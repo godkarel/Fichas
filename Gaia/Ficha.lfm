@@ -1,0 +1,1561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form formType="sheetTemplate" dataType="com.Gaia4" 
+     title="Gaia 4" name="frmGaia">
+			
+			<scrollBox align="client">
+			
+			<image field="imagemDoPersonagem" editable="true" style="stretch" 
+				left="218" top="76" width="180" height="250" />
+
+			<image left="-40" top="-5" width="700" height="780" src="/imagens/1.png"/>	
+						
+			<edit left="210" top="40" width="200" height="35" horzTextAlign="center" transparent="True" fontSize="20" fontColor="#00008B" field="Nome" />
+			<comboBox left="48" top="80" width="100" field="Raca" horzTextAlign="center" fontSize="10" items="{'Escolha', 'Humano', 'Meta-Humano', 'Yurei', 'Fallen'}"/>
+			<comboBox left="470" top="80" width="100" height="20" horzTextAlign="center" field="Classe" items="{'Escolha', 'Shisu', 'Mahou' }" />
+			
+			<edit left="148" top="141" width="65" height="40" type="number" max="1020" horzTextAlign="center" transparent="true" fontSize="24" fontColor="#00008B" field="Força" />
+			<label left="394" top="140" width="75" height="40"  horzTextAlign="center" fontSize="24" fontColor="#00008B" field="DF" />			
+			
+			<edit left="153" top="220" width="65" height="40" type="number" max="1020" horzTextAlign="center" transparent="true" fontSize="24" fontColor="#00008B" field="Mentalidade" />
+			<label left="392" top="220" width="75" height="40" horzTextAlign="center" fontSize="24" fontColor="#00008B" field="DM" />
+
+			<edit left="180" top="305" width="65" height="40" text="X" readOnly="false" horzTextAlign="center" transparent="true" fontSize="24" fontColor="#00008B" field="Destreza" />
+			<label left="363" top="305" width="75" height="40" text="X" horzTextAlign="center" fontSize="24" fontColor="#00008B" field="DD" />
+
+			<edit left="112" top="144" width="30" height="25" type="number" max="99" horzTextAlign="center" transparent="true" fontSize="18" fontColor="#00008B" field="Atletismo" />
+			<edit left="115" top="222" width="30" height="30" type="number" max="99" horzTextAlign="center" transparent="true" fontSize="18" fontColor="#00008B" field="Raciocineo" />
+			<edit left="143" top="306" width="30" height="30" type="number" max="99" horzTextAlign="center" transparent="true" fontSize="18" fontColor="#00008B" field="Equilibrio" />
+			
+			<edit left="472" top="140" width="30" height="30" type="number" max="99" horzTextAlign="center" transparent="true" fontSize="20" fontColor="#00008B" field="Execucao" />
+			<edit left="509" top="155" width="30" height="30" type="number" max="99" horzTextAlign="center" transparent="true" fontSize="20" fontColor="#00008B" field="Acerto" />
+			<edit left="468" top="220" width="30" height="30" type="number" max="99" horzTextAlign="center" transparent="true" fontSize="20" fontColor="#00008B" field="Critical" />
+			<edit left="441" top="304" width="30" height="30" type="number" max="99" horzTextAlign="center" transparent="true" fontSize="20" fontColor="#00008B" field="Esquiva" />
+
+			<edit left="69" top="140" width="50" height="25" type="number" horzTextAlign="center" visible="false" transparent="false" fontSize="18" fontColor="#00008B" field="EtherdaClasse" />		
+			<edit left="69" top="180" width="50" height="25" type="number" horzTextAlign="center" visible="false" transparent="false" fontSize="18" fontColor="#00008B" field="HPdaClasse" />			
+			<edit left="520" top="270" width="50" height="35" type="number" max="99" horzTextAlign="center" transparent="true" fontSize="28" fontColor="#00008B" field="Idade" />
+			<edit left="46" top="270" width="50" height="35" type="number" max="99" horzTextAlign="center" transparent="true" fontSize="28" fontColor="#00008B" field="Level" />			
+			
+			<label left="270" top="390" width="75" height="30" horzTextAlign="center" fontSize="18" fontColor="Green" format="%d" field="Ether" />
+			<label left="268" top="470" width="75" height="30" horzTextAlign="center" fontSize="16" fontColor="Black" field="Defesa" />		
+			<label left="269" top="610" width="75" height="30" horzTextAlign="center" fontSize="14" fontColor="Red" format="%d" field="HP" />				
+			--------------------------------------- FORM HABILIDADES 1 --------------------------------------------------------
+			<edit left="42" top="390" fontSize="10" field="NomeH1" fontColor="RED" transparent="True" />
+			<button left="40" top="395" width="100" height="20" opacity="0.4" text="" onClick="self.POPHabilidade1:show();"/>
+				
+			<popup name="POPHabilidade1" visible="false" left="1" top="40"
+                     width="620" height="620" >
+			<image top="1" width="615" height="615" src="/imagens/2.png"/>
+			<edit left="110" top="145" width="120" height="20" transparent="false" fontSize="12" fontColor="red" field="NomeH1" />
+			
+			<textEditor left="65" top="230" visible="true" name="H1" width="200" height="170"  field="DH1" />
+			
+			<button left="110" top="170" fontSize="20" height="25" width="120" text="Executar" fontColor="White" onClick="ExecutarH1()"/>
+								
+
+ <script>
+                local function ExecutarH1() 
+				
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet);        
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                
+														
+								function (rolado)
+										
+										if sheet.Rank1 =="Dano" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.DTotalH1 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH1 = mesa.meuJogador:getBarValue(2);
+												CustoH1 = CustoH1 - (tonumber(sheet.CustoH1) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH1);
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										
+										else if sheet.Rank1 =="Cura" then
+								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.DTotalH1 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH1 = mesa.meuJogador:getBarValue(2);
+												CustoH1 = CustoH1 - (tonumber(sheet.CustoH1) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH1);	
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");											
+											end;
+										else if sheet.Rank1 =="Fixo" then
+								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DanoH1 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH1 = mesa.meuJogador:getBarValue(2);
+												CustoH1 = CustoH1 - (tonumber(sheet.CustoH1) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH1);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										else if sheet.Rank1 =="Passiva" then
+												mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH1);
+										else if sheet.Rank1 =="Outros" then
+								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalH1 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH1 = mesa.meuJogador:getBarValue(2);
+												CustoH1 = CustoH1 - (tonumber(sheet.CustoH1) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH1);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+											else if sheet.Rank1 =="Buff" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalH1 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH1 = mesa.meuJogador:getBarValue(2);
+												CustoH1 = CustoH1 - (tonumber(sheet.CustoH1) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH1);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: AÇÃO DE BUFF ");
+											end;										
+										else if sheet.Rank1 =="" then
+											showMessage("Sua Habilidade Precisa ter um tipo");
+											end;
+										end;
+										end;	
+										end;
+										end;	
+										end;
+										end;
+										
+								end);          
+                end;   
+
+								
+        </script> 
+			
+			<comboBox left="420" top="145" width="70" field="Rank1" horzTextAlign="center" items="{'Dano', 'Cura', 'Fixo', 'Passiva', 'Buff', 'Outros'}"/>
+			
+			<edit left="410" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DanoH1" />
+			<edit left="510" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CustoH1" />
+			
+			<edit left="355" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="HPH1" />
+			<edit left="447" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EtherH1" />
+
+			<edit left="355" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DFH1" />
+			<edit left="447" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DMH1" />	
+			<edit left="520" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DDH1" />		
+			
+			<edit left="355" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="ExeH1" />
+			<edit left="447" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CritH1" />	
+			<edit left="520" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EsqH1" />		
+			
+				
+			<rectangle left="426" top="425" width="60" height="30" color="black" strokeColor="red" strokeSize="2"/>
+			<label left="430" top="425" width="60" height="25" fontSize="15" text="teste" fontColor="white" field="DTotalH1" />	
+			
+			</popup> 
+			
+			
+			------------------------------------------ FORM HABILIDADES 2 ---------------------------------------------			
+			<edit left="150" top="390" fontSize="10" field="NomeH2" fontColor="RED" transparent="True" />
+			<button left="150" top="395" width="100" height="20" opacity="0.4" text="" onClick="self.POPHabilidade2:show();"/>
+			
+			<popup name="POPHabilidade2" visible="false" left="1" top="40"
+                     width="620" height="620" >
+			<image top="1" width="615" height="615" src="/imagens/2.png"/>
+			<edit left="110" top="145" width="120" height="20" transparent="false" fontSize="12" fontColor="red" field="NomeH2" />
+			
+			<textEditor left="65" top="230" visible="true" name="H2" width="200" height="170"  field="DH2" />
+			
+			<button left="110" top="170" fontSize="20" height="25" width="120" text="Executar" fontColor="White" onClick="ExecutarH2()"/>
+								
+
+ <script>
+                 local function ExecutarH2() 
+				
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet);        
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                
+														
+								function (rolado)
+										
+										if sheet.Rank2 =="Dano" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.DTotalH2 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH2 = mesa.meuJogador:getBarValue(2);
+												CustoH2 = CustoH2 - (tonumber(sheet.CustoH2) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH2);
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										
+										else if sheet.Rank2 =="Cura" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.DTotalH2 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH2 = mesa.meuJogador:getBarValue(2);
+												CustoH2 = CustoH2 - (tonumber(sheet.CustoH2) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH2);	
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");											
+											end;
+										else if sheet.Rank2 =="Fixo" then
+								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DanoH2 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH2 = mesa.meuJogador:getBarValue(2);
+												CustoH2 = CustoH2 - (tonumber(sheet.CustoH2) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH2);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										else if sheet.Rank2 =="Passiva" then
+												mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH2);
+										else if sheet.Rank2 =="Outros" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalH2 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH2 = mesa.meuJogador:getBarValue(2);
+												CustoH2 = CustoH2 - (tonumber(sheet.CustoH2) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH2);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										else if sheet.Rank2 =="Buff" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalH2 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH2 = mesa.meuJogador:getBarValue(2);
+												CustoH2 = CustoH2 - (tonumber(sheet.CustoH2) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH2);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: AÇÃO DE BUFF ");
+											end;										
+										else if sheet.Rank2 =="" then
+											showMessage("Sua Habilidade Precisa ter um tipo");
+											end;
+										end;
+										end;	
+										end;
+										end;	
+										end;
+										end;
+										
+								end);          
+                end;      
+        </script> 
+						
+			<comboBox left="420" top="145" width="70" field="Rank2" horzTextAlign="center" items="{'Dano', 'Cura', 'Fixo', 'Passiva', 'Buff', 'Outros'}"/>
+			
+			<edit left="410" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DanoH2" />
+			<edit left="510" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CustoH2" />
+			
+			<edit left="355" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="HPH2" />
+			<edit left="447" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EtherH2" />
+
+			<edit left="355" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DFH2" />
+			<edit left="447" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DMH2" />	
+			<edit left="520" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DDH2" />		
+			
+			<edit left="355" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="ExeH2" />
+			<edit left="447" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CritH2" />	
+			<edit left="520" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EsqH2" />		
+			
+			<rectangle left="426" top="425" width="60" height="30" color="black" strokeColor="red" strokeSize="2"/>
+			<label left="430" top="425" width="60" height="25" fontSize="15" text="teste" fontColor="white" field="DTotalH2" />				
+			
+			</popup> 
+			
+			--------------------------------------- FORM HABILIDADES 3 -----------------------------------------
+			<edit left="42" top="415" fontSize="10" field="NomeH3" fontColor="RED" transparent="True" />
+			<button left="40" top="420" width="100" height="20" opacity="0.4" text="" onClick="self.POPHabilidade3:show();"/>
+			
+			<popup name="POPHabilidade3" visible="false" left="1" top="40"
+                     width="620" height="620" >
+			<image top="1" width="615" height="615" src="/imagens/2.png"/>
+			<edit left="110" top="145" width="120" height="20" transparent="false" fontSize="12" fontColor="red" field="NomeH3" />
+			
+			<textEditor left="65" top="230" visible="true" name="H3" width="200" height="170"  field="DH3" />
+			
+			<button left="110" top="170" fontSize="20" height="25" width="120" text="Executar" fontColor="White" onClick="ExecutarH3()"/>
+								
+
+ <script>
+                     local function ExecutarH3() 
+				
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet);        
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                
+														
+								function (rolado)
+										
+										if sheet.Rank3 =="Dano" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH3);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.DTotalH3 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH3 = mesa.meuJogador:getBarValue(2);
+												CustoH3 = CustoH3 - (tonumber(sheet.CustoH3) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH3);
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										
+										else if sheet.Rank3 =="Cura" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH3);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.DTotalH3 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH3 = mesa.meuJogador:getBarValue(2);
+												CustoH3 = CustoH3 - (tonumber(sheet.CustoH3) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH3);	
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");											
+											end;
+										else if sheet.Rank3 =="Fixo" then
+								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH3);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DanoH3 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH3 = mesa.meuJogador:getBarValue(2);
+												CustoH3 = CustoH3 - (tonumber(sheet.CustoH3) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH3);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										else if sheet.Rank3 =="Passiva" then
+												mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH3);
+										else if sheet.Rank3 =="Outros" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH3);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalH3 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH3 = mesa.meuJogador:getBarValue(2);
+												CustoH2 = CustoH3 - (tonumber(sheet.CustoH3) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH3);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										else if sheet.Rank3 =="Buff" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH3);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalH3 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH3 = mesa.meuJogador:getBarValue(2);
+												CustoH3 = CustoH3 - (tonumber(sheet.CustoH3) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH3);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: AÇÃO DE BUFF ");
+											end;										
+										else if sheet.Rank3 =="" then
+											showMessage("Sua Habilidade Precisa ter um tipo");
+											end;
+										end;
+										end;	
+										end;
+										end;	
+										end;
+										end;
+										
+								end);          
+                end;    
+        </script> 
+			
+			<comboBox left="420" top="145" width="70" field="Rank3" horzTextAlign="center" items="{'Dano', 'Cura', 'Fixo', 'Passiva', 'Buff', 'Outros'}"/>
+			
+			<edit left="410" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DanoH3" />
+			<edit left="510" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CustoH3" />
+			
+			<edit left="355" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="HPH3" />
+			<edit left="447" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EtherH3" />
+
+			<edit left="355" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DFH3" />
+			<edit left="447" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DMH3" />	
+			<edit left="520" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DDH3" />		
+			
+			<edit left="355" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="ExeH3" />
+			<edit left="447" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CritH3" />	
+			<edit left="520" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EsqH3" />		
+			
+
+			<rectangle left="426" top="425" width="60" height="30" color="black" strokeColor="red" strokeSize="2"/>
+			<label left="430" top="425" width="60" height="25" fontSize="15" text="teste" fontColor="white" field="DTotalH3" />	
+			
+			</popup> 
+			
+			--------------------------------------- FORM HABILIDADES 4 -----------------------------------------------			
+			<edit left="150" top="415" fontSize="10" field="NomeH4" fontColor="RED" transparent="True" />
+			<button left="150" top="420" width="100" height="20" opacity="0.4" text="" onClick="self.POPHabilidade4:show();"/>
+			
+			<popup name="POPHabilidade4" visible="false" left="1" top="40"
+                     width="620" height="620" >
+			<image top="1" width="615" height="615" src="/imagens/2.png"/>
+			<edit left="110" top="145" width="120" height="20" transparent="false" fontSize="12" fontColor="red" field="NomeH4" />
+			
+			<textEditor left="65" top="230" visible="true" name="H4" width="200" height="170"  field="DH4" />
+			
+			<button left="110" top="170" fontSize="20" height="25" width="120" text="Executar" fontColor="White" onClick="ExecutarH4()"/>
+								
+
+ <script>
+                     local function ExecutarH4() 
+				
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet);        
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                
+														
+								function (rolado)
+										
+										if sheet.Rank4 =="Dano" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH4);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.DTotalH4 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH4 = mesa.meuJogador:getBarValue(2);
+												CustoH4 = CustoH4 - (tonumber(sheet.CustoH4) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH4);
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										
+										else if sheet.Rank4 =="Cura" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH4);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.DTotalH4 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH4 = mesa.meuJogador:getBarValue(2);
+												CustoH4 = CustoH4 - (tonumber(sheet.CustoH4) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH4);	
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");											
+											end;
+										else if sheet.Rank4 =="Fixo" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH4);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DanoH4 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH4 = mesa.meuJogador:getBarValue(2);
+												CustoH4 = CustoH4 - (tonumber(sheet.CustoH4) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH4);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										else if sheet.Rank4 =="Passiva" then
+												mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH4);
+										else if sheet.Rank4 =="Outros" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH4);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalH4 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH4 = mesa.meuJogador:getBarValue(2);
+												CustoH4 = CustoH4 - (tonumber(sheet.CustoH4) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH4);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										else if sheet.Rank4 =="Buff" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH4);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalH4 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH4 = mesa.meuJogador:getBarValue(2);
+												CustoH4 = CustoH4 - (tonumber(sheet.CustoH4) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH4);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: AÇÃO DE BUFF ");
+											end;										
+										else if sheet.Rank4 =="" then
+											showMessage("Sua Habilidade Precisa ter um tipo");
+											end;
+										end;
+										end;	
+										end;
+										end;	
+										end;
+										end;
+										
+								end);          
+                end;  
+        </script> 
+			
+			<comboBox left="420" top="145" width="70" field="Rank4" horzTextAlign="center" items="{'Dano', 'Cura', 'Fixo', 'Passiva', 'Buff', 'Outros'}"/>
+			
+			<edit left="410" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DanoH4" />
+			<edit left="510" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CustoH4" />
+			
+			<edit left="355" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="HPH4" />
+			<edit left="447" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EtherH4" />
+
+			<edit left="355" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DFH4" />
+			<edit left="447" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DMH4" />	
+			<edit left="520" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DDH4" />		
+			
+			<edit left="355" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="ExeH4" />
+			<edit left="447" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CritH4" />	
+			<edit left="520" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EsqH4" />		
+			
+			<rectangle left="426" top="425" width="60" height="30" color="black" strokeColor="red" strokeSize="2"/>
+			<label left="430" top="425" width="60" height="25" fontSize="15" text="teste" fontColor="white" field="DTotalH4" />				
+			
+			</popup> 
+			
+		   ------------------------------------ FORM HABILIDADES 5 ----------------------------------------------			
+			<edit left="42" top="440" fontSize="10" field="NomeH5" fontColor="RED" transparent="True" />
+			<button left="40" top="445" width="100" height="20" opacity="0.4" text="" onClick="self.POPHabilidade5:show();"/>
+			
+			<popup name="POPHabilidade5" visible="false" left="1" top="40"
+                     width="620" height="620" >
+			<image top="1" width="615" height="615" src="/imagens/2.png"/>
+			<edit left="110" top="145" width="120" height="20" transparent="false" fontSize="12" fontColor="red" field="NomeH5" />
+			
+			<textEditor left="65" top="230" visible="true" name="H5" width="200" height="170"  field="DH5" />
+			
+			<button left="110" top="170" fontSize="20" height="25" width="120" text="Executar" fontColor="White" onClick="ExecutarH5()"/>
+								
+
+ <script>
+                     local function ExecutarH5() 
+				
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet);        
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                
+														
+								function (rolado)
+										
+										if sheet.Rank5 =="Dano" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH5);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.DTotalH5 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH5 = mesa.meuJogador:getBarValue(2);
+												CustoH5 = CustoH5 - (tonumber(sheet.CustoH5) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH5);
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										
+										else if sheet.Rank5 =="Cura" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH5);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.DTotalH5 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH5 = mesa.meuJogador:getBarValue(2);
+												CustoH5 = CustoH5 - (tonumber(sheet.CustoH5) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH5);	
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");											
+											end;
+										else if sheet.Rank5 =="Fixo" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH5);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DanoH5 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH5 = mesa.meuJogador:getBarValue(2);
+												CustoH5 = CustoH5 - (tonumber(sheet.CustoH5) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH5);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										else if sheet.Rank5 =="Passiva" then
+												mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH5);
+										else if sheet.Rank5 =="Outros" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH5);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalH5 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH5 = mesa.meuJogador:getBarValue(2);
+												CustoH5 = CustoH5 - (tonumber(sheet.CustoH5) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH5);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+											else if sheet.Rank5 =="Buff" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH5);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalH5 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH5 = mesa.meuJogador:getBarValue(2);
+												CustoH5 = CustoH5 - (tonumber(sheet.CustoH5) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH5);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: AÇÃO DE BUFF ");
+											end;										
+										else if sheet.Rank5 =="" then
+											showMessage("Sua Habilidade Precisa ter um tipo");
+											end;
+										end;
+										end;	
+										end;
+										end;	
+										end;
+										end;
+										
+								end);          
+                end;  
+        </script> 
+			
+			<comboBox left="420" top="145" width="70" field="Rank5" horzTextAlign="center" items="{'Dano', 'Cura', 'Fixo', 'Passiva', 'Buff', 'Outros'}"/>
+			
+			<edit left="410" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DanoH5" />
+			<edit left="510" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CustoH5" />
+			
+			<edit left="355" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="HPH5" />
+			<edit left="447" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EtherH5" />
+
+			<edit left="355" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DFH5" />
+			<edit left="447" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DMH5" />	
+			<edit left="520" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DDH5" />		
+			
+			<edit left="355" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="ExeH5" />
+			<edit left="447" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CritH5" />	
+			<edit left="520" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EsqH5" />		
+			
+			<rectangle left="426" top="425" width="60" height="30" color="black" strokeColor="red" strokeSize="2"/>
+			<label left="430" top="425" width="60" height="25" fontSize="15" text="teste" fontColor="white" field="DTotalH5" />						
+			
+			</popup> 
+			
+			
+			------------------------------- FORM HABILIDADES 6 --------------------------------				
+			<edit left="150" top="440" fontSize="10" field="NomeH6" fontColor="RED" transparent="True" />
+			<button left="150" top="445" width="100" height="20" opacity="0.4" text="" onClick="self.POPHabilidade6:show();"/>
+			
+			<popup name="POPHabilidade6" visible="false" left="1" top="40"
+                     width="620" height="620" >
+			<image top="1" width="615" height="615" src="/imagens/2.png"/>
+			<edit left="110" top="145" width="120" height="20" transparent="false" fontSize="12" fontColor="red" field="NomeH6" />
+			
+			<textEditor left="65" top="230" visible="true" name="H6" width="200" height="170"  field="DH6" />
+			
+			<button left="110" top="170" fontSize="20" height="25" width="120" text="Executar" fontColor="White" onClick="ExecutarH6()"/>
+								
+
+ <script>
+                      local function ExecutarH6() 
+				
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet);        
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                
+														
+								function (rolado)
+										
+										if sheet.Rank6 =="Dano" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH6);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.DTotalH6 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH6 = mesa.meuJogador:getBarValue(2);
+												CustoH6 = CustoH6 - (tonumber(sheet.CustoH6) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH6);
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										
+										else if sheet.Rank6 =="Cura" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH6);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.DTotalH6 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH6 = mesa.meuJogador:getBarValue(2);
+												CustoH6 = CustoH6 - (tonumber(sheet.CustoH6) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH6);	
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");											
+											end;
+										else if sheet.Rank6 =="Fixo" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH6);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DanoH6 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH6 = mesa.meuJogador:getBarValue(2);
+												CustoH6 = CustoH6 - (tonumber(sheet.CustoH6) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH6);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										else if sheet.Rank6 =="Passiva" then
+												mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH6);
+										else if sheet.Rank6 =="Outros" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH6);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalH6 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH6 = mesa.meuJogador:getBarValue(2);
+												CustoH6 = CustoH6 - (tonumber(sheet.CustoH6) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH6);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+											else if sheet.Rank6 =="Buff" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DH6);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalH6 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoH6 = mesa.meuJogador:getBarValue(2);
+												CustoH6 = CustoH6 - (tonumber(sheet.CustoH6) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoH6);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: AÇÃO DE BUFF ");
+											end;										
+										else if sheet.Rank6 =="" then
+											showMessage("Sua Habilidade Precisa ter um tipo");
+											end;
+										end;
+										end;	
+										end;
+										end;	
+										end;
+										end;
+										
+								end);          
+                end;      
+        </script> 
+			
+			<comboBox left="420" top="145" width="70" field="Rank6" horzTextAlign="center" items="{'Dano', 'Cura', 'Fixo', 'Passiva', 'Buff', 'Outros'}"/>
+			
+			<edit left="410" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DanoH6" />
+			<edit left="510" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CustoH6" />
+			
+			<edit left="355" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="HPH6" />
+			<edit left="447" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EtherH6" />
+
+			<edit left="355" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DFH6" />
+			<edit left="447" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DMH6" />	
+			<edit left="520" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DDH6" />		
+			
+			<edit left="355" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="ExeH6" />
+			<edit left="447" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CritH6" />	
+			<edit left="520" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EsqH6" />		
+			
+			<rectangle left="426" top="425" width="60" height="30" color="black" strokeColor="red" strokeSize="2"/>
+			<label left="430" top="425" width="60" height="25" fontSize="15" text="teste" fontColor="white" field="DTotalH6" />				
+			
+			</popup> 
+			
+			 __________________________________________ ULTIMAS ______________________________________________________________________
+			 ------------------------------------------ Ultima 1 ---------------------------------------------------------------------
+			<edit left="365" top="410" fontSize="10" field="NomeU1" fontColor="RED" transparent="True" />
+			<button left="365" top="395" width="100" height="70" opacity="0.4" text="" onClick="self.POPUltima1:show();"/>
+				
+			<popup name="POPUltima1" visible="false" left="1" top="40"
+                     width="620" height="620" >
+			<image top="1" width="615" height="615" src="/imagens/2.png"/>
+			<edit left="110" top="145" width="120" height="20" transparent="false" fontSize="12" fontColor="red" field="NomeU1" />
+			
+			<textEditor left="65" top="230" visible="true" name="U1" width="200" height="170"  field="DU1" />
+			
+			<button left="110" top="170" fontSize="20" height="25" width="120" text="Executar" fontColor="White" onClick="ExecutarU1()"/>
+								
+
+ <script>
+                      local function ExecutarU1() 
+				
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet);        
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                
+														
+								function (rolado)
+										
+										if sheet.RankU1 =="Dano" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DU1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.DTotalU1 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoU1 = mesa.meuJogador:getBarValue(2);
+												CustoU1 = CustoU1 - (tonumber(sheet.CustoU1) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoU1);
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										
+										else if sheet.RankU1 =="Cura" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DU1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.DTotalU1 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoU1 = mesa.meuJogador:getBarValue(2);
+												CustoU1 = CustoU1 - (tonumber(sheet.CustoU1) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoU1);	
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");											
+											end;
+										else if sheet.RankU1 =="Fixo" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DU1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DanoU1 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoU1 = mesa.meuJogador:getBarValue(2);
+												CustoU1 = CustoU1 - (tonumber(sheet.CustoU1) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoU1);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										else if sheet.RankU1 =="Passiva" then
+												mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DU1);
+										else if sheet.RankU1 =="Outros" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DU1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalU1 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoU1 = mesa.meuJogador:getBarValue(2);
+												CustoU1 = CustoU1 - (tonumber(sheet.CustoU1) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoU1);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+											else if sheet.RankU1 =="Buff" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DU1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalU1 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoU1 = mesa.meuJogador:getBarValue(2);
+												CustoU1 = CustoU1 - (tonumber(sheet.CustoU1) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoU1);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: AÇÃO DE BUFF ");
+											end;										
+										else if sheet.RankU1 =="" then
+											showMessage("Sua Habilidade Precisa ter um tipo");
+											end;
+										end;
+										end;	
+										end;
+										end;	
+										end;
+										end;
+										
+								end);          
+                end;                    
+        </script> 
+			
+			<comboBox left="420" top="145" width="70" field="RankU1" horzTextAlign="center" items="{'Dano', 'Cura', 'Fixo', 'Passiva', 'Buff', 'Outros'}"/>
+			
+			<edit left="410" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DanoU1" />
+			<edit left="510" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CustoU1" />
+			
+			<edit left="355" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="HPU1" />
+			<edit left="447" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EtherU1" />
+
+			<edit left="355" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DFU1" />
+			<edit left="447" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DMU1" />	
+			<edit left="520" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DDU1" />		
+			
+			<edit left="355" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="ExeU1" />
+			<edit left="447" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CritU1" />	
+			<edit left="520" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EsqU1" />		
+			
+			<rectangle left="426" top="425" width="60" height="30" color="black" strokeColor="red" strokeSize="2"/>
+			<label left="430" top="425" width="60" height="25" fontSize="15" text="teste" fontColor="white" field="DTotalU1" />					
+			
+			</popup> 
+			
+			 ------------------------------------------ Ultima 2 ----------------------------------------------------------------
+			 
+			<edit left="470" top="410" fontSize="10" field="NomeU2" fontColor="Red" transparent="True" />
+			<button left="470" top="395" width="100" height="70" opacity="0.4" text="" onClick="self.POPUltima2:show();"/>
+				
+			<popup name="POPUltima2" visible="false" left="1" top="40"
+                     width="620" height="620" >
+			<image top="1" width="615" height="615" src="/imagens/2.png"/>
+			<edit left="110" top="145" width="120" height="20" transparent="false" fontSize="12" fontColor="red" field="NomeU2" />
+			
+			<textEditor left="65" top="230" visible="true" name="U2" width="200" height="170"  field="DU2" />
+			
+			<button left="110" top="170" fontSize="20" height="25" width="120" text="Executar" fontColor="White" onClick="ExecutarU2()"/>
+								
+
+ <script>
+                       local function ExecutarU2() 
+				
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet);        
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                
+														
+								function (rolado)
+										
+										if sheet.RankU2 =="Dano" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DU2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.DTotalU2 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoU2 = mesa.meuJogador:getBarValue(2);
+												CustoU2 = CustoU2 - (tonumber(sheet.CustoU2) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoU2);
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										
+										else if sheet.RankU2 =="Cura" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DU2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.DTotalU2 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoU2 = mesa.meuJogador:getBarValue(2);
+												CustoU2 = CustoU2 - (tonumber(sheet.CustoU2) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoU2);	
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");											
+											end;
+										else if sheet.RankU2 =="Fixo" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DU2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DanoU2 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoU2 = mesa.meuJogador:getBarValue(2);
+												CustoU2 = CustoU2 - (tonumber(sheet.CustoU2) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoU2);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										else if sheet.RankU2 =="Passiva" then
+												mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DU2);
+										else if sheet.RankU2 =="Outros" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DU2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalU2 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoU2 = mesa.meuJogador:getBarValue(2);
+												CustoU2 = CustoU2 - (tonumber(sheet.CustoU2) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoU2);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+											else if sheet.RankU2=="Buff" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DU2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalU2 .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoU2 = mesa.meuJogador:getBarValue(2);
+												CustoU2 = CustoU2 - (tonumber(sheet.CustoU2) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoU2);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: AÇÃO DE BUFF ");
+											end;										
+										else if sheet.RankU2 =="" then
+											showMessage("Sua Habilidade Precisa ter um tipo");
+											end;
+										end;
+										end;	
+										end;
+										end;	
+										end;
+										end;
+										
+								end);          
+                end;          
+        </script> 
+			
+			<comboBox left="420" top="145" width="70" field="RankU2" horzTextAlign="center" items="{'Dano', 'Cura', 'Fixo', 'Passiva', 'Buff', 'Outros'}"/>
+			
+			<edit left="410" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DanoU2" />
+			<edit left="510" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CustoU2" />
+			
+			<edit left="355" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="HPU2" />
+			<edit left="447" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EtherU2" />
+
+			<edit left="355" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DFU2" />
+			<edit left="447" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DMU2" />	
+			<edit left="520" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DDU2" />		
+			
+			<edit left="355" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="ExeU2" />
+			<edit left="447" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CritU2" />	
+			<edit left="520" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EsqU2" />		
+			
+			<rectangle left="426" top="425" width="60" height="30" color="black" strokeColor="red" strokeSize="2"/>
+			<label left="430" top="425" width="60" height="25" fontSize="15" text="teste" fontColor="white" field="DTotalU2" />				
+			
+			</popup> 
+			
+			 ------------------------------------------ RACIAIS E BASICAS ----------------------------------------------------------------
+			 
+			<button left="100" top="535" width="80" height="70" opacity="0.9" text="Racial" onClick="self.POPHRacial:show();"/>
+				
+			<popup name="POPHRacial" visible="false" left="1" top="40"
+                     width="620" height="620" >
+			<image top="1" width="615" height="615" src="/imagens/2.png"/>
+			<edit left="110" top="145" width="120" height="20" transparent="false" fontSize="12" fontColor="red" field="NomeHR" />
+			
+			<textEditor left="65" top="230" visible="true" name="HR" width="200" height="170"  field="DescriHRacial" />
+			
+			<button left="110" top="170" fontSize="20" height="25" width="120" text="Executar" onClick="ExecutarRacial()"/>
+								
+
+<script>
+                 local function ExecutarRacial() 
+				
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet);        
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Habilidade Racial",
+                                
+														
+								function (rolado)
+										
+										if sheet.RankHRacial =="Dano" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHRacial);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.DTotalHRacial .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoHRacial = mesa.meuJogador:getBarValue(2);
+												CustoHRacial = CustoHRacial - (tonumber(sheet.CustoHRacial) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoHRacial);
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										
+										else if sheet.RankHRacial =="Cura" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHRacial);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.DTotalHRacial .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoHRacial = mesa.meuJogador:getBarValue(2);
+												CustoHRacial = CustoHRacial - (tonumber(sheet.CustoHRacial) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoHRacial);	
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");											
+											end;
+										else if sheet.RankHRacial =="Fixo" then
+								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHRacial);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalHRacial .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoHRacial = mesa.meuJogador:getBarValue(2);
+												CustoHRacial = CustoHRacial - (tonumber(sheet.CustoHRacial) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoHRacial);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										else if sheet.RankHRacial =="Passiva" then
+												mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHRacial);
+										else if sheet.RankHRacial =="Outros" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHRacial);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalHRacial .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoHRacial = mesa.meuJogador:getBarValue(2);
+												CustoHRacial = CustoHRacial - (tonumber(sheet.CustoHRacial) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoHRacial);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										else if sheet.RankHRacial =="Buff" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHRacial);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalHRacial .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoHRacial = mesa.meuJogador:getBarValue(2);
+												CustoHRacial = CustoHRacial - (tonumber(sheet.CustoHRacial) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoHRacial);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: AÇÃO DE BUFF ");
+											end;										
+										else if sheet.RankHRacial =="" then
+											showMessage("Sua Habilidade Precisa ter um tipo");
+											end;
+										end;	
+										end;
+										end;	
+										end;
+										end;
+										end;
+										
+								end);          
+                end;      
+        </script> 
+			
+			<comboBox left="420" top="145" width="70" field="RankHRacial" horzTextAlign="center" items="{'Dano', 'Cura', 'Fixo', 'Passiva', 'Buff', 'Outros'}"/>
+			
+			<edit left="410" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DanoHRacial" />
+			<edit left="510" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CustoHRacial" />
+			
+			<edit left="355" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="HPHRacial" />
+			<edit left="447" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EtherHRacial" />
+
+			<edit left="355" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DFHRacial" />
+			<edit left="447" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DMHRacial" />	
+			<edit left="520" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DDHRacial" />		
+			
+			<edit left="355" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="ExeHRacial" />
+			<edit left="447" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CritHRacial" />	
+			<edit left="520" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EsqHRacial" />		
+			
+			<rectangle left="426" top="425" width="60" height="30" color="black" strokeColor="red" strokeSize="2"/>
+			<label left="430" top="425" width="60" height="25" fontSize="15" text="teste" fontColor="white" field="DTotalHRacial" />	
+			
+							
+			</popup> 
+			
+			BASICAS ----------------------------------------------------------------
+			 
+			<button left="190" top="535" width="80" height="70" opacity="0.9" text="Basica" onClick="self.POPHBasica:show();"/>
+				
+			<popup name="POPHBasica" visible="false" left="1" top="40"
+                     width="620" height="620" >
+			<image top="1" width="615" height="615" src="/imagens/2.png"/>
+			<edit left="110" top="145" width="120" height="20" transparent="false" fontSize="12" fontColor="red" field="NomeHB" />
+			
+			<textEditor left="65" top="230" visible="true" name="HBasica" width="200" height="170"  field="DescriHB" />
+			
+			<button left="110" top="170" fontSize="20" height="25" width="120" text="Executar" fontColor="White" onClick="ExecutarHBasica()"/>
+								
+
+<script>
+                 local function ExecutarHBasica() 
+				
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet);        
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Habilidade Racial",
+                                
+														
+								function (rolado)
+										
+										if sheet.RankHBasica =="Dano" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHB);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.DTotalHB .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoHB = mesa.meuJogador:getBarValue(2);
+												CustoHB = CustoHB - (tonumber(sheet.CustoHB) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoHB);
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										
+										else if sheet.RankHBasica =="Cura" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHB);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.DTotalHB .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoHB = mesa.meuJogador:getBarValue(2);
+												CustoHB = CustoHB - (tonumber(sheet.CustoHB) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoHB);	
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");											
+											end;
+										else if sheet.RankHBasica =="Fixo" then
+								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHB);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalHB .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoHB = mesa.meuJogador:getBarValue(2);
+												CustoHB = CustoHB - (tonumber(sheet.CustoHB) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoHB);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										else if sheet.RankHBasica =="Passiva" then
+												mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHB);
+										else if sheet.RankHBasica =="Outros" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHB);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalHB .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoHB = mesa.meuJogador:getBarValue(2);
+												CustoHB = CustoHB - (tonumber(sheet.CustoHB) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoHB);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+											end;
+										else if sheet.RankHBasica =="Buff" then								
+											if sheet.Execucao >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHB);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com instendidade de « " .. sheet.DTotalHB .. " »");
+												local mesa = Firecast.getMesaDe(sheet); 
+												local CustoHB = mesa.meuJogador:getBarValue(2);
+												CustoHB = CustoHB - (tonumber(sheet.CustoHB) or 0);
+												mesa.meuJogador:requestSetBarValue(2, CustoHB);	
+											else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: AÇÃO DE BUFF ");
+											end;										
+										else if sheet.RankHBasica =="" then
+											showMessage("Sua Habilidade Precisa ter um tipo");
+											end;
+										end;	
+										end;
+										end;	
+										end;
+										end;
+										end;
+										
+								end);          
+                end;      
+        </script> 
+			
+			<comboBox left="420" top="145" width="70" field="RankHBasica" horzTextAlign="center" items="{'Dano', 'Cura', 'Fixo', 'Passiva', 'Buff', 'Outros'}"/>
+			
+			<edit left="410" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DanoHB" />
+			<edit left="510" top="191" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CustoHB" />
+			
+			<edit left="355" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="HPHB" />
+			<edit left="447" top="280" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EtherHB" />
+
+			<edit left="355" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DFHB" />
+			<edit left="447" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DMHB" />	
+			<edit left="520" top="328" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="DDHB" />		
+			
+			<edit left="355" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="ExeHB" />
+			<edit left="447" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="CritHB" />	
+			<edit left="520" top="378" width="40" height="20" transparent="false" fontSize="12" fontColor="red" field="EsqHB" />		
+			
+	
+			<rectangle left="426" top="425" width="60" height="30" color="black" strokeColor="red" strokeSize="2"/>
+			<label left="430" top="425" width="60" height="25" fontSize="15" text="teste" fontColor="white" field="DTotalHB" />	
+			
+			
+			
+			</popup> 
+			
+			______________________________________________Equipamento _______________________________________________________________
+			------------------------------------------ Arma --------------------------------------------------------
+			
+			<button left="350" top="535" width="80" height="80" opacity="0.1" text="" onClick="self.POPArma:show();"/>
+				
+			<popup name="POPArma" visible="false" left="1" top="40"
+                     width="620" height="620" >
+			<image top="1" width="615" height="615" src="/imagens/3.png"/>
+			
+			<edit left="170" top="295" width="80" height="30" transparent="false" fontSize="18" fontColor="red" field="DFArma" />
+			<edit left="425" top="295" width="70" height="30" transparent="false" fontSize="18" fontColor="red" field="ExecuçaoArma" />
+			<edit left="170" top="370" width="80" height="30" transparent="false" fontSize="18" fontColor="red" field="DMArma" />
+			<edit left="425" top="370" width="70" height="30" transparent="false" fontSize="18" fontColor="red" field="CriticalArma" />
+			<edit left="170" top="445" width="80" height="30" transparent="false" fontSize="18" fontColor="red" field="DDArma" />			
+			</popup> 
+			
+			------------------------------------------ Armadura ---------------------------------------------------
+			
+			<button left="435" top="535" width="85" height="80" opacity="0.1" text="" onClick="self.POPArmadura:show();"/>
+				
+			<popup name="POPArmadura" visible="false" left="1" top="40"
+                     width="620" height="620" >
+			<image top="1" width="615" height="615" src="/imagens/4.png"/>
+			
+			<edit left="8" top="350" width="100" height="40" transparent="false" fontSize="24" fontColor="red" field="HPAmuleto" />
+			<edit left="485" top="350" width="100" height="40" transparent="false" fontSize="24" fontColor="red" field="EtherAmuleto" />
+			<edit left="8" top="510" width="100" height="40" transparent="false" fontSize="24" fontColor="red" field="EsquivaAmuleto" />
+			<edit left="485" top="510" width="100" height="40" transparent="false" fontSize="24" fontColor="red" field="DefesaAmuleto" />
+			
+			</popup> 
+			
+			_________________________________________ Historia _____________________________________________________
+			
+			<button left="480" top="678" width="80" height="70" opacity="0.1" text="" onClick="self.POPHistoria:show();"/>
+				
+			<popup name="POPHistoria" visible="false" left="1" top="40"
+                     width="620" height="620" >
+			<image top="1" width="615" height="615" src="/imagens/6.png"/>
+			
+			<richEdit top="170" left="120" width="400" height="280" field="Historia" backgroundColor="#00000000"/>
+					 
+			</popup> 
+			
+			_________________________________________  Bolsa  _____________________________________________________
+			
+			<button left="40" top="675" width="80" height="79" opacity="0.2" text="" onClick="self.POPBolsa:show();"/>
+				
+			<popup name="POPBolsa" visible="false" left="1" top="40"
+                     width="620" height="620" >
+			<image left="10" top="10" width="600" height="600" src="/imagens/5.png"/>
+			        <!-- Botão de inserir novo item à lista -->
+
+                <button text="Novo Espaço" width="150" height="30" top="20" left="10" >
+                        <event name="onClick">
+                                -- Usuário clicou no botão de criar novo item.
+                                -- Vamos inserir um novo item no nosso recordList                              
+                                self.rclListaDosItens:append();
+                        </event>
+                </button>
+    
+
+        <!-- recordList, representando a lista -->
+		<layout top="60" left="10" width="200" height="550" margins="{bottom=4}">
+        <recordList name="rclListaDosItens" field="campoDosItens" templateForm="frmItemDaLista"  align="client" selectable="true">                              
+
+				<event name="onEndEnumeration">
+				if self.rclListaDosItens.selectedNode == nil and sheet ~= nil then
+                local nodes = ndb.getChildNodes(sheet.campoDosItens);               
+
+                if #nodes > 0 then
+                        self.rclListaDosItens.selectedNode = nodes[1];
+                end;
+				end;
+				</event>
+
+                <event name="onSelect">
+                        --[[
+                        Este evento é chamado quando o usuário selecionar/deselecionar itens da lista. Quando o usuário selecionar, vamos fazer nosso dataScopeBox (e todas as tag dentro dele) salvar e carregar dados no   objeto Nodo (NodeDatabase) do item selecionado.
+
+                  --]]                      
+                  local node = self.rclListaDosItens.selectedNode;  
+                         self.boxDetalhesDoItem.node = node;                       
+                  -- a caixa de detalhe só ficará visível se houver item selecionado
+                          self.boxDetalhesDoItem.visible = (node ~= nil);
+                </event>
+        </recordList>     
+		</layout>  		
+        <!-- dataScopeBox representando a nossa caixa de detalhes -->  
+        <dataScopeBox name="boxDetalhesDoItem" visible="false" top="210" left="210" width="400" height="300">
+                <!-- Faça um layout "bonito" para sua caixa de detalhes =). Utilize a propriedade "field" nas tags aqui dentro   -->       
+
+                <rectangle align="top" color="black" xradius="10" yradius="10"
+                                   height="180" padding="{top=3, left=3, right=3, bottom=3}">
+                                   
+
+                        <layout align="top" height="35" margins="{bottom=4}">
+                                <label left="10" top="10" text="Nome do Item:" autoSize="true"/>
+                                <edit width="150" height="25" left="120" top="7" field="NomedoItem"/>
+								<button top="7" left="282" text="Apagar!" width="80" height="25" onClick="NDB.deleteNode(self.boxDetalhesDoItem.node);" />
+                        </layout>                       
+
+                        <layout align="top" height="130">                                        
+
+                                <layout align="client" margins="{left=2}">
+                                        <textEditor top="5" width="350" left="10" field="campoTextoGrande" height="120"/>
+                                </layout>                      
+                        </layout>
+                </rectangle>
+        </dataScopeBox>
+
+			</popup> 
+			
+		<edit left="340" top="725" width="75" height="30" type="number" horzTextAlign="center" transparent="True" fontSize="18" fontColor="Gold" field="Gaies" />
+		
+		
+		
+		__________________________________________________________CALCULAVEIS___________________________________________________________________
+		<button left="258" top="334" text="calculaveis" width="100" height="18" opacity="1.0">
+		<event name="onClick">
+
+
+		sheet.DF = (tonumber(sheet.Forca) or 0) *2 + (tonumber(sheet.DFArma) or 0) + (tonumber(sheet.DFH1) or 0) + (tonumber(sheet.DFH2) or 0) + (tonumber(sheet.DFH3) or 0) +
+		(tonumber(sheet.DFH4) or 0) + (tonumber(sheet.DFH5) or 0) + (tonumber(sheet.DFH6) or 0) + (tonumber(sheet.DFHRacial) or 0) + (tonumber(sheet.DFHB) or 0) + (tonumber(sheet.DFU1) or 0) + (tonumber(sheet.DFU2) or 0); 
+		sheet.DM = (tonumber(sheet.Mentalidade) or 0) *2 + (tonumber(sheet.DMArma) or 0) + (tonumber(sheet.DMH1) or 0) + (tonumber(sheet.DMH2) or 0) + (tonumber(sheet.DMH3) or 0) +
+		(tonumber(sheet.DMH4) or 0) + (tonumber(sheet.DMH5) or 0) + (tonumber(sheet.DMH6) or 0) + (tonumber(sheet.DMHRacial) or 0) + (tonumber(sheet.DMHB) or 0) + (tonumber(sheet.DMU1) or 0) + (tonumber(sheet.DMU2) or 0); 
+		sheet.DD = (tonumber(sheet.Destreza) or 0) *2 + (tonumber(sheet.DDArma) or 0) + (tonumber(sheet.DDH1) or 0) + (tonumber(sheet.DDH2) or 0) + (tonumber(sheet.DDH3) or 0) +
+		(tonumber(sheet.DDH4) or 0) + (tonumber(sheet.DDH5) or 0) + (tonumber(sheet.DDH6) or 0) + (tonumber(sheet.DDHRacial) or 0) + (tonumber(sheet.DDHB) or 0) + (tonumber(sheet.DDU1) or 0) + (tonumber(sheet.DDU2) or 0); 
+		
+		sheet.Defesa = (tonumber(sheet.DefesaAmuleto) or 0) + (tonumber(sheet.Forca) or 0) /2;
+		
+		<![CDATA[ 
+		if sheet.Classe == 'Shisu' then
+		sheet.HPdaClasse = (tonumber(sheet.Level) or 0) * 200 +  (tonumber(sheet.HPAmuleto) or 0) + (tonumber(sheet.HPH1) or 0) + (tonumber(sheet.HPH2) or 0) + (tonumber(sheet.HPH3) or 0) + 1000 + 500 +
+		(tonumber(sheet.HPH4) or 0) + (tonumber(sheet.HPH5) or 0) + (tonumber(sheet.HPH6) or 0) + (tonumber(sheet.HPHRacial) or 0) + (tonumber(sheet.HPHB) or 0) + (tonumber(sheet.HPU1) or 0) + (tonumber(sheet.HPU2) or 0);
+		else if sheet.Classe == 'Mahou' then
+		sheet.HPdaClasse = (tonumber(sheet.Level) or 0) * 160 +  (tonumber(sheet.HPAmuleto) or 0) + (tonumber(sheet.HPH1) or 0) + (tonumber(sheet.HPH2) or 0) + (tonumber(sheet.HPH3) or 0) + 800 + 500 +
+		(tonumber(sheet.HPH4) or 0) + (tonumber(sheet.HPH5) or 0) + (tonumber(sheet.HPH6) or 0) + (tonumber(sheet.HPHRacial) or 0) + (tonumber(sheet.HPHB) or 0) + (tonumber(sheet.HPU1) or 0) + (tonumber(sheet.HPU2) or 0);
+		else
+		showMessage("Escolha uma Classe Cuzão!");
+		end
+		end
+		        ]]>
+				
+		<![CDATA[ 
+		if sheet.Classe == 'Shisu' then
+		if sheet.level > 29 then
+		sheet.HP = (tonumber(sheet.HPdaClasse) or 0) + 21000 ;
+		else if sheet.level > 21 then
+		sheet.HP = (tonumber(sheet.HPdaClasse) or 0) + 15000 ;
+		else if sheet.level > 17 then
+		sheet.HP = (tonumber(sheet.HPdaClasse) or 0) + 10000 ;
+		else if sheet.level > 14 then
+		sheet.HP = (tonumber(sheet.HPdaClasse) or 0) + 6000 ;
+		else if sheet.level > 11 then
+		sheet.HP = (tonumber(sheet.HPdaClasse) or 0) + 3000 ;
+		else if sheet.level > 4 then
+		sheet.HP = (tonumber(sheet.HPdaClasse) or 0) + 3000 ;
+		else
+		sheet.HP = (tonumber(sheet.HPdaClasse) or 0) + 1000 ;
+		end
+		end
+		end
+		end
+		end
+		end
+		end
+						        ]]>
+								
+
+								
+				<![CDATA[ 
+		if sheet.Classe == 'Mahou' then
+		if sheet.level > 29 then
+		sheet.HP = (tonumber(sheet.HPdaClasse) or 0) + 21000 ;
+		else if sheet.level > 21 then
+		sheet.HP = (tonumber(sheet.HPdaClasse) or 0) + 15000 ;
+		else if sheet.level > 17 then
+		sheet.HP = (tonumber(sheet.HPdaClasse) or 0) + 10000 ;
+		else if sheet.level > 14 then
+		sheet.HP = (tonumber(sheet.HPdaClasse) or 0) + 6000 ;
+		else if sheet.level > 9 then
+		sheet.HP = (tonumber(sheet.HPdaClasse) or 0) + 3000 ;
+		else if sheet.level > 4 then
+		sheet.HP = (tonumber(sheet.HPdaClasse) or 0) + 3000 ;
+		else
+		sheet.HP = (tonumber(sheet.HPdaClasse) or 0) + 1000 ;
+		end
+		end
+		end
+		end
+		end
+		end
+		end
+						        ]]>
+								
+		<![CDATA[ 
+		if sheet.Classe == 'Shisu' then
+		sheet.EtherdaClasse = (tonumber(sheet.Level) or 0) * 3 + (tonumber(sheet.EtherAmuleto) or 0) + (tonumber(sheet.EtherH1) or 0) + (tonumber(sheet.EtherH2) or 0) + (tonumber(sheet.EtherH3) or 0) + 100 + (tonumber(sheet.Mentalidade) or 0) /20 +
+		(tonumber(sheet.EtherH4) or 0) + (tonumber(sheet.EtherH5) or 0) + (tonumber(sheet.EtherH6) or 0) + (tonumber(sheet.EtherHRacial) or 0) + (tonumber(sheet.EtherHB) or 0) + (tonumber(sheet.EtherU1) or 0) + (tonumber(sheet.EtherU2) or 0);
+		else if sheet.Classe == 'Mahou' then
+		sheet.EtherdaClasse = (tonumber(sheet.Level) or 0) * 4 + (tonumber(sheet.EtherAmuleto) or 0) + (tonumber(sheet.EtherH1) or 0) + (tonumber(sheet.EtherH2) or 0) + (tonumber(sheet.EtherH3) or 0) + 120 + (tonumber(sheet.Mentalidade) or 0) /20 +
+		(tonumber(sheet.EtherH4) or 0) + (tonumber(sheet.EtherH5) or 0) + (tonumber(sheet.EtherH6) or 0) + (tonumber(sheet.EtherHRacial) or 0) + (tonumber(sheet.EtherHB) or 0) + (tonumber(sheet.EtherU1) or 0) + (tonumber(sheet.EtherU2) or 0);
+		else
+		showMessage("Escolha uma Classe Cuzão!");
+		end
+		end
+		        ]]>
+
+		<![CDATA[ 
+		if sheet.Classe == 'Shisu' then
+		if sheet.level > 29 then
+		sheet.Ether = (tonumber(sheet.EtherdaClasse) or 0) + 105 ;
+		else if sheet.level > 21 then
+		sheet.Ether = (tonumber(sheet.EtherdaClasse) or 0) + 75 ;
+		else if sheet.level > 17 then
+		sheet.Ether = (tonumber(sheet.EtherdaClasse) or 0) + 50 ;
+		else if sheet.level > 14 then
+		sheet.Ether = (tonumber(sheet.EtherdaClasse) or 0) + 30 ;
+		else if sheet.level > 9 then
+		sheet.Ether = (tonumber(sheet.EtherdaClasse) or 0) + 15 ;
+		else if sheet.level > 4 then
+		sheet.Ether = (tonumber(sheet.EtherdaClasse) or 0) + 15 ;
+		else
+		sheet.Ether = (tonumber(sheet.EtherdaClasse) or 0) + 5 ;
+		end
+		end
+		end
+		end
+		end
+		end
+		end
+						        ]]>
+								
+				<![CDATA[ 
+		if sheet.Classe == 'Mahou' then
+		if sheet.level > 29 then
+		sheet.Ether = (tonumber(sheet.EtherdaClasse) or 0) + 105 ;
+		else if sheet.level > 21 then
+		sheet.Ether = (tonumber(sheet.EtherdaClasse) or 0) + 75 ;
+		else if sheet.level > 17 then
+		sheet.Ether = (tonumber(sheet.EtherdaClasse) or 0) + 50 ;
+		else if sheet.level > 14 then
+		sheet.Ether = (tonumber(sheet.EtherdaClasse) or 0) + 30 ;
+		else if sheet.level > 9 then
+		sheet.Ether = (tonumber(sheet.EtherdaClasse) or 0) + 15 ;
+		else if sheet.level > 4 then
+		sheet.Ether = (tonumber(sheet.EtherdaClasse) or 0) + 15 ;
+		else
+		sheet.Ether = (tonumber(sheet.EtherdaClasse) or 0) + 5 ;
+		end
+		end
+		end
+		end
+		end
+		end
+		end
+						        ]]>
+
+		
+
+		
+
+
+
+
+
+	
+	</event>
+	</button>
+		
+		
+		 <dataLink fields="{'DanoH1', 'DanoH2', 'DanoH3', 'DanoH4', 'DanoH5', 'DanoH6', 'DanoU1', 'DanoU2', 'DanoHB', 'DanoHRacial'}">
+                <event name="onChange">                
+                     <![CDATA[ 
+		if sheet.Classe == 'Shisu' then
+		sheet.DTotalH1 = (tonumber(sheet.DanoH1) or 0) +  (tonumber(sheet.DF) or 0);
+		sheet.DTotalH2 = (tonumber(sheet.DanoH2) or 0) +  (tonumber(sheet.DF) or 0);
+		sheet.DTotalH3 = (tonumber(sheet.DanoH3) or 0) +  (tonumber(sheet.DF) or 0);
+		sheet.DTotalH4 = (tonumber(sheet.DanoH4) or 0) +  (tonumber(sheet.DF) or 0);
+		sheet.DTotalH5 = (tonumber(sheet.DanoH5) or 0) +  (tonumber(sheet.DF) or 0);
+		sheet.DTotalH6 = (tonumber(sheet.DanoH6) or 0) +  (tonumber(sheet.DF) or 0);
+		sheet.DTotalU1 = (tonumber(sheet.DanoU1) or 0) +  (tonumber(sheet.DF) or 0);
+		sheet.DTotalU2 = (tonumber(sheet.DanoU2) or 0) +  (tonumber(sheet.DF) or 0);
+		sheet.DTotalHRacial = (tonumber(sheet.DanoHRacial) or 0) +  (tonumber(sheet.DF) or 0);
+		sheet.DTotalHB = (tonumber(sheet.DanoHB) or 0) +  (tonumber(sheet.DF) or 0);
+																				
+		else if sheet.Classe == 'Mahou' then
+		sheet.DTotalH1 = (tonumber(sheet.DanoH1) or 0) +  (tonumber(sheet.DM) or 0);
+		sheet.DTotalH2 = (tonumber(sheet.DanoH2) or 0) +  (tonumber(sheet.DM) or 0);
+		sheet.DTotalH3 = (tonumber(sheet.DanoH3) or 0) +  (tonumber(sheet.DM) or 0);
+		sheet.DTotalH4 = (tonumber(sheet.DanoH4) or 0) +  (tonumber(sheet.DM) or 0);
+		sheet.DTotalH5 = (tonumber(sheet.DanoH5) or 0) +  (tonumber(sheet.DM) or 0);
+		sheet.DTotalH6 = (tonumber(sheet.DanoH6) or 0) +  (tonumber(sheet.DM) or 0);
+		sheet.DTotalU1 = (tonumber(sheet.DanoU1) or 0) +  (tonumber(sheet.DM) or 0);
+		sheet.DTotalU2 = (tonumber(sheet.DanoU2) or 0) +  (tonumber(sheet.DM) or 0);
+		sheet.DTotalHRacial = (tonumber(sheet.DanoHRacial) or 0) +  (tonumber(sheet.DM) or 0);
+		sheet.DTotalHB = (tonumber(sheet.DanoHB) or 0) +  (tonumber(sheet.DM) or 0);
+		else
+		showMessage("Escolha uma Classe Cuzão!");
+		end
+		end
+		        ]]>  
+                </event>
+        </dataLink>
+
+		<button left="190" top="695" width="105" height="30"  fontSize="12" fontColor="Gold" text="Ataque Basico" onClick="AtaqueBasico()"/>
+		
+		        <script>
+                local function AtaqueBasico()      
+					
+                        -- obter a mesa do personagem
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet);        
+						
+
+                        -- se o usuário não preencheu modificador, vamos usar o valor 0
+                        sheet.Acerto = sheet.Acerto or 0;                        
+
+                        mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",
+
+                                function (rolado)
+                                end);     
+				end;  
+
+		   
+        </script> 
+
+			</scrollBox>
+		
+
+</form>

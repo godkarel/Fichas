@@ -1,0 +1,707 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form formType="sheetTemplate" dataType="com.velen" 
+     title="Velen 4" name="frmvelen">
+
+
+		
+	 ----------- Inicio da Ficha -----------------
+		    <image left="5" top="5" width="620" height="920" src="/imagens/1.png"/>
+			<edit left="160" top="60" width="75" height="20" field="Nome" />
+			<edit left="160" top="92" width="75" height="20" field="idade" />
+			
+			<comboBox left="305" top="60" width="135" height="20" field="Classe" items="{'Escolha', 'Animago', 'Arqueiro', 'Bardo', 'Bispo', 'Caçador de Almas', 'Guerreiro', 
+			'Ladino', 'Mago', 'Mercenario', 'Monge', 'Paladino', 'Cavaleiro Draconico', }" />
+			<comboBox left="305" top="92" width="135" height="20" field="Espec" items="{'Sem Espec', 'Druida', 'Shaman', 'Caçador', 'Sentinela Lunar', 'Encantador de Almas', 
+			'Necromance', 'Sacerdote', 'Juiz', 'Barbaro', 'Tanker', 'Acrobata', 'Assassino', 'Arcanista', 'Feiticeiro', 'Summoner', 'Duelista', 'Pirata', 'Guardião Espiritual', 
+			'Cavaleiro das Trevas', 'Templario' }" />
+			
+			<edit left="490" top="60" width="40" height="20" field="Velis" />
+
+
+			<comboBox left="490" top="92" width="75" field="Raca" items="{'Escolha', 'Humano', 'Elfo', 'Elfo Negro', 'Anão', 'Orc', 'Kamael', 'Thiefling' }"/>
+			
+	-------------Atributos ------------------
+			<edit left="170" top="265" width="75" height="20" field="Força" />
+			<edit left="170" top="327" width="75" height="20" field="Inteligencia" />
+			<edit left="170" top="388" width="75" height="20" field="Destreza" />
+			<edit left="170" top="449" width="75" height="20" field="Agilidade" />
+			<edit left="170" top="510" width="75" height="20" field="Vitalidade" />
+			
+	-------------Status --------------------
+			
+			<rectangle left="480" top="265" color="black" width="100" height="20"  />
+			<label left="482" top="265" width="100" height="20" field="P.A" />
+			<rectangle left="480" top="327" color="black" width="100" height="20"  />
+			<label left="482" top="327" width="100" height="20" field="P.M" />
+			<rectangle left="480" top="388" color="black" width="100" height="20"  />
+			<label left="482" top="388" width="100" height="20" field="P.F" />
+			<rectangle left="480" top="449" color="black" width="100" height="20"  />
+			<label left="482" top="449" width="100" height="20" field="Defesa" />
+			<rectangle left="480" top="510" color="black" width="100" height="20"  />
+			<label left="482" top="510" width="100" height="20" field="Resistencia" />
+	------------- Status de Vida e outros -------------------------
+			<rectangle left="148" top="603" color="black"  width="80" height="30"  />
+			<label left="150" fontSize="20" top="603" width="80" fontColor="red" height="30" field="HPTotal" />
+			<rectangle left="148" top="640" color="black"  width="80" height="30"  />
+			<label left="150" fontSize="20" top="640" width="80" fontColor="blue" height="30" field="MPTotal" />
+			<edit left="170" top="702" width="75" height="20" field="Esquiva" />
+			<edit left="170" top="732" width="75" height="20" field="Persistencia" />
+			
+			<edit left="500" top="610" width="75" height="20" field="Acerto" />
+			<edit left="500" top="640" width="75" height="20" field="A.Magico" />
+			<edit left="500" top="702" width="75" height="20" field="Critical" />
+			<edit left="500" top="732" width="75" height="20" field="C.Magico" />
+	------------- LevelZeira --------------------------------------
+			<edit left="295" top="807" fontColor="#00008B" scale="2.0" width="21"  height="50" type="number" max="30" field="level" transparent="true" />
+			<edit left="295" top="700" fontColor="#00008B" scale="2.0" width="21" visible="false"  height="50" field="Elevel" transparent="true" />
+			
+    --------------------- Outras Forms --------------------------------	
+	
+	<button left="33" top="160" width="60" height="60" opacity="0.1">
+                <event name="onClick">
+								
+				local novoForm = GUI.newForm("frmequip");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+								
+				</event>
+				
+
+    </button>
+	
+	
+	
+		<button left="120" top="160" width="60" height="60" opacity="0.1">
+                <event name="onClick">
+				local novoForm = GUI.newForm("frmhabilidade");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+				</event>
+    </button>
+
+			<button left="460" top="160" width="60" height="60" opacity="0.1">
+                <event name="onClick">
+				local novoForm = GUI.newForm("frmHistoria");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+				</event>
+    </button>
+	
+		<button left="287" top="290" width="60" height="60" opacity="0.1">
+                <event name="onClick">
+				local novoForm = GUI.newForm("frmsummon");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+				</event>
+    </button>
+	
+		<button left="542" top="160" width="60" height="60" opacity="0.1">
+                <event name="onClick">
+				local novoForm = GUI.newForm("frmpersonagem");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+				</event>
+    
+	
+	</button>
+	---------------- BOTAO ( P.A )---------------------
+	<button left="388" top="255" width="60"  height="55" opacity="0.1"	>
+	<event name="onClick">
+	if sheet.Classe == 'Monge' then
+	sheet.P.A = (tonumber(sheet.Forca) or 0) *4 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
+	(tonumber(sheet.PAHabilidade1) or 0) + (tonumber(sheet.PAHabilidade2) or 0) + (tonumber(sheet.PAHabilidade3) or 0) + (tonumber(sheet.PAHabilidade4) or 0) + (tonumber(sheet.PAHabilidade5) or 0) + (tonumber(sheet.PAHabilidade6) or 0) + 
+	(tonumber(sheet.PAHabilidade7) or 0) + (tonumber(sheet.PAHabilidade8) or 0) + (tonumber(sheet.PAHabilidade9) or 0) + (tonumber(sheet.PAUltima1) or 0) + (tonumber(sheet.PAUltima2) or 0) 
+	else 
+	sheet.P.A = (tonumber(sheet.Forca) or 0) *2 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
+	(tonumber(sheet.PAHabilidade1) or 0) + (tonumber(sheet.PAHabilidade2) or 0) + (tonumber(sheet.PAHabilidade3) or 0) + (tonumber(sheet.PAHabilidade4) or 0) + (tonumber(sheet.PAHabilidade5) or 0) + (tonumber(sheet.PAHabilidade6) or 0) + 
+	(tonumber(sheet.PAHabilidade7) or 0) + (tonumber(sheet.PAHabilidade8) or 0) + (tonumber(sheet.PAHabilidade9) or 0) + (tonumber(sheet.PAUltima1) or 0) + (tonumber(sheet.PAUltima2) or 0) 
+	 end;
+	</event>
+	</button>
+	---------------- BOTAO ( P.M )---------------------
+	<button left="388" top="317" width="60"  height="55" opacity="0.1"	>
+	<event name="onClick">
+	sheet.P.M = (tonumber(sheet.Inteligencia) or 0) *2 + (tonumber(sheet.ArmaPM) or 0) + (tonumber(sheet.OutraPM) or 0) + (tonumber(sheet.ArmaduraPM) or 0) + (tonumber(sheet.AcessorioPM) or 0) +
+	(tonumber(sheet.PMHabilidade1) or 0) + (tonumber(sheet.PMHabilidade2) or 0) + (tonumber(sheet.PMHabilidade3) or 0) + (tonumber(sheet.PMHabilidade4) or 0) + (tonumber(sheet.PMHabilidade5) or 0) + (tonumber(sheet.PMHabilidade6) or 0) + 
+	(tonumber(sheet.PMHabilidade7) or 0) + (tonumber(sheet.PMHabilidade8) or 0) + (tonumber(sheet.PMHabilidade9) or 0) + (tonumber(sheet.PMUltima1) or 0) + (tonumber(sheet.PMUltima2) or 0) 
+	 
+	</event>
+	</button>
+	
+	---------------- BOTAO ( P.F )---------------------
+	<button left="388" top="377" width="60"  height="55" opacity="0.1"	>
+	<event name="onClick">
+	sheet.P.F = (tonumber(sheet.Destreza) or 0) *2 + (tonumber(sheet.ArmaPF) or 0) + (tonumber(sheet.OutraPF) or 0) + (tonumber(sheet.ArmaduraPF) or 0) + (tonumber(sheet.AcessorioPF) or 0) +
+	(tonumber(sheet.PFHabilidade1) or 0) + (tonumber(sheet.PFHabilidade2) or 0) + (tonumber(sheet.PFHabilidade3) or 0) + (tonumber(sheet.PFHabilidade4) or 0) + (tonumber(sheet.PFHabilidade5) or 0) + (tonumber(sheet.PFHabilidade6) or 0) + 
+	(tonumber(sheet.PFHabilidade7) or 0) + (tonumber(sheet.PFHabilidade8) or 0) + (tonumber(sheet.PFHabilidade9) or 0) + (tonumber(sheet.PFUltima1) or 0) + (tonumber(sheet.PFUltima2) or 0) 
+	 
+	 
+	</event>
+	</button>
+	
+	---------------- BOTAO ( DEF )---------------------
+	<button left="388" top="435" width="60"  height="55" opacity="0.1"	>
+	<event name="onClick">
+	sheet.Defesa = (tonumber(sheet.Vitalidade) or 0) /2 + (tonumber(sheet.Agilidade) or 0) /2 + (tonumber(sheet.ArmaDEF) or 0) + 
+	(tonumber(sheet.OutraDEF) or 0) + (tonumber(sheet.ArmaduraDEF) or 0) + (tonumber(sheet.AcessorioDEF) or 0) +
+	(tonumber(sheet.DefHabilidade1) or 0) + (tonumber(sheet.DefHabilidade2) or 0) + (tonumber(sheet.DefHabilidade3) or 0) + (tonumber(sheet.DefHabilidade4) or 0) +
+	(tonumber(sheet.DefHabilidade5) or 0) + (tonumber(sheet.DefHabilidade6) or 0) + 
+	(tonumber(sheet.DefHabilidade7) or 0) + (tonumber(sheet.DefHabilidade8) or 0) + (tonumber(sheet.DefHabilidade9) or 0) + (tonumber(sheet.DefUltima1) or 0) +
+	(tonumber(sheet.DefUltima2) or 0) 
+	 
+	</event>
+	</button>
+
+	---------------- BOTAO ( RES )---------------------
+	<button left="388" top="493" width="60"  height="55" opacity="0.1"	>
+	<event name="onClick">
+	sheet.Resistencia = (tonumber(sheet.Forca) or 0) /2 + (tonumber(sheet.Vitalidade) or 0) /2 + (tonumber(sheet.Defesa) or 0) /2 +
+	(tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaRES) or 0) + (tonumber(sheet.OutraRES) or 0) + 
+	(tonumber(sheet.ArmaduraRES) or 0) + (tonumber(sheet.AcessorioRES) or 0) +
+	(tonumber(sheet.ResHabilidade1) or 0) + (tonumber(sheet.ResHabilidade2) or 0) + (tonumber(sheet.ResHabilidade3) or 0) + 
+	(tonumber(sheet.ResHabilidade4) or 0) + (tonumber(sheet.ResHabilidade5) or 0) + (tonumber(sheet.ResHabilidade6) or 0) + 
+	(tonumber(sheet.ResHabilidade7) or 0) + (tonumber(sheet.ResHabilidade8) or 0) + (tonumber(sheet.ResHabilidade9) or 0) + 
+	(tonumber(sheet.ResUltima1) or 0) + (tonumber(sheet.ResUltima2) or 0) 
+	 
+	</event>
+	</button>	
+	---------------- BOTAO ( HP )---------------------	
+		<button left="79" top="599" width="40"  height="35" opacity="0.1"	>
+	<event name="onClick">
+	sheet.Elevel = math.floor((sheet.Level) - 20);
+	
+		<![CDATA[ 
+	if sheet.level < 21 then
+	if sheet.Raca == 'Humano' then
+	sheet.RHPNivel = (tonumber(sheet.Level) or 0) * 10
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0)
+	else if sheet.Raca == 'Elfo' then
+	sheet.RHPNivel = (tonumber(sheet.Level) or 0) * 8
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0)
+	else if sheet.Raca == 'Elfo Negro' then
+	sheet.RHPNivel = (tonumber(sheet.Level) or 0) * 8
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0)
+	else if sheet.Raca == 'Anão' then
+	sheet.RHPNivel = (tonumber(sheet.Level) or 0) * 12
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0)
+	else if sheet.Raca == 'Orc' then
+	sheet.RHPNivel = (tonumber(sheet.Level) or 0) * 11
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0)
+	else if sheet.Raca == 'Kamael' then
+	sheet.RHPNivel = (tonumber(sheet.Level) or 0) * 8
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0)
+	else if sheet.Raca == 'Thiefling' then
+	sheet.RHPNivel = (tonumber(sheet.Level) or 0) * 9
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0)
+	else
+	showMessage("Escolha uma Raça SEU ARROMBADO!");
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	else 
+	if sheet.Raca == 'Humano' then
+	sheet.R20HPNivel = (tonumber(sheet.ELevel) or 0) * 20
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.ELevel) or 0)
+	else if sheet.Raca == 'Elfo' then
+	sheet.R20HPNivel = (tonumber(sheet.ELevel) or 0) * 16
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.ELevel) or 0)
+	else if sheet.Raca == 'Elfo Negro' then
+	sheet.R20HPNivel = (tonumber(sheet.ELevel) or 0) * 16
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.ELevel) or 0)
+	else if sheet.Raca == 'Anão' then
+	sheet.R20HPNivel = (tonumber(sheet.ELevel) or 0) * 24
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.ELevel) or 0)
+	else if sheet.Raca == 'Orc' then
+	sheet.R20HPNivel = (tonumber(sheet.ELevel) or 0) * 22
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.ELevel) or 0)
+	else if sheet.Raca == 'Kamael' then
+	sheet.R20HPNivel = (tonumber(sheet.ELevel) or 0) * 16
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.ELevel) or 0)
+	else if sheet.Raca == 'Thiefling' then
+	sheet.R20HPNivel = (tonumber(sheet.ELevel) or 0) * 18
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.ELevel) or 0)
+	else
+	showMessage("Escolha uma Raça SEU ARROMBADO!");
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end;
+        ]]>
+	
+		<![CDATA[ 
+	if sheet.level < 21 then
+	if sheet.Classe == 'Animago' then
+	sheet.CHPNivel = (tonumber(sheet.Level) or 0) * 14 + 170
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0)
+	else if sheet.Classe == 'Arqueiro' then
+	sheet.CHPNivel = (tonumber(sheet.Level) or 0) * 16 + 170
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0)
+	else if sheet.Classe == 'Bardo' then
+	sheet.CHPNivel = (tonumber(sheet.Level) or 0) * 12 + 150
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0)
+	else if sheet.Classe == 'Bispo' then
+	sheet.CHPNivel = (tonumber(sheet.Level) or 0) * 14 + 160
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0)
+	else if sheet.Classe == 'Caçador de Almas' then
+	sheet.CHPNivel = (tonumber(sheet.Level) or 0) * 15 + 170
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0)
+	else if sheet.Classe == 'Guerreiro' then
+	sheet.CHPNivel = (tonumber(sheet.Level) or 0) * 20 + 220
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0)
+	else if sheet.Classe == 'Ladino' then
+	sheet.CHPNivel = (tonumber(sheet.Level) or 0) * 14 + 150
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0)
+	else if sheet.Classe == 'Mago' then
+	sheet.CHPNivel = (tonumber(sheet.Level) or 0) * 12 + 140
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0)
+	else if sheet.Classe == 'Mercenario' then
+	sheet.CHPNivel = (tonumber(sheet.Level) or 0) * 16 + 170
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0)
+	else if sheet.Classe == 'Monge' then
+	sheet.CHPNivel = (tonumber(sheet.Level) or 0) * 16 + 180
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0)
+	else if sheet.Classe == 'Paladino' then
+	sheet.CHPNivel = (tonumber(sheet.Level) or 0) * 18 + 200
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0)
+	else
+	showMessage("Escolha uma Classe Cuzão!");
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+    end;
+        ]]>
+		
+	<![CDATA[ 
+	if sheet.level > 20 then
+	if sheet.Espec == 'Druida' then
+	sheet.EHPNivel = (tonumber(sheet.Elevel) or 0) * 22 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Shaman' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 24 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Caçador' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 22 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Sentinela Lunar' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 21 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Encantador de Almas' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 21 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Necromance' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 22 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Sacerdote' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 25 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Juiz' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 28 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Barbaro' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 28 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Tanker' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 30 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Acrobata' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 23 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Assassino' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 21 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Arcanista' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 20 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Feiticeiro' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 22 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Summoner' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 20 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Duelista' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 24 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Pirata' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 26 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Guardião Espiritual' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 26 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Cavaleiro das Trevas' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 29 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else if sheet.Espec == 'Templario' then
+	sheet.EHPNivel = (tonumber(sheet.ELevel) or 0) * 27 + 600
+	sheet.HPTotal =  (tonumber(sheet.HP) or 0) + (tonumber(sheet.Vitalidade) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + (tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+	(tonumber(sheet.HPHabilidade1) or 0) + (tonumber(sheet.HPHabilidade2) or 0) + (tonumber(sheet.HPHabilidade3) or 0) + (tonumber(sheet.HPHabilidade4) or 0) + (tonumber(sheet.HPHabilidade5) or 0) + (tonumber(sheet.HPHabilidade6) or 0) + 
+	(tonumber(sheet.HPHabilidade7) or 0) + (tonumber(sheet.HPHabilidade8) or 0) + (tonumber(sheet.HPHabilidade9) or 0) + (tonumber(sheet.HPUltima1) or 0) + (tonumber(sheet.HPUltima2) or 0) + (tonumber(sheet.RHPNivel) or 0) + (tonumber(sheet.CHPNivel) or 0) +
+	(tonumber(sheet.EHPNivel) or 0)
+	else
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+    end;
+        ]]>
+	
+
+
+
+	
+
+	</event>
+	</button>	
+	
+		---------------- BOTAO ( MP )---------------------
+		<button left="79" top="635" width="40"  height="35" opacity="0.1"	>
+	<event name="onClick">
+	
+		sheet.Elevel = math.floor((sheet.Level) - 20);
+	
+		<![CDATA[ 
+	if sheet.level < 21 then
+	if sheet.Classe == 'Animago' then
+	sheet.RMPNivel = (tonumber(sheet.Level) or 0) * 4 + 100
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0)
+	else if sheet.Classe == 'Arqueiro' then
+	sheet.RMPNivel = (tonumber(sheet.Level) or 0) * 3 + 100
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0)
+	else if sheet.Classe == 'Bardo' then
+	sheet.RMPNivel = (tonumber(sheet.Level) or 0) * 4 + 100
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0)
+	else if sheet.Classe == 'Bispo' then
+	sheet.RMPNivel = (tonumber(sheet.Level) or 0) * 4 + 100
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0)
+	else if sheet.Classe == 'Caçador de Almas' then
+	sheet.RMPNivel = (tonumber(sheet.Level) or 0) * 4 + 100
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0)
+	else if sheet.Classe == 'Guerreiro' then
+	sheet.RMPNivel = (tonumber(sheet.Level) or 0) * 2	+ 100
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0)
+	else if sheet.Classe == 'Ladino' then
+	sheet.RMPNivel = (tonumber(sheet.Level) or 0) * 2 + 100
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0)
+	else if sheet.Classe == 'Mago' then
+	sheet.RMPNivel = (tonumber(sheet.Level) or 0) * 4 + 100
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0)
+	else if sheet.Classe == 'Mercenario' then
+	sheet.RMPNivel = (tonumber(sheet.Level) or 0) * 3 + 100
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0)
+	else if sheet.Classe == 'Monge' then
+	sheet.RMPNivel = (tonumber(sheet.Level) or 0) * 3 + 100
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0)
+	else if sheet.Classe == 'Paladino' then
+	sheet.RMPNivel = (tonumber(sheet.Level) or 0) * 3 + 100
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0)
+	else
+	showMessage("Escolha uma Classe Cuzão!");
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+    end;
+        ]]>
+		
+	<![CDATA[ 
+	if sheet.level > 20 then
+	if sheet.Espec == 'Druida' then
+	sheet.EMPNivel = (tonumber(sheet.Elevel) or 0) * 5
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Shaman' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 4
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Caçador' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 4
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Sentinela Lunar' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 5
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Encantador de Almas' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 5
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Necromance' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 5
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Sacerdote' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 5
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Juiz' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 4
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Barbaro' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 4
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Tanker' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 4
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Acrobata' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 4
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Assassino' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 4
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Arcanista' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 5
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Feiticeiro' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 4
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Summoner' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 5
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Duelista' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 4
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Pirata' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 4
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Guardião Espiritual' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 4
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Cavaleiro das Trevas' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 4
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else if sheet.Espec == 'Templario' then
+	sheet.EMPNivel = (tonumber(sheet.ELevel) or 0) * 4
+	sheet.MPTotal =  (tonumber(sheet.MP) or 0) + (tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.ArmaMP) or 0) + (tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) +
+	(tonumber(sheet.MPHabilidade1) or 0) + (tonumber(sheet.MPHabilidade2) or 0) + (tonumber(sheet.MPHabilidade3) or 0) + (tonumber(sheet.MPHabilidade4) or 0) + (tonumber(sheet.MPHabilidade5) or 0) + (tonumber(sheet.MPHabilidade6) or 0) + 
+	(tonumber(sheet.MPHabilidade7) or 0) + (tonumber(sheet.MPHabilidade8) or 0) + (tonumber(sheet.MPHabilidade9) or 0) + (tonumber(sheet.MPUltima1) or 0) + (tonumber(sheet.MPUltima2) or 0) + (tonumber(sheet.RMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0)
+	else
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+	end
+    end;
+        ]]>
+
+
+	 
+	</event>
+	</button>	
+
+
+
+</form>

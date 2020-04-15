@@ -1,0 +1,10 @@
+	if sheet.NomeFieldComboBox == 'a' then
+	realizarPrimeiroTeste()
+	else if sheet.NomeFieldComboBox == 'b' then
+	realizarSegundoTeste()
+	end
+
+
+		<scrollBox left="10" top="10" width="615" height="710">
+
+		        </scrollBox>

@@ -1,0 +1,2676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<popupForm name="frmhabilidade" width="1050" height="650" >
+     
+	 <scrollBox align="client">
+	 
+     <image width="1050" height="720" center="true"  src="/imagens/3.png"/>
+	 
+	 <dataLink fields="{'DanoHabilidade1', 'DanoHabilidade2', 'DanoHabilidade3', 'DanoHabilidade4', 'DanoHabilidade5', 'DanoHabilidade6', 'DanoHabilidade7', 'DanoHabilidade8', 'DanoHabilidade9', 'DanoUltima1', 'DanoUltima2',
+	 'CuraHabilidade1', 'CuraHabilidade2', 'CuraHabilidade3', 'CuraHabilidade4', 'CuraHabilidade5', 'CuraHabilidade6', 'CuraHabilidade7', 'CuraHabilidade8', 'CuraHabilidade9', 'CuraUltima1', 'CuraUltima2', 
+	 'DPTHabilidade1', 'DPTHabilidade2', 'DPTHabilidade3', 'DPTHabilidade4', 'DPTHabilidade5', 'DPTHabilidade6', 'DPTHabilidade7', 'DPTHabilidade8', 'DPTHabilidade9', 'DPTUltima1', 'DPTUltima2', 'PA', 'PM', 'PF', 'Forca', 'Inteligencia', 'Destreza', 'Agilidade', 'Vitalidade',
+	 'ArmaPA', 'ArmaDEF', 'ArmaPM', 'ArmaRES', 'ArmaPF', 'ArmaHP', 'ArmaMP', 'ArmaduraPA', 'ArmaduraDEF', 'ArmaduraPM', 'ArmaduraRES', 'ArmaduraPF', 'ArmaduraHP', 'ArmaduraMP', 'OutraPA', 'OutraDEF', 'OutraPM', 'OutraRES', 'OutraPF', 'OutraHP', 'OutraMP', 
+	 'AcessorioPA', 'AcessorioDEF', 'AcessorioPM', 'AcessorioRES', 'AcessorioPF', 'AcessorioHP', 'AcessorioMP', 'HPTotal', 'MPTotal', 'DanoAtributo1', 'DanoAtributo2', 'DanoAtributo3', 'DanoAtributo4', 'DanoAtributo5', 'DanoAtributo6', 'DanoAtributo7', 'DanoAtributo8'
+	 , 'DanoAtributo9', 'DanoAtributoU1', 'DanoAtributoU2'}">
+                <event name="onChange">  
+				
+					if sheet.DanoAtributo1 == 'PA' then
+                       sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(sheet.PA) or 0)
+					   end;
+					if sheet.DanoAtributo2 == 'PA' then
+					   sheet.Hintensidade2 = (tonumber(sheet.DanoHabilidade2) or 0) + (tonumber(sheet.CuraHabilidade2) or 0) + (tonumber(sheet.PA) or 0)
+					   end;
+					if sheet.DanoAtributo3 == 'PA' then   
+					   sheet.Hintensidade3 = (tonumber(sheet.DanoHabilidade3) or 0) + (tonumber(sheet.CuraHabilidade3) or 0) + (tonumber(sheet.PA) or 0)
+					   end;
+					if sheet.DanoAtributo4 == 'PA' then
+					   sheet.Hintensidade4 = (tonumber(sheet.DanoHabilidade4) or 0) + (tonumber(sheet.CuraHabilidade4) or 0) + (tonumber(sheet.PA) or 0)
+					   end;
+					if sheet.DanoAtributo5 == 'PA' then
+					   sheet.Hintensidade5 = (tonumber(sheet.DanoHabilidade5) or 0) + (tonumber(sheet.CuraHabilidade5) or 0) + (tonumber(sheet.PA) or 0)
+					   end;
+					if sheet.DanoAtributo6 == 'PA' then
+					   sheet.Hintensidade6 = (tonumber(sheet.DanoHabilidade6) or 0) + (tonumber(sheet.CuraHabilidade6) or 0) + (tonumber(sheet.PA) or 0)
+					   end;
+					if sheet.DanoAtributo7 == 'PA' then
+					   sheet.Hintensidade7 = (tonumber(sheet.DanoHabilidade7) or 0) + (tonumber(sheet.CuraHabilidade7) or 0) + (tonumber(sheet.PA) or 0)
+					   end;
+					if sheet.DanoAtributo8 == 'PA' then
+					   sheet.Hintensidade8 = (tonumber(sheet.DanoHabilidade8) or 0) + (tonumber(sheet.CuraHabilidade8) or 0) + (tonumber(sheet.PA) or 0)
+					   end;
+					if sheet.DanoAtributo9 == 'PA' then
+					   sheet.Hintensidade9 = (tonumber(sheet.DanoHabilidade9) or 0) + (tonumber(sheet.CuraHabilidade9) or 0) + (tonumber(sheet.PA) or 0)
+					   end;
+					if sheet.DanoAtributoU1 == 'PA' then
+					   sheet.Uintensidade1 = (tonumber(sheet.DanoUltima1) or 0) + (tonumber(sheet.CuraUltima1) or 0) + (tonumber(sheet.PA) or 0)
+					   end;
+					if sheet.DanoAtributoU2 == 'PA' then
+					   sheet.Uintensidade2 = (tonumber(sheet.DanoUltima2) or 0) + (tonumber(sheet.CuraUltima2) or 0) + (tonumber(sheet.PA) or 0)
+					   end;					   
+					
+					if sheet.DanoAtributo1 == 'PM' then
+                       sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributo2 == 'PM' then
+					   sheet.Hintensidade2 = (tonumber(sheet.DanoHabilidade2) or 0) + (tonumber(sheet.CuraHabilidade2) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributo3 == 'PM' then
+					   sheet.Hintensidade3 = (tonumber(sheet.DanoHabilidade3) or 0) + (tonumber(sheet.CuraHabilidade3) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributo4 == 'PM' then
+					   sheet.Hintensidade4 = (tonumber(sheet.DanoHabilidade4) or 0) + (tonumber(sheet.CuraHabilidade4) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributo5 == 'PM' then
+					   sheet.Hintensidade5 = (tonumber(sheet.DanoHabilidade5) or 0) + (tonumber(sheet.CuraHabilidade5) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributo6 == 'PM' then
+					   sheet.Hintensidade6 = (tonumber(sheet.DanoHabilidade6) or 0) + (tonumber(sheet.CuraHabilidade6) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributo7 == 'PM' then
+					   sheet.Hintensidade7 = (tonumber(sheet.DanoHabilidade7) or 0) + (tonumber(sheet.CuraHabilidade7) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+				    if sheet.DanoAtributo8 == 'PM' then
+					   sheet.Hintensidade8 = (tonumber(sheet.DanoHabilidade8) or 0) + (tonumber(sheet.CuraHabilidade8) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributo9 == 'PM' then
+					   sheet.Hintensidade9 = (tonumber(sheet.DanoHabilidade9) or 0) + (tonumber(sheet.CuraHabilidade9) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributoU1 == 'PM' then
+					   sheet.UintensidadeU1 = (tonumber(sheet.DanoUltima1) or 0) + (tonumber(sheet.CuraUltima1) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributoU2 == 'PM' then
+					   sheet.UintensidadeU2 = (tonumber(sheet.DanoUltima2) or 0) + (tonumber(sheet.CuraUltima2) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					
+					if sheet.DanoAtributo1 == 'PF' then
+                       sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(sheet.PF) or 0)
+					   end;
+					if sheet.DanoAtributo2 == 'PF' then
+					   sheet.Hintensidade2 = (tonumber(sheet.DanoHabilidade2) or 0) + (tonumber(sheet.CuraHabilidade2) or 0) + (tonumber(sheet.PF) or 0)
+					   end;
+					if sheet.DanoAtributo3 == 'PF' then
+					sheet.Hintensidade3 = (tonumber(sheet.DanoHabilidade3) or 0) + (tonumber(sheet.CuraHabilidade3) or 0) + (tonumber(sheet.PF) or 0)
+					   end;
+					if sheet.DanoAtributo4 == 'PF' then
+					sheet.Hintensidade4 = (tonumber(sheet.DanoHabilidade4) or 0) + (tonumber(sheet.CuraHabilidade4) or 0) + (tonumber(sheet.PF) or 0)
+					   end;	
+					if sheet.DanoAtributo5 == 'PF' then
+					   sheet.Hintensidade5 = (tonumber(sheet.DanoHabilidade5) or 0) + (tonumber(sheet.CuraHabilidade5) or 0) + (tonumber(sheet.PF) or 0)
+					   end;
+					if sheet.DanoAtributo6 == 'PF' then
+					   sheet.Hintensidade6 = (tonumber(sheet.DanoHabilidade6) or 0) + (tonumber(sheet.CuraHabilidade6) or 0) + (tonumber(sheet.PF) or 0)
+					   end;
+					if sheet.DanoAtributo7 == 'PF' then
+					   sheet.Hintensidade7 = (tonumber(sheet.DanoHabilidade7) or 0) + (tonumber(sheet.CuraHabilidade7) or 0) + (tonumber(sheet.PF) or 0)
+					   end;
+					if sheet.DanoAtributo8 == 'PF' then
+					   sheet.Hintensidade8 = (tonumber(sheet.DanoHabilidade8) or 0) + (tonumber(sheet.CuraHabilidade8) or 0) + (tonumber(sheet.PF) or 0)
+					   end;
+					if sheet.DanoAtributo9 == 'PF' then
+					   sheet.Hintensidade9 = (tonumber(sheet.DanoHabilidade9) or 0) + (tonumber(sheet.CuraHabilidade9) or 0) + (tonumber(sheet.PF) or 0)
+					   end;
+					if sheet.DanoAtributoU1 == 'PF' then
+					   sheet.UintensidadeU1 = (tonumber(sheet.DanoUltima1) or 0) + (tonumber(sheet.CuraUltima1) or 0) + (tonumber(sheet.PF) or 0)
+					   end;
+					if sheet.DanoAtributoU2 == 'PF' then
+					   sheet.UintensidadeU2 = (tonumber(sheet.DanoUltima2) or 0) + (tonumber(sheet.CuraUltima2) or 0) + (tonumber(sheet.PF) or 0)				
+					end;	
+
+					if sheet.DanoAtributo1 == 'Cura' then
+                       sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributo2 == 'Cura' then
+					   sheet.Hintensidade2 = (tonumber(sheet.DanoHabilidade2) or 0) + (tonumber(sheet.CuraHabilidade2) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributo3 == 'Cura' then
+					   sheet.Hintensidade3 = (tonumber(sheet.DanoHabilidade3) or 0) + (tonumber(sheet.CuraHabilidade3) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributo4 == 'Cura' then
+					   sheet.Hintensidade4 = (tonumber(sheet.DanoHabilidade4) or 0) + (tonumber(sheet.CuraHabilidade4) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributo5 == 'Cura' then
+					   sheet.Hintensidade5 = (tonumber(sheet.DanoHabilidade5) or 0) + (tonumber(sheet.CuraHabilidade5) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributo6 == 'Cura' then
+					   sheet.Hintensidade6 = (tonumber(sheet.DanoHabilidade6) or 0) + (tonumber(sheet.CuraHabilidade6) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributo7 == 'Cura' then
+					   sheet.Hintensidade7 = (tonumber(sheet.DanoHabilidade7) or 0) + (tonumber(sheet.CuraHabilidade7) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+				    if sheet.DanoAtributo8 == 'Cura' then
+					   sheet.Hintensidade8 = (tonumber(sheet.DanoHabilidade8) or 0) + (tonumber(sheet.CuraHabilidade8) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributo9 == 'Cura' then
+					   sheet.Hintensidade9 = (tonumber(sheet.DanoHabilidade9) or 0) + (tonumber(sheet.CuraHabilidade9) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributoU1 == 'Cura' then
+					   sheet.UintensidadeU1 = (tonumber(sheet.DanoUltima1) or 0) + (tonumber(sheet.CuraUltima1) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					if sheet.DanoAtributoU2 == 'Cura' then
+					   sheet.UintensidadeU2 = (tonumber(sheet.DanoUltima2) or 0) + (tonumber(sheet.CuraUltima2) or 0) + (tonumber(sheet.PM) or 0)
+					end;
+					
+					if sheet.DanoAtributo1 == 'Fixo' then
+                       sheet.Hintensidade1 = (tonumber(sheet.DPTHabilidade1) or 0)
+					end;
+					if sheet.DanoAtributo2 == 'Fixo' then
+					   sheet.Hintensidade2 = (tonumber(sheet.DPTHabilidade2) or 0)
+					end;
+					if sheet.DanoAtributo3 == 'Fixo' then
+					   sheet.Hintensidade3 = (tonumber(sheet.DPTHabilidade3) or 0)
+					end;
+					if sheet.DanoAtributo4 == 'Fixo' then
+					   sheet.Hintensidade4 = (tonumber(sheet.DPTHabilidade4) or 0)
+					end;
+					if sheet.DanoAtributo5 == 'Fixo' then
+					   sheet.Hintensidade5 = (tonumber(sheet.DPTHabilidade5) or 0)
+					end;
+					if sheet.DanoAtributo6 == 'Fixo' then
+					   sheet.Hintensidade6 = (tonumber(sheet.DPTHabilidade6) or 0)
+					end;
+					if sheet.DanoAtributo7 == 'Fixo' then
+					   sheet.Hintensidade7 = (tonumber(sheet.DPTHabilidade7) or 0)
+					end;
+				    if sheet.DanoAtributo8 == 'Fixo' then
+					   sheet.Hintensidade8 = (tonumber(sheet.DPTHabilidade8) or 0)
+					end;
+					if sheet.DanoAtributo9 == 'Fixo' then
+					   sheet.Hintensidade9 = (tonumber(sheet.DPTHabilidade9) or 0)
+					end;
+					if sheet.DanoAtributoU1 == 'Fixo' then
+					   sheet.UintensidadeU1 = (tonumber(sheet.DPTHabilidadeU1) or 0)
+					end;
+					if sheet.DanoAtributoU2 == 'Fixo' then
+					   sheet.UintensidadeU2 = (tonumber(sheet.DPTHabilidadeU2) or 0)
+					end;
+					
+					
+                </event>
+     </dataLink>
+	 
+	 ------------------------- Habilidade 1 --------------------------------------------------
+		 <image width="60" field="HI1" height="70" left="90" top="75"/>
+			
+	 <button left="78" top="67" text="Clique" opacity="0.0" width="90" height="90" 
+	 onClick="self.H1.visible = not self.H1.visible;
+			  self.HL1.visible = not self.HL1.visible;
+				self.HT1.visible = not self.HT1.visible;
+				self.HD1.visible = not self.HD1.visible;
+				self.HPM1.visible = not self.HPM1.visible;
+				self.HPA1.visible = not self.HPA1.visible;
+				self.HPF1.visible = not self.HPF1.visible;
+				self.HI1.visible = not self.HI1.visible;
+				self.HINT1.visible = not self.HINT1.visible;			
+				self.Combo1.visible = not self.Combo1.visible;	
+
+				self.HI2.visible = false;
+				self.HI3.visible = false;
+				self.HI4.visible = false;
+				self.HI5.visible = false;
+				self.HI6.visible = false;
+				self.HI7.visible = false;
+				self.HI8.visible = false;
+				self.HI9.visible = false;
+				self.UI1.visible = false;
+				self.UI2.visible = false;
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HINT2.visible = false;
+				self.Combo2.visible = false;
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HINT3.visible = false;				
+				self.Combo3.visible = false;
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HINT4.visible = false;
+				self.Combo4.visible = false;
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HINT5.visible = false;
+				self.Combo5.visible = false;
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HINT6.visible = false;
+				self.Combo6.visible = false;
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HINT7.visible = false;
+				self.Combo7.visible = false;
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HINT8.visible = false;
+				self.Combo8.visible = false;
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HINT9.visible = false;
+				self.Combo9.visible = false;
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				self.UINT1.visible = false;
+				self.ComboU1.visible = false;
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UINT2.visible = false;
+				self.ComboU2.visible = false;"/>
+		 
+		 <edit left="640" name="H1" visible="false" top="44" width="150" height="22" field="NomeHabilidade1" /> 
+		 <edit left="610" name="HD1" visible="false" top="320"  type="number" width="50" height="20" field="DanoHabilidade1" />
+		 <edit left="720" name="HPM1" visible="false" top="320"  type="number" width="50" height="20" field="CuraHabilidade1" />
+		 <edit left="830" name="HPA1" visible="false" top="320"  type="number" width="50" height="20" field="current" />
+		 <edit left="940" name="HPF1" visible="false" top="320"  type="number" width="50" height="20" field="DPTHabilidade1" />
+		 <label left="880" name="HINT1" visible="false" top="413"  width="50" height="20" field="Hintensidade1" />
+		 <comboBox name="Combo1" visible="false" left="610" top="350" width="120" height="20" field="DanoAtributo1" items="{'Escolha', 'PA', 'PM', 'PF', 'Cura','Fixo', 'Dano P/ Turno' }"/>
+		 <textEditor left="565" top="130" visible="false" name="HT1" width="400" height="170"  field="DescriHabilidade1" />
+		 
+		<button left="800" name="HL1" visible="false" top="40" fontSize="20" height="30" width="200" text="Primeira Habilidade" fontColor="White" onClick="ExecutarH1()"/>
+								
+			<script>
+						
+					
+                local function ExecutarH1() 
+				
+				   --[[ HABILIDADE DE DANO ]]--
+					if sheet.DanoHabilidade1 > sheet.CuraHabilidade1 and sheet.DPTHabilidade1 then
+												
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.Hintensidade1 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current = mesa.meuJogador:getBarValue(2);
+																current = current - (tonumber(sheet.current) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+								
+					--[[ HABILIDADE DE CURA ]]--
+					else if sheet.CuraHabilidade1 > sheet.DanoHabilidade1 and sheet.DPTHabilidade1 then
+					 
+					 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.Hintensidade1 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current = mesa.meuJogador:getBarValue(2);
+																current = current - (tonumber(sheet.current) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end); 
+								
+					--[[ HABILIDADE DE INTENSIDADE FIXA ]]--
+					else if sheet.DPTHabilidade1 > sheet.DanoHabilidade1 and sheet.CuraHabilidade1 then
+						 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com Intensidade de « " .. sheet.DPTHabilidade1 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current = mesa.meuJogador:getBarValue(2);
+																current = current - (tonumber(sheet.current) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+					
+					end;
+					end;
+					end;
+					
+                end;  
+
+				
+							
+        </script> 
+		 
+
+		<image name="HI1" visible="false" field="HI1" editable="true" left="564" top="397" width="214" height="130"/>
+
+	  ----------------------------- Habilidade 2 ---------------------------------------------
+	  
+	  		 <image width="60" field="HI2" height="70" left="226" top="78"/>
+			
+	 <button left="213" top="67" text="Clique" opacity="0.0" width="90" height="90" 
+
+				onClick="self.H2.visible = not self.H2.visible;
+				self.HL2.visible = not self.HL2.visible;
+				self.HT2.visible = not self.HT2.visible;
+				self.HD2.visible = not self.HD2.visible;
+				self.HPM2.visible = not self.HPM2.visible;
+				self.HPA2.visible = not self.HPA2.visible;
+				self.HPF2.visible = not self.HPF2.visible;
+				self.HI2.visible = not self.HI2.visible;
+				self.HINT2.visible = not self.HINT2.visible;
+				self.Combo2.visible = not self.Combo2.visible;	
+				
+				self.HI1.visible = false;
+				self.HI3.visible = false;
+				self.HI4.visible = false;
+				self.HI5.visible = false;
+				self.HI6.visible = false;
+				self.HI7.visible = false;
+				self.HI8.visible = false;
+				self.HI9.visible = false;
+				self.UI1.visible = false;
+				self.UI2.visible = false;
+								
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				self.HINT1.visible = false;
+				self.Combo1.visible = false;
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HINT3.visible = false;
+				self.Combo3.visible = false;				
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HINT4.visible = false;
+				self.Combo4.visible = false;
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HINT5.visible = false;
+				self.Combo5.visible = false;
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HINT6.visible = false;
+				self.Combo6.visible = false;
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HINT7.visible = false;
+				self.Combo7.visible = false;
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HINT8.visible = false;
+				self.Combo8.visible = false;
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HINT9.visible = false;
+				self.Combo9.visible = false;
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				self.UINT1.visible = false;
+				self.ComboU1.visible = false;
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UINT2.visible = false;
+				self.ComboU2.visible = false;"/>
+
+		 
+		 <edit left="640" name="H2" visible="false" top="44"  width="150" height="22" field="NomeHabilidade2" /> 
+
+		 <edit left="610" name="HD2" visible="false" top="320"  type="number" width="50" height="20" field="DanoHabilidade2" />
+		 <edit left="720" name="HPM2" visible="false" top="320"  type="number" width="50" height="20" field="CuraHabilidade2" />
+		 <edit left="830" name="HPA2" visible="false" top="320"  type="number" width="50" height="20" field="current2" />
+		 <edit left="940" name="HPF2" visible="false" top="320"  type="number" width="50" height="20" field="DPTHabilidade2" />
+		 <label left="880" name="HINT2" visible="false" top="413"  width="50" height="20" field="Hintensidade2" />
+		 <comboBox name="Combo2" visible="false" left="610" top="350" width="120" height="20" field="DanoAtributo2" items="{'Escolha', 'PA', 'PM', 'PF', 'Cura','Fixo', 'Dano P/ Turno' }"/>
+		 <textEditor left="565" top="130" visible="false" name="HT2" width="400" height="170"  field="DescriHabilidade2" />
+		 
+		 		<button left="800" name="HL2" visible="false" top="40" fontSize="20" height="30" width="200" text="Segunda Habilidade" fontColor="White" onClick="ExecutarH2()"/>
+								
+			<script>
+						
+  			
+				local function ExecutarH2() 
+				
+				   --[[ HABILIDADE DE DANO ]]--
+					if sheet.DanoHabilidade2 > sheet.CuraHabilidade2 and sheet.DPTHabilidade2 then
+												
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.Hintensidade2 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current2 = mesa.meuJogador:getBarValue(2);
+																current2 = current2 - (tonumber(sheet.current2) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current2);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+								
+					--[[ HABILIDADE DE CURA ]]--
+					else if sheet.CuraHabilidade2 > sheet.DanoHabilidade2 and sheet.DPTHabilidade2 then
+					 
+					 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.Hintensidade2 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current2 = mesa.meuJogador:getBarValue(2);
+																current2 = current2 - (tonumber(sheet.current2) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current2);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end); 
+								
+					--[[ HABILIDADE DE INTENSIDADE FIXA ]]--
+					else if sheet.DPTHabilidade2 > sheet.DanoHabilidade2 and sheet.CuraHabilidade2 then
+						 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com Intensidade de « " .. sheet.DPTHabilidade2 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current2 = mesa.meuJogador:getBarValue(2);
+																current2 = current2 - (tonumber(sheet.current2) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current2);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+					
+					end;
+					end;
+					end;
+					
+                end;  
+							
+        </script> 
+		 
+
+		<image name="HI2" visible="false" field="HI2" editable="true" left="564" top="397" width="214" height="130"/>	 
+	 
+	 ----------------------------- Habilidade 3 ---------------------------------------------
+	  
+	  		 
+			<image width="60" field="HI3" height="70" left="360" top="78"/>
+	 <button left="346" top="67" text="Clique" opacity="0.0" width="90" height="90" 
+	 
+	   onClick="self.H3.visible = not self.H3.visible;
+				self.HL3.visible = not self.HL3.visible;
+				self.HT3.visible = not self.HT3.visible;
+				self.HD3.visible = not self.HD3.visible;
+				self.HPM3.visible = not self.HPM3.visible;
+				self.HPA3.visible = not self.HPA3.visible;
+				self.HPF3.visible = not self.HPF3.visible;
+				self.HI3.visible = not self.HI3.visible;
+				self.HINT3.visible = not self.HINT3.visible;
+				self.Combo3.visible = not self.Combo3.visible;	
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				self.HINT1.visible = false;
+				self.Combo1.visible = false;
+				
+				self.HI2.visible = false;
+				self.HI1.visible = false;
+				self.HI4.visible = false;
+				self.HI5.visible = false;
+				self.HI6.visible = false;
+				self.HI7.visible = false;
+				self.HI8.visible = false;
+				self.HI9.visible = false;
+				self.UI1.visible = false;
+				self.UI2.visible = false;
+				
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HINT2.visible = false;
+				self.Combo2.visible = false;
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HINT4.visible = false;
+				self.Combo4.visible = false;
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HINT5.visible = false;
+				self.Combo5.visible = false;
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HINT6.visible = false;
+				self.Combo6.visible = false;
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HINT7.visible = false;
+				self.Combo7.visible = false;
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HINT8.visible = false;
+				self.Combo8.visible = false;
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HINT9.visible = false;
+				self.Combo9.visible = false;
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				self.UINT1.visible = false;
+				self.ComboU1.visible = false;
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UINT2.visible = false;
+				self.ComboU2.visible = false;"/>
+				
+	 
+	 	<edit left="640" name="H3" visible="false" top="44"  width="150" height="22" field="NomeHabilidade3" /> 
+
+		 <edit left="610" name="HD3" visible="false" top="320"  type="number" width="50" height="20" field="DanoHabilidade3" />
+		 <edit left="720" name="HPM3" visible="false" top="320"  type="number" width="50" height="20" field="CuraHabilidade3" />
+		 <edit left="830" name="HPA3" visible="false" top="320"  type="number" width="50" height="20" field="current3" />
+		 <edit left="940" name="HPF3" visible="false" top="320"  type="number" width="50" height="20" field="DPTHabilidade3" />
+		 <label left="880" name="HINT3" visible="false" top="413"  width="50" height="20" field="Hintensidade3" />   
+		 <textEditor left="565" name="HT3" top="130" visible="false"  width="400" height="170"  field="DescriHabilidade3" />
+		 <comboBox name="Combo3" visible="false" left="610" top="350" width="120" height="20" field="DanoAtributo3" items="{'Escolha', 'PA', 'PM', 'PF', 'Cura','Fixo', 'Dano P/ Turno' }"/>
+		  <button left="800" name="HL3" visible="false" top="40" fontSize="20" height="30" width="200" text="Terceira Habilidade" fontColor="White" onClick="ExecutarH3()"/>
+								
+			<script>
+						
+                
+				local function ExecutarH3() 
+				
+				   --[[ HABILIDADE DE DANO ]]--
+					if sheet.DanoHabilidade3 > sheet.CuraHabilidade3 and sheet.DPTHabilidade3 then
+												
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade3);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.Hintensidade3 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current3 = mesa.meuJogador:getBarValue(2);
+																current3 = current3 - (tonumber(sheet.current3) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current3);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+								
+					--[[ HABILIDADE DE CURA ]]--
+					else if sheet.CuraHabilidade3 > sheet.DanoHabilidade3 and sheet.DPTHabilidade3 then
+					 
+					 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade3);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.Hintensidade3 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current3 = mesa.meuJogador:getBarValue(2);
+																current3 = current3 - (tonumber(sheet.current3) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current3);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end); 
+								
+					--[[ HABILIDADE DE INTENSIDADE FIXA ]]--
+					else if sheet.DPTHabilidade3 > sheet.DanoHabilidade3 and sheet.CuraHabilidade3 then
+						 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade3);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com Intensidade de « " .. sheet.DPTHabilidade3 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current3 = mesa.meuJogador:getBarValue(2);
+																current3 = current3 - (tonumber(sheet.current3) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current3);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+					
+					end;
+					end;
+					end;
+					
+                end;  
+							
+        </script> 
+		 
+
+		<image name="HI3" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="HI3" />	
+	 
+	 	  ----------------------------- Habilidade 4 ---------------------------------------------
+	  
+	  		 <image width="60" field="HI4" height="70" left="90" top="205"/>
+			
+	 <button left="75" top="195" text="Clique" opacity="0.0" width="90" height="90"
+
+			onClick="self.H4.visible = not self.H4.visible;
+				self.HL4.visible = not self.HL4.visible;
+				self.HT4.visible = not self.HT4.visible;
+				self.HD4.visible = not self.HD4.visible;
+				self.HPM4.visible = not self.HPM4.visible;
+				self.HPA4.visible = not self.HPA4.visible;
+				self.HPF4.visible = not self.HPF4.visible;
+				self.HI4.visible = not self.HI4.visible;
+				self.HINT4.visible = not self.HINT4.visible;
+				self.Combo4.visible = not self.Combo4.visible;	
+								
+				self.HI2.visible = false;
+				self.HI3.visible = false;
+				self.HI1.visible = false;
+				self.HI5.visible = false;
+				self.HI6.visible = false;
+				self.HI7.visible = false;
+				self.HI8.visible = false;
+				self.HI9.visible = false;
+				self.UI1.visible = false;
+				self.UI2.visible = false;
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				self.HINT1.visible = false;
+				self.Combo1.visible = false;
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HINT2.visible = false;
+				self.Combo2.visible = false;
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HINT3.visible = false;				
+				self.Combo3.visible = false;
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HINT5.visible = false;
+				self.Combo5.visible = false;
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HINT6.visible = false;
+				self.Combo6.visible = false;
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HINT7.visible = false;
+				self.Combo7.visible = false;
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HINT8.visible = false;
+				self.Combo8.visible = false;
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HINT9.visible = false;
+				self.Combo9.visible = false;
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				self.UINT1.visible = false;
+				self.ComboU1.visible = false;
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UINT2.visible = false;
+				self.ComboU2.visible = false;"/>
+	 
+		 <edit left="640" name="H4" visible="false" top="44"  width="150" height="22" field="NomeHabilidade4" /> 
+
+		 <edit left="610" name="HD4" visible="false" top="320"  type="number" width="50" height="20" field="DanoHabilidade4" />
+		 <edit left="720" name="HPM4" visible="false" top="320"  type="number" width="50" height="20" field="CuraHabilidade4" />
+		 <edit left="830" name="HPA4" visible="false" top="320"  type="number" width="50" height="20" field="current4" />
+		 <edit left="940" name="HPF4" visible="false" top="320"  type="number" width="50" height="20" field="DPTHabilidade4" />
+		 <label left="880" name="HINT4" visible="false" top="413"  width="50" height="20" field="Hintensidade4" />   
+		 <comboBox name="Combo4" visible="false" left="610" top="350" width="120" height="20" field="DanoAtributo4" items="{'Escolha', 'PA', 'PM', 'PF', 'Cura','Fixo', 'Dano P/ Turno' }"/>
+		 <textEditor left="565" name="HT4" top="130" visible="false"  width="400" height="170"  field="DescriHabilidade4" />
+		 		<button left="800" name="HL4" visible="false" top="40" fontSize="20" height="30" width="200" text="Quarta Habilidade" fontColor="White" onClick="ExecutarH4()"/>
+								
+			<script>
+						
+                local function ExecutarH4() 
+				
+				   --[[ HABILIDADE DE DANO ]]--
+					if sheet.DanoHabilidade4 > sheet.CuraHabilidade4 and sheet.DPTHabilidade4 then
+												
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade4);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.Hintensidade4 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current4 = mesa.meuJogador:getBarValue(2);
+																current4 = current4 - (tonumber(sheet.current4) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current4);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+								
+					--[[ HABILIDADE DE CURA ]]--
+					else if sheet.CuraHabilidade4 > sheet.DanoHabilidade4 and sheet.DPTHabilidade4 then
+					 
+					 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade4);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.Hintensidade4 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current4 = mesa.meuJogador:getBarValue(2);
+																current4 = current4 - (tonumber(sheet.current4) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current4);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end); 
+								
+					--[[ HABILIDADE DE INTENSIDADE FIXA ]]--
+					else if sheet.DPTHabilidade4 > sheet.DanoHabilidade4 and sheet.CuraHabilidade4 then
+						 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade4);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com Intensidade de « " .. sheet.DPTHabilidade4 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current4 = mesa.meuJogador:getBarValue(2);
+																current4 = current4 - (tonumber(sheet.current4) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current4);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+					
+					end;
+					end;
+					end;
+					
+                end;  
+							
+        </script> 
+
+		<image name="HI4" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="HI4" />	
+	 
+	 	  ----------------------------- Habilidade 5 ---------------------------------------------
+	  
+	  		 <image width="60" field="HI5" height="70" left="227" top="205"/>
+			
+	 <button left="213" top="195" text="Clique" opacity="0.0" width="90" height="90" 
+			   onClick="self.H5.visible = not self.H5.visible;
+				self.HL5.visible = not self.HL5.visible;
+				self.HT5.visible = not self.HT5.visible;
+				self.HD5.visible = not self.HD5.visible;
+				self.HPM5.visible = not self.HPM5.visible;
+				self.HPA5.visible = not self.HPA5.visible;
+				self.HPF5.visible = not self.HPF5.visible;
+				self.HI5.visible = not self.HI5.visible;
+				self.HINT5.visible = not self.HINT5.visible;
+				self.Combo5.visible = not self.Combo5.visible;	
+				
+				self.HI2.visible = false;
+				self.HI3.visible = false;
+				self.HI4.visible = false;
+				self.HI1.visible = false;
+				self.HI6.visible = false;
+				self.HI7.visible = false;
+				self.HI8.visible = false;
+				self.HI9.visible = false;
+				self.UI1.visible = false;
+				self.UI2.visible = false;
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				self.HINT1.visible = false;
+				self.Combo1.visible = false;
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HINT2.visible = false;
+				self.Combo2.visible = false;
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HINT3.visible = false;		
+				self.Combo3.visible = false;
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HINT4.visible = false;
+				self.Combo4.visible = false;
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HINT6.visible = false;
+				self.Combo6.visible = false;
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HINT7.visible = false;
+				self.Combo7.visible = false;
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HINT8.visible = false;
+				self.Combo8.visible = false;
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HINT9.visible = false;
+				self.Combo9.visible = false;
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				self.UINT1.visible = false;
+				self.ComboU1.visible = false;
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UINT2.visible = false;
+				self.ComboU2.visible = false;"/>
+	 
+	 
+	 	 <edit left="640" name="H5" visible="false" top="44"  width="150" height="22" field="NomeHabilidade5" /> 
+
+		 <edit left="610" name="HD5" visible="false" top="320"  type="number" width="50" height="20" field="DanoHabilidade5" />
+		 <edit left="720" name="HPM5" visible="false" top="320"  type="number" width="50" height="20" field="CuraHabilidade5" />
+		 <edit left="830" name="HPA5" visible="false" top="320"  type="number" width="50" height="20" field="current5" />
+		 <edit left="940" name="HPF5" visible="false" top="320"  type="number" width="50" height="20" field="DPTHabilidade5" />
+		 <label left="880" name="HINT5" visible="false" top="413" width="50" height="20" field="Hintensidade5" /> 	  
+		 <comboBox name="Combo5" visible="false" left="610" top="350" width="120" height="20" field="DanoAtributo5" items="{'Escolha', 'PA', 'PM', 'PF', 'Cura','Fixo', 'Dano P/ Turno' }"/>
+		 <textEditor left="565" name="HT5" top="130" visible="false"  width="400" height="170"  field="DescriHabilidade5" />
+		 
+		 		<button left="800" name="HL5" visible="false" top="40" fontSize="20" height="30" width="200" text="Quinta Habilidade" fontColor="White" onClick="ExecutarH5()"/>
+								
+			<script>
+						
+                local function ExecutarH5() 
+				
+				   --[[ HABILIDADE DE DANO ]]--
+					if sheet.DanoHabilidade5 > sheet.CuraHabilidade5 and sheet.DPTHabilidade5 then
+												
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade5);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.Hintensidade5 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current5 = mesa.meuJogador:getBarValue(2);
+																current5 = current5 - (tonumber(sheet.current5) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current5);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+								
+					--[[ HABILIDADE DE CURA ]]--
+					else if sheet.CuraHabilidade5 > sheet.DanoHabilidade5 and sheet.DPTHabilidade5 then
+					 
+					 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade5);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.Hintensidade5 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current5 = mesa.meuJogador:getBarValue(2);
+																current5 = current5 - (tonumber(sheet.current5) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current5);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end); 
+								
+					--[[ HABILIDADE DE INTENSIDADE FIXA ]]--
+					else if sheet.DPTHabilidade5 > sheet.DanoHabilidade5 and sheet.CuraHabilidade5 then
+						 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade5);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com Intensidade de « " .. sheet.DPTHabilidade5 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current5 = mesa.meuJogador:getBarValue(2);
+																current5 = current5 - (tonumber(sheet.current5) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current5);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+					
+					end;
+					end;
+					end;
+					
+                end;  
+							
+        </script> 
+		 
+
+		<image name="HI5" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="HI5" />	
+	 
+	 	  ----------------------------- Habilidade 6 ---------------------------------------------
+	  
+	  		 <image width="60" field="HI6" height="70" left="361" top="205"/>
+			
+	 <button left="346" top="195" text="Clique" opacity="0.0" width="90" height="90" 
+	 
+			   onClick="self.H6.visible = not self.H6.visible;
+				self.HL6.visible = not self.HL6.visible;
+				self.HT6.visible = not self.HT6.visible;
+				self.HD6.visible = not self.HD6.visible;
+				self.HPM6.visible = not self.HPM6.visible;
+				self.HPA6.visible = not self.HPA6.visible;
+				self.HPF6.visible = not self.HPF6.visible;
+				self.HI6.visible = not self.HI6.visible;
+				self.HINT6.visible = not self.HINT6.visible;
+				self.Combo6.visible = not self.Combo6.visible;	
+				
+				self.HI2.visible = false;
+				self.HI3.visible = false;
+				self.HI4.visible = false;
+				self.HI5.visible = false;
+				self.HI1.visible = false;
+				self.HI7.visible = false;
+				self.HI8.visible = false;
+				self.HI9.visible = false;
+				self.UI1.visible = false;
+				self.UI2.visible = false;
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				self.HINT1.visible = false;
+				self.Combo1.visible = false;
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HINT2.visible = false;
+				self.Combo2.visible = false;
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HINT3.visible = false;				
+				self.Combo3.visible = false;
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HINT4.visible = false;
+				self.Combo4.visible = false;
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HINT5.visible = false;
+				self.Combo5.visible = false;
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HINT7.visible = false;
+				self.Combo7.visible = false;
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HINT8.visible = false;
+				self.Combo8.visible = false;
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HINT9.visible = false;
+				self.Combo9.visible = false;
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				self.UINT1.visible = false;
+				self.ComboU1.visible = false;
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UINT2.visible = false;
+				self.ComboU2.visible = false;"/>
+	 
+		 <edit left="640" name="H6" visible="false" top="44"  width="150" height="22" field="NomeHabilidade6" /> 
+
+		 <edit left="610" name="HD6" visible="false" top="320"  type="number" width="50" height="20" field="DanoHabilidade6" />
+		 <edit left="720" name="HPM6" visible="false" top="320"  type="number" width="50" height="20" field="CuraHabilidade6" />
+		 <edit left="830" name="HPA6" visible="false" top="320"  type="number" width="50" height="20" field="current6" />
+		 <edit left="940" name="HPF6" visible="false" top="320"  type="number" width="50" height="20" field="DPTHabilidade6" />
+		 <label left="880" name="HINT6" visible="false" top="413"  width="50" height="20" field="Hintensidade6" /> 	  
+		 <comboBox name="Combo6" visible="false" left="610" top="350" width="120" height="20" field="DanoAtributo6" items="{'Escolha', 'PA', 'PM', 'PF', 'Cura','Fixo', 'Dano P/ Turno' }"/>
+		 <textEditor left="565" name="HT6" top="130" visible="false"  width="400" height="170"  field="DescriHabilidade6" />
+		 		<button left="800" name="HL6" visible="false" top="40" fontSize="20" height="30" width="200" text="Sexta Habilidade" fontColor="White" onClick="ExecutarH6()"/>
+								
+			<script>
+						
+                local function ExecutarH6() 
+				
+				   --[[ HABILIDADE DE DANO ]]--
+					if sheet.DanoHabilidade6 > sheet.CuraHabilidade6 and sheet.DPTHabilidade6 then
+												
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade6);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.Hintensidade6 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current6 = mesa.meuJogador:getBarValue(2);
+																current6 = current6 - (tonumber(sheet.current6) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current6);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+								
+					--[[ HABILIDADE DE CURA ]]--
+					else if sheet.CuraHabilidade6 > sheet.DanoHabilidade6 and sheet.DPTHabilidade6 then
+					 
+					 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade6);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.Hintensidade6 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current6 = mesa.meuJogador:getBarValue(2);
+																current6 = current6 - (tonumber(sheet.current6) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current6);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end); 
+								
+					--[[ HABILIDADE DE INTENSIDADE FIXA ]]--
+					else if sheet.DPTHabilidade6 > sheet.DanoHabilidade6 and sheet.CuraHabilidade6 then
+						 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade6);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com Intensidade de « " .. sheet.DPTHabilidade6 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current6 = mesa.meuJogador:getBarValue(2);
+																current6 = current6 - (tonumber(sheet.current6) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current6);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+					
+					end;
+					end;
+					end;
+					
+                end;  
+							
+        </script> 
+		 
+
+		<image name="HI6" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="HI6" />	
+	 
+	 	  ----------------------------- Habilidade 7 ---------------------------------------------
+	  
+	  		 <image width="60" field="HI7" height="70" left="90" top="325"/>
+			
+	 <button left="75" top="315" text="Clique" opacity="0.0" width="90" height="90"
+			
+			 onClick="self.H7.visible = not self.H7.visible;
+				self.HL7.visible = not self.HL7.visible;
+				self.HT7.visible = not self.HT7.visible;
+				self.HD7.visible = not self.HD7.visible;
+				self.HPM7.visible = not self.HPM7.visible;
+				self.HPA7.visible = not self.HPA7.visible;
+				self.HPF7.visible = not self.HPF7.visible;
+				self.HI7.visible = not self.HI7.visible;
+				self.HINT7.visible = not self.HINT7.visible;
+				self.Combo7.visible = not self.Combo7.visible;	
+				
+				self.HI2.visible = false;
+				self.HI3.visible = false;
+				self.HI4.visible = false;
+				self.HI5.visible = false;
+				self.HI6.visible = false;
+				self.HI1.visible = false;
+				self.HI8.visible = false;
+				self.HI9.visible = false;
+				self.UI1.visible = false;
+				self.UI2.visible = false;
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				self.HINT1.visible = false;
+				self.Combo1.visible = false;
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HINT2.visible = false;
+				self.Combo2.visible = false;
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HINT3.visible = false;				
+				self.Combo3.visible = false;
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HINT4.visible = false;
+				self.Combo4.visible = false;
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HINT5.visible = false;
+				self.Combo5.visible = false;
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HINT6.visible = false;
+				self.Combo6.visible = false;
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HINT8.visible = false;
+				self.Combo8.visible = false;
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HINT9.visible = false;
+				self.Combo9.visible = false;
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				self.UINT1.visible = false;
+				self.ComboU1.visible = false;
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UINT2.visible = false;
+				self.ComboU2.visible = false;"/>
+	 
+		 <edit left="640" name="H7" visible="false" top="44"  width="150" height="22" field="NomeHabilidade7" /> 
+
+		 <edit left="610" name="HD7" visible="false" top="320"  type="number" width="50" height="20" field="DanoHabilidade7" />
+		 <edit left="720" name="HPM7" visible="false" top="320"  type="number" width="50" height="20" field="CuraHabilidade7" />
+		 <edit left="830" name="HPA7" visible="false" top="320"  type="number" width="50" height="20" field="current7" />
+		 <edit left="940" name="HPF7" visible="false" top="320"  type="number" width="50" height="20" field="DPTHabilidade7" />
+		 <label left="880" name="HINT7" visible="false" top="413"  width="50" height="20" field="Hintensidade7" /> 		  
+		 <comboBox name="Combo7" visible="false" left="610" top="350" width="120" height="20" field="DanoAtributo7" items="{'Escolha', 'PA', 'PM', 'PF', 'Cura','Fixo', 'Dano P/ Turno' }"/>
+		 <textEditor left="565" name="HT7" top="130" visible="false"  width="400" height="170"  field="DescriHabilidade7" />
+		 		<button left="800" name="HL7" visible="false" top="40" fontSize="20" height="30" width="200" text="Setima Habilidade" fontColor="White" onClick="ExecutarH7()"/>
+								
+			<script>
+						
+                local function ExecutarH7() 
+				
+				   --[[ HABILIDADE DE DANO ]]--
+					if sheet.DanoHabilidade7 > sheet.CuraHabilidade7 and sheet.DPTHabilidade7 then
+												
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade7);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.Hintensidade7 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current7 = mesa.meuJogador:getBarValue(2);
+																current7 = current7 - (tonumber(sheet.current7) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current7);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+								
+					--[[ HABILIDADE DE CURA ]]--
+					else if sheet.CuraHabilidade7 > sheet.DanoHabilidade7 and sheet.DPTHabilidade7 then
+					 
+					 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade7);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.Hintensidade7 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current7 = mesa.meuJogador:getBarValue(2);
+																current7 = current7 - (tonumber(sheet.current7) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current7);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end); 
+								
+					--[[ HABILIDADE DE INTENSIDADE FIXA ]]--
+					else if sheet.DPTHabilidade7 > sheet.DanoHabilidade7 and sheet.CuraHabilidade7 then
+						 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade7);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com Intensidade de « " .. sheet.DPTHabilidade7 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current7 = mesa.meuJogador:getBarValue(2);
+																current7 = current7 - (tonumber(sheet.current7) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current7);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+					
+					end;
+					end;
+					end;
+					
+                end;    
+							
+        </script> 
+		 
+
+		<image name="HI7" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="HI7" />	
+	 
+	 	  ----------------------------- Habilidade 8 ---------------------------------------------
+	  
+	  		  <image width="60" field="HI8" height="70" left="227" top="325"/>
+			
+	 <button left="213" top="315" text="Clique" opacity="0.0" width="90" height="90"
+				onClick="self.H8.visible = not self.H8.visible;
+				self.HL8.visible = not self.HL8.visible;
+				self.HT8.visible = not self.HT8.visible;
+				self.HD8.visible = not self.HD8.visible;
+				self.HPM8.visible = not self.HPM8.visible;
+				self.HPA8.visible = not self.HPA8.visible;
+				self.HPF8.visible = not self.HPF8.visible
+				self.HI8.visible = not self.HI8.visible;
+				self.HINT8.visible = not self.HINT8.visible;
+				self.Combo8.visible = not self.Combo8.visible;	
+				
+				self.HI2.visible = false;
+				self.HI3.visible = false;
+				self.HI4.visible = false;
+				self.HI5.visible = false;
+				self.HI6.visible = false;
+				self.HI7.visible = false;
+				self.HI1.visible = false;
+				self.HI9.visible = false;
+				self.UI1.visible = false;
+				self.UI2.visible = false;
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				self.HINT1.visible = false;
+				self.Combo1.visible = false;
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HINT2.visible = false;
+				self.Combo2.visible = false;
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HINT3.visible = false;				
+				self.Combo3.visible = false;
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HINT4.visible = false;
+				self.Combo4.visible = false;
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HINT5.visible = false;
+				self.Combo5.visible = false;
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HINT6.visible = false;
+				self.Combo6.visible = false;
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HINT7.visible = false;
+				self.Combo7.visible = false;
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HINT9.visible = false;
+				self.Combo9.visible = false;
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				self.UINT1.visible = false;
+				self.ComboU1.visible = false;
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UINT2.visible = false;
+				self.ComboU2.visible = false;"/>
+				
+	 
+	 	 <edit left="640" name="H8" visible="false" top="44"  width="150" height="22" field="NomeHabilidade8" /> 
+
+		 <edit left="610" name="HD8" visible="false" top="320"  type="number" width="50" height="20" field="DanoHabilidade8" />
+		 <edit left="720" name="HPM8" visible="false" top="320"  type="number" width="50" height="20" field="CuraHabilidade8" />
+		 <edit left="830" name="HPA8" visible="false" top="320"  type="number" width="50" height="20" field="current8" />
+		 <edit left="940" name="HPF8" visible="false" top="320"  type="number" width="50" height="20" field="DPTHabilidade8" />
+		 <label left="880" name="HINT8" visible="false" top="413"  width="50" height="20" field="Hintensidade8" /> 		  
+		 <comboBox name="Combo8" visible="false" left="610" top="350" width="120" height="20" field="DanoAtributo8" items="{'Escolha', 'PA', 'PM', 'PF', 'Cura','Fixo', 'Dano P/ Turno' }"/>
+		 <textEditor left="565" name="HT8" top="130" visible="false"  width="400" height="170"  field="DescriHabilidade8" />
+		 		<button left="800" name="HL8" visible="false" top="40" fontSize="20" height="30" width="200" text="Oitava Habilidade" fontColor="White" onClick="ExecutarH8()"/>
+								
+			<script>
+						
+                                local function ExecutarH8() 
+				
+				   --[[ HABILIDADE DE DANO ]]--
+					if sheet.DanoHabilidade8 > sheet.CuraHabilidade8 and sheet.DPTHabilidade8 then
+												
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade8);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.Hintensidade8 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current8 = mesa.meuJogador:getBarValue(2);
+																current8 = current8 - (tonumber(sheet.current8) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current8);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+								
+					--[[ HABILIDADE DE CURA ]]--
+					else if sheet.CuraHabilidade8 > sheet.DanoHabilidade8 and sheet.DPTHabilidade8 then
+					 
+					 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade8);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.Hintensidade8 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current8 = mesa.meuJogador:getBarValue(2);
+																current8 = current8 - (tonumber(sheet.current8) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current8);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end); 
+								
+					--[[ HABILIDADE DE INTENSIDADE FIXA ]]--
+					else if sheet.DPTHabilidade8 > sheet.DanoHabilidade8 and sheet.CuraHabilidade8 then
+						 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade8);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com Intensidade de « " .. sheet.DPTHabilidade8 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current8 = mesa.meuJogador:getBarValue(2);
+																current8 = current8 - (tonumber(sheet.current8) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current8);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+					
+					end;
+					end;
+					end;
+					
+                end;  
+							
+        </script> 
+		 
+
+		<image name="HI8" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="HI8" />	
+	 
+	 	  ----------------------------- Habilidade 9 ---------------------------------------------
+	  
+	  		 <image width="60" field="HI9" height="70" left="361" top="325"/>
+			
+	 <button left="346" top="315" text="Clique" opacity="0.0" width="90" height="90" 
+	 			onClick="self.H9.visible = not self.H9.visible;
+				self.HL9.visible = not self.HL9.visible;
+				self.HT9.visible = not self.HT9.visible;
+				self.HD9.visible = not self.HD9.visible;
+				self.HPM9.visible = not self.HPM9.visible;
+				self.HPA9.visible = not self.HPA9.visible;
+				self.HPF9.visible = not self.HPF9.visible;
+				self.HI9.visible = not self.HI9.visible;
+				self.HINT9.visible = not self.HINT9.visible;
+				self.Combo9.visible = not self.Combo9.visible;	
+				
+				self.HI2.visible = false;
+				self.HI3.visible = false;
+				self.HI4.visible = false;
+				self.HI5.visible = false;
+				self.HI6.visible = false;
+				self.HI7.visible = false;
+				self.HI8.visible = false;
+				self.HI1.visible = false;
+				self.UI1.visible = false;
+				self.UI2.visible = false;
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				self.HINT1.visible = false;
+				self.Combo1.visible = false;
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HINT2.visible = false;
+				self.Combo2.visible = false;
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HINT3.visible = false;
+				self.Combo3.visible = false;
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HINT4.visible = false;
+				self.Combo4.visible = false;
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HINT5.visible = false;
+				self.Combo5.visible = false;
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HINT6.visible = false;
+				self.Combo6.visible = false;
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HINT7.visible = false;
+				self.Combo7.visible = false;
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HINT8.visible = false;
+				self.Combo8.visible = false;
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				self.UINT1.visible = false;
+				self.ComboU1.visible = false;
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UINT2.visible = false;
+				self.ComboU2.visible = false;"/>
+			
+	 
+	 
+	 	 <edit left="640" name="H9" visible="false" top="44"  width="150" height="22" field="NomeHabilidade9" /> 
+		 <edit left="610" name="HD9" visible="false" top="320"  type="number" width="50" height="20" field="DanoHabilidade9" />
+		 <edit left="720" name="HPM9" visible="false" top="320"  type="number" width="50" height="20" field="CuraHabilidade9" />
+		 <edit left="830" name="HPA9" visible="false" top="320"  type="number" width="50" height="20" field="current9" />
+		 <edit left="940" name="HPF9" visible="false" top="320"  type="number" width="50" height="20" field="DPTHabilidade9" />
+		 <label left="880" name="HINT9" visible="false" top="413"  width="50" height="20" field="Hintensidade9" /> 	  
+		 <comboBox name="Combo9" visible="false" left="610" top="350" width="120" height="20" field="DanoAtributo9" items="{'Escolha', 'PA', 'PM', 'PF', 'Cura','Fixo', 'Dano P/ Turno' }"/>
+		 <textEditor left="565" name="HT9" top="130" visible="false"  width="400" height="170"  field="DescriHabilidade9" />
+		 		<button left="800" name="HL9" visible="false" top="40" fontSize="20" height="30" width="200" text="Nona Habilidade" fontColor="White" onClick="ExecutarH9()"/>
+								
+			<script>
+						
+                                local function ExecutarH9() 
+				
+				   --[[ HABILIDADE DE DANO ]]--
+					if sheet.DanoHabilidade9 > sheet.CuraHabilidade9 and sheet.DPTHabilidade9 then
+												
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade9);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.Hintensidade9 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current9 = mesa.meuJogador:getBarValue(2);
+																current9 = current9 - (tonumber(sheet.current9) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current9);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+								
+					--[[ HABILIDADE DE CURA ]]--
+					else if sheet.CuraHabilidade9 > sheet.DanoHabilidade9 and sheet.DPTHabilidade9 then
+					 
+					 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade9);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.Hintensidade9 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current9 = mesa.meuJogador:getBarValue(2);
+																current9 = current9 - (tonumber(sheet.current9) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current9);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end); 
+								
+					--[[ HABILIDADE DE INTENSIDADE FIXA ]]--
+					else if sheet.DPTHabilidade9 > sheet.DanoHabilidade9 and sheet.CuraHabilidade9 then
+						 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriHabilidade9);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com Intensidade de « " .. sheet.DPTHabilidade9 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local current9 = mesa.meuJogador:getBarValue(2);
+																current9 = current9 - (tonumber(sheet.current9) or 0);
+																mesa.meuJogador:requestSetBarValue(2, current9);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+					
+					end;
+					end;
+					end;
+					
+                end;       
+							
+        </script> 
+		 
+
+		<image name="HI9" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="HI9" />	
+	 
+	 	  ----------------------------- Ultima 1  ---------------------------------------------
+	  
+	  		  <image width="80" field="UI1" height="100" left="133" top="455"/>
+			
+		 <button left="120" top="450" text="Clique" opacity="0.0" width="110" height="110"
+		 onClick="self.U1.visible = not self.U1.visible;
+				self.UL1.visible = not self.UL1.visible;
+				self.UT1.visible = not self.UT1.visible;
+				self.UD1.visible = not self.UD1.visible;
+				self.UPM1.visible = not self.UPM1.visible;
+				self.UPA1.visible = not self.UPA1.visible;
+				self.UPF1.visible = not self.UPF1.visible;
+				self.UI1.visible = not self.UI1.visible;
+				self.UINT1.visible = not self.UINT1.visible;
+				self.ComboU1.visible = not self.ComboU1.visible;	
+				
+				self.HI2.visible = false;
+				self.HI3.visible = false;
+				self.HI4.visible = false;
+				self.HI5.visible = false;
+				self.HI6.visible = false;
+				self.HI7.visible = false;
+				self.HI8.visible = false;
+				self.HI9.visible = false;
+				self.HI1.visible = false;
+				self.UI2.visible = false;
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				self.HINT1.visible = false;
+				self.Combo1.visible = false;
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HINT2.visible = false;
+				self.Combo2.visible = false;
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HINT3.visible = false;				
+				self.Combo3.visible = false;
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HINT4.visible = false;
+				self.Combo4.visible = false;
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HINT5.visible = false;
+				self.Combo5.visible = false;
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HINT6.visible = false;
+				self.Combo6.visible = false;
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HINT7.visible = false;
+				self.Combo7.visible = false;
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HINT8.visible = false;
+				self.Combo8.visible = false;
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HINT9.visible = false;
+				self.Combo9.visible = false;
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UINT2.visible = false;
+				self.ComboU2.visible = false;"/>
+				
+
+
+		 <edit left="640" name="U1" visible="false" top="44"  width="150" height="22" field="NomeUltima1" /> 
+
+		 <edit left="610" name="UD1" visible="false" top="320"  type="number" width="50" height="20" field="DanoUltima1" />
+		 <edit left="720" name="UPM1" visible="false" top="320"  type="number" width="50" height="20" field="CuraUltima1" />
+		 <edit left="830" name="UPA1" visible="false" top="320"  type="number" width="50" height="20" field="currentU1" />
+		 <edit left="940" name="UPF1" visible="false" top="320"  type="number" width="50" height="20" field="DPTUltima1" />
+		 <label left="880" name="UINT1" visible="false" top="413"  width="50" height="20" field="Uintensidade1" />
+		 <comboBox name="ComboU1" visible="false" left="610" top="350" width="120" height="20" field="DanoAtributoU2" items="{'Escolha', 'PA', 'PM', 'PF', 'Cura','Fixo', 'Dano P/ Turno' }"/>
+		 <textEditor left="565" name="UT1" top="130" visible="false"  width="400" height="170"  field="DescriUltima1" />
+		 
+		 <button left="800" name="UL1" visible="false" top="40" fontSize="20" height="30" width="200" text="Primeira Ultimate" fontColor="White" onClick="ExecutarU1()"/>
+								
+			<script>
+						
+                    local function ExecutarU1() 
+				
+				   --[[ HABILIDADE DE DANO ]]--
+					if sheet.DanoUltima1 > sheet.CuraUltima1 and sheet.DPTUltima1 then
+												
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriUltima1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.Uintensidade1 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local currentU1 = mesa.meuJogador:getBarValue(2);
+																currentU1 = currentU1 - (tonumber(sheet.currentU1) or 0);
+																mesa.meuJogador:requestSetBarValue(2, currentU1);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+								
+					--[[ HABILIDADE DE CURA ]]--
+					else if sheet.CuraUltima1 > sheet.DanoUltima1 and sheet.DPTUltima1 then
+					 
+					 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriUltima1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.Uintensidade1 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local currentU1 = mesa.meuJogador:getBarValue(2);
+																currentU1 = currentU1 - (tonumber(sheet.currentU1) or 0);
+																mesa.meuJogador:requestSetBarValue(2, currentU1);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end); 
+								
+					--[[ HABILIDADE DE INTENSIDADE FIXA ]]--
+					else if sheet.DPTUltima1 > sheet.DanoUltima1 and sheet.CuraUltima1 then
+						 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriUltima1);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com Intensidade de « " .. sheet.DPTUltima1 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local currentU1 = mesa.meuJogador:getBarValue(2);
+																currentU1 = currentU1 - (tonumber(sheet.currentU1) or 0);
+																mesa.meuJogador:requestSetBarValue(2, currentU1);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+					
+					end;
+					end;
+					end;
+					
+                end; 
+							
+        </script> 
+
+		<image name="UI1" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="UI1" />	
+	 
+	 	  ----------------------------- Ultima 2 ---------------------------------------------
+	  
+	  		  <image width="80" field="UI2" height="100" left="284" top="455"/>	  		 
+			
+	 <button left="268" top="450" text="Clique" opacity="0.0" width="110" height="110"
+
+			onClick="self.U2.visible = not self.U2.visible;
+				self.UL2.visible = not self.UL2.visible;
+				self.UT2.visible = not self.UT2.visible;
+				self.UD2.visible = not self.UD2.visible;
+				self.UPM2.visible = not self.UPM2.visible;
+				self.UPA2.visible = not self.UPA2.visible;
+				self.UPF2.visible = not self.UPF2.visible;
+				self.UI2.visible = not self.UI2.visible;
+				self.UINT2.visible = not self.UINT2.visible;
+				self.ComboU2.visible = not self.ComboU2.visible;	
+				
+				self.HI2.visible = false;
+				self.HI3.visible = false;
+				self.HI4.visible = false;
+				self.HI5.visible = false;
+				self.HI6.visible = false;
+				self.HI7.visible = false;
+				self.HI8.visible = false;
+				self.HI9.visible = false;
+				self.UI1.visible = false;
+				self.HI1.visible = false;
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				self.HINT1.visible = false;
+				self.Combo1.visible = false;
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HINT2.visible = false;
+				self.Combo2.visible = false;
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HINT3.visible = false;
+				self.Combo3.visible = false;				
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HINT4.visible = false;
+				self.Combo4.visible = false;
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HINT5.visible = false;
+				self.Combo5.visible = false;
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HINT6.visible = false;
+				self.Combo6.visible = false;
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HINT7.visible = false;
+				self.Combo7.visible = false;
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HINT8.visible = false;
+				self.Combo8.visible = false;
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HINT9.visible = false;
+				self.Combo9.visible = false;
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				self.UINT1.visible = false;
+				self.ComboU1.visible = false;"/>
+	 
+	 
+	 	 <edit left="640" name="U2" visible="false" top="44"  width="150" height="22" field="NomeUltima2" /> 
+
+		 <edit left="610" name="UD2" visible="false" top="320" type="number" width="50" height="20" field="DanoUltima2" />
+		 <edit left="720" name="UPM2" visible="false" top="320" type="number" width="50" height="20" field="CuraUltima2" />
+		 <edit left="830" name="UPA2" visible="false" top="320" type="number" width="50" height="20" field="currentU2" />
+		 <edit left="940" name="UPF2" visible="false" top="320" type="number" width="50" height="20" field="DPTUltima2" />
+		 <label left="880" name="UINT2" visible="false" top="413"  width="50" height="20" field="Uintensidade2" />
+		 <comboBox name="ComboU2" visible="false" left="610" top="350" width="120" height="20" field="DanoAtributoU1" items="{'Escolha', 'PA', 'PM', 'PF', 'Cura','Fixo', 'Dano P/ Turno' }"/>		  
+		 <textEditor left="565" name="UT2" top="130" visible="false"  width="400" height="170"  field="DescriUltima2" />
+		 
+		 		 <button left="800" name="UL2" visible="false" top="40" fontSize="20" height="30" width="200" text="Segunda Ultimate" fontColor="White" onClick="ExecutarU2()"/>
+								
+			<script>
+						
+                    local function ExecutarU2() 
+				
+				   --[[ HABILIDADE DE DANO ]]--
+					if sheet.DanoUltima2 > sheet.CuraUltima2 and sheet.DPTUltima2 then
+												
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriUltima2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Causando « " .. sheet.Uintensidade2 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local currentU2 = mesa.meuJogador:getBarValue(2);
+																currentU2 = currentU2 - (tonumber(sheet.currentU2) or 0);
+																mesa.meuJogador:requestSetBarValue(2, currentU2);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+								
+					--[[ HABILIDADE DE CURA ]]--
+					else if sheet.CuraUltima2 > sheet.DanoUltima2 and sheet.DPTUltima2 then
+					 
+					 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriUltima2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « " .. sheet.Uintensidade2 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local currentU2 = mesa.meuJogador:getBarValue(2);
+																currentU2 = currentU2 - (tonumber(sheet.currentU2) or 0);
+																mesa.meuJogador:requestSetBarValue(2, currentU2);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end); 
+								
+					--[[ HABILIDADE DE INTENSIDADE FIXA ]]--
+					else if sheet.DPTUltima2 > sheet.DanoUltima2 and sheet.CuraUltima2 then
+						 local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+
+                        mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+                                function (rolado)
+									
+                                        if sheet.AcertoMagico >= rolado.resultado then
+                                                mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriUltima2);
+												mesaDoPersonagem.chat:enviarMensagem("[§K2,0]Com Intensidade de « " .. sheet.DPTUltima2 .. " »");
+																local mesa = Firecast.getMesaDe(sheet); 
+																local currentU2 = mesa.meuJogador:getBarValue(2);
+																currentU2 = currentU2 - (tonumber(sheet.currentU2) or 0);
+																mesa.meuJogador:requestSetBarValue(2, currentU2);
+
+                                        else
+                                                mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+                                        end;                                        
+
+                                end);  
+					
+					end;
+					end;
+					end;
+					
+                end;      
+							
+        </script> 
+
+		<image name="UI2" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="UI2" />	
+	 
+	 	        </scrollBox>
+	 
+</popupForm>

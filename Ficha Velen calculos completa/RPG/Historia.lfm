@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<popupForm	 name="frmHistoria" width="650" height="920" >
+
+
+			
+     <image width="620" height="920" center="true"  src="/imagens/7.png"/>
+	  
+	 <richEdit left="15" top="70" width="450" height="800" backgroundColor="#00000000"  defaultFontColor="white" field="Historia"/> 
+	 
+
+
+	  
+</popupForm>

@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form formType="sheetTemplate" dataType="com.concais.br" 
+     title="CONCAIS" name="frmCONCAIS">
+		<scrollBox align="client">
+		
+	   <image left="20" top="20" width="2000" height="350" src="/imagens/1.png"/>
+
+	   
+	   <image left="50" top="20" width="800" height="110" name="I1" visible="false" style="stretch" opacity="0.5"  src="/imagens/2.png"/>
+	   <image left="50" top="20" width="800" height="110" name="IE1" visible="false" style="stretch" opacity="1.0"  src="/imagens/2.png"/>
+	   <image left="50" top="130" width="800" height="220" name="I2" visible="false" style="stretch" opacity="0.5"  src="/imagens/2.png"/>
+	   <image left="50" top="130" width="800" height="220" name="IE2" visible="false" style="stretch" opacity="1.0"  src="/imagens/2.png"/>
+	   <image left="850" top="20" width="640" height="110" name="I3" visible="false" style="stretch" opacity="0.5"  src="/imagens/2.png"/>
+	   <image left="850" top="20" width="640" height="110" name="IE3" visible="false" style="stretch" opacity="1.0"  src="/imagens/2.png"/>
+	   <image left="850" top="130" width="640" height="220" name="I4" visible="false" style="stretch" opacity="0.5"  src="/imagens/2.png"/>
+	   <image left="850" top="130" width="640" height="220" name="IE4" visible="false" style="stretch" opacity="1.0"  src="/imagens/2.png"/>
+	   <image left="1480" top="20" width="530" height="110" name="I5" visible="false" style="stretch" opacity="0.5"  src="/imagens/2.png"/>
+	   <image left="1480" top="20" width="530" height="110" name="IE5" visible="false" style="stretch" opacity="1.0"  src="/imagens/2.png"/>
+	   <image left="1480" top="130" width="530" height="220" name="I6" visible="false" style="stretch" opacity="0.5"  src="/imagens/2.png"/>
+	   <image left="1480" top="130" width="530" height="220" name="IE6" visible="false" style="stretch" opacity="1.0"  src="/imagens/2.png"/>
+
+	   <rectangle left="37" top="120" width="90" height="120" color="black" strokeColor="RED" strokeSize="2"/>	   
+	   <label left="50" top="100" fontSize="60" width="100" height="100" fontColor="RED" field="Tudo"/>  
+	   <label left="40" top="160" fontSize="30" width="100" height="100" fontColor="RED" text="TOTAL" />  
+		
+		<rectangle left="340" top="50" width="85" height="70" color="black" strokeColor="blue" strokeSize="2"/>
+   	   <label left="350" top="30" fontSize="60" width="100" height="100" fontColor="BLUE" text="20" field="Quantidade"/> 
+	   <button left="250" top="80" text="Menos">
+                <event name="onClick">
+										
+						sheet.Quantidade = (tonumber(sheet.Quantidade) or 0)
+				        sheet.Quantidade = (tonumber(sheet.Quantidade) or 0) -1;
+						local texto1 = "Patio Vazio"; 
+						
+						if 0 > (tonumber(sheet.Quantidade) or 0) then
+						sheet.Quantidade = 0;
+						showMessage(texto1);
+						end;
+
+						if (tonumber(sheet.Quantidade) or 0) =="20" then
+						self.I1.opacity = 1.0;
+						showMessage(texto1);
+						end;
+						
+                </event>
+        </button>
+		
+			   <button left="430" top="80" text="Mais">
+                <event name="onClick">
+                      	sheet.Quantidade = (tonumber(sheet.Quantidade) or 0)
+				        sheet.Quantidade = (tonumber(sheet.Quantidade) or 0) +1;
+						local texto = "Limite de Carros"; 
+						
+						if (tonumber(sheet.Quantidade) or 0) > 20 then
+						sheet.Quantidade = 20;	
+						end;				
+						
+						if (tonumber(sheet.Quantidade) or 0) > 19 then
+						showMessage(texto);
+						end;		
+
+                </event>
+        </button>
+		
+		
+		------------------------------------ Area 2 -------------------------------
+		<rectangle left="340" top="195" width="85" height="70" color="black" strokeColor="blue" strokeSize="2"/>
+		<label left="350" top="175" fontSize="60" width="100" height="100" fontColor="BLUE" text="20" field="Quantidade2"/> 
+			   <button left="250" top="225" text="Menos">
+                <event name="onClick">
+						sheet.Quantidade2 = (tonumber(sheet.Quantidade2) or 0)
+				        sheet.Quantidade2 = (tonumber(sheet.Quantidade2) or 0) -1;
+						local texto1 = "Patio Vazio"; 
+						
+						if 0 > (tonumber(sheet.Quantidade2) or 0) then
+						sheet.Quantidade2 = 0;
+						showMessage(texto1);
+						end;
+
+						if (tonumber(sheet.Quantidade2) or 0) =="30" then
+						self.I2.opacity = 1.0;
+						showMessage(texto1);
+						end;
+						
+                </event>
+        </button>
+		
+			   <button left="430" top="225" text="Mais">
+                <event name="onClick">
+                      	sheet.Quantidade2 = (tonumber(sheet.Quantidade2) or 0)
+				        sheet.Quantidade2 = (tonumber(sheet.Quantidade2) or 0) +1;
+						local texto = "Limite de Carros"; 
+						
+						if (tonumber(sheet.Quantidade2) or 0) > 29 then
+						sheet.Quantidade2 = 30;	
+						end;			
+						
+						if (tonumber(sheet.Quantidade2) or 0) > 29 then
+						showMessage(texto);
+						end;
+						
+                </event>
+        </button>
+		
+				------------------------------------ Area 3 -------------------------------
+	    <rectangle left="1090" top="50" width="85" height="70" color="black" strokeColor="blue" strokeSize="2"/>		
+		<label left="1100" top="30" fontSize="60" width="100" height="100" fontColor="BLUE" text="20" field="Quantidade3"/> 
+			   <button left="1000" top="80" text="Menos">
+                <event name="onClick">
+						sheet.Quantidade3 = (tonumber(sheet.Quantidade3) or 0)
+				        sheet.Quantidade3 = (tonumber(sheet.Quantidade3) or 0) -1;
+						local texto1 = "Patio Vazio"; 
+						
+						if 0 > (tonumber(sheet.Quantidade3) or 0) then
+						sheet.Quantidade3 = 0;
+						showMessage(texto1);
+						end;
+
+						if (tonumber(sheet.Quantidade3) or 0) =="20" then
+						self.I3.opacity = 1.0;
+						showMessage(texto1);
+						end;
+						
+                </event>
+        </button>
+		
+			   <button left="1180" top="80" text="Mais">
+                <event name="onClick">
+                      	sheet.Quantidade3 = (tonumber(sheet.Quantidade3) or 0)
+				        sheet.Quantidade3 = (tonumber(sheet.Quantidade3) or 0) +1;
+						local texto = "Limite de Carros"; 
+						
+						if (tonumber(sheet.Quantidade3) or 0) > 20 then
+						sheet.Quantidade3 = 20;	
+						end;						
+						
+						if (tonumber(sheet.Quantidade3) or 0) > 19 then
+						showMessage(texto);
+						end;			
+
+                </event>
+        </button>
+		
+						------------------------------------ Area 4 -------------------------------
+	    <rectangle left="1090" top="195" width="85" height="70" color="black" strokeColor="blue" strokeSize="2"/>			
+		<label left="1100" top="175" fontSize="60" width="100" height="100" fontColor="BLUE" text="20" field="Quantidade4"/> 
+			   <button left="1000" top="225" text="Menos">
+                <event name="onClick">
+						sheet.Quantidade4 = (tonumber(sheet.Quantidade4) or 0)
+				        sheet.Quantidade4 = (tonumber(sheet.Quantidade4) or 0) -1;
+						local texto1 = "Patio Vazio"; 
+						
+						if 0 > (tonumber(sheet.Quantidade4) or 0) then
+						sheet.Quantidade4 = 0;
+						showMessage(texto1);
+						end;
+
+						if (tonumber(sheet.Quantidade4) or 0) =="20" then
+						self.I4.opacity = 1.0;
+						showMessage(texto1);
+						end;
+						
+                </event>
+        </button>
+		
+			   <button left="1180" top="225" text="Mais">
+                <event name="onClick">
+                      	sheet.Quantidade4 = (tonumber(sheet.Quantidade4) or 0)
+				        sheet.Quantidade4 = (tonumber(sheet.Quantidade4) or 0) +1;
+						local texto = "Limite de Carros"; 											
+
+						if (tonumber(sheet.Quantidade4) or 0) > 20 then
+						sheet.Quantidade4 = 20;	
+						end;						
+						
+						if (tonumber(sheet.Quantidade4) or 0) > 19 then
+						showMessage(texto);
+						end;				
+
+                </event>
+        </button>
+		
+						------------------------------------ Area 5 -------------------------------
+	    <rectangle left="1690" top="50" width="85" height="70" color="black" strokeColor="blue" strokeSize="2"/>	
+		<label left="1700" top="30" fontSize="60" width="100" height="100" fontColor="BLUE" text="20" field="Quantidade5"/> 
+			   <button left="1600" top="80" text="Menos">
+                <event name="onClick">
+						sheet.Quantidade5 = (tonumber(sheet.Quantidade5) or 0)
+				        sheet.Quantidade5 = (tonumber(sheet.Quantidade5) or 0) -1;
+						local texto1 = "Patio Vazio"; 
+						
+						if 0 > (tonumber(sheet.Quantidade5) or 0) then
+						sheet.Quantidade5 = 0;
+						showMessage(texto1);
+						end;
+
+						if (tonumber(sheet.Quantidade5) or 0) =="20" then
+						self.I5.opacity = 1.0;
+						showMessage(texto1);
+						end;
+												
+                </event>
+        </button>
+		
+			   <button left="1780" top="80" text="Mais">
+                <event name="onClick">
+                      	sheet.Quantidade5 = (tonumber(sheet.Quantidade5) or 0)
+				        sheet.Quantidade5 = (tonumber(sheet.Quantidade5) or 0) +1;
+						local texto = "Limite de Carros"; 
+						
+						if (tonumber(sheet.Quantidade5) or 0) > 20 then
+						sheet.Quantidade5 = 20;	
+						end;
+											
+						if (tonumber(sheet.Quantidade5) or 0) > 19 then
+						showMessage(texto);
+						end;					
+
+                </event>
+        </button>
+		
+				------------------------------------ Area 6 -------------------------------
+	    <rectangle left="1690" top="195" width="85" height="70" color="black" strokeColor="blue" strokeSize="2"/>			
+		<label left="1700" top="175" fontSize="60" width="100" height="100" fontColor="BLUE" text="20" field="Quantidade6"/> 
+			   <button left="1600" top="225" text="Menos">
+                <event name="onClick">
+						sheet.Quantidade6 = (tonumber(sheet.Quantidade6) or 0)
+				        sheet.Quantidade6 = (tonumber(sheet.Quantidade6) or 0) -1;
+						local texto1 = "Patio Vazio"; 
+						
+						if 0 > (tonumber(sheet.Quantidade6) or 0) then
+						sheet.Quantidade6 = 0;
+						showMessage(texto1);
+						end;
+
+						if (tonumber(sheet.Quantidade6) or 0) =="20" then
+						self.I6.opacity = 1.0;
+						showMessage(texto1);
+						end;
+												
+                </event>
+        </button>
+		
+			   <button left="1780" top="225" text="Mais">
+                <event name="onClick">
+                      	sheet.Quantidade6 = (tonumber(sheet.Quantidade6) or 0)
+				        sheet.Quantidade6 = (tonumber(sheet.Quantidade6) or 0) +1;
+						local texto = "Limite de Carros"; 
+						
+						if (tonumber(sheet.Quantidade6) or 0) > 20 then
+						sheet.Quantidade6 = 20;	
+						end;					
+						
+						if (tonumber(sheet.Quantidade6) or 0) > 19 then
+						showMessage(texto);
+						end;
+						
+
+                </event>
+        </button>
+	------------------------------------------------------------------------------------------------------------------------	
+	------------------------------------------------------------------------------------------------------------------------	
+	------------------------------------------------------------------------------------------------------------------------	
+	------------------------------------------------------------------------------------------------------------------------	
+	------------------------------------------------------------------------------------------------------------------------	
+	------------------------------------------------------------------------------------------------------------------------	
+	
+		 <dataLink fields="{'Quantidade', 'Quantidade2', 'Quantidade3', 'Quantidade4', 'Quantidade5', 'Quantidade6', TOTAL}">
+                <event name="onChange">                
+						
+						if (tonumber(sheet.Quantidade) or 0) > 10 then
+						self.I1.visible = true;
+						else if (tonumber(sheet.Quantidade) or 0) > 19 then
+						self.IE1.visible = true;	
+						else
+						self.I1.visible = false;
+						end
+						end;
+						
+						if (tonumber(sheet.Quantidade) or 0) >19 then
+						self.IE1.visible = true;
+						else
+						self.IE1.visible = false;
+						end;
+						
+						if (tonumber(sheet.Quantidade) or 0) > 10 then
+						self.I1.visible = true;
+						else
+						self.I1.visible = false;
+						end;
+						
+						if (tonumber(sheet.Quantidade) or 0) >19 then
+						self.IE1.visible = true;
+						else
+						self.IE1.visible = false;
+						end;
+						
+						if (tonumber(sheet.Quantidade2) or 0) > 15 then
+						self.I2.visible = true;
+						else if (tonumber(sheet.Quantidade2) or 0) > 29 then
+						self.IE2.visible = true;	
+						else
+						self.I2.visible = false;
+						end
+						end;
+						
+						if (tonumber(sheet.Quantidade2) or 0) >29 then
+						self.IE2.visible = true;
+						else
+						self.IE2.visible = false;
+						end;
+						
+						if (tonumber(sheet.Quantidade2) or 0) > 15 then
+						self.I2.visible = true;
+						else
+						self.I2.visible = false;
+						end;
+						
+						
+						if (tonumber(sheet.Quantidade2) or 0) >29 then
+						self.IE2.visible = true;
+						else
+						self.IE2.visible = false;
+						end;
+						
+						if (tonumber(sheet.Quantidade3) or 0) > 10 then
+						self.I3.visible = true;
+						else if (tonumber(sheet.Quantidade3) or 0) > 19 then
+						self.IE3.visible = true;	
+						else
+						self.I3.visible = false;
+						end
+						end;
+						
+						if (tonumber(sheet.Quantidade3) or 0) >19 then
+						self.IE3.visible = true;
+						else
+						self.IE3.visible = false;
+						end;
+						
+						if (tonumber(sheet.Quantidade3) or 0) > 10 then
+						self.I3.visible = true;
+						else
+						self.I3.visible = false;
+						end;
+						
+						if (tonumber(sheet.Quantidade3) or 0) >19 then
+						self.IE3.visible = true;
+						else
+						self.IE3.visible = false;
+						end;
+						
+						if (tonumber(sheet.Quantidade4) or 0) > 10 then
+						self.I4.visible = true;
+						else if (tonumber(sheet.Quantidade4) or 0) > 19 then
+						self.IE4.visible = true;	
+						else
+						self.I4.visible = false;
+						end
+						end;
+						
+						if (tonumber(sheet.Quantidade4) or 0) >19 then
+						self.IE4.visible = true;
+						else
+						self.IE4.visible = false;
+						end;
+
+						if (tonumber(sheet.Quantidade4) or 0) > 10 then
+						self.I4.visible = true;
+						else
+						self.I4.visible = false;
+						end;
+						
+						
+						if (tonumber(sheet.Quantidade4) or 0) >19 then
+						self.IE4.visible = true;
+						else
+						self.IE4.visible = false;
+						end;
+						
+						if (tonumber(sheet.Quantidade5) or 0) > 10 then
+						self.I5.visible = true;
+						else if (tonumber(sheet.Quantidade5) or 0) > 19 then
+						self.IE5.visible = true;	
+						else
+						self.I5.visible = false;
+						end
+						end;
+
+						if (tonumber(sheet.Quantidade5) or 0) >19 then
+						self.IE5.visible = true;
+						else
+						self.IE5.visible = false;
+						end;
+
+						if (tonumber(sheet.Quantidade5) or 0) > 10 then
+						self.I5.visible = true;
+						else
+						self.I5.visible = false;
+						end;
+
+						if (tonumber(sheet.Quantidade5) or 0) >19 then
+						self.IE5.visible = true;
+						else
+						self.IE5.visible = false;
+						end;
+						
+						if (tonumber(sheet.Quantidade6) or 0) > 10 then
+						self.I6.visible = true;
+						else if (tonumber(sheet.Quantidade6) or 0) > 19 then
+						self.IE6.visible = true;	
+						else
+						self.I6.visible = false;
+						end
+						end;
+						
+						if (tonumber(sheet.Quantidade6) or 0) > 10 then
+						self.I6.visible = true;
+						else
+						self.I6.visible = false;
+						end;
+						
+						if (tonumber(sheet.Quantidade6) or 0) >19 then
+						self.IE6.visible = true;
+						else
+						self.IE6.visible = false;
+						end;
+
+						if (tonumber(sheet.Quantidade6) or 0) > 10 then
+						self.I6.visible = true;
+						else
+						self.I6.visible = false;
+						end;
+						
+						if (tonumber(sheet.Quantidade6) or 0) >19 then
+						self.IE6.visible = true;
+						else
+						self.IE6.visible = false;
+						end;
+						
+						sheet.Tudo = (tonumber(sheet.Quantidade) or 0) + (tonumber(sheet.Quantidade2) or 0) + (tonumber(sheet.Quantidade3) or 0) + (tonumber(sheet.Quantidade4) or 0) + (tonumber(sheet.Quantidade5) or 0) + (tonumber(sheet.Quantidade6) or 0);
+
+                </event>
+        </dataLink>
+		
+		</scrollBox>
+		
+</form>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<popupForm name="frmpersonagem" width="650" height="920" >
+			
+
+			
+      <image width="620" height="920" center="true"  src="/imagens/4.png"/>
+	  <textEditor left="40" top="65" width="230" height="120" field="conhecimento" />
+	  <textEditor left="315" top="65" width="230" height="120" field="Diaria" />
+	  <textEditor left="40" top="230" width="230" height="180" field="HabilidadeMontaria" />
+
+	  <rectangle left="147" top="730" color="black"  width="50" height="20"  />
+	  <label left="150" top="650" width="230" height="180" field="RHPNivel" />
+
+	  <rectangle left="147" top="755" color="black"  width="50" height="20"  />
+	  <label left="150" top="675" width="230" height="180" field="CHPNivel" />
+	  
+	  <rectangle left="147" top="780" color="black"  width="50" height="20"  />
+	  <label left="150" top="700" width="230" height="180" field="EHPNivel" />
+	  
+	  <rectangle left="147" top="805" color="black"  width="50" height="20"  />
+	  <label left="150" top="725" width="230" height="180" field="R20HPNivel" />
+	  
+	  <rectangle left="147" top="830" color="black"  width="50" height="20"  />
+	  <label left="150" top="750" width="270" height="180" field="RMPNivel" />
+	  
+	  <rectangle left="147" top="855" color="black"  width="50" height="20"  />
+	  <label left="150" top="775" width="270" height="180" field="EMPNivel" />
+	  
+        <image field="imagemDoPersonagem" editable="true" style="autoFit" 
+              left="321" top="465" width="230" height="208" />
+			  
+		 <image field="imagemDoPersonagem2" editable="true" style="autoFit" 
+				left="43" top="465" width="230" height="208" />
+	 
+	  	 <edit left="390"   top="240"  width="75" height="20" field="Atletismo" />
+		 <edit left="390"   top="265"  width="75" height="20" field="Percepção" />
+		 <edit left="390"   top="290"  width="75" height="20" field="Vigor" />
+		 <edit left="390"   top="315"  width="75" height="20" field="Sabedoria" />
+		 <edit left="390"   top="340"  width="75" height="20" field="Acrobacia" />
+
+
+		 
+</popupForm>

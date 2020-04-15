@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<popupForm	 name="frmBasica" width="1000" height="600" >
+
+	<scrollBox align="client">
+			
+		<image left="1" top="5" width="1000" height="590" center="true"  src="/imagens/HB.png"/>
+		<image field="ImagemBasica" editable="true" style="autoFit" left="370" top="60" width="100" height="100"/>
+
+		<edit left="210" top="85" width="120" height="30" fontSize="18" field="NomeBasica"/> 
+		<textEditor left="100" top="170" width="370" height="270" field="BasicaDescri"/>
+		
+			<button left="130" top="450" fontSize="20" height="30" width="200" text="Habi. Basica" fontColor="White" >
+                 
+                <event name="onClick">
+                        local rolagem = rrpg.interpretarRolagem(sheet.ataqueDoPersonagem); 
+
+                        if not rolagem.possuiAlgumDado then
+                                -- se o usuario não tiver preenchido qual dado rolar,
+                                -- vamos adicionar um 1d20 + na "fórmula da rolagem"
+                                rolagem = rrpg.interpretarRolagem("1d20"):concatenar(rolagem);
+                        end; 
+
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet);
+
+                       if mesaDoPersonagem ~= nil then
+                               mesaDoPersonagem.chat:rolarDados(rolagem, sheet.BasicaDescri);
+                       end;
+                </event>
+        </button>           
+
+
+
+
+		<edit left="625" top="69" width="70" height="25" fontSize="18" field="DanoBasica"/> 
+		<edit left="780" top="69" width="70" height="25" fontSize="18" field="CustoBasica"/> 
+		<edit left="650" top="102" width="100" height="25" fontSize="18" field="DTBasica"/> 
+		
+		
+		<edit left="600" top="225" width="50" height="20" fontSize="16" field="PABasica"/> 
+		<edit left="710" top="225" width="50" height="20" fontSize="16" field="PMBasica"/> 
+		<edit left="830" top="225" width="50" height="20" fontSize="16" field="PFBasica"/> 
+		<edit left="600" top="252" width="50" height="20" fontSize="16" field="DEFBasica"/> 
+		<edit left="710" top="252" width="50" height="20" fontSize="16" field="RESBasica"/> 		
+		
+		<edit left="600" top="303" width="50" height="20" fontSize="16" field="AcertoBasica"/>
+		<edit left="715" top="303" width="50" height="20" fontSize="16" field="AMBasica"/> 
+		<edit left="845" top="303" width="50" height="20" fontSize="16" field="ESQBasica"/> 		
+		<edit left="600" top="328" width="50" height="20" fontSize="16" field="CritBasica"/> 
+		<edit left="715" top="328" width="50" height="20" fontSize="16" field="CMBasica"/> 	
+		<edit left="845" top="328" width="50" height="20" fontSize="16" field="PersistBasica"/> 		
+		<edit left="600" top="353" width="50" height="20" fontSize="16" field="PHPBasica"/>
+		<edit left="715" top="353" width="50" height="20" fontSize="16" field="PMPBasica"/> 
+		
+		<edit left="845" top="353" width="50" height="20" fontSize="16" field="REGMPBasica"/>
+		<edit left="600" top="378" width="50" height="20" fontSize="16" field="VisaoBasica"/>		
+		<edit left="715" top="378" width="50" height="20" fontSize="16" field="CorridaBasica"/>		
+		<edit left="863" top="378" width="32" height="20" fontSize="16" field="DeslocamentoBasica"/>		
+			        </scrollBox>
+		
+	  
+</popupForm>

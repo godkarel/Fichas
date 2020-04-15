@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<popupForm	 name="frmRacial" width="1000" height="600" >
+
+	<scrollBox align="client">
+			
+		<image left="1" top="5" width="1000" height="590" center="true"  src="/imagens/HR.png"/>
+		<image field="ImagemRacial" editable="true" style="autoFit" left="370" top="60" width="100" height="100"/>
+
+		<edit left="210" top="85" width="120" height="30" fontSize="18" field="NomeRacial"/> 
+		<textEditor left="100" top="170" width="370" height="270" field="RacialDescri"/>
+		
+			<button left="130" top="450" fontSize="20" height="30" width="200" text="Racial" fontColor="White" >
+                 
+                <event name="onClick">
+                        local rolagem = rrpg.interpretarRolagem(sheet.ataqueDoPersonagem); 
+
+                        if not rolagem.possuiAlgumDado then
+                                -- se o usuario não tiver preenchido qual dado rolar,
+                                -- vamos adicionar um 1d20 + na "fórmula da rolagem"
+                                rolagem = rrpg.interpretarRolagem("1d20"):concatenar(rolagem);
+                        end; 
+
+                        local mesaDoPersonagem = rrpg.getMesaDe(sheet);
+
+                       if mesaDoPersonagem ~= nil then
+                               mesaDoPersonagem.chat:rolarDados(rolagem, sheet.RacialDescri);
+                       end;
+                </event>
+        </button>           
+
+
+
+
+		<edit left="625" top="69" width="70" height="25" fontSize="18" field="DanoRacial"/> 
+		<edit left="780" top="69" width="70" height="25" fontSize="18" field="CustoRacial"/> 
+		<edit left="650" top="102" width="100" height="25" fontSize="18" field="DTRacial"/> 
+		
+		
+		<edit left="600" top="225" width="50" height="20" fontSize="16" field="PARacial"/> 
+		<edit left="710" top="225" width="50" height="20" fontSize="16" field="PMRacial"/> 
+		<edit left="830" top="225" width="50" height="20" fontSize="16" field="PFRacial"/> 
+		<edit left="600" top="252" width="50" height="20" fontSize="16" field="DEFRacial"/> 
+		<edit left="710" top="252" width="50" height="20" fontSize="16" field="RESRacial"/> 		
+		
+		<edit left="600" top="303" width="50" height="20" fontSize="16" field="AcertoRacial"/>
+		<edit left="710" top="303" width="50" height="20" fontSize="16" field="AMRacial"/> 
+		<edit left="830" top="303" width="50" height="20" fontSize="16" field="ESQRacial"/> 		
+		<edit left="600" top="328" width="50" height="20" fontSize="16" field="CritRacial"/> 
+		<edit left="710" top="328" width="50" height="20" fontSize="16" field="CMRacial"/> 	
+		<edit left="830" top="328" width="50" height="20" fontSize="16" field="PersistRacial"/> 		
+		<edit left="600" top="353" width="50" height="20" fontSize="16" field="PHPRacial"/>
+		<edit left="710" top="353" width="50" height="20" fontSize="16" field="PMPRacial"/> 		
+		
+		
+			        </scrollBox>
+	  
+</popupForm>

@@ -1,0 +1,12 @@
+	if sheet.NomeFieldComboBox == 'a' then
+	realizarPrimeiroTeste()
+	else if sheet.NomeFieldComboBox == 'b' then
+	realizarSegundoTeste()
+	end
+
+
+		<scrollBox left="10" top="10" width="615" height="710">
+
+		        </scrollBox>
+
+Ficha 1.3 Gaia 3 ( Antiga )  https://mega.nz/#!hgUQAQxD!SAZ4AJuwy_CXF_3beNkl6hFriFS8nTrgiXXk8b2ncb0

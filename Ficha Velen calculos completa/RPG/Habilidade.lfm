@@ -1,0 +1,2198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<popupForm name="frmhabilidade" width="1050" height="650" >
+     
+     <image width="1050" height="720" center="true"  src="/imagens/3.png"/>
+	 
+	 ------------------------- Habilidade 1 --------------------------------------------------
+		 <image width="60" field="HI1" height="70" left="90" top="75"/>
+			
+	 <button left="78" top="67" text="Clique" opacity="0.0" width="90" height="90" 
+	 onClick="self.H1.visible = not self.H1.visible;
+			  self.HL1.visible = not self.HL1.visible;
+				self.HT1.visible = not self.HT1.visible;
+				self.HD1.visible = not self.HD1.visible;
+				self.HPM1.visible = not self.HPM1.visible;
+				self.HPA1.visible = not self.HPA1.visible;
+				self.HPF1.visible = not self.HPF1.visible;
+				
+				self.HC1.visible = not self.HC1.visible;
+				self.HDEF1.visible = not self.HDEF1.visible;
+				self.HRES1.visible = not self.HRES1.visible;
+				self.HI1.visible = not self.HI1.visible;
+				self.HHP1.visible = not self.HHP1.visible;
+				self.HMP1.visible = not self.HMP1.visible;
+				
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HHP2.visible = false;
+				self.HMP2.visible = false;				
+								
+				self.HC2.visible = false;
+				self.HDEF2.visible = false;
+				self.HRES2.visible = false;
+				self.HI2.visible = false;
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HHP3.visible = false;
+				self.HMP3.visible = false;				
+									
+				self.HC3.visible = false;
+				self.HDEF3.visible = false;
+				self.HRES3.visible = false;
+				self.HI3.visible = false;
+				
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HHP4.visible = false;
+				self.HMP4.visible = false;				
+									
+				self.HC4.visible = false;
+				self.HDEF4.visible = false;
+				self.HRES4.visible = false;
+				self.HI4.visible = false;
+				
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HHP5.visible = false;
+				self.HMP5.visible = false;				
+											
+				self.HC5.visible = false;
+				self.HDEF5.visible = false;
+				self.HRES5.visible = false;
+				self.HI5.visible = false;
+				
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HHP6.visible = false;
+				self.HMP6.visible = false;				
+									
+				self.HC6.visible = false;
+				self.HDEF6.visible = false;
+				self.HRES6.visible = false;
+				self.HI6.visible = false;
+				
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HHP7.visible = false;
+				self.HMP7.visible = false;				
+								
+				self.HC7.visible = false;
+				self.HDEF7.visible = false;
+				self.HRES7.visible = false;
+				self.HI7.visible = false;
+				
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HHP8.visible = false;
+				self.HMP8.visible = false;				
+								
+				self.HC8.visible = false;
+				self.HDEF8.visible = false;
+				self.HRES8.visible = false;
+				self.HI8.visible = false;
+				
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HHP9.visible = false;
+				self.HMP9.visible = false;				
+								
+				self.HC9.visible = false;
+				self.HDEF9.visible = false;
+				self.HRES9.visible = false;
+				self.HI9.visible = false;
+				
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				
+				self.UC1.visible = false;
+				self.UDEF1.visible = false;
+				self.URES1.visible = false;
+				self.UI1.visible = false;
+				
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UHP2.visible = false;
+				self.UMP2.visible = false;		
+				self.UHP1.visible = false;
+				self.UMP1.visible = false;		
+								
+				self.UC2.visible = false;
+				self.UDEF2.visible = false;
+				self.URES2.visible = false;
+				self.UI2.visible = false"/>
+
+		 
+		 <edit left="640" name="H1" visible="false" top="44"  width="150" height="22" field="NomeHabilidade1" /> 
+		 <label left="800" name="HL1" visible="false" top="40" fontSize="20" width="250" text="Primeira Habilidade" fontColor="Blue" autoSize="true"/>
+		 <edit left="610" name="HD1" visible="false" top="320"  width="50" height="20" field="DanoHabilidade1" />
+		 <edit left="720" name="HPM1" visible="false" top="320"  width="50" height="20" field="PMHabilidade1" />
+		 <edit left="830" name="HPA1" visible="false" top="320"  width="50" height="20" field="PAHabilidade1" />
+		  <edit left="940" name="HPF1" visible="false" top="320"  width="50" height="20" field="PFHabilidade1" />
+		  
+		  <edit left="610" name="HC1" visible="false" top="350"  width="50" height="20" field="CuraHabilidade1" />
+		  <edit left="720" name="HDEF1" visible="false" top="350"  width="50" height="20" field="DefHabilidade1" />
+		  <edit left="830" name="HRES1" visible="false" top="350"  width="50" height="20" field="ResHabilidade1" />
+		  <edit left="830" name="HHP1" visible="false" top="380"  width="50" height="20" field="HPHabilidade1" />
+		  <edit left="940" name="HMP1" visible="false" top="380"  width="50" height="20" field="MPHabilidade1" />
+		  
+		 <textEditor left="565" top="130" visible="false" name="HT1" width="400" height="170"  field="DescriHabilidade1" />
+		 
+
+		<image name="HI1" visible="false" field="HI1" editable="true" left="564" top="397" width="214" height="130"/>
+
+	  ----------------------------- Habilidade 2 ---------------------------------------------
+	  
+	  		 <image width="60" field="HI2" height="70" left="226" top="78"/>
+			
+	 <button left="213" top="67" text="Clique" opacity="0.0" width="90" height="90" 
+
+				onClick="self.H2.visible = not self.H2.visible;
+				self.HL2.visible = not self.HL2.visible;
+				self.HT2.visible = not self.HT2.visible;
+				self.HD2.visible = not self.HD2.visible;
+				self.HPM2.visible = not self.HPM2.visible;
+				self.HPA2.visible = not self.HPA2.visible;
+				self.HPF2.visible = not self.HPF2.visible;
+				self.HHP2.visible = not self.HHP2.visible;
+				self.HMP2.visible = not self.HMP2.visible;
+				
+				self.HC2.visible = not self.HC2.visible;
+				self.HDEF2.visible = not self.HDEF2.visible;
+				self.HRES2.visible = not self.HRES2.visible;
+				self.HI2.visible = not self.HI2.visible;
+				
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				
+				self.HC1.visible = false;
+				self.HDEF1.visible = false;
+				self.HRES1.visible = false;
+				self.HI1.visible = false;
+				self.HHP1.visible = false;
+				self.HMP1.visible = false;
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HHP3.visible = false;
+				self.HMP3.visible = false;				
+									
+				self.HC3.visible = false;
+				self.HDEF3.visible = false;
+				self.HRES3.visible = false;
+				self.HI3.visible = false;
+				
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HHP4.visible = false;
+				self.HMP4.visible = false;				
+								
+				self.HC4.visible = false;
+				self.HDEF4.visible = false;
+				self.HRES4.visible = false;
+				self.HI4.visible = false;
+				
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HHP5.visible = false;
+				self.HMP5.visible = false;				
+											
+				self.HC5.visible = false;
+				self.HDEF5.visible = false;
+				self.HRES5.visible = false;
+				self.HI5.visible = false;
+				
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HHP6.visible = false;
+				self.HMP6.visible = false;				
+								
+				self.HC6.visible = false;
+				self.HDEF6.visible = false;
+				self.HRES6.visible = false;
+				self.HI6.visible = false;
+				
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HHP7.visible = false;
+				self.HMP7.visible = false;				
+								
+				self.HC7.visible = false;
+				self.HDEF7.visible = false;
+				self.HRES7.visible = false;
+				self.HI7.visible = false;
+				
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HHP8.visible = false;
+				self.HMP8.visible = false;				
+									
+				self.HC8.visible = false;
+				self.HDEF8.visible = false;
+				self.HRES8.visible = false;
+				self.HI8.visible = false;
+				
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HHP9.visible = false;
+				self.HMP9.visible = false;				
+								
+				self.HC9.visible = false;
+				self.HDEF9.visible = false;
+				self.HRES9.visible = false;
+				self.HI9.visible = false;
+				
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				
+				self.UC1.visible = false;
+				self.UDEF1.visible = false;
+				self.URES1.visible = false;
+				self.UI1.visible = false;
+				
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UHP2.visible = false;
+				self.UMP2.visible = false;		
+				self.UHP1.visible = false;
+				self.UMP1.visible = false;		
+																
+				self.UC2.visible = false;
+				self.UDEF2.visible = false;
+				self.URES2.visible = false;
+				self.UI2.visible = false"/>
+
+		 
+		 <edit left="640" name="H2" visible="false" top="44"  width="150" height="22" field="NomeHabilidade2" /> 
+		 <label left="800" name="HL2" visible="false" top="40" fontSize="20" width="250" text="Segunda Habilidade" fontColor="Blue" autoSize="true"/>
+		 <edit left="610" name="HD2" visible="false" top="320"  width="50" height="20" field="DanoHabilidade2" />
+		 <edit left="720" name="HPM2" visible="false" top="320"  width="50" height="20" field="PMHabilidade2" />
+		 <edit left="830" name="HPA2" visible="false" top="320"  width="50" height="20" field="PAHabilidade2" />
+		  <edit left="940" name="HPF2" visible="false" top="320"  width="50" height="20" field="PFHabilidade2" />
+		  
+		  <edit left="610" name="HC2" visible="false" top="350"  width="50" height="20" field="CuraHabilidade2" />
+		  <edit left="720" name="HDEF2" visible="false" top="350"  width="50" height="20" field="DefHabilidade2" />
+		  <edit left="830" name="HRES2" visible="false" top="350"  width="50" height="20" field="ResHabilidade2" />
+		  <edit left="830" name="HHP2" visible="false" top="380"  width="50" height="20" field="HPHabilidade2" />
+		  <edit left="940" name="HMP2" visible="false" top="380"  width="50" height="20" field="MPHabilidade2" />
+		  
+		 <textEditor left="565" top="130" visible="false" name="HT2" width="400" height="170"  field="DescriHabilidade2" />
+		 
+
+		<image name="HI2" visible="false" field="HI2" editable="true" left="564" top="397" width="214" height="130"/>	 
+	 
+	 ----------------------------- Habilidade 3 ---------------------------------------------
+	  
+	  		 
+			<image width="60" field="HI3" height="70" left="360" top="78"/>
+	 <button left="346" top="67" text="Clique" opacity="0.0" width="90" height="90" 
+	 
+	 onClick="self.H3.visible = not self.H3.visible;
+				self.HL3.visible = not self.HL3.visible;
+				self.HT3.visible = not self.HT3.visible;
+				self.HD3.visible = not self.HD3.visible;
+				self.HPM3.visible = not self.HPM3.visible;
+				self.HPA3.visible = not self.HPA3.visible;
+				self.HPF3.visible = not self.HPF3.visible;
+				self.HHP3.visible = not self.HHP3.visible;
+				self.HMP3.visible = not self.HMP3.visible;
+				
+				self.HC3.visible = not self.HC3.visible;
+				self.HDEF3.visible = not self.HDEF3.visible;
+				self.HRES3.visible = not self.HRES3.visible;
+				self.HI3.visible = not self.HI3.visible;
+
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				self.HHP1.visible = false;
+				self.HMP1.visible = false;				
+				
+				
+				self.HC1.visible = false;
+				self.HDEF1.visible = false;
+				self.HRES1.visible = false;
+				self.HI1.visible = false;
+				
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HHP2.visible = false;
+				self.HMP2.visible = false;				
+					
+				self.HC2.visible = false;
+				self.HDEF2.visible = false;
+				self.HRES2.visible = false;
+				self.HI2.visible = false;
+				
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HHP4.visible = false;
+				self.HMP4.visible = false;				
+								
+				self.HC4.visible = false;
+				self.HDEF4.visible = false;
+				self.HRES4.visible = false;
+				self.HI4.visible = false;
+				
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HHP5.visible = false;
+				self.HMP5.visible = false;				
+											
+				self.HC5.visible = false;
+				self.HDEF5.visible = false;
+				self.HRES5.visible = false;
+				self.HI5.visible = false;
+				
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HHP6.visible = false;
+				self.HMP6.visible = false;				
+								
+				self.HC6.visible = false;
+				self.HDEF6.visible = false;
+				self.HRES6.visible = false;
+				self.HI6.visible = false;
+				
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HHP7.visible = false;
+				self.HMP7.visible = false;				
+								
+				self.HC7.visible = false;
+				self.HDEF7.visible = false;
+				self.HRES7.visible = false;
+				self.HI7.visible = false;
+				
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HHP8.visible = false;
+				self.HMP8.visible = false;				
+									
+				self.HC8.visible = false;
+				self.HDEF8.visible = false;
+				self.HRES8.visible = false;
+				self.HI8.visible = false;
+				
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HHP9.visible = false;
+				self.HMP9.visible = false;				
+								
+				self.HC9.visible = false;
+				self.HDEF9.visible = false;
+				self.HRES9.visible = false;
+				self.HI9.visible = false;
+				
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				
+				self.UC1.visible = false;
+				self.UDEF1.visible = false;
+				self.URES1.visible = false;
+				self.UI1.visible = false;
+				
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UHP2.visible = false;
+				self.UMP2.visible = false;		
+				self.UHP1.visible = false;
+				self.UMP1.visible = false;		
+																
+				self.UC2.visible = false;
+				self.UDEF2.visible = false;
+				self.URES2.visible = false;
+				self.UI2.visible = false"/>
+				
+	 
+	 	<edit left="640" name="H3" visible="false" top="44"  width="150" height="22" field="NomeHabilidade3" /> 
+		 <label left="800" name="HL3" visible="false" top="40" fontSize="20" width="250" text="Terceira Habilidade" fontColor="Blue" autoSize="true"/>
+		 <edit left="610" name="HD3" visible="false" top="320"  width="50" height="20" field="DanoHabilidade3" />
+		 <edit left="720" name="HPM3" visible="false" top="320"  width="50" height="20" field="PMHabilidade3" />
+		 <edit left="830" name="HPA3" visible="false" top="320"  width="50" height="20" field="PAHabilidade3" />
+		  <edit left="940" name="HPF3" visible="false" top="320"  width="50" height="20" field="PFHabilidade3" />
+		  
+		  <edit left="610" name="HC3" visible="false" top="350"  width="50" height="20" field="CuraHabilidade3" />
+		  <edit left="720" name="HDEF3" visible="false" top="350"  width="50" height="20" field="DefHabilidade3" />
+		  <edit left="830" name="HRES3" visible="false" top="350"  width="50" height="20" field="ResHabilidade3" />
+		  <edit left="830" name="HHP3" visible="false" top="380"  width="50" height="20" field="HPHabilidade3" />
+		  <edit left="940" name="HMP3" visible="false" top="380"  width="50" height="20" field="MPHabilidade3" />		  
+		 <textEditor left="565" name="HT3" top="130" visible="false"  width="400" height="170"  field="DescriHabilidade3" />
+		 
+
+		<image name="HI3" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="HI3" />	
+	 
+	 	  ----------------------------- Habilidade 4 ---------------------------------------------
+	  
+	  		 <image width="60" field="HI4" height="70" left="90" top="205"/>
+			
+	 <button left="75" top="195" text="Clique" opacity="0.0" width="90" height="90"
+
+			onClick="self.H4.visible = not self.H4.visible;
+				self.HL4.visible = not self.HL4.visible;
+				self.HT4.visible = not self.HT4.visible;
+				self.HD4.visible = not self.HD4.visible;
+				self.HPM4.visible = not self.HPM4.visible;
+				self.HPA4.visible = not self.HPA4.visible;
+				self.HPF4.visible = not self.HPF4.visible;
+				self.HHP4.visible = not self.HHP4.visible;
+				self.HMP4.visible = not self.HMP4.visible;				
+				
+				self.HC4.visible = not self.HC4.visible;
+				self.HDEF4.visible = not self.HDEF4.visible;
+				self.HRES4.visible = not self.HRES4.visible;
+				self.HI4.visible = not self.HI4.visible;
+
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				
+				self.HC1.visible = false;
+				self.HDEF1.visible = false;
+				self.HRES1.visible = false;
+				self.HI1.visible = false;
+				self.HHP1.visible = false;
+				self.HMP1.visible = false;
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HHP2.visible = false;
+				self.HMP2.visible = false;				
+					
+				self.HC2.visible = false;
+				self.HDEF2.visible = false;
+				self.HRES2.visible = false;
+				self.HI2.visible = false;
+				self.H1.visible = false;
+
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HHP3.visible = false;
+				self.HMP3.visible = false;				
+									
+				self.HC3.visible = false;
+				self.HDEF3.visible = false;
+				self.HRES3.visible = false;
+				self.HI3.visible = false;
+				
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HHP5.visible = false;
+				self.HMP5.visible = false;				
+											
+				self.HC5.visible = false;
+				self.HDEF5.visible = false;
+				self.HRES5.visible = false;
+				self.HI5.visible = false;
+				
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HHP6.visible = false;
+				self.HMP6.visible = false;				
+								
+				self.HC6.visible = false;
+				self.HDEF6.visible = false;
+				self.HRES6.visible = false;
+				self.HI6.visible = false;
+				
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HHP7.visible = false;
+				self.HMP7.visible = false;				
+								
+				self.HC7.visible = false;
+				self.HDEF7.visible = false;
+				self.HRES7.visible = false;
+				self.HI7.visible = false;
+				
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HHP8.visible = false;
+				self.HMP8.visible = false;				
+									
+				self.HC8.visible = false;
+				self.HDEF8.visible = false;
+				self.HRES8.visible = false;
+				self.HI8.visible = false;
+				
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HHP9.visible = false;
+				self.HMP9.visible = false;				
+								
+				self.HC9.visible = false;
+				self.HDEF9.visible = false;
+				self.HRES9.visible = false;
+				self.HI9.visible = false;
+				
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				
+				self.UC1.visible = false;
+				self.UDEF1.visible = false;
+				self.URES1.visible = false;
+				self.UI1.visible = false;
+				
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UHP2.visible = false;
+				self.UMP2.visible = false;		
+				self.UHP1.visible = false;
+				self.UMP1.visible = false;		
+																
+				self.UC2.visible = false;
+				self.UDEF2.visible = false;
+				self.URES2.visible = false;
+				self.UI2.visible = false"/>
+	 
+		 <edit left="640" name="H4" visible="false" top="44"  width="150" height="22" field="NomeHabilidade4" /> 
+		 <label left="800" name="HL4" visible="false" top="40" fontSize="20" width="250" text="Quarta Habilidade" fontColor="Blue" autoSize="true"/>
+		 <edit left="610" name="HD4" visible="false" top="320"  width="50" height="20" field="DanoHabilidade4" />
+		 <edit left="720" name="HPM4" visible="false" top="320"  width="50" height="20" field="PMHabilidade4" />
+		 <edit left="830" name="HPA4" visible="false" top="320"  width="50" height="20" field="PAHabilidade4" />
+		  <edit left="940" name="HPF4" visible="false" top="320"  width="50" height="20" field="PFHabilidade4" />
+		  
+		  <edit left="610" name="HC4" visible="false" top="350"  width="50" height="20" field="CuraHabilidade4" />
+		  <edit left="720" name="HDEF4" visible="false" top="350"  width="50" height="20" field="DefHabilidade4" />
+		  <edit left="830" name="HRES4" visible="false" top="350"  width="50" height="20" field="ResHabilidade4" />
+		  <edit left="830" name="HHP4" visible="false" top="380"  width="50" height="20" field="HPHabilidade4" />
+		  <edit left="940" name="HMP4" visible="false" top="380"  width="50" height="20" field="MPHabilidade4" />		  
+		 <textEditor left="565" name="HT4" top="130" visible="false"  width="400" height="170"  field="DescriHabilidade4" />
+		 
+
+		<image name="HI4" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="HI4" />	
+	 
+	 	  ----------------------------- Habilidade 5 ---------------------------------------------
+	  
+	  		 <image width="60" field="HI5" height="70" left="227" top="205"/>
+			
+	 <button left="213" top="195" text="Clique" opacity="0.0" width="90" height="90" 
+			   onClick="self.H5.visible = not self.H5.visible;
+				self.HL5.visible = not self.HL5.visible;
+				self.HT5.visible = not self.HT5.visible;
+				self.HD5.visible = not self.HD5.visible;
+				self.HPM5.visible = not self.HPM5.visible;
+				self.HPA5.visible = not self.HPA5.visible;
+				self.HPF5.visible = not self.HPF5.visible;
+				self.HHP5.visible = not self.HHP5.visible;
+				self.HMP5.visible = not self.HMP5.visible;				
+				
+				self.HC5.visible = not self.HC5.visible;
+				self.HDEF5.visible = not self.HDEF5.visible;
+				self.HRES5.visible = not self.HRES5.visible;
+				self.HI5.visible = not self.HI5.visible;
+
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				
+				self.HC1.visible = false;
+				self.HDEF1.visible = false;
+				self.HRES1.visible = false;
+				self.HI1.visible = false;
+				self.HHP1.visible = false;
+				self.HMP1.visible = false;				
+				
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HHP2.visible = false;
+				self.HMP2.visible = false;				
+					
+				self.HC2.visible = false;
+				self.HDEF2.visible = false;
+				self.HRES2.visible = false;
+				self.HI2.visible = false;
+				self.H1.visible = false;
+
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HHP3.visible = false;
+				self.HMP3.visible = false;				
+									
+				self.HC3.visible = false;
+				self.HDEF3.visible = false;
+				self.HRES3.visible = false;
+				self.HI3.visible = false;
+				
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HHP4.visible = false;
+				self.HMP4.visible = false;				
+								
+				self.HC4.visible = false;
+				self.HDEF4.visible = false;
+				self.HRES4.visible = false;
+				self.HI4.visible = false;
+				
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HHP6.visible = false;
+				self.HMP6.visible = false;				
+								
+				self.HC6.visible = false;
+				self.HDEF6.visible = false;
+				self.HRES6.visible = false;
+				self.HI6.visible = false;
+				
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HHP7.visible = false;
+				self.HMP7.visible = false;				
+								
+				self.HC7.visible = false;
+				self.HDEF7.visible = false;
+				self.HRES7.visible = false;
+				self.HI7.visible = false;
+				
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HHP8.visible = false;
+				self.HMP8.visible = false;				
+									
+				self.HC8.visible = false;
+				self.HDEF8.visible = false;
+				self.HRES8.visible = false;
+				self.HI8.visible = false;
+				
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HHP9.visible = false;
+				self.HMP9.visible = false;				
+								
+				self.HC9.visible = false;
+				self.HDEF9.visible = false;
+				self.HRES9.visible = false;
+				self.HI9.visible = false;
+				
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				
+				self.UC1.visible = false;
+				self.UDEF1.visible = false;
+				self.URES1.visible = false;
+				self.UI1.visible = false;
+				
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UHP2.visible = false;
+				self.UMP2.visible = false;		
+				self.UHP1.visible = false;
+				self.UMP1.visible = false;		
+																
+				self.UC2.visible = false;
+				self.UDEF2.visible = false;
+				self.URES2.visible = false;
+				self.UI2.visible = false"/>
+	 
+	 
+	 	 <edit left="640" name="H5" visible="false" top="44"  width="150" height="22" field="NomeHabilidade5" /> 
+		 <label left="800" name="HL5" visible="false" top="40" fontSize="20" width="250" text="Quinta Habilidade" fontColor="Blue" autoSize="true"/>
+		 <edit left="610" name="HD5" visible="false" top="320"  width="50" height="20" field="DanoHabilidade5" />
+		 <edit left="720" name="HPM5" visible="false" top="320"  width="50" height="20" field="PMHabilidade5" />
+		 <edit left="830" name="HPA5" visible="false" top="320"  width="50" height="20" field="PAHabilidade5" />
+		  <edit left="940" name="HPF5" visible="false" top="320"  width="50" height="20" field="PFHabilidade5" />
+		  
+		  <edit left="610" name="HC5" visible="false" top="350"  width="50" height="20" field="CuraHabilidade5" />
+		  <edit left="720" name="HDEF5" visible="false" top="350"  width="50" height="20" field="DefHabilidade5" />
+		  <edit left="830" name="HRES5" visible="false" top="350"  width="50" height="20" field="ResHabilidade5" />
+		  <edit left="830" name="HHP5" visible="false" top="380"  width="50" height="20" field="HPHabilidade5" />
+		  <edit left="940" name="HMP5" visible="false" top="380"  width="50" height="20" field="MPHabilidade5" />		  
+		 <textEditor left="565" name="HT5" top="130" visible="false"  width="400" height="170"  field="DescriHabilidade5" />
+		 
+
+		<image name="HI5" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="HI5" />	
+	 
+	 	  ----------------------------- Habilidade 6 ---------------------------------------------
+	  
+	  		 <image width="60" field="HI6" height="70" left="361" top="205"/>
+			
+	 <button left="346" top="195" text="Clique" opacity="0.0" width="90" height="90" 
+	 
+			   onClick="self.H6.visible = not self.H6.visible;
+				self.HL6.visible = not self.HL6.visible;
+				self.HT6.visible = not self.HT6.visible;
+				self.HD6.visible = not self.HD6.visible;
+				self.HPM6.visible = not self.HPM6.visible;
+				self.HPA6.visible = not self.HPA6.visible;
+				self.HPF6.visible = not self.HPF6.visible;
+				self.HHP6.visible = not self.HHP6.visible;
+				self.HMP6.visible = not self.HMP6.visible;				
+				
+				self.HC6.visible = not self.HC6.visible;
+				self.HDEF6.visible = not self.HDEF6.visible;
+				self.HRES6.visible = not self.HRES6.visible;
+				self.HI6.visible = not self.HI6.visible;
+
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				
+				self.HC1.visible = false;
+				self.HDEF1.visible = false;
+				self.HRES1.visible = false;
+				self.HI1.visible = false;
+				self.HHP1.visible = false;
+				self.HMP1.visible = false;				
+				
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HHP2.visible = false;
+				self.HMP2.visible = false;				
+					
+				self.HC2.visible = false;
+				self.HDEF2.visible = false;
+				self.HRES2.visible = false;
+				self.HI2.visible = false;
+				self.H1.visible = false;
+
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HHP3.visible = false;
+				self.HMP3.visible = false;				
+									
+				self.HC3.visible = false;
+				self.HDEF3.visible = false;
+				self.HRES3.visible = false;
+				self.HI3.visible = false;
+				
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HHP4.visible = false;
+				self.HMP4.visible = false;				
+								
+				self.HC4.visible = false;
+				self.HDEF4.visible = false;
+				self.HRES4.visible = false;
+				self.HI4.visible = false
+				
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HHP5.visible = false;
+				self.HMP5.visible = false;				
+											
+				self.HC5.visible = false;
+				self.HDEF5.visible = false;
+				self.HRES5.visible = false;
+				self.HI5.visible = false;
+				
+								
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HHP7.visible = false;
+				self.HMP7.visible = false;				
+								
+				self.HC7.visible = false;
+				self.HDEF7.visible = false;
+				self.HRES7.visible = false;
+				self.HI7.visible = false;
+				
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HHP8.visible = false;
+				self.HMP8.visible = false;				
+									
+				self.HC8.visible = false;
+				self.HDEF8.visible = false;
+				self.HRES8.visible = false;
+				self.HI8.visible = false;
+				
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HHP9.visible = false;
+				self.HMP9.visible = false;				
+								
+				self.HC9.visible = false;
+				self.HDEF9.visible = false;
+				self.HRES9.visible = false;
+				self.HI9.visible = false;
+				
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				
+				self.UC1.visible = false;
+				self.UDEF1.visible = false;
+				self.URES1.visible = false;
+				self.UI1.visible = false;
+				
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UHP2.visible = false;
+				self.UMP2.visible = false;		
+				self.UHP1.visible = false;
+				self.UMP1.visible = false;		
+																
+				self.UC2.visible = false;
+				self.UDEF2.visible = false;
+				self.URES2.visible = false;
+				self.UI2.visible = false"/>
+	 
+		 <edit left="640" name="H6" visible="false" top="44"  width="150" height="22" field="NomeHabilidade6" /> 
+		 <label left="800" name="HL6" visible="false" top="40" fontSize="20" width="250" text="Sexta Habilidade" fontColor="Blue" autoSize="true"/>
+		 <edit left="610" name="HD6" visible="false" top="320"  width="50" height="20" field="DanoHabilidade6" />
+		 <edit left="720" name="HPM6" visible="false" top="320"  width="50" height="20" field="PMHabilidade6" />
+		 <edit left="830" name="HPA6" visible="false" top="320"  width="50" height="20" field="PAHabilidade6" />
+		  <edit left="940" name="HPF6" visible="false" top="320"  width="50" height="20" field="PFHabilidade6" />
+		  
+		  <edit left="610" name="HC6" visible="false" top="350"  width="50" height="20" field="CuraHabilidade6" />
+		  <edit left="720" name="HDEF6" visible="false" top="350"  width="50" height="20" field="DefHabilidade6" />
+		  <edit left="830" name="HRES6" visible="false" top="350"  width="50" height="20" field="ResHabilidade6" />
+		  <edit left="830" name="HHP6" visible="false" top="380"  width="50" height="20" field="HPHabilidade6" />
+		  <edit left="940" name="HMP6" visible="false" top="380"  width="50" height="20" field="MPHabilidade6" />		  
+		 <textEditor left="565" name="HT6" top="130" visible="false"  width="400" height="170"  field="DescriHabilidade6" />
+		 
+
+		<image name="HI6" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="HI6" />	
+	 
+	 	  ----------------------------- Habilidade 7 ---------------------------------------------
+	  
+	  		 <image width="60" field="HI7" height="70" left="90" top="325"/>
+			
+	 <button left="75" top="315" text="Clique" opacity="0.0" width="90" height="90"
+			
+			 onClick="self.H7.visible = not self.H7.visible;
+				self.HL7.visible = not self.HL7.visible;
+				self.HT7.visible = not self.HT7.visible;
+				self.HD7.visible = not self.HD7.visible;
+				self.HPM7.visible = not self.HPM7.visible;
+				self.HPA7.visible = not self.HPA7.visible;
+				self.HPF7.visible = not self.HPF7.visible;
+				self.HHP7.visible = not self.HHP7.visible;
+				self.HMP7.visible = not self.HMP7.visible;
+				
+				self.HC7.visible = not self.HC7.visible;
+				self.HDEF7.visible = not self.HDEF7.visible;
+				self.HRES7.visible = not self.HRES7.visible;
+				self.HI7.visible = not self.HI7.visible;
+
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				
+				self.HC1.visible = false;
+				self.HDEF1.visible = false;
+				self.HRES1.visible = false;
+				self.HI1.visible = false;
+				self.HHP1.visible = false;
+				self.HMP1.visible = false;
+
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HHP2.visible = false;
+				self.HMP2.visible = false;				
+					
+				self.HC2.visible = false;
+				self.HDEF2.visible = false;
+				self.HRES2.visible = false;
+				self.HI2.visible = false;
+				self.H1.visible = false;
+
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HHP3.visible = false;
+				self.HMP3.visible = false;				
+									
+				self.HC3.visible = false;
+				self.HDEF3.visible = false;
+				self.HRES3.visible = false;
+				self.HI3.visible = false;
+				
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HHP4.visible = false;
+				self.HMP4.visible = false;				
+								
+				self.HC4.visible = false;
+				self.HDEF4.visible = false;
+				self.HRES4.visible = false;
+				self.HI4.visible = false
+				
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HHP5.visible = false;
+				self.HMP5.visible = false;				
+											
+				self.HC5.visible = false;
+				self.HDEF5.visible = false;
+				self.HRES5.visible = false;
+				self.HI5.visible = false;
+				
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HHP6.visible = false;
+				self.HMP6.visible = false;				
+								
+				self.HC6.visible = false;
+				self.HDEF6.visible = false;
+				self.HRES6.visible = false;
+				self.HI6.visible = false;
+				
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HHP8.visible = false;
+				self.HMP8.visible = false;				
+									
+				self.HC8.visible = false;
+				self.HDEF8.visible = false;
+				self.HRES8.visible = false;
+				self.HI8.visible = false;
+				
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HHP9.visible = false;
+				self.HMP9.visible = false;				
+								
+				self.HC9.visible = false;
+				self.HDEF9.visible = false;
+				self.HRES9.visible = false;
+				self.HI9.visible = false;
+				
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				
+				self.UC1.visible = false;
+				self.UDEF1.visible = false;
+				self.URES1.visible = false;
+				self.UI1.visible = false;
+				
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UHP2.visible = false;
+				self.UMP2.visible = false;		
+				self.UHP1.visible = false;
+				self.UMP1.visible = false;		
+																
+				self.UC2.visible = false;
+				self.UDEF2.visible = false;
+				self.URES2.visible = false;
+				self.UI2.visible = false"/>
+	 
+		 <edit left="640" name="H7" visible="false" top="44"  width="150" height="22" field="NomeHabilidade7" /> 
+		 <label left="800" name="HL7" visible="false" top="40" fontSize="20" width="250" text="Setima Habilidade" fontColor="Blue" autoSize="true"/>
+		 <edit left="610" name="HD7" visible="false" top="320"  width="50" height="20" field="DanoHabilidade7" />
+		 <edit left="720" name="HPM7" visible="false" top="320"  width="50" height="20" field="PMHabilidade7" />
+		 <edit left="830" name="HPA7" visible="false" top="320"  width="50" height="20" field="PAHabilidade7" />
+		  <edit left="940" name="HPF7" visible="false" top="320"  width="50" height="20" field="PFHabilidade7" />
+		  
+		  <edit left="610" name="HC7" visible="false" top="350"  width="50" height="20" field="CuraHabilidade7" />
+		  <edit left="720" name="HDEF7" visible="false" top="350"  width="50" height="20" field="DefHabilidade7" />
+		  <edit left="830" name="HRES7" visible="false" top="350"  width="50" height="20" field="ResHabilidade7" />
+		  <edit left="830" name="HHP7" visible="false" top="380"  width="50" height="20" field="HPHabilidade7" />
+		  <edit left="940" name="HMP7" visible="false" top="380"  width="50" height="20" field="MPHabilidade7" />		  
+		 <textEditor left="565" name="HT7" top="130" visible="false"  width="400" height="170"  field="DescriHabilidade7" />
+		 
+
+		<image name="HI7" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="HI7" />	
+	 
+	 	  ----------------------------- Habilidade 8 ---------------------------------------------
+	  
+	  		  <image width="60" field="HI8" height="70" left="227" top="325"/>
+			
+	 <button left="213" top="315" text="Clique" opacity="0.0" width="90" height="90"
+				onClick="self.H8.visible = not self.H8.visible;
+				self.HL8.visible = not self.HL8.visible;
+				self.HT8.visible = not self.HT8.visible;
+				self.HD8.visible = not self.HD8.visible;
+				self.HPM8.visible = not self.HPM8.visible;
+				self.HPA8.visible = not self.HPA8.visible;
+				self.HPF8.visible = not self.HPF8.visible;
+				self.HHP8.visible = not self.HHP8.visible;
+				self.HMP8.visible = not self.HMP8.visible;				
+				
+				self.HC8.visible = not self.HC8.visible;
+				self.HDEF8.visible = not self.HDEF8.visible;
+				self.HRES8.visible = not self.HRES8.visible;
+				self.HI8.visible = not self.HI8.visible;
+
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				
+				self.HC1.visible = false;
+				self.HDEF1.visible = false;
+				self.HRES1.visible = false;
+				self.HI1.visible = false;
+				self.HHP1.visible = false;
+				self.HMP1.visible = false;				
+				
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HHP2.visible = false;
+				self.HMP2.visible = false;				
+					
+				self.HC2.visible = false;
+				self.HDEF2.visible = false;
+				self.HRES2.visible = false;
+				self.HI2.visible = false;
+				self.H1.visible = false;
+
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HHP3.visible = false;
+				self.HMP3.visible = false;				
+									
+				self.HC3.visible = false;
+				self.HDEF3.visible = false;
+				self.HRES3.visible = false;
+				self.HI3.visible = false;
+				
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HHP4.visible = false;
+				self.HMP4.visible = false;				
+								
+				self.HC4.visible = false;
+				self.HDEF4.visible = false;
+				self.HRES4.visible = false;
+				self.HI4.visible = false
+				
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HHP5.visible = false;
+				self.HMP5.visible = false;				
+											
+				self.HC5.visible = false;
+				self.HDEF5.visible = false;
+				self.HRES5.visible = false;
+				self.HI5.visible = false;
+				
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HHP6.visible = false;
+				self.HMP6.visible = false;				
+								
+				self.HC6.visible = false;
+				self.HDEF6.visible = false;
+				self.HRES6.visible = false;
+				self.HI6.visible = false;
+				
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HHP7.visible = false;
+				self.HMP7.visible = false;				
+								
+				self.HC7.visible = false;
+				self.HDEF7.visible = false;
+				self.HRES7.visible = false;
+				self.HI7.visible = false;
+				
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HHP9.visible = false;
+				self.HMP9.visible = false;				
+								
+				self.HC9.visible = false;
+				self.HDEF9.visible = false;
+				self.HRES9.visible = false;
+				self.HI9.visible = false;
+				
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				
+				self.UC1.visible = false;
+				self.UDEF1.visible = false;
+				self.URES1.visible = false;
+				self.UI1.visible = false;
+				
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UHP2.visible = false;
+				self.UMP2.visible = false;		
+				self.UHP1.visible = false;
+				self.UMP1.visible = false;		
+																
+				self.UC2.visible = false;
+				self.UDEF2.visible = false;
+				self.URES2.visible = false;
+				self.UI2.visible = false"/>
+				
+				
+				
+				
+				
+	 
+	 	 <edit left="640" name="H8" visible="false" top="44"  width="150" height="22" field="NomeHabilidade8" /> 
+		 <label left="800" name="HL8" visible="false" top="40" fontSize="20" width="250" text="Oitava Habilidade" fontColor="Blue" autoSize="true"/>
+		 <edit left="610" name="HD8" visible="false" top="320"  width="50" height="20" field="DanoHabilidade8" />
+		 <edit left="720" name="HPM8" visible="false" top="320"  width="50" height="20" field="PMHabilidade8" />
+		 <edit left="830" name="HPA8" visible="false" top="320"  width="50" height="20" field="PAHabilidade8" />
+		  <edit left="940" name="HPF8" visible="false" top="320"  width="50" height="20" field="PFHabilidade8" />
+		  
+		  <edit left="610" name="HC8" visible="false" top="350"  width="50" height="20" field="CuraHabilidade8" />
+		  <edit left="720" name="HDEF8" visible="false" top="350"  width="50" height="20" field="DefHabilidade8" />
+		  <edit left="830" name="HRES8" visible="false" top="350"  width="50" height="20" field="ResHabilidade8" />
+		  <edit left="830" name="HHP8" visible="false" top="380"  width="50" height="20" field="HPHabilidade8" />
+		  <edit left="940" name="HMP8" visible="false" top="380"  width="50" height="20" field="MPHabilidade8" />		  
+		 <textEditor left="565" name="HT8" top="130" visible="false"  width="400" height="170"  field="DescriHabilidade8" />
+		 
+
+		<image name="HI8" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="HI8" />	
+	 
+	 	  ----------------------------- Habilidade 9 ---------------------------------------------
+	  
+	  		 <image width="60" field="HI9" height="70" left="361" top="325"/>
+			
+	 <button left="346" top="315" text="Clique" opacity="0.0" width="90" height="90" 
+	 			onClick="self.H9.visible = not self.H9.visible;
+				self.HL9.visible = not self.HL9.visible;
+				self.HT9.visible = not self.HT9.visible;
+				self.HD9.visible = not self.HD9.visible;
+				self.HPM9.visible = not self.HPM9.visible;
+				self.HPA9.visible = not self.HPA9.visible;
+				self.HPF9.visible = not self.HPF9.visible;
+				self.HHP9.visible = not self.HHP9.visible;
+				self.HMP9.visible = not self.HMP9.visible;
+				
+				self.HC9.visible = not self.HC9.visible;
+				self.HDEF9.visible = not self.HDEF9.visible;
+				self.HRES9.visible = not self.HRES9.visible;
+				self.HI9.visible = not self.HI9.visible;
+
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				
+				self.HC1.visible = false;
+				self.HDEF1.visible = false;
+				self.HRES1.visible = false;
+				self.HI1.visible = false;
+				self.HHP1.visible = false;
+				self.HMP1.visible = false;				
+				
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HHP2.visible = false;
+				self.HMP2.visible = false;				
+					
+				self.HC2.visible = false;
+				self.HDEF2.visible = false;
+				self.HRES2.visible = false;
+				self.HI2.visible = false;
+				self.H1.visible = false;
+
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HHP3.visible = false;
+				self.HMP3.visible = false;				
+									
+				self.HC3.visible = false;
+				self.HDEF3.visible = false;
+				self.HRES3.visible = false;
+				self.HI3.visible = false;
+				
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HHP4.visible = false;
+				self.HMP4.visible = false;				
+								
+				self.HC4.visible = false;
+				self.HDEF4.visible = false;
+				self.HRES4.visible = false;
+				self.HI4.visible = false
+				
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HHP5.visible = false;
+				self.HMP5.visible = false;				
+											
+				self.HC5.visible = false;
+				self.HDEF5.visible = false;
+				self.HRES5.visible = false;
+				self.HI5.visible = false;
+				
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HHP6.visible = false;
+				self.HMP6.visible = false;				
+								
+				self.HC6.visible = false;
+				self.HDEF6.visible = false;
+				self.HRES6.visible = false;
+				self.HI6.visible = false;
+				
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HHP7.visible = false;
+				self.HMP7.visible = false;				
+								
+				self.HC7.visible = false;
+				self.HDEF7.visible = false;
+				self.HRES7.visible = false;
+				self.HI7.visible = false;
+				
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HHP8.visible = false;
+				self.HMP8.visible = false;				
+									
+				self.HC8.visible = false;
+				self.HDEF8.visible = false;
+				self.HRES8.visible = false;
+				self.HI8.visible = false;
+				
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				
+				self.UC1.visible = false;
+				self.UDEF1.visible = false;
+				self.URES1.visible = false;
+				self.UI1.visible = false;
+				
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UHP2.visible = false;
+				self.UMP2.visible = false;		
+				self.UHP1.visible = false;
+				self.UMP1.visible = false;		
+												
+				self.UC2.visible = false;
+				self.UDEF2.visible = false;
+				self.URES2.visible = false;
+				self.UI2.visible = false"/>
+			
+	 
+	 
+	 	 <edit left="640" name="H9" visible="false" top="44"  width="150" height="22" field="NomeHabilidade9" /> 
+		 <label left="800" name="HL9" visible="false" top="40" fontSize="20" width="250" text="Nona Habilidade" fontColor="Blue" autoSize="true"/>
+		 <edit left="610" name="HD9" visible="false" top="320"  width="50" height="20" field="DanoHabilidade9" />
+		 <edit left="720" name="HPM9" visible="false" top="320"  width="50" height="20" field="PMHabilidade9" />
+		 <edit left="830" name="HPA9" visible="false" top="320"  width="50" height="20" field="PAHabilidade9" />
+		  <edit left="940" name="HPF9" visible="false" top="320"  width="50" height="20" field="PFHabilidade9" />
+		  
+		  <edit left="610" name="HC9" visible="false" top="350"  width="50" height="20" field="CuraHabilidade9" />
+		  <edit left="720" name="HDEF9" visible="false" top="350"  width="50" height="20" field="DefHabilidade9" />
+		  <edit left="830" name="HRES9" visible="false" top="350"  width="50" height="20" field="ResHabilidade9" />
+		  <edit left="830" name="HHP9" visible="false" top="380"  width="50" height="20" field="HPHabilidade9" />
+		  <edit left="940" name="HMP9" visible="false" top="380"  width="50" height="20" field="MPHabilidade9" />		  
+		 <textEditor left="565" name="HT9" top="130" visible="false"  width="400" height="170"  field="DescriHabilidade9" />
+		 
+
+		<image name="HI9" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="HI9" />	
+	 
+	 	  ----------------------------- Ultima 1  ---------------------------------------------
+	  
+	  		  <image width="80" field="UI1" height="100" left="133" top="455"/>
+			
+		 <button left="120" top="450" text="Clique" opacity="0.0" width="110" height="110"
+		 onClick="self.U1.visible = not self.U1.visible;
+				self.UL1.visible = not self.UL1.visible;
+				self.UT1.visible = not self.UT1.visible;
+				self.UD1.visible = not self.UD1.visible;
+				self.UPM1.visible = not self.UPM1.visible;
+				self.UPA1.visible = not self.UPA1.visible;
+				self.UPF1.visible = not self.UPF1.visible;
+				self.UHP1.visible = not self.UHP1.visible;
+				self.UMP1.visible = not self.UMP1.visible;				
+			
+				
+				self.UC1.visible = not self.UC1.visible;
+				self.UDEF1.visible = not self.UDEF1.visible;
+				self.URES1.visible = not self.URES1.visible;
+				self.UI1.visible = not self.UI1.visible;
+
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				
+				self.HC1.visible = false;
+				self.HDEF1.visible = false;
+				self.HRES1.visible = false;
+				self.HI1.visible = false;
+				self.HHP1.visible = false;
+				self.HMP1.visible = false;				
+				
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HHP2.visible = false;
+				self.HMP2.visible = false;				
+					
+				self.HC2.visible = false;
+				self.HDEF2.visible = false;
+				self.HRES2.visible = false;
+				self.HI2.visible = false;
+				self.H1.visible = false;
+
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HHP3.visible = false;
+				self.HMP3.visible = false;				
+									
+				self.HC3.visible = false;
+				self.HDEF3.visible = false;
+				self.HRES3.visible = false;
+				self.HI3.visible = false;
+				
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HHP4.visible = false;
+				self.HMP4.visible = false;				
+								
+				self.HC4.visible = false;
+				self.HDEF4.visible = false;
+				self.HRES4.visible = false;
+				self.HI4.visible = false
+				
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HHP5.visible = false;
+				self.HMP5.visible = false;				
+											
+				self.HC5.visible = false;
+				self.HDEF5.visible = false;
+				self.HRES5.visible = false;
+				self.HI5.visible = false;
+				
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HHP6.visible = false;
+				self.HMP6.visible = false;				
+								
+				self.HC6.visible = false;
+				self.HDEF6.visible = false;
+				self.HRES6.visible = false;
+				self.HI6.visible = false;
+				
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				self.HHP7.visible = false;
+				self.HMP7.visible = false;				
+								
+				self.HC7.visible = false;
+				self.HDEF7.visible = false;
+				self.HRES7.visible = false;
+				self.HI7.visible = false;
+				
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HHP8.visible = false;
+				self.HMP8.visible = false;				
+									
+				self.HC8.visible = false;
+				self.HDEF8.visible = false;
+				self.HRES8.visible = false;
+				self.HI8.visible = false;
+				
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HHP9.visible = false;
+				self.HMP9.visible = false;				
+								
+				self.HC9.visible = false;
+				self.HDEF9.visible = false;
+				self.HRES9.visible = false;
+				self.HI9.visible = false;
+				
+				
+				self.U2.visible = false;
+				self.UL2.visible = false;
+				self.UT2.visible = false;
+				self.UD2.visible = false;
+				self.UPM2.visible = false;
+				self.UPA2.visible = false;
+				self.UPF2.visible = false;
+				self.UHP2.visible = false;
+				self.UMP2.visible = false;		
+				
+				self.UC2.visible = false;
+				self.UDEF2.visible = false;
+				self.URES2.visible = false;
+				self.UI2.visible = false"/>
+				
+
+
+		 <edit left="640" name="U1" visible="false" top="44"  width="150" height="22" field="NomeUltima1" /> 
+		 <label left="800" name="UL1" visible="false" top="40" fontSize="20" width="250" text="Primeira Ultima" fontColor="Blue" autoSize="true"/>
+		 <edit left="610" name="UD1" visible="false" top="320"  width="50" height="20" field="DanoUltima1" />
+		 <edit left="720" name="UPM1" visible="false" top="320"  width="50" height="20" field="PMUltima1" />
+		 <edit left="830" name="UPA1" visible="false" top="320"  width="50" height="20" field="PAUltima1" />
+		  <edit left="940" name="UPF1" visible="false" top="320"  width="50" height="20" field="PFUltima1" />
+		  <edit left="830" name="UHP1" visible="false" top="380"  width="50" height="20" field="HPUltima1" />
+		  <edit left="940" name="UMP1" visible="false" top="380"  width="50" height="20" field="MPUltima1" />		  
+		  <edit left="610" name="UC1" visible="false" top="350"  width="50" height="20" field="CuraUltima1" />
+		  <edit left="720" name="UDEF1" visible="false" top="350"  width="50" height="20" field="DefUltima1" />
+		  <edit left="830" name="URES1" visible="false" top="350"  width="50" height="20" field="ResUltima1" />
+		  
+		 <textEditor left="565" name="UT1" top="130" visible="false"  width="400" height="170"  field="DescriUltima1" />
+		 
+
+		<image name="UI1" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="UI1" />	
+	 
+	 	  ----------------------------- Ultima 2 ---------------------------------------------
+	  
+	  		  <image width="80" field="UI2" height="100" left="284" top="455"/>	  		 
+			
+	 <button left="268" top="450" text="Clique" opacity="0.0" width="110" height="110"
+
+			onClick="self.U2.visible = not self.U2.visible;
+				self.UL2.visible = not self.UL2.visible;
+				self.UT2.visible = not self.UT2.visible;
+				self.UD2.visible = not self.UD2.visible;
+				self.UPM2.visible = not self.UPM2.visible;
+				self.UPA2.visible = not self.UPA2.visible;
+				self.UPF2.visible = not self.UPF2.visible;
+				self.UHP2.visible = not self.UHP2.visible;
+				self.UMP2.visible = not self.UMP2.visible;						
+				
+				self.UC2.visible = not self.UC2.visible;
+				self.UDEF2.visible = not self.UDEF2.visible;
+				self.URES2.visible = not self.URES2.visible;
+				self.UI2.visible = not self.UI2.visible;
+
+				
+				self.H1.visible = false;
+				self.HL1.visible = false;
+				self.HT1.visible = false;
+				self.HD1.visible = false;
+				self.HPM1.visible = false;
+				self.HPA1.visible = false;
+				self.HPF1.visible = false;
+				
+				self.HC1.visible = false;
+				self.HDEF1.visible = false;
+				self.HRES1.visible = false;
+				self.HI1.visible = false;
+				self.HHP1.visible = false;
+				self.HMP1.visible = false;				
+				
+				
+				self.H2.visible = false;
+				self.HL2.visible = false;
+				self.HT2.visible = false;
+				self.HD2.visible = false;
+				self.HPM2.visible = false;
+				self.HPA2.visible = false;
+				self.HPF2.visible = false;
+				self.HHP2.visible = false;
+				self.HMP2.visible = false;				
+					
+				self.HC2.visible = false;
+				self.HDEF2.visible = false;
+				self.HRES2.visible = false;
+				self.HI2.visible = false;
+				self.H1.visible = false;
+
+				
+				self.H3.visible = false;
+				self.HL3.visible = false;
+				self.HT3.visible = false;
+				self.HD3.visible = false;
+				self.HPM3.visible = false;
+				self.HPA3.visible = false;
+				self.HPF3.visible = false;
+				self.HHP3.visible = false;
+				self.HMP3.visible = false;				
+					
+				self.HC3.visible = false;
+				self.HDEF3.visible = false;
+				self.HRES3.visible = false;
+				self.HI3.visible = false;
+				
+				
+				self.H4.visible = false;
+				self.HL4.visible = false;
+				self.HT4.visible = false;
+				self.HD4.visible = false;
+				self.HPM4.visible = false;
+				self.HPA4.visible = false;
+				self.HPF4.visible = false;
+				self.HHP4.visible = false;
+				self.HMP4.visible = false;				
+								
+				self.HC4.visible = false;
+				self.HDEF4.visible = false;
+				self.HRES4.visible = false;
+				self.HI4.visible = false
+				
+				
+				self.H5.visible = false;
+				self.HL5.visible = false;
+				self.HT5.visible = false;
+				self.HD5.visible = false;
+				self.HPM5.visible = false;
+				self.HPA5.visible = false;
+				self.HPF5.visible = false;
+				self.HHP5.visible = false;
+				self.HMP5.visible = false;				
+								
+				self.HC5.visible = false;
+				self.HDEF5.visible = false;
+				self.HRES5.visible = false;
+				self.HI5.visible = false;
+				
+				
+				self.H6.visible = false;
+				self.HL6.visible = false;
+				self.HT6.visible = false;
+				self.HD6.visible = false;
+				self.HPM6.visible = false;
+				self.HPA6.visible = false;
+				self.HPF6.visible = false;
+				self.HHP6.visible = false;
+				self.HMP6.visible = false;				
+								
+				self.HC6.visible = false;
+				self.HDEF6.visible = false;
+				self.HRES6.visible = false;
+				self.HI6.visible = false;
+				
+				
+				self.H7.visible = false;
+				self.HL7.visible = false;
+				self.HT7.visible = false;
+				self.HD7.visible = false;
+				self.HPM7.visible = false;
+				self.HPA7.visible = false;
+				self.HPF7.visible = false;
+				
+				self.HC7.visible = false;
+				self.HDEF7.visible = false;
+				self.HRES7.visible = false;
+				self.HI7.visible = false;
+				
+				
+				self.H8.visible = false;
+				self.HL8.visible = false;
+				self.HT8.visible = false;
+				self.HD8.visible = false;
+				self.HPM8.visible = false;
+				self.HPA8.visible = false;
+				self.HPF8.visible = false;
+				self.HHP8.visible = false;
+				self.HMP8.visible = false;				
+									
+				self.HC8.visible = false;
+				self.HDEF8.visible = false;
+				self.HRES8.visible = false;
+				self.HI8.visible = false;
+				
+				
+				self.H9.visible = false;
+				self.HL9.visible = false;
+				self.HT9.visible = false;
+				self.HD9.visible = false;
+				self.HPM9.visible = false;
+				self.HPA9.visible = false;
+				self.HPF9.visible = false;
+				self.HHP9.visible = false;
+				self.HMP9.visible = false;				
+												
+				self.HC9.visible = false;
+				self.HDEF9.visible = false;
+				self.HRES9.visible = false;
+				self.HI9.visible = false;
+				
+				
+				self.U1.visible = false;
+				self.UL1.visible = false;
+				self.UT1.visible = false;
+				self.UD1.visible = false;
+				self.UPM1.visible = false;
+				self.UPA1.visible = false;
+				self.UPF1.visible = false;
+				self.UHP1.visible = false;
+				self.UMP1.visible = false;					
+				self.UC1.visible = false;
+				self.UDEF1.visible = false;
+				self.URES1.visible = false;
+				self.UI1.visible = false"/>
+	 
+	 
+	 	 <edit left="640" name="U2" visible="false" top="44"  width="150" height="22" field="NomeUltima2" /> 
+		 <label left="800" name="UL2" visible="false" top="40" fontSize="20" width="250" text="Segunda Ultima" fontColor="Blue" autoSize="true"/>
+		 <edit left="610" name="UD2" visible="false" top="320"  width="50" height="20" field="DanoUltima2" />
+		 <edit left="720" name="UPM2" visible="false" top="320"  width="50" height="20" field="PMUltima2" />
+		 <edit left="830" name="UPA2" visible="false" top="320"  width="50" height="20" field="PAUltima2" />
+		 <edit left="940" name="UPF2" visible="false" top="320"  width="50" height="20" field="PFUltima2" />
+		  <edit left="830" name="UHP2" visible="false" top="380"  width="50" height="20" field="HPUltima2" />
+		  <edit left="940" name="UMP2" visible="false" top="380"  width="50" height="20" field="MPUltima2" />		  		  
+		  <edit left="610" name="UC2" visible="false" top="350"  width="50" height="20" field="CuraUltima2" />
+		  <edit left="720" name="UDEF2" visible="false" top="350"  width="50" height="20" field="DefUltima2" />
+		  <edit left="830" name="URES2" visible="false" top="350"  width="50" height="20" field="ResUltima2" />
+		  
+		 <textEditor left="565" name="UT2" top="130" visible="false"  width="400" height="170"  field="DescriUltima2" />
+		 
+
+		<image name="UI2" visible="false"  editable="true" left="564" top="397" width="214" height="130" field="UI2" />	
+	 
+</popupForm>

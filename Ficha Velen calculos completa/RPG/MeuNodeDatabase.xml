@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module sdkVersion="3.5">
+require("ndb.lua");
+local nodoRaiz = ndb.load("MeuNodeDatabase.xml");
+
+</module>

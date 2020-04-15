@@ -1,0 +1,1183 @@
+<?xml version="1.0" encoding="UTF-8"?>        
+<form formType="sheetTemplate" dataType="CombateVelen" 
+     title="Velen Sistema de Combate" name="frmscv">    	 
+	
+	
+	<image left="1" top="1" width="1050" height="600" src="/imagens/1.png"/>
+
+		
+		<edit left="10" top="10" width="30" type="number" visible="false" height="30" field="VJ"/>
+		<edit left="225" top="555" width="30" type="number" visible="true" height="30" field="turno"/>
+========================================Layout Vez e Turno =================================		
+		<rectangle left="445" top="277" width="300" height="80" color="Black" strokeColor="Red" strokeSize="3"/>
+		<label left="450" top="283" height="30" width="80" fontSize="30" text="Vez"/>
+		<button left="500" top="283" text="«" fontSize="31" height="35" width="30">
+        <event name="onClick">
+                        sheet.VJ = (tonumber(sheet.VJ) or 0) - 1
+						
+						<![CDATA[ 
+						if sheet.VJ < 1 then
+						sheet.VJ = 0
+						sheet.turno = (tonumber(sheet.turno) or 0) - 1
+						end;
+						
+						if sheet.VJ == 1 then
+						sheet.Vezde = (sheet.NomeJ1)
+						end;
+
+						if sheet.VJ == 2 then
+						sheet.Vezde = (sheet.NomeJ2)
+						end;						
+
+						if sheet.VJ == 3 then
+						sheet.Vezde = (sheet.NomeJ3)
+						end;
+
+						if sheet.VJ == 4 then
+						sheet.Vezde = (sheet.NomeJ4)
+						end;
+
+						if sheet.VJ == 5 then
+						sheet.Vezde = (sheet.NomeJ5)
+						end;
+
+						if sheet.VJ == 6 then
+						sheet.Vezde = (sheet.NomeJ6)
+						end;	
+						    ]]>
+						
+	                    </event>
+        </button>
+		
+		<label left="535" top="285" height="30" width="80" fontSize="15" fontColor="white" field="Vezde"/>
+		<label left="710" top="285" height="30" width="80" fontSize="25" fontColor="red" field="turno"/>
+		<edit left="600" top="320" height="30" width="40" max="6" type="number" fontSize="25" fontColor="red" field="Emcombate"/>
+		<label left="450" top="320" height="30" width="200" fontSize="25" text="Em Combate" fontColor="white" />
+		<button left="600" top="283" text="»" fontSize="31" height="35" width="30">
+		        <event name="onClick">
+                        sheet.VJ = (tonumber(sheet.VJ) or 0) + 1
+											
+						if sheet.VJ > sheet.Emcombate then
+						sheet.VJ = 0
+						local minhaMesa = Firecast.getRoomOf(sheet);
+                        local chat = minhaMesa.chat;    
+						sheet.turno = (tonumber(sheet.turno) or 0) + 1
+						chat:enviarMensagem("[§U][§K4,0]Proxima Rodada");
+						end;
+						
+						if sheet.VJ == 1 then
+						sheet.Vezde = (sheet.NomeJ1)
+						local minhaMesa = Firecast.getRoomOf(sheet);
+                        local chat = minhaMesa.chat;           
+                        chat:enviarMensagem("[§K9,0]Turno de « [§K4,0]" .. sheet.NomeJ1 .. "[§K9,0] »");
+						chat:enviarMensagem("[§K9,0]Rodada « [§K4,0]" .. sheet.Turno .. " [§K9,0]»");
+						end;
+
+						if sheet.VJ == 2 then
+						sheet.Vezde = (sheet.NomeJ2)
+						local minhaMesa = Firecast.getRoomOf(sheet);
+                        local chat = minhaMesa.chat;    
+						chat:enviarMensagem("[§K9,0]Turno de « [§K4,0]" .. sheet.NomeJ2 .. "[§K9,0] »");
+						chat:enviarMensagem("[§K9,0]Rodada « [§K4,0]" .. sheet.Turno .. " [§K9,0]»");
+						end;						
+
+						if sheet.VJ == 3 then
+						sheet.Vezde = (sheet.NomeJ3)
+						local minhaMesa = Firecast.getRoomOf(sheet);
+                        local chat = minhaMesa.chat;    
+						chat:enviarMensagem("[§K9,0]Turno de « [§K4,0]" .. sheet.NomeJ3 .. "[§K9,0] »");
+						chat:enviarMensagem("[§K9,0]Rodada « [§K4,0]" .. sheet.Turno .. " [§K9,0]»");
+						end;
+
+						if sheet.VJ == 4 then
+						sheet.Vezde = (sheet.NomeJ4)
+						local minhaMesa = Firecast.getRoomOf(sheet);
+                        local chat = minhaMesa.chat;    
+						chat:enviarMensagem("[§K9,0]Turno de « [§K4,0]" .. sheet.NomeJ4 .. "[§K9,0] »");
+						chat:enviarMensagem("[§K9,0]Rodada « [§K4,0]" .. sheet.Turno .. " [§K9,0]»");
+						end;
+
+						if sheet.VJ == 5 then
+						sheet.Vezde = (sheet.NomeJ5)
+						local minhaMesa = Firecast.getRoomOf(sheet);
+                        local chat = minhaMesa.chat;    
+						chat:enviarMensagem("[§K9,0]Turno de « [§K4,0]" .. sheet.NomeJ5 .. "[§K9,0] »");
+						chat:enviarMensagem("[§K9,0]Rodada « [§K4,0]" .. sheet.Turno .. " [§K9,0]»");
+						end;
+
+						if sheet.VJ == 6 then
+						sheet.Vezde = (sheet.NomeJ6)
+						local minhaMesa = Firecast.getRoomOf(sheet);
+                        local chat = minhaMesa.chat;    
+						chat:enviarMensagem("[§K9,0]Turno de « [§K4,0]" .. sheet.NomeJ6 .. "[§K9,0] »");
+						chat:enviarMensagem("[§K9,0]Rodada « [§K4,0]" .. sheet.Turno .. " [§K9,0]»");
+						end;	
+						
+                </event>
+        </button>
+		<label left="635" top="283" height="30" width="80" fontSize="20" text="Rodada"/>
+========================================JOGADOR 1 ===========================================			
+		<button left="40" top="40"  width="100" height="100" onClick="self.PopJ1:show();"/>
+		<label left="60" top="80" text="Jogador 1" field="NomeJ1" />
+	
+		<popup name="PopJ1" width="400" height="450" backOpacity="0.5">
+                <label left="20" top="20" height="30" width="80" text="Nome"/>
+				<edit left="80" top="20" height="30" width="80" field="NomeJ1"/>
+				<label left="20" top="80" height="30" width="80" text="Dano"/>
+				<edit left="80" top="80" height="30" width="80" field="DanoJ1"/>
+				<label left="170" top="80" height="30" width="80" text="Buff Dano"/>
+				<edit left="250" top="80" height="30" width="80" field="BuffDNJ1"/> 
+ 				<label left="20" top="140" height="30" width="80" text="Redução"/>
+				<edit left="80" top="140" height="30" width="80" field="ReducaoJ1"/>   
+                <label left="170" top="140" height="30" width="80" text="Buff Redução"/>
+				<edit left="250" top="140" height="30" width="80" field="BuffReduJ1"/> 
+				<label left="170" top="20" height="30" width="80" fontColor="red" text="Target/Alvo"/>
+				<comboBox left="250" top="20" scale="1.4" field="Alvo1" items="{'Player1', 'Player2', 'Player3', 'Player4', 'Player5', 'Player6'}"/>
+				
+				
+				
+				<dataLink fields="{'Alvo1', 'Alvo2', 'Alvo3', 'Alvo4', 'Alvo5', 'Alvo6', 'VIDAJ1', 'VIDAJ2', 'VIDAJ3', 'VIDAJ4', 'VIDAJ5', 'VIDAJ6'}">             
+				<event name="onChange">
+                 if sheet.Alvo1 == 'Player1' then
+				 sheet.VI1 = (tonumber(sheet.VIDAJ1) or 0)
+				 end;
+
+                 if sheet.Alvo1 == 'Player2' then
+				 sheet.VI1 = (tonumber(sheet.VIDAJ2) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo1 == 'Player3' then
+				 sheet.VI1 = (tonumber(sheet.VIDAJ3) or 0)
+				 end;	
+
+                 if sheet.Alvo1 == 'Player4' then
+				 sheet.VI1 = (tonumber(sheet.VIDAJ4) or 0)
+				 end;
+
+                 if sheet.Alvo1 == 'Player5' then
+				 sheet.VI1 = (tonumber(sheet.VIDAJ5) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo1 == 'Player6' then
+				 sheet.VI1 = (tonumber(sheet.VIDAJ6) or 0)
+				 end;	
+				 
+                 </event>
+                </dataLink>
+				
+				
+				<dataLink fields="{'ReducaoJ1', 'ReducaoJ2', 'ReducaoJ3', 'ReducaoJ4', 'ReducaoJ5', 'ReducaoJ6', 'BuffReduJ1', 'BuffReduJ2', 'BuffReduJ3', 'BuffReduJ4', 'BuffReduJ5', 'BuffReduJ6'}">           
+				<event name="onChange">
+                
+				 sheet.TR1 = (tonumber(sheet.ReducaoJ1) or 0) + (tonumber(sheet.BuffReduJ1) or 0) -100
+				 sheet.Sobra1 = (tonumber(sheet.TR1) or 0) * -1
+				 
+				 sheet.TR2 = (tonumber(sheet.ReducaoJ2) or 0) + (tonumber(sheet.BuffReduJ2) or 0) -100
+				 sheet.Sobra2 = (tonumber(sheet.TR2) or 0) * -1
+				 
+				 sheet.TR3 = (tonumber(sheet.ReducaoJ3) or 0) + (tonumber(sheet.BuffReduJ3) or 0) -100
+				 sheet.Sobra3 = (tonumber(sheet.TR3) or 0) * -1
+				 
+				 sheet.TR4 = (tonumber(sheet.ReducaoJ4) or 0) + (tonumber(sheet.BuffReduJ4) or 0) -100
+				 sheet.Sobra4 = (tonumber(sheet.TR4) or 0) * -1
+				 
+				 sheet.TR5 = (tonumber(sheet.ReducaoJ5) or 0) + (tonumber(sheet.BuffReduJ5) or 0) -100
+				 sheet.Sobra5 = (tonumber(sheet.TR5) or 0) * -1
+				 
+				 sheet.TR6 = (tonumber(sheet.ReducaoJ6) or 0) + (tonumber(sheet.BuffReduJ6) or 0) -100
+				 sheet.Sobra6 = (tonumber(sheet.TR6) or 0) * -1				 
+                 </event>
+                </dataLink>
+				
+				<button left="20" top="180" fontColor="red" text="DANO" width="100">
+                  <event name="onClick">
+				 if sheet.Alvo1 == 'Player1' then
+				 sheet.Macete1 = (tonumber(sheet.DanoJ1) or 0) + (tonumber(sheet.BuffDNJ1) or 0)
+				 sheet.Macete1 = (tonumber(sheet.Macete1) or 0) /100
+				 sheet.VIDAJ1 = (tonumber(sheet.VIDAJ1) or 0) - (tonumber(sheet.Macete1) or 0) * (tonumber(sheet.Sobra1) or 0)
+				 end;
+
+                 if sheet.Alvo1 == 'Player2' then
+				 sheet.Macete1 = (tonumber(sheet.DanoJ1) or 0) + (tonumber(sheet.BuffDNJ1) or 0)
+				 sheet.Macete1 = (tonumber(sheet.Macete1) or 0) /100
+				 sheet.VIDAJ2 = (tonumber(sheet.VIDAJ2) or 0) - (tonumber(sheet.Macete1) or 0) * (tonumber(sheet.Sobra1) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo1 == 'Player3' then
+				 sheet.Macete1 = (tonumber(sheet.DanoJ1) or 0) + (tonumber(sheet.BuffDNJ1) or 0)
+				 sheet.Macete1 = (tonumber(sheet.Macete1) or 0) /100
+				 sheet.VIDAJ3 = (tonumber(sheet.VIDAJ3) or 0) - (tonumber(sheet.Macete1) or 0) * (tonumber(sheet.Sobra1) or 0)
+				 end;	
+
+                 if sheet.Alvo1 == 'Player4' then
+				 sheet.Macete1 = (tonumber(sheet.DanoJ1) or 0) + (tonumber(sheet.BuffDNJ1) or 0)
+				 sheet.Macete1 = (tonumber(sheet.Macete1) or 0) /100
+				 sheet.VIDAJ4 = (tonumber(sheet.VIDAJ4) or 0) - (tonumber(sheet.Macete1) or 0) * (tonumber(sheet.Sobra1) or 0)
+				 end;
+                 if sheet.Alvo1 == 'Player5' then
+				 sheet.Macete1 = (tonumber(sheet.DanoJ1) or 0) + (tonumber(sheet.BuffDNJ1) or 0)
+				 sheet.Macete1 = (tonumber(sheet.Macete1) or 0) /100
+				 sheet.VIDAJ5 = (tonumber(sheet.VIDAJ5) or 0) - (tonumber(sheet.Macete1) or 0) * (tonumber(sheet.Sobra1) or 0)
+				 end;			 
+				 
+                 if sheet.Alvo1 == 'Player6' then
+				 sheet.Macete1 = (tonumber(sheet.DanoJ1) or 0) + (tonumber(sheet.BuffDNJ1) or 0)
+				 sheet.Macete1 = (tonumber(sheet.Macete1) or 0) /100
+				 sheet.VIDAJ6 = (tonumber(sheet.VIDAJ6) or 0) - (tonumber(sheet.Macete1) or 0) * (tonumber(sheet.Sobra1) or 0)
+				 end;	 
+				 
+				 sheet.DC1 = (tonumber(sheet.Macete1) or 0) * (tonumber(sheet.Sobra1) or 0)
+				 sheet.CI1 = (tonumber(sheet.DC1) or 0) * 2
+				 sheet.DT1 = (tonumber(sheet.DC1) or 0) + (tonumber(sheet.DT1) or 0)
+				 </event>
+				</button>
+				
+				<button left="250" top="180" text="Limpar" width="100">
+				<event name="onClick">
+
+					sheet.NomeJ1 = 0
+					sheet.DanoJ1 = 0
+					sheet.BuffDNJ1 = 0
+					sheet.ReducaoJ1 = 0
+					sheet.BuffReduJ1 = 0
+					sheet.DC1 = 0
+					sheet.DT1 = 0
+					sheet.TJ1 = 0
+					sheet.CI1 = 0
+					sheet.VIDAJ1 = 0
+					sheet.VI1 = 0
+					sheet.Sobra1 = 0
+					sheet.TR1 = 0
+					sheet.Macete1 = 0
+				</event>
+				</button>	
+				
+				<label left="20" top="200" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Dano Causado"/>
+				<rectangle left="20" top="240" width="130" height="30" color="white" strokeColor="DarkGray" strokeSize="2"/>
+				<label left="25" top="240" width="130" height="30" text="white" fontSize="20" fontColor="red" field="DC1"/>
+				
+				<label left="220" top="200" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Dano Total"/>
+				<rectangle left="220" top="240" width="130" height="30" color="DarkGray" strokeColor="Red" strokeSize="2"/>
+				<label left="225" top="240" width="130" height="30" text="white" fontSize="20" fontColor="red" field="DT1"/>
+				
+				<label left="220" top="280" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Numero da Vez"/>
+				<edit left="220" top="315" width="130" height="30" text="white" fontSize="20"  field="TJ1" />
+				
+				<label left="20" top="280" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Critical"/>
+				<rectangle left="20" top="315" width="130" height="30" color="DarkGray" strokeColor="red" strokeSize="2"/>		
+				<label left="25" top="315" width="130" height="30" text="white" fontSize="20" fontColor="red" field="CI1" />
+				
+				<label left="20" top="350" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Vida do Player"/>
+				<edit left="20" top="385" width="130" height="30" field="VIDAJ1" />		
+				
+				<label left="220" top="350" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Vida do Inimigo"/>
+				<rectangle left="220" top="385" width="130" height="30" color="black" strokeColor="DarkGray" strokeSize="2"/>		
+				<label left="225" top="385" width="130" height="30" text="white" fontSize="20" fontColor="red" field="VI1" />
+		
+				<edit left="20" top="420" height="30" visible="false" width="80" field="Sobra1"/>
+				<edit left="220" top="420" height="30" visible="false" width="80" field="TR1"/>
+				<edit left="220" top="420" height="30" visible="false" width="80" field="Macete1"/>
+        </popup>       
+		
+======================================JOGADOR 2 ================================================		
+		<button left="170" top="40"  width="100" height="100" onClick="self.PopJ2:show();"/>
+		<label left="190" top="80" text="Jogador 2" field="NomeJ2" />
+		
+		<popup name="PopJ2" width="400" height="450" backOpacity="0.5">
+                <label left="20" top="20" height="30" width="80" text="Nome"/>
+				<edit left="80" top="20" height="30" width="80" field="NomeJ2"/>
+				<label left="20" top="80" height="30" width="80" text="Dano"/>
+				<edit left="80" top="80" height="30" width="80" field="DanoJ2"/>
+				<label left="170" top="80" height="30" width="80" text="Buff Dano"/>
+				<edit left="250" top="80" height="30" width="80" field="BuffDNJ2"/> 
+ 				<label left="20" top="140" height="30" width="80" text="Redução"/>
+				<edit left="80" top="140" height="30" width="80" field="ReducaoJ2"/>   
+                <label left="170" top="140" height="30" width="80" text="Buff Redução"/>
+				<edit left="250" top="140" height="30" width="80" field="BuffReduJ2"/> 
+				<label left="170" top="20" height="30" width="80" fontColor="red" text="Target/Alvo"/>
+				<comboBox left="250" top="20" scale="1.4" field="Alvo2" items="{'Player1', 'Player2', 'Player3', 'Player4', 'Player5', 'Player6'}"/>
+				
+				<dataLink fields="{'Alvo1', 'Alvo2', 'Alvo3', 'Alvo4', 'Alvo5', 'Alvo6', 'VIDAJ1', 'VIDAJ2', 'VIDAJ3', 'VIDAJ4', 'VIDAJ5', 'VIDAJ6'}">             
+				<event name="onChange">
+                 if sheet.Alvo2 == 'Player1' then
+				 sheet.VI2 = (tonumber(sheet.VIDAJ1) or 0)
+				 end;
+
+                 if sheet.Alvo2 == 'Player2' then
+				 sheet.VI2 = (tonumber(sheet.VIDAJ2) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo2 == 'Player3' then
+				 sheet.VI2 = (tonumber(sheet.VIDAJ3) or 0)
+				 end;	
+
+                 if sheet.Alvo2 == 'Player4' then
+				 sheet.VI2 = (tonumber(sheet.VIDAJ4) or 0)
+				 end;
+
+                 if sheet.Alvo2 == 'Player5' then
+				 sheet.VI2 = (tonumber(sheet.VIDAJ5) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo2 == 'Player6' then
+				 sheet.VI2 = (tonumber(sheet.VIDAJ6) or 0)
+				 end;	
+				 
+                 </event>
+                </dataLink>
+				
+				<dataLink fields="{'ReducaoJ1', 'ReducaoJ2', 'ReducaoJ3', 'ReducaoJ4', 'ReducaoJ5', 'ReducaoJ6', 'BuffReduJ1', 'BuffReduJ2', 'BuffReduJ3', 'BuffReduJ4', 'BuffReduJ5', 'BuffReduJ6'}">             
+				<event name="onChange">
+                
+				 sheet.TR1 = (tonumber(sheet.ReducaoJ1) or 0) + (tonumber(sheet.BuffReduJ1) or 0) -100
+				 sheet.Sobra1 = (tonumber(sheet.TR1) or 0) * -1
+				 
+				 sheet.TR2 = (tonumber(sheet.ReducaoJ2) or 0) + (tonumber(sheet.BuffReduJ2) or 0) -100
+				 sheet.Sobra2 = (tonumber(sheet.TR2) or 0) * -1
+				 
+				 sheet.TR3 = (tonumber(sheet.ReducaoJ3) or 0) + (tonumber(sheet.BuffReduJ3) or 0) -100
+				 sheet.Sobra3 = (tonumber(sheet.TR3) or 0) * -1
+				 
+				 sheet.TR4 = (tonumber(sheet.ReducaoJ4) or 0) + (tonumber(sheet.BuffReduJ4) or 0) -100
+				 sheet.Sobra4 = (tonumber(sheet.TR4) or 0) * -1
+				 
+				 sheet.TR5 = (tonumber(sheet.ReducaoJ5) or 0) + (tonumber(sheet.BuffReduJ5) or 0) -100
+				 sheet.Sobra5 = (tonumber(sheet.TR5) or 0) * -1
+				 
+				 sheet.TR6 = (tonumber(sheet.ReducaoJ6) or 0) + (tonumber(sheet.BuffReduJ6) or 0) -100
+				 sheet.Sobra6 = (tonumber(sheet.TR6) or 0) * -1				 
+                 </event>
+                </dataLink>
+				
+				<button left="20" top="180" fontColor="red" text="DANO" width="100">
+                  <event name="onClick">
+				 if sheet.Alvo2 == 'Player1' then
+				 sheet.Macete2 = (tonumber(sheet.DanoJ2) or 0) + (tonumber(sheet.BuffDNJ2) or 0)
+				 sheet.Macete2 = (tonumber(sheet.Macete2) or 0) /100
+				 sheet.VIDAJ1 = (tonumber(sheet.VIDAJ1) or 0) - (tonumber(sheet.Macete2) or 0) * (tonumber(sheet.Sobra2) or 0)
+				 end;
+
+                 if sheet.Alvo2 == 'Player2' then
+				 sheet.Macete2 = (tonumber(sheet.DanoJ2) or 0) + (tonumber(sheet.BuffDNJ2) or 0)
+				 sheet.Macete2 = (tonumber(sheet.Macete2) or 0) /100
+				 sheet.VIDAJ2 = (tonumber(sheet.VIDAJ2) or 0) - (tonumber(sheet.Macete2) or 0) * (tonumber(sheet.Sobra2) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo2 == 'Player3' then
+				 sheet.Macete2 = (tonumber(sheet.DanoJ2) or 0) + (tonumber(sheet.BuffDNJ2) or 0)
+				 sheet.Macete2 = (tonumber(sheet.Macete2) or 0) /100
+				 sheet.VIDAJ3 = (tonumber(sheet.VIDAJ3) or 0) - (tonumber(sheet.Macete2) or 0) * (tonumber(sheet.Sobra2) or 0)
+				 end;	
+
+                 if sheet.Alvo2 == 'Player4' then
+				 sheet.Macete2 = (tonumber(sheet.DanoJ2) or 0) + (tonumber(sheet.BuffDNJ2) or 0)
+				 sheet.Macete2 = (tonumber(sheet.Macete2) or 0) /100
+				 sheet.VIDAJ4 = (tonumber(sheet.VIDAJ4) or 0) - (tonumber(sheet.Macete2) or 0) * (tonumber(sheet.Sobra2) or 0)
+				 end;
+				 
+                 if sheet.Alvo2 == 'Player5' then
+				 sheet.Macete2 = (tonumber(sheet.DanoJ2) or 0) + (tonumber(sheet.BuffDNJ2) or 0)
+				 sheet.Macete2 = (tonumber(sheet.Macete2) or 0) /100
+				 sheet.VIDAJ5 = (tonumber(sheet.VIDAJ5) or 0) - (tonumber(sheet.Macete2) or 0) * (tonumber(sheet.Sobra2) or 0)
+				 end;			 
+				 
+                 if sheet.Alvo2 == 'Player6' then
+				 sheet.Macete2 = (tonumber(sheet.DanoJ2) or 0) + (tonumber(sheet.BuffDNJ2) or 0)
+				 sheet.Macete2 = (tonumber(sheet.Macete2) or 0) /100
+				 sheet.VIDAJ6 = (tonumber(sheet.VIDAJ6) or 0) - (tonumber(sheet.Macete2) or 0) * (tonumber(sheet.Sobra2) or 0)
+				 end;	 
+				 
+				 sheet.DC2 = (tonumber(sheet.Macete2) or 0) * (tonumber(sheet.Sobra2) or 0)
+				 sheet.CI2 = (tonumber(sheet.DC2) or 0) * 2
+				 sheet.DT2 = (tonumber(sheet.DC2) or 0) + (tonumber(sheet.DT2) or 0)
+				 
+				 </event>
+				</button>	
+		
+				<button left="250" top="180" text="Limpar" width="100">
+				<event name="onClick">
+					sheet.NomeJ2 = 0
+					sheet.DanoJ2 = 0
+					sheet.BuffDNJ2 = 0
+					sheet.ReducaoJ2 = 0
+					sheet.BuffReduJ2 = 0
+					sheet.DC2 = 0
+					sheet.DT2 = 0
+					sheet.TJ2 = 0
+					sheet.CI2 = 0
+					sheet.VIDAJ2 = 0
+					sheet.VI2 = 0
+					sheet.Sobra2 = 0
+					sheet.TR2 = 0
+					sheet.Macete2 = 0
+				</event>
+				</button>	
+				
+				
+				<label left="20" top="200" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Dano Causado"/>
+				<rectangle left="20" top="240" width="130" height="30" color="white" strokeColor="DarkGray" strokeSize="2"/>
+				<label left="25" top="240" width="130" height="30" text="white" fontSize="20" fontColor="red" field="DC2"/>
+				
+				<label left="220" top="200" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Dano Total"/>
+				<rectangle left="220" top="240" width="130" height="30" color="DarkGray" strokeColor="Red" strokeSize="2"/>
+				<label left="225" top="240" width="130" height="30" text="white" fontSize="20" fontColor="red" field="DT2"/>
+				
+				<label left="220" top="280" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Numero da Vez"/>
+				<edit left="220" top="315" width="130" height="30" text="white" fontSize="20"  field="TJ2" />
+				
+				<label left="20" top="280" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Critical"/>
+				<rectangle left="20" top="315" width="130" height="30" color="DarkGray" strokeColor="red" strokeSize="2"/>		
+				<label left="25" top="315" width="130" height="30" text="white" fontSize="20" fontColor="red" field="CI2" />
+				
+				<label left="20" top="350" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Vida do Player"/>
+				<edit left="20" top="385" width="130" height="30" field="VIDAJ2" />		
+				
+				<label left="220" top="350" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Vida do Inimigo"/>
+				<rectangle left="220" top="385" width="130" height="30" color="black" strokeColor="DarkGray" strokeSize="2"/>		
+				<label left="225" top="385" width="130" height="30" text="white" fontSize="20" fontColor="red" field="VI2" />
+		
+				<edit left="20" top="420" height="30" visible="false" width="80" field="Sobra2"/>
+				<edit left="220" top="420" height="30" visible="false" width="80" field="TR2"/>
+				<edit left="220" top="420" height="30" visible="false" width="80" field="Macete2"/>
+        </popup>      
+======================================JOGADOR 3 ================================================		
+		<button left="300" top="40"  width="100" height="100" onClick="self.PopJ3:show();"/>
+		<label left="320" top="80" text="Jogador 3" field="NomeJ3" />
+
+		<popup name="PopJ3" width="400" height="450" backOpacity="0.5">
+                <label left="20" top="20" height="30" width="80" text="Nome"/>
+				<edit left="80" top="20" height="30" width="80" field="NomeJ3"/>
+				<label left="20" top="80" height="30" width="80" text="Dano"/>
+				<edit left="80" top="80" height="30" width="80" field="DanoJ3"/>
+				<label left="170" top="80" height="30" width="80" text="Buff Dano"/>
+				<edit left="250" top="80" height="30" width="80" field="BuffDNJ3"/> 
+ 				<label left="20" top="140" height="30" width="80" text="Redução"/>
+				<edit left="80" top="140" height="30" width="80" field="ReducaoJ3"/>   
+                <label left="170" top="140" height="30" width="80" text="Buff Redução"/>
+				<edit left="250" top="140" height="30" width="80" field="BuffReduJ3"/> 
+				<label left="170" top="20" height="30" width="80" fontColor="red" text="Target/Alvo"/>
+				<comboBox left="250" top="20" scale="1.4" field="Alvo3" items="{'Player1', 'Player2', 'Player3', 'Player4', 'Player5', 'Player6'}"/>
+				
+				<dataLink fields="{'Alvo1', 'Alvo2', 'Alvo3', 'Alvo4', 'Alvo5', 'Alvo6', 'VIDAJ1', 'VIDAJ2', 'VIDAJ3', 'VIDAJ4', 'VIDAJ5', 'VIDAJ6'}">              
+				<event name="onChange">
+                 if sheet.Alvo3 == 'Player1' then
+				 sheet.VI3 = (tonumber(sheet.VIDAJ1) or 0)
+				 end;
+
+                 if sheet.Alvo3 == 'Player2' then
+				 sheet.VI3 = (tonumber(sheet.VIDAJ2) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo3 == 'Player3' then
+				 sheet.VI3 = (tonumber(sheet.VIDAJ3) or 0)
+				 end;	
+
+                 if sheet.Alvo3 == 'Player4' then
+				 sheet.VI3 = (tonumber(sheet.VIDAJ4) or 0)
+				 end;
+
+                 if sheet.Alvo3 == 'Player5' then
+				 sheet.VI3 = (tonumber(sheet.VIDAJ5) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo3 == 'Player6' then
+				 sheet.VI3 = (tonumber(sheet.VIDAJ6) or 0)
+				 end;	
+				 
+                 </event>
+                </dataLink>
+				
+				<dataLink fields="{'ReducaoJ1', 'ReducaoJ2', 'ReducaoJ3', 'ReducaoJ4', 'ReducaoJ5', 'ReducaoJ6', 'BuffReduJ1', 'BuffReduJ2', 'BuffReduJ3', 'BuffReduJ4', 'BuffReduJ5', 'BuffReduJ6'}">             
+				<event name="onChange">
+                
+				 sheet.TR1 = (tonumber(sheet.ReducaoJ1) or 0) + (tonumber(sheet.BuffReduJ1) or 0) -100
+				 sheet.Sobra1 = (tonumber(sheet.TR1) or 0) * -1
+				 
+				 sheet.TR2 = (tonumber(sheet.ReducaoJ2) or 0) + (tonumber(sheet.BuffReduJ2) or 0) -100
+				 sheet.Sobra2 = (tonumber(sheet.TR2) or 0) * -1
+				 
+				 sheet.TR3 = (tonumber(sheet.ReducaoJ3) or 0) + (tonumber(sheet.BuffReduJ3) or 0) -100
+				 sheet.Sobra3 = (tonumber(sheet.TR3) or 0) * -1
+				 
+				 sheet.TR4 = (tonumber(sheet.ReducaoJ4) or 0) + (tonumber(sheet.BuffReduJ4) or 0) -100
+				 sheet.Sobra4 = (tonumber(sheet.TR4) or 0) * -1
+				 
+				 sheet.TR5 = (tonumber(sheet.ReducaoJ5) or 0) + (tonumber(sheet.BuffReduJ5) or 0) -100
+				 sheet.Sobra5 = (tonumber(sheet.TR5) or 0) * -1
+				 
+				 sheet.TR6 = (tonumber(sheet.ReducaoJ6) or 0) + (tonumber(sheet.BuffReduJ6) or 0) -100
+				 sheet.Sobra6 = (tonumber(sheet.TR6) or 0) * -1				 
+                 </event>
+                </dataLink>
+				
+				<button left="20" top="180" fontColor="red" text="DANO" width="100">
+                  <event name="onClick">
+				 if sheet.Alvo3 == 'Player1' then
+				 sheet.Macete3 = (tonumber(sheet.DanoJ3) or 0) + (tonumber(sheet.BuffDNJ3) or 0)
+				 sheet.Macete3 = (tonumber(sheet.Macete3) or 0) /100
+				 sheet.VIDAJ1 = (tonumber(sheet.VIDAJ1) or 0) - (tonumber(sheet.Macete3) or 0) * (tonumber(sheet.Sobra3) or 0)
+				 end;
+
+                 if sheet.Alvo3 == 'Player2' then
+				 sheet.Macete3 = (tonumber(sheet.DanoJ3) or 0) + (tonumber(sheet.BuffDNJ3) or 0)
+				 sheet.Macete3 = (tonumber(sheet.Macete3) or 0) /100
+				 sheet.VIDAJ2 = (tonumber(sheet.VIDAJ2) or 0) - (tonumber(sheet.Macete3) or 0) * (tonumber(sheet.Sobra3) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo3 == 'Player3' then
+				 sheet.Macete3 = (tonumber(sheet.DanoJ3) or 0) + (tonumber(sheet.BuffDNJ3) or 0)
+				 sheet.Macete3 = (tonumber(sheet.Macete3) or 0) /100
+				 sheet.VIDAJ3 = (tonumber(sheet.VIDAJ3) or 0) - (tonumber(sheet.Macete3) or 0) * (tonumber(sheet.Sobra3) or 0)
+				 end;	
+
+                 if sheet.Alvo3 == 'Player4' then
+				 sheet.Macete3 = (tonumber(sheet.DanoJ3) or 0) + (tonumber(sheet.BuffDNJ3) or 0)
+				 sheet.Macete3 = (tonumber(sheet.Macete3) or 0) /100
+				 sheet.VIDAJ4 = (tonumber(sheet.VIDAJ4) or 0) - (tonumber(sheet.Macete3) or 0) * (tonumber(sheet.Sobra3) or 0)
+				 end;
+				 
+                 if sheet.Alvo3 == 'Player5' then
+				 sheet.Macete3 = (tonumber(sheet.DanoJ3) or 0) + (tonumber(sheet.BuffDNJ3) or 0)
+				 sheet.Macete3 = (tonumber(sheet.Macete3) or 0) /100
+				 sheet.VIDAJ5 = (tonumber(sheet.VIDAJ5) or 0) - (tonumber(sheet.Macete3) or 0) * (tonumber(sheet.Sobra3) or 0)
+				 end;			 
+				 
+                 if sheet.Alvo3 == 'Player6' then
+				 sheet.Macete3 = (tonumber(sheet.DanoJ3) or 0) + (tonumber(sheet.BuffDNJ3) or 0)
+				 sheet.Macete3 = (tonumber(sheet.Macete3) or 0) /100
+				 sheet.VIDAJ6 = (tonumber(sheet.VIDAJ6) or 0) - (tonumber(sheet.Macete3) or 0) * (tonumber(sheet.Sobra3) or 0)
+				 end;	
+
+				 sheet.DC3 = (tonumber(sheet.Macete3) or 0) * (tonumber(sheet.Sobra3) or 0)
+				 sheet.CI3 = (tonumber(sheet.DC3) or 0) * 2
+				 sheet.DT3 = (tonumber(sheet.DC3) or 0) + (tonumber(sheet.DT3) or 0)
+				
+				 </event>
+				</button>	
+				
+						
+				<button left="250" top="180" text="Limpar" width="100">
+				<event name="onClick">
+					sheet.NomeJ3 = 0
+					sheet.DanoJ3 = 0
+					sheet.BuffDNJ3 = 0
+					sheet.ReducaoJ3 = 0
+					sheet.BuffReduJ3 = 0
+					sheet.DC3 = 0
+					sheet.DT3 = 0
+					sheet.TJ3 = 0
+					sheet.CI3 = 0
+					sheet.VIDAJ3 = 0
+					sheet.VI3 = 0
+					sheet.Sobra3 = 0
+					sheet.TR3 = 0
+					sheet.Macete3 = 0
+				</event>
+				</button>	
+				
+				<label left="20" top="200" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Dano Causado"/>
+				<rectangle left="20" top="240" width="130" height="30" color="white" strokeColor="DarkGray" strokeSize="2"/>
+				<label left="25" top="240" width="130" height="30" text="white" fontSize="20" fontColor="red" field="DC3"/>
+				
+				<label left="220" top="200" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Dano Total"/>
+				<rectangle left="220" top="240" width="130" height="30" color="DarkGray" strokeColor="Red" strokeSize="2"/>
+				<label left="225" top="240" width="130" height="30" text="white" fontSize="20" fontColor="red" field="DT3"/>
+				
+				<label left="220" top="280" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Numero da Vez"/>
+				<edit left="220" top="315" width="130" height="30" text="white" fontSize="20"  field="TJ3" />
+				
+				<label left="20" top="280" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Critical"/>
+				<rectangle left="20" top="315" width="130" height="30" color="DarkGray" strokeColor="red" strokeSize="2"/>		
+				<label left="25" top="315" width="130" height="30" text="white" fontSize="20" fontColor="red" field="CI3" />
+				
+				<label left="20" top="350" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Vida do Player"/>
+				<edit left="20" top="385" width="130" height="30" field="VIDAJ3" />		
+				
+				<label left="220" top="350" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Vida do Inimigo"/>
+				<rectangle left="220" top="385" width="130" height="30" color="black" strokeColor="DarkGray" strokeSize="2"/>		
+				<label left="225" top="385" width="130" height="30" text="white" fontSize="20" fontColor="red" field="VI3" />
+		
+				<edit left="20" top="420" height="30" visible="false" width="80" field="Sobra3"/>
+				<edit left="220" top="420" height="30" visible="false" width="80" field="TR3"/>
+				<edit left="220" top="420" height="30" visible="false" width="80" field="Macete3"/>
+				
+        </popup>     	
+
+======================================JOGADOR 4 ================================================		
+		<button left="430" top="40"  width="100" height="100" onClick="self.PopJ4:show();"/>
+		<label left="450" top="80" text="Jogador 4" field="NomeJ4" />
+
+		<popup name="PopJ4" width="400" height="450" backOpacity="0.5">
+                <label left="20" top="20" height="30" width="80" text="Nome"/>
+				<edit left="80" top="20" height="30" width="80" field="NomeJ4"/>
+				<label left="20" top="80" height="30" width="80" text="Dano"/>
+				<edit left="80" top="80" height="30" width="80" field="DanoJ4"/>
+				<label left="170" top="80" height="30" width="80" text="Buff Dano"/>
+				<edit left="250" top="80" height="30" width="80" field="BuffDNJ4"/> 
+ 				<label left="20" top="140" height="30" width="80" text="Redução"/>
+				<edit left="80" top="140" height="30" width="80" field="ReducaoJ4"/>   
+                <label left="170" top="140" height="30" width="80" text="Buff Redução"/>
+				<edit left="250" top="140" height="30" width="80" field="BuffReduJ4"/> 
+				<label left="170" top="20" height="30" width="80" fontColor="red" text="Target/Alvo"/>
+				<comboBox left="250" top="20" scale="1.4" field="Alvo4" items="{'Player1', 'Player2', 'Player3', 'Player4', 'Player5', 'Player6'}"/>
+
+				<dataLink fields="{'Alvo1', 'Alvo2', 'Alvo3', 'Alvo4', 'Alvo5', 'Alvo6', 'VIDAJ1', 'VIDAJ2', 'VIDAJ3', 'VIDAJ4', 'VIDAJ5', 'VIDAJ6'}">              
+				<event name="onChange">
+                 if sheet.Alvo4 == 'Player1' then
+				 sheet.VI4 = (tonumber(sheet.VIDAJ1) or 0)
+				 end;
+
+                 if sheet.Alvo4 == 'Player2' then
+				 sheet.VI4 = (tonumber(sheet.VIDAJ2) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo4 == 'Player3' then
+				 sheet.VI4 = (tonumber(sheet.VIDAJ3) or 0)
+				 end;	
+
+                 if sheet.Alvo4 == 'Player4' then
+				 sheet.VI4 = (tonumber(sheet.VIDAJ4) or 0)
+				 end;
+
+                 if sheet.Alvo4 == 'Player5' then
+				 sheet.VI4 = (tonumber(sheet.VIDAJ5) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo4 == 'Player6' then
+				 sheet.VI4 = (tonumber(sheet.VIDAJ6) or 0)
+				 end;	
+				 
+                 </event>
+                </dataLink>
+
+				<dataLink fields="{'ReducaoJ1', 'ReducaoJ2', 'ReducaoJ3', 'ReducaoJ4', 'ReducaoJ5', 'ReducaoJ6', 'BuffReduJ1', 'BuffReduJ2', 'BuffReduJ3', 'BuffReduJ4', 'BuffReduJ5', 'BuffReduJ6'}">              
+				<event name="onChange">
+                
+				 sheet.TR1 = (tonumber(sheet.ReducaoJ1) or 0) + (tonumber(sheet.BuffReduJ1) or 0) -100
+				 sheet.Sobra1 = (tonumber(sheet.TR1) or 0) * -1
+				 
+				 sheet.TR2 = (tonumber(sheet.ReducaoJ2) or 0) + (tonumber(sheet.BuffReduJ2) or 0) -100
+				 sheet.Sobra2 = (tonumber(sheet.TR2) or 0) * -1
+				 
+				 sheet.TR3 = (tonumber(sheet.ReducaoJ3) or 0) + (tonumber(sheet.BuffReduJ3) or 0) -100
+				 sheet.Sobra3 = (tonumber(sheet.TR3) or 0) * -1
+				 
+				 sheet.TR4 = (tonumber(sheet.ReducaoJ4) or 0) + (tonumber(sheet.BuffReduJ4) or 0) -100
+				 sheet.Sobra4 = (tonumber(sheet.TR4) or 0) * -1
+				 
+				 sheet.TR5 = (tonumber(sheet.ReducaoJ5) or 0) + (tonumber(sheet.BuffReduJ5) or 0) -100
+				 sheet.Sobra5 = (tonumber(sheet.TR5) or 0) * -1
+				 
+				 sheet.TR6 = (tonumber(sheet.ReducaoJ6) or 0) + (tonumber(sheet.BuffReduJ6) or 0) -100
+				 sheet.Sobra6 = (tonumber(sheet.TR6) or 0) * -1				 
+                 </event>
+                </dataLink>
+				
+				<button left="20" top="180" fontColor="red" text="DANO" width="100">
+                  <event name="onClick">
+				 if sheet.Alvo4 == 'Player1' then
+				 sheet.Macete4 = (tonumber(sheet.DanoJ4) or 0) + (tonumber(sheet.BuffDNJ4) or 0)
+				 sheet.Macete4 = (tonumber(sheet.Macete4) or 0) /100
+				 sheet.VIDAJ1 = (tonumber(sheet.VIDAJ1) or 0) - (tonumber(sheet.Macete4) or 0) * (tonumber(sheet.Sobra4) or 0)
+				 end;
+
+                 if sheet.Alvo4 == 'Player2' then
+				 sheet.Macete4 = (tonumber(sheet.DanoJ4) or 0) + (tonumber(sheet.BuffDNJ4) or 0)
+				 sheet.Macete4 = (tonumber(sheet.Macete4) or 0) /100
+				 sheet.VIDAJ2 = (tonumber(sheet.VIDAJ2) or 0) - (tonumber(sheet.Macete4) or 0) * (tonumber(sheet.Sobra4) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo4 == 'Player3' then
+				 sheet.Macete4 = (tonumber(sheet.DanoJ4) or 0) + (tonumber(sheet.BuffDNJ4) or 0)
+				 sheet.Macete4 = (tonumber(sheet.Macete4) or 0) /100
+				 sheet.VIDAJ3 = (tonumber(sheet.VIDAJ3) or 0) - (tonumber(sheet.Macete4) or 0) * (tonumber(sheet.Sobra4) or 0)
+				 end;	
+
+                 if sheet.Alvo4 == 'Player4' then
+				 sheet.Macete4 = (tonumber(sheet.DanoJ4) or 0) + (tonumber(sheet.BuffDNJ4) or 0)
+				 sheet.Macete4 = (tonumber(sheet.Macete4) or 0) /100
+				 sheet.VIDAJ4 = (tonumber(sheet.VIDAJ4) or 0) - (tonumber(sheet.Macete4) or 0) * (tonumber(sheet.Sobra4) or 0)
+				 end;
+				 
+                 if sheet.Alvo4 == 'Player5' then
+				 sheet.Macete4 = (tonumber(sheet.DanoJ4) or 0) + (tonumber(sheet.BuffDNJ4) or 0)
+				 sheet.Macete4 = (tonumber(sheet.Macete4) or 0) /100
+				 sheet.VIDAJ5 = (tonumber(sheet.VIDAJ5) or 0) - (tonumber(sheet.Macete4) or 0) * (tonumber(sheet.Sobra4) or 0)
+				 end;			 
+				 
+                 if sheet.Alvo4 == 'Player6' then
+				 sheet.Macete4 = (tonumber(sheet.DanoJ4) or 0) + (tonumber(sheet.BuffDNJ4) or 0)
+				 sheet.Macete4 = (tonumber(sheet.Macete4) or 0) /100
+				 sheet.VIDAJ6 = (tonumber(sheet.VIDAJ6) or 0) - (tonumber(sheet.Macete4) or 0) * (tonumber(sheet.Sobra4) or 0)
+				 end;
+
+				 sheet.DC4 = (tonumber(sheet.Macete4) or 0) * (tonumber(sheet.Sobra4) or 0)
+				 sheet.CI4 = (tonumber(sheet.DC4) or 0) * 2
+				 sheet.DT4 = (tonumber(sheet.DC4) or 0) + (tonumber(sheet.DT4) or 0)
+				 </event>
+				</button>
+				
+				<button left="250" top="180" text="Limpar" width="100">
+				<event name="onClick">
+					sheet.NomeJ4 = 0
+					sheet.DanoJ4 = 0
+					sheet.BuffDNJ4 = 0
+					sheet.ReducaoJ4 = 0
+					sheet.BuffReduJ4 = 0
+					sheet.DC4 = 0
+					sheet.DT4 = 0
+					sheet.TJ4 = 0
+					sheet.CI4 = 0
+					sheet.VIDAJ4 = 0
+					sheet.VI4 = 0
+					sheet.Sobra4 = 0
+					sheet.TR4 = 0
+					sheet.Macete4 = 0
+				</event>
+				</button>	
+				
+				<label left="20" top="200" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Dano Causado"/>
+				<rectangle left="20" top="240" width="130" height="30" color="white" strokeColor="DarkGray" strokeSize="2"/>
+				<label left="25" top="240" width="130" height="30" text="white" fontSize="20" fontColor="red" field="DC4"/>
+				
+				<label left="220" top="200" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Dano Total"/>
+				<rectangle left="220" top="240" width="130" height="30" color="DarkGray" strokeColor="Red" strokeSize="2"/>
+				<label left="225" top="240" width="130" height="30" text="white" fontSize="20" fontColor="red" field="DT4"/>
+				
+				<label left="220" top="280" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Numero da Vez"/>
+				<edit left="220" top="315" width="130" height="30" text="white" fontSize="20"  field="TJ4" />
+				
+				<label left="20" top="280" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Critical"/>
+				<rectangle left="20" top="315" width="130" height="30" color="DarkGray" strokeColor="red" strokeSize="2"/>		
+				<label left="25" top="315" width="130" height="30" text="white" fontSize="20" fontColor="red" field="CI4" />
+				
+				<label left="20" top="350" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Vida do Player"/>
+				<edit left="20" top="385" width="130" height="30" field="VIDAJ4" />		
+				
+				<label left="220" top="350" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Vida do Inimigo"/>
+				<rectangle left="220" top="385" width="130" height="30" color="black" strokeColor="DarkGray" strokeSize="2"/>		
+				<label left="225" top="385" width="130" height="30" text="white" fontSize="20" fontColor="red" field="VI4" />
+		
+				<edit left="20" top="420" height="30" visible="false" width="80" field="Sobra4"/>
+				<edit left="220" top="420" height="30" visible="false" width="80" field="TR4"/>
+				<edit left="220" top="420" height="30" visible="false" width="80" field="Macete4"/>
+				
+        </popup>   
+
+======================================JOGADOR 5 ================================================		
+		<button left="560" top="40"  width="100" height="100" onClick="self.PopJ5:show();"/>
+		<label left="580" top="80" text="Jogador 5" field="NomeJ5" />
+
+		<popup name="PopJ5" width="400" height="450" backOpacity="0.5">
+                <label left="20" top="20" height="30" width="80" text="Nome"/>
+				<edit left="80" top="20" height="30" width="80" field="NomeJ5"/>
+				<label left="20" top="80" height="30" width="80" text="Dano"/>
+				<edit left="80" top="80" height="30" width="80" field="DanoJ5"/>
+				<label left="170" top="80" height="30" width="80" text="Buff Dano"/>
+				<edit left="250" top="80" height="30" width="80" field="BuffDNJ5"/> 
+ 				<label left="20" top="140" height="30" width="80" text="Redução"/>
+				<edit left="80" top="140" height="30" width="80" field="ReducaoJ5"/>   
+                <label left="170" top="140" height="30" width="80" text="Buff Redução"/>
+				<edit left="250" top="140" height="30" width="80" field="BuffReduJ5"/> 
+				<label left="170" top="20" height="30" width="80" fontColor="red" text="Target/Alvo"/>
+				<comboBox left="250" top="20" scale="1.4" field="Alvo5" items="{'Player1', 'Player2', 'Player3', 'Player4', 'Player5', 'Player6'}"/>
+
+				<dataLink fields="{'Alvo1', 'Alvo2', 'Alvo3', 'Alvo4', 'Alvo5', 'Alvo6', 'VIDAJ1', 'VIDAJ2', 'VIDAJ3', 'VIDAJ4', 'VIDAJ5', 'VIDAJ6'}">              
+				<event name="onChange">
+                 if sheet.Alvo5 == 'Player1' then
+				 sheet.VI5 = (tonumber(sheet.VIDAJ1) or 0)
+				 end;
+
+                 if sheet.Alvo5 == 'Player2' then
+				 sheet.VI5 = (tonumber(sheet.VIDAJ2) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo5 == 'Player3' then
+				 sheet.VI5 = (tonumber(sheet.VIDAJ3) or 0)
+				 end;	
+
+                 if sheet.Alvo5 == 'Player4' then
+				 sheet.VI5 = (tonumber(sheet.VIDAJ4) or 0)
+				 end;
+
+                 if sheet.Alvo5 == 'Player5' then
+				 sheet.VI5 = (tonumber(sheet.VIDAJ5) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo5 == 'Player6' then
+				 sheet.VI5 = (tonumber(sheet.VIDAJ6) or 0)
+				 end;	
+				 
+                 </event>
+                </dataLink>
+
+				<dataLink fields="{'ReducaoJ1', 'ReducaoJ2', 'ReducaoJ3', 'ReducaoJ4', 'ReducaoJ5', 'ReducaoJ6', 'BuffReduJ1', 'BuffReduJ2', 'BuffReduJ3', 'BuffReduJ4', 'BuffReduJ5', 'BuffReduJ6'}">              
+				<event name="onChange">
+                
+				 sheet.TR1 = (tonumber(sheet.ReducaoJ1) or 0) + (tonumber(sheet.BuffReduJ1) or 0) -100
+				 sheet.Sobra1 = (tonumber(sheet.TR1) or 0) * -1
+				 
+				 sheet.TR2 = (tonumber(sheet.ReducaoJ2) or 0) + (tonumber(sheet.BuffReduJ2) or 0) -100
+				 sheet.Sobra2 = (tonumber(sheet.TR2) or 0) * -1
+				 
+				 sheet.TR3 = (tonumber(sheet.ReducaoJ3) or 0) + (tonumber(sheet.BuffReduJ3) or 0) -100
+				 sheet.Sobra3 = (tonumber(sheet.TR3) or 0) * -1
+				 
+				 sheet.TR4 = (tonumber(sheet.ReducaoJ4) or 0) + (tonumber(sheet.BuffReduJ4) or 0) -100
+				 sheet.Sobra4 = (tonumber(sheet.TR4) or 0) * -1
+				 
+				 sheet.TR5 = (tonumber(sheet.ReducaoJ5) or 0) + (tonumber(sheet.BuffReduJ5) or 0) -100
+				 sheet.Sobra5 = (tonumber(sheet.TR5) or 0) * -1
+				 
+				 sheet.TR6 = (tonumber(sheet.ReducaoJ6) or 0) + (tonumber(sheet.BuffReduJ6) or 0) -100
+				 sheet.Sobra6 = (tonumber(sheet.TR6) or 0) * -1				 
+                 </event>
+                </dataLink>
+				
+				<button left="20" top="180" fontColor="red" text="DANO" width="100">
+                  <event name="onClick">
+				 if sheet.Alvo5 == 'Player1' then
+				 sheet.Macete5 = (tonumber(sheet.DanoJ5) or 0) + (tonumber(sheet.BuffDNJ5) or 0)
+				 sheet.Macete5 = (tonumber(sheet.Macete5) or 0) /100
+				 sheet.VIDAJ1 = (tonumber(sheet.VIDAJ1) or 0) - (tonumber(sheet.Macete5) or 0) * (tonumber(sheet.Sobra5) or 0)
+				 end;
+
+                 if sheet.Alvo5 == 'Player2' then
+				 sheet.Macete5 = (tonumber(sheet.DanoJ5) or 0) + (tonumber(sheet.BuffDNJ5) or 0)
+				 sheet.Macete5 = (tonumber(sheet.Macete5) or 0) /100
+				 sheet.VIDAJ2 = (tonumber(sheet.VIDAJ2) or 0) - (tonumber(sheet.Macete5) or 0) * (tonumber(sheet.Sobra5) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo5 == 'Player3' then
+				 sheet.Macete5 = (tonumber(sheet.DanoJ5) or 0) + (tonumber(sheet.BuffDNJ5) or 0)
+				 sheet.Macete5 = (tonumber(sheet.Macete5) or 0) /100
+				 sheet.VIDAJ3 = (tonumber(sheet.VIDAJ3) or 0) - (tonumber(sheet.Macete5) or 0) * (tonumber(sheet.Sobra5) or 0)
+				 end;	
+
+                 if sheet.Alvo5 == 'Player4' then
+				 sheet.Macete5 = (tonumber(sheet.DanoJ5) or 0) + (tonumber(sheet.BuffDNJ5) or 0)
+				 sheet.Macete5 = (tonumber(sheet.Macete5) or 0) /100
+				 sheet.VIDAJ4 = (tonumber(sheet.VIDAJ4) or 0) - (tonumber(sheet.Macete5) or 0) * (tonumber(sheet.Sobra5) or 0)
+				 end;
+				 
+                 if sheet.Alvo5 == 'Player5' then
+				 sheet.Macete5 = (tonumber(sheet.DanoJ5) or 0) + (tonumber(sheet.BuffDNJ5) or 0)
+				 sheet.Macete5 = (tonumber(sheet.Macete5) or 0) /100
+				 sheet.VIDAJ5 = (tonumber(sheet.VIDAJ5) or 0) - (tonumber(sheet.Macete5) or 0) * (tonumber(sheet.Sobra5) or 0)
+				 end;			 
+				 
+                 if sheet.Alvo5 == 'Player6' then
+				 sheet.Macete5 = (tonumber(sheet.DanoJ5) or 0) + (tonumber(sheet.BuffDNJ5) or 0)
+				 sheet.Macete5 = (tonumber(sheet.Macete5) or 0) /100
+				 sheet.VIDAJ6 = (tonumber(sheet.VIDAJ6) or 0) - (tonumber(sheet.Macete5) or 0) * (tonumber(sheet.Sobra5) or 0)
+				 end;
+
+				 sheet.DC5 = (tonumber(sheet.Macete5) or 0) * (tonumber(sheet.Sobra5) or 0)
+				 sheet.CI5 = (tonumber(sheet.DC5) or 0) * 2
+				 sheet.DT5 = (tonumber(sheet.DC5) or 0) + (tonumber(sheet.DT5) or 0)
+				 </event>
+				</button>	
+				
+				<button left="250" top="180" text="Limpar" width="100">
+				<event name="onClick">
+					sheet.NomeJ5 = 0
+					sheet.DanoJ5 = 0
+					sheet.BuffDNJ5 = 0
+					sheet.ReducaoJ5 = 0
+					sheet.BuffReduJ5 = 0
+					sheet.DC5 = 0
+					sheet.DT5 = 0
+					sheet.TJ5 = 0
+					sheet.CI5 = 0
+					sheet.VIDAJ5 = 0
+					sheet.VI5 = 0
+					sheet.Sobra5 = 0
+					sheet.TR5 = 0
+					sheet.Macete5 = 0
+				</event>
+				</button>	
+				
+				<label left="20" top="200" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Dano Causado"/>
+				<rectangle left="20" top="240" width="130" height="30" color="white" strokeColor="DarkGray" strokeSize="2"/>
+				<label left="25" top="240" width="130" height="30" text="white" fontSize="20" fontColor="red" field="DC5"/>
+				
+				<label left="220" top="200" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Dano Total"/>
+				<rectangle left="220" top="240" width="130" height="30" color="DarkGray" strokeColor="Red" strokeSize="2"/>
+				<label left="225" top="240" width="130" height="30" text="white" fontSize="20" fontColor="red" field="DT5"/>
+				
+				<label left="220" top="280" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Numero da Vez"/>
+				<edit left="220" top="315" width="130" height="30" text="white" fontSize="20"  field="TJ5" />
+				
+				<label left="20" top="280" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Critical"/>
+				<rectangle left="20" top="315" width="130" height="30" color="DarkGray" strokeColor="red" strokeSize="2"/>		
+				<label left="25" top="315" width="130" height="30" text="white" fontSize="20" fontColor="red" field="CI5" />
+				
+				<label left="20" top="350" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Vida do Player"/>
+				<edit left="20" top="385" width="130" height="30" field="VIDAJ5" />		
+				
+				<label left="220" top="350" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Vida do Inimigo"/>
+				<rectangle left="220" top="385" width="130" height="30" color="black" strokeColor="DarkGray" strokeSize="2"/>		
+				<label left="225" top="385" width="130" height="30" text="white" fontSize="20" fontColor="red" field="VI5" />
+		
+				<edit left="20" top="420" height="30" visible="false" width="80" field="Sobra5"/>
+				<edit left="220" top="420" height="30" visible="false" width="80" field="TR5"/>
+				<edit left="220" top="420" height="30" visible="false" width="80" field="Macete5"/>
+        </popup>   
+
+======================================JOGADOR 6 ================================================		
+		<button left="690" top="40"  width="100" height="100" onClick="self.PopJ6:show();"/>
+		<label left="710" top="80" text="Jogador 6" field="NomeJ6" />
+
+		<popup name="PopJ6" width="400" height="450" backOpacity="0.5">
+                <label left="20" top="20" height="30" width="80" text="Nome"/>
+				<edit left="80" top="20" height="30" width="80" field="NomeJ6"/>
+				<label left="20" top="80" height="30" width="80" text="Dano"/>
+				<edit left="80" top="80" height="30" width="80" field="DanoJ6"/>
+				<label left="170" top="80" height="30" width="80" text="Buff Dano"/>
+				<edit left="250" top="80" height="30" width="80" field="BuffDNJ6"/> 
+ 				<label left="20" top="140" height="30" width="80" text="Redução"/>
+				<edit left="80" top="140" height="30" width="80" field="ReducaoJ6"/>   
+                <label left="170" top="140" height="30" width="80" text="Buff Redução"/>
+				<edit left="250" top="140" height="30" width="80" field="BuffReduJ6"/> 
+				<label left="170" top="20" height="30" width="80" fontColor="red" text="Target/Alvo"/>
+				<comboBox left="250" top="20" scale="1.4" field="Alvo6" items="{'Player1', 'Player2', 'Player3', 'Player4', 'Player5', 'Player6'}"/>
+
+				<dataLink fields="{'Alvo1', 'Alvo2', 'Alvo3', 'Alvo4', 'Alvo5', 'Alvo6', 'VIDAJ1', 'VIDAJ2', 'VIDAJ3', 'VIDAJ4', 'VIDAJ5', 'VIDAJ6'}">           
+				<event name="onChange">
+                 if sheet.Alvo6 == 'Player1' then
+				 sheet.VI6 = (tonumber(sheet.VIDAJ1) or 0)
+				 end;
+
+                 if sheet.Alvo6 == 'Player2' then
+				 sheet.VI6 = (tonumber(sheet.VIDAJ2) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo6 == 'Player3' then
+				 sheet.VI6 = (tonumber(sheet.VIDAJ3) or 0)
+				 end;	
+
+                 if sheet.Alvo6 == 'Player4' then
+				 sheet.VI6 = (tonumber(sheet.VIDAJ4) or 0)
+				 end;
+
+                 if sheet.Alvo6 == 'Player5' then
+				 sheet.VI6 = (tonumber(sheet.VIDAJ5) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo6 == 'Player6' then
+				 sheet.VI6 = (tonumber(sheet.VIDAJ6) or 0)
+				 end;	
+				 
+                 </event>
+                </dataLink>
+
+				<dataLink fields="{'ReducaoJ1', 'ReducaoJ2', 'ReducaoJ3', 'ReducaoJ4', 'ReducaoJ5', 'ReducaoJ6', 'BuffReduJ1', 'BuffReduJ2', 'BuffReduJ3', 'BuffReduJ4', 'BuffReduJ5', 'BuffReduJ6'}">              
+				<event name="onChange">
+                
+				 sheet.TR1 = (tonumber(sheet.ReducaoJ1) or 0) + (tonumber(sheet.BuffReduJ1) or 0) -100
+				 sheet.Sobra1 = (tonumber(sheet.TR1) or 0) * -1
+				 
+				 sheet.TR2 = (tonumber(sheet.ReducaoJ2) or 0) + (tonumber(sheet.BuffReduJ2) or 0) -100
+				 sheet.Sobra2 = (tonumber(sheet.TR2) or 0) * -1
+				 
+				 sheet.TR3 = (tonumber(sheet.ReducaoJ3) or 0) + (tonumber(sheet.BuffReduJ3) or 0) -100
+				 sheet.Sobra3 = (tonumber(sheet.TR3) or 0) * -1
+				 
+				 sheet.TR4 = (tonumber(sheet.ReducaoJ4) or 0) + (tonumber(sheet.BuffReduJ4) or 0) -100
+				 sheet.Sobra4 = (tonumber(sheet.TR4) or 0) * -1
+				 
+				 sheet.TR5 = (tonumber(sheet.ReducaoJ5) or 0) + (tonumber(sheet.BuffReduJ5) or 0) -100
+				 sheet.Sobra5 = (tonumber(sheet.TR5) or 0) * -1
+				 
+				 sheet.TR6 = (tonumber(sheet.ReducaoJ6) or 0) + (tonumber(sheet.BuffReduJ6) or 0) -100
+				 sheet.Sobra6 = (tonumber(sheet.TR6) or 0) * -1				 
+                 </event>
+                </dataLink>
+				
+				<button left="20" top="180" fontColor="red" text="DANO" width="100">
+                  <event name="onClick">
+				 if sheet.Alvo6 == 'Player1' then
+				 sheet.Macete6 = (tonumber(sheet.DanoJ6) or 0) + (tonumber(sheet.BuffDNJ6) or 0)
+				 sheet.Macete6 = (tonumber(sheet.Macete6) or 0) /100
+				 sheet.VIDAJ1 = (tonumber(sheet.VIDAJ1) or 0) - (tonumber(sheet.Macete6) or 0) * (tonumber(sheet.Sobra6) or 0)
+				 end;
+
+                 if sheet.Alvo6 == 'Player2' then
+				 sheet.Macete6 = (tonumber(sheet.DanoJ6) or 0) + (tonumber(sheet.BuffDNJ6) or 0)
+				 sheet.Macete6 = (tonumber(sheet.Macete6) or 0) /100
+				 sheet.VIDAJ2 = (tonumber(sheet.VIDAJ2) or 0) - (tonumber(sheet.Macete6) or 0) * (tonumber(sheet.Sobra6) or 0)
+				 end;				 
+				 
+                 if sheet.Alvo6 == 'Player3' then
+				 sheet.Macete6 = (tonumber(sheet.DanoJ6) or 0) + (tonumber(sheet.BuffDNJ6) or 0)
+				 sheet.Macete6 = (tonumber(sheet.Macete6) or 0) /100
+				 sheet.VIDAJ3 = (tonumber(sheet.VIDAJ3) or 0) - (tonumber(sheet.Macete6) or 0) * (tonumber(sheet.Sobra6) or 0)
+				 end;	
+
+                 if sheet.Alvo6 == 'Player4' then
+				 sheet.Macete6 = (tonumber(sheet.DanoJ6) or 0) + (tonumber(sheet.BuffDNJ6) or 0)
+				 sheet.Macete6 = (tonumber(sheet.Macete6) or 0) /100
+				 sheet.VIDAJ4 = (tonumber(sheet.VIDAJ4) or 0) - (tonumber(sheet.Macete6) or 0) * (tonumber(sheet.Sobra6) or 0)
+				 end;
+				 
+                 if sheet.Alvo6 == 'Player5' then
+				 sheet.Macete6 = (tonumber(sheet.DanoJ6) or 0) + (tonumber(sheet.BuffDNJ6) or 0)
+				 sheet.Macete6 = (tonumber(sheet.Macete6) or 0) /100
+				 sheet.VIDAJ5 = (tonumber(sheet.VIDAJ5) or 0) - (tonumber(sheet.Macete6) or 0) * (tonumber(sheet.Sobra6) or 0)
+				 end;			 
+				 
+                 if sheet.Alvo6 == 'Player6' then
+				 sheet.Macete6 = (tonumber(sheet.DanoJ6) or 0) + (tonumber(sheet.BuffDNJ6) or 0)
+				 sheet.Macete6 = (tonumber(sheet.Macete6) or 0) /100
+				 sheet.VIDAJ6 = (tonumber(sheet.VIDAJ6) or 0) - (tonumber(sheet.Macete6) or 0) * (tonumber(sheet.Sobra6) or 0)
+				 end;	 
+				 
+				 sheet.DC6 = (tonumber(sheet.Macete6) or 0) * (tonumber(sheet.Sobra6) or 0)
+				 sheet.CI6 = (tonumber(sheet.DC6) or 0) * 2
+				 sheet.DT6 = (tonumber(sheet.DC6) or 0) + (tonumber(sheet.DT6) or 0)
+				 </event>
+				</button>
+				
+				<button left="250" top="180" text="Limpar" width="100">
+				<event name="onClick">
+					sheet.NomeJ6 = 0
+					sheet.DanoJ6 = 0
+					sheet.BuffDNJ6 = 0
+					sheet.ReducaoJ6 = 0
+					sheet.BuffReduJ6 = 0
+					sheet.DC6 = 0
+					sheet.DT6 = 0
+					sheet.TJ6 = 0
+					sheet.CI6 = 0
+					sheet.VIDAJ6 = 0
+					sheet.VI6 = 0
+					sheet.Sobra6 = 0
+					sheet.TR6 = 0
+					sheet.Macete6 = 0
+				</event>
+				</button>	
+		
+				<label left="20" top="200" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Dano Causado"/>
+				<rectangle left="20" top="240" width="130" height="30" color="white" strokeColor="DarkGray" strokeSize="2"/>
+				<label left="25" top="240" width="130" height="30" text="white" fontSize="20" fontColor="red" field="DC6"/>
+				
+				<label left="220" top="200" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Dano Total"/>
+				<rectangle left="220" top="240" width="130" height="30" color="DarkGray" strokeColor="Red" strokeSize="2"/>
+				<label left="225" top="240" width="130" height="30" text="white" fontSize="20" fontColor="red" field="DT6"/>
+				
+				<label left="220" top="280" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Numero da Vez"/>
+				<edit left="220" top="315" width="130" height="30" text="white" fontSize="20"  field="TJ6" />
+				
+				<label left="20" top="280" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Critical"/>
+				<rectangle left="20" top="315" width="130" height="30" color="DarkGray" strokeColor="red" strokeSize="2"/>		
+				<label left="25" top="315" width="130" height="30" text="white" fontSize="20" fontColor="red" field="CI6" />
+				
+				<label left="20" top="350" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Vida do Player"/>
+				<edit left="20" top="385" width="130" height="30" field="VIDAJ6" />		
+				
+				<label left="220" top="350" height="30" width="150" fontSize="20" fontColor="MediumBlue" text="Vida do Inimigo"/>
+				<rectangle left="220" top="385" width="130" height="30" color="black" strokeColor="DarkGray" strokeSize="2"/>		
+				<label left="225" top="385" width="130" height="30" text="white" fontSize="20" fontColor="red" field="VI6" />
+		
+				<edit left="20" top="420" height="30" visible="false" width="80" field="Sobra6"/>
+				<edit left="220" top="420" height="30" visible="false" width="80" field="TR6"/>
+				<edit left="220" top="420" height="30" visible="false" width="80" field="Macete6"/>				
+				
+        </popup>   	
+
+		<button left="10" top="550" text="ZERAR TUDO" fontColor="red" fontSize="25" height="35" width="200">
+		<event name="onClick">
+		sheet.turno = 0
+		sheet.NomeJ1 = 0
+		sheet.DanoJ1 = 0
+		sheet.BuffDNJ1 = 0
+		sheet.ReducaoJ1 = 0
+		sheet.BuffReduJ1 = 0
+		sheet.DC1 = 0
+		sheet.DT1 = 0
+		sheet.TJ1 = 0
+		sheet.CI1 = 0
+		sheet.VIDAJ1 = 0
+		sheet.VI1 = 0
+		sheet.Sobra1 = 0
+		sheet.TR1 = 0
+		sheet.Macete1 = 0
+		
+		sheet.NomeJ2 = 0
+		sheet.DanoJ2 = 0
+		sheet.BuffDNJ2 = 0
+		sheet.ReducaoJ2 = 0
+		sheet.BuffReduJ2 = 0
+		sheet.DC2 = 0
+		sheet.DT2 = 0
+		sheet.TJ2 = 0
+		sheet.CI2 = 0
+		sheet.VIDAJ2 = 0
+		sheet.VI2 = 0
+		sheet.Sobra2 = 0
+		sheet.TR2 = 0
+		sheet.Macete2 = 0
+		
+		sheet.NomeJ3 = 0
+		sheet.DanoJ3 = 0
+		sheet.BuffDNJ3 = 0
+		sheet.ReducaoJ3 = 0
+		sheet.BuffReduJ3 = 0
+		sheet.DC3 = 0
+		sheet.DT3 = 0
+		sheet.TJ3 = 0
+		sheet.CI3 = 0
+		sheet.VIDAJ3 = 0
+		sheet.VI3 = 0
+		sheet.Sobra3 = 0
+		sheet.TR3 = 0
+		sheet.Macete3 = 0
+		
+		sheet.NomeJ4 = 0
+		sheet.DanoJ4 = 0
+		sheet.BuffDNJ4 = 0
+		sheet.ReducaoJ4 = 0
+		sheet.BuffReduJ4 = 0
+		sheet.DC4 = 0
+		sheet.DT4 = 0
+		sheet.TJ4 = 0
+		sheet.CI4 = 0
+		sheet.VIDAJ4 = 0
+		sheet.VI4 = 0
+		sheet.Sobra4 = 0
+		sheet.TR4 = 0
+		sheet.Macete4 = 0
+		
+		sheet.NomeJ5 = 0
+		sheet.DanoJ5 = 0
+		sheet.BuffDNJ5 = 0
+		sheet.ReducaoJ5 = 0
+		sheet.BuffReduJ5 = 0
+		sheet.DC5 = 0
+		sheet.DT5 = 0
+		sheet.TJ5 = 0
+		sheet.CI5 = 0
+		sheet.VIDAJ5 = 0
+		sheet.VI5 = 0
+		sheet.Sobra5 = 0
+		sheet.TR5 = 0
+		sheet.Macete5 = 0
+		
+		sheet.NomeJ6 = 0
+		sheet.DanoJ6 = 0
+		sheet.BuffDNJ6 = 0
+		sheet.ReducaoJ6 = 0
+		sheet.BuffReduJ6 = 0
+		sheet.DC6 = 0
+		sheet.DT6 = 0
+		sheet.TJ6 = 0
+		sheet.CI6 = 0
+		sheet.VIDAJ6 = 0
+		sheet.VI6 = 0
+		sheet.Sobra6 = 0
+		sheet.TR6 = 0
+		sheet.Macete6 = 0
+		</event>
+		</button>	
+		
+</form>

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<popupForm name="frmpersonagem" width="650" height="920" >
+		
+	<scrollBox align="client">
+	 			
+      <image width="620" height="920" center="true"  src="/imagens/4.png"/>
+	  
+	  <image field="imagemDoPersonagem" editable="true" style="autoFit" left="335" top="85" width="220" height="250" />	  
+	  
+      <image top="-40" left="230"  width="410" height="500" center="true"  src="/imagens/99.png"/>		
+
+	  <rectangle left="117" top="440" color="black"  width="35" height="20"  />
+	  <label left="120" top="435" width="150" height="30" field="RHPNivel" />
+	  
+	   <rectangle left="117" top="465" color="black"  width="35" height="20"  />
+	  <label left="120" top="460" width="230" height="30" field="CHPNivel" />
+		  
+	  <rectangle left="117" top="490" color="black"  width="35" height="20"  />	  
+	  <label left="120" top="485" width="230" height="30" field="EHPNivel" />
+	  
+	  <rectangle left="117" top="515" color="black"  width="35" height="20"  />
+	  <label left="120" top="510" width="230" height="30" field="R20HPNivel" />
+	  
+	  <rectangle left="117" top="540" color="black"  width="35" height="20"  />
+	  <label left="120" top="535" width="270" height="30" field="RMPNivel" />
+	  
+	  <rectangle left="117" top="565" color="black"  width="35" height="20"  />
+	  <label left="120" top="560" width="270" height="30" field="EMPNivel" />
+	  
+	  <rectangle left="233" top="440" color="black"  width="35" height="20"  />
+	  <label left="235" top="435" width="150" height="30" field="R30HPNivel" />
+	  
+	   <rectangle left="233" top="465" color="black"  width="35" height="20"  />
+	  <label left="235" top="460" width="230" height="30" field="MHPNivel" />
+		  
+	  <rectangle left="233" top="490" color="black"  width="35" height="20"  />	  
+	  <label left="235" top="485" width="230" height="30" field="MMPNivel" />
+	  ---------------------------------------------------------------------------
+	  <rectangle left="345" top="440" color="black"  width="40" height="20"  />
+	  <label left="348" top="435" width="230" height="30" field="FNivel" />
+	  
+	  <rectangle left="415" top="440" color="black"  width="40" height="20"  />
+	  <label left="418" top="435" width="230" height="30" field="INivel" />
+	  
+	  <rectangle left="500" top="440" color="black"  width="40" height="20"  />
+	  <label left="503" top="435" width="230" height="30" field="DNivel" />
+	  
+	  <rectangle left="345" top="465" color="black"  width="40" height="20"  />
+	  <label left="348" top="460" width="230" height="30" field="ANivel" />
+	  
+	  <rectangle left="415" top="465" color="black"  width="40" height="20"  />
+	  <label left="418" top="460" width="230" height="30" field="VNivel" />
+	  	 
+	  	 <edit left="120"   top="218"  width="50" type="number" height="20" field="Atletismo" />
+		 <edit left="120"   top="243"  width="50" type="number" height="20" field="Sabedoria" />
+		 <edit left="120"   top="268"  width="50" type="number" height="20" field="Percepcao" />
+		 <edit left="120"   top="293"  width="50" type="number" height="20" field="Acrobacia" />
+		 <edit left="120"   top="318"  width="50" type="number" height="20" field="Vigor" />
+		 
+		<rectangle left="200" top="218" color="black"  width="50" height="20"  />
+		<label left="203" top="218" text="99" width="50" height="20" format="%d" field="TAtletismo"/>
+		<rectangle left="200" top="243" color="black"  width="50"  height="20"  />
+		<label left="203" top="243" text="99" width="50" height="20" format="%d" field="TSabedoria"/>
+		<rectangle left="200" top="268" color="black"  width="50" height="20"  />
+		<label left="203" top="268" text="99" width="50" height="20" format="%d" field="TPercepcao"/>
+		<rectangle left="200" top="293" color="black"  width="50" height="20"  />
+		<label left="203" top="293" text="99" width="50" height="20" format="%d" field="TAcrobacia"/>
+		<rectangle left="200" top="318" color="black"  width="50" height="20"  />
+		<label left="203" top="318" text="99" width="50" height="20" format="%d" field="TVigor"/>
+		
+----------------------------------------------------MONTARIA-------------------------------------------------------------
+
+		<button left="352" top="505" width="90" height="110" opacity="0.6" text="" onClick="self.DBMont:show();"/>
+			   
+	   <popup name="DBMont" visible="false" left="1" top="40"
+                     width="600" height="600" >
+		<image field="ImagemDaMont" editable="true" style="autoFit" left="215" top="96" width="170" height="200" />	  	
+		<image left="5" top="5" width="590" height="590" center="true"  src="/imagens/8.png"/>
+		
+
+		
+		<textEditor left="23" top="357" width="553" height="130" field="HMont"/>
+	
+				<button left="372" top="450" fontSize="20" height="30" width="200" text="Habilidade Mont" fontColor="White">
+								<event name="onClick"> 
+
+                        local rolagem = Firecast.interpretarRolagem(sheet.ataqueDoPersonagem); 
+
+                        if not rolagem.possuiAlgumDado then
+                                -- se o usuario não tiver preenchido qual dado rolar,
+                                -- vamos adicionar um 1d20 + na "fórmula da rolagem"
+                                rolagem = Firecast.interpretarRolagem("1d20"):concatenar(rolagem);
+                        end; 
+
+                        local mesaDoPersonagem = Firecast.getMesaDe(sheet);
+					
+
+                       if mesaDoPersonagem ~= nil then
+                               mesaDoPersonagem.chat:rolarDados(rolagem, sheet.HMont);
+                       end;
+
+								       </event>
+								</button>
+		
+		
+	  	 <edit left="130"   top="523"  width="70" height="20" field="MontAtletismo" />
+	  	 <edit left="305"   top="523"  width="70" height="20" field="MontSabedoria" />
+	  	 <edit left="500"   top="523"  width="70" height="20" field="MontPercepcao" />		 
+		 
+		 <edit left="130"   top="553"  width="70" height="20" field="MontVigor" />
+	  	 <edit left="305"   top="553"  width="70" height="20" field="MPMont" />
+	  	 <edit left="500"   top="553"  width="70" height="20" field="MontESPACO" />
+		 
+        </popup> 
+
+--------------------------------------------DIVINDADE--------------------------------------------------------------------------------------------------------------------
+<button left="468" top="505" width="90" height="110" opacity="0.6" text="" onClick="self.DBDivindade:show();"/>
+			   
+	   <popup name="DBDivindade" visible="false" left="1" top="100"
+                     width="700" height="810" >
+		
+		<image left="40" top="5" width="700" height="800" center="true"  src="/imagens/10.png"/>
+		<comboBox left="330" top="97" width="90" height="20" fontColor="Gold" scale="1.4" field="Deuses" items="{'Escolha', 'Anilez', 'Blume', 'Jamiel', 'Thorin', 'Yin', 
+		'Yuuki', 'Abaddon', 'Delevit', 'Hidarnes', 'Ignis', 'Succubus', }"/>
+		 <edit left="330" top="130"  width="90" height="20" type="number" max="7" scale="1.4" fontColor="Gold" field="LVDivino" />
+		
+		
+		<rectangle left="280" top="195" color="black"  width="40" height="20"  />
+		<label left="283" top="195" text="99" width="50" height="20" fontColor="Gold" format="%d" field="DForca"/>
+		
+		<rectangle left="280" top="218" color="black"  width="40" height="20"  />
+		<label left="283" top="218" text="99" width="50" height="20" fontColor="Gold" format="%d" field="DAgilidade"/>
+		
+		<rectangle left="410" top="195" color="black"  width="40" height="20"  />
+		<label left="413" top="195" text="99" width="50" height="20" fontColor="Gold" format="%d" field="DInteligencia"/>
+		
+		<rectangle left="410" top="218" color="black"  width="40" height="20"  />
+		<label left="413" top="218" text="99" width="50" height="20" fontColor="Gold" format="%d" field="DVitalidade"/>
+		 
+		<rectangle left="540" top="195" color="black"  width="40" height="20"  />
+		<label left="543" top="195" text="99" width="50" height="20" fontColor="Gold" format="%d" field="DDestreza"/>
+		
+		<rectangle left="540" top="218" color="black"  width="40" height="20"  />
+		<label left="543" top="218" text="99" width="50" height="20" fontColor="Gold" format="%d" field="DMP"/>
+		
+		--------------------Data Link da Divindade ---------------------------
+		
+		<dataLink fields="{'Deuses', 'LVDivino'}">
+                <event name="onChange"> 
+		
+		--------------- Deuses ----------------
+		if sheet.Deuses == 'Anilez' then
+		sheet.DForca = 0
+		sheet.DInteligencia = 0
+		sheet.DDestreza	= (tonumber(sheet.LVDivino) or 0)
+		sheet.DAgilidade = 0
+		sheet.DVitalidade = (tonumber(sheet.LVDivino) or 0) + 1
+		sheet.DMP = 0
+		end;
+		
+		
+		if sheet.Deuses == 'Blume' then
+		sheet.DForca = 0
+		sheet.DInteligencia = (tonumber(sheet.LVDivino) or 0)
+		sheet.DDestreza	= 0
+		sheet.DAgilidade = 0
+		sheet.DVitalidade = (tonumber(sheet.LVDivino) or 0) + 1
+		sheet.DMP = 0
+		end;
+
+		if sheet.Deuses == 'Jamiel' then
+		sheet.DForca = (tonumber(sheet.LVDivino) or 0) * 0.7
+		sheet.DInteligencia = (tonumber(sheet.LVDivino) or 0) * 0.7
+		sheet.DDestreza	= 0
+		sheet.DAgilidade = 0
+		sheet.DVitalidade = (tonumber(sheet.LVDivino) or 0)
+		sheet.DMP = 0
+		end;
+		
+		if sheet.Deuses == 'Thorin' then
+		sheet.DForca = (tonumber(sheet.LVDivino) or 0)
+		sheet.DInteligencia = 0
+		sheet.DDestreza	= 0
+		sheet.DAgilidade = 0
+		sheet.DVitalidade = (tonumber(sheet.LVDivino) or 0) + 1
+		sheet.DMP = 0
+		end;
+		
+		if sheet.Deuses == 'Yin' then
+		sheet.DForca = 0
+		sheet.DInteligencia = 0
+		sheet.DDestreza	= 0
+		sheet.DAgilidade = (tonumber(sheet.LVDivino) or 0)
+		sheet.DVitalidade = (tonumber(sheet.LVDivino) or 0) + 1
+		sheet.DMP = 0
+		end;
+		
+		if sheet.Deuses == 'Yuuki' then
+		sheet.DForca = 0
+		sheet.DInteligencia = 0
+		sheet.DDestreza	= 0
+		sheet.DAgilidade = 0
+		sheet.DVitalidade = (tonumber(sheet.LVDivino) or 0) + 1
+		sheet.DMP = (tonumber(sheet.LVDivino) or 0) * 10
+		end;
+		
+		if sheet.Deuses == 'Escolha' then
+		sheet.DForca = 0
+		sheet.DInteligencia = 0
+		sheet.DDestreza	= 0
+		sheet.DAgilidade = 0
+		sheet.DVitalidade = 0
+		sheet.DMP = 0
+		end;
+		
+		------------- Demonios ------------
+		if sheet.Deuses == 'Delevit' then
+		sheet.DForca = (tonumber(sheet.LVDivino) or 0) * 0.7
+		sheet.DInteligencia = (tonumber(sheet.LVDivino) or 0) * 0.6
+		sheet.DDestreza	= 0
+		sheet.DAgilidade = 0
+		sheet.DVitalidade = (tonumber(sheet.LVDivino) or 0) + 1
+		sheet.DMP = 1 - 1
+		end;
+		
+		if sheet.Deuses == 'Ignis' then
+		sheet.DForca = 0
+		sheet.DInteligencia = 0
+		sheet.DDestreza	= 0
+		sheet.DAgilidade = 0
+		sheet.DVitalidade = (tonumber(sheet.LVDivino) or 0) + 1
+		sheet.DMP = (tonumber(sheet.LVDivino) or 0) * 10
+		end;
+		
+		if sheet.Deuses == 'Succubus' then
+		sheet.DForca = 0
+		sheet.DInteligencia = 0
+		sheet.DDestreza	= (tonumber(sheet.LVDivino) or 0)
+		sheet.DAgilidade = 0
+		sheet.DVitalidade = (tonumber(sheet.LVDivino) or 0) + 1
+		sheet.DMP = 0
+		end;
+		
+		if sheet.Deuses == 'Abaddon' then
+		sheet.DForca = 0
+		sheet.DInteligencia = (tonumber(sheet.LVDivino) or 0)
+		sheet.DDestreza	= 0
+		sheet.DAgilidade = 0
+		sheet.DVitalidade = (tonumber(sheet.LVDivino) or 0) + 1
+		sheet.DMP = 0
+		end;
+		
+		if sheet.Deuses == 'Hidarnes' then
+		sheet.DForca = 0
+		sheet.DInteligencia = 0
+		sheet.DDestreza	= 0
+		sheet.DAgilidade = (tonumber(sheet.LVDivino) or 0)
+		sheet.DVitalidade = (tonumber(sheet.LVDivino) or 0) + 1
+		sheet.DMP = 0
+		end;
+		        </event>
+        </dataLink>
+		
+        </popup> 
+		
+		
+------------------------------------------- Data Link das Pericias ------------------------------------------------------------------------------------------------------		
+		<dataLink fields="{'MontSabedoria', 'MontAcrobacia', 'MontVigor', 'PA', 'PM', 'PF', 'Forca', 'Inteligencia', 'Destreza', 'Agilidade', 'Vitalidade',
+	 'ArmaPA', 'ArmaDEF', 'ArmaPM', 'ArmaRES', 'ARMAPF', 'ArmaHP', 'ArmaMP', 'Atletismo', 'Acrobacia', 'MontAtletismo', 'Sabedoria', 'Vigor', 'Percepcao', 'MontPercepcao' }">
+                <event name="onChange"> 
+				
+		sheet.TAtletismo = (tonumber(sheet.ForcaTotal) or 0) /10 + (tonumber(sheet.Atletismo) or 0) + (tonumber(sheet.MontAtletismo) or 0)
+		sheet.TSabedoria = (tonumber(sheet.InteligenciaTotal) or 0) /10 + (tonumber(sheet.Sabedoria) or 0) + (tonumber(sheet.MontSabedoria) or 0)
+		sheet.TPercepcao = (tonumber(sheet.DestrezaTotal) or 0) /10 + (tonumber(sheet.Percepcao) or 0) + (tonumber(sheet.MontPercepcao) or 0)
+		sheet.TVigor = (tonumber(sheet.VitalidadeTotal) or 0) /10 + (tonumber(sheet.Vigor) or 0) + (tonumber(sheet.MontVigor) or 0)
+		sheet.TAcrobacia = (tonumber(sheet.AgilidadeTotal) or 0) /10 + (tonumber(sheet.Acrobacia) or 0) + (tonumber(sheet.MontAcrobacia) or 0)
+				
+		        </event>
+        </dataLink>
+	
+		
+		
+
+	------------------------------------ Fichas de Habilidade Basica e Raciais -------------------------------------------
+		
+	<button left="62" top="80" width="80" height="80" opacity="0.0" >
+	<event name="onClick">
+				local novoForm = GUI.newForm("frmRacial");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+				</event>
+	
+	</button>
+	
+	<image field="ImagemRacial" editable="false" style="autoFit" left="65" top="81" width="75" height="75"/>
+	
+	<button left="185" top="80" width="80" height="80" opacity="0.0" >
+	<event name="onClick">
+				local novoForm = GUI.newForm("frmBasica");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+				</event>
+	
+	</button>
+	
+	<image field="ImagemBasica" editable="false" style="autoFit" left="188" top="81" width="75" height="75"/>
+	
+		 <textEditor left="40"  top="650" width="330" height="230" field="Conhecimento" />
+		 
+		 <rectangle left="500" top="650" color="black" width="50" height="20" />
+	  	 <label left="503" top="650"  width="50" height="20" field="RealVisao" />
+		 <edit left="500" top="675"  width="50" height="20" field="Distancia" />
+		 <edit left="500" top="700"  width="50" height="20" field="Potes" />
+		 <comboBox left="460" top="725" width="90" height="20" fontColor="Gold" field="Deuses" items="{'Escolha', 'Anilez', 'Blume', 'Bardo', 'Jamiel', 'Thorin', 'Yin', 
+			'Yuuki', 'Abaddon', 'Delevit', 'Hidarnes', 'Ignis', 'Succubus', }"/>
+		 <edit left="500" top="750"  width="50" height="20" type="number" max="7" fontColor="Gold" field="LVDivino" />
+		 <rectangle left="500" top="775" color="black" width="50" height="20" />
+		 <label left="503" top="775"  width="50" height="20" fontColor="Blue" field="RegenMP" />
+		 <rectangle left="500" top="800" color="black" width="50" height="20" />
+		 <label left="503" top="800"  width="50" height="20" format="%d" fontColor="Red" field="RealDeslocamento" />
+		 <rectangle left="500" top="825" color="black" width="50" height="20" />
+		 <label left="503" top="825"  width="50" height="20" fontColor="Red" field="Correndo" />
+		 
+		  <edit left="503" top="845"  width="50" height="20" visible="false" fontColor="Red" field="ADeslocamento" />
+		  <edit left="503" top="875"  width="50" height="20" visible="false" fontColor="Red" field="Deslocamento" />
+		  
+		  <edit left="503" top="845"  width="50" height="20" visible="false" fontColor="Red" field="DVisao" />
+		  <edit left="503" top="875"  width="50" height="20" visible="false" fontColor="Red" field="Visao" />
+		        </scrollBox>
+		
+		
+</popupForm>
