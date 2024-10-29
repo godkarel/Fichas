@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmListaConhecimento" height="50" theme="dark"> 
+
+        <layout align="client" margins="{left=4, right=4, top=4, bottom=4}">
+                <!-- Botão para apagar o item da lista -->
+				<checkBox align="left" width="18" canFocus="false" field="DConhecimento">		
+					<event name="onChange">
+					if sheet ~= nil then
+						AtivarConhecimento();
+						AtualizaStatusMapa();
+						StatusPorRaca();
+						AtualizaAtributos();
+						CalculaMP();
+						StatusDeChances();
+						AtualizaStatusPericia();
+					end;
+				</event>
+				</checkBox>
+
+                <!-- O título do item que aparece na lista -->
+                <label align="client" text="Teste de label" field="NomeConhecimento" margins="{left=4}"/>
+        </layout>
+</form>

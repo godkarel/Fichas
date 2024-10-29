@@ -1,106 +1,319 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<popupForm	 name="frmsummon" width="650" height="920" >
-
-
-		
-        <layout align="top" height="30" margins="{bottom=4}">
-                <button text="Nova Summon" width="150" align="left">
-                        <event name="onClick">
-                                -- Usuário clicou no botão de criar novo item.
-                                -- Vamos inserir um novo item no nosso recordList                              
-                                self.rclSummon:append();
-                        </event>
-                </button>
-        </layout>       
-        <!-- recordList, representando a lista -->
-        <recordList name="rclSummon" field="CampoSummon" templateForm="frmSummon2" align="top" selectable="true" layout="horizontal" height="40">                       
-                <event name="onSelect">
-                        --[[
-                        Este evento é chamado quando o usuário selecionar/deselecionar itens da lista. Quando o usuário
-						selecionar, vamos fazer nosso dataScopeBox (e todas as tag dentro dele) salvar e carregar dados no
-						objeto Nodo (NodeDatabase) do item selecionado.
-                  --]]                      
-                  local node = self.rclSummon.selectedNode;  
-                         self.FichaSummon.node = node;                       
-                  -- a caixa de detalhe só ficará visível se houver item selecionado
-                          self.FichaSummon.visible = (node ~= nil);
-               </event>
-        </recordList>            
-        
-
-	 <dataScopeBox name="FichaSummon" visible="false" align="client"  margins="{left=4, right=4, top=2}">
-                <!-- Faça um layout "bonito" para sua caixa de detalhes =). Utilize a propriedade "field" nas tags aqui dentro   -->    
-	<scrollBox align="client">
-		
-     <image width="620" height="920" center="true"  src="/imagens/5.png"/>
-						
-                         <edit top="105" width="150" height="20" left="100" field="campoTitulo"/>
-								
-						<button top="30" left="430" text="Apagar!" margins="{left=4, right=4, top=2, bottom=2}" width="150" onClick="NDB.deleteNode(self.FichaSummon.node);" />
-											
-						<comboBox left="350" top="105" width="75" field="Raca" items="{'Escolha', 'Tanker', 'Dps', 'Suport', 'Outros' }"/>
-						
-						<edit left="170" top="170" width="70" height="20" field="DanoFisicoSummon" />
-						<edit left="170" top="202" width="70" height="20" field="DanoMagicoSummon" />
-						<edit left="170" top="236" width="70" height="20" field="EsquivaSummon" />
-						
-						<edit left="100" top="300" width="150" height="20" field="HPSummon" />
-						<edit left="100" top="332" width="150" height="20" field="MPSummon" />
-						
-						<image field="FotoSummon" editable="true" style="autoFit" left="294" top="331" width="295" height="161" />
-						
-						 <textEditor left="25" top="520" width="500" height="150" field="HabilidadeSummon1" />
-						 <textEditor left="25" top="720" width="500" height="150" field="HabilidadeSummon2" />
-						 
-						 <button left="130" top="480" fontSize="20" height="30" width="70" text="Usar" fontColor="White">
-								<event name="onClick"> 
-
-						local node = self.FichaSummon.node;
-
-                        local rolagem = Firecast.interpretarRolagem(sheet.ataqueDoPersonagem); 
-
-                        if not rolagem.possuiAlgumDado then
-                                rolagem = Firecast.interpretarRolagem("1d20"):concatenar(rolagem);
-                        end; 
-
-                        local mesaDoPersonagem = Firecast.getMesaDe(sheet);					
-
-                       if mesaDoPersonagem ~= nil then
-                               mesaDoPersonagem.chat:rolarDados(rolagem, node.HabilidadeSummon1);
-							   
-                       end;
-
-								       </event>
-								</button>
-								
-								
-								
-						 <button left="130" top="680" fontSize="20" height="30" width="70" text="Usar" fontColor="White">
-								<event name="onClick"> 
-
-						local node = self.FichaSummon.node;
-
-                        local rolagem = Firecast.interpretarRolagem(sheet.ataqueDoPersonagem); 
-
-                        if not rolagem.possuiAlgumDado then
-                                -- se o usuario não tiver preenchido qual dado rolar,
-                                -- vamos adicionar um 1d20 + na "fórmula da rolagem"
-                                rolagem = Firecast.interpretarRolagem("1d20"):concatenar(rolagem);
-                        end; 
-                        local mesaDoPersonagem = Firecast.getMesaDe(sheet);
-					
-
-                       if mesaDoPersonagem ~= nil then
-                               mesaDoPersonagem.chat:rolarDados(rolagem, node.HabilidadeSummon2);
-                       end;
-
-								       </event>
-								</button>
-	 
-			        </scrollBox>
-
-        </dataScopeBox>
-    
-
+<popupForm	 name="frmsummon" scale="0.9" width="650" height="700" >		
+	<layout align="top" height="30" margins="{bottom=4}">
+		<button text="Nova Summon" width="150" align="left">
+			<event name="onClick">
+				self.rclSummon:append();
+			</event>
+		</button>
+	</layout>       
 	
+	<recordList name="rclSummon" field="CampoSummon" templateForm="frmSummon2" align="top" selectable="true" layout="horizontal" height="40">                       
+		<event name="onSelect">                    
+			local node = self.rclSummon.selectedNode;  
+			self.FichaSummon.node = node;                       
+			self.FichaSummon.visible = (node ~= nil);
+			
+			if self.FichaSummon.visible == true then
+				self.FichaSummon.node.NomeSummon2 = self.FichaSummon.node.NomeSummon2 or ''
+				self.FichaSummon.node.Raca = self.FichaSummon.node.Raca or 'Escolha'
+				self.FichaSummon.node.LevelSummon = tonumber(self.FichaSummon.node.LevelSummon) or 1;
+				
+				self.FichaSummon.node.DanoFisicoSummon = tonumber(self.FichaSummon.node.DanoFisicoSummon) or 1;
+				self.FichaSummon.node.DanoMagicoSummon = tonumber(self.FichaSummon.node.DanoMagicoSummon) or 1;
+				self.FichaSummon.node.ReducaoSummon = tonumber(self.FichaSummon.node.ReducaoSummon) or 1;
+				self.FichaSummon.node.EsquivaSummon = tonumber(self.FichaSummon.node.EsquivaSummon) or 1;
+				
+				self.FichaSummon.node.AcertoSummon = tonumber(self.FichaSummon.node.AcertoSummon) or 1;
+				self.FichaSummon.node.AcertoMagicoSummon = tonumber(self.FichaSummon.node.AcertoMagicoSummon) or 1;
+				self.FichaSummon.node.CriticalSummon = tonumber(self.FichaSummon.node.CriticalSummon) or 1;
+				self.FichaSummon.node.CriticalMagicoSummon = tonumber(self.FichaSummon.node.CriticalMagicoSummon) or 1;
+
+				self.FichaSummon.node.HPSummonAtual = tonumber(self.FichaSummon.node.HPSummonAtual) or 1;
+				self.FichaSummon.node.HPSummonTotal = tonumber(self.FichaSummon.node.HPSummonTotal) or 1;
+				
+				self.FichaSummon.node.MPSummonAtual = tonumber(self.FichaSummon.node.MPSummonAtual) or 1;
+				self.FichaSummon.node.MPSummonTotal = tonumber(self.FichaSummon.node.MPSummonTotal) or 1;	
+				
+				self.FichaSummon.node.FotoSummon = self.FichaSummon.node.FotoSummon or 'https://upload.wikimedia.org/wikipedia/commons/f/f8/Drama-icon.png';	
+			end;
+	   </event>		   
+	   <event name="onEndEnumeration">
+			if self.rclSummon.selectedNode == nil and sheet ~= nil then
+				local nodes = ndb.getChildNodes(sheet.CampoSummon);           
+				if #nodes > 0 then
+						self.rclSummon.selectedNode = nodes[1];
+				end;
+			end;
+		</event>
+	</recordList>         
+
+	<dataScopeBox name="FichaSummon" visible="false" align="client"  margins="{left=4, right=4, top=2}">
+		<scrollBox align="client">			
+			<image width="620" height="920" center="true"  src="/imagens/5.png"/>							
+			<edit top="105" width="150" height="20" left="100" field="NomeSummon2"/>								
+			<button top="30" left="430" text="Apagar!" fontColor="red" margins="{left=4, right=4, top=2, bottom=2}" width="150" onClick="NDB.deleteNode(self.FichaSummon.node);" />
+								
+			<comboBox left="350" top="105" width="75" field="Raca" items="{'Escolha', 'Tanker', 'Dps', 'Suport', 'Outros' }"/>
+			<edit left="560" top="105" width="40" height="20" min="1" max="30" horzTextAlign="center" type="number" field="LevelSummon"/>
+			
+			<edit left="170" top="170" width="70" height="22" horzTextAlign="center" type="number" field="DanoFisicoSummon" />
+			<edit left="170" top="202" width="70" height="22" horzTextAlign="center" type="number" field="DanoMagicoSummon" />
+			<edit left="170" top="236" width="70" height="22" horzTextAlign="center" type="number" field="ReducaoSummon" />
+			<edit left="170" top="270" width="70" height="20" horzTextAlign="center" type="number" field="EsquivaSummon" />			
+
+			<edit left="420" top="170" width="70" height="20" horzTextAlign="center" type="number" field="AcertoSummon" />
+			<edit left="420" top="202" width="70" height="20" horzTextAlign="center" type="number" field="AcertoMagicoSummon" />
+			<edit left="420" top="236" width="70" height="20" horzTextAlign="center" type="number" field="CriticalSummon" />
+			<edit left="420" top="270" width="70" height="20" horzTextAlign="center" type="number" field="CriticalMagicoSummon" />							
+			
+			 <dataLink fields="{'DanoFisicoSummon', 'DanoMagicoSummon'}">
+				<event name="onChange">
+					local node = self.FichaSummon.node;
+					node.DanoFisicoSummonTotal = (tonumber(node.DanoFisicoSummon) or 0);
+					node.DanoMagicoSummonTotal = (tonumber(node.DanoMagicoSummon) or 0);
+				</event>
+			</dataLink>			
+			<button left="268" top="140" width="145" height="22" fontColor="#00FFFF" horzTextAlign="center" text="👊 Ataque da Summon" onClick="AtaqueBasicoSummon()"/>
+			
+			---------------------------- BOTAO ATAQUE BASICO ---------------------------	
+			<script>
+				local function AtaqueBasicoSummon()      
+					-- obter a mesa do personagem
+					local mesaDoPersonagem = Firecast.getMesaDe(sheet);        
+					local node = self.FichaSummon.node;					
+					node.AcertoSummon = node.AcertoSummon or 0;                  
+					mesaDoPersonagem.chat:rolarDados("1d20 + " .. node.AcertoSummon, "[§K2]Ataque Basico da Summon",						
+					function (rolado)						
+					local soDado = rolado.resultado + 1 - node.AcertoSummon;						
+						if soDado > node.CriticalSummon then
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]A SUMMON CRITOU ESSE ARROMBADO  :awyeah: « " .. node.DanoFisicoSummonTotal * 2 .. " »");	
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico corpo a corpo « [§K4,0] " .. node.DanoFisicoSummonTotal .. " [§K9,0]»");
+						end;						
+					end); 
+				end; 		   
+			</script> 			
+			<button left="207" top="388" width="40" opacity="0.1" height="40" onClick="ToparHPSummon()"/>
+			<progressBar name="BarraHP" left="90" top="400" width="110" color="red"/>						
+			<edit left="100" top="400" width="40" height="20" transparent="true" horzTextAlign="center" type="number" field="HPSummonAtual" />
+			<label left="143" top="400" width="10" height="20" text="/" />
+			<edit left="150" top="400" width="40" height="20" transparent="true" horzTextAlign="center" type="number" field="HPSummonTotal" />
+			<button left="207" top="428" width="40" opacity="0.1" height="40" onClick="ToparMPSummon()"/>
+			<progressBar name="BarraMP" left="90" top="430" width="110" color="blue"/>
+			<edit left="100" top="430" width="40" height="20" transparent="true" horzTextAlign="center" type="number" field="MPSummonAtual" />
+			<label left="143" top="430" width="10" height="20" text="/" />
+			<edit left="150" top="430" width="40" height="20" transparent="true" horzTextAlign="center" type="number" field="MPSummonTotal" />
+			<image field="FotoSummon" editable="true" style="stretch" left="294" top="331" width="295" height="161" />
+			
+			 <layout top="470" width="150" height="30" margins="{bottom=4}">
+				<button text="Nova Magia" width="150" align="left">
+					<event name="onClick">                           
+						self.rclHabilidadeSummon:append();
+					</event>
+				</button>
+			</layout>       
+			
+			<recordList name="rclHabilidadeSummon" field="CampoItensBag" templateForm="frmSummonRCL" top="500" width="200" height="400" selectable="true">                              
+				<event name="onSelect">                   
+					local node = self.rclHabilidadeSummon.selectedNode;  
+					self.dscHabilidadeSummon.node = node;                       
+					self.dscHabilidadeSummon.visible = (node ~= nil);
+					
+					if self.dscHabilidadeSummon.visible == true then
+						self.dscHabilidadeSummon.node.NomeItemBag = self.dscHabilidadeSummon.node.NomeItemBag or '';
+						self.dscHabilidadeSummon.node.DescSummonSkill = self.dscHabilidadeSummon.node.DescSummonSkill or '';
+						self.dscHabilidadeSummon.node.SummonDanoTipo = tonumber(self.dscHabilidadeSummon.node.SummonDanoTipo) or 'PA';
+						self.dscHabilidadeSummon.node.FocoSummon = tonumber(self.dscHabilidadeSummon.node.FocoSummon) or 0;
+						self.dscHabilidadeSummon.node.CustoSummon = tonumber(self.dscHabilidadeSummon.node.CustoSummon) or 0;
+						self.dscHabilidadeSummon.node.CDSummon = tonumber(self.dscHabilidadeSummon.node.CDSummon) or 0;
+						self.dscHabilidadeSummon.node.IntensidadeSummon = tonumber(self.dscHabilidadeSummon.node.IntensidadeSummon) or 0;
+					end;
+				</event>				
+				<event name="onEndEnumeration">
+					if self.rclHabilidadeSummon.selectedNode == nil and sheet ~= nil then
+						local nodes = ndb.getChildNodes(sheet.CampoItensBag);               
+
+						if #nodes > 0 then
+							self.rclHabilidadeSummon.selectedNode = nodes[1];
+						end;
+					end;
+				</event>
+			</recordList>       
+
+			<dataScopeBox name="dscHabilidadeSummon" left="200" visible="false" top="500" width="415" height="400" margins="{left=4, right=4}">
+				<!-- Faça um layout "bonito" para sua caixa de detalhes =). Utilize a propriedade "field" nas tags aqui dentro   -->       
+				<rectangle align="top" color="black" xradius="10" yradius="10"
+					height="350" padding="{top=3, left=3, right=3, bottom=3}">
+					<label left="15" top="15" width="180" text="Nome da Magia da Summon :" autoSize="true"/>
+					<edit left="200" top="10" width="200" height="25" field="NomeItemBag"/>  
+					<label left="15" top="40" width="180" text="Descrição :" autoSize="true"/>
+					<textEditor left="10" top="60" width="390" height="130" field="DescSummonSkill"/>
+					<label left="15" top="200" width="50" text="Tipo" autoSize="true"/>
+					<comboBox left="50" top="200" width="70" height="18" field="SummonDanoTipo" items="{'PA', 'PM', 'M/PA', 'M/PM', 'Cura', 'Fixo', 'BUFF', 'Defesa'}"/>
+					<label left="130" top="200" width="50" text="Foco" autoSize="true"/>
+					<edit left="170" top="200" width="50" height="18" field="FocoSummon"/>
+					
+					<label left="230" top="200" width="50" text="Custo" autoSize="true"/>
+					<edit left="270" top="200" width="50" height="18" field="CustoSummon"/>
+					
+					<label left="330" top="200" width="50" text="CD" autoSize="true"/>
+					<edit left="360" top="200" width="40" height="18" field="CDSummon"/>								
+					
+					<label left="15" top="230" width="70" text="Intensidade" fontColor="red" autoSize="true"/>
+					<edit left="90" top="230" width="70" height="18" hitTest="false" canFocus="false" field="IntensidadeSummon"/>
+					
+					<button left="15" top="260" fontColor="red" text="" height="75" width="150" onClick="ExecutarSummon()"/>
+						<script>					
+							local function ExecutarSummon() 
+								--[[ HABILIDADE DE DANO ]]--								
+								local node = self.dscHabilidadeSummon.node;
+								local nodesheet = self.FichaSummon.node;
+								local mesaDoPersonagem = rrpg.getMesaDe(sheet);
+								if node.SummonDanoTipo == 'BUFF' then
+									if node.naoEBuffSummon == true then
+										mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+										return											
+									else															
+									end;
+								end;
+								
+								nodesheet.AcertoMagicoSummon = tonumber(nodesheet.AcertoMagicoSummon) or 0;						
+								mesaDoPersonagem.chat:rolarDados("1d20", "[§K2]Executar Habilidade da Summon",
+								function (rolado)					
+								if node.SummonDanoTipo ~= nil then
+									if nodesheet.AcertoMagicoSummon + 1 > rolado.resultado then							
+										if node.SummonDanoTipo == 'PA' then
+											node.IntensidadeSummon = (tonumber(node.FocoSummon) or 0) + (tonumber(nodesheet.DanoFisicoSummon) or 0)								
+											node.naoEBuffSummon = true;
+											node.verificaBuffSummon = node.naoEBuffSummon;
+										end;	
+										
+										if node.SummonDanoTipo == 'PM' or node.SummonDanoTipo == 'Cura' then
+											node.IntensidadeSummon = (tonumber(node.FocoSummon) or 0) + (tonumber(nodesheet.DanoMagicoSummon) or 0)						
+											node.naoEBuffSummon = true;
+											node.verificaBuffSummon = node.naoEBuffSummon;
+										end;
+										
+										if node.SummonDanoTipo == 'M/PA' then
+											node.IntensidadeSummon = (tonumber(node.FocoSummon) or 0) + (tonumber(nodesheet.DanoFisicoSummon / 2) or 0)								
+											node.naoEBuffSummon = true;
+											node.verificaBuffSummon = node.naoEBuffSummon;
+										end;
+										
+										if node.SummonDanoTipo == 'M/PM' then
+											node.IntensidadeSummon = (tonumber(node.FocoSummon) or 0) + (tonumber(nodesheet.DanoMagicoSummon / 2) or 0)								
+											node.naoEBuffSummon = true;
+											node.verificaBuffSummon = node.naoEBuffSummon;
+										end;
+										
+										if node.SummonDanoTipo == 'Fixo' then
+											node.IntensidadeSummon = (tonumber(node.FocoSummon) or 0)	
+											node.naoEBuffSummon = true;
+											node.verificaBuffSummon = node.naoEBuffSummon;
+										end;
+										
+										if node.SummonDanoTipo == 'BUFF' then
+											node.IntensidadeSummon = "Habilidade de Buff";
+										end;
+										
+										if nodesheet.AcertoMagicoSummon >= rolado.resultado then
+											if node.DescSummonSkill ~= nil then
+												mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescSummonSkill);
+											end;
+											if node.SummonDanoTipo == 'Cura' then
+												if nodesheet.CriticalMagicoSummon +1 > rolado.resultado then 
+													mesaDoPersonagem.chat:enviarMensagem("[§K2,0](Summon) ,[§K8,0]Curando com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. node.IntensidadeSummon * 2 .. "[§K8,0] »");
+												else
+													mesaDoPersonagem.chat:enviarMensagem("[§K2,0](Summon) ,[§K8,0]Curando « [§K4,0]" .. node.IntensidadeSummon .. "[§K8,0] »");
+												end;	
+											else
+												if nodesheet.CriticalMagicoSummon +1 > rolado.resultado then 
+													mesaDoPersonagem.chat:enviarMensagem("[§K2,0](Summon) ,[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. node.IntensidadeSummon * 2 .. "[§K9,0] »");
+												else
+													mesaDoPersonagem.chat:enviarMensagem("[§K2,0](Summon) ,[§K9,0]Causando « [§K4,0]" .. node.IntensidadeSummon .. "[§K9,0] »");
+												end;	
+											end;
+											
+											local mesa = Firecast.getMesaDe(sheet); 
+											nodesheet.MPSummonAtual = (tonumber(nodesheet.MPSummonAtual) or 0) - (tonumber(node.CustoSummon) or 0);
+										else
+											mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+										end;
+									else							
+										mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
+																						
+										if node.SummonDanoTipo == 'BUFF' then
+											mesaDoPersonagem.chat:enviarMensagem("[§K3,15]ERA BUFF ESSA MERDA");	
+										else 	
+										end;
+									end;
+								else
+									mesaDoPersonagem.chat:enviarMensagem("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE");
+								end;
+								end);					
+							end; 														
+						</script> 
+					<image left="15" top="260" height="75" width="150" style="stretch" animate="true" src="https://gifimage.net/wp-content/uploads/2018/11/rune-gif-6.gif"/>					
+					<button left="250" top="320" fontColor="red" text="Apagar!" margins="{left=4, right=4, top=2, bottom=2}" width="150" onClick="NDB.deleteNode(self.dscHabilidadeSummon.node);" />					
+				</rectangle>
+			</dataScopeBox>	 
+		</scrollBox>					
+		
+		<dataLink fields="{'HPSummonAtual', 'HPSummonTotal'}">
+			<event name="onChange">                
+				local node = self.FichaSummon.node;				
+				self.BarraHP.value = tonumber(node.HPSummonAtual);
+				self.BarraHP.max = tonumber(node.HPSummonTotal);		
+			</event>
+		</dataLink>
+		
+		<dataLink fields="{'MPSummonAtual', 'MPSummonTotal'}">
+			<event name="onChange">    
+				local node = self.FichaSummon.node;				
+				self.BarraMP.value = tonumber(node.MPSummonAtual);
+				self.BarraMP.max = tonumber(node.MPSummonTotal);		
+			</event>
+		</dataLink>
+		
+		<dataLink field="HPRetirado">
+			<event name="onChange">   
+				local node = self.FichaSummon.node;				
+				node.HPSummonAtual = (tonumber(node.HPSummonAtual) or 0) + (tonumber(node.HPRetirado) or 0);
+				node.HPRetiradoCrtZ = (tonumber(node.HPRetirado) or 0);							
+				self.BarraHP.value = tonumber(node.HPSummonAtual);
+				self.BarraHP.max = tonumber(node.HPSummonTotal);		
+			</event>
+		</dataLink>
+		
+		<dataLink field="MPRetirado">
+			<event name="onChange">   
+				local node = self.FichaSummon.node;				
+				node.MPSummonAtual = (tonumber(node.MPSummonAtual) or 0) + (tonumber(node.MPRetirado));
+				node.MPRetiradoCrtZ = (tonumber(node.MPRetirado) or 0);							
+				self.BarraMP.value = tonumber(node.MPSummonAtual);
+				self.BarraMP.max = tonumber(node.MPSummonTotal);		
+			</event>
+		</dataLink>
+		
+		<script>
+			local function ToparHPSummon()      
+				local node = self.FichaSummon.node;									
+				node.HPSummonAtual = (tonumber(node.HPSummonTotal) or (tonumber(node.HPSummonAtual)));
+			end; 		   
+		</script> 
+
+		<script>
+			local function ToparMPSummon()      
+				local node = self.FichaSummon.node;									
+				node.MPSummonAtual = (tonumber(node.MPSummonTotal) or (tonumber(node.MPSummonAtual)));
+			end; 		   
+		</script> 
+		
+		<dataLink field="LevelSummon">
+			<event name="onChange">   							
+
+			</event>
+		</dataLink>
+	</dataScopeBox>  
 </popupForm>

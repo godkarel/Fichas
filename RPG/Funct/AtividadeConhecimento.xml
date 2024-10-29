@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	<script>		
+		function AtivarConhecimento()
+			if sheet ~= nil then
+				local nodes = ndb.getChildNodes(sheet.ListaConhecimento); 
+				
+				if nodes[5].DConhecimento == true then
+					sheet.ConArtistaCirco = 2;
+				else
+					sheet.ConArtistaCirco = 0;
+				end;
+				
+				if nodes[6].DConhecimento == true then
+					sheet.ConAgil = 3;
+				else
+					sheet.ConAgil = 0;
+				end;
+				
+				if nodes[9].DConhecimento == true then
+					sheet.ConAtleta = 2;
+				else
+					sheet.ConAtleta = 0;
+				end;
+				
+				if nodes[14].DConhecimento == true then
+					sheet.ConBoaMira = 1;
+				else
+					sheet.ConBoaMira = 0;
+				end;
+							
+				if nodes[19].DConhecimento == true then
+					sheet.ConCriticalMagico = 1;
+				else
+					sheet.ConCriticalMagico = 0;
+				end;
+				
+				if nodes[20].DConhecimento == true then
+					sheet.ConCarismatico = 2;
+				else
+					sheet.ConCarismatico = 0;
+				end;
+				
+				if nodes[25].DConhecimento == true then
+					sheet.ConDetetive = 2;
+				else
+					sheet.ConDetetive = 0;
+				end;
+				
+				if nodes[26].DConhecimento == true then
+					sheet.ConDiplomata = 2;
+				else
+					sheet.ConDiplomata = 0;
+				end;
+				
+				if nodes[28].DConhecimento == true then
+					sheet.ConEscolhidoBlume = 40;
+				else
+					sheet.ConEscolhidoBlume = 0;
+				end;
+				
+				if nodes[31].DConhecimento == true then
+					sheet.ConEvasivo = 1;
+				else
+					sheet.ConEvasivo = 0;
+				end;
+				
+				if nodes[32].DConhecimento == true then
+					sheet.ConEstrategista = 1;
+				else
+					sheet.ConEstrategista = 0;
+				end;
+				
+				if nodes[35].DConhecimento == true then
+					sheet.ConForte = 3;
+				else
+					sheet.ConForte = 0;
+				end;
+				
+				if nodes[37].DConhecimento == true then
+					sheet.ConHabilidoso = 3;
+				else
+					sheet.ConHabilidoso = 0;
+				end;
+				
+				if nodes[40].DConhecimento == true then
+					sheet.ConInteligente = 3;
+				else
+					sheet.ConInteligente = 0;
+				end;
+				
+				if nodes[47].DConhecimento == true then
+					sheet.ConMestreMagico = 1;
+				else
+					sheet.ConMestreMagico = 0;
+				end;
+				
+				if nodes[48].DConhecimento == true then
+					sheet.ConMeioMaratonista = 3 or 0;
+				else
+					sheet.ConMeioMaratonista = 0;
+				end;
+				
+				if nodes[61].DConhecimento == true then
+					sheet.ConPersistente = 1;
+				else
+					sheet.ConPersistente = 0;
+				end;
+				
+				if nodes[63].DConhecimento == true then
+					sheet.ConPassoLargo = 1,5;
+				else
+					sheet.ConPassoLargo = 0;
+				end;
+				
+				if nodes[64].DConhecimento == true then
+					sheet.ConPerseptivo = 2;
+				else
+					sheet.ConPerseptivo = 0;
+				end;
+				
+				if nodes[73].DConhecimento == true then
+					sheet.ConResistente = 3;
+				else
+					sheet.ConResistente = 0;
+				end;
+				
+				if nodes[79].DConhecimento == true then
+					sheet.ConTaRegenerando = 2;
+				else
+					sheet.ConTaRegenerando = 0;
+				end;
+				
+				if nodes[83].DConhecimento == true then
+					sheet.ConVisaoAguia = 3;
+				else
+					sheet.ConVisaoAguia = 0;
+				end;
+				
+				if nodes[84].DConhecimento == true then
+					sheet.ConVigoroso = 2;
+				else
+					sheet.ConVigoroso = 0;
+				end;		
+				
+			end;
+		end;			
+	</script>

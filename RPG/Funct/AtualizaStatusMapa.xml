@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	<script>		
+		function AtualizaStatusMapa()
+			sheet.ADeslocamento = (tonumber(sheet.AgilidadeTotal / 10) or 0);
+			sheet.RealDeslocamento = math.floor(
+				(tonumber(sheet.ConMeioMaratonista) or 0) + 
+				(tonumber(sheet.Deslocamento) or 0) + 
+				(tonumber(sheet.DeslocamentoBasica) or 0) + 
+				(tonumber(sheet.ConPassoLargo) or 0)
+			);		
+			sheet.DVisao = (tonumber(sheet.ConVisaoAguia) or 0) + (tonumber(sheet.DestrezaTotal / 10) or 0);
+			sheet.RealVisao = (tonumber(sheet.DVisao) or 0) + (tonumber(sheet.Visao) or 0) + (tonumber(sheet.VisaoBasica) or 0);
+		end;
+	</script>

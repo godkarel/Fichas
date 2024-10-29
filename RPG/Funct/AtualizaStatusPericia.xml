@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	<script>		
+		function AtualizaStatusPericia()			
+			sheet.TAtletismo = (tonumber(sheet.ForcaTotal / 20) or 0) + (tonumber(sheet.Atletismo) or 0) + (tonumber(sheet.MontAtletismo) or 0) + (tonumber(sheet.RAtletismo) or 0) + (tonumber(sheet.ConAtleta) or 0);
+			sheet.TSabedoria = (tonumber(sheet.InteligenciaTotal / 20) or 0) + (tonumber(sheet.Sabedoria) or 0) + (tonumber(sheet.MontSabedoria) or 0) + (tonumber(sheet.RSabedoria) or 0) + (tonumber(sheet.ConCarismatico) or 0) + (tonumber(sheet.ConDiplomata) or 0);
+			sheet.TPercepcao = (tonumber(sheet.DestrezaTotal / 20) or 0) + (tonumber(sheet.Percepcao) or 0) + (tonumber(sheet.MontPercepcao) or 0) + (tonumber(sheet.RPercepcao) or 0) + (tonumber(sheet.ConDetetive) or 0) + (tonumber(sheet.ConPerseptivo) or 0);
+			sheet.TVigor = (tonumber(sheet.VitalidadeTotal / 20) or 0) + (tonumber(sheet.Vigor) or 0) + (tonumber(sheet.MontVigor) or 0) + (tonumber(sheet.RVigor) or 0) + (tonumber(sheet.ConVigoroso) or 0);
+			sheet.TAcrobacia = (tonumber(sheet.AgilidadeTotal / 20) or 0) + (tonumber(sheet.Acrobacia) or 0) + (tonumber(sheet.MontAcrobacia) or 0) + (tonumber(sheet.RAcrobacia) or 0) + (tonumber(sheet.ConArtistaCirco) or 0);
+			
+			sheet.TAtletismo = math.floor(tonumber(sheet.TAtletismo) or 0)
+			sheet.TSabedoria = math.floor(tonumber(sheet.TSabedoria) or 0)
+			sheet.TPercepcao = math.floor(tonumber(sheet.TPercepcao) or 0)
+			sheet.TVigor = math.floor(tonumber(sheet.TVigor) or 0)
+			sheet.TAcrobacia = math.floor(tonumber(sheet.TAcrobacia) or 0)
+		end;
+	</script>

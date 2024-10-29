@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form name="frmSummon2" height="50" theme="dark"> 
-
-		
-        <label align="client" text="Teste de label" field="campoTitulo" 
-              margins="{left=4, right=4, top=4, bottom=4}"/>       
-
-
-        <!-- Adicionar um valor padrão para o campoTitulo caso esteja vazio.
-                Isto é especialmente útil em novos itens -->
-
+	<label align="client" fontColor="Fuchsia" fontSize="18" text="👹" margins="{left=4, right=4, top=4, bottom=4}"/>       
+	<label align="client" fontColor="Fuchsia" text="Teste de label" horzTextAlign="center" field="NomeSummon2" 
+		  margins="{left=4, right=-10, top=4, bottom=4}"/> 	
 </form>

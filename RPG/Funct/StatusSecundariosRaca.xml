@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+<script>
+	<![CDATA[
+		function StatusPorRaca()
+			sheet.Deslocamento = 0;
+			sheet.Correndo = 0;
+			sheet.visao = 0;
+			sheet.RegenMP = 0;      
+			
+			if sheet.Raca == 'Humano' then
+				sheet.Deslocamento = 9;
+				sheet.Correndo = 18 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
+				sheet.visao = 10;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);	
+			end;
+			
+			if sheet.Raca == 'Elfo' then
+				sheet.Deslocamento = 8;
+				sheet.Correndo = 20 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
+				sheet.visao = 10;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 5 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);
+			end;					
+			
+			if sheet.Raca == 'Elfo Negro' then
+				sheet.Deslocamento = 10;
+				sheet.Correndo = 17 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
+				sheet.visao = 11;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);	
+			end;
+			
+			if sheet.Raca == 'Anão' then
+				sheet.Deslocamento = 7;
+				sheet.Correndo = 15 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
+				sheet.visao = 10;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);	
+			end;	
+			
+			if sheet.Raca == 'Orc' then
+				sheet.Deslocamento = 8;
+				sheet.Correndo = 16 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
+				sheet.visao = 10;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);	
+			end;
+			
+			if sheet.Raca == 'Kamael' then
+				sheet.Deslocamento = 8;
+				sheet.Correndo = 18 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
+				sheet.visao = 12;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 5 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);
+			end;
+			
+			if sheet.Raca == 'Thiefling' then
+				sheet.Deslocamento = 9;
+				sheet.Correndo = 20 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
+				sheet.visao = 11;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);	
+			end;
+		end;							
+	]]>		
+	</script> 

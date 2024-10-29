@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	<script>		
+		function ComandoADM()		
+			
+			local personagem = rrpg.getPersonagemDe(sheet);  
+			local mesa = personagem.mesa;
+		
+			if mesa.meuJogador.isJogador == false then;						
+					if sheet.Nome == 'DeLevel' then	
+						sheet.level = tonumber(sheet.level) - 1;
+						sheet.LiberarRolagemUp = tonumber(sheet.LiberarRolagemUp) - 1;
+						sheet.Nome = 'Feito';			
+					end;
+
+					if sheet.Nome == 'ADD1PTS' then	
+						sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) + 1;					
+						sheet.Nome = 'Feito';			
+					end;
+					
+					if sheet.Nome == 'LevelUP' then	
+						ssheet.level = tonumber(sheet.level) + 1;
+						sheet.ELevel = tonumber(sheet.level) - 20;
+						sheet.PontoSkill = tonumber(sheet.PontoSkill) + 1;
+						
+						if sheet.Level == 6 then
+							sheet.PontosUlt = tonumber(sheet.PontosUlt) + 1;
+						end;
+						if sheet.Level == 12 then
+							sheet.PontosUlt = tonumber(sheet.PontosUlt) + 1;
+						end;
+						if sheet.Level == 18 then
+							sheet.PontosUlt = tonumber(sheet.PontosUlt) + 1;
+						end;
+						if sheet.Level == 24 then
+							sheet.PontosUlt = tonumber(sheet.PontosUlt) + 1;
+						end;
+						if sheet.Level == 30 then
+							sheet.PontosUlt = tonumber(sheet.PontosUlt) + 1;
+						end;
+						
+						sheet.LiberarRolagemUp = tonumber(sheet.LiberarRolagemUp) + 1;
+						AtualizaStatusMesaSilencioso()
+						
+						if sheet.LiberarRolagemUp > 0 then
+							self.btnUpaLevel.visible = true;
+						else
+							self.btnUpaLevel.visible = false
+						end;
+						
+						if sheet.Level > 30 then
+							sheet.Level = 30;
+						end;					
+						
+						sheet.Nome = 'Feito';								
+					end;
+				end;
+		end;
+	</script>

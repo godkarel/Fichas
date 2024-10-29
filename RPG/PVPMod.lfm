@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<popupForm	 name="frmPVPMod" width="650" height="920" >
+	<scrollBox align="client">	
+		<layout left="10" top="10" width="630" height="50">
+			<rectangle left="20" top="20" align="client"
+					   color="Gray" strokeColor="black" strokeSize="3"
+					   xradius="15" yradius="15" cornerType="round">	
+			
+				<button name="btnAppFicha1" left="10" width="150" height="20" top="15" text="Aplica Ficha 1">
+					<event name="onClick">										
+						self.btnAppFicha1.fontColor="red"
+						PreparaFicha1()
+					</event>
+				</button>
+					
+				<button name="btnAppFicha2" left="470" width="150" height="20" top="15" text="Aplica Ficha 2">
+					<event name="onClick">										
+						self.btnAppFicha2.fontColor="red"
+						self.btnAppFicha2.text= Ficha2.Nome
+					</event>
+				</button>			
+			</rectangle>
+			
+			<script>
+			<![CDATA[ 
+				function PreparaFicha1()
+					sheet.Ficha1 = Ficha1
+					self.btnAppFicha1.text= Ficha1.Nome
+					self.labNameFicha.text = Ficha1.Nome
+					
+					self.HPBarPVP.value = Ficha1.HPTotal
+					self.MPBarPVP.value = Ficha1.MPTotal
+					self.OutrosBarPVP.value = 0;
+					self.PotesBarPVP.value = 0;
+					
+					self.HPBarPVP.max = Ficha1.HPTotal
+					self.MPBarPVP.max = Ficha1.MPTotal
+					self.OutrosBarPVP.max = 0;
+					self.PotesBarPVP.max = 0;
+					
+					sheet.HPAtualFicha1 = self.HPBarPVP.value
+					sheet.MPAtualFicha1 = self.MPBarPVP.value
+					sheet.OutrosAtualFicha = self.OutrosBarPVP.value
+					sheet.PotesAtualFicha1 =  self.PotesBarPVP.value
+					
+					sheet.HPTotalFicha1 = self.HPBarPVP.max
+					sheet.MPTotalFicha1 = self.MPBarPVP.max
+					sheet.OutrosTotalFicha1 = self.OutrosBarPVP.max
+					sheet.PotesTotalFicha1 = self.PotesBarPVP.max
+					
+					sheet.DefFicha1 = Ficha1.DEFRED;
+					sheet.ResFicha1 = Ficha1.RESRED;
+				end;	
+			]]>	
+			</script>
+			
+		</layout>
+			 
+		<layout left="10" top="70" width="300" height="180">
+			<rectangle left="20" top="20" align="client"
+						   color="Gray" strokeColor="black" strokeSize="3"
+						   xradius="15" yradius="15" cornerType="round">
+				<image left="-20" top="10" width="180" height="150" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Jared_Leto_by_Gage_Skidmore.jpg/800px-Jared_Leto_by_Gage_Skidmore.jpg"/>
+				<label name="labNameFicha" top="10" left="140" width="120"/>
+				<progressBar name="HPBarPVP" width="150" height="15" color="red" top="30" left="140" value="50" max="100"/>
+				<edit left="150" top="30" width="50" fontSize="12" horzTextAlign="center" transparent="true" height="15" field="HPAtualFicha1"/>
+				<edit left="230" top="30" width="50" fontSize="12" horzTextAlign="center" transparent="true" height="15" field="HPTotalFicha1"/>	
+				<progressBar name="MPBarPVP" width="150" height="15" color="blue" top="48" left="140" value="50" max="100"/>
+				<edit left="150" top="48" width="50" fontSize="12" horzTextAlign="center" transparent="true" height="15" field="MPAtualFicha1"/>
+				<edit left="230" top="48" width="50" fontSize="12" horzTextAlign="center" transparent="true" height="15" field="MPTotalFicha1"/>
+				<progressBar name="OutrosBarPVP" width="150" height="15" color="DarkSeaGreen" top="66" left="140" value="50" max="100"/>
+				<edit left="150" top="66" width="50" fontSize="12" horzTextAlign="center" transparent="true" height="15" field="OutrosAtualFicha1"/>
+				<edit left="230" top="66" width="50" fontSize="12" horzTextAlign="center" transparent="true" height="15" field="OutrosTotalFicha1"/>
+				<progressBar name="PotesBarPVP" width="150" height="15" color="DarkTurquoise" top="84" left="140" value="50" max="100"/>
+				<edit left="150" top="84" width="50" fontSize="12" horzTextAlign="center" transparent="true" height="15" field="PotesAtualFicha1"/>
+				<edit left="230" top="84" width="50" fontSize="12" horzTextAlign="center" transparent="true" height="15" field="PotesTotalFicha1"/>
+				
+				<label top="100" left="140" autoSize="true" text="Target"/>
+				<comboBox left="185" top="103" height="15" fontSize="12" items="{'Alvo 1', 'Alvo 2', 'Alvo 3'}"/>
+				
+				<label top="118" left="140" autoSize="true" text="DEF"/>
+				<edit top="120" left="170" width="30" transparent="true" fontSize="12" height="15" field="DefFicha1"/>
+				<label top="118" left="220" autoSize="true" text="DEF"/>
+				<edit top="120" left="250" width="30" transparent="true" fontSize="12" height="15" field="ResFicha1"/>	 
+			</rectangle>			  
+		</layout>	
+	</scrollBox>
+</popupForm>

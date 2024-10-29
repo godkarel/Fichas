@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<![CDATA[			
+	function RolaHabilidadeDano(AtributoSkill, UtilidadeSkill, DanoSkill, CustoSkill)	
+		local mesaDoPersonagem = rrpg.getMesaDe(sheet);
+		sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;		
+		mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade Ofensiva",
+		function (rolado)					
+			if sheet.AcertoMagico + 1 > rolado.resultado then
+				if sheet.CMagico +1 > rolado.resultado then 
+					mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. DanoSkill * 2 .. "[§K9,0] »");
+				else
+					mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. DanoSkill .. "[§K9,0] »");
+				end;	
+				showMessage(CustoSkill)
+				local mesa = Firecast.getMesaDe(sheet); 
+				local Custo2 = mesa.meuJogador:getBarValue(2);
+				Custo2 = mesa.meuJogador:getBarValue(2);
+				Custo2 = (tonumber(Custo2) or 0) - (tonumber(CustoSkill) or 0);
+				mesa.meuJogador:requestSetBarValue(2, Custo2);
+			else
+				mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+			end;	
+		end);					
+	end;
+	]]>
+</script>

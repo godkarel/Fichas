@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	<script>		
+		function SistemaXPLevel()
+			if sheet.SequenciaInicial == true then	
+				sheet.XPAtual = tonumber(sheet.XPAtual) or 0;
+				
+				if sheet.Level > 20 then 
+					if sheet.Elevel > 0 then
+						sheet.XPNecessario = tonumber(sheet.Elevel) * 100;
+					end;
+				else
+					sheet.XPNecessario = 100 + tonumber(sheet.level) * 50;
+				end;
+				
+				if sheet.XPAtual >= sheet.XPNecessario then
+					sheet.XPAtual = tonumber(sheet.XPAtual) - tonumber(sheet.XPNecessario);
+					sheet.level = tonumber(sheet.level) + 1;
+					sheet.ELevel = tonumber(sheet.level) - 20;
+					sheet.PontoHabilidade = tonumber(sheet.PontoHabilidade) + 1;
+										
+					sheet.LiberarRolagemUp = tonumber(sheet.LiberarRolagemUp) + 1;
+					AtualizaStatusMesaSilencioso()
+				end;			
+				
+				self.BarraXP.value = tonumber(sheet.XPAtual);
+				self.BarraXP.max = tonumber(sheet.XPNecessario);
+				
+				if sheet.LiberarRolagemUp > 0 then
+					self.btnUpaLevel.visible = true;
+				else
+					self.btnUpaLevel.visible = false
+				end;
+				
+				if sheet.Level > 30 then
+					sheet.Level = 30;
+				end;
+			end;	
+		end;
+	</script>

@@ -1,171 +1,294 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<popupForm	 name="frmequip" width="650" height="920" >
+<popupForm	 name="frmequip" scale="0.9" width="650" height="700" >
+	<scrollBox align="client">								
+		<image width="620" height="920" center="true"  src="/imagens/2.png"/>		
+		----------- Flechas --------------
+		<progressBar name="BarraFlecha" left="400" top="420" width="90" value="100" max="100" color="green"/>	
+		<edit left="405" top="420" width="35" height="20" horzTextAlign="center" transparent="true" type="number" field="AtualFlecha" />
+		<label left="440" top="420" width="12" height="20" horzTextAlign="center" text="/" />
+		<edit left="447" top="420" width="35" height="20" horzTextAlign="center" transparent="true" type="number" field="MaxFlecha" />
 
-
-	<scrollBox align="client">
-			
-     <image width="620" height="920" center="true"  src="/imagens/2.png"/>
-          
-		  ----------Arma---------------
-	           <button left="70" top="158" width="80" height="80" opacity="0.1" text="" onClick="self.DBArma:show();"/>
+		<dataLink fields="{'AtualFlecha', 'MaxFlecha'}">
+			<event name="onChange">                
+				self.BarraFlecha.max = sheet.MaxFlecha;
+				self.BarraFlecha.value = sheet.AtualFlecha
+				
+				if sheet.AtualFlecha > sheet.MaxFlecha then
+					sheet.AtualFlecha = (tonumber(sheet.MaxFlecha) or 0);
+				end;
+			</event>
+		</dataLink>
+			  ----------Arma---------------
+		<button left="70" top="158" width="80" height="80" opacity="0.1" text="" onClick="self.DBArma:show();"/>
+		<image left="-43" top="80" width="300" height="300" src="/imagens/TAGS/Arma.png"/>
 			   
-	   <popup name="DBArma" visible="false" left="1" top="40"
-                     width="600" height="600" >
-                <!-- Faça um layout "bonito" para sua caixa de detalhes =). Utilize a propriedade "field" nas tags aqui dentro   -->       
-			  <label left="300" top="25" fontSize="25" text="Arma" fontColor="RED" autoSize="true"/>
-			  <label left="10" top="30" fontSize="20" text="Nome" fontColor="Blue" autoSize="true"/>
-			  <edit left="75" top="37" width="150" height="20" field="ArmaNome" />
-			  <label left="10" top="75" fontSize="20" text="P.A" fontColor="Blue" autoSize="true"/>
-	          <edit left="75" top="80" width="75" height="20" field="ArmaPA" />
-			  <label left="10" top="108" fontSize="20" text="Defesa" fontColor="Blue" autoSize="true"/>
-			  <edit left="75" top="113" width="75" height="20" field="ArmaDEF" />
-			  <label left="155" top="75" fontSize="20" text="P.M" fontColor="Blue" autoSize="true"/>
-			  <edit left="220" top="80" width="75" height="20" field="ArmaPM" />
-			  <label left="155" top="108" fontSize="20" text="Resist" fontColor="Blue" autoSize="true"/>
-			  <edit left="220" top="113" width="75" height="20" field="ArmaRES" />
-			  <label left="300" top="75" fontSize="20" text="P.F" fontColor="Blue" autoSize="true"/>
-			  <edit left="340" top="80" width="75" height="20" field="ArmaPF" />
-			  <label left="300" top="108" fontSize="20" text="HP" fontColor="Blue" autoSize="true"/>
-			  <edit left="340" top="113" width="75" height="20" field="ArmaHP" />
-			  <label left="420" top="108" fontSize="20" text="MP" fontColor="Blue" autoSize="true"/>
-			  <edit left="460" top="113" width="75" height="20" field="ArmaMP" />
-			  <label left="10" top="141" fontSize="20" text="Distancia" fontColor="Blue" autoSize="true"/>
-			  <edit left="100" top="146" width="50" height="20" field="ArmaDistancia" />
-			  <richEdit left="15" top="200" width="540" height="330" backgroundColor="black" defaultFontColor="white" field="SkillArma"/>
-        </popup> 
+	    <popup name="DBArma" visible="false" left="1" top="40" width="600" height="600" >
+			<label left="300" top="25" fontSize="25" text="Arma" fontColor="RED" autoSize="true"/>
+			<label left="10" top="30" fontSize="20" text="Nome" fontColor="Blue" autoSize="true"/>
+			<edit left="75" top="37" width="150" height="20" field="ArmaNome" />
+			<label left="10" top="75" fontSize="20" text="P.A" fontColor="Blue" autoSize="true"/>
+			<edit left="75" top="80" width="75" height="20" field="ArmaPA" />
+			<label left="10" top="108" fontSize="20" text="Defesa" fontColor="Blue" autoSize="true"/>
+			<edit left="75" top="113" width="75" height="20" field="ArmaDEF" />
+			<label left="155" top="75" fontSize="20" text="P.M" fontColor="Blue" autoSize="true"/>
+			<edit left="220" top="80" width="75" height="20" field="ArmaPM" />
+			<label left="155" top="108" fontSize="20" text="Resist" fontColor="Blue" autoSize="true"/>
+			<edit left="220" top="113" width="75" height="20" field="ArmaRES" />
+			<label left="300" top="75" fontSize="20" text="P.F" fontColor="Blue" autoSize="true"/>
+			<edit left="340" top="80" width="75" height="20" field="ArmaPF" />
+			<label left="300" top="108" fontSize="20" text="HP" fontColor="Blue" autoSize="true"/>
+			<edit left="340" top="113" width="75" height="20" field="ArmaHP" />
+			<label left="420" top="108" fontSize="20" text="MP" fontColor="Blue" autoSize="true"/>
+			<edit left="460" top="113" width="75" height="20" field="ArmaMP" />
+			<label left="10" top="141" fontSize="20" text="Distancia" fontColor="Blue" autoSize="true"/>
+			<edit left="100" top="146" width="50" height="20" field="ArmaDistancia" />
+			<richEdit left="15" top="200" width="540" height="330" backgroundColor="Chocolate" defaultFontColor="white" field="SkillArma"/>
+		</popup> 
 
 		 ------------------- Outra Mão ---------------
 		<button left="200" top="158" width="80" height="80" opacity="0.1" text="" onClick="self.DBOutramao:show();"/>
-		
-			   <popup name="DBOutramao" visible="false" left="1" top="40"
-                     width="600" height="600" >
-                <!-- Faça um layout "bonito" para sua caixa de detalhes =). Utilize a propriedade "field" nas tags aqui dentro   -->       
-			  <label left="300" top="25" fontSize="25" text="Outra Mão" fontColor="RED" autoSize="true"/>
-			  <label left="10" top="30" fontSize="20" text="Nome" fontColor="Blue" autoSize="true"/>
-			  <edit left="75" top="37" width="150" height="20" field="OutraNome" />
-			  <label left="10" top="75" fontSize="20" text="P.A" fontColor="Blue" autoSize="true"/>
-	          <edit left="75" top="80" width="75" height="20" field="OutraPA" />
-			  <label left="10" top="108" fontSize="20" text="Defesa" fontColor="Blue" autoSize="true"/>
-			  <edit left="75" top="113" width="75" height="20" field="OutraDEF" />
-			  <label left="155" top="75" fontSize="20" text="P.M" fontColor="Blue" autoSize="true"/>
-			  <edit left="220" top="80" width="75" height="20" field="OutraPM" />
-			  <label left="155" top="108" fontSize="20" text="Resist" fontColor="Blue" autoSize="true"/>
-			  <edit left="220" top="113" width="75" height="20" field="OutraRES" />
-			  <label left="300" top="75" fontSize="20" text="P.F" fontColor="Blue" autoSize="true"/>
-			  <edit left="340" top="80" width="75" height="20" field="OutraPF" />
-			  <label left="300" top="108" fontSize="20" text="HP" fontColor="Blue" autoSize="true"/>
-			  <edit left="340" top="113" width="75" height="20" field="OutraHP" />
-			  <label left="420" top="108" fontSize="20" text="MP" fontColor="Blue" autoSize="true"/>
-			  <edit left="460" top="113" width="75" height="20" field="OutraMP" />
-			  <label left="10" top="141" fontSize="20" text="Distancia" fontColor="Blue" autoSize="true"/>
-			  <edit left="100" top="146" width="50" height="20" field="OutraDistancia" />
-			  <richEdit left="15" top="200" width="540" height="330" backgroundColor="black" defaultFontColor="white" field="SkillOutramao"/>
-        </popup> 
+		<image left="85" top="80" width="300" height="300" src="/imagens/TAGS/ArmaSecundaria.png"/>
+		<popup name="DBOutramao" visible="false" left="1" top="40" width="600" height="600" >			
+		    <label left="300" top="25" fontSize="25" text="Outra Mão" fontColor="RED" autoSize="true"/>
+		    <label left="10" top="30" fontSize="20" text="Nome" fontColor="Blue" autoSize="true"/>
+		    <edit left="75" top="37" width="150" height="20" field="OutraNome" />
+		    <label left="10" top="75" fontSize="20" text="P.A" fontColor="Blue" autoSize="true"/>
+		    <edit left="75" top="80" width="75" height="20" field="OutraPA" />
+		    <label left="10" top="108" fontSize="20" text="Defesa" fontColor="Blue" autoSize="true"/>
+		    <edit left="75" top="113" width="75" height="20" field="OutraDEF" />
+	  	    <label left="155" top="75" fontSize="20" text="P.M" fontColor="Blue" autoSize="true"/>
+	  	    <edit left="220" top="80" width="75" height="20" field="OutraPM" />
+		    <label left="155" top="108" fontSize="20" text="Resist" fontColor="Blue" autoSize="true"/>
+		    <edit left="220" top="113" width="75" height="20" field="OutraRES" />
+		    <label left="300" top="75" fontSize="20" text="P.F" fontColor="Blue" autoSize="true"/>
+		    <edit left="340" top="80" width="75" height="20" field="OutraPF" />
+		    <label left="300" top="108" fontSize="20" text="HP" fontColor="Blue" autoSize="true"/>
+		    <edit left="340" top="113" width="75" height="20" field="OutraHP" />
+		    <label left="420" top="108" fontSize="20" text="MP" fontColor="Blue" autoSize="true"/>
+		    <edit left="460" top="113" width="75" height="20" field="OutraMP" />
+		    <label left="10" top="141" fontSize="20" text="Distancia" fontColor="Blue" autoSize="true"/>
+		    <edit left="100" top="146" width="50" height="20" field="OutraDistancia" />
+		    <label left="155" top="141" fontSize="20" text="RegenMP" fontColor="Blue" autoSize="true"/>
+		    <edit left="245" top="146" width="50" height="20" field="OutraRegenMP" />
+		    <label left="300" top="141" fontSize="20" text="Penalidade" fontColor="Blue" autoSize="true"/>
+		    <edit left="402" top="146" width="50" height="20" field="OutraDebuffShield" />
+		    <richEdit left="15" top="200" width="540" height="330" backgroundColor="Chocolate" defaultFontColor="white" field="SkillOutramao"/>
+		</popup> 
 		
 		---------------Armadura ------------------------
 		<button left="345" top="158" width="80" height="80" opacity="0.1" text="" onClick="self.DBArmadura:show();"/>
-		
-				<popup name="DBArmadura" visible="false" left="1" top="40"
-                     width="600" height="600" >
-                <!-- Faça um layout "bonito" para sua caixa de detalhes =). Utilize a propriedade "field" nas tags aqui dentro   -->       
-			  <label left="300" top="25" fontSize="25" text="Armadura" fontColor="RED" autoSize="true"/>
-			  <label left="10" top="30" fontSize="20" text="Nome" fontColor="Blue" autoSize="true"/>
-			  <edit left="75" top="37" width="150" height="20" field="ArmaduraNome" />
-			  <label left="10" top="75" fontSize="20" text="P.A" fontColor="Blue" autoSize="true"/>
-	          <edit left="75" top="80" width="75" height="20" field="ArmaduraPA" />
-			  <label left="10" top="108" fontSize="20" text="Defesa" fontColor="Blue" autoSize="true"/>
-			  <edit left="75" top="113" width="75" height="20" field="ArmaduraDEF" />
-			  <label left="155" top="75" fontSize="20" text="P.M" fontColor="Blue" autoSize="true"/>
-			  <edit left="220" top="80" width="75" height="20" field="ArmaduraPM" />
-			  <label left="155" top="108" fontSize="20" text="Resist" fontColor="Blue" autoSize="true"/>
-			  <edit left="220" top="113" width="75" height="20" field="ArmaduraRES" />
-			  <label left="300" top="75" fontSize="20" text="P.F" fontColor="Blue" autoSize="true"/>
-			  <edit left="340" top="80" width="75" height="20" field="ArmaduraPF" />
-			  <label left="300" top="108" fontSize="20" text="HP" fontColor="Blue" autoSize="true"/>
-			  <edit left="340" top="113" width="75" height="20" field="ArmaduraHP" />
-			  <label left="420" top="108" fontSize="20" text="MP" fontColor="Blue" autoSize="true"/>
-			  <edit left="460" top="113" width="75" height="20" field="ArmaduraMP" />
-			  <label left="10" top="141" fontSize="20" text="Distancia" fontColor="Blue" autoSize="true"/>
-			  <edit left="100" top="146" width="50" height="20" field="ArmaduraDistancia" />
-			  <richEdit left="15" top="200" width="540" height="330" backgroundColor="black" defaultFontColor="white" field="SkillArmadura"/>
-        </popup> 
-		
-		----------Acessorio -----------------------
-		
+		<image left="232" top="80" width="300" height="300" src="/imagens/TAGS/EQUIP.png"/>
+		<popup name="DBArmadura" visible="false" left="1" top="40" width="600" height="600" >
+			<label left="300" top="25" fontSize="25" text="Armadura" fontColor="RED" autoSize="true"/>
+			<label left="10" top="30" fontSize="20" text="Nome" fontColor="Blue" autoSize="true"/>
+			<edit left="75" top="37" width="150" height="20" field="ArmaduraNome" />
+			<label left="10" top="75" fontSize="20" text="P.A" fontColor="Blue" autoSize="true"/>
+			<edit left="75" top="80" width="75" height="20" field="ArmaduraPA" />
+			<label left="10" top="108" fontSize="20" text="Defesa" fontColor="Blue" autoSize="true"/>
+			<edit left="75" top="113" width="75" height="20" field="ArmaduraDEF" />
+			<label left="155" top="75" fontSize="20" text="P.M" fontColor="Blue" autoSize="true"/>
+			<edit left="220" top="80" width="75" height="20" field="ArmaduraPM" />
+			<label left="155" top="108" fontSize="20" text="Resist" fontColor="Blue" autoSize="true"/>
+			<edit left="220" top="113" width="75" height="20" field="ArmaduraRES" />
+			<label left="300" top="75" fontSize="20" text="P.F" fontColor="Blue" autoSize="true"/>
+			<edit left="340" top="80" width="75" height="20" field="ArmaduraPF" />
+			<label left="300" top="108" fontSize="20" text="HP" fontColor="Blue" autoSize="true"/>
+			<edit left="340" top="113" width="75" height="20" field="ArmaduraHP" />
+			<label left="420" top="108" fontSize="20" text="MP" fontColor="Blue" autoSize="true"/>
+			<edit left="460" top="113" width="75" height="20" field="ArmaduraMP" />
+			<label left="10" top="141" fontSize="20" text="Distancia" fontColor="Blue" autoSize="true"/>
+			<edit left="100" top="146" width="50" height="20" field="ArmaduraDistancia" />
+			<richEdit left="15" top="200" width="540" height="330" backgroundColor="Chocolate" defaultFontColor="white" field="SkillArmadura"/>
+		</popup> 			
+			----------Acessorio -----------------------			
 		<button left="475" top="158" width="80" height="80" opacity="0.1" text="" onClick="self.DBAcessorio:show();"/>
-		
-			  <popup name="DBAcessorio" visible="false" left="1" top="40"
-                     width="600" height="600" >
-                <!-- Faça um layout "bonito" para sua caixa de detalhes =). Utilize a propriedade "field" nas tags aqui dentro   -->       
-			  <label left="300" top="25" fontSize="25" text="Acessorio" fontColor="RED" autoSize="true"/>
-			  <label left="10" top="30" fontSize="20" text="Nome" fontColor="Blue" autoSize="true"/>
-			  <edit left="75" top="37" width="150" height="20" field="AcessorioNome" />
-			  <label left="10" top="75" fontSize="20" text="P.A" fontColor="Blue" autoSize="true"/>
-	          <edit left="75" top="80" width="75" height="20" field="AcessorioPA" />
-			  <label left="10" top="108" fontSize="20" text="Defesa" fontColor="Blue" autoSize="true"/>
-			  <edit left="75" top="113" width="75" height="20" field="AcessorioDEF" />
-			  <label left="155" top="75" fontSize="20" text="P.M" fontColor="Blue" autoSize="true"/>
-			  <edit left="220" top="80" width="75" height="20" field="AcessorioPM" />
-			  <label left="155" top="108" fontSize="20" text="Resist" fontColor="Blue" autoSize="true"/>
-			  <edit left="220" top="113" width="75" height="20" field="AcessorioRES" />
-			  <label left="300" top="75" fontSize="20" text="P.F" fontColor="Blue" autoSize="true"/>
-			  <edit left="340" top="80" width="75" height="20" field="AcessorioPF" />
-			  <label left="300" top="108" fontSize="20" text="HP" fontColor="Blue" autoSize="true"/>
-			  <edit left="340" top="113" width="75" height="20" field="AcessorioHP" />
-			  <label left="420" top="108" fontSize="20" text="MP" fontColor="Blue" autoSize="true"/>
-			  <edit left="460" top="113" width="75" height="20" field="AcessorioMP" />
-			  <label left="10" top="141" fontSize="20" text="Distancia" fontColor="Blue" autoSize="true"/>
-			  <edit left="100" top="146" width="50" height="20" field="AcessorioDistancia" />
-			  <richEdit left="15" top="200" width="540" height="330" backgroundColor="black" defaultFontColor="white" field="SkillAcessorio"/>
-        </popup> 
-		
-		<edit left="220" top="449" width="75" height="30" field="sloot" />
+		<image left="360" top="80" width="300" height="300" src="/imagens/TAGS/ACESSORIO.png"/>
+		<popup name="DBAcessorio" visible="false" left="1" top="40" width="600" height="600">
+			<label left="300" top="25" fontSize="25" text="Acessorio" fontColor="RED" autoSize="true"/>
+			<label left="10" top="30" fontSize="20" text="Nome" fontColor="Blue" autoSize="true"/>
+			<edit left="75" top="37" width="150" height="20" field="AcessorioNome" />
+			<label left="10" top="75" fontSize="20" text="P.A" fontColor="Blue" autoSize="true"/>
+			<edit left="75" top="80" width="75" height="20" field="AcessorioPA" />
+			<label left="10" top="108" fontSize="20" text="Defesa" fontColor="Blue" autoSize="true"/>
+			<edit left="75" top="113" width="75" height="20" field="AcessorioDEF" />
+			<label left="155" top="75" fontSize="20" text="P.M" fontColor="Blue" autoSize="true"/>
+			<edit left="220" top="80" width="75" height="20" field="AcessorioPM" />
+			<label left="155" top="108" fontSize="20" text="Resist" fontColor="Blue" autoSize="true"/>
+			<edit left="220" top="113" width="75" height="20" field="AcessorioRES" />
+			<label left="300" top="75" fontSize="20" text="P.F" fontColor="Blue" autoSize="true"/>
+			<edit left="340" top="80" width="75" height="20" field="AcessorioPF" />
+			<label left="300" top="108" fontSize="20" text="HP" fontColor="Blue" autoSize="true"/>
+			<edit left="340" top="113" width="75" height="20" field="AcessorioHP" />
+			<label left="420" top="108" fontSize="20" text="MP" fontColor="Blue" autoSize="true"/>
+			<edit left="460" top="113" width="75" height="20" field="AcessorioMP" />
+			<label left="155" top="141" fontSize="20" text="RegenMP" fontColor="Blue" autoSize="true"/>
+		    <edit left="245" top="146" width="50" height="20" field="A" />
+			<label left="10" top="141" fontSize="20" text="Distancia" fontColor="Blue" autoSize="true"/>
+			<edit left="100" top="146" width="50" height="20" field="AcessorioDistancia" />
+			<richEdit left="15" top="200" width="540" height="330" backgroundColor="Chocolate" defaultFontColor="white" field="SkillAcessorio"/>
+		</popup> 
+			
+		<popup name="popPotion" width="600" height="400" backOpacity="0.5">
+			<button text="Novo Potion" top="5" left="5" height="25" width="150">
+				<event name="onClick">                            
+					self.rclListaDePotion:append();
+				</event>
+			</button>        
+			<recordList name="rclListaDePotion" field="itensPotions" width="200" height="350" top="30" templateForm="frmItemPotion" selectable="true">  
+				<event name="onSelect">                  
+					if self.rclListaDePotion.selectedNode then
+						local node = self.rclListaDePotion.selectedNode; 
+						self.dscPotion.node = node;                       
+						self.dscPotion.visible = (node ~= nil);
+						
+						if self.boxDetalhesDoItem.visible == true then 
+							self.dscPotion.node.NomePotion = self.dscPotion.node.NomePotion or 'Nome do Item';
+							self.dscPotion.node.ItemRegen = self.dscPotion.node.ItemRegen or 0;
+							self.dscPotion.node.campoTextoGrande = self.dscPotion.node.campoTextoGrande or 'Descrição do Item';
+							self.dscPotion.node.EscolherPote = self.dscPotion.node.EscolherPote or 'HP';
+						end;
+					end;
+				</event>
+			</recordList>        
+			<dataScopeBox name="dscPotion" visible="false" left="200" top="30" width="400" height="290" >
+				<rectangle left="0" align="client" color="grey" xradius="10" yradius="10" height="180">             
+					<layout align="top" height="35" margins="{bottom=4}">
+						<label left="15" top="10" text="Nome do Item" autoSize="true"/>
+						<edit left="132" top="10" width="150" height="25" field="NomePotion"/>
+						<comboBox left="290" top="10" width="82" horzTextAlign="center" field="EscolherPote" fontColor="#00FFFF" value="{'HP', 'MP'}" items="{'HP', 'MP'}"/> 
+					</layout>          
+					<label left="20" top="80" text="Foto do Item"/> 
+					<image align="left" margins="{top=-70}" editable="true" field="campoURLImagem" width="130"/>
+					<layout align="client" margins="{left=2}">											
+						<textEditor top="5" left="1" width="240" height="150" field="campoTextoGrande" />										
+						<button top="220" left="50" fontColor="red" text="Apagar!" margins="{left=4, right=4, top=2, bottom=2}" width="150" onClick="NDB.deleteNode(self.dscPotion.node);" />
+					</layout> 
+					<label left="15" top="205" text="Recuperação" autoSize="true"/>
+					<edit left="132" top="205" width="150" height="25" fontColor="Blue" field="ItemRegen"/>
+					<button  top="205" left="290" fontColor="blue" text="Consumir" width="82" height="25">
+						<event name="onClick">										
+							local mesa = Firecast.getMesaDe(sheet)
+							local node = self.rclListaDePotion.selectedNode; 
+							self.dscPotion.node = node;   	
+							
+							sheet.limitePotion = tonumber(sheet.limitePotion) or 0
+							
+							if sheet.limitePotion > 0 then
+								if node.EscolherPote == "HP" then
+									local HPATUAL = mesa.meuJogador:getBarValue(1, currentValue)
+									local HPPRAREGENERAR = tonumber(HPATUAL) + tonumber(self.dscPotion.node.ItemRegen);
+									mesa.meuJogador:requestSetBarValue(1, HPPRAREGENERAR, nil);
+									local minhaMesa = Firecast.getRoomOf(sheet);
+									local chat = minhaMesa.chat;                      
+									chat:enviarMensagem("[§K3]O Jogador " .. sheet.Nome .. "[§K4] consumiu o Potion de HP: " .. self.dscPotion.node.campoTextoGrande .. " Regenerando [" .. self.dscPotion.node.ItemRegen .. "]");							
+									sheet.limitePotion = tonumber(sheet.limitePotion) - 1;
+									NDB.deleteNode(self.rclListaDePotion.selectedNode);
+									self.dscPotion.visible = false;
+								elseif node.EscolherPote == "MP" then
+									local MPATUAL = mesa.meuJogador:getBarValue(2, currentValue)
+									local MPPRAREGENERAR = tonumber(MPATUAL) + tonumber(self.dscPotion.node.ItemRegen);
+									mesa.meuJogador:requestSetBarValue(2, MPPRAREGENERAR, nil);
+									local minhaMesa = Firecast.getRoomOf(sheet);
+									local chat = minhaMesa.chat;                      
+									chat:enviarMensagem("[§K3]O Jogador " .. sheet.Nome .. "[§K2] consumiu o Potion de MP: " .. self.dscPotion.node.campoTextoGrande .. " [ Regenerando [" .. self.dscPotion.node.ItemRegen .. "]");								
+									sheet.limitePotion = tonumber(sheet.limitePotion) - 1;
+									NDB.deleteNode(self.rclListaDePotion.selectedNode);
+									self.dscPotion.visible = false;
+								end;														
+							else
+								local minhaMesa = Firecast.getRoomOf(sheet);
+								local chat = minhaMesa.chat;                      
+								chat:enviarMensagem("O Jogador " .. sheet.Nome .. " Alcançou o Limite diario de Potions");
+							end;						
+						</event>
+					</button>                    
+				</rectangle>
+			</dataScopeBox>
+		</popup> 		 
+
+		<button left="300" top="390" width="60" height="60"	onClick="self.popPotion:show();"/>	
+		<image left="305" top="395" width="50" height="50" src="/imagens/potion.png"/>
+		<edit left="305" top="365" width="50" height="25" horzTextAlign="center" fontSize="20" fontColor="red" field="limitePotion" />		
+		<edit left="225" top="449" width="50" height="30" horzTextAlign="center" fontSize="20" fontColor="#FFD700" field="sloot" />
 		<layout top="450" width="150" height="30" margins="{bottom=4}">
-                <button text="Novo Espaço" width="150" align="left">
-                        <event name="onClick">
-                                -- Usuário clicou no botão de criar novo item.
-                                -- Vamos inserir um novo item no nosso recordList                              
-                                self.rclListaDosItens:append();
-                        </event>
-                </button>
-        </layout>       
-        <!-- recordList, representando a lista -->
-        <recordList name="rclListaDosItens" field="campoDosItens" templateForm="frmItemDaLista"
-                                top="500" width="615" height="400" selectable="true">                              
-                <event name="onSelect">
-                        --[[
-                        Este evento é chamado quando o usuário selecionar/deselecionar itens da lista. Quando o usuário selecionar, vamos fazer nosso dataScopeBox 
-						(e todas as tag dentro dele) salvar e carregar dados no   objeto Nodo (NodeDatabase) do item selecionado.
-                  --]]                      
-                  local node = self.rclListaDosItens.selectedNode;  
-                         self.boxDetalhesDoItem.node = node;                       
-                  -- a caixa de detalhe só ficará visível se houver item selecionado
-                          self.boxDetalhesDoItem.visible = (node ~= nil);
-                </event>
-        </recordList>       
-        <!-- dataScopeBox representando a nossa caixa de detalhes -->  
-        <dataScopeBox name="boxDetalhesDoItem" left="198" visible="false" top="500" 
-                     width="400" height="300" margins="{left=4, right=4}">
-                <!-- Faça um layout "bonito" para sua caixa de detalhes =). Utilize a propriedade "field" nas tags aqui dentro   -->       
-                <rectangle align="top" color="black" xradius="10" yradius="10"
-                                   height="250" padding="{top=3, left=3, right=3, bottom=3}">
-                                   
-                        <layout align="top" height="30" margins="{bottom=4}">
-                                <label left="15" top="10" text="Nome do Item" autoSize="true"/>
-                                <edit left="132" top="5" width="250" field="campoTitulo"/>
-                        </layout>                       
-                        <layout align="top" height="200">              
-                                <image align="left" editable="true" field="campoURLImagem" width="130"/>                               
-                                <layout align="client" margins="{left=2}">
+			<button text="Novo Espaço" width="150" align="left">
+				<event name="onClick">
+					-- Usuário clicou no botão de criar novo item.
+					-- Vamos inserir um novo item no nosso recordList                              
+					self.rclListaDosItens:append();
+				</event>
+			</button>
+		</layout>       
 
-                                        <textEditor top="5" left="1" width="250" height="180" field="campoTextoGrande" />
-                                </layout>                      
-                        </layout>
-                </rectangle>
-        </dataScopeBox>
-
-
-		        </scrollBox>
-
-
+		<recordList name="rclListaDosItens" field="campoDosItens" templateForm="frmItemDaLista"
+					top="500" width="615" height="400" selectable="true">                              
+			<event name="onSelect">              
+				local node = self.rclListaDosItens.selectedNode;  
+				self.boxDetalhesDoItem.node = node;                       
+				self.boxDetalhesDoItem.visible = (node ~= nil);
+				
+				if self.boxDetalhesDoItem.visible == true then 
+					self.boxDetalhesDoItem.node.campoTitulo = self.boxDetalhesDoItem.node.campoTitulo or 'Nome do Item';
+					self.boxDetalhesDoItem.node.ItemRegen = self.boxDetalhesDoItem.node.ItemRegen or 0;
+					self.boxDetalhesDoItem.node.campoTextoGrande = self.boxDetalhesDoItem.node.campoTextoGrande or 'Descrição do Item';
+					
+					if self.boxDetalhesDoItem.node.Consumivel == true then
+						self.labReg.visible = true
+						self.edtReg.visible = true
+						self.btnTipoItem.visible = true
+					else
+						self.labReg.visible = false
+						self.edtReg.visible = false
+						self.btnTipoItem.visible = false
+					end;						
+				end;
+			</event>			
+		</recordList>       
+		<dataScopeBox name="boxDetalhesDoItem" left="198" visible="false" top="500" width="400" height="300" margins="{left=4, right=4}">
+			<rectangle align="top" color="black" xradius="10" yradius="10" height="280" padding="{top=3, left=3, right=3, bottom=3}">									   
+				<layout align="top" height="35" margins="{bottom=4}">
+					<label left="15" top="10" text="Nome do Item" autoSize="true"/>
+					<edit left="132" top="10" width="150" height="25" field="campoTitulo"/>
+					<checkBox name="chbConsu" left="290" top="12" text="Consumivel" field="Consumivel">
+						<event name="onChange">										
+							if self.chbConsu.checked then
+								self.labReg.visible = true
+								self.edtReg.visible = true
+								self.btnTipoItem.visible = true
+							else
+								self.labReg.visible = false
+								self.edtReg.visible = false
+								self.btnTipoItem.visible = false
+							end;
+						</event>
+					</checkBox>
+				</layout>                       
+				<layout align="top" height="230"> 
+					<label left="20" top="80" text="Foto do Item"/> 
+					<image align="left" margins="{top=-70}" editable="true" field="campoURLImagem" width="130"/>
+					<layout align="client" margins="{left=2}">									
+						<textEditor top="5" left="1" width="240" height="150" field="campoTextoGrande" />										
+						<button top="200" left="50" fontColor="red" text="Apagar!" margins="{left=4, right=4, top=2, bottom=2}" width="150" onClick="NDB.deleteNode(self.boxDetalhesDoItem.node);" />
+					</layout> 
+					<label name="labReg" left="15" top="160" text="Tipo" autoSize="true"/>
+					<edit name="edtReg" left="132" top="160" width="150" height="25" fontColor="Blue" field="TipoItem"/>
+					<button name="btnTipoItem" top="160" left="290" fontColor="blue" text="Consumir" width="100" height="25">
+						<event name="onClick">										
+							local mesa = Firecast.getMesaDe(sheet); 	
+							
+							local node = self.rclListaDosItens.selectedNode;  
+							self.boxDetalhesDoItem.node = node; 
+							
+							if self.boxDetalhesDoItem.node.TipoItem == 'Livro de Sabedoria Corporal' then
+								sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) + (tonumber(sheet.PontoHabilidade) or 0);
+								sheet.PontoHabilidade = 0;
+								NDB.deleteNode(self.rclListaDosItens.selectedNode);
+								self.boxDetalhesDoItem.visible = false;
+							end;							
+						</event>
+					</button>
+				</layout>
+			</rectangle>
+		</dataScopeBox>
+	</scrollBox>
 </popupForm>

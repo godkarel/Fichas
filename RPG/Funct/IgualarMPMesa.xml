@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	<script>
+		<![CDATA[ 
+			function IgualarMPMesa()			
+				local mesa = Firecast.getMesaDe(sheet); 
+				if mesa.meuJogador.isJogador == true then;	
+					local MPTotalMesa = (tonumber(sheet.MPTotal) or 0);
+					mesa.meuJogador:requestSetBarValue(2, nil, MPTotalMesa);
+				end;
+			end;
+		]]>
+		
+    </script> 	
+	

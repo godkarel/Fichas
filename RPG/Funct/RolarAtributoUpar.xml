@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	<script>
+				local function RolarAtributoPorUpar()            
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet);
+					sheet.modificador = sheet.modificador or 0;                        
+					if sheet.LiberarRolagemUp > 0 then
+						sheet.LiberarRolagemUp = tonumber(sheet.LiberarRolagemUp) - 1;
+						mesaDoPersonagem.chat:rolarDados("1d4", "[§K8]« Rolagem de Atributo por Level UP »",
+							function (rolado)
+								if rolado.resultado > 0 then
+									sheet.PPN = tonumber(rolado.resultado);  
+								else
+									showMessage("Aconteceu alguma coisa errada ai meu bom");
+								end;                                        
+								sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) + tonumber(rolado.resultado)
+						end);
+					else
+						showMessage("Voce ja rolou todos seus dados de Level UP");
+					end;
+				if sheet.LiberarRolagemUp > 0 then
+					self.btnUpaLevel.visible = true;
+				else
+					self.btnUpaLevel.visible = false
+				end;					
+				end;               
+	</script>

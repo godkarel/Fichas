@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<popupForm name="frmhabilidadebasica" width="1050" height="650" >
+	<import file="VerificaHabilidade.xml"/>	
+	<import file="RolaHabilidadeDano.xml"/>	
+	<scrollBox align="client">	 
+		<image width="1050" height="720" center="true"  src="/imagens/3.png"/>
+		------------------------- Habilidade 1 --------------------------------------------------		
+		<label left="250" top="15" width="200" height="40" fontColor="Indigo" fontStyle="bold" fontFamily="Nyala" fontSize="20" text="Pontos de Habilidade"/>
+		<edit  left="413" top="20" width="30" fontSize="15" horzTextAlign="center" fontStyle="bold" hitTest="true" canFocus="true" height="30" field="PontoHabilidade"/>	
+		<button text="Nova Habilidade Basica"  width="200" height="40" left="10" top="10">
+			<event name="onClick">
+				self.rclHabilidadeBasica:append();				
+			</event>		
+		</button>		
+		<recordList name="rclHabilidadeBasica" field="ListaHabilidadeBasica" templateForm="frmListaHabilidadeBasica"
+					width="450" height="550" left="70" top="60" selectable="true">                              
+			<event name="onSelect">           
+				local node = self.rclHabilidadeBasica.selectedNode; 
+				self.dscMagiaBasica.node = node;                       
+				self.dscMagiaBasica.visible = (node ~= nil);
+				
+				if self.dscMagiaBasica.visible == true then
+					self.dscMagiaBasica.node.NomeHabilidade = self.dscMagiaBasica.node.NomeHabilidade or 'Nome da Habilidade';
+					self.dscMagiaBasica.node.DescriHabilidade1 = self.dscMagiaBasica.node.DescriHabilidade1 or 'Descrição da Habilidade';
+					self.dscMagiaBasica.node.DanoHabilidade1 = tonumber(self.dscMagiaBasica.node.DanoHabilidade1) or 0;
+					self.dscMagiaBasica.node.FixoHabilidade1 = tonumber(self.dscMagiaBasica.node.FixoHabilidade1) or 0;
+					self.dscMagiaBasica.node.CuraHabilidade1 = tonumber(self.dscMagiaBasica.node.CuraHabilidade1) or 0;
+					self.dscMagiaBasica.node.CustoHabilidade =tonumber( self.dscMagiaBasica.node.CustoHabilidade) or 0;
+					self.dscMagiaBasica.node.DanoAtributo1 = self.dscMagiaBasica.node.DanoAtributo1 or 'Escolha';
+					self.dscMagiaBasica.node.Hintensidade1 = tonumber(self.dscMagiaBasica.node.Hintensidade1) or 0;	
+					self.dscMagiaBasica.node.LevelHabilidade = tonumber(self.dscMagiaBasica.node.LevelHabilidade) or 0;	
+				end;
+			</event>			
+			<event name="onEndEnumeration">
+				if self.rclHabilidadeBasica.selectedNode == nil and sheet ~= nil then
+					local nodes = ndb.getChildNodes(sheet.ListaDeHabilidades);               
+
+					if #nodes > 0 then
+						self.rclHabilidadeBasica.selectedNode = nodes[1];
+					end;
+				end;
+			</event>
+		</recordList>       
+		<dataScopeBox name="dscMagiaBasica" visible="false" width="480" height="580" left="540" top="60" >
+			<rectangle  xradius="10" color="Transparent" yradius="10" width="460" height="560" left="1" top="1" >        
+				<label left="60" top="10" width="200" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Habilidade:"/>
+				<image left="140" top="15" width="40" height="30" visible="true" field="fldImgIconSkill"/>
+				<edit  left="180" top="15" width="230" height="30" field="NomeHabilidade"/>				
+				<textEditor left="60" top="60" width="350" height="280" field="DescriHabilidade1"/>
+				<label left="60" top="350" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Custo"/>
+				<edit left="115" top="355" width="50" height="30" type="number" field="CustoHabilidade"/>
+				<label left="310" top="350" width="60" height="40" fontFamily="Nyala" visible="false" fontColor="Black" fontSize="20" text="Fixo"/>
+				<edit left="350" top="355" width="60" height="30" type="number" visible="false" field="FixoHabilidade1"/>
+				<label left="180" top="350" width="60" height="40" fontFamily="Nyala" visible="false" fontColor="Black" fontSize="20" text="Cura"/>
+				<edit left="230" top="355" width="70" height="30"  type="number"  visible="false" field="CuraHabilidade1"/>                               
+				<label left="60" top="400" width="120" height="40" fontFamily="Nyala" visible="false" fontColor="Black" fontSize="20" text="Custo"/>
+				<edit left="115" top="405" width="50" height="30" type="number" visible="false" field="CustoHabilidade"/>
+				<edit left="400" top="380" width="40" height="30" visible="false" type="number" field="Custo2"/>							    
+				<label left="180" top="400" width="120" height="40" fontFamily="Nyala" fontColor="Black" visible="false" fontSize="20" text="Tipo"/>								
+				<comboBox left="230" top="413" width="70" height="18" field="DanoAtributo1" visible="false" items="{'PA', 'PM', 'PF', 'Cura', 'Fixo', 'BUFF', 'M/PA', 'M/PM', 'M/PF'}"/>
+				<label left="180" top="350" width="60" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Level"/>
+				<button left="220" top="355" width="16" height="30" text="-">
+					<event name="onClick">						
+						local node = self.dscMagiaBasica.node;
+						sheet.PontoHabilidade = tonumber(sheet.PontoHabilidade) or 0;
+						node.LevelHabilidade = tonumber(node.LevelHabilidade) or 0;
+						
+						if node.LevelHabilidade > 0 then 
+							node.LevelHabilidade = tonumber(node.LevelHabilidade) - 1;
+							sheet.PontoHabilidade = tonumber(sheet.PontoHabilidade) + 1;
+						else
+							showMessage("Voce não pode reduzir mais o nivel da sua Habilidade");
+						end;						
+					</event>
+				</button>			
+				<edit left="237" top="355" width="27" height="30" canFocus="true" horzTextAlign="center" hitTest="true" type="number" field="LevelHabilidade"/>						
+				<button left="265" top="355" width="16" height="30" text="+">
+					<event name="onClick">
+						local node = self.dscMagiaBasica.node;
+						sheet.PontoHabilidade = tonumber(sheet.PontoHabilidade) or 0;
+						node.LevelHabilidade = tonumber(node.LevelHabilidade) or 0;
+						
+						if sheet.PontoHabilidade > 0 then 
+							if 0 >= node.LevelHabilidade then
+								node.LevelHabilidade = tonumber(node.LevelHabilidade) + 1;
+								sheet.PontoHabilidade = tonumber(sheet.PontoHabilidade) - 1;
+							else
+								showMessage("Sua habilidade chegou ao nivel Maximo");
+							end;
+						else							
+							showMessage("Voce não te mais pontos de Habilidade para Destribuir");
+						end;	
+					</event>
+				</button>
+				
+				<label left="220" top="450" width="120" height="40" fontFamily="Nyala" fontColor="blue" fontSize="20" visible="false" text="Intensidade"/>
+				<edit left="330" top="455" width="80" height="30" enabled="false" fontColor="Red" type="number" visible="false" field="Hintensidade1"/>									
+				<image left="60" top="360" width="150" height="150" animate="true" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/397b574f-4980-44a7-8ca5-94c5001d56a2/dcqawxh-436e6df0-9d0b-4c2c-9495-c4fa70be1c1e.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzM5N2I1NzRmLTQ5ODAtNDRhNy04Y2E1LTk0YzUwMDFkNTZhMlwvZGNxYXd4aC00MzZlNmRmMC05ZDBiLTRjMmMtOTQ5NS1jNGZhNzBiZTFjMWUuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.-qlcF6GMWtCjkl0gUnd1dWEKFbZRLriwVsrstjEHETo"/>
+				<button left="220" top="420" fontColor="red" text="Apagar!" margins="{left=4, right=4, top=2, bottom=2}" width="150" height="30" onClick="NDB.deleteNode(self.dscMagiaBasica.node);" />
+				<edit width="120" visible="false" field="naoEBuff"/>				
+				<button left="60" top="390" fontSize="20" opacity="0.1" height="90" width="150" text="Usar" fontColor="White" onClick="ExecutarH1()"/>								
+				<script>					
+					local function ExecutarH1() 
+					--[[ HABILIDADE DE DANO ]]--								
+					local node = self.dscMagiaBasica.node;
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet);
+													
+					sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+					mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+					function (rolado)					
+					if node.DanoAtributo1 ~= nil then
+						if sheet.AcertoMagico + 1 > rolado.resultado then							
+							if sheet.AcertoMagico >= rolado.resultado then
+								mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriHabilidade1);
+								local mesa = Firecast.getMesaDe(sheet); 
+								local Custo2 = mesa.meuJogador:getBarValue(2);
+								node.Custo2 = mesa.meuJogador:getBarValue(2);
+								node.Custo2 = (tonumber(node.Custo2) or 0) - (tonumber(node.CustoHabilidade) or 0);
+								mesa.meuJogador:requestSetBarValue(2, node.Custo2);								
+							else
+								mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+							end;
+						else							
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
+						end;
+					else
+						mesaDoPersonagem.chat:enviarMensagem("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE");
+					end;
+					end);					
+					end; 														
+				</script> 
+			</rectangle>
+		</dataScopeBox>
+	</scrollBox>	 
+</popupForm>

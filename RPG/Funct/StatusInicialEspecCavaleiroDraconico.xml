@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	<script>		
+	<![CDATA[ 
+		function self.StatusClasseEspecialAteLevel30()
+			if sheet.classe == 'Cavaleiro Draconico' then
+				if sheet.level > 20 then
+					sheet.EspecAcerto = 0;
+					sheet.EspecAM = 1;
+					sheet.EspecCR = 0;
+					sheet.EspecCM = 0;
+					sheet.EspecEsquiva = 0;
+					sheet.EspecPer = 0;
+				end;
+			end;
+		end;
+	]]>		
+    </script> 

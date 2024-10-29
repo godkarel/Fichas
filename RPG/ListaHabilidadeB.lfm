@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmListaHabilidadeBasica" height="50" theme="dark"> 
+	<event name="onNodeReady">
+		if sheet.NomeHabilidade == nil then
+			self.imgIconSkill.src = "https://thumbs.gfycat.com/BruisedDifferentHoverfly-size_restricted.gif"
+			sheet.fldImgIconSkill = "https://thumbs.gfycat.com/BruisedDifferentHoverfly-size_restricted.gif"; 
+		end;
+	</event>
+	<layout align="client" margins="{left=4, right=4, top=4, bottom=4}">
+		<image name="imgIconSkill" align="left" width="32" height="32" field="fldImgIconSkill" animate="true" src="https://thumbs.gfycat.com/BruisedDifferentHoverfly-size_restricted.gif"/>
+		<label align="client" text="Teste de label" fontColor="Crimson" field="NomeHabilidade" margins="{left=10}"/>
+	</layout>		
+</form>

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<popupForm	 name="frmVelenSobreposi" scale="0.9" width="650" height="700" >
+
+<import file="Funct/AtaqueBasico.xml"/>
+<import file="Funct/AumentaDiminuiStatus.xml"/>		
+<import file="Funct/CalculaClasseMP.xml"/>
+<import file="Funct/CalculaEspecMP.xml"/>
+<import file="Funct/CalculaHPTotal.xml"/>
+<import file="Funct/CalculaTotalMP.xml"/>
+<import file="Funct/GanhoHPRacaLv20.xml"/>
+<import file="Funct/GanhoHPRacaLv30.xml"/>
+<import file="Funct/HPClasseCavaleiroDraconico.xml"/>
+<import file="Funct/HPClassePNV.xml"/>
+<import file="Funct/HPEspecPNV.xml"/>
+<import file="Funct/HPRacaPNVCavaleiroDraconico.xml"/>
+<import file="Funct/IgualarHPMesa.xml"/>
+<import file="Funct/IgualarMPMesa.xml"/>
+<import file="Funct/MPClasseCavaleiroDraconicoLv20.xml"/>
+<import file="Funct/RolarAtributoUpar.xml"/>
+<import file="Funct/StatusChancesGeral.xml"/>
+<import file="Funct/StatusClasseInicial.xml"/>
+<import file="Funct/StatusEspecInicial.xml"/>
+<import file="Funct/StatusInicialCavaleiroDraconico.xml"/>
+<import file="Funct/StatusInicialEspecCavaleiroDraconico.xml"/>
+<import file="Funct/StatusPorRaca.xml"/>
+<import file="Funct/StatusSecundariosRaca.xml"/>
+<import file="Funct/VerificaLevel20.xml"/>
+
+	<scrollBox align="client">	
+ ----------- Inicio da Ficha ----------------- 
+		<image left="5" top="5" width="620" height="920" src="/imagens/1.png"/>
+		
+		<edit left="160" top="60" width="75" height="20" field="Nome" />
+		<edit left="160" top="92" width="75" height="20" field="idade" />
+		<button left="600" visible="false" top="10" text="Ficha1">
+			<event name="onClick">										
+				local novoForm = GUI.newForm("frmPVPMod");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+			</event>
+		</button>
+		
+		<button name="btnSelecionaFicha1" visible="false" left="10" width="150" top="820" text="Seleciona Ficha 1">
+			<event name="onClick">										
+				Ficha1 = sheet
+				self.btnSelecionaFicha1.fontColor="red"
+				self.btnSelecionaFicha1.text= Ficha1.Nome
+			</event>
+		</button>
+		
+		<button name="btnSelecionaFicha2" visible="false" left="10" width="150" top="850" text="Seleciona Ficha 2">
+			<event name="onClick">										
+				Ficha2 = sheet
+				self.btnSelecionaFicha2.fontColor="red"
+				self.btnSelecionaFicha2.text= Ficha2.Nome
+			</event>
+		</button>	
+		
+		<comboBox left="305" top="60" width="135" height="20" field="Classe" items="{'Escolha', 'Animago', 'Arqueiro', 'Bardo', 'Bispo', 'Caçador de Almas', 'Guerreiro', 
+		'Ladino', 'Mago', 'Mercenario', 'Monge', 'Paladino','Cavaleiro Draconico' }"/>
+		
+		<comboBox name="cmbEspecializa" left="305" top="92" width="135" height="20" field="Espec" enabled="false" items="{'Escolha', 'Druida', 'Shaman', 'Caçador', 'Sentinela Lunar', 'Encantador de Almas', 'Musicista da Guerra',
+		'Necromance', 'Sacerdote', 'Juiz', 'Barbaro', 'Tanker', 'Acrobata', 'Assassino', 'Arcanista', 'Elementalista', 'Summoner', 'Duelista', 'Pirata', 'Guardião Espiritual', 'Guardião da Serenidade',
+		'Cavaleiro das Trevas', 'Templario' }"/>
+		
+		<edit left="490" top="60" width="40" height="20" field="Velis"/>
+		<edit left="490" top="60" width="40" visible="false" height="20" field="PHPRacial"/>
+
+		<comboBox left="490" top="92" width="75" field="Raca" items="{'Escolha', 'Humano', 'Elfo', 'Elfo Negro', 'Anão', 'Orc', 'Kamael', 'Thiefling' }"/>
+		
+-------------Atributos ------------------
+		<button left="175" top="288" width="30" fontSize="18" text="-" onClick="DiminuirPontosForca();" />
+		<button left="208" top="288" width="30" fontSize="18" text="+" onClick="AumentarPontosForca();" />
+		<edit left="170" top="265" width="35" height="20" enabled="false" type="number" field="Forca" />
+		<rectangle left="208" top="265" color="black" width="35" height="20"  />
+		<label left="210" top="265" width="35" height="20" format="%d" field="ForcaTotal" />
+		
+		<button left="175" top="350" width="30" fontSize="18" text="-" onClick="DiminuirPontosInteligencia();" />
+		<button left="208" top="350" width="30" fontSize="18" text="+" onClick="AumentarPontosInteligencia();" />		
+		<edit left="170" top="327" width="35" height="20" enabled="false" type="number" field="Inteligencia" />
+		<rectangle left="208" top="327" color="black" width="35" height="20"  />
+		<label left="210" top="327" width="35" height="20" format="%d" field="InteligenciaTotal" />	
+		
+		<button left="175" top="411" width="30" fontSize="18" text="-" onClick="DiminuirPontosDestreza();" />
+		<button left="208" top="411" width="30" fontSize="18" text="+" onClick="AumentarPontosDestreza();" />	
+		<edit left="170" top="388" width="35" height="20" enabled="false" type="number" field="Destreza" />
+		<rectangle left="208" top="388" color="black" width="35" height="20"  />
+		<label left="210" top="388" width="35" height="20" format="%d" field="DestrezaTotal" />	
+
+		<button left="175" top="472" width="30" fontSize="18" text="-" onClick="DiminuirPontosAgilidade();" />
+		<button left="208" top="472" width="30" fontSize="18" text="+" onClick="AumentarPontosAgilidade();" />			
+		<edit left="170" top="449" width="35" height="20" enabled="false" type="number" field="Agilidade" />
+		<rectangle left="208" top="449" color="black" width="35" height="20"  />
+		<label left="210" top="449" width="35" height="20" format="%d" field="AgilidadeTotal" />	
+		
+		<button left="175" top="533" width="30" fontSize="18" text="-" onClick="DiminuirPontosVitalidade();" />
+		<button left="208" top="533" width="30" fontSize="18" text="+" onClick="AumentarPontosVitalidade();" />			
+		<edit left="170" top="510" width="35" height="20" enabled="false" type="number" field="Vitalidade" />
+		<rectangle left="208" top="510" color="black" width="35" height="20"  />
+		<label left="210" top="510" width="35" height="20" format="%d" field="VitalidadeTotal" />	
+		
+-------------Status --------------------
+		
+		<rectangle left="480" top="265" color="black" width="100" height="20"  />
+		<label left="482" top="265" width="100" height="20" format="%d" field="PA" />
+		<rectangle left="480" top="327" color="black" width="100" height="20"  />
+		<label left="482" top="327" width="100" height="20" format="%d" field="PM" />
+		<rectangle left="480" top="388" color="black" width="100" height="20"  />
+		<label left="482" top="388" width="100" height="20" format="%d" field="PF" />
+		<rectangle left="480" top="449" color="black " width="30" height="20"  />
+		<label left="482" top="449" width="40" height="20" format="%d" field="Defesa" />
+		<rectangle left="480" top="510" color="black " width="30" height="20"  />
+		<label left="482" top="510" width="40" height="20" format="%d" field="Resistencia" />
+		<rectangle left="545" top="449" color="Navy " width="30" height="20"  />
+		<label left="547" top="449" width="40" height="20" field="DEFRED" />
+		<rectangle left="545" top="510" color="Navy " width="30" height="20"  />
+		<label left="547" top="510" width="40" height="20" field="RESRED" />
+		<label left="490" top="470" width="70" height="20" scale="1.5" fontColor="Navy  " text="Redução" />
+		<label left="490" top="530" width="70" height="20" scale="1.5" fontColor="Navy  " text="Redução" />
+------------- Status de Vida e outros -------------------------
+		<image left="290" top="650" width="60" height="60" visible="false" src="/imagens/info.png"/>
+		<image left="190" top="580" width="250" height="250" visible="false" src="/imagens/TAGS/StatusAtt.png"/>
+		<button left="290" top="650" width="60" opacity="0.1" height="60" visible="false" onClick="AtualizaStatusMesa()"/>
+		
+		<button left="80" top="603" width="38" opacity="0.1" height="32" visible="false" onClick="IgualarHPMesa()"/>
+		<progressBar left="148" top="603" color="red"  width="100" value="100" max="100" height="30"  />
+		<label left="150" fontSize="20" top="603" width="100" fontColor="white" horzTextAlign="center" height="30" format="%d" field="HPTotal" />
+		<button left="80" top="637" width="38" opacity="0.1" height="32" visible="false" onClick="IgualarMPMesa()"/>
+		<progressBar left="148" top="640" color="blue"  width="100" value="100" max="100" height="30"  />
+		<label left="150" fontSize="20" top="640" width="100" fontColor="white" horzTextAlign="center" height="30" format="%d"  field="MPTotal" />
+		<rectangle left="168" top="702" color="black"  width="75" height="20"/>
+		<label left="170" top="702" width="75" height="20" field="Esquiva" />
+		<rectangle left="168" top="732" color="black"  width="75" height="20"/>
+		<label left="170" top="732" width="75" height="20" format="%d" field="Persistencia" />
+		
+		<rectangle left="498" top="610" color="black"  width="75" height="20"/>
+		<label left="500" top="610" width="75" height="20" field="Acerto" />
+		<rectangle left="498" top="640" color="black"  width="75" height="20"/>
+		<label left="500" top="640" width="75" height="20" field="AcertoMagico" />
+		<rectangle left="498" top="702" color="black"  width="75" height="20"/>
+		<label left="500" top="702" width="75" height="20" field="Critical" />
+		<rectangle left="498" top="732" color="black"  width="75" height="20"/>
+		<label left="500" top="732" width="75" height="20" field="CMagico" />
+------------- LevelZeira --------------------------------------
+		<edit left="295" top="807" fontColor="#00008B" scale="2.0" width="21"  height="50" type="number" horzTextAlign="center" textPrompt="0" canFocus="false" hitTest="false" enabled="true" max="30" field="Level" transparent="true" />
+		<edit left="295" top="700" fontColor="#00008B" scale="2.0" width="21" visible="false"  height="50" field="Elevel" transparent="false" />
+			
+    --------------------- Outras Forms --------------------------------	
+	
+		<button left="33" top="160" width="60" height="60" opacity="0.1">
+			<event name="onClick">
+				local novoForm = GUI.newForm("frmequip");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+			</event>			
+		</button>	
+		<image left="-40" top="110" width="200" height="200" src="/imagens/TAGS/TIER.png"/>
+		
+		<button left="120" top="160" width="60" height="60" opacity="0.1">
+			<event name="onClick">
+				local novoForm = GUI.newForm("frmhabilidade");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+			</event>
+		</button>
+		<image left="47" top="110" width="200" height="200" src="/imagens/TAGS/SKILL.png"/>
+
+		<button left="460" top="160" width="60" height="60" opacity="0.1">
+			<event name="onClick">
+				local novoForm = GUI.newForm("frmHistoria");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+			</event>
+		</button>
+		<image left="390" top="110" width="200" height="200" src="/imagens/TAGS/HISTORIA.png"/>
+		
+		<button left="287" top="290" width="60" height="60" opacity="0.1">
+			<event name="onClick">
+				local novoForm = GUI.newForm("frmsummon");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+			</event>
+		</button>
+		<image left="216" top="243" width="200" height="200" src="/imagens/TAGS/SUMMON.png"/>
+		
+		<button left="542" top="160" width="60" height="60" opacity="0.1">
+			<event name="onClick">
+				local novoForm = GUI.newForm("frmpersonagem");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+			</event>
+		</button>
+		<image left="467" top="110" width="200" height="200" src="/imagens/TAGS/Sobre.png"/>
+		
+
+		
+	---------------- BOTÕES EXPLICATIVOS ---------------------	
+	<button left="388" top="255" width="60"  height="55" opacity="0.1" onClick="showMessage('P.A = Poder de Ataque 2x a Força, Se for Monge 4x Força');"/>
+	<image left="317" top="205" width="200" height="200" src="/imagens/TAGS/PA.png"/>
+	
+	<button left="388" top="317" width="60"  height="55" opacity="0.1" onClick="showMessage('P.M = Poder Magico 2x a Inteligencia');"/>
+	<image left="317" top="267" width="200" height="200" src="/imagens/TAGS/PM.png"/>
+	
+	<button left="388" top="377" width="60"  height="55" opacity="0.1" onClick="showMessage('P.F = Poder de Fogo 2x a Destreza');"/>
+	<image left="317" top="327" width="200" height="200" src="/imagens/TAGS/PF.png"/>
+	
+	<button left="388" top="435" width="60"  height="55" opacity="0.1" onClick="showMessage('DEF = Defesa Fisica que é Armadura + Metade da Vitalidade e Metade da Agilidade');"/>
+	<image left="317" top="385" width="200" height="200" src="/imagens/TAGS/DEF.png"/>
+	
+	<button left="388" top="493" width="60"  height="55" opacity="0.1" onClick="showMessage('RES = Resistencia Magica que é Metade da Força + Metade da Vitalidade + Metade da Defesa');"/>
+	<image left="317" top="443" width="200" height="200" src="/imagens/TAGS/RES.png"/>
+		
+	<comboBox left="273" top="355" width="90" horzTextAlign="center" field="EscolheAtaqueBasico" fontColor="#00FFFF" items="{'PA', 'PF'}"/>
+	<button left="273" top="380" width="90" height="30"  fontSize="12" fontColor="#00FFFF" text="Ataque Basico" onClick="AtaqueBasico()"/>		
+			
+	<edit left="270" top="670" width="90" type="number" height="30" visible="false" field="ClasseAcerto"/>
+	<edit left="270" top="720" width="90" type="number" height="30" visible="false" field="DestrezaAcerto"/>
+	<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="EspecAcerto"/>
+	
+	<edit left="270" top="670" width="90" type="number" height="30" visible="false" field="ClasseAM"/>
+	<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="EspecAM"/>
+	
+	<edit left="270" top="670" width="90" type="number" height="30" visible="false" field="ClasseCR"/>
+	<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="EspecCR"/>
+	
+	<edit left="270" top="670" width="90" type="number" height="30" visible="false" field="ClasseCM"/>
+	<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="EspecCM"/>
+
+	<edit left="270" top="670" width="90" type="number" height="30" visible="false" field="ClasseEsquiva"/>
+	<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="EspecEsquiva"/>
+
+	<edit left="270" top="670" width="90" type="number" height="30" visible="false" field="ClassePer"/>
+	<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="EspecPer"/>	
+
+	<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="AgilidadeESQ"/>	
+	<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="ForcaPer"/>	
+	
+	=============== CONTROLA TUDO DO LEVELUP ========================
+	<edit top="440" left="292" width="50" height="30" max="160" min="0" hitTest="false" canFocus="false" horzTextAlign="center" type="number" text="120" transparent="true" fontColor="black" fontSize="22" enabled="true" field="ControladorAtributos"/>
+	<edit top="530" left="292" width="50" height="30" max="160" min="0" horzTextAlign="center" type="number" text="120" visible="false" fontColor="RED" fontSize="22" enabled="true" field="LiberarRolagemUp"/>
+	<edit top="850" left="400" width="50" height="30" max="20" min="0" horzTextAlign="center" type="number" visible="false" fontSize="22" enabled="true" field="CLevel"/>
+				
+		<progressBar name="BarraXP" width="100" height="20" color="purple" top="675" left="150" value="50" max="100"/>
+		<edit width="35" height="20" top="675" left="157" type="number" max="9999" transparent="true" horzTextAlign="center" field="XPAtual"/>
+		<label width="35" height="20" top="675" left="205" horzTextAlign="center" fontColor="black" field="XPNecessario"/>
+		
+		
+	</scrollBox>						
+</popupForm>

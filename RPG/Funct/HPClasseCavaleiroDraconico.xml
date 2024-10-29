@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+<script>		
+	<![CDATA[ 
+		function self.ControlaClasseEspecialHPAte20()	
+			if sheet.classe == 'Cavaleiro Draconico' then
+				sheet.RHPNivelAte20 = sheet.Level;
+			
+				if sheet.RHPNivelAte20 > 20 then
+					sheet.RHPNivelAte20 = 20;
+				end;
+			
+				sheet.HPRACAATE20 = (tonumber(sheet.RHPNivelAte20) or 0) * 11;
+				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 17  + 200;
+			end;					
+		end;
+	]]>
+    </script>
