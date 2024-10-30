@@ -1,0 +1,2002 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form formType="sheetTemplate" dataType="com.velen" 
+     title="Velen 4" name="frmvelen">	
+	<event name="onNodeReady">
+		sheet.Classe = sheet.Classe or "Animago";
+		sheet.Espec = sheet.Espec or "Escolha";
+		sheet.Raca = sheet.Raca or "Humano";
+		sheet.LiberarRolagemUp = tonumber(sheet.LiberarRolagemUp or 0);
+		
+		if sheet.Level == nil then
+			sheet.Level = 0; 
+		end;
+		
+		if sheet.Velis == nil then
+			sheet.Velis = "D10+10"; 		
+		end;
+		
+		if sheet.Nome == nil then
+			sheet.Nome = "Escolha o Nome";
+		end;	
+
+		if sheet.sloot == nil then
+			sheet.sloot = 4;
+		end;
+		
+		if sheet.Forca == nil then
+			sheet.Forca = 0; 		
+		end;
+		
+		if sheet.Inteligencia == nil then
+			sheet.Inteligencia = 0;
+		end;	
+
+		if sheet.Destreza == nil then
+			sheet.Destreza = 0;
+		end;
+		
+		if sheet.Agilidade == nil then
+			sheet.Agilidade = 0; 		
+		end;
+		
+		if sheet.Vitalidade == nil then
+			sheet.Vitalidade = 0;
+		end;	
+		
+		sheet.ForcaTotal = (tonumber(sheet.ForcaTotal) or 0); 
+		sheet.Acerto = (tonumber(sheet.Acerto) or 0); 
+		sheet.AcertoMagico	= (tonumber(sheet.AcertoMagico) or 0); 
+		sheet.Critical = (tonumber(sheet.Critical) or 0); 
+		sheet.CMagico = (tonumber(sheet.CMagico) or 0); 
+		sheet.Esquiva = (tonumber(sheet.Esquiva) or 0); 
+		sheet.Persistencia = (tonumber(sheet.Persistencia) or 0); 
+		sheet.ArmaPA = (tonumber(sheet.ArmaPA) or 0); 
+		sheet.ArmaPM = (tonumber(sheet.ArmaPM) or 0); 
+		sheet.ArmaPF = (tonumber(sheet.ArmaPF) or 0); 
+		sheet.ArmaDEF = (tonumber(sheet.ArmaDEF) or 0); 
+		sheet.ArmaRES = (tonumber(sheet.ArmaRES) or 0); 
+		sheet.ArmaHP = (tonumber(sheet.ArmaHP) or 0); 
+		sheet.ArmaMP = (tonumber(sheet.ArmaMP) or 0); 
+		sheet.OutraPA = (tonumber(sheet.OutraPA) or 0); 
+		sheet.OutraPM = (tonumber(sheet.OutraPM) or 0); 
+		sheet.OutraPF = (tonumber(sheet.OutraPF) or 0); 
+		sheet.OutraDEF = (tonumber(sheet.OutraDEF) or 0); 
+		sheet.OutraRES = (tonumber(sheet.OutraRES) or 0); 
+		sheet.OutraHP = (tonumber(sheet.OutraHP) or 0); 
+		sheet.OutraMP = (tonumber(sheet.OutraMP) or 0); 
+		sheet.ArmaduraPA = (tonumber(sheet.ArmaduraPA) or 0); 
+		sheet.ArmaduraPM = (tonumber(sheet.ArmaduraPM) or 0); 
+		sheet.ArmaduraPF = (tonumber(sheet.ArmaduraPF) or 0); 
+		sheet.ArmaduraDEF = (tonumber(sheet.ArmaduraDEF) or 0); 
+		sheet.ArmaduraRES = (tonumber(sheet.ArmaduraRES) or 0); 
+		sheet.ArmaduraHP = (tonumber(sheet.ArmaduraHP) or 0); 
+		sheet.ArmaduraMP = (tonumber(sheet.ArmaduraMP) or 0); 
+		sheet.AcessorioPA = (tonumber(sheet.AcessorioPA) or 0); 
+		sheet.AcessorioPM = (tonumber(sheet.AcessorioPM) or 0); 
+		sheet.AcessorioPF = (tonumber(sheet.AcessorioPF) or 0); 
+		sheet.AcessorioDEF = (tonumber(sheet.AcessorioDEF) or 0); 
+		sheet.AcessorioRES = (tonumber(sheet.AcessorioRES) or 0); 
+		sheet.AcessorioHP = (tonumber(sheet.AcessorioHP) or 0); 
+		sheet.AcessorioMP = (tonumber(sheet.AcessorioMP) or 0); 
+		sheet.ArmaDistancia = (tonumber(sheet.ArmaDistancia) or 0); 
+		sheet.OutraDistancia = (tonumber(sheet.OutraDistancia) or 0); 
+		sheet.ArmaduraDistancia = (tonumber(sheet.ArmaduraDistancia) or 0); 
+		sheet.AcessorioDistancia = (tonumber(sheet.AcessorioDistancia) or 0); 
+		sheet.Sabedoria = (tonumber(sheet.Sabedoria) or 0); 
+		sheet.Atletismo = (tonumber(sheet.Atletismo) or 0); 
+		sheet.Acrobacia = (tonumber(sheet.Acrobacia) or 0); 
+		sheet.Vigor = (tonumber(sheet.Vigor) or 0); 
+		sheet.Percepcao = (tonumber(sheet.Percepcao) or 0); 
+		sheet.Deslocamento = (tonumber(sheet.Deslocamento) or 0); 
+		sheet.Distancia = (tonumber(sheet.Distancia) or 0); 
+		sheet.Potes = (tonumber(sheet.Potes) or 0); 
+		sheet.MontAtletismo = (tonumber(sheet.MontAtletismo) or 0); 
+		sheet.MontSabedoria = (tonumber(sheet.MontSabedoria) or 0); 
+		sheet.Montpercepcao = (tonumber(sheet.MontPercepcao) or 0); 
+		sheet.MontVigor = (tonumber(sheet.MontVigor) or 0); 
+		sheet.MPMont = (tonumber(sheet.MPMont) or 0); 
+		sheet.MontESPACO = (tonumber(sheet.MontESPACO) or 0); 
+		sheet.idade = sheet.idade or "Depende da sua Raça"; 
+		sheet.HPTotal = (tonumber(sheet.HPTotal) or 0); 
+		sheet.MPTotal = (tonumber(sheet.MPTotal) or 0); 		
+		sheet.DanoHabilidade1 = (tonumber(sheet.DanoHabilidade1) or 0); 
+		sheet.CuraHabilidade1 = (tonumber(sheet.CuraHabilidade1) or 0); 
+		sheet.Current = (tonumber(sheet.Current) or 0); 
+		sheet.DPTHabilidade1 = (tonumber(sheet.DPTHabilidade1) or 0); 
+		sheet.Hintensidade1 = (tonumber(sheet.Hintensidade1) or 0); 
+		
+		sheet.NomeBasica = (tonumber(sheet.NomeBasica) or 0); 	
+		sheet.BasicaDescri = (tonumber(sheet.BasicaDescri) or 0);
+		sheet.DanoBasica = (tonumber(sheet.DanoBasica) or 0); 	
+		sheet.CustoBasica = (tonumber(sheet.CustoBasica) or 0); 	
+		sheet.DTBasica = (tonumber(sheet.DTBasica) or 0); 
+		sheet.PABasica = (tonumber(sheet.PABasica) or 0); 
+		sheet.PMBasica = (tonumber(sheet.PMBasica) or 0); 	
+		sheet.PFBasica = (tonumber(sheet.PFBasica) or 0); 	
+		sheet.DEFBasica = (tonumber(sheet.DEFBasica) or 0); 	
+		sheet.RESBasica = (tonumber(sheet.RESBasica) or 0); 
+		sheet.AcertoBasica = (tonumber(sheet.AcertoBasica) or 0); 	
+		sheet.AMBasica = (tonumber(sheet.AMBasica) or 0); 	
+		sheet.ESQBasica = (tonumber(sheet.ESQBasica) or 0); 
+		sheet.CritBasica = (tonumber(sheet.CritBasica) or 0); 	
+		sheet.CMBasica = (tonumber(sheet.CMBasica) or 0); 	
+		sheet.PersistBasica = (tonumber(sheet.PersistBasica) or 0); 	
+		sheet.PHPBasica = (tonumber(sheet.PHPBasica) or 0); 	
+		sheet.PMPBasica = (tonumber(sheet.PMPBasica) or 0); 		
+		sheet.NomeRacial = (tonumber(sheet.NomeRacial) or 0); 	
+		sheet.RacialDescri = (tonumber(sheet.RacialDescri) or 0);
+		sheet.DanoRacial = (tonumber(sheet.DanoRacial) or 0); 	
+		sheet.CustoRacial = (tonumber(sheet.CustoRacial) or 0); 	
+		sheet.DTRacial = (tonumber(sheet.DTRacial) or 0); 
+		sheet.PARacial = (tonumber(sheet.PARacial) or 0); 
+		sheet.PMRacial = (tonumber(sheet.PMRacial) or 0); 	
+		sheet.PFRacial = (tonumber(sheet.PFRacial) or 0); 	
+		sheet.DEFRacial = (tonumber(sheet.DEFRacial) or 0); 	
+		sheet.RESRacial = (tonumber(sheet.RESRacial) or 0); 
+		sheet.AcertoRacial = (tonumber(sheet.AcertoRacial) or 0); 	
+		sheet.AMRacial = (tonumber(sheet.AMRacial) or 0); 	
+		sheet.ESQRacial = (tonumber(sheet.ESQRacial) or 0); 
+		sheet.CritRacial = (tonumber(sheet.CritRacial) or 0); 	
+		sheet.CMRacial = (tonumber(sheet.CMRacial) or 0); 	
+		sheet.PersistRacial = (tonumber(sheet.PersistRacial) or 0); 	
+		sheet.PHPRacial = (tonumber(sheet.PHPRacial) or 0); 	
+		sheet.PMPRacial = (tonumber(sheet.PMPRacial) or 0); 
+		
+		sheet.R30HPNivel = (tonumber(sheet.R30HPNivel) or 0); 	
+		sheet.MHPNivel = (tonumber(sheet.MHPNivel) or 0); 
+		sheet.MMPNivel = (tonumber(sheet.MMPNivel) or 0); 
+		
+		sheet.HPRACAATE40 = (tonumber(sheet.HPRACAATE40) or 0);
+		
+		sheet.DForca = (tonumber(sheet.DForca) or 0); 	
+		sheet.DAgilidade = (tonumber(sheet.DAgilidade) or 0); 
+		sheet.DInteligencia = (tonumber(sheet.DInteligencia) or 0); 
+		sheet.DVitalidade = (tonumber(sheet.DVitalidade) or 0); 	
+		sheet.DDestreza = (tonumber(sheet.DDestreza) or 0); 
+		sheet.DMP = (tonumber(sheet.DMP) or 0);
+		
+		sheet.RHPNivel = (tonumber(sheet.RHPNivel) or 0);
+		sheet.CHPNivel = (tonumber(sheet.CHPNivel) or 0); 
+		sheet.EHPNivel = (tonumber(sheet.EHPNivel) or 0); 
+		sheet.R20HPNivel = (tonumber(sheet.R20HPNivel) or 0); 
+		sheet.RMPNivel = (tonumber(sheet.RMPNivel) or 0); 
+		sheet.EMPNivel = (tonumber(sheet.EMPNivel) or 0); 
+		 
+		sheet.LVDivino = (tonumber(sheet.LVDivino) or 0);
+		sheet.RegenMP = (tonumber(sheet.RegenMP) or 0); 
+		sheet.Visao = (tonumber(sheet.Visao) or 0); 
+		sheet.Deslocamento = (tonumber(sheet.Deslocamento) or 0); 
+		sheet.Correndo = (tonumber(sheet.Correndo) or 0);
+		sheet.Potes = (tonumber(sheet.Potes) or 0); 
+		sheet.Distancia = (tonumber(sheet.Distancia) or 0); 	
+
+		sheet.RealDeslocamento = (tonumber(sheet.RealDeslocamento) or 0); 	
+		sheet.RealVisao = (tonumber(sheet.RealVisao) or 0);
+
+		sheet.REGMPBasica = (tonumber(sheet.REGMPBasica) or 0);
+		sheet.VisaoBasica = (tonumber(sheet.VisaoBasica) or 0);
+		sheet.CorridaBasica = (tonumber(sheet.CorridaBasica) or 0);
+		sheet.DeslocamentoBasica = (tonumber(sheet.DeslocamentoBasica) or 0);
+		
+		sheet.ClasseAM = (tonumber(sheet.ClasseAM) or 0);
+		sheet.ClasseCM = (tonumber(sheet.ClasseCM) or 0);
+		sheet.ClasseCR = (tonumber(sheet.ClasseCR) or 0);
+		sheet.ClasseAcerto = (tonumber(sheet.ClasseAcerto) or 0);
+		sheet.ClasseEsquiva = (tonumber(sheet.ClasseEsquiva) or 0);
+		sheet.ClassePer = (tonumber(sheet.ClassePer) or 0);
+		sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0); 
+		sheet.MaxFlecha = (tonumber(sheet.MaxFlecha) or 0); 
+		
+		sheet.EspecAM = (tonumber(sheet.EspecAM) or 0);
+		sheet.EspecCM = (tonumber(sheet.EspecCM) or 0);
+		sheet.EspecCR = (tonumber(sheet.EspecCR) or 0);
+		sheet.EspecAcerto = (tonumber(sheet.EspecAcerto) or 0);
+		sheet.EspecEsquiva = (tonumber(sheet.EspecEsquiva) or 0);
+		sheet.EspecPer = (tonumber(sheet.EspecPer) or 0);
+		self.cmbEspecializa.enabled = false;
+		sheet.CLevel = (tonumber(sheet.CLevel) or 0);
+		sheet.ORCRacial = (tonumber(sheet.ORCRacial) or 0);
+		
+		sheet.ControladorAtributos = (tonumber(sheet.ControladorAtributos) or 8);
+		
+		sheet.jaRecebeu = sheet.jaRecebeu or false;	
+		
+			if sheet.jaRecebeu == false then 
+				showMessage("Bem vindo a velen");
+				showMessage("Por padrão classe, especialização e raça foram selecionadas para seu personagem, mas voce deve alterar e escolher a que for de sua vontade");
+				sheet.jaRecebeu = true;
+			end; 
+		sheet.SequenciaInicial = sheet.SequenciaInicial or true;
+		self.ChecaLevel20();
+	</event>	
+	<scrollBox align="client">
+		
+ ----------- Inicio da Ficha -----------------
+	
+ 
+		<image left="5" top="5" width="620" height="920" src="/imagens/1.png"/>
+		<edit left="160" top="60" width="75" height="20" field="Nome" />
+		<edit left="160" top="92" width="75" height="20" field="idade" />
+		
+		<comboBox left="305" top="60" width="135" height="20" field="Classe" items="{'Escolha', 'Animago', 'Arqueiro', 'Bardo', 'Bispo', 'Caçador de Almas', 'Guerreiro', 
+		'Ladino', 'Mago', 'Mercenario', 'Monge', 'Paladino','Cavaleiro Draconico' }"/>
+		<comboBox name="cmbEspecializa" left="305" top="92" width="135" height="20" field="Espec" enabled="false" items="{'Escolha', 'Druida', 'Shaman', 'Caçador', 'Sentinela Lunar', 'Encantador de Almas', 
+		'Necromance', 'Sacerdote', 'Juiz', 'Barbaro', 'Tanker', 'Acrobata', 'Assassino', 'Arcanista', 'Feiticeiro', 'Summoner', 'Duelista', 'Pirata', 'Guardião Espiritual', 
+		'Cavaleiro das Trevas', 'Templario' }"/>
+		
+		<edit left="490" top="60" width="40" height="20" field="Velis"/>
+		<edit left="490" top="60" width="40" visible="false" height="20" field="PHPRacial"/>
+
+		<comboBox left="490" top="92" width="75" field="Raca" items="{'Escolha', 'Humano', 'Elfo', 'Elfo Negro', 'Anão', 'Orc', 'Kamael', 'Thiefling' }"/>
+		
+-------------Atributos ------------------
+		<button left="175" top="288" width="30" fontSize="18" text="-" onClick="DiminuirPontosForca();" />
+		<button left="208" top="288" width="30" fontSize="18" text="+" onClick="AumentarPontosForca();" />
+		<edit left="170" top="265" width="35" height="20" enabled="false" type="number" field="Forca" />
+		<rectangle left="208" top="265" color="black" width="35" height="20"  />
+		<label left="210" top="265" width="35" height="20" format="%d" field="ForcaTotal" />
+		
+		<button left="175" top="350" width="30" fontSize="18" text="-" onClick="DiminuirPontosInteligencia();" />
+		<button left="208" top="350" width="30" fontSize="18" text="+" onClick="AumentarPontosInteligencia();" />		
+		<edit left="170" top="327" width="35" height="20" enabled="false" type="number" field="Inteligencia" />
+		<rectangle left="208" top="327" color="black" width="35" height="20"  />
+		<label left="210" top="327" width="35" height="20" format="%d" field="InteligenciaTotal" />	
+		
+		<button left="175" top="411" width="30" fontSize="18" text="-" onClick="DiminuirPontosDestreza();" />
+		<button left="208" top="411" width="30" fontSize="18" text="+" onClick="AumentarPontosDestreza();" />	
+		<edit left="170" top="388" width="35" height="20" enabled="false" type="number" field="Destreza" />
+		<rectangle left="208" top="388" color="black" width="35" height="20"  />
+		<label left="210" top="388" width="35" height="20" format="%d" field="DestrezaTotal" />	
+
+		<button left="175" top="472" width="30" fontSize="18" text="-" onClick="DiminuirPontosAgilidade();" />
+		<button left="208" top="472" width="30" fontSize="18" text="+" onClick="AumentarPontosAgilidade();" />			
+		<edit left="170" top="449" width="35" height="20" enabled="false" type="number" field="Agilidade" />
+		<rectangle left="208" top="449" color="black" width="35" height="20"  />
+		<label left="210" top="449" width="35" height="20" format="%d" field="AgilidadeTotal" />	
+		
+		<button left="175" top="533" width="30" fontSize="18" text="-" onClick="DiminuirPontosVitalidade();" />
+		<button left="208" top="533" width="30" fontSize="18" text="+" onClick="AumentarPontosVitalidade();" />			
+		<edit left="170" top="510" width="35" height="20" enabled="false" type="number" field="Vitalidade" />
+		<rectangle left="208" top="510" color="black" width="35" height="20"  />
+		<label left="210" top="510" width="35" height="20" format="%d" field="VitalidadeTotal" />	
+		
+-------------Status --------------------
+		
+		<rectangle left="480" top="265" color="black" width="100" height="20"  />
+		<label left="482" top="265" width="100" height="20" format="%d" field="PA" />
+		<rectangle left="480" top="327" color="black" width="100" height="20"  />
+		<label left="482" top="327" width="100" height="20" format="%d" field="PM" />
+		<rectangle left="480" top="388" color="black" width="100" height="20"  />
+		<label left="482" top="388" width="100" height="20" format="%d" field="PF" />
+		<rectangle left="480" top="449" color="black " width="30" height="20"  />
+		<label left="482" top="449" width="40" height="20" format="%d" field="Defesa" />
+		<rectangle left="480" top="510" color="black " width="30" height="20"  />
+		<label left="482" top="510" width="40" height="20" format="%d" field="Resistencia" />
+		<rectangle left="545" top="449" color="Navy " width="30" height="20"  />
+		<label left="547" top="449" width="40" height="20" field="DEFRED" />
+		<rectangle left="545" top="510" color="Navy " width="30" height="20"  />
+		<label left="547" top="510" width="40" height="20" field="RESRED" />
+		<label left="490" top="470" width="70" height="20" scale="1.5" fontColor="Navy  " text="Redução" />
+		<label left="490" top="530" width="70" height="20" scale="1.5" fontColor="Navy  " text="Redução" />
+------------- Status de Vida e outros -------------------------
+		<button left="80" top="603" width="38" opacity="0.1" height="32" onClick="IgualarHPMesa()"/>
+		<progressBar left="148" top="603" color="red"  width="100" value="100" max="100" height="30"  />
+		<label left="150" fontSize="20" top="603" width="100" fontColor="white" horzTextAlign="center" height="30" format="%d" field="HPTotal" />
+		<button left="80" top="637" width="38" opacity="0.1" height="32" onClick="IgualarMPMesa()"/>
+		<progressBar left="148" top="640" color="blue"  width="100" value="100" max="100" height="30"  />
+		<label left="150" fontSize="20" top="640" width="100" fontColor="white" horzTextAlign="center" height="30" format="%d" field="MPTotal" />
+		<rectangle left="168" top="702" color="black"  width="75" height="20"/>
+		<label left="170" top="702" width="75" height="20" field="Esquiva" />
+		<rectangle left="168" top="732" color="black"  width="75" height="20"/>
+		<label left="170" top="732" width="75" height="20" format="%d" field="Persistencia" />
+		
+		<rectangle left="498" top="610" color="black"  width="75" height="20"/>
+		<label left="500" top="610" width="75" height="20" field="Acerto" />
+		<rectangle left="498" top="640" color="black"  width="75" height="20"/>
+		<label left="500" top="640" width="75" height="20" field="AcertoMagico" />
+		<rectangle left="498" top="702" color="black"  width="75" height="20"/>
+		<label left="500" top="702" width="75" height="20" field="Critical" />
+		<rectangle left="498" top="732" color="black"  width="75" height="20"/>
+		<label left="500" top="732" width="75" height="20" field="CMagico" />
+------------- LevelZeira --------------------------------------
+		<edit left="295" top="807" fontColor="#00008B" scale="2.0" width="21"  height="50" type="number" textPrompt="0" enabled="true" max="30" field="Level" transparent="true" />
+		<edit left="295" top="700" fontColor="#00008B" scale="2.0" width="21" visible="false"  height="50" field="Elevel" transparent="true" />
+			
+    --------------------- Outras Forms --------------------------------	
+	
+		<button left="33" top="160" width="60" height="60" opacity="0.1">
+			<event name="onClick">
+				local novoForm = GUI.newForm("frmequip");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+			</event>			
+		</button>	
+		
+		<button left="120" top="160" width="60" height="60" opacity="0.1">
+			<event name="onClick">
+				local novoForm = GUI.newForm("frmhabilidade");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+			</event>
+		</button>
+
+		<button left="460" top="160" width="60" height="60" opacity="0.1">
+			<event name="onClick">
+				local novoForm = GUI.newForm("frmHistoria");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+			</event>
+		</button>
+		
+		<button left="287" top="290" width="60" height="60" opacity="0.1">
+			<event name="onClick">
+				local novoForm = GUI.newForm("frmsummon");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+			</event>
+		</button>
+		
+		<button left="542" top="160" width="60" height="60" opacity="0.1">
+			<event name="onClick">
+				local novoForm = GUI.newForm("frmpersonagem");
+				novoForm:setNodeObject(sheet);
+				novoForm:show();
+			</event>
+		</button>
+	
+	------------------------------------------
+	------------------------------------------	
+	--[[ Alto Calculavel Datalink de Raça ]]--
+	------------------------------------------
+	------------------------------------------
+	 <dataLink fields="{'Raca', 'Level'}">
+        <event name="onChange"> 
+				
+			<![CDATA[
+			if sheet.Level ~= nil then	
+				if sheet.level > 0 then
+					if sheet.Raca == 'Humano' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.1
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.1
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.1
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.1
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.1	
+					else if sheet.Raca == 'Elfo' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.3
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.1
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.0	
+					else if sheet.Raca == 'Elfo Negro' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.1
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.3
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.0
+					else if sheet.Raca == 'Anão' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.4
+					else if sheet.Raca == 'Orc' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.4
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.2
+					else if sheet.Raca == 'Kamael' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.3
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.0
+					else if sheet.Raca == 'Thiefling' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.3
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.0		
+					end	
+					end
+					end
+					end
+					end
+					end
+					end;
+				end;		
+			]]>
+					
+			<![CDATA[ 
+			if sheet.Level ~= nil then
+				if sheet.Level > 0 then
+					if sheet.classe == 'Cavaleiro Draconico' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.2
+					end;	
+				end;
+			end;
+		end;	
+			]]>		
+
+		  </event>
+	</dataLink>
+	
+	------------------------------------------
+	------------------------------------------	
+	--[[ Alto Calculavel Atributos Total ]]---
+	------------------------------------------
+	------------------------------------------	
+	<dataLink fields="{'Forca', 'Inteligencia', 'Destreza', 'Agilidade', 'Vitalidade', 'FNivel', 'FNivel', 'INivel', 'DNivel', 'ANivel', 'VNivel', 'DForca', 'DInteligencia', 'DDestreza', 'DAgilidade', 'DVitalidade'}">
+		<event name="onChange"> 		
+			-- Status Total --
+			sheet.ForcaTotal = (math.floor((tonumber(sheet.Forca) or 0) + (tonumber(sheet.FNIvel) or 0) + (tonumber(sheet.DForca) or 0)) or 0) or 1;
+			sheet.InteligenciaTotal	= math.floor((tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.INivel) or 0) + (tonumber(sheet.DInteligencia) or 0));
+			sheet.DestrezaTotal = math.floor((tonumber(sheet.Destreza) or 0) + (tonumber(sheet.DNivel) or 0) + (tonumber(sheet.DDestreza) or 0));
+			sheet.AgilidadeTotal = math.floor((tonumber(sheet.Agilidade) or 0) + (tonumber(sheet.ANIvel) or 0) + (tonumber(sheet.DAgilidade) or 0));
+			sheet.VitalidadeTotal = math.floor((tonumber(sheet.Vitalidade) or 0) + (tonumber(sheet.VNIvel) or 0) + (tonumber(sheet.DVitalidade) or 0));
+	    </event>
+    </dataLink> 					
+	---------------------------------------------
+	---------------------------------------------
+	--[[ Alto Calculavel Status extras Total ]]--
+	---------------------------------------------
+	---------------------------------------------			
+	<dataLink fields="{'ForcaTotal', 'InteligenciaTotal', 'DestrezaTotal', 'AgilidadeTotal', 'VitalidadeTotal', 'FNivel', 'FNivel', 'INivel', 'DNivel', 'ANivel', 'VNivel', 'DForca', 'DInteligencia', 'DDestreza',
+						'DAgilidade', 'DVitalidade', 'ArmaPA', 'ArmaDEF', 'ArmaPM', 'ArmaRES', 'ArmaPF', 'ArmaduraPA', 'ArmaduraPF', 'ArmaduraPM', 'ArmaduraRES', 'ArmaduraDEF', 'OutraPA', 'OutraPF', 'OutraPM', 'OutraRES', 'OutraDEF',
+						'AcessorioPA', 'AcessorioPF', 'AcessorioPM', 'AcessorioRES', 'AcessorioDEF', 'PABasica', 'PMBasica', 'PFBasica', 'RESBasica', 'DEFBasica', 'PARacial', 'PMRacial', 'PFRacial', 'DEFRacial', 'RESRacial',}">
+		<event name="onChange"> 		
+			sheet.ADeslocamento = (tonumber(sheet.AgilidadeTotal) or 0) /10;
+			sheet.RealDeslocamento = (tonumber(sheet.ADeslocamento) or 0) + (tonumber(sheet.Deslocamento) or 0) + (tonumber(sheet.DeslocamentoBasica) or 0);			
+			sheet.DVisao = (tonumber(sheet.DestrezaTotal) or 0) /10;
+			sheet.RealVisao = (tonumber(sheet.DVisao) or 0) + (tonumber(sheet.Visao) or 0) + (tonumber(sheet.VisaoBasica) or 0);
+	    </event>
+    </dataLink> 
+	
+	------------------------------------------
+	------------------------------------------	
+	---[[ Alto Calculavel PA,PM,PF Total ]]---
+	------------------------------------------
+	------------------------------------------	
+	<dataLink fields="{'ForcaTotal', 'InteligenciaTotal', 'DestrezaTotal', 'AgilidadeTotal', 'VitalidadeTotal', 'FNivel', 'FNivel', 'INivel', 'DNivel', 'ANivel', 'VNivel', 'DForca', 'DInteligencia', 'DDestreza',
+						'DAgilidade', 'DVitalidade', 'ArmaPA', 'ArmaDEF', 'ArmaPM', 'ArmaRES', 'ArmaPF', 'ArmaduraPA', 'ArmaduraPF', 'ArmaduraPM', 'ArmaduraRES', 'ArmaduraDEF', 'OutraPA', 'OutraPF', 'OutraPM', 'OutraRES', 'OutraDEF',
+						'AcessorioPA', 'AcessorioPF', 'AcessorioPM', 'AcessorioRES', 'AcessorioDEF', 'PABasica', 'PMBasica', 'PFBasica', 'RESBasica', 'DEFBasica', 'PARacial', 'PMRacial', 'PFRacial', 'DEFRacial', 'RESRacial', 'Classe', 'ORCRacial'}">
+		<event name="onChange"> 
+			sheet.ORCRacial = 0;
+											 
+			--PA, PM , PF, RES e Def --
+			if sheet.SequenciaInicial == true then
+				if sheet.Classe == 'Monge' then
+					if sheet.Raca == 'Orc' then
+						sheet.ORCRacial = (math.floor((tonumber(sheet.ForcaTotal) or 0) *4 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.PABasica) or 0)) * 0.10);
+											 
+						sheet.PA = math.floor((tonumber(sheet.ForcaTotal) or 0) *4 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.ORCRacial) or 0));
+					else
+						sheet.PA = math.floor((tonumber(sheet.ForcaTotal) or 0) *4 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.PABasica) or 0));
+					end;
+				else 
+					if sheet.Raca == 'Orc' then 
+						sheet.ORCRacial = (math.floor((tonumber(sheet.ForcaTotal) or 0) *2 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.PABasica) or 0)) * 0.10);
+											 
+						sheet.PA =  math.floor((tonumber(sheet.ForcaTotal) or 0) *2 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
+											  (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.ORCRacial) or 0));									
+					else
+						sheet.PA =  math.floor((tonumber(sheet.ForcaTotal) or 0) *2 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
+											  (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.PABasica) or 0));
+					end;
+				end;
+				 
+				sheet.PM =  math.floor((tonumber(sheet.InteligenciaTotal) or 0) *2 + (tonumber(sheet.ArmaPM) or 0) + (tonumber(sheet.OutraPM) or 0) + (tonumber(sheet.ArmaduraPM) or 0) + (tonumber(sheet.AcessorioPM) or 0) +
+									  (tonumber(sheet.PMRacial) or 0) + (tonumber(sheet.PMBasica) or 0));
+				sheet.PF =  math.floor((tonumber(sheet.DestrezaTotal) or 0) *2 + (tonumber(sheet.ArmaPF) or 0) + (tonumber(sheet.OutraPF) or 0) + (tonumber(sheet.ArmaduraPF) or 0) + (tonumber(sheet.AcessorioPF) or 0) +
+									  (tonumber(sheet.PFRacial) or 0) + (tonumber(sheet.PFBasica) or 0));			
+				sheet.Defesa =  math.floor((tonumber(sheet.VitalidadeTotal) or 0) /2 + (tonumber(sheet.AgilidadeTotal) or 0) /2 + (tonumber(sheet.ArmaDEF) or 0) + 
+										  (tonumber(sheet.OutraDEF) or 0) + (tonumber(sheet.ArmaduraDEF) or 0) + (tonumber(sheet.AcessorioDEF) or 0) + (tonumber(sheet.DEFRacial) or 0) + (tonumber(sheet.DEFBasica) or 0));
+				sheet.Resistencia = math.floor((tonumber(sheet.VitalidadeTotal) or 0) /2) + ((tonumber(sheet.Defesa) or 0) /2) +
+											   ((tonumber(sheet.InteligenciaTotal) or 0) /2) + (tonumber(sheet.ArmaRES) or 0) + (tonumber(sheet.OutraRES) or 0) + 
+											   (tonumber(sheet.ArmaduraRES) or 0) + (tonumber(sheet.AcessorioRES) or 0) + (tonumber(sheet.RESRacial) or 0) + (tonumber(sheet.RESBasica	) or 0) + math.floor(tonumber(sheet.ForcaTotal * 0.25) or 0);
+			end;
+		</event>
+    </dataLink> 
+
+	 <dataLink fields="{'Defesa', 'Resistencia', 'Vitalidade', 'Agilidade', 'VitalidadeTotal', 'AgilidadeTotal', 'ArmaduraDEF', 'ArmaDEF', 'OutraDEF', 'AcessorioDEF', 'DEFBasica', 'level'}">
+        <event name="onChange">
+ 		
+			---------------------------------------------
+			---------------------------------------------
+			------[[Calculo de Redução Porcentado]]------
+			---------------------------------------------
+			---------------------------------------------	
+			if sheet.Level == 30 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /5);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /5);
+			end;	
+				
+			if sheet.level == 29 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /4.5);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /4.5);
+			end;
+			
+			if sheet.level == 28 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /4.2);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /4.2);
+			end;
+			
+			if sheet.level == 27 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /3.9);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /3.9);
+			end;
+			
+			if sheet.level == 26 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /3.8);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /3.8);
+			end;
+
+			if sheet.level == 25 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /3.6);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /3.6);
+			end;
+			
+			if sheet.level == 24 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /3.4);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /3.4);
+			end;
+			
+			if sheet.level == 23 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /3.2);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /3.2);
+			end;
+			
+			if sheet.level == 22 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /3);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /3);
+			end;
+			
+			if sheet.level == 21 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /2.8);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /2.8);
+			end;
+			
+			if sheet.level == 20 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /2.5);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /2.5);
+			end;
+			
+			if sheet.level == 19 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /2.4);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /2.4);
+			end;
+			
+			if sheet.level == 18 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /2.2);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /2.2);
+			end;
+			
+			if sheet.level == 17 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /2);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /2);
+			end;
+			
+			if sheet.level == 16 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /1.9);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /1.9);
+			end;
+			
+			if sheet.level == 15 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /1.8);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /1.8);
+			end;
+			
+			if sheet.level == 14 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /1.6);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /1.6);
+			end;
+			
+			if sheet.level == 13 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /1.5);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /1.5);
+			end;
+			
+			if sheet.level == 12 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /1.3);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /1.3);
+			end;
+			
+			if sheet.level == 11 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /1.2);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /1.2);
+			end;
+			
+			if sheet.level == 10 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /1.1);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /1.1);
+			end;
+			
+			if sheet.level == 9 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /1);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /1);
+			end;
+			
+			if sheet.level == 8 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /0.92);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /0.92);
+			end;
+			
+			if sheet.level == 7 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /0.8);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /0.8);
+			end;
+			
+			if sheet.level == 6 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /0.7);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /0.7);
+			end;
+			
+			if sheet.level == 5 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /0.6);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /0.6);
+			end;
+			
+			if sheet.level == 4 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /0.5);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /0.5);
+			end;
+			
+			if sheet.level == 3 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /0.4);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /0.4);
+			end;
+			
+			if sheet.level == 2 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /0.3);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /0.3);
+			end;
+			
+			if sheet.level == 1 then 
+				sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /0.2);
+				sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /0.2);
+			end;
+        </event>
+    </dataLink>
+
+
+		
+	---------------- BOTÕES EXPLICATIVOS ---------------------
+	<button left="388" top="255" width="60"  height="55" opacity="0.1" onClick="showMessage('P.A = Poder de Ataque 2x a Força, Se for Monge 4x Força');"/>
+
+	<button left="388" top="317" width="60"  height="55" opacity="0.1" onClick="showMessage('P.M = Poder Magico 2x a Inteligencia');"/>
+	
+	<button left="388" top="377" width="60"  height="55" opacity="0.1" onClick="showMessage('P.F = Poder de Fogo 2x a Destreza');"/>
+	
+	<button left="388" top="435" width="60"  height="55" opacity="0.1" onClick="showMessage('DEF = Defesa Fisica que é Armadura + Metade da Vitalidade e Metade da Agilidade');"/>
+
+	<button left="388" top="493" width="60"  height="55" opacity="0.1" onClick="showMessage('RES = Resistencia Magica que é Metade da Força + Metade da Vitalidade + Metade da Defesa');"/>
+	
+	
+	-------------- CONTROLADOR DE STATUS GERAL POR RAÇA Classe e Espec ---------
+
+	<dataLink fields="{'Raca', 'Classe', 'Espec', 'Level'}">
+        <event name="onChange"> 		
+			if sheet.SequenciaInicial == true then
+				self.StatusPorRaca(); 
+				self.StatusClasseAte20();				
+				self.StatusEspecAteLevel30();				
+				self.StatusClasseEspecialAteLevel20();				
+				self.StatusClasseEspecialAteLevel30();			
+			end;
+		</event>
+    </dataLink>	
+	
+	<dataLink fields="{'VitalidadeTotal', 'ArmaHP', 'OutraHP', 'ArmaduraHP', 'AcessorioHP', 'PHPBasica', 'PHPRacial', 'Classe', 'Espec', 'RACA', 'Level'}">
+        <event name="onChange"> 
+			if sheet.SequenciaInicial == true then
+				self.ControlaRacaHPAte20();
+				self.ControlaRacaHPAte30();
+				self.ControlaClasseHPAte20();
+				self.ControlaEspecHPAte30();
+				self.ControlaClasseEspecialHPAte20();
+				self.ControlaClasseEspecialHPAte30();
+				self.CalculaHP();
+				self.ChecaLevel20();
+			end;
+		</event>
+    </dataLink>	
+	
+	<dataLink fields="{'InteligenciaTotal', 'ArmaMP', 'OutraMP', 'ArmaduraMP', 'AcessorioMP', 'PMPBasica', 'PMPRacial', 'Classe', 'Espec', 'Level', 'DMP', 'MPMont'}">
+        <event name="onChange"> 
+			if sheet.SequenciaInicial == true then
+				self.ControlaClasseMP();
+				self.ControlaEspecMP();			
+				self.ControlaClasseEspecialMPAte20();	
+				self.CalculaMP();
+				self.ChecaLevel20();				
+			end;
+		</event>
+    </dataLink>	
+
+	-------------- CONTROLADOR DE CHANCES DAS CLASSES E ESPECIALIZAÇÃO ---------
+	<dataLink fields="{'ClasseCR', 'DestrezaTotal', 'AgilidadeTotal', 'ClasseAM', 'AcertoBasica', 'AcertoRacial', 'ESQBasica', 'EspecAM', 'EspecCR', 'ClasseCM', 'EspecCM', 'ClasseEsquiva', 'EspecEsquiva',
+						'ClassePer', 'EspecPer', 'ESQRacial', 'CritBasica', 'CritRacial', 'AMRacial', 'AMBasica', 'CMBasica', 'CMRacial', 'PersistBasica', 'PersistRacial', 'VitalidadeTotal', 
+						'ForcaTotal', 'Level', 'ClasseAcerto', 'EspecAcerto', 'Classe', 'Espec', 'Raca'}">
+		<event name="onChange">					
+			if sheet.SequenciaInicial == true then
+				self.StatusDeChances();
+				self.ChecaLevel20();					
+			end;					
+		</event>
+	</dataLink>	
+		
+	
+---------------------------- BOTAO ATAQUE BASICO ---------------------------	
+        <script>
+			local function AtaqueBasico()      
+				-- obter a mesa do personagem
+				local mesaDoPersonagem = Firecast.getMesaDe(sheet);        
+
+				-- se o usuário não preencheu modificador, vamos usar o valor 0
+				sheet.Acerto = sheet.Acerto or 0;                        
+				if sheet.EscolheAtaqueBasico == nil then
+					showMessage("Escolha uma Base de Dano para seu Ataque Basico na lista acima");
+				else				
+					mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
+						function (rolado)						
+						local soDado = rolado.resultado + 1 - sheet.Acerto;
+							if soDado > sheet.Critical then
+								if sheet.EscolheAtaqueBasico == 'PA' then
+									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICO CORPO A CORPO CARAI  :awyeah: « " .. sheet.PA * 2 .. " »");
+								elseif sheet.EscolheAtaqueBasico == 'PF' then
+									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICO A DISTANCIA CARAI :awyeah: « " .. sheet.PF * 2 .. " »");		
+									sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
+								end;	
+							else
+								if sheet.EscolheAtaqueBasico == 'PA' then
+									mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico corpo a corpo « [§K4,0] " .. sheet.PA .. " [§K9,0]»");
+								elseif sheet.EscolheAtaqueBasico == 'PF' then			
+									mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. sheet.PF .. " [§K9,0]»");
+									sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
+								end;							
+							end;							
+					end); 
+				end;
+			end; 		   
+        </script> 
+		
+		<comboBox left="273" top="355" width="90" horzTextAlign="center" field="EscolheAtaqueBasico" fontColor="#00FFFF" items="{'PA', 'PF'}"/>
+        <button left="273" top="380" width="90" height="30"  fontSize="12" fontColor="#00FFFF" text="Ataque Basico" onClick="AtaqueBasico()"/>		
+				
+		<edit left="270" top="670" width="90" type="number" height="30" visible="false" field="ClasseAcerto"/>
+		<edit left="270" top="720" width="90" type="number" height="30" visible="false" field="DestrezaAcerto"/>
+		<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="EspecAcerto"/>
+		
+		<edit left="270" top="670" width="90" type="number" height="30" visible="false" field="ClasseAM"/>
+		<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="EspecAM"/>
+		
+		<edit left="270" top="670" width="90" type="number" height="30" visible="false" field="ClasseCR"/>
+		<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="EspecCR"/>
+		
+		<edit left="270" top="670" width="90" type="number" height="30" visible="false" field="ClasseCM"/>
+		<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="EspecCM"/>
+
+		<edit left="270" top="670" width="90" type="number" height="30" visible="false" field="ClasseEsquiva"/>
+		<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="EspecEsquiva"/>
+
+		<edit left="270" top="670" width="90" type="number" height="30" visible="false" field="ClassePer"/>
+		<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="EspecPer"/>	
+
+		<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="AgilidadeESQ"/>	
+		<edit left="270" top="770" width="90" type="number" height="30" visible="false" field="ForcaPer"/>	
+			
+		<edit top="440" left="292" width="50" height="30" max="160" min="0" horzTextAlign="center" type="number" text="120" transparent="true" fontColor="Black" fontSize="22" enabled="true" field="ControladorAtributos"/>
+		<edit top="530" left="292" width="50" height="30" max="160" min="0" horzTextAlign="center" type="number" text="120" visible="false" fontSize="22" enabled="true" field="LiberarRolagemUp"/>
+		<edit top="530" left="292" width="50" height="30" max="20" min="0" horzTextAlign="center" type="number" visible="false" fontSize="22" enabled="true" field="CLevel"/>
+		
+		<script>
+			function DiminuirPontosForca()
+                if tonumber(sheet.Forca) > 0 then
+					sheet.Forca = tonumber(sheet.Forca) - 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) + 1;
+                else
+					showMessage("Atributo Força não tem valor suficiente para ser subtraido");
+                end;
+			end;
+			
+			function AumentarPontosForca()
+                if tonumber(sheet.ControladorAtributos) > 0 then
+					sheet.Forca = tonumber(sheet.Forca) + 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) - 1;
+                else
+					showMessage("Voce não possui pontos de atributo para destribuir, vai caçar XP");
+                end;
+			end;
+			
+			function DiminuirPontosInteligencia()
+                if tonumber(sheet.Inteligencia) > 0 then
+					sheet.Inteligencia = tonumber(sheet.Inteligencia) - 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) + 1;
+                else
+					showMessage("Atributo Inteligencia não tem valor suficiente para ser subtraido");
+                end;
+			end;
+			
+			function AumentarPontosInteligencia()
+                if tonumber(sheet.ControladorAtributos) > 0 then
+					sheet.Inteligencia = tonumber(sheet.Inteligencia) + 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) - 1;
+                else
+					showMessage("Voce não possui pontos de atributo para destribuir, vai caçar XP");
+                end;
+			end;
+			
+			function DiminuirPontosDestreza()
+                if tonumber(sheet.Destreza) > 0 then
+					sheet.Destreza = tonumber(sheet.Destreza) - 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) + 1;
+                else
+					showMessage("Atributo Destreza não tem valor suficiente para ser subtraido");
+                end;
+			end;
+			
+			function AumentarPontosDestreza()
+                if tonumber(sheet.ControladorAtributos) > 0 then
+					sheet.Destreza = tonumber(sheet.Destreza) + 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) - 1;
+                else
+					showMessage("Voce não possui pontos de atributo para destribuir, vai caçar XP");
+                end;
+			end;
+			
+			function DiminuirPontosAgilidade()
+                if tonumber(sheet.Agilidade) > 0 then
+					sheet.Agilidade = tonumber(sheet.Agilidade) - 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) + 1;
+                else
+					showMessage("Atributo Agilidade não tem valor suficiente para ser subtraido");
+                end;
+			end;
+			
+			function AumentarPontosAgilidade()
+                if tonumber(sheet.ControladorAtributos) > 0 then
+					sheet.Agilidade = tonumber(sheet.Agilidade) + 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) - 1;
+                else
+					showMessage("Voce não possui pontos de atributo para destribuir, vai caçar XP");
+                end;
+			end;
+			
+			function DiminuirPontosVitalidade()
+                if tonumber(sheet.Vitalidade) > 0 then
+					sheet.Vitalidade = tonumber(sheet.Vitalidade) - 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) + 1;
+                else
+					showMessage("Atributo Vitalidade não tem valor suficiente para ser subtraido");
+                end;
+			end;
+			
+			function AumentarPontosVitalidade()
+                if tonumber(sheet.ControladorAtributos) > 0 then
+					sheet.Vitalidade = tonumber(sheet.Vitalidade) + 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) - 1;
+                else
+					showMessage("Voce não possui pontos de atributo para destribuir, vai caçar XP");
+                end;
+			end;			
+		</script>
+		
+		<button name="btnUpaLevel" left="273" top="480" width="90" height="25" fontColor="#FFD700" fontSize="15" text="Level UP" onClick="RolarAtributoPorUpar()"/>
+			<script>
+				local function RolarAtributoPorUpar()            
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet);
+					sheet.modificador = sheet.modificador or 0;                        
+					if sheet.LiberarRolagemUp > 0 then
+						sheet.LiberarRolagemUp = tonumber(sheet.LiberarRolagemUp) - 1;
+						mesaDoPersonagem.chat:rolarDados("1d4", "[§K8]« Rolagem de Atributo por Level UP »",
+							function (rolado)
+								if rolado.resultado > 0 then
+									sheet.PPN = tonumber(rolado.resultado);  
+								else
+									showMessage("Aconteceu alguma coisa errada ai meu bom");
+								end;                                        
+								sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) + tonumber(rolado.resultado)
+						end);
+					else
+						showMessage("Voce ja rolou todos seus dados de Level UP");
+					end;
+				if sheet.LiberarRolagemUp > 0 then
+					self.btnUpaLevel.visible = true;
+				else
+					self.btnUpaLevel.visible = false
+				end;					
+				end;               
+			</script>
+
+		<progressBar name="BarraXP" width="100" height="20" color="purple" top="675" left="150" value="50" max="100"/>
+		<edit width="35" height="20" top="675" left="157" type="number" max="9999" transparent="true" horzTextAlign="center" field="XPAtual"/>
+		<label width="35" height="20" top="675" left="205" horzTextAlign="center" fontColor="black" text="1000" field="XPNecessario"/>
+		
+		<dataLink fields="{'XPAtual', 'Level'}">
+            <event name="onChange">
+			if sheet.SequenciaInicial == true then	
+				sheet.XPAtual = tonumber(sheet.XPAtual) or 0;
+				sheet.XPNecessario = tonumber(sheet.level) * 100;
+				if sheet.XPAtual >= sheet.XPNecessario then
+					sheet.XPAtual = tonumber(sheet.XPAtual) - tonumber(sheet.XPNecessario);
+					sheet.level = tonumber(sheet.level) + 1;
+					sheet.LiberarRolagemUp = tonumber(sheet.LiberarRolagemUp) + 1;
+				end;			
+				self.BarraXP.value = tonumber(sheet.XPAtual);
+				self.BarraXP.max = tonumber(sheet.XPNecessario);
+				
+				if sheet.LiberarRolagemUp > 0 then
+					self.btnUpaLevel.visible = true;
+				else
+					self.btnUpaLevel.visible = false
+				end;
+				
+				if sheet.Level > 30 then
+					sheet.Level = 30;
+				end;
+			end;	
+            </event>
+        </dataLink>
+
+		<dataLink field="Nome">
+            <event name="onChange">
+				if sheet.Nome == 'DeLevel' then	
+					sheet.level = tonumber(sheet.level) - 1;
+					sheet.LiberarRolagemUp = tonumber(sheet.LiberarRolagemUp) - 1;
+					sheet.Nome = 'Feito';			
+				end;	
+            </event>
+        </dataLink>
+	</scrollBox>
+	------------------ AREA DAS FUNÇOES -----------------
+	<script>
+	------------------ CALCULO DAS RAÇAS -----------------------------------
+	<![CDATA[
+		function self.StatusPorRaca()
+			sheet.Deslocamento = 0;
+			sheet.Correndo = 0;
+			sheet.visao = 0;
+			sheet.RegenMP = 0;      
+			
+			if sheet.Raca == 'Humano' then
+				sheet.Deslocamento = 9;
+				sheet.Correndo = 18 + (tonumber(sheet.CorridaBasica) or 0);
+				sheet.visao = 10;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal) or 0) /4 + 4 + (tonumber(sheet.REGMPBasica) or 0);
+			end;
+			
+			if sheet.Raca == 'Elfo' then
+				sheet.Deslocamento = 8;
+				sheet.Correndo = 20 + (tonumber(sheet.CorridaBasica) or 0);
+				sheet.visao = 10;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal) or 0) /4 + 5 + (tonumber(sheet.REGMPBasica) or 0);
+			end;					
+			
+			if sheet.Raca == 'Elfo Negro' then
+				sheet.Deslocamento = 10;
+				sheet.Correndo = 17 + (tonumber(sheet.CorridaBasica) or 0);
+				sheet.visao = 11;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal) or 0) /4 + 4 + (tonumber(sheet.REGMPBasica) or 0);
+			end;
+			
+			if sheet.Raca == 'Anão' then
+				sheet.Deslocamento = 7;
+				sheet.Correndo = 15 + (tonumber(sheet.CorridaBasica) or 0);
+				sheet.visao = 10;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal) or 0) /4 + 4 + (tonumber(sheet.REGMPBasica) or 0);
+			end;	
+			
+			if sheet.Raca == 'Orc' then
+				sheet.Deslocamento = 8;
+				sheet.Correndo = 16 + (tonumber(sheet.CorridaBasica) or 0);
+				sheet.visao = 10;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal) or 0) /4 + 4 + (tonumber(sheet.REGMPBasica) or 0);
+			end;
+			
+			if sheet.Raca == 'Kamael' then
+				sheet.Deslocamento = 8;
+				sheet.Correndo = 18 + (tonumber(sheet.CorridaBasica) or 0);
+				sheet.visao = 12;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal) or 0) /4 + 5 + (tonumber(sheet.REGMPBasica) or 0);
+			end;
+			
+			if sheet.Raca == 'Thiefling' then
+				sheet.Deslocamento = 9;
+				sheet.Correndo = 20 + (tonumber(sheet.CorridaBasica) or 0);
+				sheet.visao = 11;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal) or 0) /4 + 4 + (tonumber(sheet.REGMPBasica) or 0);	
+			end;
+		end;							
+	]]>		
+	</script> 
+	
+	------------------ area que controla o ganho da raça com HP -------------------------
+	<script>	
+	<![CDATA[
+		function self.ControlaRacaHPAte20()
+			sheet.RHPNivelAte20 = sheet.Level;
+			
+			if sheet.RHPNivelAte20 > 20 then
+				sheet.RHPNivelAte20 = 20;
+			end;
+			
+			if sheet.Raca == 'Humano' then
+				sheet.HPRACAATE20 = (tonumber(sheet.RHPNivelAte20) or 0) * 10;
+			end;
+			
+			if sheet.Raca == 'Elfo' then
+				sheet.HPRACAATE20 = (tonumber(sheet.RHPNivelAte20) or 0) * 8;
+			end;					
+			
+			if sheet.Raca == 'Elfo Negro' then
+				sheet.HPRACAATE20 = (tonumber(sheet.RHPNivelAte20) or 0) * 8;
+			end;
+			
+			if sheet.Raca == 'Anão' then
+				sheet.HPRACAATE20 = (tonumber(sheet.RHPNivelAte20) or 0) * 12;
+			end;	
+			
+			if sheet.Raca == 'Orc' then
+				sheet.HPRACAATE20 = (tonumber(sheet.RHPNivelAte20) or 0) * 11;
+			end;
+			
+			if sheet.Raca == 'Kamael' then
+				sheet.HPRACAATE20 = (tonumber(sheet.RHPNivelAte20) or 0) * 8;
+			end;
+			
+			if sheet.Raca == 'Thiefling' then
+				sheet.HPRACAATE20 = (tonumber(sheet.RHPNivelAte20) or 0) * 9;				
+			end;
+			
+		end;		
+	]]>		
+	</script> 
+	
+	<script>
+	<![CDATA[
+		function self.ControlaRacaHPAte30()   
+			sheet.HPRACAATE30 = 0;        
+			sheet.RHPNivelAte30 = math.floor((sheet.Level) - 20);
+			
+			if sheet.RHPNivelAte30 > 10 then
+				sheet.RHPNivelAte30 = 10;
+			end;
+
+			if sheet.RHPNivelAte30 < 0 then
+				sheet.RHPNivelAte30 = 0;
+			end;		
+							
+			if sheet.Raca == 'Humano' then
+				sheet.HPRACAATE30 = (tonumber(sheet.RHPNivelAte30) or 0) * 20;
+			end;
+			
+			if sheet.Raca == 'Elfo' then						
+				sheet.HPRACAATE30 = (tonumber(sheet.RHPNivelAte30) or 0) * 16;
+			end;
+			
+			if sheet.Raca == 'Elfo Negro' then					
+				sheet.HPRACAATE30 = (tonumber(sheet.RHPNivelAte30) or 0) * 16;						
+			end;
+			
+			if sheet.Raca == 'Anão' then						
+				sheet.HPRACAATE30 = (tonumber(sheet.RHPNivelAte30) or 0) * 24;				
+			end;
+			
+			if sheet.Raca == 'Orc' then
+				sheet.HPRACAATE30 = (tonumber(sheet.RHPNivelAte30) or 0) * 22;						
+			end;
+			
+			if sheet.Raca == 'Kamael' then					
+				sheet.HPRACAATE30 = (tonumber(sheet.RHPNivelAte30) or 0) * 16;					
+			end;
+			
+			if sheet.Raca == 'Thiefling' then				
+				sheet.HPRACAATE30 = (tonumber(sheet.RHPNivelAte30) or 0) * 18;				
+			end;
+		end;
+	]]>		
+	</script>	
+	------------------ TERMINO DO GANHO DE HP DAS RAÇAS -------------------------
+	------------- TERMINO DO CALCULO DAS RAÇAS --------------------------
+				
+	-----------------------INICIO DO CALCULO DA CLASSE ----------------
+	---------------------------- CALCULO DE STATUS POR CLASSE --------------------------------
+	<script>
+	<![CDATA[
+		function self.StatusClasseAte20()				
+			sheet.ClasseAcerto = 0;
+			sheet.ClasseAM = 0;
+			sheet.ClasseCR = 0;
+			sheet.ClasseCM = 0;
+			sheet.ClasseEsquiva = 0;
+			sheet.ClassePer = 0;
+		
+					
+			if sheet.Classe == 'Animago' then					
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 11
+				sheet.ClassePer = 1						
+			end;	
+				
+			if sheet.Classe == 'Arqueiro' then
+				sheet.ClasseAcerto = 2;
+				sheet.ClasseAM = 15;
+				sheet.ClasseCR = 20;
+				sheet.ClasseCM = 1;
+				sheet.ClasseEsquiva = 11;
+				sheet.ClassePer = 1;
+			end;	
+				
+			if sheet.Classe == 'Bardo' then
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 16;
+				sheet.ClasseCR = 20;
+				sheet.ClasseCM = 1;
+				sheet.ClasseEsquiva = 11;
+				sheet.ClassePer = 1;
+			end;	
+				
+			if sheet.Classe == 'Bispo' then
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 16;
+				sheet.ClasseCR = 20;
+				sheet.ClasseCM = 1;
+				sheet.ClasseEsquiva = 11;
+				sheet.ClassePer = 1;
+			end;	
+				
+			if sheet.Classe == 'Caçador de Almas' then
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 15;
+				sheet.ClasseCR = 20;
+				sheet.ClasseCM = 2;
+				sheet.ClasseEsquiva = 11;
+				sheet.ClassePer = 1;
+			end;	
+				
+			if sheet.Classe == 'Guerreiro' then
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 14;
+				sheet.ClasseCR = 19;
+				sheet.ClasseCM = 1;
+				sheet.ClasseEsquiva = 11;
+				sheet.ClassePer = 2;
+			end;	
+				
+			if sheet.Classe == 'Ladino' then
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 15;
+				sheet.ClasseCR = 20;
+				sheet.ClasseCM = 1;
+				sheet.ClasseEsquiva = 12;
+				sheet.ClassePer = 1;
+			end;	
+				
+			if sheet.Classe == 'Mago' then
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 16;
+				sheet.ClasseCR = 20;
+				sheet.ClasseCM = 1;
+				sheet.ClasseEsquiva = 11;
+				sheet.ClassePer = 1;
+
+			end;	
+				
+			if sheet.Classe == 'Mercenario' then
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 15;
+				sheet.ClasseCR = 19;
+				sheet.ClasseCM = 2;
+				sheet.ClasseEsquiva = 11;
+				sheet.ClassePer = 1;
+			end;	
+				
+			if sheet.Classe == 'Monge' then
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 15;
+				sheet.ClasseCR = 20;
+				sheet.ClasseCM = 1;
+				sheet.ClasseEsquiva = 12;
+				sheet.ClassePer = 1;
+			end;	
+				
+			if sheet.Classe == 'Paladino' then
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 15;
+				sheet.ClasseCR= 20;
+				sheet.ClasseCM = 1;
+				sheet.ClasseEsquiva = 11;
+				sheet.ClassePer = 1;
+			end;
+		end;	
+	]]>	
+	</script>
+	
+	---------------------- INICIO DO CALCULO DE HP DE CLASSE ------------------------
+	<script>
+	<![CDATA[
+		function self.ControlaClasseHPAte20()	
+			sheet.RHPNivelAte20 = sheet.Level;
+			
+			if sheet.RHPNivelAte20 > 20 then
+				sheet.RHPNivelAte20 = 20;
+			end;
+		
+			if sheet.Classe == 'Animago' then		
+				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 14 + 170;
+			end;	
+				
+			if sheet.Classe == 'Arqueiro' then
+				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 16 + 170;
+			end;	
+				
+			if sheet.Classe == 'Bardo' then
+				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 12 + 150;
+			end;	
+				
+			if sheet.Classe == 'Bispo' then
+				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 14 + 160;
+			end;	
+				
+			if sheet.Classe == 'Caçador de Almas' then
+				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 15 + 170;
+			end;	
+				
+			if sheet.Classe == 'Guerreiro' then
+				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 20 + 220;
+			end;	
+				
+			if sheet.Classe == 'Ladino' then
+				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 14 + 150;
+			end;	
+				
+			if sheet.Classe == 'Mago' then
+				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 12 + 140;
+			end;	
+				
+			if sheet.Classe == 'Mercenario' then
+				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 16 + 170;
+			end;	
+				
+			if sheet.Classe == 'Monge' then
+				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 16 + 180;
+			end;	
+				
+			if sheet.Classe == 'Paladino' then
+				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 18 + 200;
+			end;
+		end;
+	]]>	
+	</script>
+	------------------ FIM DO CALCULO DE HP DE CLASSE ---------------------
+			
+	
+	--------------- INICIO DE CALCULOS DA ESPECIALIZAÇÃO -----------------
+	<script>
+	<![CDATA[
+		function self.StatusEspecAteLevel30() 
+			if sheet.Level < 20 then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;	
+			end;
+			
+			if sheet.Espec == 'Druida' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;							
+			end;
+			
+			if sheet.Espec == 'Shaman' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 1;
+			end;
+			
+			if sheet.Espec == 'Caçador' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 1;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Sentinela Lunar' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 1;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Encantador de Almas' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 1;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Necromance' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 1;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Sacerdote' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Juiz' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 1;
+				sheet.EspecCM = 1;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Barbaro' then
+				sheet.EspecAcerto = 1;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Tanker' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 1;
+			end;
+			
+			if sheet.Espec == 'Acrobata' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Assassino' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 1;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Arcanista' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Feiticeiro' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Summoner' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Duelista' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 1;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Pirata' then
+				sheet.EspecAcerto = 1;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Guardião Espiritual' then
+				sheet.EspecAcerto = 1;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Cavaleiro das Trevas' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 1;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Templario' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+		end;	
+	]]>	
+	</script>
+	
+	-----CALCULADORR DE HP DA DA ESPECIALIZAÇÃO ------ 
+	
+	<script>
+	<![CDATA[
+		function self.ControlaEspecHPAte30()
+			if sheet.Level > 20 then        
+				sheet.RHPNivelAte30 = math.floor((sheet.Level) - 20);
+				sheet.EHPNivel = 0;	
+				
+				if sheet.RHPNivelAte30 > 10 then
+					sheet.RHPNivelAte30 = 10;
+				end;
+
+				if sheet.RHPNivelAte30 < 0 then
+					sheet.RHPNivelAte30 = 0;
+				end;							
+				
+				if sheet.Espec == 'Druida' then
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 22 + 600;					
+				end;
+				
+				if sheet.Espec == 'Shaman' then
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 24 + 600;
+				end;
+				
+				if sheet.Espec == 'Caçador' then
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 22 + 600;
+				end;
+				
+				if sheet.Espec == 'Sentinela Lunar' then
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 21 + 600;
+				end;
+				
+				if sheet.Espec == 'Encantador de Almas' then						
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 21 + 600;
+				end;
+				
+				if sheet.Espec == 'Necromance' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 22 + 600;
+				end;
+				
+				if sheet.Espec == 'Sacerdote' then
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 25 + 600;
+				end;
+				
+				if sheet.Espec == 'Juiz' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 28 + 600;
+				end;
+				
+				if sheet.Espec == 'Barbaro' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 28 + 600;
+				end;
+				
+				if sheet.Espec == 'Tanker' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 30 + 600;
+				end;
+				
+				if sheet.Espec == 'Acrobata' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 23 + 600;
+				end;
+				
+				if sheet.Espec == 'Assassino' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 21 + 600;
+				end;
+				
+				if sheet.Espec == 'Arcanista' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 20 + 600;
+				end;
+				
+				if sheet.Espec == 'Feiticeiro' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 22 + 600;
+				end;
+				
+				if sheet.Espec == 'Summoner' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 20 + 600;
+				end;
+				
+				if sheet.Espec == 'Duelista' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 24 + 600;
+				end;
+				
+				if sheet.Espec == 'Pirata' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 26 + 600;
+				end;
+				
+				if sheet.Espec == 'Guardião Espiritual' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 26 + 600;
+				end;
+				
+				if sheet.Espec == 'Cavaleiro das Trevas' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 29 + 600;
+				end;
+				
+				if sheet.Espec == 'Templario' then						
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 27 + 600;
+				end;
+				
+				if sheet.Level < 19 then
+					sheet.EHPNivel = 0;
+				end;
+			end;
+		end;	
+	]]>	
+	</script>
+	------------------------------ TERMINO STATUS POR ESPEC ----------------------------
+	
+	------------------------------- Status Especial Classe -----------------------------	
+	<script>		
+	<![CDATA[ 
+		function self.StatusClasseEspecialAteLevel20()	
+			if sheet.classe == 'Cavaleiro Draconico' then						
+				sheet.Deslocamento = 9;
+				sheet.Correndo = 18 + (tonumber(sheet.CorridaBasica) or 0);
+				sheet.visao = 10;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal) or 0) /4 + 4 + (tonumber(sheet.REGMPBasica) or 0);
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 14;
+				sheet.ClasseCR = 20;
+				sheet.ClasseCM = 2;
+				sheet.ClasseEsquiva = 10;
+				sheet.ClassePer = 1;
+			end;
+		end;
+	]]>		
+    </script>
+	--------------------------- HP DA CLASSE ESPECIAL ---------------------------
+	<script>		
+	<![CDATA[ 
+		function self.ControlaClasseEspecialHPAte20()	
+			if sheet.classe == 'Cavaleiro Draconico' then
+				sheet.RHPNivelAte20 = sheet.Level;
+			
+				if sheet.RHPNivelAte20 > 20 then
+					sheet.RHPNivelAte20 = 20;
+				end;
+			
+				sheet.HPRACAATE20 = (tonumber(sheet.RHPNivelAte20) or 0) * 11;
+				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 17  + 200;
+			end;					
+		end;
+	]]>
+    </script>
+	
+	------------------------ STATUS DA CLASSE ESPECIAL DERIVADOS DA ESPECIALIZAÇÃO ----------------
+	<script>		
+	<![CDATA[ 
+		function self.StatusClasseEspecialAteLevel30()
+			if sheet.classe == 'Cavaleiro Draconico' then
+				if sheet.level > 20 then
+					sheet.EspecAcerto = 0;
+					sheet.EspecAM = 1;
+					sheet.EspecCR = 0;
+					sheet.EspecCM = 0;
+					sheet.EspecEsquiva = 0;
+					sheet.EspecPer = 0;
+				end;
+			end;
+		end;
+	]]>		
+    </script> 
+
+	<script>		
+	<![CDATA[ 
+		function self.ControlaClasseEspecialHPAte30()		
+			if sheet.classe == 'Cavaleiro Draconico' then
+				if sheet.Level > 20 then
+					sheet.HPRACAATE30 = 0;        
+					sheet.RHPNivelAte30 = math.floor((sheet.Level) - 20);
+					sheet.EHPNivel = 0;	
+					
+					if sheet.RHPNivelAte30 > 10 then
+						sheet.RHPNivelAte30 = 10;
+					end;
+
+					if sheet.RHPNivelAte30 < 0 then
+						sheet.RHPNivelAte30 = 0;
+					end;
+					
+					sheet.HPRACAATE30 = (tonumber(sheet.RHPNivelAte30) or 0) * 22;
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 28 + 600;
+				end;	
+			end;
+		end;
+	]]>		
+    </script> 
+	------------------- TERMINO DE CALCULO HP DO CAVALEIRO DRACONICO -----------------------------
+	
+	------------------------ CALCULA TOTAL HP ----------------------------------------
+	<script>		
+	<![CDATA[ 
+		function self.CalculaHP()
+			if sheet.Level < 21 then
+				sheet.EHPNivel = 0;
+				sheet.HPRACAATE30 = 0;
+			end;
+			
+			sheet.HPTotal = (tonumber(sheet.VitalidadeTotal) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + 
+			(tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+			(tonumber(sheet.PHPRacial) or 0) + (tonumber(sheet.PHPBasica) or 0) + (tonumber(sheet.HPRACAATE20) or 0) + (tonumber(sheet.CHPNivel) or 0) + 
+			(tonumber(sheet.EHPNivel) or 0) + (tonumber(sheet.HPRACAATE30) or 0);
+		end;
+	]]>		
+    </script> 	
+	
+	-------------------------- Controle de MP por Classe ------------------------
+	<script>
+	<![CDATA[ 
+		function self.ControlaClasseMP()
+			
+			sheet.RHPNivelAte20 = sheet.Level;
+			
+			if sheet.RHPNivelAte20 > 20 then
+				sheet.RHPNivelAte20 = 20;
+			end;
+						
+			if sheet.Classe == 'Animago' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 4 + 100;
+			end;
+			
+			if sheet.Classe == 'Arqueiro' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 3 + 100;
+			end;
+			
+			if sheet.Classe == 'Bardo' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 4 + 100;
+			end;
+			
+			if sheet.Classe == 'Bispo' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 4 + 100;
+			end;
+			
+			if sheet.Classe == 'Caçador de Almas' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 4 + 100;
+			end;
+			
+			if sheet.Classe == 'Guerreiro' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 2 + 100;
+			end;
+			
+			if sheet.Classe == 'Ladino' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 2 + 100;
+			end;
+			
+			if sheet.Classe == 'Mago' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 4 + 100;
+			end;
+			
+			if sheet.Classe == 'Mercenario' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 3 + 100;
+			end;
+			
+			if sheet.Classe == 'Monge' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 3 + 100;
+			end;
+			
+			if sheet.Classe == 'Paladino' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20 	) or 0) * 3 + 100;
+			end;
+		end;					
+	]]>	
+    </script>
+	
+	<script>
+	-------------------------- Controle de MP por Especialização ------------------------
+	<![CDATA[ 
+		function self.ControlaEspecMP()
+		
+			if sheet.Level < 21 then
+				sheet.EMPNivel = 0;
+			end;	
+		     
+			sheet.RHPNivelAte30 = math.floor((sheet.Level) - 20);
+			
+			if sheet.RHPNivelAte30 > 10 then
+				sheet.RHPNivelAte30 = 10;
+			end;
+
+			if sheet.RHPNivelAte30 < 0 then
+				sheet.RHPNivelAte30 = 0;
+			end;
+
+			if sheet.Espec == 'Druida' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Shaman' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 2;
+			end;
+			
+			if sheet.Espec == 'Caçador' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Sentinela Lunar' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 4;
+			end;
+			
+			if sheet.Espec == 'Encantador de Almas' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Necromance' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Sacerdote' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 4;
+			end;
+			
+			if sheet.Espec == 'Juiz' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Barbaro' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Tanker' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 2;
+			end;
+			
+			if sheet.Espec == 'Acrobata' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Assassino' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 2;
+			end;
+			
+			if sheet.Espec == 'Arcanista' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Feiticeiro' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Summoner' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 4;
+			end;
+			
+			if sheet.Espec == 'Duelista' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Pirata' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 2;
+			end;
+			
+			if sheet.Espec == 'Guardião Espiritual' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 2;
+			end;
+			
+			if sheet.Espec == 'Cavaleiro das Trevas' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 2;
+			end;
+			
+			if sheet.Espec == 'Templario' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+		end;
+	]]>	
+    </script>
+	
+	----------------------------- CONTROLA MP DA CLASSE ESPECIAL EM TOTAL ---------------------
+	
+	<script>
+	<![CDATA[ 
+		function self.ControlaClasseEspecialMPAte20()			
+			if sheet.Classe == 'Cavaleiro Draconico' then
+				sheet.RHPNivelAte20 = sheet.Level;
+				
+				if sheet.RHPNivelAte20 > 20 then
+					sheet.RHPNivelAte20 = 20;
+				end;
+						
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 4 + 100;
+				
+				if sheet.Level < 21 then
+					sheet.EMPNivel = 0;
+				end;	
+			 
+				sheet.RHPNivelAte30 = math.floor((sheet.Level) - 20);
+				
+				if sheet.RHPNivelAte30 > 10 then
+					sheet.RHPNivelAte30 = 10;
+				end;
+
+				if sheet.RHPNivelAte30 < 0 then
+					sheet.RHPNivelAte30 = 0;
+				end;	
+					
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+				
+			end;			
+		end;
+	]]>		
+    </script> 
+
+	
+	<script>
+	-------------------------- CALCULO TOTAL DE MP ------------------------
+	<![CDATA[ 
+		function self.CalculaMP()
+			if sheet.Level < 21 then
+				sheet.EMPNivel = 0;
+			end;
+
+			sheet.MPTotal = (tonumber(sheet.InteligenciaTotal) or 0) + (tonumber(sheet.ArmaMP) or 0) + 
+			(tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) + (tonumber(sheet.MPMont) or 0) +
+			(tonumber(sheet.PMPRacial) or 0) + (tonumber(sheet.PMPBasica) or 0) + (tonumber(sheet.CMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0) + (tonumber(sheet.DMP) or 0);	
+		end;
+	]]>	
+    </script>
+	
+	
+	----------------------------- STATUS GERAL DE CHANCE DE ACERTOS E CRITICAL DOS PERSONAGENS --------------------
+	
+	<script>
+		<![CDATA[ 
+			function self.StatusDeChances()			
+				sheet.DestrezaAcerto = math.floor((tonumber(sheet.DestrezaTotal) or 0) /4);
+					
+					sheet.AgilidadeESQ = math.floor((tonumber(sheet.AgilidadeTotal) or 0) /5);
+
+					sheet.ForcaPer =  	((tonumber(sheet.ForcaTotal) or 0) /30);
+						
+					sheet.Acerto = math.floor((tonumber(sheet.ClasseAcerto) or 0) + (tonumber(sheet.EspecAcerto) or 0) + (tonumber(sheet.DestrezaAcerto) or 0) + (tonumber(sheet.AcertoBasica) or 0) + (tonumber(sheet.AcertoRacial) or 0));
+
+					if sheet.Level > 20 then
+						sheet.AcertoMagico = math.floor((tonumber(sheet.ClasseAM) or 0) + (tonumber(sheet.EspecAM) or 0) + (tonumber(sheet.AMBasica) or 0) + (tonumber(sheet.AMRacial) or 0));
+					else 
+						sheet.AcertoMagico = math.floor((tonumber(sheet.ClasseAM) or 0) + (tonumber(sheet.AMBasica) or 0) + (tonumber(sheet.AMRacial) or 0));
+					end;
+					
+					if sheet.Level > 20 then
+						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.EspecCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0));
+					else 
+						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0));
+					end;
+					
+					if sheet.Level > 20 then
+						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.EspecCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0));
+					else 
+						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0));
+					end;
+					
+					if sheet.Level > 20 then
+						sheet.Esquiva = math.floor((tonumber(sheet.ClasseEsquiva) or 0) + (tonumber(sheet.EspecEsquiva) or 0) + (tonumber(sheet.ESQBasica) or 0) + (tonumber(sheet.ESQRacial) or 0) + (tonumber(sheet.AgilidadeESQ) or 0));
+					else 
+						sheet.Esquiva = math.floor((tonumber(sheet.ClasseEsquiva) or 0) + (tonumber(sheet.ESQBasica) or 0) + (tonumber(sheet.ESQRacial) or 0) + (tonumber(sheet.AgilidadeESQ) or 0));
+					end;
+
+					if sheet.Level > 20 then
+						sheet.Persistencia = (tonumber(sheet.ClassePer) or 0) + (tonumber(sheet.EspecPer) or 0) + (tonumber(sheet.PersistBasica) or 0) + (tonumber(sheet.PersistRacial) or 0) + (tonumber(sheet.ForcaPer) or 0); 
+					else 
+						sheet.Persistencia = (tonumber(sheet.ClassePer) or 0) + (tonumber(sheet.PersistBasica) or 0) + (tonumber(sheet.PersistRacial) or 0) + (tonumber(sheet.ForcaPer) or 0);
+					end;		
+						
+					if sheet.Esquiva > 14 then
+						sheet.Esquiva = 14;
+					end;
+							
+					if sheet.Acerto > 6 then
+						sheet.Acerto = 6;
+					end;
+					
+					if sheet.Persistencia > 5 then
+						sheet.Persistencia = 5;
+					end;	
+			end;
+		]]>
+		
+    </script> 	
+	
+	--------------------------- CHEGA LEVEL 20 E CAVALEIRO DRACONICO -----------------------------
+	
+	<script>
+		<![CDATA[ 
+			function self.ChecaLevel20()			
+				if sheet.Level >= 20 then
+					self.cmbEspecializa.enabled = true;
+				else	
+					self.cmbEspecializa.enabled = false;
+				end;
+
+				if sheet.classe == 'Cavaleiro Draconico' then
+					self.cmbEspecializa.enabled = false;
+				else	
+					self.cmbEspecializa.enabled = true;
+				end;	
+			end;
+		]]>
+		
+    </script> 	
+	
+	<script>
+		<![CDATA[ 
+			function IgualarHPMesa()			
+				local mesa = Firecast.getMesaDe(sheet); 
+				local HPTotalMesa = (tonumber(sheet.HPTotal) or 0);
+				mesa.meuJogador:requestSetBarValue(1, nil, HPTotalMesa);
+			end;
+		]]>
+		
+    </script> 
+
+	<script>
+		<![CDATA[ 
+			function IgualarMPMesa()			
+				local mesa = Firecast.getMesaDe(sheet); 
+				local MPTotalMesa = (tonumber(sheet.MPTotal) or 0);
+				mesa.meuJogador:requestSetBarValue(2, nil, MPTotalMesa);
+			end;
+		]]>
+		
+    </script> 	
+	
+
+	
+</form>

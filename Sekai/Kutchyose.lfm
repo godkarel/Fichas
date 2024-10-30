@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<popupForm name="frmKutchyoseFicha" width="1050" height="650" >
+	<layout align="top" height="30" margins="{bottom=4}">
+		<button text="Novo Kutchyose" width="150" align="left">
+			<event name="onClick">
+				self.rclKuchyoseLista:append();
+			</event>
+		</button>
+	</layout> 
+	
+	<recordList name="rclKuchyoseLista" field="CampoKutchyose" templateForm="frmKutchyoseFicha1" align="top" selectable="true" layout="horizontal" height="40">                       
+		<event name="onSelect">                    
+			local node = self.rclKuchyoseLista.selectedNode;  
+			self.FichaKutchyose1.node = node;                       
+			self.FichaKutchyose1.visible = (node ~= nil);					  
+	   </event>		   
+	   <event name="onEndEnumeration">
+			if self.rclKuchyoseLista.selectedNode == nil and sheet ~= nil then
+				local nodes = ndb.getChildNodes(sheet.CampoSummon);           
+				if #nodes > 0 then
+						self.rclKuchyoseLista.selectedNode = nodes[1];
+				end;
+			end;
+		</event>
+	</recordList>   
+	
+	<dataScopeBox name="FichaKutchyose1" visible="false" align="client"  margins="{left=4, right=4, top=2}">
+		<scrollBox align="client">	 
+			<image width="1010" height="750" center="true"  src="/imagens/9.png"/>
+			<edit left="100	" top="6" width="200" height="25" field="KutchyoseNome"/>
+			<edit left="440	" top="6" width="30" height="25" horzTextAlign="center" field="KutchyoseNumero"/>
+			<edit left="85" top="62" width="70" height="25" field="KutchyoseDano"/>
+			<edit left="290" top="62" width="25" height="25" type="number" min="0" field="KutchyosePorcentDano"/>
+			<edit left="375" top="62" width="100" height="25" fontColor="red" enabled="false" field="KutchyoseDanoTotal"/>
+			<comboBox name="cmbKutchyoseDN" left="535" top="68" width="110" height="18" field="KutchyoseTipoDano" items="{'Tai', 'Nin', 'Gen', 'Elemental', 'DanoArmado'}" values="{'1', '2', '3', '4', '5'}"/>
+			<edit left="85" top="90" width="70" height="25" field="KutchyoseHP"/>
+			<edit left="290" top="90" width="25" height="25" field="KutchyosePorcentHP"/>
+			<edit left="375" top="90" width="100" height="25" enabled="false"  fontColor="red" field="KutchyoseHPTotal"/>		
+			<progressBar name="KutchyoseHPBar" left="110" top="125" width="120" height="20" color="green" value="50" max="100"/>
+			<edit left="120" top="125" width="40" height="20" transparent="true" horzTextAlign="center" type="number" fontColor="white" field="KutchyoseAtualEnergia"/>
+			<edit left="180" top="125" width="40" height="20" transparent="true" horzTextAlign="center" type="number" fontColor="white" field="KutchyoseMaxEnergia"/>
+			<image left="695" top="15" width="242" height="176" field="KutchyoseIMG" editable="true" style="autoFit"/>
+			<button left="150" top="200" width="140" height="40" text="Novo Jutsu Kutchyose">
+				<event name="onClick">                             
+					self.rclListaJutsusKutchyose:append();
+				</event>
+			</button>
+			<recordList name="rclListaJutsusKutchyose" field="KutchyoseJutsus" templateForm="frmKutchyoseFichaJutsu"
+						width="1000" height="505" left="5" top="245" selectable="true">                              
+				<event name="onSelect">                     
+					local node = self.rclListaJutsusKutchyose.selectedNode; 
+					self.ListaJutsusKutchyose.node = node;                       
+					self.ListaJutsusKutchyose.visible = (node ~= nil);
+				</event>
+			</recordList>       
+			<dataScopeBox name="ListaJutsusKutchyose" visible="false" width="700" height="460" left="400" top="300" >
+				<rectangle  color="black" xradius="10" yradius="10" width="588" height="450" left="1" top="1" >											
+					<label  width="120" height="40" left="10" top="10" fontFamily="Nyala" fontSize="16" text="Nome do Jutsu:"/>
+					<edit  width="310" height="30" left="130" top="15" field="NomeJutsuKutchyose"/>
+					<textEditor left="10" top="60" width="430" height="240" field="DescriJutsu"/>
+					<label left="10" top="305" width="120" height="40"  fontFamily="Nyala" fontSize="16" text="Dano:"/>
+					<edit left="53" top="310" width="80" height="30"  type="number" field="KutchyoseDanoJutsu"/>					
+					<label left="140" top="305" width="120" height="40" fontFamily="Nyala" fontSize="16" fontColor="green" text="Energia Kutchyuose:"/>
+					<edit  left="260" top="310" width="40" height="30" type="number" horzTextAlign="center" fontColor="green"  field="CustoKutchyose"/>	
+					<label left="230" top="305" width="100" height="40" fontFamily="Nyala" fontSize="16" visible="false" fontColor="green" text="Custo Real: "/>
+					<edit left="300" top="310" width="40" height="30" type="number" enabled="false" visible="false" horzTextAlign="center" fontColor="cyan"  field="CustoJutsu"/>
+					<label left="345" top="305" width="100" height="40" fontFamily="Nyala" fontSize="16" visible="false" fontColor="green" text="Energia: "/>
+					<edit name="edtCustoKutchyose" left="400" top="310" width="40" height="30" type="number"  horzTextAlign="center" visible="false" fontColor="green"  field="CustoEnergia"/>
+					<label left="10" top="345" width="60" height="40" fontFamily="Nyala" fontSize="16" text="Tipo 1:"/>
+					<comboBox  left="50" top="358" width="123" height="18" field="KutchyoseTipoJutsu" items="{'Dano Completo', 'Dano X2', 'M/Dano', 'KutchyoseOutros'}"/>
+					<label left="160" top="345" width="60" height="40" fontFamily="Nyala" visible="false" fontSize="16" text="Tipo 2:"/>
+					<comboBox left="205" top="358" width="100" height="18" field="Tipo" visible="false" items="{'Nulo', 'Tai', 'Nin', 'Gen', 'Elemental', 'DanoArmado', 'Defensivo', 'Selamento', 'Outros','M/Tai', 'M/Nin', 'M/Gen', 'M/Elemental', 'M/DA'}"/>	
+					<label left="310" top="345" width="60" height="40" fontFamily="Nyala" visible="false" fontSize="16" text="Tipo 3:"/>
+					<comboBox left="355" top="358" width="100" height="18" field="Tipo" visible="false" items="{'Nulo', 'Tai', 'Nin', 'Gen', 'Elemental', 'DanoArmado', 'Defensivo', 'Selamento', 'Outros','M/Tai', 'M/Nin', 'M/Gen', 'M/Elemental', 'M/DA'}"/>	
+					<label  width="150" height="40" left="10" top="390" fontFamily="Nyala" fontSize="16" text="Dano Verdadeiro"/>
+					<edit  width="80" height="20" left="110" top="400" enabled="false" horzTextAlign="center" type="number" field="KutchyoseDNVerdadeiro"/>
+					<label  width="170" height="40" left="280" top="390" fontFamily="Nyala" fontColor="Crimson " fontSize="16" text="Intensidade"/>
+					<edit  width="80" height="20" left="350" top="400" enabled="false" horzTextAlign="center" type="number" fontColor="Crimson" field="KutchyoseIntensidade"/>
+					<label  width="70" height="40" left="195" top="390" fontFamily="Nyala" fontSize="16" text="Level"/>
+					<edit  width="40" height="30" left="390" top="380" visible="false"  horzTextAlign="center" fontColor="cyan"  type="number" field="ChakraPlayer"/>
+					<edit  width="30" height="20" left="230" top="400" enabled="true" horzTextAlign="center" type="number" field="LevelJutsu1"/> 
+					<image left="445" top="110" width="140" height="150" src="/imagens/invoc.png"/>
+					<button left="445" top="120" fontSize="20" opacity="0.0" height="120" width="140" text="Usar" fontColor="White">
+						<event name="onClick"> 								
+							<![CDATA[
+								local node = self.ListaJutsusKutchyose.node;									
+								local mesaDoPersonagem = rrpg.getMesaDe(sheet);								
+								node.LevelJutsu1 = 1;
+								
+								if node.KutchyoseTipoJutsu == nil then
+									showMessage("Escolha o tipo do seu jutsu e preencha com as informações");
+								else 	
+									sheet.AcertoNinTotal = tonumber(sheet.AcertoNinTotal) or 0;
+									
+									if node.KutchyoseTipoJutsu ~= nil then
+										node.KutchyoseDNVerdadeiro = (tonumber(node.KutchyoseDanoJutsu) or 0)* 2^tonumber(node.LevelJutsu1 - 1); 
+									else
+										node.LevelJutsu1 = 1;
+									end;
+									
+									if node.KutchyoseTipoJutsu == 'Dano Completo' then
+										node.KutchyoseIntensidade = (tonumber(node.KutchyoseDNVerdadeiro) or 0) + (tonumber(sheet.KutchyoseDanoTotal) or 0);	
+									end;	
+									
+									if node.KutchyoseTipoJutsu == 'Dano X2' then
+										node.KutchyoseIntensidade = (tonumber(node.KutchyoseDNVerdadeiro) or 0) + ((tonumber(sheet.KutchyoseDanoTotal) or 0) * 2);	
+									end;
+									
+									if node.KutchyoseTipoJutsu == 'M/Dano' then
+										node.KutchyoseIntensidade = (tonumber(node.KutchyoseDNVerdadeiro) or 0) + ((tonumber(sheet.KutchyoseDanoTotal) or 0) / 2);	
+									end;
+									
+									if node.KutchyoseTipoJutsu == 'KutchyoseOutros' then
+										node.KutchyoseIntensidade = 0;
+									end;
+									
+									if ((node.CustoKutchyose == nil) or (node.CustoKutchyose == 0)) then
+										showMessage("O CUSTO DE ENERGIA DO KUTCHYOSE NÃO PODE ESTAR VAZIA SEU ANIMAL!");
+									else
+										mesaDoPersonagem.chat:rolarDados("1d100", "[§K3]Tentativa de executar Jutsu",
+										function (rolado)
+											if sheet.AcertoNinTotal >= rolado.resultado then
+												mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriJutsu);
+												if node.KutchyoseTipoJutsu == 'Dano Completo'then
+													if sheet.CRNinTotal >= rolado.resultado then
+														mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.KutchyoseIntensidade * 2) .. "[§K3] »");
+													else
+														mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.KutchyoseIntensidade .. "[§K3] »");
+													end;
+												end;
+												
+												if node.KutchyoseTipoJutsu == 'Dano X2'then
+													if sheet.CRNinTotal >= rolado.resultado then
+														mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.KutchyoseIntensidade * 2) .. "[§K3] »");
+													else
+														mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.KutchyoseIntensidade .. "[§K3] »");
+													end;
+												end;
+												
+												if node.KutchyoseTipoJutsu == 'M/Dano'then
+													if sheet.CRNinTotal >= rolado.resultado then
+														mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.KutchyoseIntensidade * 2) .. "[§K3] »");
+													else
+														mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.KutchyoseIntensidade .. "[§K3] »");
+													end;
+												end;
+												
+												if node.KutchyoseTipoJutsu == 'KutchyoseOutros'then
+													if sheet.CRNinTotal >= rolado.resultado then
+														mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.KutchyoseIntensidade * 2) .. "[§K3] »");
+													else
+														mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.KutchyoseIntensidade .. "[§K3] »");
+													end;
+												end;	
+												
+												sheet.KutchyoseAtualEnergia = sheet.KutchyoseAtualEnergia - (tonumber(node.CustoKutchyose) or 0);
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K4,0]TURURU, O Naruto pode ser duro as vezes [§I https://i.pinimg.com/736x/3d/5b/26/3d5b2652bd9b8459d9e9ba70c0724734.jpg]");
+											end;											
+										end);
+									end;
+								end;	
+							]]>
+						</event>
+					</button>
+					<label width="70" height="40" left="500" top="230" fontFamily="Nyala" fontSize="18" text="Usar"/>
+				</rectangle>
+			</dataScopeBox>
+			
+			<dataLink fields="{'KutchyoseMaxEnergia', 'KutchyoseAtualEnergia'}">
+				<event name="onChange">
+					if sheet.KutchyoseAtualEnergia ~= '' then
+						self.KutchyoseHPBar.value = (tonumber(sheet.KutchyoseAtualEnergia) or 0);
+						self.KutchyoseHPBar.max = (tonumber(sheet.KutchyoseMaxEnergia) or 0);		
+					end;
+				</event>
+			</dataLink>
+			
+			<dataLink fields="{'KutchyoseDano', 'KutchyosePorcentDano', 'KutchyoseTipoDano', 'TaiTotal', 'NinTotal', 'GenTotal', 'DATotal', 'EleTotal'}">
+				<event name="onChange">
+					if sheet.KutchyosePorcentDano ~= nil then
+						sheet.KutchyosePorcentDanoAPP = tonumber(sheet.KutchyosePorcentDano / 100);
+						
+						if self.cmbKutchyoseDN.value == '1' then
+							sheet.KutchyoseDanoTotal = sheet.KutchyoseDano + (sheet.TaiTotal * sheet.KutchyosePorcentDanoAPP) ;
+						end;
+						
+						if self.cmbKutchyoseDN.value == '2' then
+							sheet.KutchyoseDanoTotal = sheet.KutchyoseDano + (sheet.NinTotal * sheet.KutchyosePorcentDanoAPP);
+						end;
+						
+						if self.cmbKutchyoseDN.value == '3' then
+							sheet.KutchyoseDanoTotal = sheet.KutchyoseDano + (sheet.GenTotal * sheet.KutchyosePorcentDanoAPP);
+						end;
+						
+						if self.cmbKutchyoseDN.value == '4' then
+							sheet.KutchyoseDanoTotal = sheet.KutchyoseDano + (sheet.DATotal * sheet.KutchyosePorcentDanoAPP);
+						end;
+						
+						if self.cmbKutchyoseDN.value == '5' then
+							sheet.KutchyoseDanoTotal = sheet.KutchyoseDano + (sheet.EleTotal * sheet.KutchyosePorcentDanoAPP);
+						end;
+					end;
+				</event>
+			</dataLink>
+			
+			<dataLink fields="{'KutchyosePorcentHP', 'KutchyoseHP', 'HPTotal'}">
+				<event name="onChange">
+					if sheet.KutchyosePorcentHP ~= nil then
+						sheet.KutchyosePorcentHPAPP = tonumber(sheet.KutchyosePorcentHP / 100);					
+						sheet.KutchyoseHPTotal = sheet.KutchyoseHP + (sheet.HPTotal * sheet.KutchyosePorcentHPAPP) ;	
+					end;
+				</event>
+			</dataLink>
+			
+			<button left="20" top="160" text="Ataque Kutchyose" fontColor="cyan" width="130" height="30">
+				<event name="onClick">        
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet);        
+					sheet.AcertoTaiTotal = tonumber(sheet.AcertoTaiTotal or 0);  
+						mesaDoPersonagem.chat:rolarDados("1d100 ","[§K3]O Kutchyose tenta usar o ataque basico no oponente",
+							function (rolado)
+								if sheet.AcertoTaiTotal >= rolado.resultado then
+									if sheet.CRTaiTotal >= rolado.resultado then
+										mesaDoPersonagem.chat:enviarMensagem("[§K4]O KUTCHYOSE CRITOU O ALVO COM ATAQUE BASICO CAUSANDO [§K4]" .. (sheet.KutchyoseDanoTotal * 2));
+									else
+										mesaDoPersonagem.chat:enviarMensagem("[§K3]O Kutchyose acertou o alvo com ataque basico Causando [§K4]" .. sheet.KutchyoseDanoTotal);
+									end;																					
+								else
+									mesaDoPersonagem.chat:enviarMensagem("[§K4]O Oponente esquivou do ataque do Kutchyose");
+								end;
+								
+								sheet.KutchyoseAtualEnergia = sheet.KutchyoseAtualEnergia - 10;						
+						end); 		
+				</event>
+			</button>
+			
+			<button left="170" top="160" text="Esquiva Kutchyose" fontColor="cyan" width="130" height="30">
+				<event name="onClick">
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet);        
+					sheet.EsquivaTotal = tonumber(sheet.EsquivaTotal or 0);                        
+					mesaDoPersonagem.chat:rolarDados("1d100 ","[§K3]Tentativa de Esquiva do Kutchyose",
+						function (rolado)
+							if sheet.EsquivaTotal >= rolado.resultado then
+								mesaDoPersonagem.chat:enviarMensagem("[§K3]O Kutchyose esquivou do ataque do oponente");
+							else
+								mesaDoPersonagem.chat:enviarMensagem("[§K4]O Oponente Acertou o Kutchyose");
+							end;										
+					end);  
+				</event>
+			</button>		
+		</scrollBox>	
+	</dataScopeBox>
+</popupForm>

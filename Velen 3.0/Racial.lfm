@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<popupForm	 name="frmRacial" width="1000" height="600" >
+	<scrollBox align="client">		
+		<image left="1" top="5" width="1000" height="590" center="true"  src="/imagens/HR.png"/>
+		<image field="ImagemRacial" editable="true" style="autoFit" left="370" top="60" width="100" height="100"/>
+		<edit left="170" top="85" width="180" height="30" enabled="false" fontSize="16" field="NomeRacial"/> 
+		<textEditor left="100" top="170" width="370" height="270" enabled="false" field="RacialDescri"/>
+			<button left="130" top="450" fontSize="20" height="30" width="200" text="Usar Racial" fontColor="White" >     
+                <event name="onClick">
+					--[[ HABILIDADE BASICA ]]--								
+					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
+					sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+					mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Habilidade Racial",
+					function (rolado)					
+						if sheet.AcertoMagico >= rolado.resultado then
+							mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.RacialDescri);
+							if sheet.DanoRacial > 0 then
+								mesaDoPersonagem.chat:enviarMensagem(".. [§K4]Causando ".. tonumber(sheet.DanoRacial));
+							end;
+							local mesa = Firecast.getMesaDe(sheet); 
+							sheet.RacialBarrinha = mesa.meuJogador:getBarValue(2);
+							sheet.RacialBarrinha = (tonumber(sheet.RacialBarrinha) or 0) - (tonumber(sheet.CustoRacial) or 0);
+							mesa.meuJogador:requestSetBarValue(2, sheet.RacialBarrinha);
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+						end;
+					end);
+                </event>
+        </button>           
+		<edit left="625" top="69" width="70" height="25" enabled="false" fontSize="18" field="DanoRacial"/> 
+		<edit left="780" top="69" width="70" height="25" enabled="false" fontSize="18" field="CustoRacial"/> 
+		<edit name="DTRacialT" left="650" top="102" width="100" height="25" enabled="false" visible="false" fontSize="18" field="DTRacial"/> 
+
+		<edit left="600" top="225" width="50" height="20" opacity="1.0" enabled="false" type="float" decimalPlaces="2" fontSize="16" field="OrcRacial"/> 
+		<edit left="710" top="225" width="50" height="20" enabled="false" fontSize="16" field="PMRacial"/> 
+		<edit left="830" top="225" width="50" height="20" enabled="false" fontSize="16" field="PFRacial"/> 
+		<edit left="600" top="252" width="50" height="20" enabled="false" fontSize="16" field="DEFRacial"/> 
+		<edit left="710" top="252" width="50" height="20" enabled="false" fontSize="16" field="RESRacial"/> 		
+		
+		<edit left="600" top="303" width="50" height="20" enabled="false" fontSize="16" field="AcertoRacial"/>
+		<edit left="710" top="303" width="50" height="20" enabled="false" fontSize="16" field="AMRacial"/> 
+		<edit left="830" top="303" width="50" height="20" enabled="false" fontSize="16" field="ESQRacial"/> 		
+		<edit left="600" top="328" width="50" height="20" enabled="false" fontSize="16" field="CritRacial"/> 
+		<edit left="710" top="328" width="50" height="20" enabled="false" fontSize="16" field="CMRacial"/> 	
+		<edit left="830" top="328" width="50" height="20" enabled="false" fontSize="16" field="PersistRacial"/> 		
+		<edit left="600" top="353" width="50" height="20" enabled="false" fontSize="16" field="PHPRacial"/>
+		<edit left="710" top="353" width="50" height="20" enabled="false" fontSize="16" field="PMPRacial"/> 
+
+		<dataLink field="Raca">
+			<event name="onChange">
+					SkillRacial(sheet.Raca);	
+			</event>
+	
+		</dataLink>
+		
+		<script>
+            local function SkillRacial(RacialHabilidade)
+				sheet.PARacial = 0;
+				
+				if sheet.classe == "Cavaleiro Draconico" then
+					sheet.RacialDescri = "Skill Racial : Escama Draconica\nToda Batalha ele anulará o primeiro dano critico causados a ele anulando o dano total\nPassiva";
+					sheet.CustoRacial = 0;
+					sheet.PARacial = 0;
+				else
+					if sheet.Raca == "Humano" then
+						sheet.NomeRacial = "Despertar (NIVEL UNICO)"
+						sheet.RacialDescri = "Skill da Raça : Despertar\n Se livra de um efeito negativo, seja la qual for : sangramento, atordoamento, lentidão, silencio e etc.\n Custo 30 CD 1 vez por batalha / Defensiva";	
+						sheet.CustoRacial = 30;
+					end;
+					
+					if sheet.Raca == "Elfo" then
+						sheet.NomeRacial = "Interromper (NIVEL UNICO)"
+						sheet.RacialDescri = "Skill racial : Interromper\nNo momento que o oponente estiver conjurando a habilidade ele corta sua corrente de mana impedindo ele de completar sua conjuração e deixando a habilidade em CD\n( OBS : Ela não corta o conjuramento de Ultima )\n30 mana 1 vez por batalha /Defesa\nSkill Passiva :  Por ter uma audição e visão mais aguçada ele recebe +3 de percepção passiva";			   
+						sheet.CustoRacial = 30;
+					end;
+					
+					if sheet.Raca == "Elfo Negro" then
+						sheet.NomeRacial = "Sombra da Natureza (NIVEL UNICO)"
+						sheet.RacialDescri = "Skill da raça : Sombra da Natureza\nFicar Invisível se movimentando lentamente por 1 rodada teste de percepção 15\n30 Custo -CD 1 vez por batalha / Defesa\nSkill Passiva :  Por ter uma audição e visão mais aguçada ele recebe +3 de percepção passiva";		   
+						sheet.CustoRacial = 30;
+					end;
+
+					if sheet.Raca == "Anão" then
+						sheet.NomeRacial = "Cantoria de Anão (NIVEL UNICO)"
+						sheet.RacialDescri = "Skill de Raça : Cantoria de Anão\nCanta muito alto com uma voz horrível e deixa todas as Habilidades do oponente com atraso de 1 de CD ate o ( final da batalha )\nHabilidades Basicas e Ultimas não sofrem esse efeito\nCusto 30 CD 1 vez por Batalha / Buff\nSkill Passiva : Tem + 10% de chance de Fortificar um equipamento";			   
+						sheet.CustoRacial = 30;
+					end;
+
+					if sheet.Raca == "Orc" then
+						
+							sheet.NomeRacial = "Furia Natural (NIVEL UNICO)"
+							sheet.PARacial = math.floor(tonumber(sheet.PA) * 0.10); 
+							sheet.RacialDescri = "Skill Passiva da Raça : Fúria Natural\n10% de Poder de Ataque de bônus\n[ Passiva ]\nSkill Passiva :  Recebe + 5 de Atletismo\nVeja com o mestre";		   
+							sheet.CustoRacial = 0;
+
+					end;
+
+					if sheet.Raca == "Kamael" then
+						sheet.NomeRacial = "Colecionador (NIVEL UNICO)"
+						sheet.RacialDescri = "Skill de Raça : Colecionador\nAumenta em +1 o limite de Habilidades escolhidas pela classe\nPassiva\nSkill Passiva : Kamaeis não recebem dano de queda independente da altura que caírem pois podem planar com apenas 1 asa, não permitindo a eles voar";			   
+						sheet.CustoRacial = 0;
+					end;
+
+					if sheet.Raca == "Thiefling" then
+						sheet.NomeRacial = "Rabada (NIVEL UNICO)"
+						sheet.RacialDescri = "Skill de Raça : Rabada\nUsa seu rabo que tem uma ponta afiada que causa 10% da vida do oponente em Dano Real\n35 Custo CD 1 vez por Dia \nSkill Passiva : Visão na penumbra ( Conseguem enxergar no escuro )";		   
+						sheet.CustoRacial = 35;
+					end;
+				end;
+			end;
+        </script>
+		
+	</scrollBox>
+</popupForm>

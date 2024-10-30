@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<script>
+		<![CDATA[
+		function PreparaDifuculdadeAprenderRankE()							
+			local node = self.dsbListadeTreino.node;
+							
+				if node.RankPorAprender == 'E' then
+					if sheet.GraduacaoTreino == 'Academico' then					
+						node.Dificuldade1d10DoJutsu1 = 5 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 5 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 5 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 15 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Genin' then
+						node.Dificuldade1d10DoJutsu1 = 6 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 6 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 6 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 16 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Chunin' then
+						node.Dificuldade1d10DoJutsu1 = 7 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 7 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 7 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 17 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Jounin' then
+						node.Dificuldade1d10DoJutsu1 = 8 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 8 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 8 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 18 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Anbu' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'AnbuNucleo' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Organização' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'GDE' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Concelheiro' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Kage' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+				end;
+				
+				VerificaIntermediariosParaAprendizado();
+				ImpoeLimitenoAprendizado();
+		end;			
+		]]>
+
+		<![CDATA[
+		function PreparaDifuculdadeAprenderRankD()							
+			local node = self.dsbListadeTreino.node;
+						
+				if node.RankPorAprender == 'D' then
+					if sheet.GraduacaoTreino == 'Academico' then					
+						node.Dificuldade1d10DoJutsu1 = 4 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 4 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 4 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 14 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Genin' then
+						node.Dificuldade1d10DoJutsu1 = 5 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 5 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 5 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 15 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Chunin' then
+						node.Dificuldade1d10DoJutsu1 = 6 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 6 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 6 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 16 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Jounin' then
+						node.Dificuldade1d10DoJutsu1 = 7 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 7 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 7 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 17 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Anbu' then
+						node.Dificuldade1d10DoJutsu1 = 8 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 8 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 8 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 18 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'AnbuNucleo' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Organização' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'GDE' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Concelheiro' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Kage' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+				end;	
+
+				VerificaIntermediariosParaAprendizado();
+				ImpoeLimitenoAprendizado();
+		end;			
+		]]>
+
+		<![CDATA[
+		function PreparaDifuculdadeAprenderRankC()							
+			local node = self.dsbListadeTreino.node;
+								
+				if node.RankPorAprender == 'C' then
+					if sheet.GraduacaoTreino == 'Academico' then					
+						node.Dificuldade1d10DoJutsu1 = 3 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 3 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 3 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 13 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Genin' then
+						node.Dificuldade1d10DoJutsu1 = 4 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 4 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 4 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 14 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Chunin' then
+						node.Dificuldade1d10DoJutsu1 = 5 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 5 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 5 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 15 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Jounin' then
+						node.Dificuldade1d10DoJutsu1 = 6 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 6 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 6 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 16 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Anbu' then
+						node.Dificuldade1d10DoJutsu1 = 7 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 7 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 7 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 17 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'AnbuNucleo' then
+						node.Dificuldade1d10DoJutsu1 = 8 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 8 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 8 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 18 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Organização' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'GDE' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Concelheiro' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Kage' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+				end;
+				
+				VerificaIntermediariosParaAprendizado();
+				ImpoeLimitenoAprendizado();
+		end;	
+		]]>
+
+		<![CDATA[
+		function PreparaDifuculdadeAprenderRankB()							
+			local node = self.dsbListadeTreino.node;
+								
+				if node.RankPorAprender == 'B' then
+					if sheet.GraduacaoTreino == 'Academico' then					
+						node.Dificuldade1d10DoJutsu1 = 2 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 2 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 2 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 12 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Genin' then
+						node.Dificuldade1d10DoJutsu1 = 3 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 3 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 3 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 13 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Chunin' then
+						node.Dificuldade1d10DoJutsu1 = 4 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 4 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 4 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 14 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Jounin' then
+						node.Dificuldade1d10DoJutsu1 = 5 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 5 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 5 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 15 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Anbu' then
+						node.Dificuldade1d10DoJutsu1 = 6 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 6 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 6 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 16 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'AnbuNucleo' then
+						node.Dificuldade1d10DoJutsu1 = 7 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 7 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 7 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 17 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Organização' then
+						node.Dificuldade1d10DoJutsu1 = 8 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 8 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 8 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 18 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'GDE' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Concelheiro' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Kage' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+				end;
+				
+				VerificaIntermediariosParaAprendizado();
+				ImpoeLimitenoAprendizado();
+		end;	
+		]]>
+
+		<![CDATA[
+		function PreparaDifuculdadeAprenderRankA()							
+			local node = self.dsbListadeTreino.node;
+								
+				if node.RankPorAprender == 'A' then
+					if sheet.GraduacaoTreino == 'Academico' then					
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Genin' then
+						node.Dificuldade1d10DoJutsu1 = 2 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 2 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 2 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 12 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Chunin' then
+						node.Dificuldade1d10DoJutsu1 = 3 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 3 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 3 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 13 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Jounin' then
+						node.Dificuldade1d10DoJutsu1 = 4 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 4 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 4 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 14 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Anbu' then
+						node.Dificuldade1d10DoJutsu1 = 5 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 5 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 5 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 15 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'AnbuNucleo' then
+						node.Dificuldade1d10DoJutsu1 = 6 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 6 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 6 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 16 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Organização' then
+						node.Dificuldade1d10DoJutsu1 = 7 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 7 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 7 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 17 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'GDE' then
+						node.Dificuldade1d10DoJutsu1 = 8 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 8 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 8 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 18 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Concelheiro' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Kage' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+				end;
+				
+				VerificaIntermediariosParaAprendizado();
+				ImpoeLimitenoAprendizado();
+		end;	
+		]]>
+
+		<![CDATA[
+		function PreparaDifuculdadeAprenderRankS()							
+			local node = self.dsbListadeTreino.node;
+								
+				if node.RankPorAprender == 'S' then
+					if sheet.GraduacaoTreino == 'Academico' then					
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Genin' then
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Chunin' then
+						node.Dificuldade1d10DoJutsu1 = 2 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 2 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 2 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 12 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Jounin' then
+						node.Dificuldade1d10DoJutsu1 = 3 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 3 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 3 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 13 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Anbu' then
+						node.Dificuldade1d10DoJutsu1 = 4 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 4 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 4 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 14 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'AnbuNucleo' then
+						node.Dificuldade1d10DoJutsu1 = 5 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 5 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 5 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 15 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Organização' then
+						node.Dificuldade1d10DoJutsu1 = 6 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 6 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 6 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 16 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'GDE' then
+						node.Dificuldade1d10DoJutsu1 = 7 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 7 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 7 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 17 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Concelheiro' then
+						node.Dificuldade1d10DoJutsu1 = 8 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 8 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 8 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 18 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Kage' then
+						node.Dificuldade1d10DoJutsu1 = 9 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 9 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 9 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 19 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+				end;
+				
+				VerificaIntermediariosParaAprendizado();
+				ImpoeLimitenoAprendizado();
+		end;	
+		]]>
+
+		<![CDATA[
+		function PreparaDifuculdadeAprenderRankSS()							
+			local node = self.dsbListadeTreino.node;
+								
+				if node.RankPorAprender == 'SS' then
+					if sheet.GraduacaoTreino == 'Academico' then					
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Genin' then
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Chunin' then
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Jounin' then
+						node.Dificuldade1d10DoJutsu1 = 2 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 2 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 2 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 12 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Anbu' then
+						node.Dificuldade1d10DoJutsu1 = 3 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 3 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 3 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 13 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'AnbuNucleo' then
+						node.Dificuldade1d10DoJutsu1 = 4 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 4 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 4 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 14 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Organização' then
+						node.Dificuldade1d10DoJutsu1 = 5 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 5 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 5 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 15 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'GDE' then
+						node.Dificuldade1d10DoJutsu1 = 6 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 6 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 6 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 16 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Concelheiro' then
+						node.Dificuldade1d10DoJutsu1 = 7 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 7 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 7 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 17 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Kage' then
+						node.Dificuldade1d10DoJutsu1 = 8 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 8 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 8 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 18 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+				end;
+				
+				VerificaIntermediariosParaAprendizado();
+				ImpoeLimitenoAprendizado();
+		end;	
+		]]>
+
+		<![CDATA[
+		function PreparaDifuculdadeAprenderRankX()							
+			local node = self.dsbListadeTreino.node;
+								
+				if node.RankPorAprender == 'X' then
+					if sheet.GraduacaoTreino == 'Academico' then					
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Genin' then
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Chunin' then
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Jounin' then
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Anbu' then
+						node.Dificuldade1d10DoJutsu1 = 2 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 2 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 2 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 12 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'AnbuNucleo' then
+						node.Dificuldade1d10DoJutsu1 = 3 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 3 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 3 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 13 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Organização' then
+						node.Dificuldade1d10DoJutsu1 = 4 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 4 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 4 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 14 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'GDE' then
+						node.Dificuldade1d10DoJutsu1 = 5 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 5 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 5 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 15 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Concelheiro' then
+						node.Dificuldade1d10DoJutsu1 = 6 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 6 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 6 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 16 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Kage' then
+						node.Dificuldade1d10DoJutsu1 = 7 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 7 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 7 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 17 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+				end;
+				
+				VerificaIntermediariosParaAprendizado();
+				ImpoeLimitenoAprendizado();
+		end;	
+		]]>
+
+		<![CDATA[
+		function PreparaDifuculdadeAprenderRankXPLUS()							
+			local node = self.dsbListadeTreino.node;			
+			
+				if node.RankPorAprender == 'X+' then
+					if sheet.GraduacaoTreino == 'Academico' then					
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Genin' then
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Chunin' then
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Jounin' then
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Anbu' then
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'AnbuNucleo' then
+						node.Dificuldade1d10DoJutsu1 = 2 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 2 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 2 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 12 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Organização' then
+						node.Dificuldade1d10DoJutsu1 = 3 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 3 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 3 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 13 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'GDE' then
+						node.Dificuldade1d10DoJutsu1 = 4 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 4 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 4 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 14 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Concelheiro' then
+						node.Dificuldade1d10DoJutsu1 = 5 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 5 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 5 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 15 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+					
+					if sheet.GraduacaoTreino == 'Kage' then
+						node.Dificuldade1d10DoJutsu1 = 6 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade2d10DoJutsu1 = 6 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade3D10DoJutsu1 = 6 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0) or 0;
+						node.Dificuldade1d20DoJutsu1 = 16 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0) or 0;
+					end;
+				end;
+				
+				VerificaIntermediariosParaAprendizado();
+				ImpoeLimitenoAprendizado();
+		end;	
+		]]>
+
+		<![CDATA[
+		function VerificaIntermediariosParaAprendizado()							
+			local node = self.dsbListadeTreino.node;
+				if node.Dificuldade1d10DoJutsu1 ~= nil then
+					if node.Dificuldade1d10DoJutsu1 <= 0 then			
+						node.Dificuldade1d10DoJutsu1 = 1 + (tonumber(node.Dificuldade1d10DoJutsu1Estudo) or 0);
+					end;
+				end;
+				
+				if node.Dificuldade2d10DoJutsu1 ~= nil then	
+					if node.Dificuldade2d10DoJutsu1 <= 0 then		
+						node.Dificuldade2d10DoJutsu1 = 1 + (tonumber(node.Dificuldade2d10DoJutsu1Estudo) or 0);
+					end;
+				end;
+				
+				if node.Dificuldade3d10DoJutsu1 ~= nil then
+					if node.Dificuldade3D10DoJutsu1 <= 0 then		
+						node.Dificuldade3D10DoJutsu1 = 1 + (tonumber(node.Dificuldade3d10DoJutsu1Estudo) or 0);
+					end;
+				end;
+				
+				if node.Dificuldade1d20DoJutsu1 ~= nil then	
+					if node.Dificuldade1d20DoJutsu1 <= 0 then		
+						node.Dificuldade1d20DoJutsu1 = 11 + (tonumber(node.Dificuldade1d20DoJutsu1Estudo) or 0);
+					end;
+				end;					
+				
+		end;			
+		]]>
+
+		<![CDATA[
+		function ImpoeLimitenoAprendizado()							
+			local node = self.dsbListadeTreino.node;
+				if node.Dificuldade1d10DoJutsu1 ~= nil then
+					if node.Dificuldade1d10DoJutsu1 >= 9 then			
+						node.Dificuldade1d10DoJutsu1 = 9;
+					end;
+				end;
+				
+				if node.Dificuldade2d10DoJutsu1 ~= nil then	
+					if node.Dificuldade2d10DoJutsu1 >= 9 then		
+						node.Dificuldade2d10DoJutsu1 = 9;
+					end;
+				end;
+				
+				if node.Dificuldade3d10DoJutsu1 ~= nil then
+					if node.Dificuldade3D10DoJutsu1 >= 9 then		
+						node.Dificuldade3D10DoJutsu1 = 9;;
+					end;
+				end;
+				
+				if node.Dificuldade1d20DoJutsu1 ~= nil then	
+					if node.Dificuldade1d20DoJutsu1 >= 20 then		
+						node.Dificuldade1d20DoJutsu1 = 19;
+					end;
+				end;					
+				
+		end;			
+		]]>
+
+		<![CDATA[
+		function MonstraProPlayerADificuldadeAprendizado()						
+			local node = self.dsbListadeTreino.node;
+						
+			node.Treina1d10 = tonumber(node.Dificuldade1d10DoJutsu1);
+			node.Treina2d10 = tonumber(node.Dificuldade2d10DoJutsu1);
+			node.Treina3d10 = tonumber(node.Dificuldade3d10DoJutsu1);
+			node.Treina1d20 = tonumber(node.Dificuldade1d20DoJutsu1);			
+			
+												
+		end;				
+		]]>
+
+		
+		function RecebeXPPorAprenderJutsu() 					
+			local node = self.dsbListadeTreino.node;
+														
+			if node.RankPorAprender == "E" then
+				sheet.ExpPTreino = 500;
+			elseif	node.RankPorAprender == "D" then
+				sheet.ExpPTreino = 1000;
+			elseif	node.RankPorAprender == "C" then
+				sheet.ExpPTreino = 2000;
+			elseif	node.RankPorAprender == "B" then
+				sheet.ExpPTreino = 3000;
+			elseif	node.RankPorAprender == "A" then
+				sheet.ExpPTreino = 5000;
+			elseif	node.RankPorAprender == "S" then
+				sheet.ExpPTreino = 8000;
+			elseif	node.RankPorAprender == "SS" then
+				sheet.ExpPTreino = 11000;
+			elseif	node.RankPorAprender == "X" then
+				sheet.ExpPTreino = 14000;
+			elseif	node.RankPorAprender == "X+" then
+				sheet.ExpPTreino = 20000;
+			end;
+		end;
+	
+	</script>
+	
+

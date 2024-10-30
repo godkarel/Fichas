@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<script>
+	function UsarJutsuEDC()	
+	node = self.rclListadeJutsus1.selectedNode;								
+	local mesaDoPersonagem = rrpg.getMesaDe(sheet);									
+	sheet.AcertoNinTotal = tonumber(sheet.AcertoNinTotal) or 0;	
+	sheet.AcertoTaiTotal = tonumber(sheet.AcertoTaiTotal) or 0;	
+	sheet.AcertoGenTotal = tonumber(sheet.AcertoGenTotal) or 0;
+	
+	mesaDoPersonagem.chat:rolarDados("1d100", "[§K3]Tentativa da Habilidade do Estilo de Combate",
+	function (rolado)
+		if node.Tipo1EDC == 'Tai'then
+			if sheet.AcertoTaiTotal >= rolado.resultado then
+				mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DEDC);					
+				if node.Tipo1EDC == 'Tai'then
+					if sheet.CRTaiTotal >= rolado.resultado then
+						mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+					else
+						mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+					end;
+				end;
+			
+				if node.Tipo1EDC == 'DanoArmado'then
+					if sheet.CRTaiTotal >= rolado.resultado then
+						mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+					else
+						mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+					end;
+				end;
+				
+				if node.Tipo1EDC == 'M/Tai'then
+					if sheet.CRTaiTotal >= rolado.resultado then
+						mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+					else
+						mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+					end;
+				end;
+				
+				if node.Tipo1EDC == 'M/DA'then
+					if sheet.CRTaiTotal >= rolado.resultado then
+						mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+					else
+						mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+					end;
+				end;
+				
+				if node.Tipo1EDC == 'Nulo' then													
+					if sheet.CRNinTotal >= rolado.resultado then
+						mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+					else
+						mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+					end;
+				end;
+				
+				if node.Tipo1EDC == 'Kunai' then													
+					if sheet.CRTaiTotal >= rolado.resultado then
+						mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+					else
+						mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+					end;
+				end;
+				
+				if node.Tipo1EDC == 'Shuriken' then													
+					if sheet.CRTaiTotal >= rolado.resultado then
+						mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+					else
+						mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+					end;
+				end;
+				
+				if node.Tipo1EDC == 'Shuriken Fuuma' then													
+					if sheet.CRTaiTotal >= rolado.resultado then
+						mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+					else
+						mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+					end;
+				end;
+				
+				if node.Tipo1EDC == 'Kunai Gigante' then													
+					if sheet.CRTaiTotal >= rolado.resultado then
+						mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+					else
+						mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+					end;
+				end;
+				
+				if node.Tipo1EDC == 'Senbon' then													
+					if sheet.CRTaiTotal >= rolado.resultado then
+						mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+					else
+						mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+					end;
+				end;
+				
+				if node.Tipo1EDC == 'Bandagem' then													
+					if sheet.CRNinTotal >= rolado.resultado then
+						mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+					else
+						mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+					end;
+				end;
+
+				if 	self.edtGM21.checked then
+					if sheet.TipoOutro == 'Chacra' then
+						sheet.OutrosAtual = (tonumber(sheet.ChakraAtual) or 0) - (tonumber(node.CustoEDC) or 0);
+						sheet.BDChakra = sheet.OutrosAtual;
+						sheet.ChakraAtual = sheet.OutrosAtual;
+					end;
+				
+					if sheet.TipoOutro == 'Outros' then
+						sheet.OutrosAtual = (tonumber(sheet.BDOutro) or 0) - (tonumber(node.CustoEDC) or 0);
+						sheet.BDOutro = (tonumber(sheet.OutrosAtual) or 0);
+					end;
+					
+					if sheet.TipoOutro == 'Reiatsu' then
+						sheet.OutrosAtual = (tonumber(sheet.BDReiatsu) or 0) - (tonumber(node.CustoEDC) or 0);
+						sheet.BDReiatsu = (tonumber(sheet.OutrosAtual) or 0);
+					end;
+					
+					if sheet.TipoOutro == 'Chacra Biju' then
+						sheet.OutrosAtual = (tonumber(sheet.BDChakraBiju) or 0) - (tonumber(node.CustoEDC) or 0);
+						sheet.BDChakraBiju = (tonumber(sheet.OutrosAtual) or 0);
+					end;
+					
+					if sheet.TipoOutro == 'Chacra Branco' then
+						sheet.OutrosAtual = (tonumber(sheet.BDChakraBranco) or 0) - (tonumber(node.CustoEDC) or 0);
+						sheet.BDChakraBranco = (tonumber(sheet.OutrosAtual) or 0);
+					end;
+					
+					if sheet.TipoOutro == 'Chacra Preto' then
+						sheet.OutrosAtual = (tonumber(sheet.BDChakraPreto) or 0) - (tonumber(node.CustoEDC) or 0);
+						sheet.BDChakraPreto = (tonumber(sheet.OutrosAtual) or 0);
+					end;
+					
+					if sheet.TipoOutro == 'Hadou' then
+						sheet.OutrosAtual = (tonumber(sheet.BDHadou) or 0) - (tonumber(node.CustoEDC) or 0);
+						sheet.BDHadou = (tonumber(sheet.OutrosAtual) or 0);
+					end;
+					
+					if sheet.TipoOutro == 'Hadou Negro' then
+						sheet.OutrosAtual = (tonumber(sheet.BDHadouNegro) or 0) - (tonumber(node.CustoEDC) or 0);
+						sheet.BDHadouNegro = (tonumber(sheet.OutrosAtual) or 0);
+					end;
+					
+					if sheet.TipoOutro == 'Chacra Natural' then
+						sheet.OutrosAtual = (tonumber(sheet.BDChakraNatural) or 0) - (tonumber(node.CustoEDC) or 0);
+						sheet.BDChakraNatural = (tonumber(sheet.OutrosAtual) or 0);
+					end;
+					
+					if sheet.TipoOutro == 'Chacra Roxo' then
+						sheet.OutrosAtual = (tonumber(sheet.BDChakraRoxo) or 0) - (tonumber(node.CustoEDC) or 0);
+						sheet.BDChakraRoxo = (tonumber(sheet.OutrosAtual) or 0);
+					end;		
+				else
+					if self.edtGM21.checked then
+						sheet.ChakraAtual = node.ChakraPlayerEDCEDC;
+					else
+						local mesa = Firecast.getMesaDe(sheet);
+						local ChakraPlayerEDC = mesa.meuJogador:getBarValue(2);
+						node.ChakraPlayerEDC = mesa.meuJogador:getBarValue(2);
+						node.ChakraPlayerEDC = (tonumber(node.ChakraPlayerEDC) or 0) - (tonumber(node.CustoEDC) or 0);
+						sheet.ChakraAtual = node.ChakraPlayerEDC;
+						mesa.meuJogador:requestSetBarValue(2, node.ChakraPlayerEDC);	
+					end;
+				end;
+				
+				if node.EnergiaCustoEDC > 0 then
+						if self.edtGM21.checked == true then
+							local mesa = Firecast.getMesaDe(sheet);
+							sheet.EnergiaAtual = (tonumber(sheet.EnergiaAtual) or 0) - (tonumber(node.EnergiaCustoEDC) or 0);
+						else			
+							local mesa = Firecast.getMesaDe(sheet);
+							local EnergiaPlayerEDC = mesa.meuJogador:getBarValue(4);
+							node.EnergiaPlayerEDC = mesa.meuJogador:getBarValue(4);
+							node.EnergiaPlayerEDC = (tonumber(node.EnergiaPlayerEDC) or 0) - (tonumber(node.EnergiaCustoEDC) or 0);
+							sheet.EnergiaAtual = node.EnergiaPlayerEDC;
+							mesa.meuJogador:requestSetBarValue(4, node.EnergiaPlayerEDC);
+						end;
+					end;
+			else
+				mesaDoPersonagem.chat:enviarMensagem("[§K4,0]TURURU, Me fudi [§I http://pa1.narvii.com/6742/00f3ec4e74b0e4abb78512441228015db2d794a9_00.gif]");
+			end;
+		end;
+		
+			if node.Tipo1EDC == 'Nin'then
+				if sheet.AcertoNinTotal >= rolado.resultado then
+					mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DEDC);							
+					if node.Tipo1EDC == 'Nin'then
+						if sheet.CRNinTotal >= rolado.resultado then
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+						end;
+					end;
+					
+					if node.Tipo1EDC == 'Elemental'then
+						if sheet.CRNinTotal >= rolado.resultado then
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+						end;
+					end;
+
+					if node.Tipo1EDC == 'M/Nin'then
+						if sheet.CRNinTotal >= rolado.resultado then
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+						end;
+					end;
+					
+					if node.Tipo1EDC == 'M/Elemental'then
+						if sheet.CRNinTotal >= rolado.resultado then
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+						end;
+					end;
+					
+					if node.Tipo1EDC == 'Nulo' then													
+						if sheet.CRNinTotal >= rolado.resultado then
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+						end;
+					end;
+					
+					if node.Tipo1EDC == 'Papel Bomba' then													
+						if sheet.CRNinTotal >= rolado.resultado then
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+						end;
+					end;
+					
+					if node.Tipo1EDC == 'Ginso Explosivo' then													
+						if sheet.CRNinTotal >= rolado.resultado then
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+						end;
+					end;
+					
+					if node.Tipo1EDC == 'Bandagem' then													
+						if sheet.CRNinTotal >= rolado.resultado then
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+						end;
+					end;
+
+					if 	self.edtGM21.checked then
+						if sheet.TipoOutro == 'Chacra' then
+							sheet.OutrosAtual = (tonumber(sheet.ChakraAtual) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDChakra = sheet.OutrosAtual;
+							sheet.ChakraAtual = sheet.OutrosAtual;
+						end;
+					
+						if sheet.TipoOutro == 'Outros' then
+							sheet.OutrosAtual = (tonumber(sheet.BDOutro) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDOutro = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Reiatsu' then
+							sheet.OutrosAtual = (tonumber(sheet.BDReiatsu) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDReiatsu = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Chacra Biju' then
+							sheet.OutrosAtual = (tonumber(sheet.BDChakraBiju) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDChakraBiju = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Chacra Branco' then
+							sheet.OutrosAtual = (tonumber(sheet.BDChakraBranco) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDChakraBranco = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Chacra Preto' then
+							sheet.OutrosAtual = (tonumber(sheet.BDChakraPreto) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDChakraPreto = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Hadou' then
+							sheet.OutrosAtual = (tonumber(sheet.BDHadou) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDHadou = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Hadou Negro' then
+							sheet.OutrosAtual = (tonumber(sheet.BDHadouNegro) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDHadouNegro = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Chacra Natural' then
+							sheet.OutrosAtual = (tonumber(sheet.BDChakraNatural) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDChakraNatural = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Chacra Roxo' then
+							sheet.OutrosAtual = (tonumber(sheet.BDChakraRoxo) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDChakraRoxo = (tonumber(sheet.OutrosAtual) or 0);
+						end;		
+					else
+						if self.edtGM21.checked then
+							sheet.ChakraAtual = node.ChakraPlayerEDCEDC;
+						else
+							local mesa = Firecast.getMesaDe(sheet);
+							local ChakraPlayerEDC = mesa.meuJogador:getBarValue(2);
+							node.ChakraPlayerEDC = mesa.meuJogador:getBarValue(2);
+							node.ChakraPlayerEDC = (tonumber(node.ChakraPlayerEDC) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.ChakraAtual = node.ChakraPlayerEDC;
+							mesa.meuJogador:requestSetBarValue(2, node.ChakraPlayerEDC);	
+						end;
+					end;
+					
+					if node.EnergiaCustoEDC > 0 then
+						if self.edtGM21.checked == true then
+							local mesa = Firecast.getMesaDe(sheet);
+							sheet.EnergiaAtual = (tonumber(sheet.EnergiaAtual) or 0) - (tonumber(node.EnergiaCustoEDC) or 0);
+						else			
+							local mesa = Firecast.getMesaDe(sheet);
+							local EnergiaPlayerEDC = mesa.meuJogador:getBarValue(4);
+							node.EnergiaPlayerEDC = mesa.meuJogador:getBarValue(4);
+							node.EnergiaPlayerEDC = (tonumber(node.EnergiaPlayerEDC) or 0) - (tonumber(node.EnergiaCustoEDC) or 0);
+							sheet.EnergiaAtual = node.EnergiaPlayerEDC;
+							mesa.meuJogador:requestSetBarValue(4, node.EnergiaPlayerEDC);
+						end;
+					end;					
+				else
+					mesaDoPersonagem.chat:enviarMensagem("[§K4,0]TURURU, Me fudi [§I http://pa1.narvii.com/6742/00f3ec4e74b0e4abb78512441228015db2d794a9_00.gif]");
+				end;
+			end;
+			
+			if node.Tipo1EDC == 'Gen'then	
+				if sheet.AcertoGenTotal >= rolado.resultado then
+					mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DEDC);					
+					if node.Tipo1EDC == 'Gen'then
+						if sheet.CRGenTotal >= rolado.resultado then
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+						end;
+					end;
+					
+					if node.Tipo1EDC == 'M/Gen'then
+						if sheet.CRGenTotal >= rolado.resultado then
+								mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+						end;
+					end;
+					
+					if node.Tipo1EDC == 'Nulo' then													
+						if sheet.CRNinTotal >= rolado.resultado then
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+						end;
+					end;
+					
+					if node.Tipo1EDC == 'Veneno' then													
+						if sheet.CRNinTotal >= rolado.resultado then
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+						end;
+					end;
+					
+					if node.Tipo1EDC == 'Bandagem' then													
+						if sheet.CRNinTotal >= rolado.resultado then
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICAL :awyeah: « [§K4,0]" .. (node.IntensidadeEDC * 2) .. "[§K3] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K3,0]Causando « [§K4,0]" .. node.IntensidadeEDC .. "[§K3] »");
+						end;
+					end;
+
+					if 	self.edtGM21.checked then
+						if sheet.TipoOutro == 'Chacra' then
+							sheet.OutrosAtual = (tonumber(sheet.ChakraAtual) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDChakra = sheet.OutrosAtual;
+							sheet.ChakraAtual = sheet.OutrosAtual;
+						end;
+					
+						if sheet.TipoOutro == 'Outros' then
+							sheet.OutrosAtual = (tonumber(sheet.BDOutro) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDOutro = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Reiatsu' then
+							sheet.OutrosAtual = (tonumber(sheet.BDReiatsu) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDReiatsu = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Chacra Biju' then
+							sheet.OutrosAtual = (tonumber(sheet.BDChakraBiju) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDChakraBiju = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Chacra Branco' then
+							sheet.OutrosAtual = (tonumber(sheet.BDChakraBranco) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDChakraBranco = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Chacra Preto' then
+							sheet.OutrosAtual = (tonumber(sheet.BDChakraPreto) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDChakraPreto = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Hadou' then
+							sheet.OutrosAtual = (tonumber(sheet.BDHadou) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDHadou = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Hadou Negro' then
+							sheet.OutrosAtual = (tonumber(sheet.BDHadouNegro) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDHadouNegro = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Chacra Natural' then
+							sheet.OutrosAtual = (tonumber(sheet.BDChakraNatural) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDChakraNatural = (tonumber(sheet.OutrosAtual) or 0);
+						end;
+						
+						if sheet.TipoOutro == 'Chacra Roxo' then
+							sheet.OutrosAtual = (tonumber(sheet.BDChakraRoxo) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.BDChakraRoxo = (tonumber(sheet.OutrosAtual) or 0);
+						end;		
+					else
+						if self.edtGM21.checked then
+							sheet.ChakraAtual = node.ChakraPlayerEDCEDC;
+						else
+							local mesa = Firecast.getMesaDe(sheet);
+							local ChakraPlayerEDC = mesa.meuJogador:getBarValue(2);
+							node.ChakraPlayerEDC = mesa.meuJogador:getBarValue(2);
+							node.ChakraPlayerEDC = (tonumber(node.ChakraPlayerEDC) or 0) - (tonumber(node.CustoEDC) or 0);
+							sheet.ChakraAtual = node.ChakraPlayerEDC;
+							mesa.meuJogador:requestSetBarValue(2, node.ChakraPlayerEDC);	
+						end;
+					end;
+					
+					if node.EnergiaCustoEDC > 0 then
+						if self.edtGM21.checked == true then
+							local mesa = Firecast.getMesaDe(sheet);
+							sheet.EnergiaAtual = (tonumber(sheet.EnergiaAtual) or 0) - (tonumber(node.EnergiaCustoEDC) or 0);
+						else			
+							local mesa = Firecast.getMesaDe(sheet);
+							local EnergiaPlayerEDC = mesa.meuJogador:getBarValue(4);
+							node.EnergiaPlayerEDC = mesa.meuJogador:getBarValue(4);
+							node.EnergiaPlayerEDC = (tonumber(node.EnergiaPlayerEDC) or 0) - (tonumber(node.EnergiaCustoEDC) or 0);
+							sheet.EnergiaAtual = node.EnergiaPlayerEDC;
+							mesa.meuJogador:requestSetBarValue(4, node.EnergiaPlayerEDC);
+						end;
+					end;
+				else
+					mesaDoPersonagem.chat:enviarMensagem("[§K4,0]TURURU, Me fudi [§I http://pa1.narvii.com/6742/00f3ec4e74b0e4abb78512441228015db2d794a9_00.gif]");
+				end;
+			end;			
+		end);
+	end;
+</script>

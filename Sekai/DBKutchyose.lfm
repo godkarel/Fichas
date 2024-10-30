@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmKutchyoseFicha1" height="50" theme="dark"> 
+	<label align="left" width="32" fontColor="cyan" scale="1.5" text="🐸" margins="{left=4}"/>		
+	<label align="client" text="Teste de label" fontColor="red" field="KutchyoseNome" margins="{left=4}"/>		
+</form>

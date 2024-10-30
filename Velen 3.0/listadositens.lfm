@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmItemDaLista" height="50" theme="dark"> 
+        <layout align="client" width="200" margins="{left=4, right=4, top=4, bottom=4}">
+				
+				
+				
+                <label align="client" text="Teste de label" field="campoTitulo" margins="{left=4}"/>
+        </layout>
+</form>

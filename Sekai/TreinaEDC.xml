@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<script>
+	<![CDATA[
+	function VerificaIntermediariosParaTreinoEDC()
+		node.Dificuldade1d10EDC = tonumber(node.Dificuldade1d10EDC) or 1;
+		node.Dificuldade2d10EDC = tonumber(node.Dificuldade2d10EDC) or 1;
+		node.Dificuldade3d10EDC = tonumber(node.Dificuldade3d10EDC) or 1;
+		node.Dificuldade1d20EDC = tonumber(node.Dificuldade1d20EDC) or 1;
+	
+		if node.Dificuldade1d10EDC ~= nil then
+			if node.Dificuldade1d10EDC <= 0 then			
+				node.Dificuldade1d10EDC = 1;
+			end;
+		end;
+		
+		if node.Dificuldade2d10EDC ~= nil then	
+			if node.Dificuldade2d10EDC <= 0 then		
+				node.Dificuldade2d10EDC = 1;
+			end;
+		end;
+		
+		if node.Dificuldade3d10EDC ~= nil then
+			if node.Dificuldade3D10EDC <= 0 then		
+				node.Dificuldade3D10EDC = 1;
+			end;
+		end;
+		
+		if node.Dificuldade1d20EDC ~= nil then	
+			if node.Dificuldade1d20EDC <= 0 then		
+				node.Dificuldade1d20EDC = 1;
+			end;
+		end;					
+	end;			
+	]]>
+
+	<![CDATA[
+	function ImpoeLimitenoTreinoEDC()									
+		if node.Dificuldade1d10EDC ~= nil then
+			if node.Dificuldade1d10EDC >= 9 then			
+				node.Dificuldade1d10EDC = 9;
+			end;
+		end;
+		
+		if node.Dificuldade2d10EDC ~= nil then	
+			if node.Dificuldade2d10EDC >= 9 then		
+				node.Dificuldade2d10EDC = 9;
+			end;
+		end;
+		
+		if node.Dificuldade3d10EDC ~= nil then
+			if node.Dificuldade3d10EDC >= 9 then		
+				node.Dificuldade3d10EDC = 9;;
+			end;
+		end;
+		
+		if node.Dificuldade1d20EDC ~= nil then	
+			if node.Dificuldade1d20EDC >= 20 then		
+				node.Dificuldade1d20EDC = 19;
+			end;
+		end;			
+	end;			
+	]]>
+
+	<![CDATA[
+	function MonstraProPlayerADificuldadeTreinoEDC()		
+		node.Upa1d10 = tonumber(node.Dificuldade1d10EDC) or 1;
+		node.Upa2d10 = tonumber(node.Dificuldade2d10EDC) or 1;
+		node.Upa3d10 = tonumber(node.Dificuldade3d10EDC) or 1;
+		node.Upa1d20 = tonumber(node.Dificuldade1d20EDC) or 1;											
+	end;				
+	]]>
+
+	<![CDATA[
+	function TreinaEDC()	
+		VerificaIntermediariosParaTreinoEDC();
+		ImpoeLimitenoTreinoEDC();
+		MonstraProPlayerADificuldadeTreinoEDC();	
+		
+		self.btnUpaEDC.visible = false;			
+		local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
+		
+		if sheet.TreinoON == true then	
+			mesaDoPersonagem.chat:rolarDados("1d10", "[§K3]Fortificamento de Jutsu",
+			function (rolado)
+			if node.DEDC == nil then
+				showMessage("Falta Descrição do Jutsu ou não irá funcionar");
+				self.btnUpaEDC.visible = true;
+			else 
+				mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DEDC);										
+					if node.Upa1d10 >= rolado.resultado then
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3] Sucesso");
+						mesaDoPersonagem.chat:rolarDados("1d10", "[§K3]Segunda Tentativa",
+						function (rolado)	
+							if node.Upa2d10 >= rolado.resultado then
+								mesaDoPersonagem.chat:enviarMensagem(".. [§K3] Sucesso");
+								mesaDoPersonagem.chat:rolarDados("1d10", "[§K3]Terceira Tentativa",
+								function (rolado)
+									if node.Upa3d10 >= rolado.resultado then
+										mesaDoPersonagem.chat:enviarMensagem(".. [§K3] Sucesso");
+										mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Tentativa de Execução Final",
+										function (rolado)
+											if node.Upa1d20 >= rolado.resultado then
+												mesaDoPersonagem.chat:enviarMensagem(".. [§K3] Aprendeu o Jutsu");										
+												mesaDoPersonagem.chat:enviarMensagem("[§I https://ns-rpg.weebly.com/uploads/2/5/1/4/25140777/644651_orig.gif]");
+												showMessage("Voce Upou seu estilo de combate e precisa desativar e ativar ele novamente para poder Atualizar os Status do Estilo de Combate");
+												node.Dificuldade1d10EDC = 1;
+												node.Dificuldade2d10EDC = 1;
+												node.Dificuldade3d10EDC = 1;
+												node.Dificuldade1d20EDC = 1;																			
+												node.LevelEDC = tonumber(node.LevelEDC or 0) + 1;
+												RecebeXPPorEDC();
+												self.btnUpaEDC.visible = true;	
+											else 
+												mesaDoPersonagem.chat:enviarMensagem(".. [§K4] Falhou na Ultima");
+												node.Dificuldade1d20EDC = (tonumber(node.Dificuldade1d20EDC) or 0) + 1;
+												self.btnUpaEDC.visible = true;	
+											end;
+										end);	
+									else
+										mesaDoPersonagem.chat:enviarMensagem(".. [§K4] Falhou na Terceira");
+										node.Dificuldade3d10EDC = (tonumber(node.Dificuldade3d10EDC) or 0) + 1;
+										self.btnUpaEDC.visible = true;																
+									end;
+								end);
+							else
+								mesaDoPersonagem.chat:enviarMensagem(".. [§K4] Falhou na Segunda");
+								node.Dificuldade2d10EDC = (tonumber(node.Dificuldade2d10EDC) or 0) + 1;
+								self.btnUpaEDC.visible = true;														
+							end;												
+						end)
+					else
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K4] Falhou na Primeira");
+						node.Dificuldade1d10EDC = (tonumber(node.Dificuldade1d10EDC) or 0) + 1;
+						self.btnUpaEDC.visible = true;
+					end;
+				end;
+			end);
+		else
+			showMessage("TREINO NÃO HABILITADO PROVAVELMENTE O MESTRE ESTA OFFLINE");
+			self.btnUpaEDC.visible = true;
+		end;
+	end;				
+	]]>
+	
+	function RecebeXPPorEDC() 						
+		sheet.ExpPTreino = 5000 * tonumber(node.LevelEDC);
+	end;
+	
+	function FazCalculoTipoLista1Intensidade1EDC() 	
+		if	self.rclEstiloCombate.visible == true then
+			node.Lista1Intensidade1EDC = 0;				
+			
+			if node.Tipo1EDC == 'Tai' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.TaiTotal) or 0);	
+			end;	
+			
+			if node.Tipo1EDC == 'Nin' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.NinTotal) or 0);	
+			end;
+			
+			if node.Tipo1EDC == 'Gen' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.GenTotal) or 0);	
+			end;
+			
+			if node.Tipo1EDC == 'Elemental' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.EleTotal) or 0);	
+			end;
+			
+			if node.Tipo1EDC == 'DanoArmado' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.DanoArmado) or 0);	
+			end;
+			
+			if node.Tipo1EDC == 'M/Tai' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.TaiTotal / 2) or 0);	
+			end;
+			
+			if node.Tipo1EDC == 'M/Nin' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.NinTotal / 2) or 0);	
+			end;
+			
+			if node.Tipo1EDC == 'M/Gen' then	
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.GenTotal / 2) or 0);	
+			end;
+			
+			if node.Tipo1EDC == 'M/Elemental' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.EleTotal / 2) or 0);	
+			end;
+			
+			if node.Tipo1EDC == 'M/DA' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.DanoArmado / 2) or 0);	
+			end;
+			
+			if node.Tipo1EDC == 'Selamento' then
+				node.Lista1Intensidade1EDC = 0;	
+			end;
+			
+			if node.Tipo1EDC == 'Outros' then
+				node.Lista1Intensidade1EDC = 0;
+			end;
+			
+			if node.Tipo1EDC == 'Nulo' then
+				node.Lista1Intensidade1EDC = 0;	
+			end;
+			
+			if node.Tipo1EDC == 'Kunai' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.DanoKunai) or 0);	
+			end;
+			
+			if node.Tipo1EDC == 'Shuriken' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.DanoShuriken) or 0);	
+			end;
+			
+			if node.Tipo1EDC == 'Shuriken Fuuma' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.DanoShurikenFuuma) or 0);	
+			end;
+			
+			if node.Tipo1EDC == 'Kunai Gigante' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.DanoKunaiGigante) or 0);	
+			end;
+			
+			if node.Tipo1EDC == 'Senbon' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.Senbon) or 0);
+			end;
+			
+			if node.Tipo1EDC == 'Papel Bomba' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.PB) or 0);	
+			end;
+			
+			if node.Tipo1EDC == 'Ginso Explosivo' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.GinsoExplosivo) or 0);
+			end;
+			
+			if node.Tipo1EDC == 'Veneno' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.Veneno) or 0);	
+			end;
+			
+			if node.Tipo1EDC == 'Bandagem' then
+				node.Lista1Intensidade1EDC = math.floor(tonumber(sheet.Bandagem) or 0);
+			end;				
+		end;	
+	end;
+
+	function FazCalculoTipoLista1Intensidade2EDC()		
+		if	self.rclEstiloCombate.visible == true then
+			node.Lista1Intensidade2EDC = 0;	
+
+			if node.Tipo2EDC == 'Nulo' then
+				node.Lista1Intensidade2EDC = 0;	
+			end;
+
+			if node.Tipo2EDC == 'Tai' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.TaiTotal) or 0);	
+			end;	
+			
+			if node.Tipo2EDC == 'Nin' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.NinTotal) or 0);	
+			end;
+			
+			if node.Tipo2EDC == 'Gen' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.GenTotal) or 0);	
+			end;
+			
+			if node.Tipo2EDC == 'Elemental' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.EleTotal) or 0);	
+			end;
+			
+			if node.Tipo2EDC == 'DanoArmado' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.DanoArmado) or 0);	
+			end;
+			
+			if node.Tipo2EDC == 'M/Tai' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.TaiTotal / 2) or 0);	
+			end;
+			
+			if node.Tipo2EDC == 'M/Nin' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.NinTotal / 2) or 0);	
+			end;
+			
+			if node.Tipo2EDC == 'M/Gen' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.GenTotal / 2) or 0);	
+			end;
+			
+			if node.Tipo2EDC == 'M/Elemental' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.EleTotal / 2) or 0);	
+			end;
+			
+			if node.Tipo2EDC == 'M/DA' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.DanoArmado / 2) or 0);	
+			end;
+			
+			if node.Tipo2EDC == 'Selamento' then
+				node.Lista1Intensidade2EDC = 0;	
+			end;
+			
+			if node.Tipo2EDC == 'Outros' then
+				node.Lista1Intensidade2EDC = 0;
+			end;
+			
+			if node.Tipo2EDC == 'Kunai' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.DanoKunai) or 0);	
+			end;
+			
+			if node.Tipo2EDC == 'Shuriken' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.DanoShuriken) or 0);	
+			end;
+			
+			if node.Tipo2EDC == 'Shuriken Fuuma' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.DanoShurikenFuuma) or 0);	
+			end;
+			
+			if node.Tipo2EDC == 'Kunai Gigante' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.DanoKunaiGigante) or 0);	
+			end;
+			
+			if node.Tipo2EDC == 'Senbon' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.Senbon) or 0);
+			end;
+			
+			if node.Tipo2EDC == 'Papel Bomba' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.PB) or 0);	
+			end;
+			
+			if node.Tipo2EDC == 'Ginso Explosivo' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.GinsoExplosivo) or 0);
+			end;
+			
+			if node.Tipo2EDC == 'Veneno' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.Veneno) or 0);	
+			end;
+			
+			if node.Tipo2EDC == 'Bandagem' then
+				node.Lista1Intensidade2EDC = math.floor(tonumber(sheet.Bandagem) or 0);
+			end;		
+		end;	
+	end;
+
+	function FazCalculoTipoListaIntensidadeTotal1EDC() 	
+		if	self.rclEstiloCombate.visible == true then			
+			node.IntensidadeEDC = (tonumber(node.DanoVerdadeiroEDC) or 0) + (tonumber(node.Lista1Intensidade1EDC) or 0) + (tonumber(node.Lista1Intensidade2EDC) or 0);										
+		end;		
+	end;
+
+	function FazCalculodoCustoReal1EDC() 	
+		if	self.rclEstiloCombate.visible == true then		
+			if node.LevelEDC == nil then
+				node.LevelEDC = 1;
+			end;
+			
+			node.AdicionalCustoEDC = ((tonumber(node.LevelEDC * 2) or 0) - 2);
+			node.CustoRealEDC = tonumber(node.CustoEDC or 0) + tonumber(node.AdicionalCustoEDC or 0) or 0;							
+		end;		
+	end;
+
+	function FazCalculodoCustoEnergia1EDC()	
+		if	self.rclEstiloCombate.visible == true then 
+			node.EnergiaCustoEDC = math.floor(tonumber(node.EnergiaCustoEDC) or 0);						
+		end;		
+	end;
+</script>

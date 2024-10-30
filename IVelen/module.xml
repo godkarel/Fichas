@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module sdkVersion="3.5">
+    <id>InimigoVelen</id>
+    <version>1.0</version>
+        <!--Informações do plugin na língua "pt-BR". Você pode ter várias tags "info", uma para cada tradução que quiser.-->
+        <name>Velen Inimigo</name>
+        <description>Ficha de Npcs Inimigos do RPG de Velen</description>
+        <author>Karel</author>
+        <site>Nenhum</site>
+        <contact>Karelsama</contact>
+</module>

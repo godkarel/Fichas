@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form name="frmSistemaCombateVelen" formType="tablesDock" 
+    dataType="RRPG.DataTypeUnico.DaMinhaJanelaAcoplavel"
+    title="Sistema de Combate Velen">   
+
+    <edit left="10" top="20" field="NomeFicha"/>		
+	<edit left="10" top="50" field="NomeProcuradoBibItem"/>
+
+		
+	<button left="120"  top="80" text="Mostra Ficha 1">
+			<event name="onClick">										
+				PegaDadosFicha1()				
+			</event>
+	</button>
+		
+	 <script>
+		function PegaDadosFicha1()
+			showMessage(Ficha1);
+		end;
+	</script>		
+
+	
+</form>

@@ -1,0 +1,1052 @@
+<?xml version="1.0" encoding="UTF-8"?>        
+	
+<popupForm	 name="frmSobrePostaInimigo" scale="0.9" width="650" height="600" >	
+	<event name="onNodeReady">	
+		sheet.HPAtual = tonumber(sheet.HPAtual) or 0;
+		sheet.HPRetirado = tonumber(sheet.HPRetirado) or 0;
+		sheet.HPTotal = tonumber(sheet.HPTotal) or 0;
+		sheet.level = tonumber(sheet.level) or 0;
+		sheet.MPAtual = tonumber(sheet.MPAtual) or 0;
+		sheet.MPTotal = tonumber(sheet.MPTotal) or 0;
+		sheet.MPRetirado = tonumber(sheet.MPRetirado) or 0;
+		
+		sheet.Nome = sheet.Nome or "Nome Mob";
+		sheet.Dano = tonumber(sheet.Dano) or 0;
+		sheet.DanoMagico = tonumber(sheet.DanoMagico) or 0;
+		sheet.Defesa = tonumber(sheet.Defesa) or 0;
+		sheet.Resistencia = tonumber(sheet.Resistencia) or 0;
+		sheet.Acerto = tonumber(sheet.Acerto) or 0;
+		sheet.Esquiva = tonumber(sheet.Esquiva) or 0;
+		sheet.Critical = tonumber(sheet.Critical) or 0;
+		sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;
+		sheet.CriticalMagico = tonumber(sheet.CriticalMagico) or 0;
+		sheet.Persistencia = tonumber(sheet.Persistencia) or 0;
+		sheet.TipoAtaque = sheet.TipoAtaque or "Dano Fisico";
+		
+		sheet.Atletismo = tonumber(sheet.Atletismo) or 0;
+		sheet.Sabedoria = tonumber(sheet.Sabedoria) or 0;
+		sheet.Percepcao = tonumber(sheet.Percepcao) or 0;
+		sheet.Acrobacia = tonumber(sheet.Acrobacia) or 0;
+		sheet.Vigor = tonumber(sheet.Vigor) or 0;
+		sheet.Visao = tonumber(sheet.Visao) or 0;
+		sheet.DistanciaA = tonumber(sheet.DistanciaA) or 0;
+		sheet.RegenMP = tonumber(sheet.RegenMP) or 0;
+		sheet.Deslocamento = tonumber(sheet.Deslocamento) or 0;
+		sheet.Corrida = tonumber(sheet.Corrida) or 0;
+		
+		sheet.DescDrop1 = (sheet.DescDrop1) or "Item";
+		sheet.DescDrop2 = (sheet.DescDrop2) or "Item";
+		sheet.DescDrop3 = (sheet.DescDrop3) or "Item";
+		sheet.DescDrop4 = (sheet.DescDrop4) or "Item";
+		
+		sheet.ChanceDrop1 = tonumber(sheet.ChanceDrop1) or 0;		
+		sheet.ChanceDrop2 = tonumber(sheet.ChanceDrop2) or 0;		
+		sheet.ChanceDrop3 = tonumber(sheet.ChanceDrop3) or 0;		
+		sheet.ChanceDrop4 = tonumber(sheet.ChanceDrop4) or 0;
+		
+		sheet.NomeMecanica1 = sheet.NomeMecanica1 or '';
+		sheet.DescriMecanica1 = sheet.DescriMecanica1 or 'Descrição da Habilidade';
+		sheet.FalhaMecanica1 = sheet.FalhaMecanica1 or 'Mecanica Completa';
+		sheet.TipoMecanica1 = sheet.TipoMecanica1 or 'Escolha';
+		sheet.DanoMecanica1 = tonumber(sheet.DanoMecanica1) or 0;
+		sheet.CuraMecanica1 = tonumber(sheet.CuraMecanica1) or 0;
+		sheet.FixoMecanica1 = tonumber(sheet.FixoMecanica1) or 0;
+		sheet.CustoMecanica1 = tonumber(sheet.CustoMecanica1) or 0;
+		sheet.CDMecanica1 = tonumber(sheet.CDMecanica1) or 0;
+		
+		sheet.NomeMecanica2 = sheet.NomeMecanica2 or '';
+		sheet.DescriMecanica2 = sheet.DescriMecanica2 or 'Descrição da Habilidade';
+		sheet.FalhaMecanica2 = sheet.FalhaMecanica2 or 'Mecanica Completa';
+		sheet.TipoMecanica2 = sheet.TipoMecanica2 or 'Escolha';
+		sheet.DanoMecanica2 = tonumber(sheet.DanoMecanica2) or 0;
+		sheet.CuraMecanica2 = tonumber(sheet.CuraMecanica2) or 0;
+		sheet.FixoMecanica2 = tonumber(sheet.FixoMecanica2) or 0;
+		sheet.CustoMecanica2 = tonumber(sheet.CustoMecanica2) or 0;
+		sheet.CDMecanica2 = tonumber(sheet.CDMecanica2) or 0;
+		
+		sheet.NomeMecanica3 = sheet.NomeMecanica3 or '';
+		sheet.DescriMecanica3 = sheet.DescriMecanica3 or 'Descrição da Habilidade';
+		sheet.FalhaMecanica3 = sheet.FalhaMecanica3 or 'Mecanica Completa';
+		sheet.TipoMecanica3 = sheet.TipoMecanica3 or 'Escolha';
+		sheet.DanoMecanica3 = tonumber(sheet.DanoMecanica3) or 0;
+		sheet.CuraMecanica3 = tonumber(sheet.CuraMecanica3) or 0;
+		sheet.FixoMecanica3 = tonumber(sheet.FixoMecanica3) or 0;
+		sheet.CustoMecanica3 = tonumber(sheet.CustoMecanica3) or 0;
+		sheet.CDMecanica3 = tonumber(sheet.CDMecanica3) or 0;
+		
+		sheet.NomeMecanica4 = sheet.NomeMecanica4 or '';
+		sheet.DescriMecanica4 = sheet.DescriMecanica4 or 'Descrição da Habilidade';
+		sheet.FalhaMecanica4 = sheet.FalhaMecanica4 or 'Mecanica Completa';
+		sheet.TipoMecanica4 = sheet.TipoMecanica4 or 'Escolha';
+		sheet.DanoMecanica4 = tonumber(sheet.DanoMecanica4) or 0;
+		sheet.CuraMecanica4 = tonumber(sheet.CuraMecanica4) or 0;
+		sheet.FixoMecanica4 = tonumber(sheet.FixoMecanica4) or 0;
+		sheet.CustoMecanica4 = tonumber(sheet.CustoMecanica4) or 0;
+		sheet.CDMecanica4 = tonumber(sheet.CDMecanica4) or 0;
+		
+		sheet.TipoRecebido = sheet.TipoRecebido or "% Fisico";
+	</event>
+	
+	<scrollBox align="client">
+		<image name="URLIMG" left="185" top="-25" width="140" height="190" editable="true" style="autoFit" field="imgInimigo"/>	
+		-- GAMBIARRA PRA RESOLVER A FALHA NA FOTO --
+		<image left="110" top="-70" width="100" height="100" src="/imagens/2.png"/>
+		<image left="300" top="-70" width="100" height="100" src="/imagens/2.png"/>
+		-- GAMBIARRA PRA RESOLVER A FALHA NA FOTO --
+		<image left="5" top="-70" width="500" height="800" src="/imagens/1.png"/>
+		
+		----------------------------------------------
+		-------------------HP E MP--------------------
+		----------------------------------------------
+		<progressBar name="BarraHP" left="75" top="160" width="120" height="20" color="red" value="50" max="100"/>
+		<edit left="75" top="160" width="60" height="20" transparent="true" horzTextAlign="center" field="HPAtual"/>
+		<button left="75" top="190" width="70" height="20" fontSize="12" fontColor="red" text="DANO">
+			<event name="onClick">
+				RetiraHP();
+			</event>
+        </button>
+		<edit left="150" top="190" width="45" height="20" transparent="false" horzTextAlign="center" field="HPRetirado"/>		
+		<edit left="135" top="160" width="60" height="20" transparent="true" horzTextAlign="center" field="HPTotal"/> 
+		
+		<button left="407" top="42" width="65" height="65" opacity="0" fontSize="12" fontColor="#00FFFF" onClick="URL()"/>
+		<edit left="35" top="48" width="65" height="40" fontSize="24" transparent="true" horzTextAlign="center" fontColor="blue" type="number" decimalPlaces="0" max="30" min="1" field="level"/>
+		
+		<progressBar name="BarraMP" left="315" top="160" width="120" height="20" color="cyan" value="50" max="100"/>
+		<edit left="315" top="160" width="60" height="20" transparent="true" horzTextAlign="center" field="MPAtual"/> 
+		<edit left="375" top="160" width="60" height="20" transparent="true" horzTextAlign="center" field="MPTotal"/> 
+		<button left="315" top="190" width="70" height="20" fontSize="12" fontColor="cyan" text="CUSTO">
+			<event name="onClick">
+				RetiraMP();
+			</event>
+        </button>
+		<edit left="390" top="190" width="45" height="20" transparent="false" horzTextAlign="center" field="MPRetirado"/>
+		
+		<button left="223" top="165" width="60" height="25" fontSize="12" fontColor="white" text="Full💙">
+			<event name="onClick">
+				ToparStatus();
+			</event>
+        </button>
+		
+		<comboBox left="200" top="190" width="70" height="20" fontSize="12" fontColor="white" field="TipoRecebido" items="{'% Fisico', '% Magico'}"/>
+			
+		<edit left="145" top="215" width="130" height="20" transparent="false" horzTextAlign="center" field="Nome"/>		
+		<edit left="180" top="237" width="95" height="20" transparent="false" horzTextAlign="center" decimalPlaces="0" type="number" field="Dano"/>
+		<edit left="180" top="263" width="95" height="20" transparent="false" horzTextAlign="center" decimalPlaces="0" type="number" field="DanoMagico"/>
+		<edit left="180" top="289" width="35" height="20" transparent="false" horzTextAlign="center" type="number" field="Defesa"/>
+		<edit left="180" top="314" width="35" height="20" transparent="false" horzTextAlign="center" type="number" field="Resistencia"/>
+		
+		<rectangle left="240" top="289" width="35" height="20" color="blue"  strokeColor="white" strokeSize="1"/>
+		<edit left="240" top="289" width="35" height="20" transparent="true" canFocus="false" hitTest="false" horzTextAlign="center" field="DefesaPorCent"/>
+		<rectangle left="240" top="314" width="35" height="20" color="blue" strokeColor="white" strokeSize="1"/>
+		<edit left="240" top="314" width="35" height="20" transparent="true" canFocus="false" hitTest="false" horzTextAlign="center" field="ResistenciaPorCent"/>			
+
+		<edit left="360" top="263" width="60" height="20" transparent="false" horzTextAlign="center" type="number" field="Acerto"/> 
+		<edit left="360" top="289" width="60" height="20" transparent="false" horzTextAlign="center" type="number" field="Esquiva"/>
+		<edit left="360" top="314" width="60" height="20" transparent="false" horzTextAlign="center" type="number" field="Critical"/> 			
+		
+		<edit left="220" top="363" width="60" height="20" transparent="false" horzTextAlign="center" field="AcertoMagico"/> 
+		<edit left="220" top="388" width="60" height="20" transparent="false" horzTextAlign="center" field="CriticalMagico"/>
+		<edit left="220" top="413" width="60" height="20" transparent="false" horzTextAlign="center" field="Persistencia"/>
+		<comboBox left="310" top="338" width="100" field="TipoAtaque" fontSize="12" fontColor="red" items="{'Dano Fisico', 'Dano Magico'}"/>			
+		<button left="310" top="363" width="100" height="20"  fontSize="12" fontColor="red" text="Ataque Basico" onClick="AtaqueBasico()"/>	
+		<button left="310" top="388" width="100" height="20"  fontSize="12" fontColor="#00FFFF" text="Extra" onClick="self.popExtra:show();"/>		
+		
+		<button name="btnMeca1" left="280" top="215" width="75" height="20" horzTextAlign="center" text="Mecanica 1" onClick="self.popMecanica1:show();"/>
+		<popup name="popMecanica1" width="420" height="420" backOpacity="0.5">
+        <label left="10" top="10" fontSize="22" height="25" text="Mecanica 1"/>		
+		<label left="10" top="45" text="Habilidade :"/>	
+		<edit left="100" top="40" width="278" field="NomeMecanica1"/>
+		<label left="10" top="80"  text="Descrição Comum:"/>	
+		<textEditor left="130" top="80" width="248" height="100" field="DescriMecanica1"/>
+		<button left="10" top="100" width="105" height="80" horzTextAlign="center" text="Enviar"  onClick="MecanicaComum1()"/>
+		<label left="10" top="190" text="Descrição Completa:"/>	
+		<textEditor left="130" top="190" width="248" height="100" field="FalhaMecanica1"/>
+		<label left="10" top="303" text="Tipo:"/>	
+		<comboBox left="50" top="300" width="105" items="{'Dano', 'Dano Magico', 'Cura', 'Fixo'}" field="TipoMecanica1"/>
+		<label left="10" top="335" text="Dano:"/>	
+		<edit left="50" top="330" width="75" field="DanoMecanica1"/>
+		<label left="135" top="335" text="Cura:"/>	
+		<edit left="180" top="330" width="75" field="CuraMecanica1"/>
+		<label left="265" top="335" text="Fixo:"/>	
+		<edit left="305" top="330" width="75" field="FixoMecanica1"/>
+		<label left="10" top="370" visible="true" text="Custo:"/>	
+		<edit left="50" top="365" visible="true" width="75" field="CustoMecanica1"/>
+		<label left="135" top="370" visible="true" text="CD:"/>	
+		<edit left="180" top="365" visible="true" width="75" field="CDMecanica1"/>
+		
+		<checkBox name="CbxMeca1" left="265" top="370" width="75" fontColor="red" text="Mecanica Completa" field="ConheceMecanica1"/>
+		
+        </popup>     
+		
+		<button name="btnMeca2" left="280" top="237" width="75" height="20" horzTextAlign="center" text="Mecanica 2" onClick="self.popMecanica2:show();"/>
+		<popup name="popMecanica2" width="420" height="420" backOpacity="0.5">
+        <label left="10" top="10" fontSize="22" height="25" text="Mecanica 2"/>		
+		<label left="10" top="45" text="Habilidade :"/>	
+		<edit left="100" top="40" width="278" field="NomeMecanica2"/>
+		<label left="10" top="80"  text="Descrição Comum:"/>	
+		<textEditor left="130" top="80" width="248" height="100" field="DescriMecanica2"/>
+		<button left="10" top="100" width="105" height="80" horzTextAlign="center" text="Enviar"  onClick="MecanicaComum2()"/>
+		<label left="10" top="190" text="Descrição Completa:"/>	
+		<textEditor left="130" top="190" width="248" height="100" field="FalhaMecanica2"/>
+		<label left="10" top="305" text="Tipo:"/>	
+		<comboBox left="50" top="300" width="105" items="{'Dano', 'Dano Magico', 'Cura', 'Fixo'}" field="TipoMecanica2"/>
+		<label left="10" top="335" text="Dano:"/>	
+		<edit left="50" top="330" width="75" field="DanoMecanica2"/>
+		<label left="135" top="335" text="Cura:"/>	
+		<edit left="180" top="330" width="75" field="CuraMecanica2"/>
+		<label left="265" top="335" text="Fixo:"/>	
+		<edit left="305" top="330" width="75" field="FixoMecanica2"/>
+		<label left="10" top="370" visible="true" text="Custo:"/>	
+		<edit left="50" top="365" visible="true" width="75" field="CustoMecanica2"/>
+		<label left="135" top="370" visible="true" text="CD:"/>	
+		<edit left="180" top="365" visible="true" width="75" field="CDMecanica2"/>
+		
+		<checkBox name="CbxMeca2" left="265" top="370" width="75" fontColor="red" text="Mecanica Completa" field="ConheceMecanica2"/>
+		
+        </popup>     
+		
+		<button name="btnMeca3" left="360" top="215" width="75" height="20" horzTextAlign="center" text="Mecanica 3" onClick="self.popMecanica3:show();"/>
+		<popup name="popMecanica3" width="420" height="420" backOpacity="0.5">
+        <label left="10" top="10" fontSize="22" height="25" text="Mecanica 3"/>		
+		<label left="10" top="45" text="Habilidade :"/>	
+		<edit left="100" top="40" width="278" field="NomeMecanica3"/>
+		<label left="10" top="80"  text="Descrição Comum:"/>	
+		<textEditor left="130" top="80" width="248" height="100" field="DescriMecanica3"/>
+		<button left="10" top="100" width="105" height="80" horzTextAlign="center" text="Enviar"  onClick="MecanicaComum3()"/>
+		<label left="10" top="190" text="Descrição Completa:"/>	
+		<textEditor left="130" top="190" width="248" height="100" field="FalhaMecanica3"/>
+		<label left="10" top="303" text="Tipo:"/>	
+		<comboBox left="50" top="300" width="105" items="{'Dano', 'Dano Magico', 'Cura', 'Fixo'}" field="TipoMecanica3"/>
+		<label left="10" top="335" text="Dano:"/>	
+		<edit left="50" top="330" width="75" field="DanoMecanica3"/>
+		<label left="135" top="335" text="Cura:"/>	
+		<edit left="180" top="330" width="75" field="CuraMecanica3"/>
+		<label left="265" top="335" text="Fixo:"/>	
+		<edit left="305" top="330" width="75" field="FixoMecanica3"/>
+		<label left="10" top="370" visible="true" text="Custo:"/>	
+		<edit left="50" top="365" visible="true" width="75" field="CustoMecanica3"/>
+		<label left="135" top="370" visible="true" text="CD:"/>	
+		<edit left="180" top="365" visible="true" width="75" field="CDMecanica3"/>
+		
+		<checkBox name="CbxMeca3" left="265" top="370" width="75" fontColor="red" text="Mecanica Completa" field="ConheceMecanica3"/>
+		
+        </popup>     
+		
+		<button name="btnMeca4" left="360" top="237" width="75" height="20" horzTextAlign="center" text="Mecanica 4" onClick="self.popMecanica4:show();"/>
+		<popup name="popMecanica4" width="420" height="420" backOpacity="0.5">
+        <label left="10" top="10" fontSize="22" height="25" text="Mecanica 4"/>		
+		<label left="10" top="45" text="Habilidade :"/>	
+		<edit left="100" top="40" width="278" field="NomeMecanica4"/>
+		<label left="10" top="80"  text="Descrição Comum:"/>	
+		<textEditor left="130" top="80" width="248" height="100" field="DescriMecanica4"/>
+		<button left="10" top="100" width="105" height="80" horzTextAlign="center" text="Enviar"  onClick="MecanicaComum4()"/>
+		<label left="10" top="190" text="Descrição Completa:"/>	
+		<textEditor left="130" top="190" width="248" height="100" field="FalhaMecanica4"/>
+		<label left="10" top="303" text="Tipo:"/>	
+		<comboBox left="50" top="300" width="105" items="{'Dano', 'Dano Magico', 'Cura', 'Fixo'}" field="TipoMecanica4"/>
+		<label left="10" top="335" text="Dano:"/>	
+		<edit left="50" top="330" width="75" field="DanoMecanica4"/>
+		<label left="135" top="335" text="Cura:"/>	
+		<edit left="180" top="330" width="75" field="CuraMecanica4"/>
+		<label left="265" top="335" text="Fixo:"/>	
+		<edit left="305" top="330" width="75" field="FixoMecanica4"/>
+		<label left="10" top="370" visible="true" text="Custo:"/>	
+		<edit left="50" top="365" visible="true" width="75" field="CustoMecanica4"/>
+		<label left="135" top="370" visible="true" text="CD:"/>	
+		<edit left="180" top="365" visible="true" width="75" field="CDMecanica4"/>
+		
+		<checkBox name="CbxMeca4" left="265" top="370" width="75" fontColor="red" text="Mecanica Completa" field="ConheceMecanica4"/>
+		
+        </popup>    
+
+		<dataLink fields="{'NomeMecanica1', 'NomeMecanica2', 'NomeMecanica3', 'NomeMecanica4'}">
+                <event name="onChange">
+					self.btnMeca1.fontColor = 'white'
+					self.btnMeca2.fontColor = 'white'
+					self.btnMeca3.fontColor = 'white'
+					self.btnMeca4.fontColor = 'white'
+					
+					if sheet.NomeMecanica1 ~= nil then
+						self.btnMeca1.fontColor = 'red';
+					end;
+					
+					if sheet.NomeMecanica2 ~= nil then
+						self.btnMeca2.fontColor = 'red';
+					end;
+					if sheet.NomeMecanica3 ~= nil then
+						self.btnMeca3.fontColor = 'red';
+					end;
+					if sheet.NomeMecanica4 ~= nil then
+						self.btnMeca4.fontColor = 'red';
+					end;					
+                </event>
+        </dataLink>		
+		
+		
+        <button text="Nova Habilidade" left="310" top="413" width="100" height="20" fontSize="12" fontColor="#00FFFF">
+			<event name="onClick">                                            
+				self.rclHabilidadeInimigo:append();
+			</event>
+		</button>          
+
+        <recordList name="rclHabilidadeInimigo" left="40" top="450" width="190" height="200" field="campoDosItens" templateForm="frmHabilidadeInimigo"  selectable="true">                           
+			<event name="onSelect">                               
+				local node = self.rclHabilidadeInimigo.selectedNode; 
+					self.dscHabilidadeInimigo.node = node;                       
+					self.dscHabilidadeInimigo.visible = (node ~= nil);
+					
+					if self.dscHabilidadeInimigo.visible == true then
+						self.dscHabilidadeInimigo.node.NomeSkill = self.dscHabilidadeInimigo.node.NomeSkill or ''
+						self.dscHabilidadeInimigo.node.TipoSkill = self.dscHabilidadeInimigo.node.TipoSkill or 'Escolha'
+						self.dscHabilidadeInimigo.node.Foco = tonumber(self.dscHabilidadeInimigo.node.Foco) or 0;
+						self.dscHabilidadeInimigo.node.Custo = tonumber(self.dscHabilidadeInimigo.node.Custo) or 0;
+						self.dscHabilidadeInimigo.node.Intensidade = tonumber(self.dscHabilidadeInimigo.node.Intensidade) or 0;
+						self.dscHabilidadeInimigo.node.DescriHabilidade = self.dscHabilidadeInimigo.node.DescriHabilidade or 'Descrição da Habilidade'
+					end;
+			</event>
+			
+			<event name="onEndEnumeration">
+				if self.rclHabilidadeInimigo.selectedNode == nil and sheet ~= nil then
+					local nodes = ndb.getChildNodes(sheet.campoDosItens);	
+					if #nodes > 0 then
+						self.rclHabilidadeInimigo.selectedNode = nodes[1];
+					end;
+				end;
+			</event>
+        </recordList>
+		
+        <dataScopeBox name="dscHabilidadeInimigo" top="445" left="230	" visible="false" width="240" height="200">
+			<rectangle height="200" align="top" color="grey" xradius="10" yradius="10" >
+				<label left="10" top="10" width="70" height="18" text="Skill"/>  
+				<edit left="40" top="10" width="70" height="18" fontSize="10" field="NomeSkill"/> 
+				<label left="115" top="10" width="28" height="18" text="Tipo"/> 
+				<comboBox left="145" top="10" width="90" field="TipoSkill" items="{'Dano', 'Dano Magico', 'Buff', 'Cura', 'Real', 'Defensiva'}"/>		
+				<button left="200" top="162" text="X" fontSize="18" fontColor="red" width="35" height="35" onClick="NDB.deleteNode(self.dscHabilidadeInimigo.node);" />
+				<label left="10" top="150" width="70" height="18" text="Foco"/>
+				<edit left="45" top="150" width="50" height="18" type="number" field="Foco"/>
+				<label left="100" top="150" width="70" height="18" text="Custo"/>
+				<edit left="140" top="150" width="50" height="18" type="number" field="Custo"/> 				
+				<label left="10" top="175" width="70" height="18" text="Intensidade"/>
+				<edit left="85" top="175" width="70" canFocus="false" type="number" height="18" field="Intensidade"/> 
+				<textEditor left="10" top="40" width="160" height="100" fontSize="10" field="DescriHabilidade"/>
+				<button left="175" top="60" width="60" height="60" fontSize="12" fontColor="blue" text="Usar" onClick="UsarHabilidade()"/>
+				
+			</rectangle>
+        </dataScopeBox>		
+	</scrollBox> 
+	
+	<popup name="popExtra" visible="false" width="500" height="700" backOpacity="0.5">
+		<image align="client" src="/imagens/3.png"/> 
+		<edit left="230" top="132" width="50" height="18" fontSize="12" field="Atletismo"/>
+		<edit left="230" top="156" width="50" height="18" fontSize="12" field="Sabedoria"/>
+		<edit left="230" top="180" width="50" height="18" fontSize="12" field="Percepcao"/>
+		<edit left="230" top="204" width="50" height="18" fontSize="12" field="Acrobacia"/>
+		<edit left="230" top="228" width="50" height="18" fontSize="12" field="Vigor"/>
+		
+		<edit left="230" top="324" width="50" height="18" fontSize="12" field="Visao"/>
+		<edit left="230" top="346" width="50" height="18" fontSize="12" field="DistanciaA"/>
+		<edit left="230" top="368" width="50" height="18" fontSize="12" field="RegenMP"/>
+		<edit left="230" top="390" width="50" height="18" fontSize="12" field="Deslocamento"/>
+		<edit left="230" top="412" width="50" height="18" fontSize="12" field="Corrida"/>
+		
+		<button left="83" top="450" width="50" height="18" fontSize="12" text="DROP 1">
+			<event name="onClick">                                            
+				Drop1();
+			</event>
+		</button> 		
+		<label left="150" top="450" width="50" height="18" fontSize="12" text="CHANCE"/>
+		<edit left="203" top="450" width="30" height="18" fontSize="12" field="ChanceDrop1"/>
+		<textEditor left="83" top="475" width="150" height="50" field="DescDrop1"/>
+		
+		<button left="250" top="450" width="50" height="18" fontSize="12" text="DROP 2">
+			<event name="onClick">                                            
+				Drop2();
+			</event>
+		</button> 		
+		<label left="317" top="450" width="50" height="18" fontSize="12" text="CHANCE"/>
+		<edit left="370" top="450" width="30" height="18" fontSize="12" field="ChanceDrop2"/>
+		<textEditor left="250" top="475" width="150" height="50" field="DescDrop2"/>
+		
+		<button left="83" top="530" width="50" height="18" fontSize="12" text="DROP 3">
+			<event name="onClick">                                            
+				Drop3();
+			</event>
+		</button> 		
+		<label left="150" top="530" width="50" height="18" fontSize="12" text="CHANCE"/>
+		<edit left="203" top="530" width="30" height="18" fontSize="12" field="ChanceDrop3"/>
+		<textEditor left="83" top="555" width="150" height="50" field="DescDrop3"/>
+		
+		<button left="250" top="530" width="50" height="18" fontSize="12" text="DROP 4">
+			<event name="onClick">                                            
+				Drop4();
+			</event>
+		</button> 		
+		<label left="317" top="530" width="50" height="18" fontSize="12" text="CHANCE"/>
+		<edit left="370" top="530" width="30" height="18" fontSize="12" field="ChanceDrop4"/>
+		<textEditor left="250" top="555" width="150" height="50" field="DescDrop4"/>
+		
+		
+		<button left="300" top="132" width="70" height="20"  fontSize="12" fontColor="#00FFFF" text="Atletismo" onClick="RolarTesteAtletismo()"/>
+			<script>
+				local function RolarTesteAtletismo()      
+					local mesaDoPersonagem = Firecast.getMesaDe(sheet);      
+					sheet.Atletismo = math.floor(tonumber(sheet.Atletismo or 0));                        
+					mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Atletismo, "[§K2]Teste de Atletismo"); 
+				end; 	   
+			</script> 
+		
+		<button left="300" top="156" width="70" height="20"  fontSize="12" fontColor="#00FFFF" text="Sabedoria" onClick="RolarTesteSabedoria()"/>
+			<script>
+				local function RolarTesteSabedoria()      
+					local mesaDoPersonagem = Firecast.getMesaDe(sheet);      
+					sheet.Sabedoria = math.floor(tonumber(sheet.Sabedoria or 0));                       
+					mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Sabedoria, "[§K2]Teste de Sabedoria"); 
+				end; 	   
+			</script>
+
+		<button left="300" top="180" width="70" height="20"  fontSize="12" fontColor="#00FFFF" text="Percepção" onClick="RolarTestePercepcao()"/>
+			<script>
+				local function RolarTestePercepcao()      
+					local mesaDoPersonagem = Firecast.getMesaDe(sheet);      
+					sheet.Percepcao = math.floor(tonumber(sheet.Percepcao or 0));                       
+					mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Percepcao, "[§K2]Teste de Percepcao"); 
+				end; 	   
+			</script> 
+
+		<button left="300" top="204" width="70" height="20"  fontSize="12" fontColor="#00FFFF" text="Acrobacia" onClick="RolarTesteAcrobacia()"/>
+			<script>
+				local function RolarTesteAcrobacia()      
+					local mesaDoPersonagem = Firecast.getMesaDe(sheet);      
+					sheet.Acrobacia = math.floor(tonumber(sheet.Acrobacia or 0));                         
+					mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acrobacia, "[§K2]Teste de Acrobacia"); 
+				end; 	   
+			</script> 
+
+		<button left="300" top="228" width="70" height="20"  fontSize="12" fontColor="#00FFFF" text="Vigor" onClick="RolarTesteVigor()"/>
+			<script>
+				local function RolarTesteVigor()      
+					local mesaDoPersonagem = Firecast.getMesaDe(sheet);      
+					sheet.Vigor = math.floor(tonumber(sheet.Vigor or 0));                         
+					mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Vigor, "[§K2]Teste de Vigor"); 
+				end; 	   
+			</script> 			
+    </popup> 
+	
+	<dataLink fields="{'Defesa', 'Resistencia', 'level'}">
+		<event name="onChange"> 
+			---------------------------------------------
+			---------------------------------------------
+			------[[Calculo de Redução Porcentado]]------
+			---------------------------------------------
+			---------------------------------------------
+			if sheet.level == 30 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /5);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /5);
+			end;	
+				
+			if sheet.level == 29 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /4.5);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /4.5);
+			end;
+			
+			if sheet.level == 28 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /4.2);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /4.2);
+			end;
+			
+			if sheet.level == 27 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /3.9);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /3.9);
+			end;
+			
+			if sheet.level == 26 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /3.8);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /3.8);
+			end;
+
+			if sheet.level == 25 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /3.6);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /3.6);
+			end;
+			
+			if sheet.level == 24 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /3.4);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /3.4);
+			end;
+			
+			if sheet.level == 23 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /3.2);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /3.2);
+			end;
+			
+			if sheet.level == 22 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /3);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /3);
+			end;
+			
+			if sheet.level == 21 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /2.8);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /2.8);
+			end;
+			
+			if sheet.level == 20 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /2.5);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /2.5);
+			end;
+			
+			if sheet.level == 19 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /2.4);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /2.4);
+			end;
+			
+			if sheet.level == 18 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /2.2);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /2.2);
+			end;
+			
+			if sheet.level == 17 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /2);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /2);
+			end;
+			
+			if sheet.level == 16 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /1.9);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /1.9);
+			end;
+			
+			if sheet.level == 15 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /1.8);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /1.8);
+			end;
+			
+			if sheet.level == 14 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /1.6);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /1.6);
+			end;
+			
+			if sheet.level == 13 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /1.5);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /1.5);
+			end;
+			
+			if sheet.level == 12 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /1.3);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /1.3);
+			end;
+			
+			if sheet.level == 11 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /1.2);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /1.2);
+			end;
+			
+			if sheet.level == 10 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /1.1);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /1.1);
+			end;
+			
+			if sheet.level == 9 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /1);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /1);
+			end;
+			
+			if sheet.level == 8 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /0.92);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /0.92);
+			end;
+			
+			if sheet.level == 7 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /0.8);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /0.8);
+			end;
+			
+			if sheet.level == 6 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /0.7);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /0.7);
+			end;
+			
+			if sheet.level == 5 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /0.5);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /0.5);
+			end;
+			
+			if sheet.level == 4 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /0.4);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /0.4);
+			end;
+			
+			if sheet.level == 3 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /0.3);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /0.3);
+			end;
+			
+			if sheet.level == 2 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /0.2);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /0.2);
+			end;
+			
+			if sheet.level == 1 then 
+				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /0.15);
+				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /0.15);
+			end;
+		</event>
+    </dataLink>
+		
+	<dataLink fields="{'HPAtual', 'HPTotal'}">
+		<event name="onChange">                
+			self.BarraHP.value = tonumber(sheet.HPAtual);
+			self.BarraHP.max = tonumber(sheet.HPTotal);		
+		</event>
+	</dataLink>
+	
+	<dataLink fields="{'MPAtual', 'MPTotal'}">
+		<event name="onChange">                
+			self.BarraMP.value = tonumber(sheet.MPAtual);
+			self.BarraMP.max = tonumber(sheet.MPTotal);		
+		</event>
+	</dataLink>
+	
+	<script>
+		local function ToparStatus()   
+			sheet.HPAtual = sheet.HPTotal;
+						
+			sheet.MPAtual = sheet.MPTotal;
+		end; 		   
+	</script>
+		
+	<script>
+		local function AtaqueBasico()      
+			local mesaDoPersonagem = Firecast.getMesaDe(sheet);        
+			sheet.Acerto = sheet.Acerto or 0;                        
+			if sheet.TipoAtaque == nil then
+				showMessage("Escolha uma Base de Dano para seu Ataque Basico na lista acima");
+			else				
+				mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
+					function (rolado)						
+					local soDado = rolado.resultado + 1 - tonumber(sheet.Acerto);
+						if soDado > tonumber(sheet.Critical) then
+							if sheet.TipoAtaque == 'Dano Fisico' then
+								mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICO CORPO A CORPO CARAI  :awyeah: « " .. sheet.Dano * 2 .. " »");
+							elseif sheet.TipoAtaque == 'Dano Magico' then
+								mesaDoPersonagem.chat:enviarMensagem("[§K4,0]CRITICO A DISTANCIA CARAI :awyeah: « " .. sheet.DanoMagico * 2 .. " »");								
+							end;	
+						else
+							if sheet.TipoAtaque == 'Dano Fisico' then
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico corpo a corpo « [§K4,0] " .. sheet.Dano .. " [§K9,0]»");
+							elseif sheet.TipoAtaque == 'Dano Magico' then			
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. sheet.DanoMagico .. " [§K9,0]»");
+							end;							
+						end;							
+				end); 
+			end;
+		end; 		   
+	</script>
+	
+	<script>					
+		local function UsarHabilidade() 
+		--[[ HABILIDADE DE DANO ]]--								
+		local node = self.dscHabilidadeInimigo.node;
+		local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
+		sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+		mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+		function (rolado)					
+		if node.TipoSkill ~= nil then
+			if sheet.AcertoMagico + 1 > rolado.resultado then							
+				if node.TipoSkill == 'Dano' then
+					node.Intensidade = (tonumber(sheet.Dano) or 0) + (tonumber(node.Foco) or 0);							
+				end;			
+				if node.TipoSkill == 'Dano Magico' then
+					node.Intensidade = (tonumber(sheet.DanoMagico) or 0) + (tonumber(node.Foco) or 0);								
+				end;
+				if node.TipoSkill == 'Cura' then
+					node.Intensidade = (tonumber(sheet.DanoMagico) or 0) + (tonumber(node.Foco) or 0);	
+				end;
+				if node.TipoSkill == 'Buff' then
+					node.Intensidade = 0;	
+				end;
+				if node.TipoSkill == 'Real' then
+					node.Intensidade = (tonumber(node.Foco) or 0);
+				end;
+				if node.TipoSkill == 'Defensiva' then
+					node.Intensidade = 0;
+				end;
+				if sheet.AcertoMagico >= rolado.resultado then				
+					mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriHabilidade);
+					if node.TipoSkill == 'Cura' then
+						if sheet.CriticalMagico +1 > rolado.resultado then 
+							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. (node.Intensidade * 2 or 0) .. "[§K8,0] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. node.Intensidade or 0 .. "[§K8,0] »");
+						end;	
+					else
+						if sheet.CriticalMagico +1 > rolado.resultado then 
+							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (node.Intensidade * 2 or 0) .. "[§K9,0] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. node.Intensidade or 0 .. "[§K9,0] »");
+						end;	
+					end;
+					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(node.Custo) or 0; 
+				else
+					mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+				end;
+			else							
+				mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
+				if node.TipoSkill == 'Buff' then
+					mesaDoPersonagem.chat:enviarMensagem("[§K3,15]ERA BUFF ESSA MERDA");	
+				else 	
+				end;
+			end;
+		else
+			mesaDoPersonagem.chat:enviarMensagem("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE,[§K4,0] ROLA DNV");
+		end;
+		end);					
+		end; 														
+	</script> 
+
+	<script>
+		local function URL() 
+		local mesaDoPersonagem = rrpg.getMesaDe(sheet);	
+			if sheet.imgInimigo ~= nil then
+				mesaDoPersonagem.chat:enviarMensagem("[§I" .. sheet.imgInimigo .. "]");	
+			else
+				showMessage("O Inimigo não possui uma imagem para enviar por isso enviaremos uma imagem da sua PRIMA");
+			end;
+		end;
+	</script> 
+	-------------------------------------------------------------------------------------------
+	-------------------------------------------------------------------------------------------
+	-------------------------------------------------------------------------------------------
+	-------------------------------------------------------------------------------------------
+	-----------------------------------------MECANICA------------------------------------------
+	-------------------------------------------------------------------------------------------
+	-------------------------------------------------------------------------------------------
+	-------------------------------------------------------------------------------------------
+	
+	<script>
+		local function MecanicaComum1() 
+		--[[ MECANICA 1 ]]--								
+		local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
+		sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+		mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+		function (rolado)					
+		if sheet.TipoMecanica1 ~= nil then
+			if sheet.AcertoMagico + 1 > rolado.resultado then							
+				if sheet.TipoMecanica1 == 'Dano' then
+					sheet.IntensidadeMecanica1 = (tonumber(sheet.DanoMecanica1) or 0) + (tonumber(sheet.Dano) or 0);							
+				end;			
+				if sheet.TipoMecanica1 == 'Dano Magico' then
+					sheet.IntensidadeMecanica1 = (tonumber(sheet.DanoMecanica1) or 0) + (tonumber(sheet.DanoMagico) or 0);								
+				end;
+				if sheet.TipoMecanica1 == 'Cura' then
+					sheet.IntensidadeMecanica1 = (tonumber(sheet.CuraMecanica1) or 0) + (tonumber(sheet.DanoMagico) or 0);	
+				end;
+				
+				if sheet.TipoMecanica1 == 'Fixo' then
+					sheet.IntensidadeMecanica1 = (tonumber(sheet.FixoMecanica1) or 0);	
+				end;
+
+				if sheet.AcertoMagico >= rolado.resultado then
+					if self.CbxMeca1.checked then
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica1);
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.FalhaMecanica1);
+					else					
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica1);
+					end;
+					if sheet.TipoMecanica1 == 'Cura' then
+						if sheet.CriticalMagico +1 > rolado.resultado then 
+							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. (sheet.IntensidadeMecanica1 * 2 or 0) .. "[§K8,0] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. sheet.IntensidadeMecanica1 or 0 .. "[§K8,0] »");
+						end;	
+					else
+						if sheet.CriticalMagico +1 > rolado.resultado then 
+							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (sheet.IntensidadeMecanica1 * 2 or 0) .. "[§K9,0] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. sheet.IntensidadeMecanica1 or 0 .. "[§K9,0] »");
+						end;	
+					end;
+					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(sheet.CustoMecanica1) or 0; 
+				else
+					mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+				end;
+			else							
+				mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");	
+			end;
+		else
+			showMessage("A Habilidade ta sem tipo");
+		end;
+		end);					
+		end; 				
+	</script> 
+	
+	<script>
+		local function MecanicaComum2() 
+		--[[ MECANICA 2 ]]--								
+		local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
+		sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+		mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+		function (rolado)					
+		if sheet.TipoMecanica2 ~= nil then
+			if sheet.AcertoMagico + 1 > rolado.resultado then							
+				if sheet.TipoMecanica2 == 'Dano' then
+					sheet.IntensidadeMecanica2 = (tonumber(sheet.DanoMecanica2) or 0) + (tonumber(sheet.Dano) or 0);							
+				end;			
+				if sheet.TipoMecanica2 == 'Dano Magico' then
+					sheet.IntensidadeMecanica2 = (tonumber(sheet.DanoMecanica2) or 0) + (tonumber(sheet.DanoMagico) or 0);								
+				end;
+				if sheet.TipoMecanica2 == 'Cura' then
+					sheet.IntensidadeMecanica2 = (tonumber(sheet.CuraMecanica2) or 0) + (tonumber(sheet.DanoMagico) or 0);	
+				end;
+				
+				if sheet.TipoMecanica2 == 'Fixo' then
+					sheet.IntensidadeMecanica2 = (tonumber(sheet.FixoMecanica2) or 0);	
+				end;
+
+				if sheet.AcertoMagico >= rolado.resultado then
+					if self.CbxMeca2.checked then
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica2);
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.FalhaMecanica2);
+					else					
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica2);
+					end;
+					if sheet.TipoMecanica2 == 'Cura' then
+						if sheet.CriticalMagico +1 > rolado.resultado then 
+							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. (sheet.IntensidadeMecanica2 * 2 or 0) .. "[§K8,0] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. sheet.IntensidadeMecanica2 or 0 .. "[§K8,0] »");
+						end;	
+					else
+						if sheet.CriticalMagico +1 > rolado.resultado then 
+							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (sheet.IntensidadeMecanica2 * 2 or 0) .. "[§K9,0] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. sheet.IntensidadeMecanica2 or 0 .. "[§K9,0] »");
+						end;	
+					end;
+					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(sheet.CustoMecanica2) or 0; 
+				else
+					mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+				end;
+			else							
+				mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");	
+			end;
+		else
+			showMessage("A Habilidade ta sem tipo");
+		end;
+		end);					
+		end; 				
+	</script> 
+	
+	<script>
+		local function MecanicaComum3() 
+		--[[ MECANICA 3 ]]--								
+		local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
+		sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+		mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+		function (rolado)					
+		if sheet.TipoMecanica3 ~= nil then
+			if sheet.AcertoMagico + 1 > rolado.resultado then							
+				if sheet.TipoMecanica3 == 'Dano' then
+					sheet.IntensidadeMecanica3 = (tonumber(sheet.DanoMecanica3) or 0) + (tonumber(sheet.Dano) or 0);							
+				end;			
+				if sheet.TipoMecanica3 == 'Dano Magico' then
+					sheet.IntensidadeMecanica3 = (tonumber(sheet.DanoMecanica3) or 0) + (tonumber(sheet.DanoMagico) or 0);								
+				end;
+				if sheet.TipoMecanica3 == 'Cura' then
+					sheet.IntensidadeMecanica3 = (tonumber(sheet.CuraMecanica3) or 0) + (tonumber(sheet.DanoMagico) or 0);	
+				end;
+				
+				if sheet.TipoMecanica3 == 'Fixo' then
+					sheet.IntensidadeMecanica3 = (tonumber(sheet.FixoMecanica3) or 0);	
+				end;
+
+				if sheet.AcertoMagico >= rolado.resultado then
+					if self.CbxMeca3.checked then
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica3);
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.FalhaMecanica3);
+					else					
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica3);
+					end;
+					if sheet.TipoMecanica3 == 'Cura' then
+						if sheet.CriticalMagico +1 > rolado.resultado then 
+							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. (sheet.IntensidadeMecanica3 * 2 or 0) .. "[§K8,0] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. sheet.IntensidadeMecanica3 or 0 .. "[§K8,0] »");
+						end;	
+					else
+						if sheet.CriticalMagico +1 > rolado.resultado then 
+							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (sheet.IntensidadeMecanica3 * 2 or 0) .. "[§K9,0] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. sheet.IntensidadeMecanica3 or 0 .. "[§K9,0] »");
+						end;	
+					end;
+					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(sheet.CustoMecanica3) or 0; 
+				else
+					mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+				end;
+			else							
+				mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");	
+			end;
+		else
+			showMessage("A Habilidade ta sem tipo");
+		end;
+		end);					
+		end; 				
+	</script> 
+	
+	<script>
+		local function MecanicaComum4() 
+		--[[ Mecanica4 4 ]]--								
+		local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
+		sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+		mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+		function (rolado)					
+		if sheet.TipoMecanica4 ~= nil then
+			if sheet.AcertoMagico + 1 > rolado.resultado then							
+				if sheet.TipoMecanica4 == 'Dano' then
+					sheet.IntensidadeMecanica4 = (tonumber(sheet.DanoMecanica4) or 0) + (tonumber(sheet.Dano) or 0);							
+				end;			
+				if sheet.TipoMecanica4 == 'Dano Magico' then
+					sheet.IntensidadeMecanica4 = (tonumber(sheet.DanoMecanica4) or 0) + (tonumber(sheet.DanoMagico) or 0);								
+				end;
+				if sheet.TipoMecanica4 == 'Cura' then
+					sheet.IntensidadeMecanica4 = (tonumber(sheet.CuraMecanica4) or 0) + (tonumber(sheet.DanoMagico) or 0);	
+				end;
+				
+				if sheet.TipoMecanica4 == 'Fixo' then
+					sheet.IntensidadeMecanica4 = (tonumber(sheet.FixoMecanica4) or 0);	
+				end;
+
+				if sheet.AcertoMagico >= rolado.resultado then
+					if self.CbxMeca4.checked then
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica4);
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.FalhaMecanica4);
+					else					
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica4);
+					end;
+					if sheet.TipoMecanica4 == 'Cura' then
+						if sheet.CriticalMagico +1 > rolado.resultado then 
+							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. (sheet.IntensidadeMecanica4 * 2 or 0) .. "[§K8,0] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. sheet.IntensidadeMecanica4 or 0 .. "[§K8,0] »");
+						end;	
+					else
+						if sheet.CriticalMagico +1 > rolado.resultado then 
+							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (sheet.IntensidadeMecanica4 * 2 or 0) .. "[§K9,0] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. sheet.IntensidadeMecanica4 or 0 .. "[§K9,0] »");
+						end;	
+					end;
+					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(sheet.CustoMecanica4) or 0; 
+				else
+					mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+				end;
+			else							
+				mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");	
+			end;
+		else
+			showMessage("A Habilidade ta sem tipo");
+		end;
+		end);					
+		end; 				
+	</script> 
+	
+	<script>
+		local function RetiraHP()
+			if sheet.TipoRecebido == '% Fisico' then
+				sheet.AplicaDefPorCent = (tonumber(sheet.HPRetirado) or 0) * (tonumber(sheet.DefesaPorCent) / 100);
+			else
+				sheet.AplicaDefPorCent = (tonumber(sheet.HPRetirado) or 0) * (tonumber(sheet.ResistenciaPorCent) / 100);
+			end;
+			
+			sheet.HPRetiradoReal = (tonumber(sheet.HPRetirado) or 0) - (tonumber(sheet.AplicaDefPorCent))		
+			sheet.HPRetiradoReal = math.ceil(sheet.HPRetiradoReal)
+			
+			sheet.HPAtual = (tonumber(sheet.HPAtual) or 0) - (tonumber(sheet.HPRetiradoReal) or 0);
+			sheet.HPRetiradoCrtZ = (tonumber(sheet.HPRetirado) or 0);
+						
+			self.BarraHP.value = tonumber(sheet.HPAtual);
+			self.BarraHP.max = tonumber(sheet.HPTotal);	
+			
+			local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
+			mesaDoPersonagem.chat:enviarMensagem("[§K4,0]Dano que recebido pela criatura " .. sheet.HPRetiradoReal);
+			
+			sheet.HPRetirado = 0;
+			
+		end; 		   
+	</script>
+	
+	<script>
+		local function RetiraMP()      
+			sheet.MPAtual = (tonumber(sheet.MPAtual) or 0) - (tonumber(sheet.MPRetirado) or 0);
+			sheet.MPRetiradoCrtZ = (tonumber(sheet.MPRetirado) or 0);
+						
+			self.BarraMP.value = tonumber(sheet.MPAtual);
+			self.BarraMP.max = tonumber(sheet.MPTotal);	
+			
+			sheet.MPRetirado = 0;
+		end; 		   
+	</script>
+	
+	<script>
+		local function Drop1() 								
+			local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
+			sheet.ChanceDrop1 = tonumber(sheet.ChanceDrop1) or 0;						
+			mesaDoPersonagem.chat:rolarDados("1d100", "[§K3]Chance de Drop",
+			function (rolado)					
+				if sheet.ChanceDrop1 >= rolado.resultado then							
+					mesaDoPersonagem.chat:enviarMensagem("[§K8,0]DROPOU");	
+					mesaDoPersonagem.chat:enviarMensagem("[§K8,0] " .. sheet.DescDrop1);					
+				else							
+					mesaDoPersonagem.chat:enviarMensagem("[§K14,0]SEM SORTE");	
+				end;			
+			end);					
+		end; 				
+	</script> 
+	
+	<script>
+		local function Drop2() 								
+			local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
+			sheet.ChanceDrop2 = tonumber(sheet.ChanceDrop2) or 0;						
+			mesaDoPersonagem.chat:rolarDados("1d100", "[§K3]Chance de Drop",
+			function (rolado)					
+				if sheet.ChanceDrop2 >= rolado.resultado then							
+					mesaDoPersonagem.chat:enviarMensagem("[§K8,0]DROPOU");	
+					mesaDoPersonagem.chat:enviarMensagem("[§K8,0] " .. sheet.DescDrop2);					
+				else							
+					mesaDoPersonagem.chat:enviarMensagem("[§K14,0]SEM SORTE");	
+				end;			
+			end);					
+		end; 				
+	</script> 
+	
+	<script>
+		local function Drop3() 								
+			local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
+			sheet.ChanceDrop3 = tonumber(sheet.ChanceDrop3) or 0;						
+			mesaDoPersonagem.chat:rolarDados("1d100", "[§K3]Chance de Drop",
+			function (rolado)					
+				if sheet.ChanceDrop3 >= rolado.resultado then							
+					mesaDoPersonagem.chat:enviarMensagem("[§K8,0]DROPOU");	
+					mesaDoPersonagem.chat:enviarMensagem("[§K8,0] " .. sheet.DescDrop3);					
+				else							
+					mesaDoPersonagem.chat:enviarMensagem("[§K14,0]SEM SORTE");	
+				end;			
+			end);					
+		end; 				
+	</script> 
+	
+	<script>
+		local function Drop4() 								
+			local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
+			sheet.ChanceDrop4 = tonumber(sheet.ChanceDrop4) or 0;						
+			mesaDoPersonagem.chat:rolarDados("1d100", "[§K3]Chance de Drop",
+			function (rolado)					
+				if sheet.ChanceDrop4 >= rolado.resultado then							
+					mesaDoPersonagem.chat:enviarMensagem("[§K8,0]DROPOU");	
+					mesaDoPersonagem.chat:enviarMensagem("[§K8,0] " .. sheet.DescDrop4);					
+				else							
+					mesaDoPersonagem.chat:enviarMensagem("[§K14,0]SEM SORTE");	
+				end;			
+			end);					
+		end; 				
+	</script> 
+</popupForm>

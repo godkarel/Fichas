@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<popupForm name="frmScript" width="1050" height="650" >
+    ===============================
+	===============================
+	=== Botão de Treinar Status ===
+	===============================
+	===============================
+	<script>
+		local function TreinandoStatus()
+			local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+			if sheet.TreinoON == false then
+				showMessage("MESTRE FORA DA MESA O TREINO NÃO ESTA HABILITADO");
+				mesaDoPersonagem.chat:enviarMensagem("[§K3]MESTRE FORA DA MESA O TREINO NÃO ESTA HABILITADO");
+			else
+				sheet.gambiarrento = 0;  
+				sheet.EsperaTreinoResultado = 0;
+				sheet.modificador = 0;						
+				if sheet.GraduacaoTreino == "" then
+					showMessage("Tu não tem Graduação pra treino não filho da puta ? Ajeita essa merda eu passo horas programando pra tu rolar essa merda e nem colocar a graduação seu imundo ?");
+				else
+					if sheet.VezesPDia == 0 then
+						showMessage("VAI TREINAR 0 VEZES POR DIA ? SEU ARROMBADO ENTÃO TU NÃO VAI GANHAR PONTO SEU LIXO ESPACIAL");
+					else
+						if sheet.GraduacaoTreino == "Academico" then
+							mesaDoPersonagem.chat:rolarDados("1d4 + " .. sheet.gambiarrento, "[§K3]Treinando Status",
+							function (rolado)                                            
+								mesaDoPersonagem.chat:enviarMensagem("[§K3]Treinou igual um  FDP e recebeu [§K4]" .. rolado.resultado * 5);
+								sheet.EsperaTreinoResultado = rolado.resultado * 5;
+								sheet.EsperaTreinoResultado  = sheet.EsperaTreinoResultado * 1;
+								sheet.GanhoPTreino = sheet.EsperaTreinoResultado;
+								sheet.ExpPTreino = (sheet.GanhoPTreino /2);
+								ZeradorTreino();
+							end);          	
+						end;
+						
+						if sheet.GraduacaoTreino == "Genin" then
+							mesaDoPersonagem.chat:rolarDados("1d4 + " .. sheet.modificador, "Treinando Status",
+							function (rolado)                                            
+								mesaDoPersonagem.chat:enviarMensagem("[§K3]Treinou igual um  FDP e recebeu [§K4]" .. rolado.resultado * 20);
+								sheet.EsperaTreinoResultado = rolado.resultado * 20;
+								sheet.EsperaTreinoResultado  = sheet.EsperaTreinoResultado * 1;
+								sheet.GanhoPTreino = sheet.EsperaTreinoResultado;
+								sheet.ExpPTreino = (sheet.GanhoPTreino / 2);
+								ZeradorTreino();
+								end);          	
+						end;
+						
+						if sheet.GraduacaoTreino == "Chunin" then
+							mesaDoPersonagem.chat:rolarDados("1d4 + " .. sheet.modificador, "Treinando Status",
+							function (rolado)                                            
+								mesaDoPersonagem.chat:enviarMensagem("[§K3]Treinou igual um  FDP e recebeu [§K4]" .. rolado.resultado * 100);
+								sheet.EsperaTreinoResultado = rolado.resultado * 100;
+								sheet.EsperaTreinoResultado  = sheet.EsperaTreinoResultado * 1;
+								sheet.GanhoPTreino = sheet.EsperaTreinoResultado;
+								sheet.ExpPTreino = (sheet.GanhoPTreino / 5);
+								ZeradorTreino();
+								end);          	
+						end;
+						
+						if sheet.GraduacaoTreino == "Jounin" then
+							mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.modificador, "Treinando Status",
+							function (rolado)                                            
+								mesaDoPersonagem.chat:enviarMensagem("[§K3]Treinou igual um  FDP e recebeu [§K4]" .. rolado.resultado * 100);
+								sheet.EsperaTreinoResultado = rolado.resultado * 100;
+								sheet.EsperaTreinoResultado  = sheet.EsperaTreinoResultado * 1;
+								sheet.GanhoPTreino = sheet.EsperaTreinoResultado;
+								sheet.ExpPTreino = (sheet.GanhoPTreino / 5);
+								ZeradorTreino();
+								end);          	
+						end;
+						
+						if sheet.GraduacaoTreino == "Anbu" then
+							mesaDoPersonagem.chat:rolarDados("1d50 + " .. sheet.modificador, "Treinando Status",
+							function (rolado)                                            
+								mesaDoPersonagem.chat:enviarMensagem("[§K3]Treinou igual um  FDP e recebeu [§K4]" .. rolado.resultado * 100);
+								sheet.EsperaTreinoResultado = rolado.resultado * 100;
+								sheet.EsperaTreinoResultado  = sheet.EsperaTreinoResultado * 1;
+								sheet.GanhoPTreino = sheet.EsperaTreinoResultado;
+								sheet.ExpPTreino = (sheet.GanhoPTreino * 0.10);
+								ZeradorTreino();
+								end);          	
+						end;
+						
+						if sheet.GraduacaoTreino == "AnbuNucleo" then
+							mesaDoPersonagem.chat:rolarDados("1d100 + " .. sheet.modificador, "Treinando Status",
+							function (rolado)                                            
+								mesaDoPersonagem.chat:enviarMensagem("[§K3]Treinou igual um  FDP e recebeu [§K4]" .. rolado.resultado * 100);
+								sheet.EsperaTreinoResultado = rolado.resultado * 100;
+								sheet.EsperaTreinoResultado  = sheet.EsperaTreinoResultado * 1;
+								sheet.GanhoPTreino = sheet.EsperaTreinoResultado;
+								sheet.ExpPTreino = (sheet.GanhoPTreino * 0.10);
+								ZeradorTreino();
+								end);          	
+						end;
+						
+						if sheet.GraduacaoTreino == "Organização" then
+							mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.modificador, "Treinando Status",
+							function (rolado)                                            
+								mesaDoPersonagem.chat:enviarMensagem("[§K3]Treinou igual um  FDP e recebeu [§K4]" .. rolado.resultado * 1000);
+								sheet.EsperaTreinoResultado = rolado.resultado * 1000;
+								sheet.EsperaTreinoResultado  = sheet.EsperaTreinoResultado * 1;
+								sheet.GanhoPTreino = sheet.EsperaTreinoResultado;
+								sheet.ExpPTreino = (sheet.GanhoPTreino * 0.05);
+								ZeradorTreino();
+							end);          	
+						end;
+						
+						if sheet.GraduacaoTreino == "GDE" then
+							mesaDoPersonagem.chat:rolarDados("1d6 + " .. sheet.modificador, "Treinando Status",
+							function (rolado)                                            
+								mesaDoPersonagem.chat:enviarMensagem("[§K3]Treinou igual um  FDP e recebeu [§K4]" .. rolado.resultado * 10000);
+								sheet.EsperaTreinoResultado = rolado.resultado * 10000;
+								sheet.EsperaTreinoResultado  = sheet.EsperaTreinoResultado * 1;
+								sheet.GanhoPTreino = sheet.EsperaTreinoResultado;
+								sheet.ExpPTreino = (sheet.GanhoPTreino * 0.05);
+								ZeradorTreino();
+							end);          	
+						end;
+						
+						if sheet.GraduacaoTreino == "Concelheiro" then
+							mesaDoPersonagem.chat:rolarDados("1d12 + " .. sheet.modificador, "Treinando Status",
+							function (rolado)                                            
+								mesaDoPersonagem.chat:enviarMensagem("[§K3]Treinou igual um  FDP e recebeu [§K4]" .. rolado.resultado * 10000);
+								sheet.EsperaTreinoResultado = rolado.resultado * 10000;
+								sheet.EsperaTreinoResultado  = sheet.EsperaTreinoResultado * 1;
+								sheet.GanhoPTreino = sheet.EsperaTreinoResultado;
+								sheet.ExpPTreino = (sheet.GanhoPTreino * 0.01);
+								ZeradorTreino();
+							end);      
+						end;
+						
+						if sheet.GraduacaoTreino == "Kage" then
+							mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.modificador, "Treinando Status",
+							function (rolado)                                            
+								mesaDoPersonagem.chat:enviarMensagem("[§K3]Treinou igual um  FDP e recebeu [§K4]" .. rolado.resultado * 10000);
+								sheet.EsperaTreinoResultado = rolado.resultado * 10000;
+								sheet.EsperaTreinoResultado  = sheet.EsperaTreinoResultado * 1;
+								sheet.GanhoPTreino = sheet.EsperaTreinoResultado;
+								sheet.ExpPTreino = (sheet.GanhoPTreino * 0.01);
+								ZeradorTreino();
+							end); 				
+						end;
+					end; 
+				end;
+			end;
+		end;				
+	</script>
+	
+	===============================
+	===============================
+	== Controlador para o Treino ==
+	===============================
+	===============================
+	
+	<script>		
+		function ZeradorTreino() 
+			sheet.VezesPDia = 1;
+		end;	
+	</script>
+	
+	==============================================
+	==============================================
+	=== Quando o HP Deve ser Aumentado pq UPOU ===
+	==============================================
+	==============================================
+	
+	<script>		
+		function LevelUPHP()						
+			if sheet.GraduacaoTreino == 'Academico' then
+				sheet.GHP =  (tonumber(sheet.GHP) or 0) + 200;
+			end;
+			
+			if sheet.GraduacaoTreino == 'Genin' then
+				sheet.GHP =  (tonumber(sheet.GHP) or 0) + 400;
+			end;
+			
+			if sheet.GraduacaoTreino == 'Chunin' then
+				sheet.GHP =  (tonumber(sheet.GHP) or 0) + 2000;		
+			end;
+			
+			if sheet.GraduacaoTreino == 'Jounin' then
+				sheet.GHP =  (tonumber(sheet.GHP) or 0) + 10000;
+			end;
+			
+			if sheet.GraduacaoTreino == 'Anbu' then
+				sheet.GHP =  (tonumber(sheet.GHP) or 0) + 20000;
+			end;
+		   
+			if sheet.GraduacaoTreino == 'AnbuNucleo' then
+				sheet.GHP =  (tonumber(sheet.GHP) or 0) + 30000;
+			end;
+			
+			if sheet.GraduacaoTreino == 'Organização' then
+				sheet.GHP =  (tonumber(sheet.GHP) or 0) + 40000;
+			end;				
+							
+			if sheet.GraduacaoTreino == 'GDE' then
+				sheet.GHP =  (tonumber(sheet.GHP) or 0) + 60000;
+			end;				
+							
+			if sheet.GraduacaoTreino == 'Concelheiro' then
+				sheet.GHP =  (tonumber(sheet.GHP) or 0) + 80000;
+			end;				
+							
+			if sheet.GraduacaoTreino == 'Kage' then
+				sheet.GHP =  (tonumber(sheet.GHP) or 0) + 100000;
+			end;					
+		end;	
+	</script>
+	
+	==============================================
+	==============================================
+	====== Controlador Transformação SENNIN ======
+	==============================================
+	==============================================
+	
+	<script>
+		function CalculaTransformacaoSennin();
+			if sheet.Sequenci1 == true then
+				if sheet.Transformado5 == true then	
+					sheet.TISTaijutsu = tonumber(sheet.TransSenninTaijutsu) or 0;
+					sheet.TISNinjutsu = tonumber(sheet.TransSenninNinjutsu) or 0;
+					sheet.TISGenjutsu = tonumber(sheet.TransSenninGenjutsu) or 0;
+					sheet.TISDA = tonumber(sheet.TransSenninDA) or 0;
+					sheet.TISElemental = tonumber(sheet.TransSenninElemental) or 0;				
+					sheet.TISHP = tonumber(sheet.TransSenninHP) or 0;
+					sheet.TISChakra = tonumber(sheet.TransSenninChakra) or 0;
+					sheet.TISReiatsu = tonumber(sheet.TransSenninReiatsu) or 0;
+					sheet.TISOutros = tonumber(sheet.TransSenninOutros) or 0;				
+					sheet.TISReducao = tonumber(sheet.TransSenninReducao) or 0;				
+					sheet.TISATai = tonumber(sheet.TransSenninATai) or 0;
+					sheet.TISANin = tonumber(sheet.TransSenninANin) or 0;
+					sheet.TISAGen = tonumber(sheet.TransSenninAGen) or 0;
+					sheet.TISEsquiva = tonumber(sheet.TransSenninEsquiva) or 0;
+					sheet.TISBloqueio = tonumber(sheet.TransSenninBloqueio) or 0;
+					sheet.TISCTai = tonumber(sheet.TransSenninCTai) or 0;
+					sheet.TISCNin = tonumber(sheet.TransSenninCNin) or 0;
+					sheet.TISCGen = tonumber(sheet.TransSenninCGen) or 0;
+					sheet.TISTurnos = tonumber(sheet.TransSenninTurnos) or 0;				
+				else	
+					sheet.TISTaijutsu = 0;
+					sheet.TISNinjutsu = 0;
+					sheet.TISGenjutsu = 0;
+					sheet.TISDA = 0;
+					sheet.TISElemental = 0;				
+					sheet.TISHP = 0;
+					sheet.TISChakra = 0;
+					sheet.TISReiatsu = 0;
+					sheet.TISOutros = 0;				
+					sheet.TISReducao = 0;				
+					sheet.TISATai = 0;
+					sheet.TISANin = 0;
+					sheet.TISAGen = 0;
+					sheet.TISEsquiva = 0;
+					sheet.TISBloqueio = 0;
+					sheet.TISCTai = 0;
+					sheet.TISCNin = 0;
+					sheet.TISCGen = 0;
+					sheet.TISTurnos = 0;		 
+				end;
+				
+				CalculaTransformacaoTotal();
+			end;
+		end;
+	</script>
+	
+	==============================================
+	==============================================
+	====== Controlador Transformação HOLLOW ======
+	==============================================
+	==============================================
+	
+	<script>
+		function CalculaTransformacaoHollow();
+			if sheet.Sequenci1 == true then
+				if sheet.Transformado3 == true then	
+					sheet.TIHTaijutsu = tonumber(sheet.TransHollowTaijutsu) or 0;
+					sheet.TIHNinjutsu = tonumber(sheet.TransHollowNinjutsu) or 0;
+					sheet.TIHGenjutsu = tonumber(sheet.TransHollowGenjutsu) or 0;
+					sheet.TIHDA = tonumber(sheet.TransHollowDA) or 0;
+					sheet.TIHElemental = tonumber(sheet.TransHollowElemental) or 0;				
+					sheet.TIHHP = tonumber(sheet.TransHollowHP) or 0;
+					sheet.TIHChakra = tonumber(sheet.TransHollowChakra) or 0;
+					sheet.TIHReiatsu = tonumber(sheet.TransHollowReiatsu) or 0;
+					sheet.TIHOutros = tonumber(sheet.TransHollowOutros) or 0;	
+					sheet.TIHEnergia = tonumber(sheet.TransHollowEnergia) or 0;					
+					sheet.TIHReducao = tonumber(sheet.TransHollowReducao) or 0;				
+					sheet.TIHATai = tonumber(sheet.TransHollowATai) or 0;
+					sheet.TIHANin = tonumber(sheet.TransHollowANin) or 0;
+					sheet.TIHAGen = tonumber(sheet.TransHollowAGen) or 0;
+					sheet.TIHEsquiva = tonumber(sheet.TransHollowEsquiva) or 0;
+					sheet.TIHBloqueio = tonumber(sheet.TransHollowBloqueio) or 0;
+					sheet.TIHCTai = tonumber(sheet.TransHollowCTai) or 0;
+					sheet.TIHCNin = tonumber(sheet.TransHollowCNin) or 0;
+					sheet.TIHCGen = tonumber(sheet.TransHollowCGen) or 0;
+					sheet.TIHTurnos = tonumber(sheet.TransHollowTurnos) or 0;				
+				else	
+					sheet.TIHTaijutsu = 0;
+					sheet.TIHNinjutsu = 0;
+					sheet.TIHGenjutsu = 0;
+					sheet.TIHDA = 0;
+					sheet.TIHElemental = 0;				
+					sheet.TIHHP = 0;
+					sheet.TIHChakra = 0;
+					sheet.TIHReiatsu = 0;
+					sheet.TIHOutros = 0;	
+					sheet.TIHEnergia = 0;						
+					sheet.TIHReducao = 0;				
+					sheet.TIHATai = 0;
+					sheet.TIHANin = 0;
+					sheet.TIHAGen = 0;
+					sheet.TIHEsquiva = 0;
+					sheet.TIHBloqueio = 0;
+					sheet.TIHCTai = 0;
+					sheet.TIHCNin = 0;
+					sheet.TIHCGen = 0;
+					sheet.TIHTurnos = 0;		 
+				end;
+				
+				CalculaTransformacaoTotal();
+			end;
+		end;
+	</script>
+	
+	==============================================
+	==============================================
+	====== Controlador Transformação BijuMode ======
+	==============================================
+	==============================================
+	
+	<script>
+		function CalculaTransformacaoBijuMode();
+			if sheet.Sequenci1 == true then
+				if sheet.Transformado4 == true then	
+					sheet.TIBTaijutsu = tonumber(sheet.TransBijuModeTaijutsu) or 0;
+					sheet.TIBNinjutsu = tonumber(sheet.TransBijuModeNinjutsu) or 0;
+					sheet.TIBGenjutsu = tonumber(sheet.TransBijuModeGenjutsu) or 0;
+					sheet.TIBDA = tonumber(sheet.TransBijuModeDA) or 0;
+					sheet.TIBElemental = tonumber(sheet.TransBijuModeElemental) or 0;				
+					sheet.TIBHP = tonumber(sheet.TransBijuModeHP) or 0;
+					sheet.TIBChakra = tonumber(sheet.TransBijuModeChakra) or 0;
+					sheet.TIBReiatsu = tonumber(sheet.TransBijuModeReiatsu) or 0;
+					sheet.TIBOutros = tonumber(sheet.TransBijuModeOutros) or 0;				
+					sheet.TIBReducao = tonumber(sheet.TransBijuModeReducao) or 0;				
+					sheet.TIBATai = tonumber(sheet.TransBijuModeATai) or 0;
+					sheet.TIBANin = tonumber(sheet.TransBijuModeANin) or 0;
+					sheet.TIBAGen = tonumber(sheet.TransBijuModeAGen) or 0;
+					sheet.TIBEsquiva = tonumber(sheet.TransBijuModeEsquiva) or 0;
+					sheet.TIBBloqueio = tonumber(sheet.TransBijuModeBloqueio) or 0;
+					sheet.TIBCTai = tonumber(sheet.TransBijuModeCTai) or 0;
+					sheet.TIBCNin = tonumber(sheet.TransBijuModeCNin) or 0;
+					sheet.TIBCGen = tonumber(sheet.TransBijuModeCGen) or 0;
+					sheet.TIBTurnos = tonumber(sheet.TransBijuModeTurnos) or 0;				
+				else	
+					sheet.TIBTaijutsu = 0;
+					sheet.TIBNinjutsu = 0;
+					sheet.TIBGenjutsu = 0;
+					sheet.TIBDA = 0;
+					sheet.TIBElemental = 0;				
+					sheet.TIBHP = 0;
+					sheet.TIBChakra = 0;
+					sheet.TIBReiatsu = 0;
+					sheet.TIBOutros = 0;				
+					sheet.TIBReducao = 0;				
+					sheet.TIBATai = 0;
+					sheet.TIBANin = 0;
+					sheet.TIBAGen = 0;
+					sheet.TIBEsquiva = 0;
+					sheet.TIBBloqueio = 0;
+					sheet.TIBCTai = 0;
+					sheet.TIBCNin = 0;
+					sheet.TIBCGen = 0;
+					sheet.TIBTurnos = 0;		 
+				end;
+				
+				CalculaTransformacaoTotal();
+			end;
+		end;
+	</script>
+	
+	==============================================
+	==============================================
+	====== Controlador Transformação NORMAL ======
+	==============================================
+	==============================================
+
+	<script>
+		function CalculaTransformacao();
+			if sheet.Sequenci1 == true then
+				if sheet.Transformado2 == true then	
+					sheet.TITaijutsu = tonumber(sheet.TransTaijutsu) or 0;
+					sheet.TINinjutsu = tonumber(sheet.TransNinjutsu) or 0;
+					sheet.TIGenjutsu = tonumber(sheet.TransGenjutsu) or 0;
+					sheet.TIDA = tonumber(sheet.TransDA) or 0;
+					sheet.TIElemental = tonumber(sheet.TransElemental) or 0;				
+					sheet.TIHP = tonumber(sheet.TransHP) or 0;
+					sheet.TIChakra = tonumber(sheet.TransChakra) or 0;
+					sheet.TIReiatsu = tonumber(sheet.TransReiatsu) or 0;
+					sheet.TIOutros = tonumber(sheet.TransOutros) or 0;	
+					sheet.TIEnergia = tonumber(sheet.TransEnergia) or 0;	
+					sheet.TIReducao = tonumber(sheet.TransReducao) or 0;				
+					sheet.TIATai = tonumber(sheet.TransATai) or 0;
+					sheet.TIANin = tonumber(sheet.TransANin) or 0;
+					sheet.TIAGen = tonumber(sheet.TransAGen) or 0;
+					sheet.TIEsquiva = (tonumber(sheet.TransEsquiva) or 0);
+					sheet.TIBloqueio = tonumber(sheet.TransBloqueio) or 0;
+					sheet.TICTai = tonumber(sheet.TransCTai) or 0;
+					sheet.TICNin = tonumber(sheet.TransCNin) or 0;
+					sheet.TICGen = tonumber(sheet.TransCGen) or 0;
+					sheet.TITurnos = tonumber(sheet.TransTurnos) or 0;				
+				else	
+					sheet.TITaijutsu = 0;
+					sheet.TINinjutsu = 0;
+					sheet.TIGenjutsu = 0;
+					sheet.TIDA = 0;
+					sheet.TIElemental = 0;				
+					sheet.TIHP = 0;
+					sheet.TIChakra = 0;
+					sheet.TIReiatsu = 0;
+					sheet.TIOutros = 0;
+					sheet.TIEnergia = 0;
+					sheet.TIReducao = 0;				
+					sheet.TIATai = 0;
+					sheet.TIANin = 0;
+					sheet.TIAGen = 0;
+					sheet.TIEsquiva = 0;
+					sheet.TIBloqueio = 0;
+					sheet.TICTai = 0;
+					sheet.TICNin = 0;
+					sheet.TICGen = 0;
+					sheet.TITurnos = 0;		 
+				end;
+				
+				CalculaTransformacaoTotal();
+			end;
+		end;
+	</script>
+	
+	==============================================
+	==============================================
+	====== Calculo Transformação Total ======
+	==============================================
+	==============================================
+	
+	<script>
+		function CalculaTransformacaoTotal();
+			if sheet.TransformadoTotal == true then	
+				sheet.TTaijutsu = (tonumber(sheet.TITaijutsu) or 0) + (tonumber(sheet.TISTaijutsu) or 0) + (tonumber(sheet.TIHTaijutsu) or 0) + (tonumber(sheet.TIBTaijutsu) or 0);
+				sheet.TNinjutsu = (tonumber(sheet.TINinjutsu) or 0) + (tonumber(sheet.TISNinjutsu) or 0) + (tonumber(sheet.TIHNinjutsu) or 0) + (tonumber(sheet.TIBNinjutsu) or 0);
+				sheet.TGenjutsu = (tonumber(sheet.TIGenjutsu) or 0) + (tonumber(sheet.TISGenjutsu) or 0) + (tonumber(sheet.TIHGenjutsu) or 0) + (tonumber(sheet.TIBGenjutsu) or 0);
+				sheet.TDA = (tonumber(sheet.TIDA) or 0) + (tonumber(sheet.TISDA) or 0) + (tonumber(sheet.TIHDA) or 0) + (tonumber(sheet.TIBDA) or 0);
+				sheet.TElemental = (tonumber(sheet.TIElemental) or 0) + (tonumber(sheet.TISElemental) or 0) + (tonumber(sheet.TIHElemental) or 0) + (tonumber(sheet.TIBElemental) or 0);			
+				sheet.THP = (tonumber(sheet.TIHP) or 0) + (tonumber(sheet.TISHP) or 0) + (tonumber(sheet.TIHHP) or 0) + (tonumber(sheet.TIBHP) or 0);
+				sheet.TChakra = (tonumber(sheet.TIChakra) or 0) + (tonumber(sheet.TISChakra) or 0) + (tonumber(sheet.TIHChakra) or 0) + (tonumber(sheet.TIBChakra) or 0);
+				sheet.TReiatsu = (tonumber(sheet.TIReiatsu) or 0) + (tonumber(sheet.TISReiatsu) or 0) + (tonumber(sheet.TIHReiatsu) or 0) + (tonumber(sheet.TIBReiatsu) or 0);
+				sheet.TOutros = (tonumber(sheet.TIOutros) or 0) + (tonumber(sheet.TISOutros) or 0) + (tonumber(sheet.TIHOutros) or 0) + (tonumber(sheet.TIBOutros) or 0);
+				sheet.TEnergia = (tonumber(sheet.TIEnergia) or 0) + (tonumber(sheet.TIHEnergia) or 0);		
+				sheet.TReducao = (tonumber(sheet.TIReducao) or 0) + (tonumber(sheet.TISReducao) or 0) + (tonumber(sheet.TIHReducao) or 0) + (tonumber(sheet.TIBReducao) or 0);		
+				sheet.TATai = (tonumber(sheet.TIATai) or 0) + (tonumber(sheet.TISATai) or 0) + (tonumber(sheet.TIHATai) or 0) + (tonumber(sheet.TIBATai) or 0);
+				sheet.TANin = (tonumber(sheet.TIANin) or 0) + (tonumber(sheet.TISANin) or 0) + (tonumber(sheet.TIHANin) or 0) + (tonumber(sheet.TIBANin) or 0);
+				sheet.TAGen = (tonumber(sheet.TIAGen) or 0) + (tonumber(sheet.TISAGen) or 0) + (tonumber(sheet.TIHAGen) or 0) + (tonumber(sheet.TIBAGen) or 0);
+				sheet.TEsquiva = (tonumber(sheet.TIEsquiva) or 0) + (tonumber(sheet.TISEsquiva) or 0) + (tonumber(sheet.TIHEsquiva) or 0) + (tonumber(sheet.TIBEsquiva) or 0);
+				sheet.TBloqueio = (tonumber(sheet.TIBloqueio) or 0) + (tonumber(sheet.TISBloqueio) or 0) + (tonumber(sheet.TIHBloqueio) or 0) + (tonumber(sheet.TIBBloqueio) or 0);
+				sheet.TCTai = (tonumber(sheet.TICTai) or 0) + (tonumber(sheet.TISCTai) or 0) + (tonumber(sheet.TIHCTai) or 0) + (tonumber(sheet.TIBCTai) or 0);
+				sheet.TCNin = (tonumber(sheet.TICNin) or 0) + (tonumber(sheet.TISCNin) or 0) + (tonumber(sheet.TIHCNin) or 0) + (tonumber(sheet.TIBCNin) or 0);
+				sheet.TCGen = (tonumber(sheet.TICGen) or 0) + (tonumber(sheet.TISCGen) or 0) + (tonumber(sheet.TIHCGen) or 0) + (tonumber(sheet.TIBCGen) or 0);
+				sheet.TTurnos = (tonumber(sheet.TITurnos) or 0) + (tonumber(sheet.TISTurnos) or 0) + (tonumber(sheet.TIHTurnos) or 0) + (tonumber(sheet.TIBTurnos) or 0);		
+			else	
+				sheet.TTaijutsu = 0;
+				sheet.TNinjutsu = 0;
+				sheet.TGenjutsu = 0;
+				sheet.TDA = 0;
+				sheet.TElemental = 0;				
+				sheet.THP = 0;
+				sheet.TChakra = 0;
+				sheet.TReiatsu = 0;
+				sheet.TOutros = 0;	
+				sheet.TEnergia = 0;					
+				sheet.TReducao = 0;				
+				sheet.TATai = 0;
+				sheet.TANin = 0;
+				sheet.TAGen = 0;
+				sheet.TEsquiva = 0;
+				sheet.TBloqueio = 0;
+				sheet.TCTai = 0;
+				sheet.TCNin = 0;
+				sheet.TCGen = 0;
+				sheet.TTurnos = 0;		 
+			end;					
+		end;
+	</script>
+	
+	======================================================================
+	======================================================================
+	====== Ativa a TRANSFORMAÇAO TOTAL COM QUALQUER UMA SELECIONADA ======
+	======================================================================
+	======================================================================
+	
+	<script>
+		function AtivaJunto() 
+			if sheet.Sequenci1 == true then
+				self.ControlaTransTotal.checked = false;
+			
+				if self.ControlaTrans.checked == true then
+					self.ControlaTransTotal.checked = true;		
+				end;
+				
+				if self.ControlaTransSennin.checked == true then
+					self.ControlaTransTotal.checked = true;		
+				end;
+				
+				if self.ControlaTransHollow.checked == true then
+					self.ControlaTransTotal.checked = true;		
+				end;
+				
+				if self.ControlaTransMantoBiju.checked == true then
+					self.ControlaTransTotal.checked = true;		
+				end;
+				
+				sheet.Transformado = tonumber(sheet.Transformado) + 1;		
+			end;
+		end;
+	</script>
+	
+	======================================================================
+	======================================================================
+	==== Seleciona qual o Estilo de combate que esta ativo no momento ====
+	======================================================================
+	======================================================================
+	
+	<script>
+		function SelecionaEDC()
+			node = self.rclEstiloCombate.selectedNode;
+			self.dscEstiloCombate.node = node;	
+			
+			if sheet.Sequenci1 == true then
+				if node.ATIVOEDC == "true" then
+					sheet.NomeEDC = node.NomeEDC
+					sheet.EstilodeCombateNivel = node.LevelEDC		
+					sheet.DTaijutsu = node.TaiEDC
+					sheet.DNinjutsu = node.NinEDC
+					sheet.DGenjutsu = node.GenEDC
+					sheet.DDA = node.DAEDC
+					sheet.DDE = node.EleEDC
+					sheet.DHP = node.HPEDC
+					sheet.DChakra = node.ChakraEDC
+					sheet.DReiatsu = node.ReiatsuEDC
+					sheet.DOutro = node.OutroEDC	
+					sheet.DAcertoTai = node.ATEDC
+					sheet.DAcertoNin = node.ANEDC
+					sheet.DAcertoGen = node.AGEDC
+					sheet.DBloqueio = node.BloqEDC
+					sheet.DEsquiva = node.EsqEDC
+					sheet.DCriticalTai = node.CRTaiEDC
+					sheet.DCriticalNin = node.CRNinEDC
+					sheet.DCriticalGen = node.CRGenEDC
+					sheet.DTurnos = node.TurnosEDC
+					sheet.ChakraBiju = node.ChakraBijuEDC
+					sheet.ChakraBranco = node.ChakraBrancoEDC
+					sheet.ChakraPreto = node.ChakraPretoEDC
+					sheet.Hadou = node.HadouEDC
+					sheet.HadouNegro = node.HadouNegroEDC
+					sheet.ChakraNaturalBonus = node.ChakraNaturalEDC
+					sheet.ChakraRoxo = node.ChakraRoxoEDC
+					sheet.DReducao = node.ReducaoEDC
+					sheet.DEnergia = node.EnergiaEDC			
+					sheet.ChakraNat = node.ChakraNaturalTotalEDC						
+					sheet.DIntensidade = tonumber(node.IntensidadeEDC or 0);
+					sheet.DCustoReal = tonumber(node.CustoRealEDC or 0);
+					sheet.DEnergiaCusto = tonumber(node.EnergiaCustoEDC or 0);
+					sheet.DTipo = node.Tipo1EDC or "Nin";
+					sheet.DEDC = node.DEDC or "";
+					sheet.DRegeneradorEnergia = tonumber(node.RegeneradorEnergiaEDC or 10);
+				end;					
+			end;
+		end;
+	</script>
+</popupForm>

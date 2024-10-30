@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmHabilidadeInimigo" height="50" theme="dark"> 
+
+        <layout align="client" margins="{left=4, right=4, top=4, bottom=4}">
+			<label align="left" fontSize="20" scale="1.1" text="📖" fontColor="CYAN" margins="{left=10}"/>
+            <label align="left"  fontColor="CYAN" field="NomeSkill" margins="{left=-100}"/>
+		
+        </layout>
+</form>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<popupForm name="frmhabilidade" width="1050" height="650" >
+	<scrollBox align="client">	 
+		<image width="1050" height="720" center="true"  src="/imagens/3.png"/>
+		------------------------- Habilidade 1 --------------------------------------------------		
+		<button text="Nova Magia"  width="125" height="40" left="10" top="10">
+			<event name="onClick">
+					-- Usuário clicou no botão de criar novo item.
+					-- Vamos inserir um novo item no nosso recordList                              
+					self.rclListaDosItens3:append();
+			</event>
+			
+			
+		</button>
+		<!-- recordList, representando a lista -->
+		<recordList name="rclListaDosItens3" field="ListaDeHabilidades" templateForm="frmItemDaLista3"
+					width="950" height="550" left="70" top="60" selectable="true">                              
+			<event name="onSelect">
+				--[[
+				Este evento é chamado quando o usuário selecionar/deselecionar itens da lista. Quando o usuário selecionar, 
+				vamos fazer nosso dataScopeBox (e todas as tag dentro dele) salvar e carregar dados no   objeto Nodo (NodeDatabase) do item selecionado.
+				--]]                      
+				local node = self.rclListaDosItens3.selectedNode; 
+				self.ListaJutsus3.node = node;                       
+				-- a caixa de detalhe só ficará visível se houver item selecionado
+				self.ListaJutsus3.visible = (node ~= nil);
+			</event>
+			
+			<event name="onEndEnumeration">
+					if self.rclListaDosItens3.selectedNode == nil and sheet ~= nil then
+							local nodes = ndb.getChildNodes(sheet.ListaDeHabilidades);               
+
+							if #nodes > 0 then
+									self.rclListaDosItens3.selectedNode = nodes[1];
+							end;
+					end;
+				</event>
+		</recordList>       
+		<!-- dataScopeBox representando a nossa caixa de detalhes -->  
+		<dataScopeBox name="ListaJutsus3" visible="false" width="480" height="580" left="540" top="60" >
+			<!-- Faça um layout "bonito" para sua caixa de detalhes =). Utilize a propriedade "field" nas tags aqui dentro   -->       
+			<rectangle  xradius="10" color="Transparent" yradius="10" width="460" height="560" left="1" top="1" >                                         
+				<label left="60" top="10" width="200" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Habilidade:"/>
+				<edit  left="170" top="15" width="240" height="30" field="NomeHabilidade"/>
+				<textEditor left="60" top="60" width="350" height="280" field="DescriHabilidade1"/>
+				<label left="60" top="350" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Dano"/>
+				<edit left="115" top="355" width="50" height="30" type="number" field="DanoHabilidade1"/>
+				<label left="310" top="350" width="60" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Fixo"/>
+				<edit left="350" top="355" width="60" height="30" type="number" field="FixoHabilidade1"/>
+				<label left="180" top="350" width="60" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Cura"/>
+				<edit left="230" top="355" width="70" height="30"  type="number"  field="CuraHabilidade1"/>                               
+				<label left="60" top="400" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Custo"/>
+				<edit left="115" top="405" width="50" height="30" type="number" field="Custo"/>
+				<edit left="400" top="380" width="40" height="30" visible="false" type="number" field="Custo2"/>							    
+				<label left="180" top="400" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Tipo"/>								
+				<comboBox left="230" top="413" width="70" height="18" field="DanoAtributo1" items="{'PA', 'PM', 'PF', 'Cura', 'Fixo', 'BUFF'}"/>
+				<label left="220" top="450" width="120" height="40" fontFamily="Nyala" fontColor="blue" fontSize="20" text="Intensidade"/>
+				<edit left="330" top="455" width="80" height="30" enabled="false" fontColor="Red" type="number" field="Hintensidade1"/>
+				
+				<image left="60" top="420" width="150" height="150" src="/imagens/magia.png"/>
+				<button left="250" top="510" fontColor="red" text="Apagar!" margins="{left=4, right=4, top=2, bottom=2}" width="150" onClick="NDB.deleteNode(self.ListaJutsus3.node);" />
+				<edit width="120" visible="false" field="naoEBuff"/>				
+				<button left="60" top="450" fontSize="20" opacity="0.1" height="90" width="150" text="Usar" fontColor="White" onClick="ExecutarH1()"/>								
+				<script>					
+					local function ExecutarH1() 
+					--[[ HABILIDADE DE DANO ]]--								
+					local node = self.ListaJutsus3.node;
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet);
+					if node.DanoAtributo1 == 'BUFF' then
+						if node.naoEBuff == true then
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+						return 
+						else															
+						end;
+					end;										
+					sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+					mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+					function (rolado)					
+					if node.DanoAtributo1 ~= nil then
+						if sheet.AcertoMagico + 1 > rolado.resultado then							
+							if node.DanoAtributo1 == 'PA' then
+								node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PA) or 0)								
+								node.naoEBuff = true;
+								node.verificaBuff = node.naoEBuff;
+							end;			
+							if node.DanoAtributo1 == 'PM' then
+								node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)						
+								node.naoEBuff = true;
+								node.verificaBuff = node.naoEBuff;
+							end;
+							if node.DanoAtributo1 == 'PF' then
+								node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PF) or 0)	
+								node.naoEBuff = true;
+								node.verificaBuff = node.naoEBuff;
+							end;
+							if node.DanoAtributo1 == 'Cura' then
+								node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)	
+								node.naoEBuff = true;
+								node.verificaBuff = node.naoEBuff;
+							end;
+							if node.DanoAtributo1 == 'Fixo' then
+								node.Hintensidade1 = (tonumber(node.FixoHabilidade1) or 0)	
+								node.naoEBuff = true;
+								node.verificaBuff = node.naoEBuff;
+							end;
+							if node.DanoAtributo1 == 'BUFF' then
+								node.Hintensidade1 = "Habilidade de Buff";
+							end;
+							if sheet.AcertoMagico >= rolado.resultado then
+								mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriHabilidade1);
+								if node.DanoAtributo1 == 'Cura' then
+									if sheet.CMagico +1 > rolado.resultado then 
+										mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. node.Hintensidade1 * 2 .. "[§K8,0] »");
+									else
+										mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] »");
+									end;	
+								else
+									if sheet.CMagico +1 > rolado.resultado then 
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. node.Hintensidade1 * 2 .. "[§K9,0] »");
+									else
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. node.Hintensidade1 .. "[§K9,0] »");
+									end;	
+								end;									
+								local mesa = Firecast.getMesaDe(sheet); 
+								local Custo2 = mesa.meuJogador:getBarValue(2);
+								node.Custo2 = mesa.meuJogador:getBarValue(2);
+								node.Custo2 = (tonumber(node.Custo2) or 0) - (tonumber(node.Custo) or 0);
+								mesa.meuJogador:requestSetBarValue(2, node.Custo2);
+							else
+								mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+							end;
+						else							
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
+							if node.DanoAtributo1 == 'BUFF' then
+								mesaDoPersonagem.chat:enviarMensagem("[§K3,15]ERA BUFF ESSA MERDA");	
+							else 	
+							end;
+						end;
+					else
+						mesaDoPersonagem.chat:enviarMensagem("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE");
+					end;
+					end);					
+					end; 														
+				</script> 
+			</rectangle>
+		</dataScopeBox>
+	</scrollBox>	 
+</popupForm>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmListadeJutsu3" height="50" theme="dark"> 
+	<layout align="client" margins="{left=4, right=4, top=4, bottom=4}">
+		<label align="left" width="32" fontColor="cyan" scale="1.5" text="🈁" margins="{left=4}"/>
+		<label align="client" text="Teste de label" fontColor="red" field="NomedoJutsu3" margins="{left=4}"/>
+	</layout>
+</form>	
