@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	<script>
+		<![CDATA[ 
+			function IgualarHPMesa()
+				local mesa = Firecast.getMesaDe(sheet); 
+				local HPTotalMesa = (tonumber(sheet.HPTotal) or 0);
+				mesa.meuJogador:requestSetBarValue(1, nil, HPTotalMesa);
+			end;
+		]]>
+		
+		<![CDATA[ 
+			function AtualizaStatusMesa()	
+				if sheet.SequenciaInicial == true then	
+					local mesa = Firecast.getMesaDe(sheet);					
+					
+					IgualarHPMesa();
+					IgualarMPMesa();
+					
+					if sheet.Espec == "Juiz" then
+						local Linha1 = "(PA" .. (sheet.PA or 0) .. ")" .. "(PF" .. (sheet.PF or 0) .. ")(PM" .. (sheet.PM or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")"
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")(CM" .. (sheet.CMagico) .. ")" .. ")(CR" .. (sheet.Critical) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						showMessage("Status das Linhas, HP e MP Atualizados");
+						return
+					end;
+					
+					if sheet.Espec == "Encantador de Almas" or sheet.Espec == "Necromance" or sheet.Espec == "Sacerdote" or sheet.Espec == "Arcanista" or sheet.Espec == "Elementalista" or sheet.Espec == "Summoner" then
+						local Linha1 = "(PM" .. (sheet.PM or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")"
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")(CM" .. (sheet.CMagico) .. ")(CR" .. (sheet.Critical) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						showMessage("Status das Linhas, HP e MP Atualizados");
+						return
+					end;	
+
+					if sheet.Espec == "Shaman" or sheet.Espec == "Druida" then
+						local Linha1 = "(PA" .. (sheet.PA or 0) .. ")" .. "(PM" .. (sheet.PM or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")"
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")(CM" .. (sheet.CMagico) .. ")(CR" .. (sheet.Critical) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						showMessage("Status das Linhas, HP e MP Atualizados");
+						return
+					end;
+					
+					if sheet.Espec == "Barbaro" or sheet.Espec == "Acrobata" or sheet.Espec == "Assassino" or sheet.Espec == "Tanker" or sheet.Espec == "Duelista" or sheet.Espec == "Guardião Espiritual" or sheet.Espec == "Cavaleiro das Trevas" or sheet.Espec == "Templario" then
+						local Linha1 = "(PA" .. (sheet.PA or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")(CM" .. (sheet.CMagico) .. ")(CR" .. (sheet.Critical) .. ")";
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						showMessage("Status das Linhas, HP e MP Atualizados");
+						return
+					end;
+					
+					if sheet.Espec == "Pirata" or sheet.Espec == "Juiz" then
+						local Linha1 = "(PA" .. (sheet.PA or 0) .. ")" .. "(PF" .. (sheet.PF or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")"
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")(CM" .. (sheet.CMagico) .. ")(CR" .. (sheet.Critical) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						showMessage("Status das Linhas, HP e MP Atualizados");
+						return
+					end;
+					
+					if sheet.Espec == "Sentinela Lunar" or sheet.Espec == "Caçador" then
+						local Linha1 = "(PF" .. (sheet.PF or 0) .. ")" .. "(PM" .. (sheet.PM or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")"
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")(CM" .. (sheet.CMagico) .. ")(CR" .. (sheet.Critical) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						showMessage("Status das Linhas, HP e MP Atualizados");
+						return
+					end;
+					
+					---------------------------------------
+					
+					if sheet.Classe == "Animago" or sheet.Classe == "Bardo" or sheet.Classe == "Bispo" or sheet.Classe == "Mago" then
+						local Linha1 = "(PM" .. (sheet.PM or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")(CM" .. (sheet.CMagico) .. ")" .. ")(CR" .. (sheet.Critical) .. ")";
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						showMessage("Status das Linhas, HP e MP Atualizados");
+						return
+					end;
+					
+					if sheet.Classe == "Arqueiro" then
+						local Linha1 = "(PF" .. (sheet.PF or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")(CM" .. (sheet.CMagico) .. ")" .. ")(CR" .. (sheet.Critical) .. ")";
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						showMessage("Status das Linhas, HP e MP Atualizados");
+						return
+					end;
+					
+					if sheet.Classe == "Guerreiro" or sheet.Classe == "Ladino" or sheet.Classe == "Mercenario" or sheet.Classe == "Monge" or sheet.Classe == "Paladino" or sheet.Classe == "Cavaleiro Draconico" then
+						local Linha1 = "(PA" .. (sheet.PA or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")(CM" .. (sheet.CMagico) .. ")" .. ")(CR" .. (sheet.Critical) .. ")";
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						showMessage("Status das Linhas, HP e MP Atualizados");
+						return
+					end;
+					
+					if sheet.Classe == "Caçador de Almas" or sheet.Espec == "Juiz" then
+						local Linha1 = "(PA" .. (sheet.PA or 0) .. ")" .. "(PF" .. (sheet.PF or 0) .. ")(PM" .. (sheet.PM or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")"
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")(CM" .. (sheet.CMagico) .. ")" .. ")(CR" .. (sheet.Critical) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						showMessage("Status das Linhas, HP e MP Atualizados");
+						return
+					end;					
+				end;
+			end;
+		]]>
+		
+		<![CDATA[ 
+			function AtualizaStatusMesaSilencioso()	
+				if sheet.SequenciaInicial == true then	
+					local mesa = Firecast.getMesaDe(sheet);
+					
+					if sheet.Espec == "Juiz" then
+						local Linha1 = "(PA" .. (sheet.PA or 0) .. ")" .. "(PF" .. (sheet.PF or 0) .. ")(PM" .. (sheet.PM or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")"
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")(CM" .. (sheet.CMagico) .. ")" .. ")(CR" .. (sheet.Critical) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						return
+					end;
+					
+					if sheet.Espec == "Encantador de Almas" or sheet.Espec == "Necromance" or sheet.Espec == "Sacerdote" or sheet.Espec == "Arcanista" or sheet.Espec == "Elementalista" or sheet.Espec == "Summoner" then
+						local Linha1 = "(PM" .. (sheet.PM or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")"
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")(CM" .. (sheet.CMagico) .. ")(CR" .. (sheet.Critical) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						return
+					end;	
+
+					if sheet.Espec == "Shaman" or sheet.Espec == "Druida" then
+						local Linha1 = "(PA" .. (sheet.PA or 0) .. ")" .. "(PM" .. (sheet.PM or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")"
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")(CM" .. (sheet.CMagico) .. ")(CR" .. (sheet.Critical) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						return
+					end;
+					
+					if sheet.Espec == "Barbaro" or sheet.Espec == "Acrobata" or sheet.Espec == "Assassino" or sheet.Espec == "Tanker" or sheet.Espec == "Duelista" or sheet.Espec == "Guardião Espiritual" or sheet.Espec == "Cavaleiro das Trevas" or sheet.Espec == "Templario" then
+						local Linha1 = "(PA" .. (sheet.PA or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")(CM" .. (sheet.CMagico) .. ")(CR" .. (sheet.Critical) .. ")";
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						return
+					end;
+					
+					if sheet.Espec == "Pirata" or sheet.Espec == "Juiz" then
+						local Linha1 = "(PA" .. (sheet.PA or 0) .. ")" .. "(PF" .. (sheet.PF or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")"
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")(CM" .. (sheet.CMagico) .. ")(CR" .. (sheet.Critical) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						return
+					end;
+					
+					if sheet.Espec == "Sentinela Lunar" or sheet.Espec == "Caçador" then
+						local Linha1 = "(PF" .. (sheet.PF or 0) .. ")" .. "(PM" .. (sheet.PM or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")"
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")(CM" .. (sheet.CMagico) .. ")(CR" .. (sheet.Critical) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						return
+					end;
+					
+					---------------------------------------
+					
+					if sheet.Classe == "Animago" or sheet.Classe == "Bardo" or sheet.Classe == "Bispo" or sheet.Classe == "Mago" then
+						local Linha1 = "(PM" .. (sheet.PM or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")(CM" .. (sheet.CMagico) .. ")" .. ")(CR" .. (sheet.Critical) .. ")";
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						return
+					end;
+					
+					if sheet.Classe == "Arqueiro" then
+						local Linha1 = "(PF" .. (sheet.PF or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")(CM" .. (sheet.CMagico) .. ")" .. ")(CR" .. (sheet.Critical) .. ")";
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						return
+					end;
+					
+					if sheet.Classe == "Guerreiro" or sheet.Classe == "Ladino" or sheet.Classe == "Mercenario" or sheet.Classe == "Monge" or sheet.Classe == "Paladino" or sheet.Classe == "Cavaleiro Draconico" then
+						local Linha1 = "(PA" .. (sheet.PA or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")(CM" .. (sheet.CMagico) .. ")" .. ")(CR" .. (sheet.Critical) .. ")";
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						return
+					end;
+					
+					if sheet.Classe == "Caçador de Almas" or sheet.Espec == "Juiz" then
+						local Linha1 = "(PA" .. (sheet.PA or 0) .. ")" .. "(PF" .. (sheet.PF or 0) .. ")(PM" .. (sheet.PM or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")"
+						local Linha2 = "(D" .. (sheet.DEFRED or 0) .. ") (R" .. (sheet.RESRED or 0) .. ") (E" .. (sheet.Esquiva) .. ") (P" .. math.floor(sheet.Persistencia) .. ")(CM" .. (sheet.CMagico) .. ")" .. ")(CR" .. (sheet.Critical) .. ")";
+						mesa.meuJogador:requestSetEditableLine(1, Linha1);
+						mesa.meuJogador:requestSetEditableLine(2, Linha2);
+						return
+					end;
+									
+				end;
+			end;
+		]]>
+		
+    </script> 

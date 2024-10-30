@@ -7,7 +7,7 @@ require("ndb.lua");
 require("locale.lua");
 local __o_Utils = require("utils.lua");
 
-local function constructNew_frmscv()
+local function constructNew_frmJanelaVelenCombate()
     local obj = GUI.fromHandle(_obj_newObject("form"));
     local self = obj;
     local sheet = nil;
@@ -26,10 +26,10 @@ local function constructNew_frmscv()
 
     _gui_assignInitialParentForForm(obj.handle);
     obj:beginUpdate();
-    obj:setFormType("sheetTemplate");
-    obj:setDataType("Sistema_de_Combate_Velen");
+    obj:setName("frmJanelaVelenCombate");
+    obj:setFormType("tablesDock");
+    obj:setDataType("RRPG.DataTypeUnico.JanelaVelenCombate");
     obj:setTitle("Sistema de Combate Velen");
-    obj:setName("frmscv");
 
     obj.image1 = GUI.fromHandle(_obj_newObject("image"));
     obj.image1:setParent(obj);
@@ -1817,13 +1817,13 @@ local function constructNew_frmscv()
     return obj;
 end;
 
-function newfrmscv()
+function newfrmJanelaVelenCombate()
     local retObj = nil;
     __o_rrpgObjs.beginObjectsLoading();
 
     __o_Utils.tryFinally(
       function()
-        retObj = constructNew_frmscv();
+        retObj = constructNew_frmJanelaVelenCombate();
       end,
       function()
         __o_rrpgObjs.endObjectsLoading();
@@ -1833,18 +1833,19 @@ function newfrmscv()
     return retObj;
 end;
 
-local _frmscv = {
-    newEditor = newfrmscv, 
-    new = newfrmscv, 
-    name = "frmscv", 
-    dataType = "Sistema_de_Combate_Velen", 
-    formType = "sheetTemplate", 
+local _frmJanelaVelenCombate = {
+    newEditor = newfrmJanelaVelenCombate, 
+    new = newfrmJanelaVelenCombate, 
+    name = "frmJanelaVelenCombate", 
+    dataType = "RRPG.DataTypeUnico.JanelaVelenCombate", 
+    formType = "tablesDock", 
     formComponentName = "form", 
     title = "Sistema de Combate Velen", 
     description=""};
 
-frmscv = _frmscv;
-Firecast.registrarForm(_frmscv);
-Firecast.registrarDataType(_frmscv);
+frmJanelaVelenCombate = _frmJanelaVelenCombate;
+Firecast.registrarForm(_frmJanelaVelenCombate);
+Firecast.registrarDataType(_frmJanelaVelenCombate);
+Firecast.registrarSpecialForm(_frmJanelaVelenCombate);
 
-return _frmscv;
+return _frmJanelaVelenCombate;

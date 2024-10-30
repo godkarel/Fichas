@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	<script>
+		<![CDATA[ 
+			function AtualizadordeStatus()
+				if self.cmbInimigo1.text == sheet.NomeJ1 then
+					sheet.VI1 = (tonumber(sheet.VIDAJ1) or 0);
+					sheet.DefesaAlvo1 = (tonumber(sheet.DefesaJ1) or 0);
+					sheet.BuffDefesaAlvo1 = (tonumber(sheet.BuffDefJ1) or 0);
+					sheet.ResistenciaAlvo1 = (tonumber(sheet.ResistenciaJ1) or 0);
+					sheet.BuffResistenciaAlvo1 = (tonumber(sheet.BuffResisJ1) or 0);
+				end;
+
+				if self.cmbInimigo1.text == sheet.NomeJ2 then
+					sheet.VI1 = (tonumber(sheet.VIDAJ2) or 0)
+					sheet.DefesaAlvo1 = (tonumber(sheet.DefesaJ2) or 0);
+					sheet.BuffDefesaAlvo1 = (tonumber(sheet.BuffDefJ2) or 0);
+					sheet.ResistenciaAlvo1 = (tonumber(sheet.ResistenciaJ2) or 0);
+					sheet.BuffResistenciaAlvo1 = (tonumber(sheet.BuffResisJ2) or 0);
+				end;				 
+				 
+				if self.cmbInimigo1.text == sheet.NomeJ3 then
+					sheet.VI1 = (tonumber(sheet.VIDAJ3) or 0)
+					sheet.DefesaAlvo1 = (tonumber(sheet.DefesaJ3) or 0);
+					sheet.BuffDefesaAlvo1 = (tonumber(sheet.BuffDefJ3) or 0);
+					sheet.ResistenciaAlvo1 = (tonumber(sheet.ResistenciaJ3) or 0);
+					sheet.BuffResistenciaAlvo1 = (tonumber(sheet.BuffResisJ3) or 0);
+				end;	
+
+				if self.cmbInimigo1.text == sheet.NomeJ4 then
+					sheet.VI1 = (tonumber(sheet.VIDAJ4) or 0)
+					sheet.DefesaAlvo1 = (tonumber(sheet.DefesaJ4) or 0);
+					sheet.BuffDefesaAlvo1 = (tonumber(sheet.BuffDefJ4) or 0);
+					sheet.ResistenciaAlvo1 = (tonumber(sheet.ResistenciaJ4) or 0);
+					sheet.BuffResistenciaAlvo1 = (tonumber(sheet.BuffResisJ4) or 0);
+				end;
+
+				if self.cmbInimigo1.text == sheet.NomeJ5 then
+					sheet.VI1 = (tonumber(sheet.VIDAJ5) or 0)
+					sheet.DefesaAlvo1 = (tonumber(sheet.DefesaJ5) or 0);
+					sheet.BuffDefesaAlvo1 = (tonumber(sheet.BuffDefJ5) or 0);
+					sheet.ResistenciaAlvo1 = (tonumber(sheet.ResistenciaJ5) or 0);
+					sheet.BuffResistenciaAlvo1 = (tonumber(sheet.BuffResisJ5) or 0);
+				end;				 
+				 
+				if self.cmbInimigo1.text == sheet.NomeJ6 then
+					sheet.VI1 = (tonumber(sheet.VIDAJ6) or 0)
+					sheet.DefesaAlvo1 = (tonumber(sheet.DefesaJ6) or 0);
+					sheet.BuffDefesaAlvo1 = (tonumber(sheet.BuffDefJ6) or 0);
+					sheet.ResistenciaAlvo1 = (tonumber(sheet.ResistenciaJ6) or 0);
+					sheet.BuffResistenciaAlvo1 = (tonumber(sheet.BuffResisJ6) or 0);
+				end;
+				
+				if self.cmbInimigo1.text == sheet.NomeJ7 then
+					sheet.VI1 = (tonumber(sheet.VIDAJ7) or 0)
+					sheet.DefesaAlvo1 = (tonumber(sheet.DefesaJ7) or 0);
+					sheet.BuffDefesaAlvo1 = (tonumber(sheet.BuffDefJ7) or 0);
+					sheet.ResistenciaAlvo1 = (tonumber(sheet.ResistenciaJ7) or 0);
+					sheet.BuffResistenciaAlvo1	= (tonumber(sheet.BuffResisJ7) or 0);
+				end;
+				
+				if self.cmbInimigo1.text == sheet.NomeJ8 then
+					sheet.VI1 = (tonumber(sheet.VIDAJ8) or 0)
+					sheet.DefesaAlvo1 = (tonumber(sheet.DefesaJ8) or 0);
+					sheet.BuffDefesaAlvo1 = (tonumber(sheet.BuffDefJ8) or 0);
+					sheet.ResistenciaAlvo1 = (tonumber(sheet.ResistenciaJ8) or 0);
+					sheet.BuffResistenciaAlvo1 = (tonumber(sheet.BuffResisJ8) or 0);
+				end;
+				
+				if self.cmbInimigo1.text == sheet.NomeJ9 then
+					sheet.VI1 = (tonumber(sheet.VIDAJ9) or 0)
+					sheet.DefesaAlvo1 = (tonumber(sheet.DefesaJ9) or 0);
+					sheet.BuffDefesaAlvo1 = (tonumber(sheet.BuffDefJ9) or 0);
+					sheet.ResistenciaAlvo1 = (tonumber(sheet.ResistenciaJ9) or 0);
+					sheet.BuffResistenciaAlvo1 = (tonumber(sheet.BuffResisJ9) or 0);
+				end;
+				
+				if self.cmbInimigo1.text == sheet.NomeJ10 then
+					sheet.VI1 = (tonumber(sheet.VIDAJ10) or 0)
+					sheet.DefesaAlvo1 = (tonumber(sheet.DefesaJ10) or 0);
+					sheet.BuffDefesaAlvo1 = (tonumber(sheet.BuffDefJ10) or 0);
+					sheet.ResistenciaAlvo1 = (tonumber(sheet.ResistenciaJ10) or 0);
+					sheet.BuffResistenciaAlvo1 = (tonumber(sheet.BuffResisJ10) or 0);
+				end;
+					
+				---- ALVO 2 ---	
+					
+				if self.cmbInimigo2.text == sheet.NomeJ1 then
+					sheet.VI2 = (tonumber(sheet.VIDAJ1) or 0);
+					sheet.DefesaAlvo2 = (tonumber(sheet.DefesaJ1) or 0);
+					sheet.BuffDefesaAlvo2 = (tonumber(sheet.BuffDefJ1) or 0);
+					sheet.ResistenciaAlvo2 = (tonumber(sheet.ResistenciaJ1) or 0);
+					sheet.BuffResistenciaAlvo2 = (tonumber(sheet.BuffResisJ1) or 0);
+				end;
+
+				if self.cmbInimigo2.text == sheet.NomeJ2 then
+					sheet.VI2 = (tonumber(sheet.VIDAJ2) or 0)
+					sheet.DefesaAlvo2 = (tonumber(sheet.DefesaJ2) or 0);
+					sheet.BuffDefesaAlvo2 = (tonumber(sheet.BuffDefJ2) or 0);
+					sheet.ResistenciaAlvo2 = (tonumber(sheet.ResistenciaJ2) or 0);
+					sheet.BuffResistenciaAlvo2 = (tonumber(sheet.BuffResisJ2) or 0);
+				end;				 
+				 
+				if self.cmbInimigo2.text == sheet.NomeJ3 then
+					sheet.VI2 = (tonumber(sheet.VIDAJ3) or 0)
+					sheet.DefesaAlvo2 = (tonumber(sheet.DefesaJ3) or 0);
+					sheet.BuffDefesaAlvo2 = (tonumber(sheet.BuffDefJ3) or 0);
+					sheet.ResistenciaAlvo2 = (tonumber(sheet.ResistenciaJ3) or 0);
+					sheet.BuffResistenciaAlvo2 = (tonumber(sheet.BuffResisJ3) or 0);
+				end;	
+
+				if self.cmbInimigo2.text == sheet.NomeJ4 then
+					sheet.VI2 = (tonumber(sheet.VIDAJ4) or 0)
+					sheet.DefesaAlvo2 = (tonumber(sheet.DefesaJ4) or 0);
+					sheet.BuffDefesaAlvo2 = (tonumber(sheet.BuffDefJ4) or 0);
+					sheet.ResistenciaAlvo2 = (tonumber(sheet.ResistenciaJ4) or 0);
+					sheet.BuffResistenciaAlvo2 = (tonumber(sheet.BuffResisJ4) or 0);
+				end;
+
+				if self.cmbInimigo2.text == sheet.NomeJ5 then
+					sheet.VI2 = (tonumber(sheet.VIDAJ5) or 0)
+					sheet.DefesaAlvo2 = (tonumber(sheet.DefesaJ5) or 0);
+					sheet.BuffDefesaAlvo2 = (tonumber(sheet.BuffDefJ5) or 0);
+					sheet.ResistenciaAlvo2 = (tonumber(sheet.ResistenciaJ5) or 0);
+					sheet.BuffResistenciaAlvo2 = (tonumber(sheet.BuffResisJ5) or 0);
+				end;				 
+				 
+				if self.cmbInimigo2.text == sheet.NomeJ6 then
+					sheet.VI2 = (tonumber(sheet.VIDAJ6) or 0)
+					sheet.DefesaAlvo2 = (tonumber(sheet.DefesaJ6) or 0);
+					sheet.BuffDefesaAlvo2 = (tonumber(sheet.BuffDefJ6) or 0);
+					sheet.ResistenciaAlvo2 = (tonumber(sheet.ResistenciaJ6) or 0);
+					sheet.BuffResistenciaAlvo2 = (tonumber(sheet.BuffResisJ6) or 0);
+				end;
+				
+				if self.cmbInimigo2.text == sheet.NomeJ7 then
+					sheet.VI2 = (tonumber(sheet.VIDAJ7) or 0)
+					sheet.DefesaAlvo2 = (tonumber(sheet.DefesaJ7) or 0);
+					sheet.BuffDefesaAlvo2 = (tonumber(sheet.BuffDefJ7) or 0);
+					sheet.ResistenciaAlvo2 = (tonumber(sheet.ResistenciaJ7) or 0);
+					sheet.BuffResistenciaAlvo2	= (tonumber(sheet.BuffResisJ7) or 0);
+				end;
+				
+				if self.cmbInimigo2.text == sheet.NomeJ8 then
+					sheet.VI2 = (tonumber(sheet.VIDAJ8) or 0)
+					sheet.DefesaAlvo2 = (tonumber(sheet.DefesaJ8) or 0);
+					sheet.BuffDefesaAlvo2 = (tonumber(sheet.BuffDefJ8) or 0);
+					sheet.ResistenciaAlvo2 = (tonumber(sheet.ResistenciaJ8) or 0);
+					sheet.BuffResistenciaAlvo2 = (tonumber(sheet.BuffResisJ8) or 0);
+				end;
+				
+				if self.cmbInimigo2.text == sheet.NomeJ9 then
+					sheet.VI2 = (tonumber(sheet.VIDAJ9) or 0)
+					sheet.DefesaAlvo2 = (tonumber(sheet.DefesaJ9) or 0);
+					sheet.BuffDefesaAlvo2 = (tonumber(sheet.BuffDefJ9) or 0);
+					sheet.ResistenciaAlvo2 = (tonumber(sheet.ResistenciaJ9) or 0);
+					sheet.BuffResistenciaAlvo2	= (tonumber(sheet.BuffResisJ9) or 0);
+				end;
+				
+				if self.cmbInimigo2.text == sheet.NomeJ10 then
+					sheet.VI2 = (tonumber(sheet.VIDAJ10) or 0)
+					sheet.DefesaAlvo2 = (tonumber(sheet.DefesaJ10) or 0);
+					sheet.BuffDefesaAlvo2 = (tonumber(sheet.BuffDefJ10) or 0);
+					sheet.ResistenciaAlvo2 = (tonumber(sheet.ResistenciaJ10) or 0);
+					sheet.BuffResistenciaAlvo2 = (tonumber(sheet.BuffResisJ10) or 0);
+				end;
+				
+				---- ALVO 3 ---	
+				
+				if self.cmbInimigo3.text == sheet.NomeJ1 then
+					sheet.VI3 = (tonumber(sheet.VIDAJ1) or 0);
+					sheet.DefesaAlvo3 = (tonumber(sheet.DefesaJ1) or 0);
+					sheet.BuffDefesaAlvo3 = (tonumber(sheet.BuffDefJ1) or 0);
+					sheet.ResistenciaAlvo3 = (tonumber(sheet.ResistenciaJ1) or 0);
+					sheet.BuffResistenciaAlvo3 = (tonumber(sheet.BuffResisJ1) or 0);
+				end;
+
+				if self.cmbInimigo3.text == sheet.NomeJ2 then
+					sheet.VI3 = (tonumber(sheet.VIDAJ2) or 0)
+					sheet.DefesaAlvo3 = (tonumber(sheet.DefesaJ2) or 0);
+					sheet.BuffDefesaAlvo3 = (tonumber(sheet.BuffDefJ2) or 0);
+					sheet.ResistenciaAlvo3 = (tonumber(sheet.ResistenciaJ2) or 0);
+					sheet.BuffResistenciaAlvo3 = (tonumber(sheet.BuffResisJ2) or 0);
+				end;				 
+				 
+				if self.cmbInimigo3.text == sheet.NomeJ3 then
+					sheet.VI3 = (tonumber(sheet.VIDAJ3) or 0)
+					sheet.DefesaAlvo3 = (tonumber(sheet.DefesaJ3) or 0);
+					sheet.BuffDefesaAlvo3 = (tonumber(sheet.BuffDefJ3) or 0);
+					sheet.ResistenciaAlvo3 = (tonumber(sheet.ResistenciaJ3) or 0);
+					sheet.BuffResistenciaAlvo3 = (tonumber(sheet.BuffResisJ3) or 0);
+				end;	
+
+				if self.cmbInimigo3.text == sheet.NomeJ4 then
+					sheet.VI3 = (tonumber(sheet.VIDAJ4) or 0)
+					sheet.DefesaAlvo3 = (tonumber(sheet.DefesaJ4) or 0);
+					sheet.BuffDefesaAlvo3 = (tonumber(sheet.BuffDefJ4) or 0);
+					sheet.ResistenciaAlvo3 = (tonumber(sheet.ResistenciaJ4) or 0);
+					sheet.BuffResistenciaAlvo3 = (tonumber(sheet.BuffResisJ4) or 0);
+				end;
+
+				if self.cmbInimigo3.text == sheet.NomeJ5 then
+					sheet.VI3 = (tonumber(sheet.VIDAJ5) or 0)
+					sheet.DefesaAlvo3 = (tonumber(sheet.DefesaJ5) or 0);
+					sheet.BuffDefesaAlvo3 = (tonumber(sheet.BuffDefJ5) or 0);
+					sheet.ResistenciaAlvo3 = (tonumber(sheet.ResistenciaJ5) or 0);
+					sheet.BuffResistenciaAlvo3 = (tonumber(sheet.BuffResisJ5) or 0);
+				end;				 
+				 
+				if self.cmbInimigo3.text == sheet.NomeJ6 then
+					sheet.VI3 = (tonumber(sheet.VIDAJ6) or 0)
+					sheet.DefesaAlvo3 = (tonumber(sheet.DefesaJ6) or 0);
+					sheet.BuffDefesaAlvo3 = (tonumber(sheet.BuffDefJ6) or 0);
+					sheet.ResistenciaAlvo3 = (tonumber(sheet.ResistenciaJ6) or 0);
+					sheet.BuffResistenciaAlvo3 = (tonumber(sheet.BuffResisJ6) or 0);
+				end;
+				
+				if self.cmbInimigo3.text == sheet.NomeJ7 then
+					sheet.VI3 = (tonumber(sheet.VIDAJ7) or 0)
+					sheet.DefesaAlvo3 = (tonumber(sheet.DefesaJ7) or 0);
+					sheet.BuffDefesaAlvo3 = (tonumber(sheet.BuffDefJ7) or 0);
+					sheet.ResistenciaAlvo3 = (tonumber(sheet.ResistenciaJ7) or 0);
+					sheet.BuffResistenciaAlvo3	= (tonumber(sheet.BuffResisJ7) or 0);
+				end;
+				
+				if self.cmbInimigo3.text == sheet.NomeJ8 then
+					sheet.VI3 = (tonumber(sheet.VIDAJ8) or 0)
+					sheet.DefesaAlvo3 = (tonumber(sheet.DefesaJ8) or 0);
+					sheet.BuffDefesaAlvo3 = (tonumber(sheet.BuffDefJ8) or 0);
+					sheet.ResistenciaAlvo3 = (tonumber(sheet.ResistenciaJ8) or 0);
+					sheet.BuffResistenciaAlvo3 = (tonumber(sheet.BuffResisJ8) or 0);
+				end;
+				
+				if self.cmbInimigo3.text == sheet.NomeJ9 then
+					sheet.VI3 = (tonumber(sheet.VIDAJ9) or 0)
+					sheet.DefesaAlvo3 = (tonumber(sheet.DefesaJ9) or 0);
+					sheet.BuffDefesaAlvo3 = (tonumber(sheet.BuffDefJ9) or 0);
+					sheet.ResistenciaAlvo3 = (tonumber(sheet.ResistenciaJ9) or 0);
+					sheet.BuffResistenciaAlvo3	= (tonumber(sheet.BuffResisJ9) or 0);
+				end;
+				
+				if self.cmbInimigo3.text == sheet.NomeJ10 then
+					sheet.VI3 = (tonumber(sheet.VIDAJ10) or 0)
+					sheet.DefesaAlvo3 = (tonumber(sheet.DefesaJ10) or 0);
+					sheet.BuffDefesaAlvo3 = (tonumber(sheet.BuffDefJ10) or 0);
+					sheet.ResistenciaAlvo3 = (tonumber(sheet.ResistenciaJ10) or 0);
+					sheet.BuffResistenciaAlvo3 = (tonumber(sheet.BuffResisJ10) or 0);
+				end;
+				
+				---- ALVO 4 ---	
+				
+				if self.cmbInimigo4.text == sheet.NomeJ1 then
+					sheet.VI4 = (tonumber(sheet.VIDAJ1) or 0);
+					sheet.DefesaAlvo4 = (tonumber(sheet.DefesaJ1) or 0);
+					sheet.BuffDefesaAlvo4 = (tonumber(sheet.BuffDefJ1) or 0);
+					sheet.ResistenciaAlvo4 = (tonumber(sheet.ResistenciaJ1) or 0);
+					sheet.BuffResistenciaAlvo4 = (tonumber(sheet.BuffResisJ1) or 0);
+				end;
+
+				if self.cmbInimigo4.text == sheet.NomeJ2 then
+					sheet.VI4 = (tonumber(sheet.VIDAJ2) or 0)
+					sheet.DefesaAlvo4 = (tonumber(sheet.DefesaJ2) or 0);
+					sheet.BuffDefesaAlvo4 = (tonumber(sheet.BuffDefJ2) or 0);
+					sheet.ResistenciaAlvo4 = (tonumber(sheet.ResistenciaJ2) or 0);
+					sheet.BuffResistenciaAlvo4 = (tonumber(sheet.BuffResisJ2) or 0);
+				end;				 
+				 
+				if self.cmbInimigo4.text == sheet.NomeJ3 then
+					sheet.VI4 = (tonumber(sheet.VIDAJ3) or 0)
+					sheet.DefesaAlvo4 = (tonumber(sheet.DefesaJ3) or 0);
+					sheet.BuffDefesaAlvo4 = (tonumber(sheet.BuffDefJ3) or 0);
+					sheet.ResistenciaAlvo4 = (tonumber(sheet.ResistenciaJ3) or 0);
+					sheet.BuffResistenciaAlvo4 = (tonumber(sheet.BuffResisJ3) or 0);
+				end;	
+
+				if self.cmbInimigo4.text == sheet.NomeJ4 then
+					sheet.VI4 = (tonumber(sheet.VIDAJ4) or 0)
+					sheet.DefesaAlvo4 = (tonumber(sheet.DefesaJ4) or 0);
+					sheet.BuffDefesaAlvo4 = (tonumber(sheet.BuffDefJ4) or 0);
+					sheet.ResistenciaAlvo4 = (tonumber(sheet.ResistenciaJ4) or 0);
+					sheet.BuffResistenciaAlvo4 = (tonumber(sheet.BuffResisJ4) or 0);
+				end;
+
+				if self.cmbInimigo4.text == sheet.NomeJ5 then
+					sheet.VI4 = (tonumber(sheet.VIDAJ5) or 0)
+					sheet.DefesaAlvo4 = (tonumber(sheet.DefesaJ5) or 0);
+					sheet.BuffDefesaAlvo4 = (tonumber(sheet.BuffDefJ5) or 0);
+					sheet.ResistenciaAlvo4 = (tonumber(sheet.ResistenciaJ5) or 0);
+					sheet.BuffResistenciaAlvo4 = (tonumber(sheet.BuffResisJ5) or 0);
+				end;				 
+				 
+				if self.cmbInimigo4.text == sheet.NomeJ6 then
+					sheet.VI4 = (tonumber(sheet.VIDAJ6) or 0)
+					sheet.DefesaAlvo4 = (tonumber(sheet.DefesaJ6) or 0);
+					sheet.BuffDefesaAlvo4 = (tonumber(sheet.BuffDefJ6) or 0);
+					sheet.ResistenciaAlvo4 = (tonumber(sheet.ResistenciaJ6) or 0);
+					sheet.BuffResistenciaAlvo4 = (tonumber(sheet.BuffResisJ6) or 0);
+				end;
+				
+				if self.cmbInimigo4.text == sheet.NomeJ7 then
+					sheet.VI4 = (tonumber(sheet.VIDAJ7) or 0)
+					sheet.DefesaAlvo4 = (tonumber(sheet.DefesaJ7) or 0);
+					sheet.BuffDefesaAlvo4 = (tonumber(sheet.BuffDefJ7) or 0);
+					sheet.ResistenciaAlvo4 = (tonumber(sheet.ResistenciaJ7) or 0);
+					sheet.BuffResistenciaAlvo4	= (tonumber(sheet.BuffResisJ7) or 0);
+				end;
+				
+				if self.cmbInimigo4.text == sheet.NomeJ8 then
+					sheet.VI4 = (tonumber(sheet.VIDAJ8) or 0)
+					sheet.DefesaAlvo4 = (tonumber(sheet.DefesaJ8) or 0);
+					sheet.BuffDefesaAlvo4 = (tonumber(sheet.BuffDefJ8) or 0);
+					sheet.ResistenciaAlvo4 = (tonumber(sheet.ResistenciaJ8) or 0);
+					sheet.BuffResistenciaAlvo4 = (tonumber(sheet.BuffResisJ8) or 0);
+				end;
+				
+				if self.cmbInimigo4.text == sheet.NomeJ9 then
+					sheet.VI4 = (tonumber(sheet.VIDAJ9) or 0)
+					sheet.DefesaAlvo4 = (tonumber(sheet.DefesaJ9) or 0);
+					sheet.BuffDefesaAlvo4 = (tonumber(sheet.BuffDefJ9) or 0);
+					sheet.ResistenciaAlvo4 = (tonumber(sheet.ResistenciaJ9) or 0);
+					sheet.BuffResistenciaAlvo4	= (tonumber(sheet.BuffResisJ9) or 0);
+				end;
+				
+				if self.cmbInimigo4.text == sheet.NomeJ10 then
+					sheet.VI4 = (tonumber(sheet.VIDAJ10) or 0)
+					sheet.DefesaAlvo4 = (tonumber(sheet.DefesaJ10) or 0);
+					sheet.BuffDefesaAlvo4 = (tonumber(sheet.BuffDefJ10) or 0);
+					sheet.ResistenciaAlvo4 = (tonumber(sheet.ResistenciaJ10) or 0);
+					sheet.BuffResistenciaAlvo4 = (tonumber(sheet.BuffResisJ10) or 0);
+				end;
+
+				---- ALVO 5 ---	
+							
+				if self.cmbInimigo5.text == sheet.NomeJ1 then
+					sheet.VI5 = (tonumber(sheet.VIDAJ1) or 0);
+					sheet.DefesaAlvo5 = (tonumber(sheet.DefesaJ1) or 0);
+					sheet.BuffDefesaAlvo5 = (tonumber(sheet.BuffDefJ1) or 0);
+					sheet.ResistenciaAlvo5 = (tonumber(sheet.ResistenciaJ1) or 0);
+					sheet.BuffResistenciaAlvo5 = (tonumber(sheet.BuffResisJ1) or 0);
+				end;
+
+				if self.cmbInimigo5.text == sheet.NomeJ2 then
+					sheet.VI5 = (tonumber(sheet.VIDAJ2) or 0)
+					sheet.DefesaAlvo5 = (tonumber(sheet.DefesaJ2) or 0);
+					sheet.BuffDefesaAlvo5 = (tonumber(sheet.BuffDefJ2) or 0);
+					sheet.ResistenciaAlvo5 = (tonumber(sheet.ResistenciaJ2) or 0);
+					sheet.BuffResistenciaAlvo5 = (tonumber(sheet.BuffResisJ2) or 0);
+				end;				 
+				 
+				if self.cmbInimigo5.text == sheet.NomeJ3 then
+					sheet.VI5 = (tonumber(sheet.VIDAJ3) or 0)
+					sheet.DefesaAlvo5 = (tonumber(sheet.DefesaJ3) or 0);
+					sheet.BuffDefesaAlvo5 = (tonumber(sheet.BuffDefJ3) or 0);
+					sheet.ResistenciaAlvo5 = (tonumber(sheet.ResistenciaJ3) or 0);
+					sheet.BuffResistenciaAlvo5 = (tonumber(sheet.BuffResisJ3) or 0);
+				end;	
+
+				if self.cmbInimigo5.text == sheet.NomeJ4 then
+					sheet.VI5 = (tonumber(sheet.VIDAJ4) or 0)
+					sheet.DefesaAlvo5 = (tonumber(sheet.DefesaJ4) or 0);
+					sheet.BuffDefesaAlvo5 = (tonumber(sheet.BuffDefJ4) or 0);
+					sheet.ResistenciaAlvo5 = (tonumber(sheet.ResistenciaJ4) or 0);
+					sheet.BuffResistenciaAlvo5 = (tonumber(sheet.BuffResisJ4) or 0);
+				end;
+
+				if self.cmbInimigo5.text == sheet.NomeJ5 then
+					sheet.VI5 = (tonumber(sheet.VIDAJ5) or 0)
+					sheet.DefesaAlvo5 = (tonumber(sheet.DefesaJ5) or 0);
+					sheet.BuffDefesaAlvo5 = (tonumber(sheet.BuffDefJ5) or 0);
+					sheet.ResistenciaAlvo5 = (tonumber(sheet.ResistenciaJ5) or 0);
+					sheet.BuffResistenciaAlvo5 = (tonumber(sheet.BuffResisJ5) or 0);
+				end;				 
+				 
+				if self.cmbInimigo5.text == sheet.NomeJ6 then
+					sheet.VI5 = (tonumber(sheet.VIDAJ6) or 0)
+					sheet.DefesaAlvo5 = (tonumber(sheet.DefesaJ6) or 0);
+					sheet.BuffDefesaAlvo5 = (tonumber(sheet.BuffDefJ6) or 0);
+					sheet.ResistenciaAlvo5 = (tonumber(sheet.ResistenciaJ6) or 0);
+					sheet.BuffResistenciaAlvo5 = (tonumber(sheet.BuffResisJ6) or 0);
+				end;
+				
+				if self.cmbInimigo5.text == sheet.NomeJ7 then
+					sheet.VI5 = (tonumber(sheet.VIDAJ7) or 0)
+					sheet.DefesaAlvo5 = (tonumber(sheet.DefesaJ7) or 0);
+					sheet.BuffDefesaAlvo5 = (tonumber(sheet.BuffDefJ7) or 0);
+					sheet.ResistenciaAlvo5 = (tonumber(sheet.ResistenciaJ7) or 0);
+					sheet.BuffResistenciaAlvo5	= (tonumber(sheet.BuffResisJ7) or 0);
+				end;
+				
+				if self.cmbInimigo5.text == sheet.NomeJ8 then
+					sheet.VI5 = (tonumber(sheet.VIDAJ8) or 0)
+					sheet.DefesaAlvo5 = (tonumber(sheet.DefesaJ8) or 0);
+					sheet.BuffDefesaAlvo5 = (tonumber(sheet.BuffDefJ8) or 0);
+					sheet.ResistenciaAlvo5 = (tonumber(sheet.ResistenciaJ8) or 0);
+					sheet.BuffResistenciaAlvo5 = (tonumber(sheet.BuffResisJ8) or 0);
+				end;
+				
+				if self.cmbInimigo5.text == sheet.NomeJ9 then
+					sheet.VI5 = (tonumber(sheet.VIDAJ9) or 0)
+					sheet.DefesaAlvo5 = (tonumber(sheet.DefesaJ9) or 0);
+					sheet.BuffDefesaAlvo5 = (tonumber(sheet.BuffDefJ9) or 0);
+					sheet.ResistenciaAlvo5 = (tonumber(sheet.ResistenciaJ9) or 0);
+					sheet.BuffResistenciaAlvo5	= (tonumber(sheet.BuffResisJ9) or 0);
+				end;
+				
+				if self.cmbInimigo5.text == sheet.NomeJ10 then
+					sheet.VI5 = (tonumber(sheet.VIDAJ10) or 0)
+					sheet.DefesaAlvo5 = (tonumber(sheet.DefesaJ10) or 0);
+					sheet.BuffDefesaAlvo5 = (tonumber(sheet.BuffDefJ10) or 0);
+					sheet.ResistenciaAlvo5 = (tonumber(sheet.ResistenciaJ10) or 0);
+					sheet.BuffResistenciaAlvo5 = (tonumber(sheet.BuffResisJ10) or 0);
+				end;
+				
+				---- ALVO 6 ---	
+				
+				if self.cmbInimigo6.text == sheet.NomeJ1 then
+					sheet.VI6 = (tonumber(sheet.VIDAJ1) or 0);
+					sheet.DefesaAlvo6 = (tonumber(sheet.DefesaJ1) or 0);
+					sheet.BuffDefesaAlvo6 = (tonumber(sheet.BuffDefJ1) or 0);
+					sheet.ResistenciaAlvo6 = (tonumber(sheet.ResistenciaJ1) or 0);
+					sheet.BuffResistenciaAlvo6 = (tonumber(sheet.BuffResisJ1) or 0);
+				end;
+
+				if self.cmbInimigo6.text == sheet.NomeJ2 then
+					sheet.VI6 = (tonumber(sheet.VIDAJ2) or 0)
+					sheet.DefesaAlvo6 = (tonumber(sheet.DefesaJ2) or 0);
+					sheet.BuffDefesaAlvo6 = (tonumber(sheet.BuffDefJ2) or 0);
+					sheet.ResistenciaAlvo6 = (tonumber(sheet.ResistenciaJ2) or 0);
+					sheet.BuffResistenciaAlvo6 = (tonumber(sheet.BuffResisJ2) or 0);
+				end;				 
+				 
+				if self.cmbInimigo6.text == sheet.NomeJ3 then
+					sheet.VI6 = (tonumber(sheet.VIDAJ3) or 0)
+					sheet.DefesaAlvo6 = (tonumber(sheet.DefesaJ3) or 0);
+					sheet.BuffDefesaAlvo6 = (tonumber(sheet.BuffDefJ3) or 0);
+					sheet.ResistenciaAlvo6 = (tonumber(sheet.ResistenciaJ3) or 0);
+					sheet.BuffResistenciaAlvo6 = (tonumber(sheet.BuffResisJ3) or 0);
+				end;	
+
+				if self.cmbInimigo6.text == sheet.NomeJ4 then
+					sheet.VI6 = (tonumber(sheet.VIDAJ4) or 0)
+					sheet.DefesaAlvo6 = (tonumber(sheet.DefesaJ4) or 0);
+					sheet.BuffDefesaAlvo6 = (tonumber(sheet.BuffDefJ4) or 0);
+					sheet.ResistenciaAlvo6 = (tonumber(sheet.ResistenciaJ4) or 0);
+					sheet.BuffResistenciaAlvo6 = (tonumber(sheet.BuffResisJ4) or 0);
+				end;
+
+				if self.cmbInimigo6.text == sheet.NomeJ5 then
+					sheet.VI6 = (tonumber(sheet.VIDAJ5) or 0)
+					sheet.DefesaAlvo6 = (tonumber(sheet.DefesaJ5) or 0);
+					sheet.BuffDefesaAlvo6 = (tonumber(sheet.BuffDefJ5) or 0);
+					sheet.ResistenciaAlvo6 = (tonumber(sheet.ResistenciaJ5) or 0);
+					sheet.BuffResistenciaAlvo6 = (tonumber(sheet.BuffResisJ5) or 0);
+				end;				 
+				 
+				if self.cmbInimigo6.text == sheet.NomeJ6 then
+					sheet.VI6 = (tonumber(sheet.VIDAJ6) or 0)
+					sheet.DefesaAlvo6 = (tonumber(sheet.DefesaJ6) or 0);
+					sheet.BuffDefesaAlvo6 = (tonumber(sheet.BuffDefJ6) or 0);
+					sheet.ResistenciaAlvo6 = (tonumber(sheet.ResistenciaJ6) or 0);
+					sheet.BuffResistenciaAlvo6 = (tonumber(sheet.BuffResisJ6) or 0);
+				end;
+				
+				if self.cmbInimigo6.text == sheet.NomeJ7 then
+					sheet.VI6 = (tonumber(sheet.VIDAJ7) or 0)
+					sheet.DefesaAlvo6 = (tonumber(sheet.DefesaJ7) or 0);
+					sheet.BuffDefesaAlvo6 = (tonumber(sheet.BuffDefJ7) or 0);
+					sheet.ResistenciaAlvo6 = (tonumber(sheet.ResistenciaJ7) or 0);
+					sheet.BuffResistenciaAlvo6	 = (tonumber(sheet.BuffResisJ7) or 0);
+				end;
+				
+				if self.cmbInimigo6.text == sheet.NomeJ8 then
+					sheet.VI6 = (tonumber(sheet.VIDAJ8) or 0)
+					sheet.DefesaAlvo6 = (tonumber(sheet.DefesaJ8) or 0);
+					sheet.BuffDefesaAlvo6 = (tonumber(sheet.BuffDefJ8) or 0);
+					sheet.ResistenciaAlvo6 = (tonumber(sheet.ResistenciaJ8) or 0);
+					sheet.BuffResistenciaAlvo6	 = (tonumber(sheet.BuffResisJ8) or 0);
+				end;
+				
+				if self.cmbInimigo6.text == sheet.NomeJ9 then
+					sheet.VI6 = (tonumber(sheet.VIDAJ9) or 0)
+					sheet.DefesaAlvo6 = (tonumber(sheet.DefesaJ9) or 0);
+					sheet.BuffDefesaAlvo6 = (tonumber(sheet.BuffDefJ9) or 0);
+					sheet.ResistenciaAlvo6 = (tonumber(sheet.ResistenciaJ9) or 0);
+					sheet.BuffResistenciaAlvo6	 = (tonumber(sheet.BuffResisJ9) or 0);
+				end;
+				
+				if self.cmbInimigo6.text == sheet.NomeJ10 then
+					sheet.VI6 = (tonumber(sheet.VIDAJ10) or 0)
+					sheet.DefesaAlvo6 = (tonumber(sheet.DefesaJ10) or 0);
+					sheet.BuffDefesaAlvo6 = (tonumber(sheet.BuffDefJ10) or 0);
+					sheet.ResistenciaAlvo6 = (tonumber(sheet.ResistenciaJ10) or 0);
+					sheet.BuffResistenciaAlvo6	 = (tonumber(sheet.BuffResisJ10) or 0);
+				end;
+				
+				---- ALVO 7 ---	
+				
+				if self.cmbInimigo7.text == sheet.NomeJ1 then
+					sheet.VI7 = (tonumber(sheet.VIDAJ1) or 0);
+					sheet.DefesaAlvo7 = (tonumber(sheet.DefesaJ1) or 0);
+					sheet.BuffDefesaAlvo7 = (tonumber(sheet.BuffDefJ1) or 0);
+					sheet.ResistenciaAlvo7 = (tonumber(sheet.ResistenciaJ1) or 0);
+					sheet.BuffResistenciaAlvo7 = (tonumber(sheet.BuffResisJ1) or 0);
+				end;
+
+				if self.cmbInimigo7.text == sheet.NomeJ2 then
+					sheet.VI7 = (tonumber(sheet.VIDAJ2) or 0)
+					sheet.DefesaAlvo7 = (tonumber(sheet.DefesaJ2) or 0);
+					sheet.BuffDefesaAlvo7 = (tonumber(sheet.BuffDefJ2) or 0);
+					sheet.ResistenciaAlvo7 = (tonumber(sheet.ResistenciaJ2) or 0);
+					sheet.BuffResistenciaAlvo7 = (tonumber(sheet.BuffResisJ2) or 0);
+				end;				 
+				 
+				if self.cmbInimigo7.text == sheet.NomeJ3 then
+					sheet.VI7 = (tonumber(sheet.VIDAJ3) or 0)
+					sheet.DefesaAlvo7 = (tonumber(sheet.DefesaJ3) or 0);
+					sheet.BuffDefesaAlvo7 = (tonumber(sheet.BuffDefJ3) or 0);
+					sheet.ResistenciaAlvo7 = (tonumber(sheet.ResistenciaJ3) or 0);
+					sheet.BuffResistenciaAlvo7 = (tonumber(sheet.BuffResisJ3) or 0);
+				end;	
+
+				if self.cmbInimigo7.text == sheet.NomeJ4 then
+					sheet.VI7 = (tonumber(sheet.VIDAJ4) or 0)
+					sheet.DefesaAlvo7 = (tonumber(sheet.DefesaJ4) or 0);
+					sheet.BuffDefesaAlvo7 = (tonumber(sheet.BuffDefJ4) or 0);
+					sheet.ResistenciaAlvo7 = (tonumber(sheet.ResistenciaJ4) or 0);
+					sheet.BuffResistenciaAlvo7 = (tonumber(sheet.BuffResisJ4) or 0);
+				end;
+
+				if self.cmbInimigo7.text == sheet.NomeJ5 then
+					sheet.VI7 = (tonumber(sheet.VIDAJ5) or 0)
+					sheet.DefesaAlvo7 = (tonumber(sheet.DefesaJ5) or 0);
+					sheet.BuffDefesaAlvo7 = (tonumber(sheet.BuffDefJ5) or 0);
+					sheet.ResistenciaAlvo7 = (tonumber(sheet.ResistenciaJ5) or 0);
+					sheet.BuffResistenciaAlvo7 = (tonumber(sheet.BuffResisJ5) or 0);
+				end;				 
+				 
+				if self.cmbInimigo7.text == sheet.NomeJ6 then
+					sheet.VI7 = (tonumber(sheet.VIDAJ6) or 0)
+					sheet.DefesaAlvo7 = (tonumber(sheet.DefesaJ6) or 0);
+					sheet.BuffDefesaAlvo7 = (tonumber(sheet.BuffDefJ6) or 0);
+					sheet.ResistenciaAlvo7 = (tonumber(sheet.ResistenciaJ6) or 0);
+					sheet.BuffResistenciaAlvo7	 = (tonumber(sheet.BuffResisJ6) or 0);
+				end;
+				
+				if self.cmbInimigo7.text == sheet.NomeJ7 then
+					sheet.VI7 = (tonumber(sheet.VIDAJ7) or 0)
+					sheet.DefesaAlvo7 = (tonumber(sheet.DefesaJ7) or 0);
+					sheet.BuffDefesaAlvo7 = (tonumber(sheet.BuffDefJ7) or 0);
+					sheet.ResistenciaAlvo7 = (tonumber(sheet.ResistenciaJ7) or 0);
+					sheet.BuffResistenciaAlvo7	 = (tonumber(sheet.BuffResisJ7) or 0);
+				end;
+				
+				if self.cmbInimigo7.text == sheet.NomeJ8 then
+					sheet.VI7 = (tonumber(sheet.VIDAJ8) or 0)
+					sheet.DefesaAlvo7 = (tonumber(sheet.DefesaJ8) or 0);
+					sheet.BuffDefesaAlvo7 = (tonumber(sheet.BuffDefJ8) or 0);
+					sheet.ResistenciaAlvo7 = (tonumber(sheet.ResistenciaJ8) or 0);
+					sheet.BuffResistenciaAlvo7	 = (tonumber(sheet.BuffResisJ8) or 0);
+				end;
+				
+				if self.cmbInimigo7.text == sheet.NomeJ9 then
+					sheet.VI7 = (tonumber(sheet.VIDAJ9) or 0)
+					sheet.DefesaAlvo7 = (tonumber(sheet.DefesaJ9) or 0);
+					sheet.BuffDefesaAlvo7 = (tonumber(sheet.BuffDefJ9) or 0);
+					sheet.ResistenciaAlvo7 = (tonumber(sheet.ResistenciaJ9) or 0);
+					sheet.BuffResistenciaAlvo7	 = (tonumber(sheet.BuffResisJ9) or 0);
+				end;
+				
+				if self.cmbInimigo7.text == sheet.NomeJ10 then
+					sheet.VI7 = (tonumber(sheet.VIDAJ10) or 0)
+					sheet.DefesaAlvo7 = (tonumber(sheet.DefesaJ10) or 0);
+					sheet.BuffDefesaAlvo7 = (tonumber(sheet.BuffDefJ10) or 0);
+					sheet.ResistenciaAlvo7 = (tonumber(sheet.ResistenciaJ10) or 0);
+					sheet.BuffResistenciaAlvo7	 = (tonumber(sheet.BuffResisJ10) or 0);
+				end;
+				
+				---- ALVO 8 ---	
+				
+				if self.cmbInimigo8.text == sheet.NomeJ1 then
+					sheet.VI8 = (tonumber(sheet.VIDAJ1) or 0);
+					sheet.DefesaAlvo8 = (tonumber(sheet.DefesaJ1) or 0);
+					sheet.BuffDefesaAlvo8 = (tonumber(sheet.BuffDefJ1) or 0);
+					sheet.ResistenciaAlvo8 = (tonumber(sheet.ResistenciaJ1) or 0);
+					sheet.BuffResistenciaAlvo8 = (tonumber(sheet.BuffResisJ1) or 0);
+				end;
+
+				if self.cmbInimigo8.text == sheet.NomeJ2 then
+					sheet.VI8 = (tonumber(sheet.VIDAJ2) or 0)
+					sheet.DefesaAlvo8 = (tonumber(sheet.DefesaJ2) or 0);
+					sheet.BuffDefesaAlvo8 = (tonumber(sheet.BuffDefJ2) or 0);
+					sheet.ResistenciaAlvo8 = (tonumber(sheet.ResistenciaJ2) or 0);
+					sheet.BuffResistenciaAlvo8 = (tonumber(sheet.BuffResisJ2) or 0);
+				end;				 
+				 
+				if self.cmbInimigo8.text == sheet.NomeJ3 then
+					sheet.VI8 = (tonumber(sheet.VIDAJ3) or 0)
+					sheet.DefesaAlvo8 = (tonumber(sheet.DefesaJ3) or 0);
+					sheet.BuffDefesaAlvo8 = (tonumber(sheet.BuffDefJ3) or 0);
+					sheet.ResistenciaAlvo8 = (tonumber(sheet.ResistenciaJ3) or 0);
+					sheet.BuffResistenciaAlvo8 = (tonumber(sheet.BuffResisJ3) or 0);
+				end;	
+
+				if self.cmbInimigo8.text == sheet.NomeJ4 then
+					sheet.VI8 = (tonumber(sheet.VIDAJ4) or 0)
+					sheet.DefesaAlvo8 = (tonumber(sheet.DefesaJ4) or 0);
+					sheet.BuffDefesaAlvo8 = (tonumber(sheet.BuffDefJ4) or 0);
+					sheet.ResistenciaAlvo8 = (tonumber(sheet.ResistenciaJ4) or 0);
+					sheet.BuffResistenciaAlvo8 = (tonumber(sheet.BuffResisJ4) or 0);
+				end;
+
+				if self.cmbInimigo8.text == sheet.NomeJ5 then
+					sheet.VI8 = (tonumber(sheet.VIDAJ5) or 0)
+					sheet.DefesaAlvo8 = (tonumber(sheet.DefesaJ5) or 0);
+					sheet.BuffDefesaAlvo8 = (tonumber(sheet.BuffDefJ5) or 0);
+					sheet.ResistenciaAlvo8 = (tonumber(sheet.ResistenciaJ5) or 0);
+					sheet.BuffResistenciaAlvo8 = (tonumber(sheet.BuffResisJ5) or 0);
+				end;				 
+				 
+				if self.cmbInimigo8.text == sheet.NomeJ6 then
+					sheet.VI8 = (tonumber(sheet.VIDAJ6) or 0)
+					sheet.DefesaAlvo8 = (tonumber(sheet.DefesaJ6) or 0);
+					sheet.BuffDefesaAlvo8 = (tonumber(sheet.BuffDefJ6) or 0);
+					sheet.ResistenciaAlvo8 = (tonumber(sheet.ResistenciaJ6) or 0);
+					sheet.BuffResistenciaAlvo8 = (tonumber(sheet.BuffResisJ6) or 0);
+				end;
+				
+				if self.cmbInimigo8.text == sheet.NomeJ7 then
+					sheet.VI8 = (tonumber(sheet.VIDAJ7) or 0)
+					sheet.DefesaAlvo8 = (tonumber(sheet.DefesaJ7) or 0);
+					sheet.BuffDefesaAlvo8 = (tonumber(sheet.BuffDefJ7) or 0);
+					sheet.ResistenciaAlvo8 = (tonumber(sheet.ResistenciaJ7) or 0);
+					sheet.BuffResistenciaAlvo8	 = (tonumber(sheet.BuffResisJ7) or 0);
+				end;
+				
+				if self.cmbInimigo8.text == sheet.NomeJ8 then
+					sheet.VI8 = (tonumber(sheet.VIDAJ8) or 0)
+					sheet.DefesaAlvo8 = (tonumber(sheet.DefesaJ8) or 0);
+					sheet.BuffDefesaAlvo8 = (tonumber(sheet.BuffDefJ8) or 0);
+					sheet.ResistenciaAlvo8 = (tonumber(sheet.ResistenciaJ8) or 0);
+					sheet.BuffResistenciaAlvo8	 = (tonumber(sheet.BuffResisJ8) or 0);
+				end;
+				
+				if self.cmbInimigo8.text == sheet.NomeJ9 then
+					sheet.VI8 = (tonumber(sheet.VIDAJ9) or 0)
+					sheet.DefesaAlvo8 = (tonumber(sheet.DefesaJ9) or 0);
+					sheet.BuffDefesaAlvo8 = (tonumber(sheet.BuffDefJ9) or 0);
+					sheet.ResistenciaAlvo8 = (tonumber(sheet.ResistenciaJ9) or 0);
+					sheet.BuffResistenciaAlvo8	 = (tonumber(sheet.BuffResisJ9) or 0);
+				end;
+				
+				if self.cmbInimigo8.text == sheet.NomeJ10 then
+					sheet.VI8 = (tonumber(sheet.VIDAJ10) or 0)
+					sheet.DefesaAlvo8 = (tonumber(sheet.DefesaJ10) or 0);
+					sheet.BuffDefesaAlvo8 = (tonumber(sheet.BuffDefJ10) or 0);
+					sheet.ResistenciaAlvo8 = (tonumber(sheet.ResistenciaJ10) or 0);
+					sheet.BuffResistenciaAlvo8	 = (tonumber(sheet.BuffResisJ10) or 0);
+				end;
+				
+					---- ALVO 9 ---	
+				
+				if self.cmbInimigo9.text == sheet.NomeJ1 then
+					sheet.VI9 = (tonumber(sheet.VIDAJ1) or 0);
+					sheet.DefesaAlvo9 = (tonumber(sheet.DefesaJ1) or 0);
+					sheet.BuffDefesaAlvo9 = (tonumber(sheet.BuffDefJ1) or 0);
+					sheet.ResistenciaAlvo9 = (tonumber(sheet.ResistenciaJ1) or 0);
+					sheet.BuffResistenciaAlvo9 = (tonumber(sheet.BuffResisJ1) or 0);
+				end;
+
+				if self.cmbInimigo9.text == sheet.NomeJ2 then
+					sheet.VI9 = (tonumber(sheet.VIDAJ2) or 0)
+					sheet.DefesaAlvo9 = (tonumber(sheet.DefesaJ2) or 0);
+					sheet.BuffDefesaAlvo9 = (tonumber(sheet.BuffDefJ2) or 0);
+					sheet.ResistenciaAlvo9 = (tonumber(sheet.ResistenciaJ2) or 0);
+					sheet.BuffResistenciaAlvo9 = (tonumber(sheet.BuffResisJ2) or 0);
+				end;				 
+				 
+				if self.cmbInimigo9.text == sheet.NomeJ3 then
+					sheet.VI9 = (tonumber(sheet.VIDAJ3) or 0)
+					sheet.DefesaAlvo9 = (tonumber(sheet.DefesaJ3) or 0);
+					sheet.BuffDefesaAlvo9 = (tonumber(sheet.BuffDefJ3) or 0);
+					sheet.ResistenciaAlvo9 = (tonumber(sheet.ResistenciaJ3) or 0);
+					sheet.BuffResistenciaAlvo9 = (tonumber(sheet.BuffResisJ3) or 0);
+				end;	
+
+				if self.cmbInimigo9.text == sheet.NomeJ4 then
+					sheet.VI9 = (tonumber(sheet.VIDAJ4) or 0)
+					sheet.DefesaAlvo9 = (tonumber(sheet.DefesaJ4) or 0);
+					sheet.BuffDefesaAlvo9 = (tonumber(sheet.BuffDefJ4) or 0);
+					sheet.ResistenciaAlvo9 = (tonumber(sheet.ResistenciaJ4) or 0);
+					sheet.BuffResistenciaAlvo9 = (tonumber(sheet.BuffResisJ4) or 0);
+				end;
+
+				if self.cmbInimigo9.text == sheet.NomeJ5 then
+					sheet.VI9 = (tonumber(sheet.VIDAJ5) or 0)
+					sheet.DefesaAlvo9 = (tonumber(sheet.DefesaJ5) or 0);
+					sheet.BuffDefesaAlvo9 = (tonumber(sheet.BuffDefJ5) or 0);
+					sheet.ResistenciaAlvo9 = (tonumber(sheet.ResistenciaJ5) or 0);
+					sheet.BuffResistenciaAlvo9 = (tonumber(sheet.BuffResisJ5) or 0);
+				end;				 
+				 
+				if self.cmbInimigo9.text == sheet.NomeJ6 then
+					sheet.VI9 = (tonumber(sheet.VIDAJ6) or 0)
+					sheet.DefesaAlvo9 = (tonumber(sheet.DefesaJ6) or 0);
+					sheet.BuffDefesaAlvo9 = (tonumber(sheet.BuffDefJ6) or 0);
+					sheet.ResistenciaAlvo9 = (tonumber(sheet.ResistenciaJ6) or 0);
+					sheet.BuffResistenciaAlvo9 = (tonumber(sheet.BuffResisJ6) or 0);
+				end;
+				
+				if self.cmbInimigo9.text == sheet.NomeJ7 then
+					sheet.VI9 = (tonumber(sheet.VIDAJ7) or 0)
+					sheet.DefesaAlvo9 = (tonumber(sheet.DefesaJ7) or 0);
+					sheet.BuffDefesaAlvo9 = (tonumber(sheet.BuffDefJ7) or 0);
+					sheet.ResistenciaAlvo9 = (tonumber(sheet.ResistenciaJ7) or 0);
+					sheet.BuffResistenciaAlvo9	 = (tonumber(sheet.BuffResisJ7) or 0);
+				end;
+				
+				if self.cmbInimigo9.text == sheet.NomeJ8 then
+					sheet.VI9 = (tonumber(sheet.VIDAJ8) or 0)
+					sheet.DefesaAlvo9 = (tonumber(sheet.DefesaJ8) or 0);
+					sheet.BuffDefesaAlvo9 = (tonumber(sheet.BuffDefJ8) or 0);
+					sheet.ResistenciaAlvo9 = (tonumber(sheet.ResistenciaJ8) or 0);
+					sheet.BuffResistenciaAlvo9	 = (tonumber(sheet.BuffResisJ8) or 0);
+				end;
+				
+				if self.cmbInimigo9.text == sheet.NomeJ9 then
+					sheet.VI9 = (tonumber(sheet.VIDAJ9) or 0)
+					sheet.DefesaAlvo9 = (tonumber(sheet.DefesaJ9) or 0);
+					sheet.BuffDefesaAlvo9 = (tonumber(sheet.BuffDefJ9) or 0);
+					sheet.ResistenciaAlvo9 = (tonumber(sheet.ResistenciaJ9) or 0);
+					sheet.BuffResistenciaAlvo9	 = (tonumber(sheet.BuffResisJ9) or 0);
+				end;
+				
+				if self.cmbInimigo9.text == sheet.NomeJ10 then
+					sheet.VI9 = (tonumber(sheet.VIDAJ10) or 0)
+					sheet.DefesaAlvo9 = (tonumber(sheet.DefesaJ10) or 0);
+					sheet.BuffDefesaAlvo9 = (tonumber(sheet.BuffDefJ10) or 0);
+					sheet.ResistenciaAlvo9 = (tonumber(sheet.ResistenciaJ10) or 0);
+					sheet.BuffResistenciaAlvo9	 = (tonumber(sheet.BuffResisJ10) or 0);
+				end;
+				
+					---- ALVO 10 ---	
+				
+				if self.cmbInimigo10.text == sheet.NomeJ1 then
+					sheet.VI10 = (tonumber(sheet.VIDAJ1) or 0);
+					sheet.DefesaAlvo10 = (tonumber(sheet.DefesaJ1) or 0);
+					sheet.BuffDefesaAlvo10 = (tonumber(sheet.BuffDefJ1) or 0);
+					sheet.ResistenciaAlvo10 = (tonumber(sheet.ResistenciaJ1) or 0);
+					sheet.BuffResistenciaAlvo10 = (tonumber(sheet.BuffResisJ1) or 0);
+				end;
+
+				if self.cmbInimigo10.text == sheet.NomeJ2 then
+					sheet.VI10 = (tonumber(sheet.VIDAJ2) or 0)
+					sheet.DefesaAlvo10 = (tonumber(sheet.DefesaJ2) or 0);
+					sheet.BuffDefesaAlvo10 = (tonumber(sheet.BuffDefJ2) or 0);
+					sheet.ResistenciaAlvo10 = (tonumber(sheet.ResistenciaJ2) or 0);
+					sheet.BuffResistenciaAlvo10 = (tonumber(sheet.BuffResisJ2) or 0);
+				end;				 
+				 
+				if self.cmbInimigo10.text == sheet.NomeJ3 then
+					sheet.VI10 = (tonumber(sheet.VIDAJ3) or 0)
+					sheet.DefesaAlvo10 = (tonumber(sheet.DefesaJ3) or 0);
+					sheet.BuffDefesaAlvo10 = (tonumber(sheet.BuffDefJ3) or 0);
+					sheet.ResistenciaAlvo10 = (tonumber(sheet.ResistenciaJ3) or 0);
+					sheet.BuffResistenciaAlvo10 = (tonumber(sheet.BuffResisJ3) or 0);
+				end;	
+
+				if self.cmbInimigo10.text == sheet.NomeJ4 then
+					sheet.VI10 = (tonumber(sheet.VIDAJ4) or 0)
+					sheet.DefesaAlvo10 = (tonumber(sheet.DefesaJ4) or 0);
+					sheet.BuffDefesaAlvo10 = (tonumber(sheet.BuffDefJ4) or 0);
+					sheet.ResistenciaAlvo10 = (tonumber(sheet.ResistenciaJ4) or 0);
+					sheet.BuffResistenciaAlvo10 = (tonumber(sheet.BuffResisJ4) or 0);
+				end;
+
+				if self.cmbInimigo10.text == sheet.NomeJ5 then
+					sheet.VI10 = (tonumber(sheet.VIDAJ5) or 0)
+					sheet.DefesaAlvo10 = (tonumber(sheet.DefesaJ5) or 0);
+					sheet.BuffDefesaAlvo10 = (tonumber(sheet.BuffDefJ5) or 0);
+					sheet.ResistenciaAlvo10 = (tonumber(sheet.ResistenciaJ5) or 0);
+					sheet.BuffResistenciaAlvo10 = (tonumber(sheet.BuffResisJ5) or 0);
+				end;				 
+				 
+				if self.cmbInimigo10.text == sheet.NomeJ6 then
+					sheet.VI10 = (tonumber(sheet.VIDAJ6) or 0)
+					sheet.DefesaAlvo10 = (tonumber(sheet.DefesaJ6) or 0);
+					sheet.BuffDefesaAlvo10 = (tonumber(sheet.BuffDefJ6) or 0);
+					sheet.ResistenciaAlvo10 = (tonumber(sheet.ResistenciaJ6) or 0);
+					sheet.BuffResistenciaAlvo10 = (tonumber(sheet.BuffResisJ6) or 0);
+				end;
+				
+				if self.cmbInimigo10.text == sheet.NomeJ7 then
+					sheet.VI10 = (tonumber(sheet.VIDAJ7) or 0)
+					sheet.DefesaAlvo10 = (tonumber(sheet.DefesaJ7) or 0);
+					sheet.BuffDefesaAlvo10 = (tonumber(sheet.BuffDefJ7) or 0);
+					sheet.ResistenciaAlvo10 = (tonumber(sheet.ResistenciaJ7) or 0);
+					sheet.BuffResistenciaAlvo10	 = (tonumber(sheet.BuffResisJ7) or 0);
+				end;
+				
+				if self.cmbInimigo10.text == sheet.NomeJ8 then
+					sheet.VI10 = (tonumber(sheet.VIDAJ8) or 0)
+					sheet.DefesaAlvo10 = (tonumber(sheet.DefesaJ8) or 0);
+					sheet.BuffDefesaAlvo10 = (tonumber(sheet.BuffDefJ8) or 0);
+					sheet.ResistenciaAlvo10 = (tonumber(sheet.ResistenciaJ8) or 0);
+					sheet.BuffResistenciaAlvo10	 = (tonumber(sheet.BuffResisJ8) or 0);
+				end;
+				
+				if self.cmbInimigo10.text == sheet.NomeJ9 then
+					sheet.VI10 = (tonumber(sheet.VIDAJ9) or 0)
+					sheet.DefesaAlvo10 = (tonumber(sheet.DefesaJ9) or 0);
+					sheet.BuffDefesaAlvo10 = (tonumber(sheet.BuffDefJ9) or 0);
+					sheet.ResistenciaAlvo10 = (tonumber(sheet.ResistenciaJ9) or 0);
+					sheet.BuffResistenciaAlvo10	 = (tonumber(sheet.BuffResisJ9) or 0);
+				end;
+				
+				if self.cmbInimigo10.text == sheet.NomeJ10 then
+					sheet.VI10 = (tonumber(sheet.VIDAJ10) or 0)
+					sheet.DefesaAlvo10 = (tonumber(sheet.DefesaJ10) or 0);
+					sheet.BuffDefesaAlvo10 = (tonumber(sheet.BuffDefJ10) or 0);
+					sheet.ResistenciaAlvo10 = (tonumber(sheet.ResistenciaJ10) or 0);
+					sheet.BuffResistenciaAlvo10	 = (tonumber(sheet.BuffResisJ10) or 0);
+				end;
+				
+				------ DEFESA ------
+				
+				sheet.TR1 = (tonumber(sheet.DefesaAlvo1) or 0) + (tonumber(sheet.BuffDefesaAlvo1) or 0) -100
+				sheet.Sobra1 = (tonumber(sheet.TR1) or 0) * -1
+				 
+				sheet.TR2 = (tonumber(sheet.DefesaAlvo2) or 0) + (tonumber(sheet.BuffDefesaAlvo2) or 0) -100
+				sheet.Sobra2 = (tonumber(sheet.TR2) or 0) * -1
+				 
+				sheet.TR3 = (tonumber(sheet.DefesaAlvo3) or 0) + (tonumber(sheet.BuffDefesaAlvo3) or 0) -100
+				sheet.Sobra3 = (tonumber(sheet.TR3) or 0) * -1
+				 
+				sheet.TR4 = (tonumber(sheet.DefesaAlvo4) or 0) + (tonumber(sheet.BuffDefesaAlvo4) or 0) -100
+				sheet.Sobra4 = (tonumber(sheet.TR4) or 0) * -1
+				 
+				sheet.TR5 = (tonumber(sheet.DefesaAlvo5) or 0) + (tonumber(sheet.BuffDefesaAlvo5) or 0) -100
+				sheet.Sobra5 = (tonumber(sheet.TR5) or 0) * -1
+				 
+				sheet.TR6 = (tonumber(sheet.DefesaAlvo6) or 0) + (tonumber(sheet.BuffDefesaAlvo6) or 0) -100
+				sheet.Sobra6 = (tonumber(sheet.TR6) or 0) * -1		
+				
+				sheet.TR7 = (tonumber(sheet.DefesaAlvo7) or 0) + (tonumber(sheet.BuffDefesaAlvo7) or 0) -100
+				sheet.Sobra7 = (tonumber(sheet.TR7) or 0) * -1
+				 
+				sheet.TR8 = (tonumber(sheet.DefesaAlvo8) or 0) + (tonumber(sheet.BuffDefesaAlvo8) or 0) -100
+				sheet.Sobra8 = (tonumber(sheet.TR8) or 0) * -1		
+				
+				sheet.TR9 = (tonumber(sheet.DefesaAlvo9) or 0) + (tonumber(sheet.BuffDefesaAlvo9) or 0) -100
+				sheet.Sobra9 = (tonumber(sheet.TR9) or 0) * -1
+				 
+				sheet.TR10 = (tonumber(sheet.DefesaAlvo10) or 0) + (tonumber(sheet.BuffDefesaAlvo10) or 0) -100
+				sheet.Sobra10 = (tonumber(sheet.TR10) or 0) * -1	
+
+				----- RESISTENCIA ------
+				
+				sheet.TRR1 = (tonumber(sheet.ResistenciaAlvo1) or 0) + (tonumber(sheet.BuffResistenciaAlvo1) or 0) -100
+				sheet.SobraR1 = (tonumber(sheet.TRR1) or 0) * -1
+				 
+				sheet.TRR2 = (tonumber(sheet.ResistenciaAlvo2) or 0) + (tonumber(sheet.BuffResistenciaAlvo2) or 0) -100
+				sheet.SobraR2 = (tonumber(sheet.TRR2) or 0) * -1
+				 
+				sheet.TRR3 = (tonumber(sheet.ResistenciaAlvo3) or 0) + (tonumber(sheet.BuffResistenciaAlvo3) or 0) -100
+				sheet.SobraR3 = (tonumber(sheet.TRR3) or 0) * -1
+				 
+				sheet.TRR4 = (tonumber(sheet.ResistenciaAlvo4) or 0) + (tonumber(sheet.BuffResistenciaAlvo4) or 0) -100
+				sheet.SobraR4 = (tonumber(sheet.TRR4) or 0) * -1
+				 
+				sheet.TRR5 = (tonumber(sheet.ResistenciaAlvo5) or 0) + (tonumber(sheet.BuffResistenciaAlvo5) or 0) -100
+				sheet.SobraR5 = (tonumber(sheet.TRR5) or 0) * -1
+				 
+				sheet.TRR6 = (tonumber(sheet.ResistenciaAlvo6) or 0) + (tonumber(sheet.BuffResistenciaAlvo6) or 0) -100
+				sheet.SobraR6 = (tonumber(sheet.TRR6) or 0) * -1	
+				
+				sheet.TRR7 = (tonumber(sheet.ResistenciaAlvo7) or 0) + (tonumber(sheet.BuffResistenciaAlvo7) or 0) -100
+				sheet.SobraR7 = (tonumber(sheet.TRR7) or 0) * -1
+				 
+				sheet.TRR8 = (tonumber(sheet.ResistenciaAlvo8) or 0) + (tonumber(sheet.BuffResistenciaAlvo8) or 0) -100
+				sheet.SobraR8 = (tonumber(sheet.TRR8) or 0) * -1	
+				
+				sheet.TRR9 = (tonumber(sheet.ResistenciaAlvo9) or 0) + (tonumber(sheet.BuffResistenciaAlvo9) or 0) -100
+				sheet.SobraR9 = (tonumber(sheet.TRR9) or 0) * -1
+				 
+				sheet.TRR10 = (tonumber(sheet.ResistenciaAlvo10) or 0) + (tonumber(sheet.BuffResistenciaAlvo10) or 0) -100
+				sheet.SobraR10 = (tonumber(sheet.TRR10) or 0) * -1					
+			end;
+		]]>		
+		
+		
+    </script> 

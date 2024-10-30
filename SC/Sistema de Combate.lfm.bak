@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>        
+<form name="sheetTemplate" formType="tablesDock" 
+    dataType="RRPG.DataTypeUnico.DaMinhaJanelaAcoplavel"
+    title="Sistema de Combate Velen"> 
+	
+	<image left="1" top="1" width="1370" height="770" src="/imagens/1.png"/>
+	
+	<edit left="11" top="60" field="APA1" width="80"/>
+	<edit left="119" top="60" field="APM1" width="80"/>
+	<edit left="228" top="60" field="ADS1" width="110"/>
+	<edit left="380" top="60" field="AB1" width="110"/>
+	<edit left="516" top="60" field="ACura1" width="110"/>
+	<edit left="658" top="60" field="AD1" width="110"/>
+	<edit left="803" top="60" field="AR1" width="80"/>
+	----------------------- Area Calculada -----------------------
+	<rectangle color="black" left="912" top="60" width="110" height="30"/> 
+	<label left="915" top="65" field="ACausado1" width="110"/>
+	<rectangle color="black" left="1055" top="60" width="110" height="30"/> 
+	<label left="1058" top="65" field="ACritical1" width="110"/>	
+	<rectangle color="black" left="1201" top="60" width="110" height="30"/> 	
+	<label left="1204" top="65" field="ATotal1" width="110"/>		
+	
+	
+    -------------------------- botoes ------------------------------
+			<button left="55" top="33" text="P.A" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ACausado1 = (tonumber(sheet.APA1) or 0) + (tonumber(sheet.AB1) or 0) + (tonumber(sheet.ADS1) or 0) - (tonumber(sheet.AD1) or 0);
+					   sheet.ACritical1 = (tonumber(sheet.ACausado1) or 0) *2 ;
+					   sheet.ATotal1 = (tonumber(sheet.ACausado1) or 0) + (tonumber(sheet.AT1) or 0) ;
+					   sheet.AT1 = (tonumber(sheet.ATotal1) or 0)"/>
+					   
+					   
+			<button left="167" top="33" text="P.M" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ACausado1 = (tonumber(sheet.APM1) or 0) + (tonumber(sheet.AB1) or 0) + (tonumber(sheet.ADS1) or 0) - (tonumber(sheet.AR1) or 0);
+					   sheet.ACritical1 = (tonumber(sheet.ACausado1) or 0) *2 ;
+					   sheet.ATotal1 = (tonumber(sheet.ACausado1) or 0) + (tonumber(sheet.AT1) or 0) ;
+					   sheet.AT1 = (tonumber(sheet.ATotal1) or 0)"/>
+					   
+			<button left="587" top="33" text="Cura" opacity="1.0" width="38" height="25" 
+						onClick="sheet.AT1 = (tonumber(sheet.AT1) or 0) - (tonumber(sheet.ACura1) or 0);
+						sheet.ATotal1 = (tonumber(sheet.AT1) or 0)"/>
+						
+			<button left="1320" top="59" text="Limpar" opacity="1.0" width="50" height="30" 
+						onClick="sheet.AT1 = 0
+						sheet.APA1 = 0;
+						sheet.APM1 = 0;
+						sheet.ADS1 = 0;
+						sheet.AB1 = 0;
+						sheet.AD1 = 0;
+						sheet.AR1 = 0;
+						sheet.ACura1 = 0;
+						sheet.ACritical1 = 0;
+						sheet.ACausado1 = 0;
+						sheet.ATotal1 = 0"/>
+
+
+	
+	-----------------------------------------------------------------------
+	---------------------------Aliado 2 -----------------------------------
+	-----------------------------------------------------------------------
+	
+	<edit left="11" top="125" field="APA2" width="80"/>
+	<edit left="119" top="125" field="APM2" width="80"/>
+	<edit left="228" top="125" field="ADS2" width="110"/>
+	<edit left="380" top="125" field="AB2" width="110"/>
+	<edit left="516" top="125" field="ACura2" width="110"/>
+	<edit left="658" top="125" field="AD2" width="110"/>
+	<edit left="803" top="125" field="AR2" width="80"/>
+	----------------------- Area Calculada -----------------------
+	<rectangle color="black" left="912" top="125" width="110" height="30"/> 
+	<label left="915" top="130" field="ACausado2" width="110"/>
+	<rectangle color="black" left="1055" top="125" width="110" height="30"/> 
+	<label left="1058" top="130" field="ACritical2" width="110"/>	
+	<rectangle color="black" left="1201" top="125" width="110" height="30"/> 	
+	<label left="1204" top="130" field="ATotal2" width="110"/>		
+	
+	 -------------------------- botoes ------------------------------
+			<button left="55" top="95" text="P.A" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ACausado2 = (tonumber(sheet.APA2) or 0) + (tonumber(sheet.AB2) or 0) + (tonumber(sheet.ADS2) or 0) - (tonumber(sheet.AD2) or 0);
+					   sheet.ACritical2 = (tonumber(sheet.ACausado2) or 0) *2 ;
+					   sheet.ATotal2 = (tonumber(sheet.ACausado2) or 0) + (tonumber(sheet.AT2) or 0) ;
+					   sheet.AT2 = (tonumber(sheet.ATotal2) or 0)"/>
+					   
+					   
+			<button left="167" top="95" text="P.M" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ACausado2 = (tonumber(sheet.APM2) or 0) + (tonumber(sheet.AB2) or 0) + (tonumber(sheet.ADS2) or 0) - (tonumber(sheet.AR2) or 0);
+					   sheet.ACritical2 = (tonumber(sheet.ACausado2) or 0) *2 ;
+					   sheet.ATotal2 = (tonumber(sheet.ACausado2) or 0) + (tonumber(sheet.AT2) or 0) ;
+					   sheet.AT2 = (tonumber(sheet.ATotal2) or 0)"/>
+					   
+			<button left="587" top="95" text="Cura" opacity="1.0" width="38" height="25" 
+						onClick="sheet.AT2 = (tonumber(sheet.AT2) or 0) - (tonumber(sheet.ACura2) or 0);
+						sheet.ATotal2 = (tonumber(sheet.AT2) or 0)"/>
+						
+			<button left="1320" top="125" text="Limpar" opacity="1.0" width="50" height="30" 
+						onClick="sheet.AT2 = 0
+						sheet.APA2 = 0;
+						sheet.APM2 = 0;
+						sheet.ADS2 = 0;
+						sheet.AB2 = 0;
+						sheet.AD2 = 0;
+						sheet.AR2 = 0;
+						sheet.ACura2 = 0;
+						sheet.ACritical2 = 0;
+						sheet.ACausado2 = 0;
+						sheet.ATotal2 = 0"/>
+	
+	
+	-----------------------------------------------------------------------
+	---------------------------Aliado 3 -----------------------------------
+	-----------------------------------------------------------------------
+	
+		<edit left="11" top="190" field="APA3" width="80"/>
+	<edit left="119" top="190" field="APM3" width="80"/>
+	<edit left="228" top="190" field="ADS3" width="110"/>
+	<edit left="380" top="190" field="AB3" width="110"/>
+	<edit left="516" top="190" field="ACura3" width="110"/>
+	<edit left="658" top="190" field="AD3" width="110"/>
+	<edit left="803" top="190" field="AR3" width="80"/>
+	----------------------- Area Calculada -----------------------
+	<rectangle color="black" left="912" top="190" width="110" height="30"/> 
+	<label left="915" top="195" field="ACausado3" width="110"/>
+	<rectangle color="black" left="1055" top="190" width="110" height="30"/> 
+	<label left="1058" top="195" field="ACritical3" width="110"/>	
+	<rectangle color="black" left="1201" top="190" width="110" height="30"/> 	
+	<label left="1204" top="195" field="ATotal3" width="110"/>		
+	
+	 -------------------------- botoes ------------------------------
+			<button left="55" top="163" text="P.A" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ACausado3 = (tonumber(sheet.APA3) or 0) + (tonumber(sheet.AB3) or 0) + (tonumber(sheet.ADS3) or 0) - (tonumber(sheet.AD3) or 0);
+					   sheet.ACritical3 = (tonumber(sheet.ACausado3) or 0) *2 ;
+					   sheet.ATotal3 = (tonumber(sheet.ACausado3) or 0) + (tonumber(sheet.AT3) or 0) ;
+					   sheet.AT3 = (tonumber(sheet.ATotal3) or 0)"/>
+					   
+					   
+			<button left="167" top="163" text="P.M" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ACausado3 = (tonumber(sheet.APM3) or 0) + (tonumber(sheet.AB3) or 0) + (tonumber(sheet.ADS3) or 0) - (tonumber(sheet.AR3) or 0);
+					   sheet.ACritical3 = (tonumber(sheet.ACausado3) or 0) *2 ;
+					   sheet.ATotal3 = (tonumber(sheet.ACausado3) or 0) + (tonumber(sheet.AT3) or 0) ;
+					   sheet.AT3 = (tonumber(sheet.ATotal3) or 0)"/>
+					   
+			<button left="587" top="163" text="Cura" opacity="1.0" width="38" height="25" 
+						onClick="sheet.AT3 = (tonumber(sheet.AT3) or 0) - (tonumber(sheet.ACura3) or 0);
+						sheet.ATotal3 = (tonumber(sheet.AT3) or 0)"/>
+						
+			<button left="1320" top="190" text="Limpar" opacity="1.0" width="50" height="30" 
+						onClick="sheet.AT3 = 0
+						sheet.APA3 = 0;
+						sheet.APM3 = 0;
+						sheet.ADS3 = 0;
+						sheet.AB3 = 0;
+						sheet.AD3 = 0;
+						sheet.AR3 = 0;
+						sheet.ACura3 = 0;
+						sheet.ACritical3 = 0;
+						sheet.ACausado3 = 0;
+						sheet.ATotal3 = 0"/>
+	
+	
+	-----------------------------------------------------------------------
+	---------------------------Aliado 4 -----------------------------------
+	-----------------------------------------------------------------------
+	<edit left="11" top="255" field="APA4" width="80"/>
+	<edit left="119" top="255" field="APM4" width="80"/>
+	<edit left="228" top="255" field="ADS4" width="110"/>
+	<edit left="380" top="255" field="AB4" width="110"/>
+	<edit left="516" top="255" field="ACura4" width="110"/>
+	<edit left="658" top="255" field="AD4" width="110"/>
+	<edit left="803" top="255" field="AR4" width="80"/>
+	----------------------- Area Calculada -----------------------
+	<rectangle color="black" left="912" top="255" width="110" height="30"/> 
+	<label left="915" top="260" field="ACausado4" width="110"/>
+	<rectangle color="black" left="1055" top="255" width="110" height="30"/> 
+	<label left="1058" top="260" field="ACritical4" width="110"/>	
+	<rectangle color="black" left="1201" top="255" width="110" height="30"/> 	
+	<label left="1204" top="260" field="ATotal4" width="110"/>		
+	
+		 -------------------------- botoes ------------------------------
+			<button left="55" top="228" text="P.A" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ACausado4 = (tonumber(sheet.APA4) or 0) + (tonumber(sheet.AB4) or 0) + (tonumber(sheet.ADS4) or 0) - (tonumber(sheet.AD4) or 0);
+					   sheet.ACritical4 = (tonumber(sheet.ACausado4) or 0) *2 ;
+					   sheet.ATotal4 = (tonumber(sheet.ACausado4) or 0) + (tonumber(sheet.AT4) or 0) ;
+					   sheet.AT4 = (tonumber(sheet.ATotal4) or 0)"/>
+					   
+					   
+			<button left="167" top="228" text="P.M" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ACausado4 = (tonumber(sheet.APM4) or 0) + (tonumber(sheet.AB4) or 0) + (tonumber(sheet.ADS4) or 0) - (tonumber(sheet.AR4) or 0);
+					   sheet.ACritical4 = (tonumber(sheet.ACausado4) or 0) *2 ;
+					   sheet.ATotal4 = (tonumber(sheet.ACausado4) or 0) + (tonumber(sheet.AT4) or 0) ;
+					   sheet.AT4 = (tonumber(sheet.ATotal4) or 0)"/>
+					   
+			<button left="587" top="228" text="Cura" opacity="1.0" width="38" height="25" 
+						onClick="sheet.AT4 = (tonumber(sheet.AT4) or 0) - (tonumber(sheet.ACura4) or 0);
+						sheet.ATotal4 = (tonumber(sheet.AT4) or 0)"/>
+						
+			<button left="1320" top="255" text="Limpar" opacity="1.0" width="50" height="30" 
+						onClick="sheet.AT4 = 0
+						sheet.APA4 = 0;
+						sheet.APM4 = 0;
+						sheet.ADS4 = 0;
+						sheet.AB4 = 0;
+						sheet.AD4 = 0;
+						sheet.AR4 = 0;
+						sheet.ACura4 = 0;
+						sheet.ACritical4 = 0;
+						sheet.ACausado4 = 0;
+						sheet.ATotal4 = 0"/>
+	
+	
+	
+	-----------------------------------------------------------------------
+	--------------------------- Inimigo 1 ---------------------------------
+	-----------------------------------------------------------------------
+	
+	<edit left="11" top="365" field="IPA1" width="80"/>
+	<edit left="119" top="365" field="IPM1" width="80"/>
+	<edit left="228" top="365" field="IDS1" width="110"/>
+	<edit left="380" top="365" field="IB1" width="110"/>
+	<edit left="516" top="365" field="ICura1" width="110"/>
+	<edit left="658" top="365" field="ID1" width="110"/>
+	<edit left="803" top="365" field="IR1" width="80"/>
+	----------------------- Area Calculada -----------------------
+	<rectangle color="black" left="912" top="365" width="110" height="30"/> 
+	<label left="915" top="370" field="ICausado1" width="110"/>
+	<rectangle color="black" left="1055" top="365" width="110" height="30"/> 
+	<label left="1058" top="370" field="ICritical1" width="110"/>	
+	<rectangle color="black" left="1201" top="365" width="110" height="30"/> 	
+	<label left="1204" top="370" field="ITotal1" width="110"/>		
+	
+	-------------------------- botoes ------------------------------
+	<button left="55" top="338" text="P.A" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ICausado1 = (tonumber(sheet.IPA1) or 0) + (tonumber(sheet.IB1) or 0) + (tonumber(sheet.IDS1) or 0) - (tonumber(sheet.ID1) or 0);
+					   sheet.ICritical1 = (tonumber(sheet.ICausado1) or 0) *2 ;
+					   sheet.ITotal1 = (tonumber(sheet.ICausado1) or 0) + (tonumber(sheet.IT1) or 0) ;
+					   sheet.IT1 = (tonumber(sheet.ITotal1) or 0)"/>
+					   
+					   
+	<button left="167" top="338" text="P.M" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ICausado1 = (tonumber(sheet.IPM1) or 0) + (tonumber(sheet.IB1) or 0) + (tonumber(sheet.IDS1) or 0) - (tonumber(sheet.IR1) or 0);
+					   sheet.ICritical1 = (tonumber(sheet.ICausado1) or 0) *2 ;
+					   sheet.ITotal1 = (tonumber(sheet.ICausado1) or 0) + (tonumber(sheet.IT1) or 0) ;
+					   sheet.IT1 = (tonumber(sheet.ITotal1) or 0)"/>
+					   
+	<button left="587" top="338" text="Cura" opacity="1.0" width="38" height="25" 
+						onClick="sheet.IT1 = (tonumber(sheet.IT1) or 0) - (tonumber(sheet.ICura1) or 0);
+						sheet.ITotal1 = (tonumber(sheet.IT1) or 0)"/>
+						
+	<button left="1320" top="365" text="Limpar" opacity="1.0" width="50" height="30" 
+						onClick="sheet.IT1 = 0
+						sheet.IPA1 = 0;
+						sheet.IPM1 = 0;
+						sheet.IDS1 = 0;
+						sheet.IB1 = 0;
+						sheet.ID1 = 0;
+						sheet.IR1 = 0;
+						sheet.ICura1 = 0;
+						sheet.ICritical1 = 0;
+						sheet.ICausado1 = 0;
+						sheet.ITotal1 = 0"/>
+						
+						
+	-----------------------------------------------------------------------
+	--------------------------- Inimigo 2 ---------------------------------
+	-----------------------------------------------------------------------
+	
+	<edit left="11" top="430" field="IPA2" width="80"/>
+	<edit left="119" top="430" field="IPM2" width="80"/>
+	<edit left="228" top="430" field="IDS2" width="110"/>
+	<edit left="380" top="430" field="IB2" width="110"/>
+	<edit left="516" top="430" field="ICura2" width="110"/>
+	<edit left="658" top="430" field="ID2" width="110"/>
+	<edit left="803" top="430" field="IR2" width="80"/>
+	----------------------- Area Calculada -----------------------
+	<rectangle color="black" left="912" top="430" width="110" height="30"/> 
+	<label left="915" top="435" field="ICausado2" width="110"/>
+	<rectangle color="black" left="1055" top="430" width="110" height="30"/> 
+	<label left="1058" top="435" field="ICritical2" width="110"/>	
+	<rectangle color="black" left="1201" top="430" width="110" height="30"/> 	
+	<label left="1204" top="435" field="ITotal2" width="110"/>		
+	
+	-------------------------- botoes ------------------------------
+	<button left="55" top="403" text="P.A" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ICausado2 = (tonumber(sheet.IPA2) or 0) + (tonumber(sheet.IB2) or 0) + (tonumber(sheet.IDS2) or 0) - (tonumber(sheet.ID2) or 0);
+					   sheet.ICritical2 = (tonumber(sheet.ICausado2) or 0) *2 ;
+					   sheet.ITotal2 = (tonumber(sheet.ICausado2) or 0) + (tonumber(sheet.IT2) or 0) ;
+					   sheet.IT2 = (tonumber(sheet.ITotal2) or 0)"/>
+					   
+					   
+	<button left="167" top="403" text="P.M" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ICausado2 = (tonumber(sheet.IPM2) or 0) + (tonumber(sheet.IB2) or 0) + (tonumber(sheet.IDS2) or 0) - (tonumber(sheet.IR2) or 0);
+					   sheet.ICritical2 = (tonumber(sheet.ICausado2) or 0) *2 ;
+					   sheet.ITotal2 = (tonumber(sheet.ICausado2) or 0) + (tonumber(sheet.IT2) or 0) ;
+					   sheet.IT2 = (tonumber(sheet.ITotal2) or 0)"/>
+					   
+	<button left="587" top="403" text="Cura" opacity="1.0" width="38" height="25" 
+						onClick="sheet.IT2 = (tonumber(sheet.IT2) or 0) - (tonumber(sheet.ICura2) or 0);
+						sheet.ITotal2 = (tonumber(sheet.IT2) or 0)"/>
+						
+	<button left="1320" top="430" text="Limpar" opacity="1.0" width="50" height="30" 
+						onClick="sheet.IT2 = 0
+						sheet.IPA2 = 0;
+						sheet.IPM2 = 0;
+						sheet.IDS2 = 0;
+						sheet.IB2 = 0;
+						sheet.ID2 = 0;
+						sheet.IR2 = 0;
+						sheet.ICura2 = 0;
+						sheet.ICritical2 = 0;
+						sheet.ICausado2 = 0;
+						sheet.ITotal2 = 0"/>
+	
+    -----------------------------------------------------------------------
+	--------------------------- Inimigo 3 ---------------------------------
+	-----------------------------------------------------------------------
+	
+	<edit left="11" top="495" field="IPA3" width="80"/>
+	<edit left="119" top="495" field="IPM3" width="80"/>
+	<edit left="228" top="495" field="IDS3" width="110"/>
+	<edit left="380" top="495" field="IB3" width="110"/>
+	<edit left="516" top="495" field="ICura3" width="110"/>
+	<edit left="658" top="495" field="ID3" width="110"/>
+	<edit left="803" top="495" field="IR3" width="80"/>
+	----------------------- Area Calculada -----------------------
+	<rectangle color="black" left="912" top="495" width="110" height="30"/> 
+	<label left="915" top="500" field="ICausado3" width="110"/>
+	<rectangle color="black" left="1055" top="495" width="110" height="30"/> 
+	<label left="1058" top="500" field="ICritical3" width="110"/>	
+	<rectangle color="black" left="1201" top="495" width="110" height="30"/> 	
+	<label left="1204" top="500" field="ITotal3" width="110"/>		
+	
+	-------------------------- botoes ------------------------------
+	<button left="55" top="468" text="P.A" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ICausado3 = (tonumber(sheet.IPA3) or 0) + (tonumber(sheet.IB3) or 0) + (tonumber(sheet.IDS3) or 0) - (tonumber(sheet.ID3) or 0);
+					   sheet.ICritical3 = (tonumber(sheet.ICausado3) or 0) *2 ;
+					   sheet.ITotal3 = (tonumber(sheet.ICausado3) or 0) + (tonumber(sheet.IT3) or 0) ;
+					   sheet.IT3 = (tonumber(sheet.ITotal3) or 0)"/>
+					   
+					   
+	<button left="167" top="468" text="P.M" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ICausado3 = (tonumber(sheet.IPM3) or 0) + (tonumber(sheet.IB3) or 0) + (tonumber(sheet.IDS3) or 0) - (tonumber(sheet.IR3) or 0);
+					   sheet.ICritical3 = (tonumber(sheet.ICausado3) or 0) *2 ;
+					   sheet.ITotal3 = (tonumber(sheet.ICausado3) or 0) + (tonumber(sheet.IT3) or 0) ;
+					   sheet.IT3 = (tonumber(sheet.ITotal3) or 0)"/>
+					   
+	<button left="587" top="468" text="Cura" opacity="1.0" width="38" height="25" 
+						onClick="sheet.IT3 = (tonumber(sheet.IT3) or 0) - (tonumber(sheet.ICura3) or 0);
+						sheet.ITotal3 = (tonumber(sheet.IT3) or 0)"/>
+						
+	<button left="1320" top="495" text="Limpar" opacity="1.0" width="50" height="30" 
+						onClick="sheet.IT3 = 0
+						sheet.IPA3 = 0;
+						sheet.IPM3 = 0;
+						sheet.IDS3 = 0;
+						sheet.IB3 = 0;
+						sheet.ID3 = 0;
+						sheet.IR3 = 0;
+						sheet.ICura3 = 0;
+						sheet.ICritical3 = 0;
+						sheet.ICausado3 = 0;
+						sheet.ITotal3 = 0"/>
+						
+						
+    -----------------------------------------------------------------------
+	--------------------------- Inimigo 3 ---------------------------------
+	-----------------------------------------------------------------------
+	
+	<edit left="11" top="560" field="IPA4" width="80"/>
+	<edit left="119" top="560" field="IPM4" width="80"/>
+	<edit left="228" top="560" field="IDS4" width="110"/>
+	<edit left="380" top="560" field="IB4" width="110"/>
+	<edit left="516" top="560" field="ICura4" width="110"/>
+	<edit left="658" top="560" field="ID4" width="110"/>
+	<edit left="803" top="560" field="IR4" width="80"/>
+	----------------------- Area Calculada -----------------------
+	<rectangle color="black" left="912" top="560" width="110" height="30"/> 
+	<label left="915" top="565" field="ICausado4" width="110"/>
+	<rectangle color="black" left="1055" top="560" width="110" height="30"/> 
+	<label left="1058" top="565" field="ICritical4" width="110"/>	
+	<rectangle color="black" left="1201" top="560" width="110" height="30"/> 	
+	<label left="1204" top="565" field="ITotal4" width="110"/>		
+	
+	-------------------------- botoes ------------------------------
+	<button left="55" top="530" text="P.A" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ICausado4 = (tonumber(sheet.IPA4) or 0) + (tonumber(sheet.IB4) or 0) + (tonumber(sheet.IDS4) or 0) - (tonumber(sheet.ID4) or 0);
+					   sheet.ICritical4 = (tonumber(sheet.ICausado4) or 0) *2 ;
+					   sheet.ITotal4 = (tonumber(sheet.ICausado4) or 0) + (tonumber(sheet.IT4) or 0) ;
+					   sheet.IT4 = (tonumber(sheet.ITotal4) or 0)"/>
+					   
+					   
+	<button left="167" top="530" text="P.M" opacity="1.0" width="37" height="25" 
+						onClick="sheet.ICausado4 = (tonumber(sheet.IPM4) or 0) + (tonumber(sheet.IB4) or 0) + (tonumber(sheet.IDS4) or 0) - (tonumber(sheet.IR4) or 0);
+					   sheet.ICritical4 = (tonumber(sheet.ICausado4) or 0) *2 ;
+					   sheet.ITotal4 = (tonumber(sheet.ICausado4) or 0) + (tonumber(sheet.IT4) or 0) ;
+					   sheet.IT4 = (tonumber(sheet.ITotal4) or 0)"/>
+					   
+	<button left="587" top="530" text="Cura" opacity="1.0" width="38" height="25" 
+						onClick="sheet.IT4 = (tonumber(sheet.IT4) or 0) - (tonumber(sheet.ICura4) or 0);
+						sheet.ITotal4 = (tonumber(sheet.IT4) or 0)"/>
+						
+	<button left="1320" top="560" text="Limpar" opacity="1.0" width="50" height="30" 
+						onClick="sheet.IT4 = 0
+						sheet.IPA4 = 0;
+						sheet.IPM4 = 0;
+						sheet.IDS4 = 0;
+						sheet.IB4 = 0;
+						sheet.ID4 = 0;
+						sheet.IR4 = 0;
+						sheet.ICura4 = 0;
+						sheet.ICritical4 = 0;
+						sheet.ICausado4 = 0;
+						sheet.ITotal4 = 0"/>
+	 ---------------------------------------------------------------------
+	-------------------- HP Inimigo e Aliado -----------------------------
+	-----------------------------------------------------------------------
+		<rectangle color="black" left="247" top="655" width="150" height="30"/> 
+		<label left="250" top="655" field="HPBoss" height="30" width="150"/>
+		<rectangle color="black" left="875" top="655" width="150" height="30"/> 
+		<label left="878" top="655" field="HPAliado" height="30" width="150"/>
+	
+		-------------------------- botoes ------------------------------
+		<button left="246" top="690" text="DANO" opacity="1.0" width="70" height="30" 
+						onClick="sheet.HPBoss = (tonumber(sheet.AT1) or 0) + (tonumber(sheet.AT2) or 0) + (tonumber(sheet.AT3) or 0) + (tonumber(sheet.AT4) or 0);"/>
+	
+		<button left="325" top="690" text="Limpar" opacity="1.0" width="70" height="30" 
+						onClick="sheet.HPBoss = 0;
+						sheet.AT1 = 0;
+						sheet.AT2 = 0;
+						sheet.AT3 = 0;
+						sheet.AT4 = 0"/>
+						
+						
+		<button left="874" top="690" text="DANO" opacity="1.0" width="70" height="30" 
+						onClick="sheet.HPAliado = (tonumber(sheet.IT1) or 0) + (tonumber(sheet.IT2) or 0) + (tonumber(sheet.IT3) or 0) + (tonumber(sheet.IT4) or 0);"/>
+	
+		<button left="955" top="690" text="Limpar" opacity="1.0" width="70" height="30" 
+						onClick="sheet.HPAliado = 0;
+						sheet.IT1 = 0;
+						sheet.IT2 = 0;
+						sheet.IT3 = 0;
+						sheet.IT4 = 0"/>
+</form>

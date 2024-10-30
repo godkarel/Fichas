@@ -154,6 +154,7 @@ local function constructNew_frmscv()
     obj.button1:setText("P.A");
     obj.button1:setOpacity(1.0);
     obj.button1:setWidth(37);
+    obj.button1:setVisible(false);
     obj.button1:setHeight(25);
     obj.button1:setName("button1");
 

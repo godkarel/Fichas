@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<script>
+		function ColocarNomes()
+			Nomes = {} 
+			Nomes[1] = sheet.NomeJ1
+			Nomes[2] = sheet.NomeJ2
+			Nomes[3] = sheet.NomeJ3
+			Nomes[4] = sheet.NomeJ4
+			Nomes[5] = sheet.NomeJ5
+			Nomes[6] = sheet.NomeJ6
+			Nomes[7] = sheet.NomeJ7
+			Nomes[8] = sheet.NomeJ8
+			Nomes[9] = sheet.NomeJ9
+			Nomes[10] = sheet.NomeJ10
+			
+			self.cmbInimigo1.items = Nomes;
+			self.cmbInimigo2.items = Nomes;
+			self.cmbInimigo3.items = Nomes;
+			self.cmbInimigo4.items = Nomes;
+			self.cmbInimigo5.items = Nomes;
+			self.cmbInimigo6.items = Nomes;
+			self.cmbInimigo7.items = Nomes;
+			self.cmbInimigo8.items = Nomes;
+			self.cmbInimigo9.items = Nomes;
+			self.cmbInimigo10.items = Nomes;
+		end;
+		
+		function SetaTarget()
+			Nomes = {} 
+			Nomes[1] = "Player1"
+			Nomes[2] = "Player1"
+			Nomes[3] = "Player1"
+			Nomes[4] = "Player1"
+			Nomes[5] = "Player1"
+			Nomes[6] = "Player1"
+			Nomes[7] = "Player1"
+			Nomes[8] = "Player1"
+			Nomes[9] = "Player1"
+			Nomes[10] = "Player1"
+			
+			self.cmbInimigo1.items = Nomes;
+			self.cmbInimigo2.items = Nomes;
+			self.cmbInimigo3.items = Nomes;
+			self.cmbInimigo4.items = Nomes;
+			self.cmbInimigo5.items = Nomes;
+			self.cmbInimigo6.items = Nomes;
+			self.cmbInimigo7.items = Nomes;
+			self.cmbInimigo8.items = Nomes;
+			Self.cmbInimigo9.items = Nomes;
+			Self.cmbInimigo10.items = Nomes;
+		end;		
+    </script> 

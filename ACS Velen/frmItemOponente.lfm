@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmItemOponente" height="100" margins="{top=2,bottom=2}">
+	<image align="left" width="100" margins="{top=1}" src="http://fc03.deviantart.net/fs70/i/2011/234/5/4/dragon_aspects_by_rattlesnakedefender-d47ii5y.jpg"/>
+	<layout align="left" width="150" margins="{right=1}">
+	
+		<label align="top" width="150" field="NomeDoOponenteVez" margins="{top=1}"/>
+		<progressBar align="top" field="HPBarO" fieldMax="HPBarMaxO" width="150" color="red" margins="{top=1}" >
+		<label align="left" horzTextAlign="center" field="HPBarO"/>
+		<label align="client" horzTextAlign="center" text="/"/>
+		<label align="right" horzTextAlign="center" field="HPBarO"/>
+		</progressBar>
+		<progressBar align="top" width="150" color="blue" field="MPBarO" fieldMax="MPBarMaxO" margins="{top=1}">	
+		<label align="left" horzTextAlign="center" field="MPBarO"/>
+		<label align="right" horzTextAlign="center" text="---/---"/>
+		<label align="right" horzTextAlign="center" field="MPBarO"/>	
+		</progressBar>
+	
+		<label left="400" text="Vez" margins="{right=1}"	/>
+	</layout>
+    <button align="right" text="Remover" width="80"
+            onClick="NDB.deleteNode(sheet);"/>
+</form>

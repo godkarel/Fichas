@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	
+	<script>		
+		function ProximaAcao()
+			local minhaMesa = Firecast.getRoomOf(sheet)
+			local chat = minhaMesa.chat
+			acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
+			lista2 = criarEIncrementarLista();
+			
+			if acoes == nil then
+				acoes = sheet.AcaoAtual
+			end;
+			
+			if sheet.VezAtualIndex > #lista2 then
+				sheet.VezAtualIndex = 1 -- reinicia o player para começar dnv
+			end;
+			
+			if sheet.VezAtualIndex == nil then
+				sheet.VezAtualIndex = 1
+			else
+				sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+			end;
+
+			if sheet.AcaoAtualIndex == nil then
+				sheet.AcaoAtualIndex = 1  -- Inicializa com a primeira ação
+				sheet.AcaoAtualControle = acoes[sheet.AcaoAtualIndex]
+				sheet.TurnoAtualControle = (sheet.TurnoAtualControle or 0) + 1
+			else
+				sheet.AcaoAtualIndex = sheet.AcaoAtualIndex + 1
+				if sheet.AcaoAtualIndex > #acoes then
+					sheet.AcaoAtualIndex = 1  -- Reinicia o ciclo das ações
+					sheet.TurnoAtualControle = (sheet.TurnoAtualControle or 0) + 1
+					sheet.VezAtualIndex = sheet.VezAtualIndex + 1
+					sheet.AcaoAtualControle = acoes[sheet.AcaoAtualIndex]
+					sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+					if sheet.VezAtualControle == nil or sheet.VezAtualControle == "" then
+						sheet.VezAtualIndex = 1
+					else
+						sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+					end;
+				end
+			end
+
+			sheet.AcaoAtual = acoes[sheet.AcaoAtualIndex]
+			chat:enviarNarracao(sheet.AcaoAtual)
+			
+			if sheet.VezAtualIndex == nil then
+				sheet.VezAtualIndex = 1
+			else
+				sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+			end;
+		end;
+		
+		<![CDATA[
+		function AnteriorAcao()
+			local minhaMesa = Firecast.getRoomOf(sheet)
+			local chat = minhaMesa.chat
+			acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
+			lista2 = criarEIncrementarLista();
+			
+			if sheet.VezAtualIndex < 1 then
+				sheet.VezAtualIndex = 3 -- reinicia o player para começar dnv
+			end;
+			
+			if sheet.VezAtualIndex == nil then
+				sheet.VezAtualIndex = 1
+			else
+				sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+			end;
+
+			if sheet.AcaoAtualIndex == nil then
+				sheet.AcaoAtualIndex = 3  -- Inicializa com a primeira ação
+				sheet.AcaoAtualControle = acoes[sheet.AcaoAtualIndex]
+				sheet.TurnoAtualControle = (sheet.TurnoAtualControle or 0) - 1
+			else
+				sheet.AcaoAtualIndex = sheet.AcaoAtualIndex - 1
+				if sheet.AcaoAtualIndex < 1 then
+					sheet.AcaoAtualIndex = 3  -- Reinicia o ciclo das ações
+					sheet.TurnoAtualControle = (sheet.TurnoAtualControle or 0) - 1
+					sheet.VezAtualIndex = sheet.VezAtualIndex - 1
+					sheet.AcaoAtualControle = acoes[sheet.AcaoAtualIndex]
+					sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+					if sheet.VezAtualControle == nil or sheet.VezAtualControle == "" then
+						sheet.VezAtualIndex = 3
+					else
+						sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+					end;
+				end
+			end
+
+			sheet.AcaoAtual = acoes[sheet.AcaoAtualIndex]
+			chat:enviarNarracao(sheet.AcaoAtual)
+			
+			if sheet.VezAtualIndex == nil then
+				sheet.VezAtualIndex = 3
+			else
+				sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+			end;
+		end;
+		]]>
+		
+	</script>

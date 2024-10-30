@@ -20,7 +20,7 @@
 	
 	
     -------------------------- botoes ------------------------------
-			<button left="55" top="33" text="P.A" opacity="1.0" width="37" height="25" 
+			<button left="55" top="33" text="P.A" opacity="1.0" width="37" visible="false" height="25" 
 						onClick="sheet.ACausado1 = (tonumber(sheet.APA1) or 0) + (tonumber(sheet.AB1) or 0) + (tonumber(sheet.ADS1) or 0) - (tonumber(sheet.AD1) or 0);
 					   sheet.ACritical1 = (tonumber(sheet.ACausado1) or 0) *2 ;
 					   sheet.ATotal1 = (tonumber(sheet.ACausado1) or 0) + (tonumber(sheet.AT1) or 0) ;

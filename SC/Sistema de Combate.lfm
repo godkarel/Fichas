@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>        
-<form formType="sheetTemplate" dataType="Sistema_de_Combate_Velen" 
-     title="Sistema de Combate Velen" name="frmscv">    	 
+<form name="frmJanelaVelenCombate" formType="tablesDock" 
+    dataType="RRPG.DataTypeUnico.JanelaVelenCombate"
+    title="Sistema de Combate Velen"> 
+	
+
+	
 	<image left="1" top="1" width="1370" height="770" src="/imagens/1.png"/>
 	
 	<edit left="11" top="60" field="APA1" width="80"/>
