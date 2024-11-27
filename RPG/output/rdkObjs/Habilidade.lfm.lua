@@ -481,7 +481,7 @@ local function constructNew_frmhabilidade()
 						return nomes
 					end
 
-					local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);]]
+					local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);]]--
 					
 					local node = self.ListaJutsus3.node;
 					local mesaDoPersonagem = rrpg.getMesaDe(sheet);
@@ -575,28 +575,30 @@ local function constructNew_frmhabilidade()
 								node.Custo2 = (tonumber(node.Custo2) or 0) - (tonumber(node.CustoHabilidade) or 0);
 								mesa.meuJogador:requestSetBarValue(2, node.Custo2);
 								if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
-									if 1 == rolado.resultado then 
-										mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando  com [§K4,0] CRITICAL [§K9,0] « [§K4,0]" .. node.Hintensidade1 * 2 .. "[§K8,0] »:dinofauro:");
-										--[[nodeExterno.AlvoRecebido = self.cmbInimigos.value
-										nodeExterno.DanoRecebido = node.Hintensidade1 * 2	
-										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value]]
-									else
-										mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] »");
-										--[[nodeExterno.AlvoRecebido = self.cmbInimigos.value
-										nodeExterno.DanoRecebido = node.Hintensidade1
-										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value]]
+									if 1 == rolado.resultado then										
+										--[[nodeExterno.AlvoRecebido = self.cmbInimigos.value]]--
+										--[[nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value]]--
+										nodeExterno = math.floor(node.Hintensidade1 * 2)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando  com [§K4,0] CRITICAL [§K9,0] « [§K4,0]" .. nodeExterno .. "[§K8,0] »:dinofauro:");
+									else										
+										--[[nodeExterno.AlvoRecebido = self.cmbInimigos.value]]--
+										--[[nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value]]--
+										nodeExterno = math.floor(node.Hintensidade1)
+										mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. nodeExterno .. "[§K8,0] »");
 									end;	
 								else
 									if sheet.CMagico +1 > rolado.resultado then 										
-										--[[nodeExterno.AlvoRecebido = self.cmbInimigos.value
-										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value	
-										nodeExterno.DanoRecebido = (node.Hintensidade1 * 2) * (1 - (RESAlvo / 100))]]
-										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (node.Hintensidade1 * 2) .. "[§K9,0] »:dinofauro:");
+										--[[nodeExterno.AlvoRecebido = self.cmbInimigos.value]]--
+										--[[nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value]]--	
+										--[[nodeExterno = math.floor((node.Hintensidade1 * 2) * (1 - (RESAlvo / 100)))]]--
+										nodeExterno = math.floor(node.Hintensidade1 * 2)
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno) .. "[§K9,0] »:dinofauro:");
 									else
-										--[[nodeExterno.AlvoRecebido = self.cmbInimigos.value
-										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value	
-										nodeExterno.DanoRecebido = (node.Hintensidade1) * (1 - (RESAlvo / 100))]]
-										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. node.Hintensidade1 .. "[§K9,0] »");
+										--[[nodeExterno.AlvoRecebido = self.cmbInimigos.value]]--
+										--[[nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value]]--	
+										--[[nodeExterno = math.floor((node.Hintensidade1) * (1 - (RESAlvo / 100)))]]--
+										nodeExterno = math.floor(node.Hintensidade1)
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno .. "[§K9,0] »");
 									end;	
 								end;										
 							else

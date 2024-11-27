@@ -19,6 +19,9 @@
 					IgualarHPMesa();
 					IgualarMPMesa();
 					
+					AtualizaMPAtual();
+					AtualizaHPAtual();
+					
 					if mesa.meuJogador.isJogador == true then;					
 						if sheet.Espec == "Juiz" then
 							local Linha1 = "(PA" .. (sheet.PA or 0) .. ")" .. "(PF" .. (sheet.PF or 0) .. ")(PM" .. (sheet.PM or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")"
@@ -205,6 +208,23 @@
 									
 				end;
 			end;
+			
+			function AtualizaHPAtual()
+				local mesa = Firecast.getMesaDe(sheet); 
+				if mesa.meuJogador.isJogador == true then;	
+					local HPTotalMesa = (tonumber(sheet.HPTotal) or 0);
+					mesa.meuJogador:requestSetBarValue(1, sheet.HPAtual, HPTotalMesa);
+				end;
+			end;
+			
+			function AtualizaMPAtual()
+				local mesa = Firecast.getMesaDe(sheet); 
+				if mesa.meuJogador.isJogador == true then;	
+					local MPTotalMesa = (tonumber(sheet.MPTotal) or 0);
+					mesa.meuJogador:requestSetBarValue(2, sheet.MPAtual, MPTotalMesa);
+				end;
+			end;
+			
 		]]>
 		
     </script> 

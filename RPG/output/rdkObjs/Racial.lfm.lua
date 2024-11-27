@@ -129,7 +129,7 @@ local function constructNew_frmRacial()
     obj.edit4:setWidth(50);
     obj.edit4:setHeight(20);
     obj.edit4:setOpacity(1.0);
-    obj.edit4:setEnabled(false);
+    obj.edit4:setEnabled(true);
     obj.edit4:setType("float");
     obj.edit4:setDecimalPlaces(2);
     obj.edit4:setFontSize(16);
@@ -142,7 +142,7 @@ local function constructNew_frmRacial()
     obj.edit5:setTop(225);
     obj.edit5:setWidth(50);
     obj.edit5:setHeight(20);
-    obj.edit5:setEnabled(false);
+    obj.edit5:setEnabled(true);
     obj.edit5:setFontSize(16);
     obj.edit5:setField("PMRacial");
     obj.edit5:setName("edit5");
@@ -153,7 +153,7 @@ local function constructNew_frmRacial()
     obj.edit6:setTop(225);
     obj.edit6:setWidth(50);
     obj.edit6:setHeight(20);
-    obj.edit6:setEnabled(false);
+    obj.edit6:setEnabled(true);
     obj.edit6:setFontSize(16);
     obj.edit6:setField("PFRacial");
     obj.edit6:setName("edit6");
@@ -164,7 +164,7 @@ local function constructNew_frmRacial()
     obj.edit7:setTop(252);
     obj.edit7:setWidth(50);
     obj.edit7:setHeight(20);
-    obj.edit7:setEnabled(false);
+    obj.edit7:setEnabled(true);
     obj.edit7:setFontSize(16);
     obj.edit7:setField("DEFRacial");
     obj.edit7:setName("edit7");
@@ -175,7 +175,7 @@ local function constructNew_frmRacial()
     obj.edit8:setTop(252);
     obj.edit8:setWidth(50);
     obj.edit8:setHeight(20);
-    obj.edit8:setEnabled(false);
+    obj.edit8:setEnabled(true);
     obj.edit8:setFontSize(16);
     obj.edit8:setField("RESRacial");
     obj.edit8:setName("edit8");
@@ -186,7 +186,7 @@ local function constructNew_frmRacial()
     obj.edit9:setTop(303);
     obj.edit9:setWidth(50);
     obj.edit9:setHeight(20);
-    obj.edit9:setEnabled(false);
+    obj.edit9:setEnabled(true);
     obj.edit9:setFontSize(16);
     obj.edit9:setField("AcertoRacial");
     obj.edit9:setName("edit9");
@@ -197,7 +197,7 @@ local function constructNew_frmRacial()
     obj.edit10:setTop(303);
     obj.edit10:setWidth(50);
     obj.edit10:setHeight(20);
-    obj.edit10:setEnabled(false);
+    obj.edit10:setEnabled(true);
     obj.edit10:setFontSize(16);
     obj.edit10:setField("AMRacial");
     obj.edit10:setName("edit10");
@@ -208,7 +208,7 @@ local function constructNew_frmRacial()
     obj.edit11:setTop(303);
     obj.edit11:setWidth(50);
     obj.edit11:setHeight(20);
-    obj.edit11:setEnabled(false);
+    obj.edit11:setEnabled(true);
     obj.edit11:setFontSize(16);
     obj.edit11:setField("ESQRacial");
     obj.edit11:setName("edit11");
@@ -219,7 +219,7 @@ local function constructNew_frmRacial()
     obj.edit12:setTop(328);
     obj.edit12:setWidth(50);
     obj.edit12:setHeight(20);
-    obj.edit12:setEnabled(false);
+    obj.edit12:setEnabled(true);
     obj.edit12:setFontSize(16);
     obj.edit12:setField("CritRacial");
     obj.edit12:setName("edit12");
@@ -230,7 +230,7 @@ local function constructNew_frmRacial()
     obj.edit13:setTop(328);
     obj.edit13:setWidth(50);
     obj.edit13:setHeight(20);
-    obj.edit13:setEnabled(false);
+    obj.edit13:setEnabled(true);
     obj.edit13:setFontSize(16);
     obj.edit13:setField("CMRacial");
     obj.edit13:setName("edit13");
@@ -241,7 +241,7 @@ local function constructNew_frmRacial()
     obj.edit14:setTop(328);
     obj.edit14:setWidth(50);
     obj.edit14:setHeight(20);
-    obj.edit14:setEnabled(false);
+    obj.edit14:setEnabled(true);
     obj.edit14:setFontSize(16);
     obj.edit14:setField("PersistRacial");
     obj.edit14:setName("edit14");
@@ -252,7 +252,7 @@ local function constructNew_frmRacial()
     obj.edit15:setTop(353);
     obj.edit15:setWidth(50);
     obj.edit15:setHeight(20);
-    obj.edit15:setEnabled(false);
+    obj.edit15:setEnabled(true);
     obj.edit15:setFontSize(16);
     obj.edit15:setField("PHPRacial");
     obj.edit15:setName("edit15");
@@ -263,7 +263,7 @@ local function constructNew_frmRacial()
     obj.edit16:setTop(353);
     obj.edit16:setWidth(50);
     obj.edit16:setHeight(20);
-    obj.edit16:setEnabled(false);
+    obj.edit16:setEnabled(true);
     obj.edit16:setFontSize(16);
     obj.edit16:setField("PMPRacial");
     obj.edit16:setName("edit16");
