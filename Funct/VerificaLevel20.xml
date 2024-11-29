@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	 <script>
+		<![CDATA[ 
+			function self.ChecaLevel20()	
+				if sheet.SequenciaInicial == true then	
+					if sheet.Level >= 20 then
+						self.cmbEspecializa.enabled = true;
+					else	
+						self.cmbEspecializa.enabled = false;
+					end;
+
+					if sheet.classe == 'Cavaleiro Draconico' then
+						self.cmbEspecializa.enabled = false;
+					else	
+					
+					end;	
+				end;
+			end;
+		]]>
+		
+    </script>

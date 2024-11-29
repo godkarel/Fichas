@@ -165,7 +165,7 @@ local function constructNew_frmvelen()
 									
 									for _, node in ipairs(nodesO) do
 
-										if node.NomeDoPersonagemVez == idPersonagem then  -- Verifica se o campo NomeDoOponenteVez existe
+										if node.NomeDoPersonagemVez == idPersonagem then  -- Verifica se o campo NomeDoPersonagemVez existe
 											EsqAlvo = node.ESQ
 											RESAlvo = node.RES
 											DefAlvo = node.DEF

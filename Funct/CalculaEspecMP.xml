@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<script>
+	<![CDATA[ 
+		function self.ControlaEspecMP()
+		
+			if sheet.Level < 21 then
+				sheet.EMPNivel = 0;
+			end;	
+		     
+			sheet.RHPNivelAte30 = math.floor((sheet.Level) - 20);
+			
+			if sheet.RHPNivelAte30 > 10 then
+				sheet.RHPNivelAte30 = 10;
+			end;
+
+			if sheet.RHPNivelAte30 < 0 then
+				sheet.RHPNivelAte30 = 0;
+			end;
+
+			if sheet.Espec == 'Druida' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Shaman' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 2;
+			end;
+			
+			if sheet.Espec == 'Caçador' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Sentinela Lunar' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 4;
+			end;
+			
+			if sheet.Espec == 'Encantador de Almas' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Musicista da Guerra' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 4;
+			end;
+			
+			if sheet.Espec == 'Necromance' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Sacerdote' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 5;
+			end;
+			
+			if sheet.Espec == 'Juiz' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Barbaro' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Tanker' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 2;
+			end;
+			
+			if sheet.Espec == 'Acrobata' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Assassino' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 2;
+			end;
+			
+			if sheet.Espec == 'Arcanista' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Elementalista' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Summoner' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 4;
+			end;
+			
+			if sheet.Espec == 'Duelista' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+			
+			if sheet.Espec == 'Pirata' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 2;
+			end;
+			
+			if sheet.Espec == 'Guardião da Serenidade' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 2;
+			end;
+			
+			if sheet.Espec == 'Guardião Espiritual' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 2;
+			end;
+			
+			if sheet.Espec == 'Cavaleiro das Trevas' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 2;
+			end;
+			
+			if sheet.Espec == 'Templario' then
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
+			end;
+		end;
+	]]>	
+    </script>

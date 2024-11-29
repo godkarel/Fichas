@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	<script>		
+		function XPTotalPraUpar()
+			if sheet.SequenciaInicial == true then				
+				if sheet.Level > 20 then 
+					if sheet.Elevel > 0 then
+						sheet.XPNecessario = 1050 + tonumber(sheet.ELevel) * 100;
+					end;
+				else
+					sheet.XPNecessario = 100 + tonumber(sheet.level) * 50;
+				end;
+			end;
+		end;
+	</script>
