@@ -107,7 +107,6 @@ local function constructNew_frmvelen()
 											else
 												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
 											end;
-<<<<<<< HEAD
 										elseif sheet.EscolheAtaqueBasico == 'M/PM' then				
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
@@ -130,9 +129,6 @@ local function constructNew_frmvelen()
 											sheet.nodeExterno = math.floor((sheet.PM)) + math.floor((sheet.PA * 2))
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
 										end;
-=======
-										end;	
->>>>>>> 3035c68463e16f501113ce1f27884f83e8961ac9
 									else
 										if sheet.EscolheAtaqueBasico == 'PA' then
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
@@ -153,7 +149,6 @@ local function constructNew_frmvelen()
 											else
 												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
 											end;
-<<<<<<< HEAD
 										elseif sheet.EscolheAtaqueBasico == 'M/PM' then				
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
@@ -184,13 +179,6 @@ local function constructNew_frmvelen()
 									mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] Errou o ataque no oponente");
 								end;
 								
-=======
-										end;							
-									end;
-								else
-									mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] Errou o ataque no oponente");
-								end;
->>>>>>> 3035c68463e16f501113ce1f27884f83e8961ac9
 						end); 
 					end;
 				end;
@@ -4062,7 +4050,6 @@ local function constructNew_frmvelen()
     obj.edit32:setField("XPAtual");
     obj.edit32:setName("edit32");
 
-<<<<<<< HEAD
     obj.label27 = GUI.fromHandle(_obj_newObject("label"));
     obj.label27:setParent(obj.scrollBox1);
     obj.label27:setWidth(35);
@@ -4073,18 +4060,6 @@ local function constructNew_frmvelen()
     obj.label27:setFontColor("black");
     obj.label27:setField("XPNecessario");
     obj.label27:setName("label27");
-=======
-    obj.label25 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label25:setParent(obj.scrollBox1);
-    obj.label25:setWidth(35);
-    obj.label25:setHeight(20);
-    obj.label25:setTop(675);
-    obj.label25:setLeft(205);
-    obj.label25:setHorzTextAlign("center");
-    obj.label25:setFontColor("black");
-    obj.label25:setField("XPNecessario");
-    obj.label25:setName("label25");
->>>>>>> 3035c68463e16f501113ce1f27884f83e8961ac9
 
     obj.dataLink11 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink11:setParent(obj.scrollBox1);
@@ -4699,11 +4674,7 @@ local function constructNew_frmvelen()
             				end;
         end);
 
-<<<<<<< HEAD
     obj._e_event46 = obj.dataLink16:addEventListener("onChange",
-=======
-    obj._e_event45 = obj.dataLink16:addEventListener("onChange",
->>>>>>> 3035c68463e16f501113ce1f27884f83e8961ac9
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then				
             					if sheet.Level >= 1 then 
@@ -4716,10 +4687,7 @@ local function constructNew_frmvelen()
         end);
 
     function obj:_releaseEvents()
-<<<<<<< HEAD
         __o_rrpgObjs.removeEventListenerById(self._e_event46);
-=======
->>>>>>> 3035c68463e16f501113ce1f27884f83e8961ac9
         __o_rrpgObjs.removeEventListenerById(self._e_event45);
         __o_rrpgObjs.removeEventListenerById(self._e_event44);
         __o_rrpgObjs.removeEventListenerById(self._e_event43);
@@ -4874,7 +4842,6 @@ local function constructNew_frmvelen()
         if self.edit15 ~= nil then self.edit15:destroy(); self.edit15 = nil; end;
         if self.edit29 ~= nil then self.edit29:destroy(); self.edit29 = nil; end;
         if self.btnUpaLevel ~= nil then self.btnUpaLevel:destroy(); self.btnUpaLevel = nil; end;
-        if self.label25 ~= nil then self.label25:destroy(); self.label25 = nil; end;
         if self.rectangle5 ~= nil then self.rectangle5:destroy(); self.rectangle5 = nil; end;
         if self.image9 ~= nil then self.image9:destroy(); self.image9 = nil; end;
         if self.image13 ~= nil then self.image13:destroy(); self.image13 = nil; end;
@@ -4902,10 +4869,7 @@ local function constructNew_frmvelen()
         if self.edit13 ~= nil then self.edit13:destroy(); self.edit13 = nil; end;
         if self.comboBox2 ~= nil then self.comboBox2:destroy(); self.comboBox2 = nil; end;
         if self.image6 ~= nil then self.image6:destroy(); self.image6 = nil; end;
-<<<<<<< HEAD
         if self.AtkBasic ~= nil then self.AtkBasic:destroy(); self.AtkBasic = nil; end;
-=======
->>>>>>> 3035c68463e16f501113ce1f27884f83e8961ac9
         if self.dataLink12 ~= nil then self.dataLink12:destroy(); self.dataLink12 = nil; end;
         if self.label8 ~= nil then self.label8:destroy(); self.label8 = nil; end;
         if self.button19 ~= nil then self.button19:destroy(); self.button19 = nil; end;
