@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+<script>		
+	<![CDATA[ 
+		function self.ControlaClasseEspecialHPAte30()		
+			if sheet.classe == 'Cavaleiro Draconico' then
+				if sheet.Level > 20 then
+					sheet.HPRACAATE30 = 0;        
+					sheet.RHPNivelAte30 = math.floor((sheet.Level) - 20);
+					sheet.EHPNivel = 0;	
+					
+					if sheet.RHPNivelAte30 > 10 then
+						sheet.RHPNivelAte30 = 10;
+					end;
+
+					if sheet.RHPNivelAte30 < 0 then
+						sheet.RHPNivelAte30 = 0;
+					end;
+					
+					sheet.HPRACAATE30 = (tonumber(sheet.RHPNivelAte30) or 0) * 22;
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 28 + 600;
+				end;	
+			end;
+		end;
+	]]>		
+    </script> 

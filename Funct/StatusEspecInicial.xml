@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+<script>
+	<![CDATA[
+		function self.StatusEspecAteLevel30() 
+			if sheet.Level < 20 then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;	
+			end;
+			
+			if sheet.Espec == 'Druida' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;							
+			end;
+			
+			if sheet.Espec == 'Shaman' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 1;
+			end;
+			
+			if sheet.Espec == 'Caçador' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 1;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Sentinela Lunar' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 1;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Encantador de Almas' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 1;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Musicista da Guerra' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 1;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Necromance' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 1;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Sacerdote' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Juiz' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 1;
+				sheet.EspecCM = 1;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Barbaro' then
+				sheet.EspecAcerto = 1;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Tanker' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 1;
+			end;
+			
+			if sheet.Espec == 'Acrobata' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Assassino' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 1;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Arcanista' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Elementalista' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Summoner' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Duelista' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 1;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Pirata' then
+				sheet.EspecAcerto = 1;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Guardião Espiritual' then
+				sheet.EspecAcerto = 1;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Guardião da Serenidade' then
+				sheet.EspecAcerto = 1;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Cavaleiro das Trevas' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 0;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 1;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+			
+			if sheet.Espec == 'Templario' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+		end;	
+	]]>	
+	</script>

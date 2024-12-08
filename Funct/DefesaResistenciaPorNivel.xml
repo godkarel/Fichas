@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	<script>		
+		function CalculaDefesaResistenciaPorNivel()
+			if sheet.SequenciaInicial == true then	
+				CalculadorRESISTLevel();
+				
+				if sheet.Level == 30 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /6);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /6);
+				end;	
+					
+				if sheet.level == 29 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /5.6);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /5.6);
+				end;
+				
+				if sheet.level == 28 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /5.3);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /5.3);
+				end;
+				
+				if sheet.level == 27 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /5);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /5);
+				end;
+				
+				if sheet.level == 26 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /4.75);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /4.75);
+				end;
+
+				if sheet.level == 25 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /4.6);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /4.6);
+				end;
+				
+				if sheet.level == 24 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /4.3);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /4.3);
+				end;
+				
+				if sheet.level == 23 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /4);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /4);
+				end;
+				
+				if sheet.level == 22 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /3.8);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /3.8);
+				end;
+				
+				if sheet.level == 21 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /3.6);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /3.6);
+				end;
+				
+				if sheet.level == 20 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /3.4);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /3.4);
+				end;
+				
+				if sheet.level == 19 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /3.2);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /3.2);
+				end;
+				
+				if sheet.level == 18 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /3);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /3);
+				end;
+				
+				if sheet.level == 17 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /2.7);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /2.7);
+				end;
+				
+				if sheet.level == 16 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /2.55);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /2.55);
+				end;
+				
+				if sheet.level == 15 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /2.4);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /2.4);
+				end;
+				
+				if sheet.level == 14 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /2.2);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /2.2);
+				end;
+				
+				if sheet.level == 13 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /2);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /2);
+				end;
+				
+				if sheet.level == 12 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /1.8);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /1.8);
+				end;
+				
+				if sheet.level == 11 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /1.65);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /1.65);
+				end;
+				
+				if sheet.level == 10 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /1.55);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /1.55);
+				end;
+				
+				if sheet.level == 9 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /1.35);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /1.35);
+				end;
+				
+				if sheet.level == 8 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /1.25);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /1.25);
+				end;
+				
+				if sheet.level == 7 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /1);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /1);
+				end;
+				
+				if sheet.level == 6 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /0.9);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /0.9);
+				end;
+				
+				if sheet.level == 5 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /0.8);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /0.8);
+				end;
+				
+				if sheet.level == 4 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /0.65);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /0.65);
+				end;
+				
+				if sheet.level == 3 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /0.47);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /0.47);
+				end;
+				
+				if sheet.level == 2 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /0.37);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /0.37);
+				end;
+				
+				if sheet.level == 1 then 
+					sheet.DEFRED = math.floor((tonumber(sheet.Defesa) or 0) /0.25);
+					sheet.RESRED = math.floor((tonumber(sheet.Resistencia) or 0) /0.25);
+				end;
+				
+				sheet.RESRED = (tonumber(sheet.RESRED) or 0) + (tonumber(sheet.ResistenciaPadrao) or 0);
+				
+				sheet.DEFRED = math.floor(tonumber(sheet.DEFRED) or 0);
+				sheet.RESRED = math.floor(tonumber(sheet.RESRED) or 0);
+			end;
+		end;
+	</script>

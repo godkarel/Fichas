@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+<script>
+	<![CDATA[
+		function self.ControlaEspecHPAte30()
+			if sheet.Level > 20 then        
+				sheet.RHPNivelAte30 = math.floor((sheet.Level) - 20);
+				sheet.EHPNivel = 0;	
+				
+				if sheet.RHPNivelAte30 > 10 then
+					sheet.RHPNivelAte30 = 10;
+				end;
+
+				if sheet.RHPNivelAte30 < 0 then
+					sheet.RHPNivelAte30 = 0;
+				end;							
+				
+				if sheet.Espec == 'Druida' then
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 22 + 600;					
+				end;
+				
+				if sheet.Espec == 'Shaman' then
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 24 + 600;
+				end;
+				
+				if sheet.Espec == 'Caçador' then
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 22 + 600;
+				end;
+				
+				if sheet.Espec == 'Sentinela Lunar' then
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 21 + 600;
+				end;
+				
+				if sheet.Espec == 'Encantador de Almas' then						
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 21 + 600;
+				end;
+				
+				if sheet.Espec == 'Musicista da Guerra' then						
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 23 + 600;
+				end;
+				
+				if sheet.Espec == 'Necromance' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 22 + 600;
+				end;
+				
+				if sheet.Espec == 'Sacerdote' then
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 25 + 600;
+				end;
+				
+				if sheet.Espec == 'Juiz' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 28 + 600;
+				end;
+				
+				if sheet.Espec == 'Barbaro' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 28 + 600;
+				end;
+				
+				if sheet.Espec == 'Tanker' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 30 + 600;
+				end;
+				
+				if sheet.Espec == 'Acrobata' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 23 + 600;
+				end;
+				
+				if sheet.Espec == 'Assassino' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 21 + 600;
+				end;
+				
+				if sheet.Espec == 'Arcanista' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 20 + 600;
+				end;
+				
+				if sheet.Espec == 'Elementalista' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 22 + 600;
+				end;
+				
+				if sheet.Espec == 'Summoner' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 20 + 600;
+				end;
+				
+				if sheet.Espec == 'Duelista' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 24 + 600;
+				end;
+				
+				if sheet.Espec == 'Pirata' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 26 + 600;
+				end;
+				
+				if sheet.Espec == 'Guardião da Serenidade' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 27 + 600;
+				end;
+				
+				if sheet.Espec == 'Guardião Espiritual' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 26 + 600;
+				end;
+				
+				if sheet.Espec == 'Cavaleiro das Trevas' then							
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 29 + 600;
+				end;
+				
+				if sheet.Espec == 'Templario' then						
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 27 + 600;
+				end;
+				
+				if sheet.Level < 19 then
+					sheet.EHPNivel = 0;
+				end;
+			end;
+		end;	
+	]]>	
+	</script>

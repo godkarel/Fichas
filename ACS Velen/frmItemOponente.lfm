@@ -7,12 +7,12 @@
 		<progressBar align="top" field="HPBarO" fieldMax="HPBarMaxO" width="150" color="red" margins="{top=1}" >
 		<label align="left" horzTextAlign="center" field="HPBarO"/>
 		<label align="client" horzTextAlign="center" text="/"/>
-		<label align="right" horzTextAlign="center" field="HPBarO"/>
+		<label align="right" horzTextAlign="center" field="HPBarMaxO"/>
 		</progressBar>
 		<progressBar align="top" width="150" color="blue" field="MPBarO" fieldMax="MPBarMaxO" margins="{top=1}">	
 		<label align="left" horzTextAlign="center" field="MPBarO"/>
 		<label align="right" horzTextAlign="center" text="---/---"/>
-		<label align="right" horzTextAlign="center" field="MPBarO"/>	
+		<label align="right" horzTextAlign="center" field="MPBarMaxO"/>	
 		</progressBar>
 	
 		<label left="400" text="Vez" margins="{right=1}"	/>

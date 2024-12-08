@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+<dataLink fields="{'Raca', 'Level'}">
+        <event name="onChange"> 
+				
+			<![CDATA[
+			if sheet.Level ~= nil then	
+				if sheet.level > 0 then
+					if sheet.Raca == 'Humano' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.1
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.1
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.1
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.1
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.1	
+					else if sheet.Raca == 'Elfo' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.3
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.1
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.0	
+					else if sheet.Raca == 'Elfo Negro' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.1
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.3
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.0
+					else if sheet.Raca == 'Anão' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.4
+					else if sheet.Raca == 'Orc' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.4
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.2
+					else if sheet.Raca == 'Kamael' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.3
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.0
+					else if sheet.Raca == 'Thiefling' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.0
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.3
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.0		
+					end	
+					end
+					end
+					end
+					end
+					end
+					end;
+				end;		
+			]]>
+					
+			<![CDATA[ 
+			if sheet.Level ~= nil then
+				if sheet.Level > 0 then
+					if sheet.classe == 'Cavaleiro Draconico' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.2
+					end;	
+				end;
+			end;
+		end;	
+			]]>		
+
+		  </event>
+	</dataLink>

@@ -81,7 +81,7 @@ local function constructNew_frmItemOponente()
     obj.label4:setParent(obj.progressBar1);
     obj.label4:setAlign("right");
     obj.label4:setHorzTextAlign("center");
-    obj.label4:setField("HPBarO");
+    obj.label4:setField("HPBarMaxO");
     obj.label4:setName("label4");
 
     obj.progressBar2 = GUI.fromHandle(_obj_newObject("progressBar"));
@@ -112,7 +112,7 @@ local function constructNew_frmItemOponente()
     obj.label7:setParent(obj.progressBar2);
     obj.label7:setAlign("right");
     obj.label7:setHorzTextAlign("center");
-    obj.label7:setField("MPBarO");
+    obj.label7:setField("MPBarMaxO");
     obj.label7:setName("label7");
 
     obj.label8 = GUI.fromHandle(_obj_newObject("label"));

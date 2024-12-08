@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<script>
+	<![CDATA[ 
+		function self.ControlaClasseMP()
+			
+			sheet.RHPNivelAte20 = sheet.Level;
+			
+			if sheet.RHPNivelAte20 > 20 then
+				sheet.RHPNivelAte20 = 20;
+			end;
+						
+			if sheet.Classe == 'Animago' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 4 + 130;
+			end;
+			
+			if sheet.Classe == 'Arqueiro' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 3 + 120;
+			end;
+			
+			if sheet.Classe == 'Bardo' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 4 + 130;
+			end;
+			
+			if sheet.Classe == 'Bispo' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 4 + 140;
+			end;
+			
+			if sheet.Classe == 'Caçador de Almas' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 4 + 130;
+			end;
+			
+			if sheet.Classe == 'Guerreiro' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 2 + 110;
+			end;
+			
+			if sheet.Classe == 'Ladino' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 2 + 100;
+			end;
+			
+			if sheet.Classe == 'Mago' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 4 + 135;
+			end;
+			
+			if sheet.Classe == 'Mercenario' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 3 + 115;
+			end;
+			
+			if sheet.Classe == 'Monge' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 3 + 120;
+			end;
+			
+			if sheet.Classe == 'Paladino' then
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20 	) or 0) * 3 + 120;
+			end;
+		end;					
+	]]>	
+    </script>

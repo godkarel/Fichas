@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<script>
+	<![CDATA[ 
+		function CalculaMP()
+			if sheet.Level < 21 then
+				sheet.EMPNivel = 0;
+			end;
+
+			sheet.MPTotal = (tonumber(sheet.InteligenciaTotal * 1.5) or 0) + (tonumber(sheet.ArmaMP) or 0) + 
+			(tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) + (tonumber(sheet.MPMont) or 0) +
+			(tonumber(sheet.PMPRacial) or 0) + (tonumber(sheet.PMPBasica) or 0) + (tonumber(sheet.CMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0) + (tonumber(sheet.DMP) or 0)+ 
+			(tonumber(sheet.ConEscolhidoBlume) or 0);	
+		end;
+	]]>	
+    </script>

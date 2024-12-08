@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	 <script>
+			function VerificaClasse()			
+				if sheet.Classe == "Animago" then
+					self.LayEscolheSkill1.visible = true;
+					self.LayEscolheSkill2.visible = true;
+					self.LayEscolheSkill3.visible = true;
+					self.LayEscolheSkill4.visible = true;
+					self.LayEscolheSkill5.visible = true;
+					self.LayEscolheSkill6.visible = true;
+					
+					self.LayEscolheULT1.visible = true;
+					self.LayEscolheULT2.visible = true;
+					
+					self.LayEscolheSkill1.src = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df2gaeq-3ba8cb5f-4a82-43bd-93f0-7eacdaeac373.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYyZ2FlcS0zYmE4Y2I1Zi00YTgyLTQzYmQtOTNmMC03ZWFjZGFlYWMzNzMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.7ZTCCiQfiTRHytwJZhJp-ZmRm1Axq5rdH0cixVZZGBo";
+					self.LayEscolheSkill2.src = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df2gaet-900655b7-b8ca-4d70-a4d3-1d2bca2feda4.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYyZ2FldC05MDA2NTViNy1iOGNhLTRkNzAtYTRkMy0xZDJiY2EyZmVkYTQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.QdZblXQXPlYPFdLKcrhAU-LyomCr35s7yLMJq0pabHc"
+					self.LayEscolheSkill3.src = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df2gaev-1b79b246-cf77-4d8d-aecf-7551738b0afe.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYyZ2Fldi0xYjc5YjI0Ni1jZjc3LTRkOGQtYWVjZi03NTUxNzM4YjBhZmUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.oBLWjUPPm-jDenA6L1yU5B8n96vCTDkWd4HMP8y_tr0"
+					self.LayEscolheSkill4.src = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df2gaez-9628a43d-1a35-4d85-a9a6-bef8cc0e658a.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYyZ2Flei05NjI4YTQzZC0xYTM1LTRkODUtYTlhNi1iZWY4Y2MwZTY1OGEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.LqRevme7gPLpaeqhqhRIOQdBkk3y1ymXxIHU1GXMHRY"
+					self.LayEscolheSkill5.src = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df2gaf4-6820fe27-4d4c-423c-adc3-f5dfb258659c.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYyZ2FmNC02ODIwZmUyNy00ZDRjLTQyM2MtYWRjMy1mNWRmYjI1ODY1OWMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.FlXYWFYBbbIUdaZ3fVcjFfTXBUgpns7nN5trVARp4Kc"
+					self.LayEscolheSkill6.src = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df2gaf8-96090d7c-f02f-49f0-a32d-c7287e954fe9.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYyZ2FmOC05NjA5MGQ3Yy1mMDJmLTQ5ZjAtYTMyZC1jNzI4N2U5NTRmZTkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.DeHdVcnm4Oa0k0-ILzC2imx7RsyHbmhUHs2EOJPigjo"
+				end;	
+			end;
+
+    </script>

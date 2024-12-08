@@ -393,18 +393,27 @@
 										if 1 == rolado.resultado then										
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value	
+<<<<<<< HEAD
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))								
+=======
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1								
+>>>>>>> 3035c68463e16f501113ce1f27884f83e8961ac9
 											mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando  com [§K4,0] CRITICAL [§K9,0] « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] » :dinofauro: ");
 										else										
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+<<<<<<< HEAD
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))
+=======
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+>>>>>>> 3035c68463e16f501113ce1f27884f83e8961ac9
 											mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] »");
 										end;	
 									else
 										if sheet.CMagico +1 > rolado.resultado then 										
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+<<<<<<< HEAD
 											nodeExterno.DanoRecebido = "Habilidade de Buff";
 											if node.DanoAtributo1 ~= 'BUFF' then
 												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1 * 2) * (1 - (RESAlvo / 100)))
@@ -413,10 +422,18 @@
 												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
 											end;
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))
+=======
+											nodeExterno.DanoRecebido = math.floor((node.Hintensidade1 * 2) * (1 - (RESAlvo / 100)))
+											if node.DanoAtributo1 == 'Fixo' then
+												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
+											end;
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+>>>>>>> 3035c68463e16f501113ce1f27884f83e8961ac9
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido) .. "[§K9,0] » :dinofauro: ");
 										else
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+<<<<<<< HEAD
 											nodeExterno.DanoRecebido = "Habilidade de Buff";
 											if node.DanoAtributo1 ~= 'BUFF' then
 												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1) * (1 - (RESAlvo / 100)))
@@ -425,6 +442,13 @@
 												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
 											end;
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))
+=======
+											nodeExterno.DanoRecebido = math.floor((node.Hintensidade1) * (1 - (RESAlvo / 100)))
+											if node.DanoAtributo1 == 'Fixo' then
+												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
+											end;
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+>>>>>>> 3035c68463e16f501113ce1f27884f83e8961ac9
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido .. "[§K9,0] »");
 										end;	
 									end;										
@@ -577,18 +601,27 @@
 										if 1 == rolado.resultado then										
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value	
+<<<<<<< HEAD
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))																		
+=======
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1																			
+>>>>>>> 3035c68463e16f501113ce1f27884f83e8961ac9
 											mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando  com [§K4,0] CRITICAL [§K9,0] « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] » :dinofauro: ");
 										else										
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+<<<<<<< HEAD
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))
+=======
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+>>>>>>> 3035c68463e16f501113ce1f27884f83e8961ac9
 											mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] »");
 										end;	
 									else
 										if sheet.CMagico +1 > rolado.resultado then 										
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+<<<<<<< HEAD
 											nodeExterno.DanoRecebido = "Habilidade de Buff";
 											if node.DanoAtributo1 ~= 'BUFF' then
 												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1 * 2) * (1 - (RESAlvo / 100)))
@@ -597,10 +630,18 @@
 												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
 											end;
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))
+=======
+											nodeExterno.DanoRecebido = math.floor((node.Hintensidade1 * 2) * (1 - (RESAlvo / 100)))
+											if node.DanoAtributo1 == 'Fixo' then
+												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
+											end;
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+>>>>>>> 3035c68463e16f501113ce1f27884f83e8961ac9
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido) .. "[§K9,0] » :dinofauro: ");
 										else
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+<<<<<<< HEAD
 											nodeExterno.DanoRecebido = "Habilidade de Buff";
 											if node.DanoAtributo1 ~= 'BUFF' then
 												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1) * (1 - (RESAlvo / 100)))
@@ -609,6 +650,13 @@
 												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
 											end;
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))
+=======
+											nodeExterno.DanoRecebido = math.floor((node.Hintensidade1) * (1 - (RESAlvo / 100)))
+											if node.DanoAtributo1 == 'Fixo' then
+												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
+											end;
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+>>>>>>> 3035c68463e16f501113ce1f27884f83e8961ac9
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido .. "[§K9,0] »");
 										end;	
 									end;										

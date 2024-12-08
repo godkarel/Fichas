@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+<script>
+			function DiminuirPontosForca()
+                if tonumber(sheet.Forca) > 0 then
+					sheet.Forca = tonumber(sheet.Forca) - 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) + 1;
+                else
+					showMessage("Atributo Força não tem valor suficiente para ser subtraido");
+                end;
+			end;
+			
+			function AumentarPontosForca()
+                if tonumber(sheet.ControladorAtributos) > 0 then
+					sheet.Forca = tonumber(sheet.Forca) + 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) - 1;
+                else
+					showMessage("Voce não possui pontos de atributo para destribuir, vai caçar XP");
+                end;
+			end;
+			
+			function DiminuirPontosInteligencia()
+                if tonumber(sheet.Inteligencia) > 0 then
+					sheet.Inteligencia = tonumber(sheet.Inteligencia) - 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) + 1;
+                else
+					showMessage("Atributo Inteligencia não tem valor suficiente para ser subtraido");
+                end;
+			end;
+			
+			function AumentarPontosInteligencia()
+                if tonumber(sheet.ControladorAtributos) > 0 then
+					sheet.Inteligencia = tonumber(sheet.Inteligencia) + 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) - 1;
+                else
+					showMessage("Voce não possui pontos de atributo para destribuir, vai caçar XP");
+                end;
+			end;
+			
+			function DiminuirPontosDestreza()
+                if tonumber(sheet.Destreza) > 0 then
+					sheet.Destreza = tonumber(sheet.Destreza) - 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) + 1;
+                else
+					showMessage("Atributo Destreza não tem valor suficiente para ser subtraido");
+                end;
+			end;
+			
+			function AumentarPontosDestreza()
+                if tonumber(sheet.ControladorAtributos) > 0 then
+					sheet.Destreza = tonumber(sheet.Destreza) + 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) - 1;
+                else
+					showMessage("Voce não possui pontos de atributo para destribuir, vai caçar XP");
+                end;
+			end;
+			
+			function DiminuirPontosAgilidade()
+                if tonumber(sheet.Agilidade) > 0 then
+					sheet.Agilidade = tonumber(sheet.Agilidade) - 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) + 1;
+                else
+					showMessage("Atributo Agilidade não tem valor suficiente para ser subtraido");
+                end;
+			end;
+			
+			function AumentarPontosAgilidade()
+                if tonumber(sheet.ControladorAtributos) > 0 then
+					sheet.Agilidade = tonumber(sheet.Agilidade) + 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) - 1;
+                else
+					showMessage("Voce não possui pontos de atributo para destribuir, vai caçar XP");
+                end;
+			end;
+			
+			function DiminuirPontosVitalidade()
+                if tonumber(sheet.Vitalidade) > 0 then
+					sheet.Vitalidade = tonumber(sheet.Vitalidade) - 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) + 1;
+                else
+					showMessage("Atributo Vitalidade não tem valor suficiente para ser subtraido");
+                end;
+			end;
+			
+			function AumentarPontosVitalidade()
+                if tonumber(sheet.ControladorAtributos) > 0 then
+					sheet.Vitalidade = tonumber(sheet.Vitalidade) + 1;
+					sheet.ControladorAtributos = tonumber(sheet.ControladorAtributos) - 1;
+                else
+					showMessage("Voce não possui pontos de atributo para destribuir, vai caçar XP");
+                end;
+			end;			
+		</script>

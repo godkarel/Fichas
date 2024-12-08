@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	<script>		
+		function CalculadorRESISTLevel()
+			if sheet.SequenciaInicial == true then	
+				if sheet.Level > 39 then 
+					sheet.ResistenciaPadrao = 5;
+				end;
+
+				if sheet.Level > 29 then 
+					sheet.ResistenciaPadrao = 4;
+				end;	
+
+				if sheet.Level > 19 then 
+					sheet.ResistenciaPadrao = 3;
+				end;
+
+				if sheet.Level > 9 then 
+					sheet.ResistenciaPadrao = 2;
+				end;				
+				
+				if sheet.Level > 0 then 
+					sheet.ResistenciaPadrao = 1;
+				end;
+			end;
+		end;
+	</script>

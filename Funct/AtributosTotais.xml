@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	
+	<script>		
+		function AtualizaAtributos()
+			sheet.ForcaTotal = (math.floor((tonumber(sheet.Forca) or 0) + (tonumber(sheet.FNIvel) or 0) + (tonumber(sheet.DForca) or 0)  + (tonumber(sheet.ConForte) or 0)) or 0) or 1;
+			sheet.InteligenciaTotal	= math.floor((tonumber(sheet.Inteligencia) or 0) + (tonumber(sheet.INivel) or 0) + (tonumber(sheet.DInteligencia) or 0) + (tonumber(sheet.ConInteligente) or 0));
+			sheet.DestrezaTotal = math.floor((tonumber(sheet.Destreza) or 0) + (tonumber(sheet.DNivel) or 0) + (tonumber(sheet.DDestreza) or 0) + (tonumber(sheet.ConHabilidoso) or 0));
+			sheet.AgilidadeTotal = math.floor((tonumber(sheet.Agilidade) or 0) + (tonumber(sheet.ANIvel) or 0) + (tonumber(sheet.DAgilidade) or 0) + (tonumber(sheet.ConAgil) or 0));
+			sheet.VitalidadeTotal = math.floor((tonumber(sheet.Vitalidade) or 0) + (tonumber(sheet.VNIvel) or 0) + (tonumber(sheet.DVitalidade) or 0) + (tonumber(sheet.ConResistente) or 0));
+		end;
+	</script>
