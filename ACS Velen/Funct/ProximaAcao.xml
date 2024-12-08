@@ -59,12 +59,7 @@
 			lista2 = criarEIncrementarLista();
 			
 			if sheet.VezAtualIndex < 1 then
-				sheet.VezAtualIndex = 3 -- reinicia o player para começar dnv
-			end;
-			
-			if sheet.VezAtualIndex == nil then
-				sheet.VezAtualIndex = 1
-			else
+				sheet.VezAtualIndex = #lista2
 				sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
 			end;
 
@@ -81,7 +76,7 @@
 					sheet.AcaoAtualControle = acoes[sheet.AcaoAtualIndex]
 					sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
 					if sheet.VezAtualControle == nil or sheet.VezAtualControle == "" then
-						sheet.VezAtualIndex = 3
+						sheet.VezAtualIndex = #lista2
 					else
 						sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
 					end;

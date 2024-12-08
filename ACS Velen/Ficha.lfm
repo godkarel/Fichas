@@ -3,6 +3,7 @@
       title="Sistema de Combate Velen" name="frmACSVelen">
 	  <event name="onNodeReady">		
 		sheet.ACAOTURNO = (tonumber(sheet.ACAOTURNO) or 0); 
+		sheet.DanoRecebido = 0
 	</event>
 	 
 	<import file="Funct/ProximaAcao.xml"/>
@@ -134,12 +135,12 @@
 					<progressBar align="top" width="150" color="red" field="HPBar" fieldMax="HPBarMax" margins="{top=1}">
 					<label align="left" horzTextAlign="center" field="HPBar"/>
 					<label align="client" horzTextAlign="center" text="/"/>
-					<label align="right" horzTextAlign="center" field="HPBar"/>
+					<label align="right" horzTextAlign="center" field="HPBarMax"/>
 					</progressBar>
 					<progressBar align="top" width="150" color="blue" field="MPBar" fieldMax="MPBarMax" margins="{top=1}">	
 					<label align="left" horzTextAlign="center" field="MPBar"/>
 					<label align="right" horzTextAlign="center" text="---/---"/>
-					<label align="right" horzTextAlign="center" field="MPBar"/>						
+					<label align="right" horzTextAlign="center" field="MPBarMax"/>						
 					</progressBar>
 				</layout>
 				
@@ -207,25 +208,25 @@
     <layout left="620" top="40" width="200" height="60">
         <label text="Turno Atual:" align="top" autoSize="true" fontSize="16" fontColor="white"/>
         <edit name="editTurnoAtual" field="TurnoAtualControle" align="top" width="200" height="20" horzTextAlign="center"/>
-        <button name="btnTurnoAnterior" text="USA ESSE Anterior" align="left" width="90" height="20" top="40">
-						<event name="onClick">										
-							showMessage(sheet.ACAOTURNO)
-						</event>
-					</button>	
+        <button name="btnTurnoAnterior" text="AnteriorRR" align="left" width="90" height="20" top="40">
+			<event name="onClick">										
+				
+			</event>
+		</button>	
 		
         <button name="btnTurnoProximo" text="Próximo" align="right" width="90" height="20" top="40">
 			<event name="onClick">										
-					ProximaAcao();
-				</event>
-			</button>
+						
+			</event>
+		</button>
     </layout>
 
     <!-- Campo para exibir a Vez Atual -->
     <layout left="620" top="120" width="200" height="60">
         <label text="Vez Atual:" align="top" autoSize="true" fontSize="16" fontColor="white"/>
         <edit name="editVezAtual" field="VezAtualControle" align="top" width="200" height="20" readOnly="true" horzTextAlign="center"/>
-        <button name="btnVezAnterior" text="Anterior" align="left" width="90" height="20" top="40"/>
-        <button name="btnVezProximo" text="Próximo" align="right" width="90" height="20" top="40"/>
+        <button name="btnVezAnterior" text="ANTERIOR" align="left" width="90" height="20" top="40"/>
+        <button name="btnVezProximo" text="PRÓXIMO" align="right" width="90" height="20" top="40"/>
     </layout>
 
     <!-- Campo para exibir a Ação Atual -->
@@ -540,8 +541,8 @@
 		</rectangle>
 	</dataScopeBox>
 	
-	<dataLink fields="{'DanoRecebido', 'AlvoRecebido', 'GrupoRecebido', 'ACAOTURNO'}">
-		<event name="onChange">                
+	<dataLink fields="{'ACAOTURNO'}">
+		<event name="onChange">            
 		    if sheet.GrupoRecebido == "1" then
 				local nodes = ndb.getChildNodes(sheet.NomeOponentes)
 					
@@ -593,8 +594,6 @@
 				for _, node in ipairs(nodes) do
 					if node.NomeDoPersonagemVez == sheet.AlvoRecebido then
 						node.HPBar = node.HPBar - sheet.DanoRecebido
-
-						
 
 						if	self.BoxDetalheJogadores.visible == true then
 							local node = self.rclGrupoJogadores.selectedNode;   

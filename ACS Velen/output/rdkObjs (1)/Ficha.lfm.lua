@@ -93,12 +93,7 @@ local function constructNew_frmACSVelen()
 			lista2 = criarEIncrementarLista();
 			
 			if sheet.VezAtualIndex < 1 then
-				sheet.VezAtualIndex = 3 -- reinicia o player para começar dnv
-			end;
-			
-			if sheet.VezAtualIndex == nil then
-				sheet.VezAtualIndex = 1
-			else
+				sheet.VezAtualIndex = #lista2
 				sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
 			end;
 
@@ -115,7 +110,7 @@ local function constructNew_frmACSVelen()
 					sheet.AcaoAtualControle = acoes[sheet.AcaoAtualIndex]
 					sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
 					if sheet.VezAtualControle == nil or sheet.VezAtualControle == "" then
-						sheet.VezAtualIndex = 3
+						sheet.VezAtualIndex = #lista2
 					else
 						sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
 					end;
@@ -702,7 +697,7 @@ local function constructNew_frmACSVelen()
     obj.btnTurnoAnterior = GUI.fromHandle(_obj_newObject("button"));
     obj.btnTurnoAnterior:setParent(obj.layout6);
     obj.btnTurnoAnterior:setName("btnTurnoAnterior");
-    obj.btnTurnoAnterior:setText("Anterior");
+    obj.btnTurnoAnterior:setText("AnteriorRR");
     obj.btnTurnoAnterior:setAlign("left");
     obj.btnTurnoAnterior:setWidth(90);
     obj.btnTurnoAnterior:setHeight(20);
@@ -747,7 +742,7 @@ local function constructNew_frmACSVelen()
     obj.btnVezAnterior = GUI.fromHandle(_obj_newObject("button"));
     obj.btnVezAnterior:setParent(obj.layout7);
     obj.btnVezAnterior:setName("btnVezAnterior");
-    obj.btnVezAnterior:setText("Anterior");
+    obj.btnVezAnterior:setText("ANTERIOR");
     obj.btnVezAnterior:setAlign("left");
     obj.btnVezAnterior:setWidth(90);
     obj.btnVezAnterior:setHeight(20);
@@ -756,7 +751,7 @@ local function constructNew_frmACSVelen()
     obj.btnVezProximo = GUI.fromHandle(_obj_newObject("button"));
     obj.btnVezProximo:setParent(obj.layout7);
     obj.btnVezProximo:setName("btnVezProximo");
-    obj.btnVezProximo:setText("Próximo");
+    obj.btnVezProximo:setText("PRÓXIMO");
     obj.btnVezProximo:setAlign("right");
     obj.btnVezProximo:setWidth(90);
     obj.btnVezProximo:setHeight(20);
@@ -1038,9 +1033,9 @@ local function constructNew_frmACSVelen()
     obj.progressBar3:setParent(obj.layout9);
     obj.progressBar3:setAlign("top");
     obj.progressBar3:setWidth(150);
-    obj.progressBar3:setColor("red");
-    obj.progressBar3:setField("HPBar");
-    obj.progressBar3:setFieldMax("HPBarMax");
+    obj.progressBar3:setColor("yellow");
+    obj.progressBar3:setField("HPBarO");
+    obj.progressBar3:setFieldMax("HPBarMaxO");
     obj.progressBar3:setMargins({top=1});
     obj.progressBar3:setName("progressBar3");
 
@@ -1048,7 +1043,7 @@ local function constructNew_frmACSVelen()
     obj.label54:setParent(obj.progressBar3);
     obj.label54:setAlign("left");
     obj.label54:setHorzTextAlign("center");
-    obj.label54:setField("HPBar");
+    obj.label54:setField("HPBarO");
     obj.label54:setName("label54");
 
     obj.label55 = GUI.fromHandle(_obj_newObject("label"));
@@ -1062,7 +1057,7 @@ local function constructNew_frmACSVelen()
     obj.label56:setParent(obj.progressBar3);
     obj.label56:setAlign("right");
     obj.label56:setHorzTextAlign("center");
-    obj.label56:setField("HPBar");
+    obj.label56:setField("HPBarMaxO");
     obj.label56:setName("label56");
 
     obj.progressBar4 = GUI.fromHandle(_obj_newObject("progressBar"));
@@ -1070,8 +1065,8 @@ local function constructNew_frmACSVelen()
     obj.progressBar4:setAlign("top");
     obj.progressBar4:setWidth(150);
     obj.progressBar4:setColor("blue");
-    obj.progressBar4:setField("MPBar");
-    obj.progressBar4:setFieldMax("MPBarMax");
+    obj.progressBar4:setField("MPBarO");
+    obj.progressBar4:setFieldMax("MPBarMaxO");
     obj.progressBar4:setMargins({top=1});
     obj.progressBar4:setName("progressBar4");
 
@@ -1079,7 +1074,7 @@ local function constructNew_frmACSVelen()
     obj.label57:setParent(obj.progressBar4);
     obj.label57:setAlign("left");
     obj.label57:setHorzTextAlign("center");
-    obj.label57:setField("MPBar");
+    obj.label57:setField("MPBarO");
     obj.label57:setName("label57");
 
     obj.label58 = GUI.fromHandle(_obj_newObject("label"));
@@ -1093,7 +1088,7 @@ local function constructNew_frmACSVelen()
     obj.label59:setParent(obj.progressBar4);
     obj.label59:setAlign("right");
     obj.label59:setHorzTextAlign("center");
-    obj.label59:setField("MPBar");
+    obj.label59:setField("MPBarMaxO");
     obj.label59:setName("label59");
 
     obj.layout10 = GUI.fromHandle(_obj_newObject("layout"));
@@ -1464,21 +1459,26 @@ local function constructNew_frmACSVelen()
 
     obj.dataLink1 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink1:setParent(obj);
-    obj.dataLink1:setFields({'DanoRecebido', 'AlvoRecebido', 'GrupoRecebido'});
+    obj.dataLink1:setFields({'DanoRecebido', 'AlvoRecebido', 'GrupoRecebido', 'ACAOTURNO'});
     obj.dataLink1:setName("dataLink1");
 
-    obj._e_event0 = obj.button1:addEventListener("onClick",
+    obj._e_event0 = obj:addEventListener("onNodeReady",
+        function ()
+            sheet.ACAOTURNO = (tonumber(sheet.ACAOTURNO) or 0);
+        end);
+
+    obj._e_event1 = obj.button1:addEventListener("onClick",
         function (event)
             self.rclGrupoJogadores:append();
         end);
 
-    obj._e_event1 = obj.button2:addEventListener("onClick",
+    obj._e_event2 = obj.button2:addEventListener("onClick",
         function (event)
             -- Chama a função para criar e incrementar a lista
             			criarEIncrementarLista()
         end);
 
-    obj._e_event2 = obj.button3:addEventListener("onClick",
+    obj._e_event3 = obj.button3:addEventListener("onClick",
         function (event)
             if self.TrocadorDeAcao.enabled == false then
             			self.TrocadorDeAcao.enabled = true
@@ -1490,7 +1490,7 @@ local function constructNew_frmACSVelen()
             		end
         end);
 
-    obj._e_event3 = obj.rclGrupoJogadores:addEventListener("onSelect",
+    obj._e_event4 = obj.rclGrupoJogadores:addEventListener("onSelect",
         function ()
             local node = self.rclGrupoJogadores.selectedNode; 
             			
@@ -1501,12 +1501,12 @@ local function constructNew_frmACSVelen()
             			self.BoxDetalheJogadores.visible = (node ~= nil);
         end);
 
-    obj._e_event4 = obj.rclGrupoJogadores:addEventListener("onCompare",
+    obj._e_event5 = obj.rclGrupoJogadores:addEventListener("onCompare",
         function (nodeA, nodeB)
             return utils.compareStringPtBr(nodeA.Vez, nodeB.Vez);
         end);
 
-    obj._e_event5 = obj.button4:addEventListener("onClick",
+    obj._e_event6 = obj.button4:addEventListener("onClick",
         function (event)
             if	self.BoxDetalheJogadores.visible == true then
             								local node = self.rclGrupoJogadores.selectedNode;   
@@ -1568,41 +1568,40 @@ local function constructNew_frmACSVelen()
             							end;
         end);
 
-    obj._e_event6 = obj.btnTurnoAnterior:addEventListener("onClick",
+    obj._e_event7 = obj.btnTurnoAnterior:addEventListener("onClick",
         function (event)
         end);
 
-    obj._e_event7 = obj.btnTurnoProximo:addEventListener("onClick",
+    obj._e_event8 = obj.btnTurnoProximo:addEventListener("onClick",
         function (event)
-            ProximaAcao();
         end);
 
-    obj._e_event8 = obj.btnAcaoAnterior:addEventListener("onClick",
+    obj._e_event9 = obj.btnAcaoAnterior:addEventListener("onClick",
         function (event)
             AnteriorAcao();
         end);
 
-    obj._e_event9 = obj.btnAcaoProximo:addEventListener("onClick",
+    obj._e_event10 = obj.btnAcaoProximo:addEventListener("onClick",
         function (event)
             ProximaAcao();
         end);
 
-    obj._e_event10 = obj.TrocadorDeAcao:addEventListener("onTimer",
+    obj._e_event11 = obj.TrocadorDeAcao:addEventListener("onTimer",
         function ()
             AcaoAtualControlador()
         end);
 
-    obj._e_event11 = obj.AvisoDeTempo:addEventListener("onTimer",
+    obj._e_event12 = obj.AvisoDeTempo:addEventListener("onTimer",
         function ()
             AvisoDeTempoControlador()
         end);
 
-    obj._e_event12 = obj.button5:addEventListener("onClick",
+    obj._e_event13 = obj.button5:addEventListener("onClick",
         function (event)
             self.rclGrupoOponentes:append();
         end);
 
-    obj._e_event13 = obj.rclGrupoOponentes:addEventListener("onSelect",
+    obj._e_event14 = obj.rclGrupoOponentes:addEventListener("onSelect",
         function ()
             local node = self.rclGrupoOponentes.selectedNode; 
             				
@@ -1613,12 +1612,12 @@ local function constructNew_frmACSVelen()
             			self.rclGrupoOponentes:sort();
         end);
 
-    obj._e_event14 = obj.rclGrupoOponentes:addEventListener("onCompare",
+    obj._e_event15 = obj.rclGrupoOponentes:addEventListener("onCompare",
         function (nodeA, nodeB)
             return utils.compareStringPtBr(nodeA.Vez, nodeB.Vez);
         end);
 
-    obj._e_event15 = obj.button6:addEventListener("onClick",
+    obj._e_event16 = obj.button6:addEventListener("onClick",
         function (event)
             if	self.BoxDetalheOponentes.visible == true then
             							local node = self.rclGrupoOponentes.selectedNode;   
@@ -1666,8 +1665,8 @@ local function constructNew_frmACSVelen()
             										node.Vigor = nodeExterno.TVigor or '0';
             										node.HPBarMaxO = nodeExterno.HPTotal or '0';
             										node.MPBarMaxO = nodeExterno.MPTotal or '0';
-            										node.HPBarO = nodeExterno.HPTotal or '0';
-            										node.MPBarO = nodeExterno.MPTotal or '0';
+            										node.HPBarO = nodeExterno.HPAtual or '0';
+            										node.MPBarO = nodeExterno.MPAtual or '0';
             										node.NomeDoOponenteVez = node.Vez .. " - " ..  node.NomeDoOponente
             									end
             								end
@@ -1677,7 +1676,7 @@ local function constructNew_frmACSVelen()
             						end;
         end);
 
-    obj._e_event16 = obj.dataLink1:addEventListener("onChange",
+    obj._e_event17 = obj.dataLink1:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.GrupoRecebido == "1" then
             				local nodes = ndb.getChildNodes(sheet.NomeOponentes)
@@ -1685,24 +1684,92 @@ local function constructNew_frmACSVelen()
             				for _, node in ipairs(nodes) do
             					if node.NomeDoOponenteVez == sheet.AlvoRecebido then
             						node.HPBarO = node.HPBarO - sheet.DanoRecebido
-            						
+            						--AQUI--
+            
+            						if	self.BoxDetalheOponentes.visible == true then
+            							local node = self.rclGrupoOponentes.selectedNode;   
+            							self.rclGrupoOponentes.node = node;
+            							
+            							local mesas = rrpg.getRooms();
+            							local bibliotecaAtual = mesas[1].library;
+            
+            							local function obterNomesRecursivo(bibItem)
+            								local itensFilhos = bibItem.children;
+            								local nomes = bibItem.name;								
+            
+            								for i = 1, #itensFilhos, 1 do
+            									local bibItemFilho = itensFilhos[i];
+            									local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";									
+            
+            									if nomesDoFilho == node.NomeDoOponente then
+            										-- Obter ID do personagem Loan
+            										local idPersonagem = bibItemFilho;
+            
+            										-- Solicita acesso à ficha do personagem
+            										local promise = bibItemFilho:asyncOpenNDB();
+            
+            										-- Aguarda até que a ficha esteja carregada
+            										local nodeExterno = await(promise);
+            										
+            										nodeExterno.HPAtual = node.HPBarO or '0';
+            
+            									end
+            								end
+            							return nomes
+            							end
+            							local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+            						end;
             					end
             				end
-            			end	
+            			end;
             			
             			if sheet.GrupoRecebido == "2" then
             				local nodes = ndb.getChildNodes(sheet.NomeJogador)
             					
             				for _, node in ipairs(nodes) do
-            					if node.NomeDoOponenteVez == sheet.AlvoRecebido then
-            						node.HPBarO = node.HPBarO - sheet.DanoRecebido
+            					if node.NomeDoPersonagemVez == sheet.AlvoRecebido then
+            						node.HPBar = node.HPBar - sheet.DanoRecebido
+            
             						
+            
+            						if	self.BoxDetalheJogadores.visible == true then
+            							local node = self.rclGrupoJogadores.selectedNode;   
+            							self.rclGrupoJogadores.node = node;
+            							
+            							local mesas = rrpg.getRooms();
+            							local bibliotecaAtual = mesas[1].library;
+            
+            							local function obterNomesRecursivo(bibItem)
+            								local itensFilhos = bibItem.children;
+            								local nomes = bibItem.name;
+            
+            								for i = 1, #itensFilhos, 1 do
+            									local bibItemFilho = itensFilhos[i];
+            									local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+            
+            									if nomesDoFilho == node.NomeDoPersonagem then
+            										-- Obter ID do personagem Loan
+            										local idPersonagem = bibItemFilho;
+            
+            										-- Solicita acesso à ficha do personagem
+            										local promise = bibItemFilho:asyncOpenNDB();
+            
+            										-- Aguarda até que a ficha esteja carregada
+            										local nodeExterno = await(promise);
+            										nodeExterno.HPAtual = node.HPBar or '0';
+            									end
+            								end
+            							return nomes
+            							end
+            							local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+            						end;
             					end
             				end
             			end
         end);
 
     function obj:_releaseEvents()
+        __o_rrpgObjs.removeEventListenerById(self._e_event17);
         __o_rrpgObjs.removeEventListenerById(self._e_event16);
         __o_rrpgObjs.removeEventListenerById(self._e_event15);
         __o_rrpgObjs.removeEventListenerById(self._e_event14);
