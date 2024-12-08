@@ -71,7 +71,9 @@ local function constructNew_frmItemDaLista3()
 					return "Menor6"
 				end;
 			end;			
-		end;	
+		end;
+		
+			
 	
 
 

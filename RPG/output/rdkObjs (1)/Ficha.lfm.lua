@@ -61,7 +61,6 @@ local function constructNew_frmvelen()
 								for _, node in ipairs(nodesO) do
 									if node.NomeDoOponenteVez == idPersonagem then  -- Verifica se o campo NomeDoOponenteVez existe
 										EsqAlvo = node.ESQ
-										showMessage(node.ESQ)
 										RESAlvo = node.RES
 										DefAlvo = node.DEF 
 									end
@@ -3683,8 +3682,8 @@ local function constructNew_frmvelen()
     obj.edit27:setHeight(30);
     obj.edit27:setMax(160);
     obj.edit27:setMin(0);
-    obj.edit27:setHitTest(false);
-    obj.edit27:setCanFocus(false);
+    obj.edit27:setHitTest(true);
+    obj.edit27:setCanFocus(true);
     obj.edit27:setHorzTextAlign("center");
     obj.edit27:setType("number");
     obj.edit27:setText("120");

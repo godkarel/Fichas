@@ -104,7 +104,6 @@ local function constructNew_frmActionBar()
 								for _, node in ipairs(nodesO) do
 									if node.NomeDoOponenteVez == idPersonagem then  -- Verifica se o campo NomeDoOponenteVez existe
 										EsqAlvo = node.ESQ
-										showMessage(node.ESQ)
 										RESAlvo = node.RES
 										DefAlvo = node.DEF 
 									end

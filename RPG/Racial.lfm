@@ -33,20 +33,20 @@
 		<edit left="780" top="69" width="70" height="25" enabled="false" fontSize="18" field="CustoRacial"/> 
 		<edit name="DTRacialT" left="650" top="102" width="100" height="25" enabled="false" visible="false" fontSize="18" field="DTRacial"/> 
 
-		<edit left="600" top="225" width="50" height="20" opacity="1.0" enabled="false" type="float" decimalPlaces="2" fontSize="16" field="OrcRacial"/> 
-		<edit left="710" top="225" width="50" height="20" enabled="false" fontSize="16" field="PMRacial"/> 
-		<edit left="830" top="225" width="50" height="20" enabled="false" fontSize="16" field="PFRacial"/> 
-		<edit left="600" top="252" width="50" height="20" enabled="false" fontSize="16" field="DEFRacial"/> 
-		<edit left="710" top="252" width="50" height="20" enabled="false" fontSize="16" field="RESRacial"/> 		
+		<edit left="600" top="225" width="50" height="20" opacity="1.0" enabled="true" type="float" decimalPlaces="2" fontSize="16" field="OrcRacial"/> 
+		<edit left="710" top="225" width="50" height="20" enabled="true" fontSize="16" field="PMRacial"/> 
+		<edit left="830" top="225" width="50" height="20" enabled="true" fontSize="16" field="PFRacial"/> 
+		<edit left="600" top="252" width="50" height="20" enabled="true" fontSize="16" field="DEFRacial"/> 
+		<edit left="710" top="252" width="50" height="20" enabled="true" fontSize="16" field="RESRacial"/> 		
 		
-		<edit left="600" top="303" width="50" height="20" enabled="false" fontSize="16" field="AcertoRacial"/>
-		<edit left="710" top="303" width="50" height="20" enabled="false" fontSize="16" field="AMRacial"/> 
-		<edit left="830" top="303" width="50" height="20" enabled="false" fontSize="16" field="ESQRacial"/> 		
-		<edit left="600" top="328" width="50" height="20" enabled="false" fontSize="16" field="CritRacial"/> 
-		<edit left="710" top="328" width="50" height="20" enabled="false" fontSize="16" field="CMRacial"/> 	
-		<edit left="830" top="328" width="50" height="20" enabled="false" fontSize="16" field="PersistRacial"/> 		
-		<edit left="600" top="353" width="50" height="20" enabled="false" fontSize="16" field="PHPRacial"/>
-		<edit left="710" top="353" width="50" height="20" enabled="false" fontSize="16" field="PMPRacial"/>
+		<edit left="600" top="303" width="50" height="20" enabled="true" fontSize="16" field="AcertoRacial"/>
+		<edit left="710" top="303" width="50" height="20" enabled="true" fontSize="16" field="AMRacial"/> 
+		<edit left="830" top="303" width="50" height="20" enabled="true" fontSize="16" field="ESQRacial"/> 		
+		<edit left="600" top="328" width="50" height="20" enabled="true" fontSize="16" field="CritRacial"/> 
+		<edit left="710" top="328" width="50" height="20" enabled="true" fontSize="16" field="CMRacial"/> 	
+		<edit left="830" top="328" width="50" height="20" enabled="true" fontSize="16" field="PersistRacial"/> 		
+		<edit left="600" top="353" width="50" height="20" enabled="true" fontSize="16" field="PHPRacial"/>
+		<edit left="710" top="353" width="50" height="20" enabled="true" fontSize="16" field="PMPRacial"/>
 		
 		<dataLink field="Raca">
 			<event name="onChange">

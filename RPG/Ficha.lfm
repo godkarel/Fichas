@@ -104,7 +104,9 @@
 		sheet.MontESPACO = (tonumber(sheet.MontESPACO) or 0); 
 		sheet.idade = sheet.idade or "Depende da sua Raça"; 
 		sheet.HPTotal = (tonumber(sheet.HPTotal) or 0); 
-		sheet.MPTotal = (tonumber(sheet.MPTotal) or 0); 		
+		sheet.MPTotal = (tonumber(sheet.MPTotal) or 0); 
+		sheet.HPAtual = (tonumber(sheet.HPAtual) or 0); 
+		sheet.MPAtual = (tonumber(sheet.MPAtual) or 0); 		
 		sheet.DanoHabilidade1 = (tonumber(sheet.DanoHabilidade1) or 0); 
 		sheet.CuraHabilidade1 = (tonumber(sheet.CuraHabilidade1) or 0); 
 		sheet.Current = (tonumber(sheet.Current) or 0); 
@@ -353,16 +355,20 @@
 ------------- Status de Vida e outros -------------------------
 		<image left="290" top="650" width="60" height="60" visible="false" src="/imagens/info.png"/>
 		<image left="190" top="580" width="250" height="250" visible="false" src="/imagens/TAGS/StatusAtt.png"/>
-		<button left="290" top="650" width="60" opacity="0.1" height="60" visible="false" onClick="AtualizaStatusMesa()"/>
+		<button left="290" top="650" width="60" opacity="1.0" height="60" visible="false" onClick="AtualizaStatusMesa()"/>
 		
 		<button left="80" top="603" width="38" opacity="0.1" height="32" visible="false" onClick="IgualarHPMesa()"/>
 		<progressBar left="125" top="603" color="red"  width="130" value="100" max="100" height="30"  >
-		<label left="-30" fontSize="18" top="2" autoSize="true" fontColor="white" horzTextAlign="center" height="30" format="%d" field="HPTotal" />
+		<label left="40" fontSize="18" top="2" autoSize="true" fontColor="white" horzTextAlign="center" height="30" format="%d" field="HPTotal" />
 		<label align="client" fontSize="18" top="2" autoSize="true" fontColor="white" horzTextAlign="center" height="30" text="/" />
+		<edit left="-20" fontSize="18" top="0" transparent="true" fontColor="white" type="number" horzTextAlign="center" height="30" field="HPAtual" />
 		</progressBar>
 		<button left="80" top="637" width="38" opacity="0.1" height="32" visible="false" onClick="IgualarMPMesa()"/>
-		<progressBar left="148" top="640" color="blue"  width="100" value="100" max="100" height="30"  />
-		<label left="150" fontSize="20" top="640" width="100" fontColor="white" horzTextAlign="center" height="30" format="%d"  field="MPTotal" />
+		<progressBar left="125" top="640" color="blue"  width="130" value="100" max="100" height="30" >
+		<label left="40" fontSize="18" top="2" autoSize="true" fontColor="white" horzTextAlign="center" height="30" format="%d" field="MPTotal" />
+		<label align="client" fontSize="18" top="2" autoSize="true" fontColor="white" horzTextAlign="center" height="30" text="/" />
+		<edit left="-20" fontSize="18" top="0" transparent="true" fontColor="white" type="number" horzTextAlign="center" height="30" field="MPAtual" />
+		</progressBar>
 		<rectangle left="168" top="702" color="black"  width="75" height="20"/>
 		<label left="170" top="702" width="75" height="20" field="Esquiva" />
 		<rectangle left="168" top="732" color="black"  width="75" height="20"/>
@@ -545,8 +551,22 @@
 	<button left="388" top="493" width="60"  height="55" opacity="0.1" onClick="showMessage('RES = Resistencia Magica que é Metade da Força + Metade da Vitalidade + Metade da Defesa');"/>
 	<image left="317" top="443" width="200" height="200" src="/imagens/TAGS/RES.png"/>
 		
-	<comboBox left="273" top="355" width="90" horzTextAlign="center" field="EscolheAtaqueBasico" fontColor="#00FFFF" items="{'PA', 'PF'}"/>
-	<button left="273" top="380" width="90" height="30"  fontSize="12" fontColor="#00FFFF" text="Ataque Basico" onClick="AtaqueBasico()"/>		
+	<comboBox left="273" top="355" width="90" horzTextAlign="center" field="EscolheAtaqueBasico" fontColor="#00FFFF" items="{'PA', 'PF', 'M/PM', 'PM+PA', 'M/PM+PA'}"/>
+	<button name="AtkBasic" left="273" top="380" width="90" height="30"  fontSize="12" fontColor="#00FFFF" text="Ataque Basico" onClick="self.popAtaqueBasico:show('bottom', self.AtkBasic);"/>
+	<popup name="popAtaqueBasico" width="200" height="200" backOpacity="0.5">
+		<flowLayout name="TargetName" scale="1.2" align="top" height="50">
+			<label text="Alvo:" fontColor="red" align="right"  width="75" />
+			<comboBox items="{'Inimigo 1', 'Inimigo 2', 'Inimigo 3'}"
+						values="{'1', '2', '3'}" value="1" fontColor="#FF6347" name="cmbInimigos" width="150" height="25" />
+		</flowLayout>
+		 
+		<flowLayout name="NameTipoDeGrupo" scale="1.2" top="70" width="200" height="60">
+			<label text="Grupo:" fontColor="green" align="right" width="75" />
+			<comboBox items="{'Jogadores', 'Inimigos'}"
+					  values="{'1', '2'}" value="1" fontColor="#00FF7F" name="cmbTipoGrupo" field="cmbTipoDeGrupoF" width="150" height="25" />
+		</flowLayout>
+		<button align="bottom" width="90" height="30"  fontSize="12" fontColor="#00FFFF" text="Ataque Basico" onClick="AtaqueBasico();"/>             
+        </popup>                     	
 			
 	<edit left="270" top="670" width="90" type="number" height="30" visible="false" field="ClasseAcerto"/>
 	<edit left="270" top="720" width="90" type="number" height="30" visible="false" field="DestrezaAcerto"/>
@@ -579,7 +599,7 @@
 	</button>
 	
 	=============== CONTROLA TUDO DO LEVELUP ========================
-	<edit top="440" left="292" width="50" height="30" max="160" min="0" hitTest="false" canFocus="false" horzTextAlign="center" type="number" text="120" transparent="true" fontColor="black" fontSize="22" enabled="true" field="ControladorAtributos"/>
+	<edit top="440" left="292" width="50" height="30" max="160" min="0" hitTest="true" canFocus="true" horzTextAlign="center" type="number" text="120" transparent="true" fontColor="black" fontSize="22" enabled="true" field="ControladorAtributos"/>
 	<edit top="530" left="292" width="50" height="30" max="160" min="0" horzTextAlign="center" type="number" text="120" visible="false" fontColor="RED" fontSize="22" enabled="true" field="LiberarRolagemUp"/>
 	<edit top="850" left="400" width="50" height="30" max="20" min="0" horzTextAlign="center" type="number" visible="false" fontSize="22" enabled="true" field="CLevel"/>
 				
@@ -628,6 +648,19 @@
 						if (sheet.HPTotal > 0) and (sheet.MPTotal > 0)then
 							IgualarHPMesa();
 							IgualarMPMesa();
+						end;
+					end;							
+				end;
+            </event>
+        </dataLink>
+
+		<dataLink fields="{'HPAtual', 'MPAtual'}">
+            <event name="onChange">
+				if sheet.SequenciaInicial == true then				
+					if sheet.Level >= 1 then 
+						if (sheet.HPAtual > 0) and (sheet.MPAtual > 0)then
+							AtualizaMPAtual();
+							AtualizaHPAtual();
 						end;
 					end;							
 				end;

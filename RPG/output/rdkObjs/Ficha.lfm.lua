@@ -32,101 +32,261 @@ local function constructNew_frmvelen()
     obj:setName("frmvelen");
 
 
-			local function AtaqueBasico()      
-				-- obter a mesa do personagem
-				local mesaDoPersonagem = Firecast.getMesaDe(sheet);
-				local mesas = rrpg.getRooms();
-				local bibliotecaAtual = mesas[1].library;
+			local function AtaqueBasico()   
+				if sheet.cmbTipoDeGrupoF == "1" then   
+					-- obter a mesa do personagem
+					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
+					local mesas = rrpg.getRooms();
+					local bibliotecaAtual = mesas[1].library;
 
-					--[[local function obterNomesRecursivo(bibItem)
-						local itensFilhos = bibItem.children;
-						local nomes = bibItem.name;
-						
-						for i = 1, #itensFilhos, 1 do
-							local bibItemFilho = itensFilhos[i];
-							local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+						local function obterNomesRecursivo(bibItem)
+							local itensFilhos = bibItem.children;
+							local nomes = bibItem.name;
+							
+							for i = 1, #itensFilhos, 1 do
+								local bibItemFilho = itensFilhos[i];
+								local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
 
-							if nomesDoFilho == "Sistema de Combaate Velen" then
-								-- Obter ID do personagem Loan
-								local idPersonagem = self.cmbInimigos.value;
-								
-								-- Solicita acesso à ficha do personagem
-								local promise = bibItemFilho:asyncOpenNDB();
+								if nomesDoFilho == "Sistema de Combaate Velen" then
+									-- Obter ID do personagem Loan
+									local idPersonagem = self.cmbInimigos.value;
+									
+									-- Solicita acesso à ficha do personagem
+									local promise = bibItemFilho:asyncOpenNDB();
 
-								-- Aguarda até que a ficha esteja carregada
-								nodeExterno = await(promise);
-								
-								local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)
-						
-								for _, node in ipairs(nodesO) do
-									if node.NomeDoOponenteVez == idPersonagem then  -- Verifica se o campo NomeDoOponenteVez existe
-										EsqAlvo = node.ESQ
-										RESAlvo = node.RES
-										DefAlvo = node.DEF 
+									-- Aguarda até que a ficha esteja carregada
+									nodeExterno = await(promise);
+									
+									local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)								
+									
+									for _, node in ipairs(nodesO) do
+
+										if node.NomeDoOponenteVez == idPersonagem then  -- Verifica se o campo NomeDoOponenteVez existe
+											EsqAlvo = node.ESQ
+											RESAlvo = node.RES
+											DefAlvo = node.DEF
+										end
 									end
 								end
 							end
+							return nomes
 						end
-						return nomes
-					end
 
-					local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);]]
+						local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
 
-				
-				------------------------------------------------------------------
-
-				-- se o usuário não preencheu modificador, vamos usar o valor 0
-				sheet.Acerto = sheet.Acerto or 0;                        
-				if sheet.EscolheAtaqueBasico == nil then
-					showMessage("Escolha uma Base de Dano para seu Ataque Basico na lista acima");
-				else				
-					mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
-						function (rolado)	
-						--[[EsqAlvo = EsqAlvo + 1
-						local soDado = rolado.resultado;
-							if soDado > EsqAlvo then]]
-								if rolado.resultado > sheet.Critical then
-									if sheet.EscolheAtaqueBasico == 'PA' then
-										--[[nodeExterno.AlvoRecebido = self.cmbInimigos.value
-										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-										nodeExterno.DanoRecebido = (sheet.PA * 2) * (1 - (DefAlvo / 100))]]
-										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.PA * 2) .. " [§K9,0] » CRITICAL :dinofauro:");
-										
-									elseif sheet.EscolheAtaqueBasico == 'PF' then	
-										if sheet.AtualFlecha ~= 0 then									
-											sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
-											--[[nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value	
-											nodeExterno.DanoRecebido = (sheet.PF * 2) * (1 - (DefAlvo / 100))]]
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (sheet.PF * 2) .. " [§K9,0]» CRITICAL :dinofauro:");											
-										else
-											mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
-										end;
-									end;	
-								else
-									if sheet.EscolheAtaqueBasico == 'PA' then
-										--[[nodeExterno.AlvoRecebido = self.cmbInimigos.value
-										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-										nodeExterno.DanoRecebido = (sheet.PA) * (1 - (DefAlvo / 100))]]
-										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (sheet.PA) .. " [§K9,0]»");
-									elseif sheet.EscolheAtaqueBasico == 'PF' then		
-										if sheet.AtualFlecha ~= 0 then									
-											sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
-											--[[nodeExterno.AlvoRecebido = self.cmbInimigos.value
+					
+					------------------------------------------------------------------
+					
+					-- se o usuário não preencheu modificador, vamos usar o valor 0
+					sheet.Acerto = sheet.Acerto or 0;                      
+					if sheet.EscolheAtaqueBasico == nil then
+						showMessage("Escolha uma Base de Dano para seu Ataque Basico na lista acima");
+					else				
+						mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
+							function (rolado)	
+							EsqAlvo = EsqAlvo + 1
+							local soDado = rolado.resultado - sheet.acerto;
+								if rolado.resultado + sheet.acerto > EsqAlvo then
+									if soDado >= sheet.Critical then
+										if sheet.EscolheAtaqueBasico == 'PA' then
+											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = (sheet.PF) * (1 - (DefAlvo / 100))]]
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (sheet.PF) .. " [§K9,0]»");
-										else
-											mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
+											nodeExterno.DanoRecebido = math.floor((sheet.PA * 2) * (1 - (DefAlvo / 100)))
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+											sheet.nodeExterno = math.floor(sheet.PA * 2)										
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
+										elseif sheet.EscolheAtaqueBasico == 'PF' then	
+											if sheet.AtualFlecha ~= 0 then									
+												sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
+												nodeExterno.AlvoRecebido = self.cmbInimigos.value
+												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+												nodeExterno.DanoRecebido = math.floor((sheet.PF * 2) * (1 - (DefAlvo / 100)))
+												nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+												sheet.nodeExterno = math.floor(sheet.PF * 2)
+												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
+											end;
+										elseif sheet.EscolheAtaqueBasico == 'M/PM' then				
+											nodeExterno.AlvoRecebido = self.cmbInimigos.value
+											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+											nodeExterno.DanoRecebido = math.floor((sheet.PM) * (1 - (RESAlvo / 100)))
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+											sheet.nodeExterno = math.floor(sheet.PM)
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
+										elseif sheet.EscolheAtaqueBasico == 'PM+PA' then								
+											nodeExterno.AlvoRecebido = self.cmbInimigos.value
+											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+											nodeExterno.DanoRecebido = math.floor((sheet.PM * 2) + math.floor((sheet.PA * 2)) * (1 - (DefAlvo / 100)))
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+											sheet.nodeExterno = math.floor((sheet.PM * 2)) + math.floor((sheet.PA * 2))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
+										elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
+											nodeExterno.AlvoRecebido = self.cmbInimigos.value
+											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA * 2)) * (1 - (DefAlvo / 100)))
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+											sheet.nodeExterno = math.floor((sheet.PM)) + math.floor((sheet.PA * 2))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
 										end;
-									end;							
+									else
+										if sheet.EscolheAtaqueBasico == 'PA' then
+											nodeExterno.AlvoRecebido = self.cmbInimigos.value
+											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+											nodeExterno.DanoRecebido = math.floor((sheet.PA) * (1 - (DefAlvo / 100)))
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+											sheet.nodeExterno = math.floor(sheet.PA)
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
+										elseif sheet.EscolheAtaqueBasico == 'PF' then		
+											if sheet.AtualFlecha ~= 0 then									
+												sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
+												nodeExterno.AlvoRecebido = self.cmbInimigos.value
+												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+												nodeExterno.DanoRecebido = math.floor((sheet.PF) * (1 - (DefAlvo / 100)))
+												nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+												sheet.nodeExterno = math.floor(sheet.PF)
+												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
+											else
+												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
+											end;
+										elseif sheet.EscolheAtaqueBasico == 'M/PM' then				
+											nodeExterno.AlvoRecebido = self.cmbInimigos.value
+											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+											nodeExterno.DanoRecebido = math.floor((sheet.PM / 2) * (1 - (RESAlvo / 100)))
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+											sheet.nodeExterno = math.floor(sheet.PM / 2)
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
+										elseif sheet.EscolheAtaqueBasico == 'PM+PA' then								
+											nodeExterno.AlvoRecebido = self.cmbInimigos.value
+											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA)) * (1 - (DefAlvo / 100)))
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+											sheet.nodeExterno = math.floor((sheet.PM)) + math.floor((sheet.PA))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
+										elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
+											nodeExterno.AlvoRecebido = self.cmbInimigos.value
+											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+											nodeExterno.DanoRecebido = math.floor(((sheet.PM / 2)) + math.floor((sheet.PA)) * (1 - (DefAlvo / 100)))
+											nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+											sheet.nodeExterno = math.floor((sheet.PM / 2)) + math.floor((sheet.PA))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
+										
+										end;
+											
+									end;
+									
+								else
+									mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] Errou o ataque no oponente");
 								end;
-							--[[else
-								mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] Errou o ataque no oponente");
-							end;]]
-					end); 
+								
+						end); 
+					end;
 				end;
-			end; 		   
+
+				if sheet.cmbTipoDeGrupoF == "2" then   
+						-- obter a mesa do personagem
+					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
+					local mesas = rrpg.getRooms();
+					local bibliotecaAtual = mesas[1].library;
+
+						local function obterNomesRecursivo(bibItem)
+							local itensFilhos = bibItem.children;
+							local nomes = bibItem.name;
+							
+							for i = 1, #itensFilhos, 1 do
+								local bibItemFilho = itensFilhos[i];
+								local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+
+								if nomesDoFilho == "Sistema de Combaate Velen" then
+									-- Obter ID do personagem Loan
+									local idPersonagem = self.cmbInimigos.value;
+									
+									-- Solicita acesso à ficha do personagem
+									local promise = bibItemFilho:asyncOpenNDB();
+
+									-- Aguarda até que a ficha esteja carregada
+									nodeExterno = await(promise);
+									
+									local nodesO = ndb.getChildNodes(nodeExterno.NomeJogador)								
+									
+									for _, node in ipairs(nodesO) do
+
+										if node.NomeDoPersonagemVez == idPersonagem then  -- Verifica se o campo NomeDoPersonagemVez existe
+											EsqAlvo = node.ESQ
+											RESAlvo = node.RES
+											DefAlvo = node.DEF
+										end
+									end
+								end
+							end
+							return nomes
+						end
+
+						local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+
+						
+						------------------------------------------------------------------
+						
+						-- se o usuário não preencheu modificador, vamos usar o valor 0
+						sheet.Acerto = sheet.Acerto or 0;                        
+						if sheet.EscolheAtaqueBasico == nil then
+							showMessage("Escolha uma Base de Dano para seu Ataque Basico na lista acima");
+						else				
+							mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
+								function (rolado)	
+								EsqAlvo = EsqAlvo + 1
+								local soDado = rolado.resultado - sheet.acerto;
+									if rolado.resultado + sheet.acerto > EsqAlvo then
+										if soDado >= sheet.Critical then
+											if sheet.EscolheAtaqueBasico == 'PA' then
+												nodeExterno.AlvoRecebido = self.cmbInimigos.value
+												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+												nodeExterno.DanoRecebido = math.floor((sheet.PA * 2) * (1 - (DefAlvo / 100)))
+												nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+												sheet.nodeExterno = math.floor(sheet.PA * 2)										
+												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
+											elseif sheet.EscolheAtaqueBasico == 'PF' then	
+												if sheet.AtualFlecha ~= 0 then									
+													sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
+													nodeExterno.AlvoRecebido = self.cmbInimigos.value
+													nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+													nodeExterno.DanoRecebido = math.floor((sheet.PF * 2) * (1 - (DefAlvo / 100)))
+													nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+													sheet.nodeExterno = math.floor(sheet.PF * 2)
+													mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
+												else
+													mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
+												end;
+											end;	
+										else
+											if sheet.EscolheAtaqueBasico == 'PA' then
+												nodeExterno.AlvoRecebido = self.cmbInimigos.value
+												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+												nodeExterno.DanoRecebido = math.floor((sheet.PA) * (1 - (DefAlvo / 100)))
+												nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+												sheet.nodeExterno = math.floor(sheet.PA)
+												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
+											elseif sheet.EscolheAtaqueBasico == 'PF' then		
+												if sheet.AtualFlecha ~= 0 then									
+													sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
+													nodeExterno.AlvoRecebido = self.cmbInimigos.value
+													nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+													nodeExterno.DanoRecebido = math.floor((sheet.PF) * (1 - (DefAlvo / 100)))
+													nodeExterno.ACAOTURNO = nodeExterno.ACAOTURNO + 1
+													sheet.nodeExterno = math.floor(sheet.PF)
+													mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
+												else
+													mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
+												end;
+											end;							
+										end;
+									else
+										mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] Errou o ataque no oponente");
+									end;
+							end); 
+						end;
+					end;
+				end;
         
 
 
@@ -813,6 +973,9 @@ local function constructNew_frmvelen()
 					IgualarHPMesa();
 					IgualarMPMesa();
 					
+					AtualizaMPAtual();
+					AtualizaHPAtual();
+					
 					if mesa.meuJogador.isJogador == true then;					
 						if sheet.Espec == "Juiz" then
 							local Linha1 = "(PA" .. (sheet.PA or 0) .. ")" .. "(PF" .. (sheet.PF or 0) .. ")(PM" .. (sheet.PM or 0) .. ")(A" .. (sheet.Acerto) ..  ")(AM" .. (sheet.AcertoMagico) .. ")"
@@ -1005,6 +1168,23 @@ local function constructNew_frmvelen()
 									
 				end;
 			end;
+			
+			function AtualizaHPAtual()
+				local mesa = Firecast.getMesaDe(sheet); 
+				if mesa.meuJogador.isJogador == true then;	
+					local HPTotalMesa = (tonumber(sheet.HPTotal) or 0);
+					mesa.meuJogador:requestSetBarValue(1, sheet.HPAtual, HPTotalMesa);
+				end;
+			end;
+			
+			function AtualizaMPAtual()
+				local mesa = Firecast.getMesaDe(sheet); 
+				if mesa.meuJogador.isJogador == true then;	
+					local MPTotalMesa = (tonumber(sheet.MPTotal) or 0);
+					mesa.meuJogador:requestSetBarValue(2, sheet.MPAtual, MPTotalMesa);
+				end;
+			end;
+			
 		
 
 
@@ -3002,7 +3182,7 @@ local function constructNew_frmvelen()
     obj.button13:setLeft(290);
     obj.button13:setTop(650);
     obj.button13:setWidth(60);
-    obj.button13:setOpacity(0.1);
+    obj.button13:setOpacity(1.0);
     obj.button13:setHeight(60);
     obj.button13:setVisible(false);
     obj.button13:setName("button13");
@@ -3030,7 +3210,7 @@ local function constructNew_frmvelen()
 
     obj.label15 = GUI.fromHandle(_obj_newObject("label"));
     obj.label15:setParent(obj.progressBar1);
-    obj.label15:setLeft(-30);
+    obj.label15:setLeft(40);
     obj.label15:setFontSize(18);
     obj.label15:setTop(2);
     obj.label15:setAutoSize(true);
@@ -3053,6 +3233,19 @@ local function constructNew_frmvelen()
     obj.label16:setText("/");
     obj.label16:setName("label16");
 
+    obj.edit10 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit10:setParent(obj.progressBar1);
+    obj.edit10:setLeft(-20);
+    obj.edit10:setFontSize(18);
+    obj.edit10:setTop(0);
+    obj.edit10:setTransparent(true);
+    obj.edit10:setFontColor("white");
+    obj.edit10:setType("number");
+    obj.edit10:setHorzTextAlign("center");
+    obj.edit10:setHeight(30);
+    obj.edit10:setField("HPAtual");
+    obj.edit10:setName("edit10");
+
     obj.button15 = GUI.fromHandle(_obj_newObject("button"));
     obj.button15:setParent(obj.scrollBox1);
     obj.button15:setLeft(80);
@@ -3065,27 +3258,52 @@ local function constructNew_frmvelen()
 
     obj.progressBar2 = GUI.fromHandle(_obj_newObject("progressBar"));
     obj.progressBar2:setParent(obj.scrollBox1);
-    obj.progressBar2:setLeft(148);
+    obj.progressBar2:setLeft(125);
     obj.progressBar2:setTop(640);
     obj.progressBar2:setColor("blue");
-    obj.progressBar2:setWidth(100);
+    obj.progressBar2:setWidth(130);
     obj.progressBar2:setPosition(100);
     obj.progressBar2:setMax(100);
     obj.progressBar2:setHeight(30);
     obj.progressBar2:setName("progressBar2");
 
     obj.label17 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label17:setParent(obj.scrollBox1);
-    obj.label17:setLeft(150);
-    obj.label17:setFontSize(20);
-    obj.label17:setTop(640);
-    obj.label17:setWidth(100);
+    obj.label17:setParent(obj.progressBar2);
+    obj.label17:setLeft(40);
+    obj.label17:setFontSize(18);
+    obj.label17:setTop(2);
+    obj.label17:setAutoSize(true);
     obj.label17:setFontColor("white");
     obj.label17:setHorzTextAlign("center");
     obj.label17:setHeight(30);
     obj.label17.format = "%d";
     obj.label17:setField("MPTotal");
     obj.label17:setName("label17");
+
+    obj.label18 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label18:setParent(obj.progressBar2);
+    obj.label18:setAlign("client");
+    obj.label18:setFontSize(18);
+    obj.label18:setTop(2);
+    obj.label18:setAutoSize(true);
+    obj.label18:setFontColor("white");
+    obj.label18:setHorzTextAlign("center");
+    obj.label18:setHeight(30);
+    obj.label18:setText("/");
+    obj.label18:setName("label18");
+
+    obj.edit11 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit11:setParent(obj.progressBar2);
+    obj.edit11:setLeft(-20);
+    obj.edit11:setFontSize(18);
+    obj.edit11:setTop(0);
+    obj.edit11:setTransparent(true);
+    obj.edit11:setFontColor("white");
+    obj.edit11:setType("number");
+    obj.edit11:setHorzTextAlign("center");
+    obj.edit11:setHeight(30);
+    obj.edit11:setField("MPAtual");
+    obj.edit11:setName("edit11");
 
     obj.rectangle13 = GUI.fromHandle(_obj_newObject("rectangle"));
     obj.rectangle13:setParent(obj.scrollBox1);
@@ -3096,14 +3314,14 @@ local function constructNew_frmvelen()
     obj.rectangle13:setHeight(20);
     obj.rectangle13:setName("rectangle13");
 
-    obj.label18 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label18:setParent(obj.scrollBox1);
-    obj.label18:setLeft(170);
-    obj.label18:setTop(702);
-    obj.label18:setWidth(75);
-    obj.label18:setHeight(20);
-    obj.label18:setField("Esquiva");
-    obj.label18:setName("label18");
+    obj.label19 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label19:setParent(obj.scrollBox1);
+    obj.label19:setLeft(170);
+    obj.label19:setTop(702);
+    obj.label19:setWidth(75);
+    obj.label19:setHeight(20);
+    obj.label19:setField("Esquiva");
+    obj.label19:setName("label19");
 
     obj.rectangle14 = GUI.fromHandle(_obj_newObject("rectangle"));
     obj.rectangle14:setParent(obj.scrollBox1);
@@ -3114,15 +3332,15 @@ local function constructNew_frmvelen()
     obj.rectangle14:setHeight(20);
     obj.rectangle14:setName("rectangle14");
 
-    obj.label19 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label19:setParent(obj.scrollBox1);
-    obj.label19:setLeft(170);
-    obj.label19:setTop(732);
-    obj.label19:setWidth(75);
-    obj.label19:setHeight(20);
-    obj.label19.format = "%d";
-    obj.label19:setField("Persistencia");
-    obj.label19:setName("label19");
+    obj.label20 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label20:setParent(obj.scrollBox1);
+    obj.label20:setLeft(170);
+    obj.label20:setTop(732);
+    obj.label20:setWidth(75);
+    obj.label20:setHeight(20);
+    obj.label20.format = "%d";
+    obj.label20:setField("Persistencia");
+    obj.label20:setName("label20");
 
     obj.rectangle15 = GUI.fromHandle(_obj_newObject("rectangle"));
     obj.rectangle15:setParent(obj.scrollBox1);
@@ -3133,14 +3351,14 @@ local function constructNew_frmvelen()
     obj.rectangle15:setHeight(20);
     obj.rectangle15:setName("rectangle15");
 
-    obj.label20 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label20:setParent(obj.scrollBox1);
-    obj.label20:setLeft(500);
-    obj.label20:setTop(610);
-    obj.label20:setWidth(75);
-    obj.label20:setHeight(20);
-    obj.label20:setField("Acerto");
-    obj.label20:setName("label20");
+    obj.label21 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label21:setParent(obj.scrollBox1);
+    obj.label21:setLeft(500);
+    obj.label21:setTop(610);
+    obj.label21:setWidth(75);
+    obj.label21:setHeight(20);
+    obj.label21:setField("Acerto");
+    obj.label21:setName("label21");
 
     obj.rectangle16 = GUI.fromHandle(_obj_newObject("rectangle"));
     obj.rectangle16:setParent(obj.scrollBox1);
@@ -3151,14 +3369,14 @@ local function constructNew_frmvelen()
     obj.rectangle16:setHeight(20);
     obj.rectangle16:setName("rectangle16");
 
-    obj.label21 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label21:setParent(obj.scrollBox1);
-    obj.label21:setLeft(500);
-    obj.label21:setTop(640);
-    obj.label21:setWidth(75);
-    obj.label21:setHeight(20);
-    obj.label21:setField("AcertoMagico");
-    obj.label21:setName("label21");
+    obj.label22 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label22:setParent(obj.scrollBox1);
+    obj.label22:setLeft(500);
+    obj.label22:setTop(640);
+    obj.label22:setWidth(75);
+    obj.label22:setHeight(20);
+    obj.label22:setField("AcertoMagico");
+    obj.label22:setName("label22");
 
     obj.rectangle17 = GUI.fromHandle(_obj_newObject("rectangle"));
     obj.rectangle17:setParent(obj.scrollBox1);
@@ -3169,14 +3387,14 @@ local function constructNew_frmvelen()
     obj.rectangle17:setHeight(20);
     obj.rectangle17:setName("rectangle17");
 
-    obj.label22 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label22:setParent(obj.scrollBox1);
-    obj.label22:setLeft(500);
-    obj.label22:setTop(702);
-    obj.label22:setWidth(75);
-    obj.label22:setHeight(20);
-    obj.label22:setField("Critical");
-    obj.label22:setName("label22");
+    obj.label23 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label23:setParent(obj.scrollBox1);
+    obj.label23:setLeft(500);
+    obj.label23:setTop(702);
+    obj.label23:setWidth(75);
+    obj.label23:setHeight(20);
+    obj.label23:setField("Critical");
+    obj.label23:setName("label23");
 
     obj.rectangle18 = GUI.fromHandle(_obj_newObject("rectangle"));
     obj.rectangle18:setParent(obj.scrollBox1);
@@ -3187,46 +3405,46 @@ local function constructNew_frmvelen()
     obj.rectangle18:setHeight(20);
     obj.rectangle18:setName("rectangle18");
 
-    obj.label23 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label23:setParent(obj.scrollBox1);
-    obj.label23:setLeft(500);
-    obj.label23:setTop(732);
-    obj.label23:setWidth(75);
-    obj.label23:setHeight(20);
-    obj.label23:setField("CMagico");
-    obj.label23:setName("label23");
+    obj.label24 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label24:setParent(obj.scrollBox1);
+    obj.label24:setLeft(500);
+    obj.label24:setTop(732);
+    obj.label24:setWidth(75);
+    obj.label24:setHeight(20);
+    obj.label24:setField("CMagico");
+    obj.label24:setName("label24");
 
-    obj.edit10 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit10:setParent(obj.scrollBox1);
-    obj.edit10:setLeft(295);
-    obj.edit10:setTop(807);
-    obj.edit10:setFontColor("#00008B");
-    obj.edit10:setScale(2.0);
-    obj.edit10:setWidth(21);
-    obj.edit10:setHeight(50);
-    obj.edit10:setType("number");
-    obj.edit10:setHorzTextAlign("center");
-    obj.edit10:setTextPrompt("0");
-    obj.edit10:setCanFocus(false);
-    obj.edit10:setHitTest(false);
-    obj.edit10:setEnabled(true);
-    obj.edit10:setMax(30);
-    obj.edit10:setField("Level");
-    obj.edit10:setTransparent(true);
-    obj.edit10:setName("edit10");
+    obj.edit12 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit12:setParent(obj.scrollBox1);
+    obj.edit12:setLeft(295);
+    obj.edit12:setTop(807);
+    obj.edit12:setFontColor("#00008B");
+    obj.edit12:setScale(2.0);
+    obj.edit12:setWidth(21);
+    obj.edit12:setHeight(50);
+    obj.edit12:setType("number");
+    obj.edit12:setHorzTextAlign("center");
+    obj.edit12:setTextPrompt("0");
+    obj.edit12:setCanFocus(false);
+    obj.edit12:setHitTest(false);
+    obj.edit12:setEnabled(true);
+    obj.edit12:setMax(30);
+    obj.edit12:setField("Level");
+    obj.edit12:setTransparent(true);
+    obj.edit12:setName("edit12");
 
-    obj.edit11 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit11:setParent(obj.scrollBox1);
-    obj.edit11:setLeft(295);
-    obj.edit11:setTop(700);
-    obj.edit11:setFontColor("#00008B");
-    obj.edit11:setScale(2.0);
-    obj.edit11:setWidth(21);
-    obj.edit11:setVisible(false);
-    obj.edit11:setHeight(50);
-    obj.edit11:setField("Elevel");
-    obj.edit11:setTransparent(false);
-    obj.edit11:setName("edit11");
+    obj.edit13 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit13:setParent(obj.scrollBox1);
+    obj.edit13:setLeft(295);
+    obj.edit13:setTop(700);
+    obj.edit13:setFontColor("#00008B");
+    obj.edit13:setScale(2.0);
+    obj.edit13:setWidth(21);
+    obj.edit13:setVisible(false);
+    obj.edit13:setHeight(50);
+    obj.edit13:setField("Elevel");
+    obj.edit13:setTransparent(false);
+    obj.edit13:setName("edit13");
 
     obj.button16 = GUI.fromHandle(_obj_newObject("button"));
     obj.button16:setParent(obj.scrollBox1);
@@ -3486,13 +3704,82 @@ local function constructNew_frmvelen()
     obj.comboBox3:setHorzTextAlign("center");
     obj.comboBox3:setField("EscolheAtaqueBasico");
     obj.comboBox3:setFontColor("#00FFFF");
-    obj.comboBox3:setItems({'PA', 'PF'});
+    obj.comboBox3:setItems({'PA', 'PF', 'M/PM', 'PM+PA', 'M/PM+PA'});
     obj.comboBox3:setName("comboBox3");
 
+    obj.AtkBasic = GUI.fromHandle(_obj_newObject("button"));
+    obj.AtkBasic:setParent(obj.scrollBox1);
+    obj.AtkBasic:setName("AtkBasic");
+    obj.AtkBasic:setLeft(273);
+    obj.AtkBasic:setTop(380);
+    obj.AtkBasic:setWidth(90);
+    obj.AtkBasic:setHeight(30);
+    obj.AtkBasic:setFontSize(12);
+    obj.AtkBasic:setFontColor("#00FFFF");
+    obj.AtkBasic:setText("Ataque Basico");
+
+    obj.popAtaqueBasico = GUI.fromHandle(_obj_newObject("popup"));
+    obj.popAtaqueBasico:setParent(obj.scrollBox1);
+    obj.popAtaqueBasico:setName("popAtaqueBasico");
+    obj.popAtaqueBasico:setWidth(200);
+    obj.popAtaqueBasico:setHeight(200);
+    obj.popAtaqueBasico:setBackOpacity(0.5);
+
+    obj.TargetName = GUI.fromHandle(_obj_newObject("flowLayout"));
+    obj.TargetName:setParent(obj.popAtaqueBasico);
+    obj.TargetName:setName("TargetName");
+    obj.TargetName:setScale(1.2);
+    obj.TargetName:setAlign("top");
+    obj.TargetName:setHeight(50);
+
+    obj.label25 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label25:setParent(obj.TargetName);
+    obj.label25:setText("Alvo:");
+    obj.label25:setFontColor("red");
+    obj.label25:setAlign("right");
+    obj.label25:setWidth(75);
+    obj.label25:setName("label25");
+
+    obj.cmbInimigos = GUI.fromHandle(_obj_newObject("comboBox"));
+    obj.cmbInimigos:setParent(obj.TargetName);
+    obj.cmbInimigos:setItems({'Inimigo 1', 'Inimigo 2', 'Inimigo 3'});
+    obj.cmbInimigos:setValues({'1', '2', '3'});
+    obj.cmbInimigos:setValue("1");
+    obj.cmbInimigos:setFontColor("#FF6347");
+    obj.cmbInimigos:setName("cmbInimigos");
+    obj.cmbInimigos:setWidth(150);
+    obj.cmbInimigos:setHeight(25);
+
+    obj.NameTipoDeGrupo = GUI.fromHandle(_obj_newObject("flowLayout"));
+    obj.NameTipoDeGrupo:setParent(obj.popAtaqueBasico);
+    obj.NameTipoDeGrupo:setName("NameTipoDeGrupo");
+    obj.NameTipoDeGrupo:setScale(1.2);
+    obj.NameTipoDeGrupo:setTop(70);
+    obj.NameTipoDeGrupo:setWidth(200);
+    obj.NameTipoDeGrupo:setHeight(60);
+
+    obj.label26 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label26:setParent(obj.NameTipoDeGrupo);
+    obj.label26:setText("Grupo:");
+    obj.label26:setFontColor("green");
+    obj.label26:setAlign("right");
+    obj.label26:setWidth(75);
+    obj.label26:setName("label26");
+
+    obj.cmbTipoGrupo = GUI.fromHandle(_obj_newObject("comboBox"));
+    obj.cmbTipoGrupo:setParent(obj.NameTipoDeGrupo);
+    obj.cmbTipoGrupo:setItems({'Jogadores', 'Inimigos'});
+    obj.cmbTipoGrupo:setValues({'1', '2'});
+    obj.cmbTipoGrupo:setValue("1");
+    obj.cmbTipoGrupo:setFontColor("#00FF7F");
+    obj.cmbTipoGrupo:setName("cmbTipoGrupo");
+    obj.cmbTipoGrupo:setField("cmbTipoDeGrupoF");
+    obj.cmbTipoGrupo:setWidth(150);
+    obj.cmbTipoGrupo:setHeight(25);
+
     obj.button27 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button27:setParent(obj.scrollBox1);
-    obj.button27:setLeft(273);
-    obj.button27:setTop(380);
+    obj.button27:setParent(obj.popAtaqueBasico);
+    obj.button27:setAlign("bottom");
     obj.button27:setWidth(90);
     obj.button27:setHeight(30);
     obj.button27:setFontSize(12);
@@ -3500,48 +3787,26 @@ local function constructNew_frmvelen()
     obj.button27:setText("Ataque Basico");
     obj.button27:setName("button27");
 
-    obj.edit12 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit12:setParent(obj.scrollBox1);
-    obj.edit12:setLeft(270);
-    obj.edit12:setTop(670);
-    obj.edit12:setWidth(90);
-    obj.edit12:setType("number");
-    obj.edit12:setHeight(30);
-    obj.edit12:setVisible(false);
-    obj.edit12:setField("ClasseAcerto");
-    obj.edit12:setName("edit12");
-
-    obj.edit13 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit13:setParent(obj.scrollBox1);
-    obj.edit13:setLeft(270);
-    obj.edit13:setTop(720);
-    obj.edit13:setWidth(90);
-    obj.edit13:setType("number");
-    obj.edit13:setHeight(30);
-    obj.edit13:setVisible(false);
-    obj.edit13:setField("DestrezaAcerto");
-    obj.edit13:setName("edit13");
-
     obj.edit14 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit14:setParent(obj.scrollBox1);
     obj.edit14:setLeft(270);
-    obj.edit14:setTop(770);
+    obj.edit14:setTop(670);
     obj.edit14:setWidth(90);
     obj.edit14:setType("number");
     obj.edit14:setHeight(30);
     obj.edit14:setVisible(false);
-    obj.edit14:setField("EspecAcerto");
+    obj.edit14:setField("ClasseAcerto");
     obj.edit14:setName("edit14");
 
     obj.edit15 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit15:setParent(obj.scrollBox1);
     obj.edit15:setLeft(270);
-    obj.edit15:setTop(670);
+    obj.edit15:setTop(720);
     obj.edit15:setWidth(90);
     obj.edit15:setType("number");
     obj.edit15:setHeight(30);
     obj.edit15:setVisible(false);
-    obj.edit15:setField("ClasseAM");
+    obj.edit15:setField("DestrezaAcerto");
     obj.edit15:setName("edit15");
 
     obj.edit16 = GUI.fromHandle(_obj_newObject("edit"));
@@ -3552,7 +3817,7 @@ local function constructNew_frmvelen()
     obj.edit16:setType("number");
     obj.edit16:setHeight(30);
     obj.edit16:setVisible(false);
-    obj.edit16:setField("EspecAM");
+    obj.edit16:setField("EspecAcerto");
     obj.edit16:setName("edit16");
 
     obj.edit17 = GUI.fromHandle(_obj_newObject("edit"));
@@ -3563,7 +3828,7 @@ local function constructNew_frmvelen()
     obj.edit17:setType("number");
     obj.edit17:setHeight(30);
     obj.edit17:setVisible(false);
-    obj.edit17:setField("ClasseCR");
+    obj.edit17:setField("ClasseAM");
     obj.edit17:setName("edit17");
 
     obj.edit18 = GUI.fromHandle(_obj_newObject("edit"));
@@ -3574,7 +3839,7 @@ local function constructNew_frmvelen()
     obj.edit18:setType("number");
     obj.edit18:setHeight(30);
     obj.edit18:setVisible(false);
-    obj.edit18:setField("EspecCR");
+    obj.edit18:setField("EspecAM");
     obj.edit18:setName("edit18");
 
     obj.edit19 = GUI.fromHandle(_obj_newObject("edit"));
@@ -3585,7 +3850,7 @@ local function constructNew_frmvelen()
     obj.edit19:setType("number");
     obj.edit19:setHeight(30);
     obj.edit19:setVisible(false);
-    obj.edit19:setField("ClasseCM");
+    obj.edit19:setField("ClasseCR");
     obj.edit19:setName("edit19");
 
     obj.edit20 = GUI.fromHandle(_obj_newObject("edit"));
@@ -3596,7 +3861,7 @@ local function constructNew_frmvelen()
     obj.edit20:setType("number");
     obj.edit20:setHeight(30);
     obj.edit20:setVisible(false);
-    obj.edit20:setField("EspecCM");
+    obj.edit20:setField("EspecCR");
     obj.edit20:setName("edit20");
 
     obj.edit21 = GUI.fromHandle(_obj_newObject("edit"));
@@ -3607,7 +3872,7 @@ local function constructNew_frmvelen()
     obj.edit21:setType("number");
     obj.edit21:setHeight(30);
     obj.edit21:setVisible(false);
-    obj.edit21:setField("ClasseEsquiva");
+    obj.edit21:setField("ClasseCM");
     obj.edit21:setName("edit21");
 
     obj.edit22 = GUI.fromHandle(_obj_newObject("edit"));
@@ -3618,7 +3883,7 @@ local function constructNew_frmvelen()
     obj.edit22:setType("number");
     obj.edit22:setHeight(30);
     obj.edit22:setVisible(false);
-    obj.edit22:setField("EspecEsquiva");
+    obj.edit22:setField("EspecCM");
     obj.edit22:setName("edit22");
 
     obj.edit23 = GUI.fromHandle(_obj_newObject("edit"));
@@ -3629,7 +3894,7 @@ local function constructNew_frmvelen()
     obj.edit23:setType("number");
     obj.edit23:setHeight(30);
     obj.edit23:setVisible(false);
-    obj.edit23:setField("ClassePer");
+    obj.edit23:setField("ClasseEsquiva");
     obj.edit23:setName("edit23");
 
     obj.edit24 = GUI.fromHandle(_obj_newObject("edit"));
@@ -3640,18 +3905,18 @@ local function constructNew_frmvelen()
     obj.edit24:setType("number");
     obj.edit24:setHeight(30);
     obj.edit24:setVisible(false);
-    obj.edit24:setField("EspecPer");
+    obj.edit24:setField("EspecEsquiva");
     obj.edit24:setName("edit24");
 
     obj.edit25 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit25:setParent(obj.scrollBox1);
     obj.edit25:setLeft(270);
-    obj.edit25:setTop(770);
+    obj.edit25:setTop(670);
     obj.edit25:setWidth(90);
     obj.edit25:setType("number");
     obj.edit25:setHeight(30);
     obj.edit25:setVisible(false);
-    obj.edit25:setField("AgilidadeESQ");
+    obj.edit25:setField("ClassePer");
     obj.edit25:setName("edit25");
 
     obj.edit26 = GUI.fromHandle(_obj_newObject("edit"));
@@ -3662,8 +3927,30 @@ local function constructNew_frmvelen()
     obj.edit26:setType("number");
     obj.edit26:setHeight(30);
     obj.edit26:setVisible(false);
-    obj.edit26:setField("ForcaPer");
+    obj.edit26:setField("EspecPer");
     obj.edit26:setName("edit26");
+
+    obj.edit27 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit27:setParent(obj.scrollBox1);
+    obj.edit27:setLeft(270);
+    obj.edit27:setTop(770);
+    obj.edit27:setWidth(90);
+    obj.edit27:setType("number");
+    obj.edit27:setHeight(30);
+    obj.edit27:setVisible(false);
+    obj.edit27:setField("AgilidadeESQ");
+    obj.edit27:setName("edit27");
+
+    obj.edit28 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit28:setParent(obj.scrollBox1);
+    obj.edit28:setLeft(270);
+    obj.edit28:setTop(770);
+    obj.edit28:setWidth(90);
+    obj.edit28:setType("number");
+    obj.edit28:setHeight(30);
+    obj.edit28:setVisible(false);
+    obj.edit28:setField("ForcaPer");
+    obj.edit28:setName("edit28");
 
     obj.button28 = GUI.fromHandle(_obj_newObject("button"));
     obj.button28:setParent(obj.scrollBox1);
@@ -3674,59 +3961,59 @@ local function constructNew_frmvelen()
     obj.button28:setOpacity(0.0);
     obj.button28:setName("button28");
 
-    obj.edit27 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit27:setParent(obj.scrollBox1);
-    obj.edit27:setTop(440);
-    obj.edit27:setLeft(292);
-    obj.edit27:setWidth(50);
-    obj.edit27:setHeight(30);
-    obj.edit27:setMax(160);
-    obj.edit27:setMin(0);
-    obj.edit27:setHitTest(false);
-    obj.edit27:setCanFocus(false);
-    obj.edit27:setHorzTextAlign("center");
-    obj.edit27:setType("number");
-    obj.edit27:setText("120");
-    obj.edit27:setTransparent(true);
-    obj.edit27:setFontColor("black");
-    obj.edit27:setFontSize(22);
-    obj.edit27:setEnabled(true);
-    obj.edit27:setField("ControladorAtributos");
-    obj.edit27:setName("edit27");
-
-    obj.edit28 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit28:setParent(obj.scrollBox1);
-    obj.edit28:setTop(530);
-    obj.edit28:setLeft(292);
-    obj.edit28:setWidth(50);
-    obj.edit28:setHeight(30);
-    obj.edit28:setMax(160);
-    obj.edit28:setMin(0);
-    obj.edit28:setHorzTextAlign("center");
-    obj.edit28:setType("number");
-    obj.edit28:setText("120");
-    obj.edit28:setVisible(false);
-    obj.edit28:setFontColor("RED");
-    obj.edit28:setFontSize(22);
-    obj.edit28:setEnabled(true);
-    obj.edit28:setField("LiberarRolagemUp");
-    obj.edit28:setName("edit28");
-
     obj.edit29 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit29:setParent(obj.scrollBox1);
-    obj.edit29:setTop(850);
-    obj.edit29:setLeft(400);
+    obj.edit29:setTop(440);
+    obj.edit29:setLeft(292);
     obj.edit29:setWidth(50);
     obj.edit29:setHeight(30);
-    obj.edit29:setMax(20);
+    obj.edit29:setMax(160);
     obj.edit29:setMin(0);
+    obj.edit29:setHitTest(true);
+    obj.edit29:setCanFocus(true);
     obj.edit29:setHorzTextAlign("center");
     obj.edit29:setType("number");
-    obj.edit29:setVisible(false);
+    obj.edit29:setText("120");
+    obj.edit29:setTransparent(true);
+    obj.edit29:setFontColor("black");
     obj.edit29:setFontSize(22);
     obj.edit29:setEnabled(true);
-    obj.edit29:setField("CLevel");
+    obj.edit29:setField("ControladorAtributos");
     obj.edit29:setName("edit29");
+
+    obj.edit30 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit30:setParent(obj.scrollBox1);
+    obj.edit30:setTop(530);
+    obj.edit30:setLeft(292);
+    obj.edit30:setWidth(50);
+    obj.edit30:setHeight(30);
+    obj.edit30:setMax(160);
+    obj.edit30:setMin(0);
+    obj.edit30:setHorzTextAlign("center");
+    obj.edit30:setType("number");
+    obj.edit30:setText("120");
+    obj.edit30:setVisible(false);
+    obj.edit30:setFontColor("RED");
+    obj.edit30:setFontSize(22);
+    obj.edit30:setEnabled(true);
+    obj.edit30:setField("LiberarRolagemUp");
+    obj.edit30:setName("edit30");
+
+    obj.edit31 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit31:setParent(obj.scrollBox1);
+    obj.edit31:setTop(850);
+    obj.edit31:setLeft(400);
+    obj.edit31:setWidth(50);
+    obj.edit31:setHeight(30);
+    obj.edit31:setMax(20);
+    obj.edit31:setMin(0);
+    obj.edit31:setHorzTextAlign("center");
+    obj.edit31:setType("number");
+    obj.edit31:setVisible(false);
+    obj.edit31:setFontSize(22);
+    obj.edit31:setEnabled(true);
+    obj.edit31:setField("CLevel");
+    obj.edit31:setName("edit31");
 
     obj.btnUpaLevel = GUI.fromHandle(_obj_newObject("button"));
     obj.btnUpaLevel:setParent(obj.scrollBox1);
@@ -3750,29 +4037,29 @@ local function constructNew_frmvelen()
     obj.BarraXP:setPosition(50);
     obj.BarraXP:setMax(100);
 
-    obj.edit30 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit30:setParent(obj.scrollBox1);
-    obj.edit30:setWidth(35);
-    obj.edit30:setHeight(20);
-    obj.edit30:setTop(675);
-    obj.edit30:setLeft(157);
-    obj.edit30:setType("number");
-    obj.edit30:setMax(9999);
-    obj.edit30:setTransparent(true);
-    obj.edit30:setHorzTextAlign("center");
-    obj.edit30:setField("XPAtual");
-    obj.edit30:setName("edit30");
+    obj.edit32 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit32:setParent(obj.scrollBox1);
+    obj.edit32:setWidth(35);
+    obj.edit32:setHeight(20);
+    obj.edit32:setTop(675);
+    obj.edit32:setLeft(157);
+    obj.edit32:setType("number");
+    obj.edit32:setMax(9999);
+    obj.edit32:setTransparent(true);
+    obj.edit32:setHorzTextAlign("center");
+    obj.edit32:setField("XPAtual");
+    obj.edit32:setName("edit32");
 
-    obj.label24 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label24:setParent(obj.scrollBox1);
-    obj.label24:setWidth(35);
-    obj.label24:setHeight(20);
-    obj.label24:setTop(675);
-    obj.label24:setLeft(205);
-    obj.label24:setHorzTextAlign("center");
-    obj.label24:setFontColor("black");
-    obj.label24:setField("XPNecessario");
-    obj.label24:setName("label24");
+    obj.label27 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label27:setParent(obj.scrollBox1);
+    obj.label27:setWidth(35);
+    obj.label27:setHeight(20);
+    obj.label27:setTop(675);
+    obj.label27:setLeft(205);
+    obj.label27:setHorzTextAlign("center");
+    obj.label27:setFontColor("black");
+    obj.label27:setField("XPNecessario");
+    obj.label27:setName("label27");
 
     obj.dataLink11 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink11:setParent(obj.scrollBox1);
@@ -3798,6 +4085,11 @@ local function constructNew_frmvelen()
     obj.dataLink15:setParent(obj.scrollBox1);
     obj.dataLink15:setFields({'HPTotal', 'MPTotal'});
     obj.dataLink15:setName("dataLink15");
+
+    obj.dataLink16 = GUI.fromHandle(_obj_newObject("dataLink"));
+    obj.dataLink16:setParent(obj.scrollBox1);
+    obj.dataLink16:setFields({'HPAtual', 'MPAtual'});
+    obj.dataLink16:setName("dataLink16");
 
     obj._e_event0 = obj:addEventListener("onNodeReady",
         function ()
@@ -3902,7 +4194,9 @@ local function constructNew_frmvelen()
             		sheet.MontESPACO = (tonumber(sheet.MontESPACO) or 0); 
             		sheet.idade = sheet.idade or "Depende da sua Raça"; 
             		sheet.HPTotal = (tonumber(sheet.HPTotal) or 0); 
-            		sheet.MPTotal = (tonumber(sheet.MPTotal) or 0); 		
+            		sheet.MPTotal = (tonumber(sheet.MPTotal) or 0); 
+            		sheet.HPAtual = (tonumber(sheet.HPAtual) or 0); 
+            		sheet.MPAtual = (tonumber(sheet.MPAtual) or 0); 		
             		sheet.DanoHabilidade1 = (tonumber(sheet.DanoHabilidade1) or 0); 
             		sheet.CuraHabilidade1 = (tonumber(sheet.CuraHabilidade1) or 0); 
             		sheet.Current = (tonumber(sheet.Current) or 0); 
@@ -4320,39 +4614,44 @@ local function constructNew_frmvelen()
             showMessage('RES = Resistencia Magica que é Metade da Força + Metade da Vitalidade + Metade da Defesa');
         end);
 
-    obj._e_event37 = obj.button27:addEventListener("onClick",
+    obj._e_event37 = obj.AtkBasic:addEventListener("onClick",
         function (event)
-            AtaqueBasico()
+            self.popAtaqueBasico:show('bottom', self.AtkBasic);
         end);
 
-    obj._e_event38 = obj.button28:addEventListener("onClick",
+    obj._e_event38 = obj.button27:addEventListener("onClick",
+        function (event)
+            AtaqueBasico();
+        end);
+
+    obj._e_event39 = obj.button28:addEventListener("onClick",
         function (event)
             local novoForm = GUI.newForm("frmBasica");
             			novoForm:setNodeObject(sheet);
             			novoForm:show();
         end);
 
-    obj._e_event39 = obj.btnUpaLevel:addEventListener("onClick",
+    obj._e_event40 = obj.btnUpaLevel:addEventListener("onClick",
         function (event)
             RolarAtributoPorUpar()
         end);
 
-    obj._e_event40 = obj.dataLink11:addEventListener("onChange",
+    obj._e_event41 = obj.dataLink11:addEventListener("onChange",
         function (field, oldValue, newValue)
             SistemaXPLevel();
         end);
 
-    obj._e_event41 = obj.dataLink12:addEventListener("onChange",
+    obj._e_event42 = obj.dataLink12:addEventListener("onChange",
         function (field, oldValue, newValue)
             XPTotalPraUpar();
         end);
 
-    obj._e_event42 = obj.dataLink13:addEventListener("onChange",
+    obj._e_event43 = obj.dataLink13:addEventListener("onChange",
         function (field, oldValue, newValue)
             ComandoADM();
         end);
 
-    obj._e_event43 = obj.dataLink14:addEventListener("onChange",
+    obj._e_event44 = obj.dataLink14:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then				
             					if sheet.Level >= 1 then 
@@ -4363,7 +4662,7 @@ local function constructNew_frmvelen()
             				end;
         end);
 
-    obj._e_event44 = obj.dataLink15:addEventListener("onChange",
+    obj._e_event45 = obj.dataLink15:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then				
             					if sheet.Level >= 1 then 
@@ -4375,7 +4674,21 @@ local function constructNew_frmvelen()
             				end;
         end);
 
+    obj._e_event46 = obj.dataLink16:addEventListener("onChange",
+        function (field, oldValue, newValue)
+            if sheet.SequenciaInicial == true then				
+            					if sheet.Level >= 1 then 
+            						if (sheet.HPAtual > 0) and (sheet.MPAtual > 0)then
+            							AtualizaMPAtual();
+            							AtualizaHPAtual();
+            						end;
+            					end;							
+            				end;
+        end);
+
     function obj:_releaseEvents()
+        __o_rrpgObjs.removeEventListenerById(self._e_event46);
+        __o_rrpgObjs.removeEventListenerById(self._e_event45);
         __o_rrpgObjs.removeEventListenerById(self._e_event44);
         __o_rrpgObjs.removeEventListenerById(self._e_event43);
         __o_rrpgObjs.removeEventListenerById(self._e_event42);
@@ -4433,9 +4746,9 @@ local function constructNew_frmvelen()
         end;
 
         if self.image5 ~= nil then self.image5:destroy(); self.image5 = nil; end;
+        if self.button7 ~= nil then self.button7:destroy(); self.button7 = nil; end;
         if self.rectangle10 ~= nil then self.rectangle10:destroy(); self.rectangle10 = nil; end;
         if self.edit16 ~= nil then self.edit16:destroy(); self.edit16 = nil; end;
-        if self.label24 ~= nil then self.label24:destroy(); self.label24 = nil; end;
         if self.edit28 ~= nil then self.edit28:destroy(); self.edit28 = nil; end;
         if self.rectangle6 ~= nil then self.rectangle6:destroy(); self.rectangle6 = nil; end;
         if self.edit30 ~= nil then self.edit30:destroy(); self.edit30 = nil; end;
@@ -4449,6 +4762,7 @@ local function constructNew_frmvelen()
         if self.dataLink2 ~= nil then self.dataLink2:destroy(); self.dataLink2 = nil; end;
         if self.image2 ~= nil then self.image2:destroy(); self.image2 = nil; end;
         if self.button28 ~= nil then self.button28:destroy(); self.button28 = nil; end;
+        if self.dataLink16 ~= nil then self.dataLink16:destroy(); self.dataLink16 = nil; end;
         if self.edit27 ~= nil then self.edit27:destroy(); self.edit27 = nil; end;
         if self.button1 ~= nil then self.button1:destroy(); self.button1 = nil; end;
         if self.label10 ~= nil then self.label10:destroy(); self.label10 = nil; end;
@@ -4459,11 +4773,13 @@ local function constructNew_frmvelen()
         if self.edit9 ~= nil then self.edit9:destroy(); self.edit9 = nil; end;
         if self.comboBox3 ~= nil then self.comboBox3:destroy(); self.comboBox3 = nil; end;
         if self.edit14 ~= nil then self.edit14:destroy(); self.edit14 = nil; end;
+        if self.TargetName ~= nil then self.TargetName:destroy(); self.TargetName = nil; end;
         if self.dataLink13 ~= nil then self.dataLink13:destroy(); self.dataLink13 = nil; end;
         if self.button4 ~= nil then self.button4:destroy(); self.button4 = nil; end;
         if self.rectangle4 ~= nil then self.rectangle4:destroy(); self.rectangle4 = nil; end;
         if self.label15 ~= nil then self.label15:destroy(); self.label15 = nil; end;
         if self.image8 ~= nil then self.image8:destroy(); self.image8 = nil; end;
+        if self.edit32 ~= nil then self.edit32:destroy(); self.edit32 = nil; end;
         if self.dataLink5 ~= nil then self.dataLink5:destroy(); self.dataLink5 = nil; end;
         if self.label2 ~= nil then self.label2:destroy(); self.label2 = nil; end;
         if self.button13 ~= nil then self.button13:destroy(); self.button13 = nil; end;
@@ -4471,14 +4787,16 @@ local function constructNew_frmvelen()
         if self.edit18 ~= nil then self.edit18:destroy(); self.edit18 = nil; end;
         if self.rectangle1 ~= nil then self.rectangle1:destroy(); self.rectangle1 = nil; end;
         if self.rectangle18 ~= nil then self.rectangle18:destroy(); self.rectangle18 = nil; end;
+        if self.NameTipoDeGrupo ~= nil then self.NameTipoDeGrupo:destroy(); self.NameTipoDeGrupo = nil; end;
         if self.edit3 ~= nil then self.edit3:destroy(); self.edit3 = nil; end;
         if self.button8 ~= nil then self.button8:destroy(); self.button8 = nil; end;
         if self.label19 ~= nil then self.label19:destroy(); self.label19 = nil; end;
         if self.label5 ~= nil then self.label5:destroy(); self.label5 = nil; end;
         if self.button14 ~= nil then self.button14:destroy(); self.button14 = nil; end;
         if self.button26 ~= nil then self.button26:destroy(); self.button26 = nil; end;
-        if self.dataLink14 ~= nil then self.dataLink14:destroy(); self.dataLink14 = nil; end;
+        if self.cmbInimigos ~= nil then self.cmbInimigos:destroy(); self.cmbInimigos = nil; end;
         if self.edit21 ~= nil then self.edit21:destroy(); self.edit21 = nil; end;
+        if self.dataLink14 ~= nil then self.dataLink14:destroy(); self.dataLink14 = nil; end;
         if self.edit6 ~= nil then self.edit6:destroy(); self.edit6 = nil; end;
         if self.button3 ~= nil then self.button3:destroy(); self.button3 = nil; end;
         if self.label12 ~= nil then self.label12:destroy(); self.label12 = nil; end;
@@ -4495,9 +4813,11 @@ local function constructNew_frmvelen()
         if self.label17 ~= nil then self.label17:destroy(); self.label17 = nil; end;
         if self.rectangle13 ~= nil then self.rectangle13:destroy(); self.rectangle13 = nil; end;
         if self.edit17 ~= nil then self.edit17:destroy(); self.edit17 = nil; end;
+        if self.label27 ~= nil then self.label27:destroy(); self.label27 = nil; end;
         if self.BarraXP ~= nil then self.BarraXP:destroy(); self.BarraXP = nil; end;
         if self.button21 ~= nil then self.button21:destroy(); self.button21 = nil; end;
         if self.rectangle7 ~= nil then self.rectangle7:destroy(); self.rectangle7 = nil; end;
+        if self.edit31 ~= nil then self.edit31:destroy(); self.edit31 = nil; end;
         if self.edit1 ~= nil then self.edit1:destroy(); self.edit1 = nil; end;
         if self.image11 ~= nil then self.image11:destroy(); self.image11 = nil; end;
         if self.dataLink6 ~= nil then self.dataLink6:destroy(); self.dataLink6 = nil; end;
@@ -4506,6 +4826,7 @@ local function constructNew_frmvelen()
         if self.button24 ~= nil then self.button24:destroy(); self.button24 = nil; end;
         if self.progressBar1 ~= nil then self.progressBar1:destroy(); self.progressBar1 = nil; end;
         if self.edit23 ~= nil then self.edit23:destroy(); self.edit23 = nil; end;
+        if self.cmbTipoGrupo ~= nil then self.cmbTipoGrupo:destroy(); self.cmbTipoGrupo = nil; end;
         if self.edit4 ~= nil then self.edit4:destroy(); self.edit4 = nil; end;
         if self.image14 ~= nil then self.image14:destroy(); self.image14 = nil; end;
         if self.edit10 ~= nil then self.edit10:destroy(); self.edit10 = nil; end;
@@ -4516,8 +4837,9 @@ local function constructNew_frmvelen()
         if self.rectangle11 ~= nil then self.rectangle11:destroy(); self.rectangle11 = nil; end;
         if self.image4 ~= nil then self.image4:destroy(); self.image4 = nil; end;
         if self.dataLink8 ~= nil then self.dataLink8:destroy(); self.dataLink8 = nil; end;
-        if self.edit15 ~= nil then self.edit15:destroy(); self.edit15 = nil; end;
+        if self.label25 ~= nil then self.label25:destroy(); self.label25 = nil; end;
         if self.edit8 ~= nil then self.edit8:destroy(); self.edit8 = nil; end;
+        if self.edit15 ~= nil then self.edit15:destroy(); self.edit15 = nil; end;
         if self.edit29 ~= nil then self.edit29:destroy(); self.edit29 = nil; end;
         if self.btnUpaLevel ~= nil then self.btnUpaLevel:destroy(); self.btnUpaLevel = nil; end;
         if self.rectangle5 ~= nil then self.rectangle5:destroy(); self.rectangle5 = nil; end;
@@ -4536,6 +4858,7 @@ local function constructNew_frmvelen()
         if self.label4 ~= nil then self.label4:destroy(); self.label4 = nil; end;
         if self.button15 ~= nil then self.button15:destroy(); self.button15 = nil; end;
         if self.dataLink15 ~= nil then self.dataLink15:destroy(); self.dataLink15 = nil; end;
+        if self.popAtaqueBasico ~= nil then self.popAtaqueBasico:destroy(); self.popAtaqueBasico = nil; end;
         if self.progressBar2 ~= nil then self.progressBar2:destroy(); self.progressBar2 = nil; end;
         if self.edit20 ~= nil then self.edit20:destroy(); self.edit20 = nil; end;
         if self.cmbEspecializa ~= nil then self.cmbEspecializa:destroy(); self.cmbEspecializa = nil; end;
@@ -4543,15 +4866,17 @@ local function constructNew_frmvelen()
         if self.label13 ~= nil then self.label13:destroy(); self.label13 = nil; end;
         if self.rectangle17 ~= nil then self.rectangle17:destroy(); self.rectangle17 = nil; end;
         if self.label23 ~= nil then self.label23:destroy(); self.label23 = nil; end;
-        if self.image6 ~= nil then self.image6:destroy(); self.image6 = nil; end;
-        if self.comboBox2 ~= nil then self.comboBox2:destroy(); self.comboBox2 = nil; end;
         if self.edit13 ~= nil then self.edit13:destroy(); self.edit13 = nil; end;
+        if self.comboBox2 ~= nil then self.comboBox2:destroy(); self.comboBox2 = nil; end;
+        if self.image6 ~= nil then self.image6:destroy(); self.image6 = nil; end;
+        if self.AtkBasic ~= nil then self.AtkBasic:destroy(); self.AtkBasic = nil; end;
         if self.dataLink12 ~= nil then self.dataLink12:destroy(); self.dataLink12 = nil; end;
         if self.label8 ~= nil then self.label8:destroy(); self.label8 = nil; end;
         if self.button19 ~= nil then self.button19:destroy(); self.button19 = nil; end;
         if self.button5 ~= nil then self.button5:destroy(); self.button5 = nil; end;
         if self.rectangle12 ~= nil then self.rectangle12:destroy(); self.rectangle12 = nil; end;
         if self.label14 ~= nil then self.label14:destroy(); self.label14 = nil; end;
+        if self.label26 ~= nil then self.label26:destroy(); self.label26 = nil; end;
         if self.label3 ~= nil then self.label3:destroy(); self.label3 = nil; end;
         if self.button12 ~= nil then self.button12:destroy(); self.button12 = nil; end;
         if self.button20 ~= nil then self.button20:destroy(); self.button20 = nil; end;
@@ -4565,13 +4890,13 @@ local function constructNew_frmvelen()
         if self.edit22 ~= nil then self.edit22:destroy(); self.edit22 = nil; end;
         if self.edit7 ~= nil then self.edit7:destroy(); self.edit7 = nil; end;
         if self.rectangle15 ~= nil then self.rectangle15:destroy(); self.rectangle15 = nil; end;
-        if self.label21 ~= nil then self.label21:destroy(); self.label21 = nil; end;
         if self.edit11 ~= nil then self.edit11:destroy(); self.edit11 = nil; end;
+        if self.label21 ~= nil then self.label21:destroy(); self.label21 = nil; end;
         if self.dataLink10 ~= nil then self.dataLink10:destroy(); self.dataLink10 = nil; end;
         if self.edit25 ~= nil then self.edit25:destroy(); self.edit25 = nil; end;
         if self.label16 ~= nil then self.label16:destroy(); self.label16 = nil; end;
         if self.rectangle9 ~= nil then self.rectangle9:destroy(); self.rectangle9 = nil; end;
-        if self.button7 ~= nil then self.button7:destroy(); self.button7 = nil; end;
+        if self.label24 ~= nil then self.label24:destroy(); self.label24 = nil; end;
         self:_oldLFMDestroy();
     end;
 
