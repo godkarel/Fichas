@@ -3,7 +3,6 @@
       title="Sistema de Combate Velen" name="frmACSVelen">
 	  <event name="onNodeReady">		
 		sheet.ACAOTURNO = (tonumber(sheet.ACAOTURNO) or 0); 
-		sheet.DanoRecebido = 0
 	</event>
 	 
 	<import file="Funct/ProximaAcao.xml"/>
@@ -118,8 +117,8 @@
 											node.Vigor = nodeExterno.TVigor or '0';
 											node.HPBarMax = nodeExterno.HPTotal or '0';
 											node.MPBarMax = nodeExterno.MPTotal or '0';
-											node.HPBar = nodeExterno.HPTotal or '0';
-											node.MPBar = nodeExterno.MPTotal or '0';
+											node.HPBar = nodeExterno.HPAtual or '0';
+											node.MPBar = nodeExterno.MPAtual or '0';
 											node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoPersonagem
 										end
 									end
@@ -210,7 +209,7 @@
         <edit name="editTurnoAtual" field="TurnoAtualControle" align="top" width="200" height="20" horzTextAlign="center"/>
         <button name="btnTurnoAnterior" text="AnteriorRR" align="left" width="90" height="20" top="40">
 			<event name="onClick">										
-				
+				showMessage(sheet.ACAOTURNO)
 			</event>
 		</button>	
 		
@@ -382,6 +381,10 @@
 				
 				return lista
 			end
+
+			
+
+
 	</script>
 	--- Recordlist do Oponente ---	
 	<button top="10" left="830" text="Adicionar Oponentes" width="150" height="30">
@@ -423,13 +426,13 @@
 							local mesas = rrpg.getRooms();
 							local bibliotecaAtual = mesas[1].library;
 
-							local function obterNomesRecursivo(bibItem)
+							local function obterNomesRecursivoO(bibItem)
 								local itensFilhos = bibItem.children;
 								local nomes = bibItem.name;
 
 								for i = 1, #itensFilhos, 1 do
 									local bibItemFilho = itensFilhos[i];
-									local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+									local nomesDoFilho = obterNomesRecursivoO(bibItemFilho) or "";
 
 									if nomesDoFilho == node.NomeDoOponente then
 										-- Obter ID do personagem Loan
@@ -469,7 +472,7 @@
 								end
 							return nomes
 							end
-							local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+							local nomesDeTodosOsItens = obterNomesRecursivoO(bibliotecaAtual);
 						end;	
 					</event>
 				</button>			
@@ -548,9 +551,9 @@
 					
 				for _, node in ipairs(nodes) do
 					if node.NomeDoOponenteVez == sheet.AlvoRecebido then
-						node.HPBarO = node.HPBarO - sheet.DanoRecebido
+						
 						--AQUI--
-
+						showMessage("Dano Que Veio" .. sheet.DanoRecebido)
 						if	self.BoxDetalheOponentes.visible == true then
 							local node = self.rclGrupoOponentes.selectedNode;   
 							self.rclGrupoOponentes.node = node;
@@ -575,7 +578,7 @@
 
 										-- Aguarda até que a ficha esteja carregada
 										local nodeExterno = await(promise);
-										
+										node.HPBarO = (node.HPBarO - await(sheet.DanoRecebido))
 										nodeExterno.HPAtual = node.HPBarO or '0';
 
 									end
@@ -584,6 +587,7 @@
 							end
 							local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
 						end;
+						
 					end
 				end
 			end;
@@ -593,8 +597,8 @@
 					
 				for _, node in ipairs(nodes) do
 					if node.NomeDoPersonagemVez == sheet.AlvoRecebido then
-						node.HPBar = node.HPBar - sheet.DanoRecebido
-
+						
+						showMessage("sistema de combate" .. sheet.DanoRecebido)
 						if	self.BoxDetalheJogadores.visible == true then
 							local node = self.rclGrupoJogadores.selectedNode;   
 							self.rclGrupoJogadores.node = node;
@@ -602,13 +606,13 @@
 							local mesas = rrpg.getRooms();
 							local bibliotecaAtual = mesas[1].library;
 
-							local function obterNomesRecursivo(bibItem)
+							local function obterNomesRecursivoO(bibItem)
 								local itensFilhos = bibItem.children;
 								local nomes = bibItem.name;
 
 								for i = 1, #itensFilhos, 1 do
 									local bibItemFilho = itensFilhos[i];
-									local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+									local nomesDoFilho = obterNomesRecursivoO(bibItemFilho) or "";
 
 									if nomesDoFilho == node.NomeDoPersonagem then
 										-- Obter ID do personagem Loan
@@ -619,13 +623,16 @@
 
 										-- Aguarda até que a ficha esteja carregada
 										local nodeExterno = await(promise);
+										node.HPBar = (node.HPBar - await(sheet.DanoRecebido))
 										nodeExterno.HPAtual = node.HPBar or '0';
+										
 									end
 								end
 							return nomes
 							end
-							local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+							local nomesDeTodosOsItens = obterNomesRecursivoO(bibliotecaAtual);
 						end;
+						
 					end
 				end
 			end

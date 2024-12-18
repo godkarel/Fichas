@@ -947,6 +947,10 @@ local function constructNew_frmACSVelen()
 				
 				return lista
 			end
+
+			
+
+
 	
 
 
@@ -1464,8 +1468,7 @@ local function constructNew_frmACSVelen()
 
     obj._e_event0 = obj:addEventListener("onNodeReady",
         function ()
-            sheet.ACAOTURNO = (tonumber(sheet.ACAOTURNO) or 0); 
-            		sheet.DanoRecebido = 0
+            sheet.ACAOTURNO = (tonumber(sheet.ACAOTURNO) or 0);
         end);
 
     obj._e_event1 = obj.button1:addEventListener("onClick",
@@ -1555,8 +1558,8 @@ local function constructNew_frmACSVelen()
             											node.Vigor = nodeExterno.TVigor or '0';
             											node.HPBarMax = nodeExterno.HPTotal or '0';
             											node.MPBarMax = nodeExterno.MPTotal or '0';
-            											node.HPBar = nodeExterno.HPTotal or '0';
-            											node.MPBar = nodeExterno.MPTotal or '0';
+            											node.HPBar = nodeExterno.HPAtual or '0';
+            											node.MPBar = nodeExterno.MPAtual or '0';
             											node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoPersonagem
             										end
             									end
@@ -1571,6 +1574,7 @@ local function constructNew_frmACSVelen()
 
     obj._e_event7 = obj.btnTurnoAnterior:addEventListener("onClick",
         function (event)
+            showMessage(sheet.ACAOTURNO)
         end);
 
     obj._e_event8 = obj.btnTurnoProximo:addEventListener("onClick",
@@ -1627,13 +1631,13 @@ local function constructNew_frmACSVelen()
             							local mesas = rrpg.getRooms();
             							local bibliotecaAtual = mesas[1].library;
             
-            							local function obterNomesRecursivo(bibItem)
+            							local function obterNomesRecursivoO(bibItem)
             								local itensFilhos = bibItem.children;
             								local nomes = bibItem.name;
             
             								for i = 1, #itensFilhos, 1 do
             									local bibItemFilho = itensFilhos[i];
-            									local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+            									local nomesDoFilho = obterNomesRecursivoO(bibItemFilho) or "";
             
             									if nomesDoFilho == node.NomeDoOponente then
             										-- Obter ID do personagem Loan
@@ -1673,7 +1677,7 @@ local function constructNew_frmACSVelen()
             								end
             							return nomes
             							end
-            							local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+            							local nomesDeTodosOsItens = obterNomesRecursivoO(bibliotecaAtual);
             						end;
         end);
 
@@ -1684,9 +1688,9 @@ local function constructNew_frmACSVelen()
             					
             				for _, node in ipairs(nodes) do
             					if node.NomeDoOponenteVez == sheet.AlvoRecebido then
-            						node.HPBarO = node.HPBarO - sheet.DanoRecebido
+            						
             						--AQUI--
-            
+            						showMessage("Dano Que Veio" .. sheet.DanoRecebido)
             						if	self.BoxDetalheOponentes.visible == true then
             							local node = self.rclGrupoOponentes.selectedNode;   
             							self.rclGrupoOponentes.node = node;
@@ -1711,7 +1715,7 @@ local function constructNew_frmACSVelen()
             
             										-- Aguarda até que a ficha esteja carregada
             										local nodeExterno = await(promise);
-            										
+            										node.HPBarO = (node.HPBarO - await(sheet.DanoRecebido))
             										nodeExterno.HPAtual = node.HPBarO or '0';
             
             									end
@@ -1720,6 +1724,7 @@ local function constructNew_frmACSVelen()
             							end
             							local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
             						end;
+            						
             					end
             				end
             			end;
@@ -1729,8 +1734,8 @@ local function constructNew_frmACSVelen()
             					
             				for _, node in ipairs(nodes) do
             					if node.NomeDoPersonagemVez == sheet.AlvoRecebido then
-            						node.HPBar = node.HPBar - sheet.DanoRecebido
-            
+            						
+            						showMessage("sistema de combate" .. sheet.DanoRecebido)
             						if	self.BoxDetalheJogadores.visible == true then
             							local node = self.rclGrupoJogadores.selectedNode;   
             							self.rclGrupoJogadores.node = node;
@@ -1738,13 +1743,13 @@ local function constructNew_frmACSVelen()
             							local mesas = rrpg.getRooms();
             							local bibliotecaAtual = mesas[1].library;
             
-            							local function obterNomesRecursivo(bibItem)
+            							local function obterNomesRecursivoO(bibItem)
             								local itensFilhos = bibItem.children;
             								local nomes = bibItem.name;
             
             								for i = 1, #itensFilhos, 1 do
             									local bibItemFilho = itensFilhos[i];
-            									local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+            									local nomesDoFilho = obterNomesRecursivoO(bibItemFilho) or "";
             
             									if nomesDoFilho == node.NomeDoPersonagem then
             										-- Obter ID do personagem Loan
@@ -1755,13 +1760,16 @@ local function constructNew_frmACSVelen()
             
             										-- Aguarda até que a ficha esteja carregada
             										local nodeExterno = await(promise);
+            										node.HPBar = (node.HPBar - await(sheet.DanoRecebido))
             										nodeExterno.HPAtual = node.HPBar or '0';
+            										
             									end
             								end
             							return nomes
             							end
-            							local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+            							local nomesDeTodosOsItens = obterNomesRecursivoO(bibliotecaAtual);
             						end;
+            						
             					end
             				end
             			end
