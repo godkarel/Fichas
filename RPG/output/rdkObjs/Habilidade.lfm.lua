@@ -506,21 +506,23 @@ local function constructNew_frmhabilidade()
     obj.button5:setName("button5");
 
 					
-					local function ExecutarH1() 
+				local function ExecutarH2() 
 				--[[ HABILIDADE DE DANO ]]--
 				-- obter a mesa do personagem
+
+				
 				local mesaDoPersonagem = Firecast.getMesaDe(sheet);
 				local mesas = rrpg.getRooms();
 				local bibliotecaAtual = mesas[1].library;
 
-					if sheet.cmbTipoDeGrupoFH == "1" then 
-						local function obterNomesRecursivoH(bibItem)
+					if self.cmbTipoGrupoH.value == "1" then 
+						local function obterNomesRecursivoH1(bibItem)
 							local itensFilhos = bibItem.children;
 							local nomes = bibItem.name;
 							
 							for i = 1, #itensFilhos, 1 do
 								local bibItemFilho = itensFilhos[i];
-								local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
+								local nomesDoFilho = obterNomesRecursivoH1(bibItemFilho) or "";
 
 								if nomesDoFilho == "Sistema de Combaate Velen" then
 									-- Obter ID do personagem Loan
@@ -546,10 +548,8 @@ local function constructNew_frmhabilidade()
 							return nomes
 						end
 
-						local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
+						local nomesDeTodosOsItens = obterNomesRecursivoH1(bibliotecaAtual);
 						
-						
-
 						local node = self.ListaJutsus3.node;
 						local mesaDoPersonagem = rrpg.getMesaDe(sheet);
 						if node.DanoAtributo1 == 'BUFF' then
@@ -645,68 +645,75 @@ local function constructNew_frmhabilidade()
 										if 1 == rolado.resultado then										
 											nodeExterno.AlvoRecebido = self.cmbInimigosH.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value	
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))								
+																		
 											mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando  com [§K4,0] CRITICAL [§K9,0] « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] » :dinofauro: ");
 										else										
 											nodeExterno.AlvoRecebido = self.cmbInimigosH.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))
+											
 											mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] »");
 										end;	
 									else
 										if sheet.CMagico +1 > rolado.resultado then 										
 											nodeExterno.AlvoRecebido = self.cmbInimigosH.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-											nodeExterno.DanoRecebido = "Habilidade de Buff";
 											if node.DanoAtributo1 ~= 'BUFF' then
 												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1 * 2) * (1 - (RESAlvo / 100)))
+												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 											end;											
 											if node.DanoAtributo1 == 'Fixo' then
 												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
+												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 											end;
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))
+											
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido) .. "[§K9,0] » :dinofauro: ");
 										else
 											nodeExterno.AlvoRecebido = self.cmbInimigosH.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-											nodeExterno.DanoRecebido = "Habilidade de Buff";
 											if node.DanoAtributo1 ~= 'BUFF' then
 												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1) * (1 - (RESAlvo / 100)))
+												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 											end;
 											if node.DanoAtributo1 == 'Fixo' then
 												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
+												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 											end;
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido .. "[§K9,0] »");
 										end;	
 									end;										
 								else
 									mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+									nodeExterno.DanoRecebido = 0
+									nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 								end;
 							else							
 								mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
+								nodeExterno.DanoRecebido = 0
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 								if node.DanoAtributo1 == 'BUFF' then
 									mesaDoPersonagem.chat:enviarMensagem("[§K3,15]ERA BUFF ESSA MERDA");	
 								else 	
 								end;
 							end;
 						else
+							nodeExterno.DanoRecebido = 0
 							mesaDoPersonagem.chat:enviarMensagem("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE");
 						end;
 						end);
+					
 					end;
 
 					
 					---------- inimigo 2 -----------
 
-					if sheet.cmbTipoDeGrupoFH == "2" then 
-						local function obterNomesRecursivoH(bibItem)
+					if self.cmbTipoGrupoH.value == "2" then 
+						local function obterNomesRecursivoH2(bibItem)
 							local itensFilhos = bibItem.children;
 							local nomes = bibItem.name;
 							
 							for i = 1, #itensFilhos, 1 do
 								local bibItemFilho = itensFilhos[i];
-								local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
+								local nomesDoFilho = obterNomesRecursivoH2(bibItemFilho) or "";
 
 								if nomesDoFilho == "Sistema de Combaate Velen" then
 									-- Obter ID do personagem Loan
@@ -732,7 +739,7 @@ local function constructNew_frmhabilidade()
 							return nomes
 						end
 
-						local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
+						local nomesDeTodosOsItens = obterNomesRecursivoH2(bibliotecaAtual);
 						
 						local node = self.ListaJutsus3.node;
 						local mesaDoPersonagem = rrpg.getMesaDe(sheet);
@@ -828,61 +835,63 @@ local function constructNew_frmhabilidade()
 									if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
 										if 1 == rolado.resultado then										
 											nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value	
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))																		
+											nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value		
 											mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando  com [§K4,0] CRITICAL [§K9,0] « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] » :dinofauro: ");
 										else										
 											nodeExterno.AlvoRecebido = self.cmbInimigosH.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))
 											mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] »");
 										end;	
 									else
 										if sheet.CMagico +1 > rolado.resultado then 										
 											nodeExterno.AlvoRecebido = self.cmbInimigosH.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-											nodeExterno.DanoRecebido = "Habilidade de Buff";
 											if node.DanoAtributo1 ~= 'BUFF' then
 												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1 * 2) * (1 - (RESAlvo / 100)))
+												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 											end;
 											if node.DanoAtributo1 == 'Fixo' then
 												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
+												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 											end;
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido) .. "[§K9,0] » :dinofauro: ");
 										else
 											nodeExterno.AlvoRecebido = self.cmbInimigosH.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-											nodeExterno.DanoRecebido = "Habilidade de Buff";
 											if node.DanoAtributo1 ~= 'BUFF' then
 												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1) * (1 - (RESAlvo / 100)))
+												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 											end;
 											if node.DanoAtributo1 == 'Fixo' then
 												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
+												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 											end;
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO + 1))
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido .. "[§K9,0] »");
 										end;	
 									end;										
 								else
 									mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+									nodeExterno.DanoRecebido = 0
+									nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 								end;
 							else							
 								mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
+								nodeExterno.DanoRecebido = 0
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 								if node.DanoAtributo1 == 'BUFF' then
 									mesaDoPersonagem.chat:enviarMensagem("[§K3,15]ERA BUFF ESSA MERDA");	
 								else 	
 								end;
 							end;
-						else
+						else							
 							mesaDoPersonagem.chat:enviarMensagem("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE");
+							nodeExterno.DanoRecebido = 0
 						end;
 						end);
+					
 					end;
-
-
-										
-				end; 																		
+											
+				end; 																				
 				
 
 
@@ -971,7 +980,7 @@ local function constructNew_frmhabilidade()
 
     obj._e_event7 = obj.dataLink2:addEventListener("onChange",
         function (field, oldValue, newValue)
-            if sheet.cmbTipoDeGrupoFH == "1" then
+            if self.cmbTipoGrupoH.value == "1" then
             								local mesas = rrpg.getRooms();
             								local bibliotecaAtual = mesas[1].library;
             								
@@ -980,6 +989,8 @@ local function constructNew_frmhabilidade()
             								local function obterNomesRecursivoH(bibItem)
             									local itensFilhos = bibItem.children;
             									local nomes = bibItem.name;
+            
+            									
             									
             									for i = 1, #itensFilhos, 1 do
             										local bibItemFilho = itensFilhos[i];
@@ -1024,7 +1035,7 @@ local function constructNew_frmhabilidade()
             								atualizarComboBoxH()
             							end
             
-            							if sheet.cmbTipoDeGrupoFH == "2" then
+            							if self.cmbTipoGrupoH.value == "2" then
             								local mesas = rrpg.getRooms();
             								local bibliotecaAtual = mesas[1].library;
             								
@@ -1077,7 +1088,7 @@ local function constructNew_frmhabilidade()
 
     obj._e_event8 = obj.button5:addEventListener("onClick",
         function (event)
-            ExecutarH1()
+            ExecutarH2()
         end);
 
     function obj:_releaseEvents()
