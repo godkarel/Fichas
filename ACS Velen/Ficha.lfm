@@ -6,6 +6,8 @@
 	</event>
 	 
 	<import file="Funct/ProximaAcao.xml"/>
+	<import file="Funct/ProximaVez.xml"/>
+	<import file="Funct/ProximoTurno.xml"/>
 	 
 	--- recordlist do jogador ---
 	<button top="10" left="10" text="Adicionar Jogador" width="150" height="30">
@@ -20,7 +22,7 @@
 
 			-- Chama a função para criar e incrementar a lista
 			criarEIncrementarLista()
-
+			showMessage(sheet.PersonagensEmCombate)
 
 		</event>
 	</button>
@@ -209,13 +211,13 @@
         <edit name="editTurnoAtual" field="TurnoAtualControle" align="top" width="200" height="20" horzTextAlign="center"/>
         <button name="btnTurnoAnterior" text="AnteriorRR" align="left" width="90" height="20" top="40">
 			<event name="onClick">										
-				showMessage(sheet.ACAOTURNO)
+				AnteriorTurno();	
 			</event>
 		</button>	
 		
         <button name="btnTurnoProximo" text="Próximo" align="right" width="90" height="20" top="40">
 			<event name="onClick">										
-						
+				ProximoTurno();		
 			</event>
 		</button>
     </layout>
@@ -224,8 +226,16 @@
     <layout left="620" top="120" width="200" height="60">
         <label text="Vez Atual:" align="top" autoSize="true" fontSize="16" fontColor="white"/>
         <edit name="editVezAtual" field="VezAtualControle" align="top" width="200" height="20" readOnly="true" horzTextAlign="center"/>
-        <button name="btnVezAnterior" text="ANTERIOR" align="left" width="90" height="20" top="40"/>
-        <button name="btnVezProximo" text="PRÓXIMO" align="right" width="90" height="20" top="40"/>
+        <button name="btnVezAnterior" text="Anterior" align="left" width="90" height="20" top="40">
+		<event name="onClick">										
+				AnteriorVez();
+			</event>
+		</button>	
+        <button name="btnVezProximo" text="PRÓXIMO" align="right" width="90" height="20" top="40">
+		<event name="onClick">										
+				ProximaVez();
+			</event>
+		</button>	
     </layout>
 
     <!-- Campo para exibir a Ação Atual -->
@@ -240,7 +250,7 @@
 		
         <button name="btnAcaoProximo" text="Próximo" align="right" width="90" height="20" top="40">
 			<event name="onClick">										
-					ProximaAcao();
+				ProximaAcao();
 			</event>
 		</button>
     </layout>
@@ -345,42 +355,44 @@
 		end
 	
 	function criarEIncrementarLista()
-				if sheet ~= nil then
-					local nodesJ = ndb.getChildNodes(sheet.NomeJogador)  -- Obtém todos os nós filhos do campo NomeJogador
-					local nodesO = ndb.getChildNodes(sheet.NomeOponentes)  -- Obtém todos os nós filhos do campo NomeOponentes
-					
-					lista = {}  -- Cria uma nova lista
+    if sheet ~= nil then
+        local nodesJ = ndb.getChildNodes(sheet.NomeJogador)  -- Obtém todos os nós filhos do campo NomeJogador
+        local nodesO = ndb.getChildNodes(sheet.NomeOponentes)  -- Obtém todos os nós filhos do campo NomeOponentes
+        
+        lista = {}  -- Cria uma nova lista
 
-					-- Itera sobre os nós e adiciona o NomeDoPersonagemVez de cada um à lista
-					for _, node in ipairs(nodesJ) do
-						if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
-							table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
-						end
-					end
-					
-					-- Itera sobre os nós e adiciona o NomeDoOponenteVez de cada um à lista
-					for _, node in ipairs(nodesO) do
-						if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
-							table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
-						end
-					end
+        -- Itera sobre os nós e adiciona o NomeDoPersonagemVez de cada um à lista
+        for _, node in ipairs(nodesJ) do
+            if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
+                table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
+            end
+        end
+        
+        -- Itera sobre os nós e adiciona o NomeDoOponenteVez de cada um à lista
+        for _, node in ipairs(nodesO) do
+            if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
+                table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
+            end
+        end
 
-					-- Ordena a lista em ordem alfabética
-					table.sort(lista)
+        -- Ordena a lista em ordem alfabética
+        table.sort(lista)
 
-					-- Concatena todos os itens da lista em uma única string
-					local listaStr = ""
-					for i, item in ipairs(lista) do
-						listaStr = listaStr .. "Item " .. i .. ": " .. tostring(item) .. "\n"
-					end
-					-- Exibe a lista concatenada em um único showMessage
-					
-				else
-					
-				end
-				
-				return lista
-			end
+        -- Concatena todos os itens da lista em uma única string
+        local listaStr = ""
+        for i, item in ipairs(lista) do
+            listaStr = listaStr .. "Item " .. i .. ": " .. tostring(item) .. "\n"
+        end
+
+        -- Exibe a lista concatenada em um único showMessage
+        sheet.PersonagensEmCombate = listaStr
+    else
+        showMessage("A 'sheet' não está definida.")
+    end
+
+    return lista
+end
+
 
 			
 
@@ -553,7 +565,6 @@
 					if node.NomeDoOponenteVez == sheet.AlvoRecebido then
 						
 						--AQUI--
-						showMessage("Dano Que Veio" .. sheet.DanoRecebido)
 						if	self.BoxDetalheOponentes.visible == true then
 							local node = self.rclGrupoOponentes.selectedNode;   
 							self.rclGrupoOponentes.node = node;
@@ -597,8 +608,6 @@
 					
 				for _, node in ipairs(nodes) do
 					if node.NomeDoPersonagemVez == sheet.AlvoRecebido then
-						
-						showMessage("sistema de combate" .. sheet.DanoRecebido)
 						if	self.BoxDetalheJogadores.visible == true then
 							local node = self.rclGrupoJogadores.selectedNode;   
 							self.rclGrupoJogadores.node = node;
