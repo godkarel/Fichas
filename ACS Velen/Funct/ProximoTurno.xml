@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	
+	<script>		
+		function ProximoTurno()
+			local minhaMesa = Firecast.getRoomOf(sheet)
+			local chat = minhaMesa.chat
+			acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
+			lista2 = criarEIncrementarLista();
+			
+			if acoes == nil then
+				acoes = sheet.AcaoAtual
+			end;
+			
+			if sheet.TurnoAtualControle == nil or sheet.TurnoAtualControle == "" then
+				sheet.TurnoAtualControle = 1
+			end;
+
+			sheet.TurnoAtualControle = tonumber(sheet.TurnoAtualControle) + 1
+
+			chat:enviarNarracao("[§K4]TURNO [§K1]ALTERADO PELO MESTRE | [§K4]" .. sheet.TurnoAtualControle)
+						
+		end;
+		
+		<![CDATA[
+		function AnteriorTurno()
+			local minhaMesa = Firecast.getRoomOf(sheet)
+			local chat = minhaMesa.chat
+			acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
+			lista2 = criarEIncrementarLista();
+			
+			if acoes == nil then
+				acoes = sheet.AcaoAtual
+			end;
+			
+			if sheet.TurnoAtualControle == nil or sheet.TurnoAtualControle == "" then
+				sheet.TurnoAtualControle = 1
+			end;
+
+			sheet.TurnoAtualControle = tonumber(sheet.TurnoAtualControle) - 1
+
+			if sheet.TurnoAtualControle < 1 then
+				sheet.TurnoAtualControle = 1
+			end;
+
+			chat:enviarNarracao("[§K4]TURNO [§K1]ALTERADO PELO MESTRE | [§K4]" .. sheet.TurnoAtualControle)
+						
+		end;
+		]]>
+		
+	</script>

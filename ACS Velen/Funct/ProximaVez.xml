@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	
+	<script>		
+		function ProximaVez()
+			local minhaMesa = Firecast.getRoomOf(sheet)
+			local chat = minhaMesa.chat
+			acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
+			lista2 = criarEIncrementarLista();
+			
+			if acoes == nil then
+				acoes = sheet.AcaoAtual
+			end;
+			
+			if sheet.VezAtualIndex == nil then
+				sheet.VezAtualIndex = 1
+			end;
+
+			sheet.VezAtualIndex = tonumber(sheet.VezAtualIndex) + 1
+
+			if sheet.VezAtualIndex > #lista2 then
+				sheet.VezAtualIndex = 1 -- reinicia o player para começar dnv
+			end;
+
+			sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+
+			if sheet.VezAtualControle == nil or sheet.VezAtualControle == "" then
+				sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+			end;
+
+			chat:enviarNarracao("[§K4]VEZ [§K1]ALTERADA PELO MESTRE [§K4]" .. sheet.VezAtualControle)
+						
+		end;
+		
+		<![CDATA[
+		function AnteriorVez()
+			local minhaMesa = Firecast.getRoomOf(sheet)
+			local chat = minhaMesa.chat
+			acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
+			lista2 = criarEIncrementarLista();
+			
+			if acoes == nil then
+				acoes = sheet.AcaoAtual
+			end;
+			
+			if sheet.VezAtualIndex == nil then
+				sheet.VezAtualIndex = #lista2
+			end;
+
+			sheet.VezAtualIndex = tonumber(sheet.VezAtualIndex) - 1
+
+			if sheet.VezAtualIndex < 1 then
+				sheet.VezAtualIndex = #lista2 -- reinicia o player para começar dnv
+			end;
+
+			sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+
+			if sheet.VezAtualControle == nil or sheet.VezAtualControle == "" then
+				sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+			end;
+
+			chat:enviarNarracao("[§K4]VEZ [§K1]ALTERADA PELO MESTRE [§K4]" .. sheet.VezAtualControle)
+						
+		end;
+		]]>
+		
+	</script>

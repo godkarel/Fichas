@@ -60,9 +60,11 @@ local function constructNew_frmACSVelen()
 				sheet.AcaoAtualIndex = sheet.AcaoAtualIndex + 1
 				if sheet.AcaoAtualIndex > #acoes then
 					sheet.AcaoAtualIndex = 1  -- Reinicia o ciclo das ações
+					
 					sheet.TurnoAtualControle = (sheet.TurnoAtualControle or 0) + 1
 					sheet.VezAtualIndex = sheet.VezAtualIndex + 1
 					sheet.AcaoAtualControle = acoes[sheet.AcaoAtualIndex]
+					
 					sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
 					if sheet.VezAtualControle == nil or sheet.VezAtualControle == "" then
 						sheet.VezAtualIndex = 1
@@ -73,7 +75,10 @@ local function constructNew_frmACSVelen()
 			end
 
 			sheet.AcaoAtual = acoes[sheet.AcaoAtualIndex]
-			chat:enviarNarracao(sheet.AcaoAtual)
+			sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+			
+			
+			chat:enviarNarracao("[§K4]" .. sheet.AcaoAtual .. " [§K1]| do personagem | [§K4]" .. sheet.VezAtualControle .. "[§K1] | do Turno | [§K4]" .. sheet.TurnoAtualControle)
 			
 			if sheet.VezAtualIndex == nil then
 				sheet.VezAtualIndex = 1
@@ -118,13 +123,143 @@ local function constructNew_frmACSVelen()
 			end
 
 			sheet.AcaoAtual = acoes[sheet.AcaoAtualIndex]
-			chat:enviarNarracao(sheet.AcaoAtual)
+			sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+			
+			chat:enviarNarracao("[§K4]" .. sheet.AcaoAtual .. " [§K1]| do personagem | [§K4]" .. sheet.VezAtualControle .. "[§K1] | do Turno | [§K4]" .. sheet.TurnoAtualControle)
 			
 			if sheet.VezAtualIndex == nil then
 				sheet.VezAtualIndex = 3
 			else
 				sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
 			end;
+		end;
+		
+
+
+
+		
+	
+
+
+		
+		function ProximaVez()
+			local minhaMesa = Firecast.getRoomOf(sheet)
+			local chat = minhaMesa.chat
+			acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
+			lista2 = criarEIncrementarLista();
+			
+			if acoes == nil then
+				acoes = sheet.AcaoAtual
+			end;
+			
+			if sheet.VezAtualIndex == nil then
+				sheet.VezAtualIndex = 1
+			end;
+
+			sheet.VezAtualIndex = tonumber(sheet.VezAtualIndex) + 1
+
+			if sheet.VezAtualIndex > #lista2 then
+				sheet.VezAtualIndex = 1 -- reinicia o player para começar dnv
+			end;
+
+			sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+
+			if sheet.VezAtualControle == nil or sheet.VezAtualControle == "" then
+				sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+			end;
+
+			chat:enviarNarracao("[§K4]VEZ [§K1]ALTERADA PELO MESTRE [§K4]" .. sheet.VezAtualControle)
+						
+		end;
+		
+		
+
+
+
+		function AnteriorVez()
+			local minhaMesa = Firecast.getRoomOf(sheet)
+			local chat = minhaMesa.chat
+			acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
+			lista2 = criarEIncrementarLista();
+			
+			if acoes == nil then
+				acoes = sheet.AcaoAtual
+			end;
+			
+			if sheet.VezAtualIndex == nil then
+				sheet.VezAtualIndex = #lista2
+			end;
+
+			sheet.VezAtualIndex = tonumber(sheet.VezAtualIndex) - 1
+
+			if sheet.VezAtualIndex < 1 then
+				sheet.VezAtualIndex = #lista2 -- reinicia o player para começar dnv
+			end;
+
+			sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+
+			if sheet.VezAtualControle == nil or sheet.VezAtualControle == "" then
+				sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+			end;
+
+			chat:enviarNarracao("[§K4]VEZ [§K1]ALTERADA PELO MESTRE [§K4]" .. sheet.VezAtualControle)
+						
+		end;
+		
+
+
+
+		
+	
+
+
+		
+		function ProximoTurno()
+			local minhaMesa = Firecast.getRoomOf(sheet)
+			local chat = minhaMesa.chat
+			acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
+			lista2 = criarEIncrementarLista();
+			
+			if acoes == nil then
+				acoes = sheet.AcaoAtual
+			end;
+			
+			if sheet.TurnoAtualControle == nil or sheet.TurnoAtualControle == "" then
+				sheet.TurnoAtualControle = 1
+			end;
+
+			sheet.TurnoAtualControle = tonumber(sheet.TurnoAtualControle) + 1
+
+			chat:enviarNarracao("[§K4]TURNO [§K1]ALTERADO PELO MESTRE | [§K4]" .. sheet.TurnoAtualControle)
+						
+		end;
+		
+		
+
+
+
+		function AnteriorTurno()
+			local minhaMesa = Firecast.getRoomOf(sheet)
+			local chat = minhaMesa.chat
+			acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
+			lista2 = criarEIncrementarLista();
+			
+			if acoes == nil then
+				acoes = sheet.AcaoAtual
+			end;
+			
+			if sheet.TurnoAtualControle == nil or sheet.TurnoAtualControle == "" then
+				sheet.TurnoAtualControle = 1
+			end;
+
+			sheet.TurnoAtualControle = tonumber(sheet.TurnoAtualControle) - 1
+
+			if sheet.TurnoAtualControle < 1 then
+				sheet.TurnoAtualControle = 1
+			end;
+
+			chat:enviarNarracao("[§K4]TURNO [§K1]ALTERADO PELO MESTRE | [§K4]" .. sheet.TurnoAtualControle)
+						
 		end;
 		
 
@@ -259,7 +394,7 @@ local function constructNew_frmACSVelen()
     obj.label4:setParent(obj.progressBar1);
     obj.label4:setAlign("right");
     obj.label4:setHorzTextAlign("center");
-    obj.label4:setField("HPBar");
+    obj.label4:setField("HPBarMax");
     obj.label4:setName("label4");
 
     obj.progressBar2 = GUI.fromHandle(_obj_newObject("progressBar"));
@@ -290,7 +425,7 @@ local function constructNew_frmACSVelen()
     obj.label7:setParent(obj.progressBar2);
     obj.label7:setAlign("right");
     obj.label7:setHorzTextAlign("center");
-    obj.label7:setField("MPBar");
+    obj.label7:setField("MPBarMax");
     obj.label7:setName("label7");
 
     obj.layout2 = GUI.fromHandle(_obj_newObject("layout"));
@@ -742,7 +877,7 @@ local function constructNew_frmACSVelen()
     obj.btnVezAnterior = GUI.fromHandle(_obj_newObject("button"));
     obj.btnVezAnterior:setParent(obj.layout7);
     obj.btnVezAnterior:setName("btnVezAnterior");
-    obj.btnVezAnterior:setText("ANTERIOR");
+    obj.btnVezAnterior:setText("Anterior");
     obj.btnVezAnterior:setAlign("left");
     obj.btnVezAnterior:setWidth(90);
     obj.btnVezAnterior:setHeight(20);
@@ -911,42 +1046,48 @@ local function constructNew_frmACSVelen()
 		end
 	
 	function criarEIncrementarLista()
-				if sheet ~= nil then
-					local nodesJ = ndb.getChildNodes(sheet.NomeJogador)  -- Obtém todos os nós filhos do campo NomeJogador
-					local nodesO = ndb.getChildNodes(sheet.NomeOponentes)  -- Obtém todos os nós filhos do campo NomeOponentes
-					
-					lista = {}  -- Cria uma nova lista
+    if sheet ~= nil then
+        local nodesJ = ndb.getChildNodes(sheet.NomeJogador)  -- Obtém todos os nós filhos do campo NomeJogador
+        local nodesO = ndb.getChildNodes(sheet.NomeOponentes)  -- Obtém todos os nós filhos do campo NomeOponentes
+        
+        lista = {}  -- Cria uma nova lista
 
-					-- Itera sobre os nós e adiciona o NomeDoPersonagemVez de cada um à lista
-					for _, node in ipairs(nodesJ) do
-						if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
-							table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
-						end
-					end
-					
-					-- Itera sobre os nós e adiciona o NomeDoOponenteVez de cada um à lista
-					for _, node in ipairs(nodesO) do
-						if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
-							table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
-						end
-					end
+        -- Itera sobre os nós e adiciona o NomeDoPersonagemVez de cada um à lista
+        for _, node in ipairs(nodesJ) do
+            if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
+                table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
+            end
+        end
+        
+        -- Itera sobre os nós e adiciona o NomeDoOponenteVez de cada um à lista
+        for _, node in ipairs(nodesO) do
+            if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
+                table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
+            end
+        end
 
-					-- Ordena a lista em ordem alfabética
-					table.sort(lista)
+        -- Ordena a lista em ordem alfabética
+        table.sort(lista)
 
-					-- Concatena todos os itens da lista em uma única string
-					local listaStr = ""
-					for i, item in ipairs(lista) do
-						listaStr = listaStr .. "Item " .. i .. ": " .. tostring(item) .. "\n"
-					end
-					-- Exibe a lista concatenada em um único showMessage
-					
-				else
-					
-				end
-				
-				return lista
-			end
+        -- Concatena todos os itens da lista em uma única string
+        local listaStr = ""
+        for i, item in ipairs(lista) do
+            listaStr = listaStr .. "Item " .. i .. ": " .. tostring(item) .. "\n"
+        end
+
+        -- Exibe a lista concatenada em um único showMessage
+        sheet.PersonagensEmCombate = listaStr
+    else
+        showMessage("A 'sheet' não está definida.")
+    end
+
+    return lista
+end
+
+
+			
+
+
 	
 
 
@@ -1459,7 +1600,7 @@ local function constructNew_frmACSVelen()
 
     obj.dataLink1 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink1:setParent(obj);
-    obj.dataLink1:setFields({'DanoRecebido', 'AlvoRecebido', 'GrupoRecebido', 'ACAOTURNO'});
+    obj.dataLink1:setFields({'ACAOTURNO'});
     obj.dataLink1:setName("dataLink1");
 
     obj._e_event0 = obj:addEventListener("onNodeReady",
@@ -1476,6 +1617,7 @@ local function constructNew_frmACSVelen()
         function (event)
             -- Chama a função para criar e incrementar a lista
             			criarEIncrementarLista()
+            			showMessage(sheet.PersonagensEmCombate)
         end);
 
     obj._e_event3 = obj.button3:addEventListener("onClick",
@@ -1554,8 +1696,8 @@ local function constructNew_frmACSVelen()
             											node.Vigor = nodeExterno.TVigor or '0';
             											node.HPBarMax = nodeExterno.HPTotal or '0';
             											node.MPBarMax = nodeExterno.MPTotal or '0';
-            											node.HPBar = nodeExterno.HPTotal or '0';
-            											node.MPBar = nodeExterno.MPTotal or '0';
+            											node.HPBar = nodeExterno.HPAtual or '0';
+            											node.MPBar = nodeExterno.MPAtual or '0';
             											node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoPersonagem
             										end
             									end
@@ -1570,38 +1712,50 @@ local function constructNew_frmACSVelen()
 
     obj._e_event7 = obj.btnTurnoAnterior:addEventListener("onClick",
         function (event)
+            AnteriorTurno();
         end);
 
     obj._e_event8 = obj.btnTurnoProximo:addEventListener("onClick",
         function (event)
+            ProximoTurno();
         end);
 
-    obj._e_event9 = obj.btnAcaoAnterior:addEventListener("onClick",
+    obj._e_event9 = obj.btnVezAnterior:addEventListener("onClick",
+        function (event)
+            AnteriorVez();
+        end);
+
+    obj._e_event10 = obj.btnVezProximo:addEventListener("onClick",
+        function (event)
+            ProximaVez();
+        end);
+
+    obj._e_event11 = obj.btnAcaoAnterior:addEventListener("onClick",
         function (event)
             AnteriorAcao();
         end);
 
-    obj._e_event10 = obj.btnAcaoProximo:addEventListener("onClick",
+    obj._e_event12 = obj.btnAcaoProximo:addEventListener("onClick",
         function (event)
             ProximaAcao();
         end);
 
-    obj._e_event11 = obj.TrocadorDeAcao:addEventListener("onTimer",
+    obj._e_event13 = obj.TrocadorDeAcao:addEventListener("onTimer",
         function ()
             AcaoAtualControlador()
         end);
 
-    obj._e_event12 = obj.AvisoDeTempo:addEventListener("onTimer",
+    obj._e_event14 = obj.AvisoDeTempo:addEventListener("onTimer",
         function ()
             AvisoDeTempoControlador()
         end);
 
-    obj._e_event13 = obj.button5:addEventListener("onClick",
+    obj._e_event15 = obj.button5:addEventListener("onClick",
         function (event)
             self.rclGrupoOponentes:append();
         end);
 
-    obj._e_event14 = obj.rclGrupoOponentes:addEventListener("onSelect",
+    obj._e_event16 = obj.rclGrupoOponentes:addEventListener("onSelect",
         function ()
             local node = self.rclGrupoOponentes.selectedNode; 
             				
@@ -1612,12 +1766,12 @@ local function constructNew_frmACSVelen()
             			self.rclGrupoOponentes:sort();
         end);
 
-    obj._e_event15 = obj.rclGrupoOponentes:addEventListener("onCompare",
+    obj._e_event17 = obj.rclGrupoOponentes:addEventListener("onCompare",
         function (nodeA, nodeB)
             return utils.compareStringPtBr(nodeA.Vez, nodeB.Vez);
         end);
 
-    obj._e_event16 = obj.button6:addEventListener("onClick",
+    obj._e_event18 = obj.button6:addEventListener("onClick",
         function (event)
             if	self.BoxDetalheOponentes.visible == true then
             							local node = self.rclGrupoOponentes.selectedNode;   
@@ -1626,13 +1780,13 @@ local function constructNew_frmACSVelen()
             							local mesas = rrpg.getRooms();
             							local bibliotecaAtual = mesas[1].library;
             
-            							local function obterNomesRecursivo(bibItem)
+            							local function obterNomesRecursivoO(bibItem)
             								local itensFilhos = bibItem.children;
             								local nomes = bibItem.name;
             
             								for i = 1, #itensFilhos, 1 do
             									local bibItemFilho = itensFilhos[i];
-            									local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+            									local nomesDoFilho = obterNomesRecursivoO(bibItemFilho) or "";
             
             									if nomesDoFilho == node.NomeDoOponente then
             										-- Obter ID do personagem Loan
@@ -1672,20 +1826,19 @@ local function constructNew_frmACSVelen()
             								end
             							return nomes
             							end
-            							local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+            							local nomesDeTodosOsItens = obterNomesRecursivoO(bibliotecaAtual);
             						end;
         end);
 
-    obj._e_event17 = obj.dataLink1:addEventListener("onChange",
+    obj._e_event19 = obj.dataLink1:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.GrupoRecebido == "1" then
             				local nodes = ndb.getChildNodes(sheet.NomeOponentes)
             					
             				for _, node in ipairs(nodes) do
             					if node.NomeDoOponenteVez == sheet.AlvoRecebido then
-            						node.HPBarO = node.HPBarO - sheet.DanoRecebido
+            						
             						--AQUI--
-            
             						if	self.BoxDetalheOponentes.visible == true then
             							local node = self.rclGrupoOponentes.selectedNode;   
             							self.rclGrupoOponentes.node = node;
@@ -1710,7 +1863,7 @@ local function constructNew_frmACSVelen()
             
             										-- Aguarda até que a ficha esteja carregada
             										local nodeExterno = await(promise);
-            										
+            										node.HPBarO = (node.HPBarO - await(sheet.DanoRecebido))
             										nodeExterno.HPAtual = node.HPBarO or '0';
             
             									end
@@ -1719,6 +1872,7 @@ local function constructNew_frmACSVelen()
             							end
             							local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
             						end;
+            						
             					end
             				end
             			end;
@@ -1728,10 +1882,6 @@ local function constructNew_frmACSVelen()
             					
             				for _, node in ipairs(nodes) do
             					if node.NomeDoPersonagemVez == sheet.AlvoRecebido then
-            						node.HPBar = node.HPBar - sheet.DanoRecebido
-            
-            						
-            
             						if	self.BoxDetalheJogadores.visible == true then
             							local node = self.rclGrupoJogadores.selectedNode;   
             							self.rclGrupoJogadores.node = node;
@@ -1739,13 +1889,13 @@ local function constructNew_frmACSVelen()
             							local mesas = rrpg.getRooms();
             							local bibliotecaAtual = mesas[1].library;
             
-            							local function obterNomesRecursivo(bibItem)
+            							local function obterNomesRecursivoO(bibItem)
             								local itensFilhos = bibItem.children;
             								local nomes = bibItem.name;
             
             								for i = 1, #itensFilhos, 1 do
             									local bibItemFilho = itensFilhos[i];
-            									local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+            									local nomesDoFilho = obterNomesRecursivoO(bibItemFilho) or "";
             
             									if nomesDoFilho == node.NomeDoPersonagem then
             										-- Obter ID do personagem Loan
@@ -1756,19 +1906,24 @@ local function constructNew_frmACSVelen()
             
             										-- Aguarda até que a ficha esteja carregada
             										local nodeExterno = await(promise);
+            										node.HPBar = (node.HPBar - await(sheet.DanoRecebido))
             										nodeExterno.HPAtual = node.HPBar or '0';
+            										
             									end
             								end
             							return nomes
             							end
-            							local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+            							local nomesDeTodosOsItens = obterNomesRecursivoO(bibliotecaAtual);
             						end;
+            						
             					end
             				end
             			end
         end);
 
     function obj:_releaseEvents()
+        __o_rrpgObjs.removeEventListenerById(self._e_event19);
+        __o_rrpgObjs.removeEventListenerById(self._e_event18);
         __o_rrpgObjs.removeEventListenerById(self._e_event17);
         __o_rrpgObjs.removeEventListenerById(self._e_event16);
         __o_rrpgObjs.removeEventListenerById(self._e_event15);

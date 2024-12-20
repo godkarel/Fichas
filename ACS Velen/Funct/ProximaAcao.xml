@@ -29,9 +29,11 @@
 				sheet.AcaoAtualIndex = sheet.AcaoAtualIndex + 1
 				if sheet.AcaoAtualIndex > #acoes then
 					sheet.AcaoAtualIndex = 1  -- Reinicia o ciclo das ações
+					
 					sheet.TurnoAtualControle = (sheet.TurnoAtualControle or 0) + 1
 					sheet.VezAtualIndex = sheet.VezAtualIndex + 1
 					sheet.AcaoAtualControle = acoes[sheet.AcaoAtualIndex]
+					
 					sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
 					if sheet.VezAtualControle == nil or sheet.VezAtualControle == "" then
 						sheet.VezAtualIndex = 1
@@ -42,7 +44,10 @@
 			end
 
 			sheet.AcaoAtual = acoes[sheet.AcaoAtualIndex]
-			chat:enviarNarracao(sheet.AcaoAtual)
+			sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+			
+			
+			chat:enviarNarracao("[§K4]" .. sheet.AcaoAtual .. " [§K1]| do personagem | [§K4]" .. sheet.VezAtualControle .. "[§K1] | do Turno | [§K4]" .. sheet.TurnoAtualControle)
 			
 			if sheet.VezAtualIndex == nil then
 				sheet.VezAtualIndex = 1
@@ -84,7 +89,9 @@
 			end
 
 			sheet.AcaoAtual = acoes[sheet.AcaoAtualIndex]
-			chat:enviarNarracao(sheet.AcaoAtual)
+			sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
+			
+			chat:enviarNarracao("[§K4]" .. sheet.AcaoAtual .. " [§K1]| do personagem | [§K4]" .. sheet.VezAtualControle .. "[§K1] | do Turno | [§K4]" .. sheet.TurnoAtualControle)
 			
 			if sheet.VezAtualIndex == nil then
 				sheet.VezAtualIndex = 3
