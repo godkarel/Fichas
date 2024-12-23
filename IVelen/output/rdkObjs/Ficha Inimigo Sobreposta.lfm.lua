@@ -12,7 +12,7 @@ local function constructNew_frmSobrePostaInimigo()
     local self = obj;
     local sheet = nil;
 
-    rawset(obj, "_oldSetNodeObjectFunction", rawget(obj, "setNodeObject"));
+    rawset(obj, "_oldSetNodeObjectFunction", obj.setNodeObject);
 
     function obj:setNodeObject(nodeObject)
         sheet = nodeObject;
@@ -2207,7 +2207,7 @@ local function constructNew_frmSobrePostaInimigo()
 
 
     obj._e_event0 = obj:addEventListener("onNodeReady",
-        function (_)
+        function ()
             sheet.HPAtual = tonumber(sheet.HPAtual) or 0;
             		sheet.HPRetirado = tonumber(sheet.HPRetirado) or 0;
             		sheet.HPTotal = tonumber(sheet.HPTotal) or 0;
@@ -2291,80 +2291,80 @@ local function constructNew_frmSobrePostaInimigo()
             		sheet.CDMecanica4 = tonumber(sheet.CDMecanica4) or 0;
             		
             		sheet.TipoRecebido = sheet.TipoRecebido or "% Fisico";
-        end, obj);
+        end);
 
     obj._e_event1 = obj.button1:addEventListener("onClick",
-        function (_)
+        function (event)
             RetiraHP();
-        end, obj);
+        end);
 
     obj._e_event2 = obj.button2:addEventListener("onClick",
-        function (_)
+        function (event)
             URL()
-        end, obj);
+        end);
 
     obj._e_event3 = obj.button3:addEventListener("onClick",
-        function (_)
+        function (event)
             RetiraMP();
-        end, obj);
+        end);
 
     obj._e_event4 = obj.button4:addEventListener("onClick",
-        function (_)
+        function (event)
             ToparStatus();
-        end, obj);
+        end);
 
     obj._e_event5 = obj.button5:addEventListener("onClick",
-        function (_)
+        function (event)
             AtaqueBasico()
-        end, obj);
+        end);
 
     obj._e_event6 = obj.button6:addEventListener("onClick",
-        function (_)
+        function (event)
             self.popExtra:show();
-        end, obj);
+        end);
 
     obj._e_event7 = obj.btnMeca1:addEventListener("onClick",
-        function (_)
+        function (event)
             self.popMecanica1:show();
-        end, obj);
+        end);
 
     obj._e_event8 = obj.button7:addEventListener("onClick",
-        function (_)
+        function (event)
             MecanicaComum1()
-        end, obj);
+        end);
 
     obj._e_event9 = obj.btnMeca2:addEventListener("onClick",
-        function (_)
+        function (event)
             self.popMecanica2:show();
-        end, obj);
+        end);
 
     obj._e_event10 = obj.button8:addEventListener("onClick",
-        function (_)
+        function (event)
             MecanicaComum2()
-        end, obj);
+        end);
 
     obj._e_event11 = obj.btnMeca3:addEventListener("onClick",
-        function (_)
+        function (event)
             self.popMecanica3:show();
-        end, obj);
+        end);
 
     obj._e_event12 = obj.button9:addEventListener("onClick",
-        function (_)
+        function (event)
             MecanicaComum3()
-        end, obj);
+        end);
 
     obj._e_event13 = obj.btnMeca4:addEventListener("onClick",
-        function (_)
+        function (event)
             self.popMecanica4:show();
-        end, obj);
+        end);
 
     obj._e_event14 = obj.button10:addEventListener("onClick",
-        function (_)
+        function (event)
             MecanicaComum4()
-        end, obj);
+        end);
 
     obj._e_event15 = obj.dataLink1:addEventListener("onChange",
-        function (_, field, oldValue, newValue)
+        function (field, oldValue, newValue)
             self.btnMeca1.fontColor = 'white'
             					self.btnMeca2.fontColor = 'white'
             					self.btnMeca3.fontColor = 'white'
@@ -2383,15 +2383,15 @@ local function constructNew_frmSobrePostaInimigo()
             					if sheet.NomeMecanica4 ~= nil then
             						self.btnMeca4.fontColor = 'red';
             					end;
-        end, obj);
+        end);
 
     obj._e_event16 = obj.button11:addEventListener("onClick",
-        function (_)
+        function (event)
             self.rclHabilidadeInimigo:append();
-        end, obj);
+        end);
 
     obj._e_event17 = obj.rclHabilidadeInimigo:addEventListener("onSelect",
-        function (_)
+        function ()
             local node = self.rclHabilidadeInimigo.selectedNode; 
             					self.dscHabilidadeInimigo.node = node;                       
             					self.dscHabilidadeInimigo.visible = (node ~= nil);
@@ -2404,75 +2404,75 @@ local function constructNew_frmSobrePostaInimigo()
             						self.dscHabilidadeInimigo.node.Intensidade = tonumber(self.dscHabilidadeInimigo.node.Intensidade) or 0;
             						self.dscHabilidadeInimigo.node.DescriHabilidade = self.dscHabilidadeInimigo.node.DescriHabilidade or 'Descrição da Habilidade'
             					end;
-        end, obj);
+        end);
 
     obj._e_event18 = obj.rclHabilidadeInimigo:addEventListener("onEndEnumeration",
-        function (_)
+        function ()
             if self.rclHabilidadeInimigo.selectedNode == nil and sheet ~= nil then
             					local nodes = ndb.getChildNodes(sheet.campoDosItens);	
             					if #nodes > 0 then
             						self.rclHabilidadeInimigo.selectedNode = nodes[1];
             					end;
             				end;
-        end, obj);
+        end);
 
     obj._e_event19 = obj.button12:addEventListener("onClick",
-        function (_)
+        function (event)
             NDB.deleteNode(self.dscHabilidadeInimigo.node);
-        end, obj);
+        end);
 
     obj._e_event20 = obj.button13:addEventListener("onClick",
-        function (_)
+        function (event)
             UsarHabilidade()
-        end, obj);
+        end);
 
     obj._e_event21 = obj.button14:addEventListener("onClick",
-        function (_)
+        function (event)
             Drop1();
-        end, obj);
+        end);
 
     obj._e_event22 = obj.button15:addEventListener("onClick",
-        function (_)
+        function (event)
             Drop2();
-        end, obj);
+        end);
 
     obj._e_event23 = obj.button16:addEventListener("onClick",
-        function (_)
+        function (event)
             Drop3();
-        end, obj);
+        end);
 
     obj._e_event24 = obj.button17:addEventListener("onClick",
-        function (_)
+        function (event)
             Drop4();
-        end, obj);
+        end);
 
     obj._e_event25 = obj.button18:addEventListener("onClick",
-        function (_)
+        function (event)
             RolarTesteAtletismo()
-        end, obj);
+        end);
 
     obj._e_event26 = obj.button19:addEventListener("onClick",
-        function (_)
+        function (event)
             RolarTesteSabedoria()
-        end, obj);
+        end);
 
     obj._e_event27 = obj.button20:addEventListener("onClick",
-        function (_)
+        function (event)
             RolarTestePercepcao()
-        end, obj);
+        end);
 
     obj._e_event28 = obj.button21:addEventListener("onClick",
-        function (_)
+        function (event)
             RolarTesteAcrobacia()
-        end, obj);
+        end);
 
     obj._e_event29 = obj.button22:addEventListener("onClick",
-        function (_)
+        function (event)
             RolarTesteVigor()
-        end, obj);
+        end);
 
     obj._e_event30 = obj.dataLink2:addEventListener("onChange",
-        function (_, field, oldValue, newValue)
+        function (field, oldValue, newValue)
             ---------------------------------------------
             			---------------------------------------------
             			------[[Calculo de Redução Porcentado]]------
@@ -2627,19 +2627,19 @@ local function constructNew_frmSobrePostaInimigo()
             				sheet.DefesaPorCent = math.floor((tonumber(sheet.Defesa) or 0) /0.15);
             				sheet.ResistenciaPorCent = math.floor((tonumber(sheet.Resistencia) or 0) /0.15);
             			end;
-        end, obj);
+        end);
 
     obj._e_event31 = obj.dataLink3:addEventListener("onChange",
-        function (_, field, oldValue, newValue)
+        function (field, oldValue, newValue)
             self.BarraHP.value = tonumber(sheet.HPAtual);
             			self.BarraHP.max = tonumber(sheet.HPTotal);
-        end, obj);
+        end);
 
     obj._e_event32 = obj.dataLink4:addEventListener("onChange",
-        function (_, field, oldValue, newValue)
+        function (field, oldValue, newValue)
             self.BarraMP.value = tonumber(sheet.MPAtual);
             			self.BarraMP.max = tonumber(sheet.MPTotal);
-        end, obj);
+        end);
 
     function obj:_releaseEvents()
         __o_rrpgObjs.removeEventListenerById(self._e_event32);
@@ -2686,189 +2686,189 @@ local function constructNew_frmSobrePostaInimigo()
           self:setNodeDatabase(nil);
         end;
 
-        if self.label33 ~= nil then self.label33:destroy(); self.label33 = nil; end;
-        if self.rclHabilidadeInimigo ~= nil then self.rclHabilidadeInimigo:destroy(); self.rclHabilidadeInimigo = nil; end;
-        if self.label14 ~= nil then self.label14:destroy(); self.label14 = nil; end;
-        if self.label44 ~= nil then self.label44:destroy(); self.label44 = nil; end;
-        if self.edit46 ~= nil then self.edit46:destroy(); self.edit46 = nil; end;
-        if self.button15 ~= nil then self.button15:destroy(); self.button15 = nil; end;
-        if self.CbxMeca3 ~= nil then self.CbxMeca3:destroy(); self.CbxMeca3 = nil; end;
-        if self.edit41 ~= nil then self.edit41:destroy(); self.edit41 = nil; end;
-        if self.textEditor13 ~= nil then self.textEditor13:destroy(); self.textEditor13 = nil; end;
-        if self.BarraMP ~= nil then self.BarraMP:destroy(); self.BarraMP = nil; end;
-        if self.edit36 ~= nil then self.edit36:destroy(); self.edit36 = nil; end;
-        if self.edit9 ~= nil then self.edit9:destroy(); self.edit9 = nil; end;
-        if self.label40 ~= nil then self.label40:destroy(); self.label40 = nil; end;
-        if self.edit33 ~= nil then self.edit33:destroy(); self.edit33 = nil; end;
-        if self.label43 ~= nil then self.label43:destroy(); self.label43 = nil; end;
-        if self.textEditor9 ~= nil then self.textEditor9:destroy(); self.textEditor9 = nil; end;
-        if self.edit29 ~= nil then self.edit29:destroy(); self.edit29 = nil; end;
-        if self.dataLink4 ~= nil then self.dataLink4:destroy(); self.dataLink4 = nil; end;
-        if self.URLIMG ~= nil then self.URLIMG:destroy(); self.URLIMG = nil; end;
-        if self.edit28 ~= nil then self.edit28:destroy(); self.edit28 = nil; end;
-        if self.edit7 ~= nil then self.edit7:destroy(); self.edit7 = nil; end;
-        if self.label45 ~= nil then self.label45:destroy(); self.label45 = nil; end;
-        if self.textEditor3 ~= nil then self.textEditor3:destroy(); self.textEditor3 = nil; end;
-        if self.edit12 ~= nil then self.edit12:destroy(); self.edit12 = nil; end;
-        if self.edit35 ~= nil then self.edit35:destroy(); self.edit35 = nil; end;
-        if self.label26 ~= nil then self.label26:destroy(); self.label26 = nil; end;
-        if self.btnMeca2 ~= nil then self.btnMeca2:destroy(); self.btnMeca2 = nil; end;
-        if self.comboBox4 ~= nil then self.comboBox4:destroy(); self.comboBox4 = nil; end;
-        if self.dscHabilidadeInimigo ~= nil then self.dscHabilidadeInimigo:destroy(); self.dscHabilidadeInimigo = nil; end;
-        if self.CbxMeca1 ~= nil then self.CbxMeca1:destroy(); self.CbxMeca1 = nil; end;
-        if self.button16 ~= nil then self.button16:destroy(); self.button16 = nil; end;
-        if self.label23 ~= nil then self.label23:destroy(); self.label23 = nil; end;
-        if self.button2 ~= nil then self.button2:destroy(); self.button2 = nil; end;
-        if self.popMecanica1 ~= nil then self.popMecanica1:destroy(); self.popMecanica1 = nil; end;
-        if self.image2 ~= nil then self.image2:destroy(); self.image2 = nil; end;
-        if self.label22 ~= nil then self.label22:destroy(); self.label22 = nil; end;
-        if self.label24 ~= nil then self.label24:destroy(); self.label24 = nil; end;
-        if self.label32 ~= nil then self.label32:destroy(); self.label32 = nil; end;
-        if self.label35 ~= nil then self.label35:destroy(); self.label35 = nil; end;
-        if self.label13 ~= nil then self.label13:destroy(); self.label13 = nil; end;
-        if self.comboBox6 ~= nil then self.comboBox6:destroy(); self.comboBox6 = nil; end;
-        if self.edit54 ~= nil then self.edit54:destroy(); self.edit54 = nil; end;
-        if self.label27 ~= nil then self.label27:destroy(); self.label27 = nil; end;
-        if self.edit57 ~= nil then self.edit57:destroy(); self.edit57 = nil; end;
-        if self.rectangle1 ~= nil then self.rectangle1:destroy(); self.rectangle1 = nil; end;
-        if self.edit50 ~= nil then self.edit50:destroy(); self.edit50 = nil; end;
-        if self.edit47 ~= nil then self.edit47:destroy(); self.edit47 = nil; end;
-        if self.edit61 ~= nil then self.edit61:destroy(); self.edit61 = nil; end;
-        if self.button20 ~= nil then self.button20:destroy(); self.button20 = nil; end;
-        if self.edit24 ~= nil then self.edit24:destroy(); self.edit24 = nil; end;
-        if self.edit59 ~= nil then self.edit59:destroy(); self.edit59 = nil; end;
-        if self.edit14 ~= nil then self.edit14:destroy(); self.edit14 = nil; end;
-        if self.button1 ~= nil then self.button1:destroy(); self.button1 = nil; end;
-        if self.comboBox3 ~= nil then self.comboBox3:destroy(); self.comboBox3 = nil; end;
-        if self.edit4 ~= nil then self.edit4:destroy(); self.edit4 = nil; end;
-        if self.edit44 ~= nil then self.edit44:destroy(); self.edit44 = nil; end;
-        if self.label8 ~= nil then self.label8:destroy(); self.label8 = nil; end;
-        if self.edit26 ~= nil then self.edit26:destroy(); self.edit26 = nil; end;
-        if self.edit34 ~= nil then self.edit34:destroy(); self.edit34 = nil; end;
-        if self.edit11 ~= nil then self.edit11:destroy(); self.edit11 = nil; end;
-        if self.edit19 ~= nil then self.edit19:destroy(); self.edit19 = nil; end;
-        if self.image1 ~= nil then self.image1:destroy(); self.image1 = nil; end;
-        if self.label4 ~= nil then self.label4:destroy(); self.label4 = nil; end;
-        if self.label6 ~= nil then self.label6:destroy(); self.label6 = nil; end;
-        if self.popMecanica2 ~= nil then self.popMecanica2:destroy(); self.popMecanica2 = nil; end;
-        if self.CbxMeca2 ~= nil then self.CbxMeca2:destroy(); self.CbxMeca2 = nil; end;
-        if self.edit5 ~= nil then self.edit5:destroy(); self.edit5 = nil; end;
-        if self.textEditor2 ~= nil then self.textEditor2:destroy(); self.textEditor2 = nil; end;
-        if self.label31 ~= nil then self.label31:destroy(); self.label31 = nil; end;
-        if self.label34 ~= nil then self.label34:destroy(); self.label34 = nil; end;
-        if self.label15 ~= nil then self.label15:destroy(); self.label15 = nil; end;
-        if self.button13 ~= nil then self.button13:destroy(); self.button13 = nil; end;
-        if self.textEditor11 ~= nil then self.textEditor11:destroy(); self.textEditor11 = nil; end;
-        if self.label37 ~= nil then self.label37:destroy(); self.label37 = nil; end;
-        if self.label41 ~= nil then self.label41:destroy(); self.label41 = nil; end;
-        if self.label49 ~= nil then self.label49:destroy(); self.label49 = nil; end;
-        if self.label12 ~= nil then self.label12:destroy(); self.label12 = nil; end;
-        if self.button22 ~= nil then self.button22:destroy(); self.button22 = nil; end;
-        if self.edit45 ~= nil then self.edit45:destroy(); self.edit45 = nil; end;
-        if self.edit8 ~= nil then self.edit8:destroy(); self.edit8 = nil; end;
-        if self.textEditor5 ~= nil then self.textEditor5:destroy(); self.textEditor5 = nil; end;
-        if self.edit53 ~= nil then self.edit53:destroy(); self.edit53 = nil; end;
-        if self.label16 ~= nil then self.label16:destroy(); self.label16 = nil; end;
-        if self.textEditor7 ~= nil then self.textEditor7:destroy(); self.textEditor7 = nil; end;
-        if self.button21 ~= nil then self.button21:destroy(); self.button21 = nil; end;
-        if self.edit2 ~= nil then self.edit2:destroy(); self.edit2 = nil; end;
-        if self.edit10 ~= nil then self.edit10:destroy(); self.edit10 = nil; end;
         if self.edit16 ~= nil then self.edit16:destroy(); self.edit16 = nil; end;
-        if self.label9 ~= nil then self.label9:destroy(); self.label9 = nil; end;
-        if self.edit31 ~= nil then self.edit31:destroy(); self.edit31 = nil; end;
-        if self.popMecanica3 ~= nil then self.popMecanica3:destroy(); self.popMecanica3 = nil; end;
-        if self.edit1 ~= nil then self.edit1:destroy(); self.edit1 = nil; end;
-        if self.comboBox2 ~= nil then self.comboBox2:destroy(); self.comboBox2 = nil; end;
-        if self.label28 ~= nil then self.label28:destroy(); self.label28 = nil; end;
-        if self.popMecanica4 ~= nil then self.popMecanica4:destroy(); self.popMecanica4 = nil; end;
-        if self.comboBox7 ~= nil then self.comboBox7:destroy(); self.comboBox7 = nil; end;
-        if self.label47 ~= nil then self.label47:destroy(); self.label47 = nil; end;
-        if self.button4 ~= nil then self.button4:destroy(); self.button4 = nil; end;
-        if self.edit21 ~= nil then self.edit21:destroy(); self.edit21 = nil; end;
-        if self.textEditor4 ~= nil then self.textEditor4:destroy(); self.textEditor4 = nil; end;
+        if self.edit47 ~= nil then self.edit47:destroy(); self.edit47 = nil; end;
+        if self.edit28 ~= nil then self.edit28:destroy(); self.edit28 = nil; end;
+        if self.CbxMeca2 ~= nil then self.CbxMeca2:destroy(); self.CbxMeca2 = nil; end;
+        if self.label37 ~= nil then self.label37:destroy(); self.label37 = nil; end;
         if self.edit30 ~= nil then self.edit30:destroy(); self.edit30 = nil; end;
-        if self.btnMeca3 ~= nil then self.btnMeca3:destroy(); self.btnMeca3 = nil; end;
-        if self.button3 ~= nil then self.button3:destroy(); self.button3 = nil; end;
-        if self.label1 ~= nil then self.label1:destroy(); self.label1 = nil; end;
-        if self.label42 ~= nil then self.label42:destroy(); self.label42 = nil; end;
-        if self.edit52 ~= nil then self.edit52:destroy(); self.edit52 = nil; end;
-        if self.edit55 ~= nil then self.edit55:destroy(); self.edit55 = nil; end;
-        if self.comboBox5 ~= nil then self.comboBox5:destroy(); self.comboBox5 = nil; end;
-        if self.edit43 ~= nil then self.edit43:destroy(); self.edit43 = nil; end;
-        if self.edit56 ~= nil then self.edit56:destroy(); self.edit56 = nil; end;
-        if self.label48 ~= nil then self.label48:destroy(); self.label48 = nil; end;
-        if self.image3 ~= nil then self.image3:destroy(); self.image3 = nil; end;
-        if self.button7 ~= nil then self.button7:destroy(); self.button7 = nil; end;
-        if self.label17 ~= nil then self.label17:destroy(); self.label17 = nil; end;
-        if self.edit58 ~= nil then self.edit58:destroy(); self.edit58 = nil; end;
-        if self.comboBox1 ~= nil then self.comboBox1:destroy(); self.comboBox1 = nil; end;
-        if self.edit13 ~= nil then self.edit13:destroy(); self.edit13 = nil; end;
-        if self.edit39 ~= nil then self.edit39:destroy(); self.edit39 = nil; end;
-        if self.edit23 ~= nil then self.edit23:destroy(); self.edit23 = nil; end;
-        if self.popExtra ~= nil then self.popExtra:destroy(); self.popExtra = nil; end;
-        if self.BarraHP ~= nil then self.BarraHP:destroy(); self.BarraHP = nil; end;
-        if self.dataLink1 ~= nil then self.dataLink1:destroy(); self.dataLink1 = nil; end;
-        if self.button11 ~= nil then self.button11:destroy(); self.button11 = nil; end;
-        if self.dataLink3 ~= nil then self.dataLink3:destroy(); self.dataLink3 = nil; end;
-        if self.label29 ~= nil then self.label29:destroy(); self.label29 = nil; end;
-        if self.button12 ~= nil then self.button12:destroy(); self.button12 = nil; end;
-        if self.button6 ~= nil then self.button6:destroy(); self.button6 = nil; end;
-        if self.label36 ~= nil then self.label36:destroy(); self.label36 = nil; end;
-        if self.rectangle2 ~= nil then self.rectangle2:destroy(); self.rectangle2 = nil; end;
-        if self.button5 ~= nil then self.button5:destroy(); self.button5 = nil; end;
-        if self.rectangle3 ~= nil then self.rectangle3:destroy(); self.rectangle3 = nil; end;
-        if self.edit37 ~= nil then self.edit37:destroy(); self.edit37 = nil; end;
-        if self.label21 ~= nil then self.label21:destroy(); self.label21 = nil; end;
-        if self.edit40 ~= nil then self.edit40:destroy(); self.edit40 = nil; end;
-        if self.label30 ~= nil then self.label30:destroy(); self.label30 = nil; end;
-        if self.textEditor6 ~= nil then self.textEditor6:destroy(); self.textEditor6 = nil; end;
-        if self.textEditor10 ~= nil then self.textEditor10:destroy(); self.textEditor10 = nil; end;
-        if self.textEditor12 ~= nil then self.textEditor12:destroy(); self.textEditor12 = nil; end;
-        if self.dataLink2 ~= nil then self.dataLink2:destroy(); self.dataLink2 = nil; end;
-        if self.label10 ~= nil then self.label10:destroy(); self.label10 = nil; end;
-        if self.edit17 ~= nil then self.edit17:destroy(); self.edit17 = nil; end;
-        if self.label19 ~= nil then self.label19:destroy(); self.label19 = nil; end;
-        if self.button10 ~= nil then self.button10:destroy(); self.button10 = nil; end;
-        if self.edit38 ~= nil then self.edit38:destroy(); self.edit38 = nil; end;
-        if self.edit48 ~= nil then self.edit48:destroy(); self.edit48 = nil; end;
-        if self.edit51 ~= nil then self.edit51:destroy(); self.edit51 = nil; end;
-        if self.label46 ~= nil then self.label46:destroy(); self.label46 = nil; end;
-        if self.button17 ~= nil then self.button17:destroy(); self.button17 = nil; end;
-        if self.label39 ~= nil then self.label39:destroy(); self.label39 = nil; end;
-        if self.edit15 ~= nil then self.edit15:destroy(); self.edit15 = nil; end;
-        if self.label11 ~= nil then self.label11:destroy(); self.label11 = nil; end;
-        if self.label3 ~= nil then self.label3:destroy(); self.label3 = nil; end;
-        if self.label20 ~= nil then self.label20:destroy(); self.label20 = nil; end;
-        if self.textEditor1 ~= nil then self.textEditor1:destroy(); self.textEditor1 = nil; end;
-        if self.CbxMeca4 ~= nil then self.CbxMeca4:destroy(); self.CbxMeca4 = nil; end;
-        if self.btnMeca1 ~= nil then self.btnMeca1:destroy(); self.btnMeca1 = nil; end;
-        if self.button9 ~= nil then self.button9:destroy(); self.button9 = nil; end;
-        if self.edit6 ~= nil then self.edit6:destroy(); self.edit6 = nil; end;
-        if self.label25 ~= nil then self.label25:destroy(); self.label25 = nil; end;
-        if self.label7 ~= nil then self.label7:destroy(); self.label7 = nil; end;
-        if self.button8 ~= nil then self.button8:destroy(); self.button8 = nil; end;
-        if self.button18 ~= nil then self.button18:destroy(); self.button18 = nil; end;
-        if self.label18 ~= nil then self.label18:destroy(); self.label18 = nil; end;
-        if self.label2 ~= nil then self.label2:destroy(); self.label2 = nil; end;
-        if self.edit22 ~= nil then self.edit22:destroy(); self.edit22 = nil; end;
-        if self.edit3 ~= nil then self.edit3:destroy(); self.edit3 = nil; end;
-        if self.textEditor8 ~= nil then self.textEditor8:destroy(); self.textEditor8 = nil; end;
+        if self.textEditor2 ~= nil then self.textEditor2:destroy(); self.textEditor2 = nil; end;
+        if self.edit50 ~= nil then self.edit50:destroy(); self.edit50 = nil; end;
         if self.edit42 ~= nil then self.edit42:destroy(); self.edit42 = nil; end;
-        if self.label5 ~= nil then self.label5:destroy(); self.label5 = nil; end;
-        if self.label38 ~= nil then self.label38:destroy(); self.label38 = nil; end;
-        if self.edit49 ~= nil then self.edit49:destroy(); self.edit49 = nil; end;
         if self.btnMeca4 ~= nil then self.btnMeca4:destroy(); self.btnMeca4 = nil; end;
+        if self.button11 ~= nil then self.button11:destroy(); self.button11 = nil; end;
+        if self.edit35 ~= nil then self.edit35:destroy(); self.edit35 = nil; end;
+        if self.rectangle3 ~= nil then self.rectangle3:destroy(); self.rectangle3 = nil; end;
+        if self.textEditor9 ~= nil then self.textEditor9:destroy(); self.textEditor9 = nil; end;
+        if self.textEditor13 ~= nil then self.textEditor13:destroy(); self.textEditor13 = nil; end;
+        if self.edit5 ~= nil then self.edit5:destroy(); self.edit5 = nil; end;
+        if self.edit49 ~= nil then self.edit49:destroy(); self.edit49 = nil; end;
+        if self.dataLink2 ~= nil then self.dataLink2:destroy(); self.dataLink2 = nil; end;
+        if self.image2 ~= nil then self.image2:destroy(); self.image2 = nil; end;
+        if self.comboBox6 ~= nil then self.comboBox6:destroy(); self.comboBox6 = nil; end;
         if self.edit27 ~= nil then self.edit27:destroy(); self.edit27 = nil; end;
-        if self.image4 ~= nil then self.image4:destroy(); self.image4 = nil; end;
-        if self.button19 ~= nil then self.button19:destroy(); self.button19 = nil; end;
+        if self.label43 ~= nil then self.label43:destroy(); self.label43 = nil; end;
+        if self.label30 ~= nil then self.label30:destroy(); self.label30 = nil; end;
+        if self.button1 ~= nil then self.button1:destroy(); self.button1 = nil; end;
+        if self.BarraMP ~= nil then self.BarraMP:destroy(); self.BarraMP = nil; end;
+        if self.edit14 ~= nil then self.edit14:destroy(); self.edit14 = nil; end;
+        if self.label10 ~= nil then self.label10:destroy(); self.label10 = nil; end;
+        if self.label22 ~= nil then self.label22:destroy(); self.label22 = nil; end;
+        if self.comboBox3 ~= nil then self.comboBox3:destroy(); self.comboBox3 = nil; end;
+        if self.edit9 ~= nil then self.edit9:destroy(); self.edit9 = nil; end;
+        if self.edit39 ~= nil then self.edit39:destroy(); self.edit39 = nil; end;
+        if self.CbxMeca4 ~= nil then self.CbxMeca4:destroy(); self.CbxMeca4 = nil; end;
+        if self.edit45 ~= nil then self.edit45:destroy(); self.edit45 = nil; end;
+        if self.edit59 ~= nil then self.edit59:destroy(); self.edit59 = nil; end;
+        if self.label35 ~= nil then self.label35:destroy(); self.label35 = nil; end;
+        if self.button4 ~= nil then self.button4:destroy(); self.button4 = nil; end;
+        if self.label15 ~= nil then self.label15:destroy(); self.label15 = nil; end;
         if self.edit32 ~= nil then self.edit32:destroy(); self.edit32 = nil; end;
-        if self.button14 ~= nil then self.button14:destroy(); self.button14 = nil; end;
-        if self.edit62 ~= nil then self.edit62:destroy(); self.edit62 = nil; end;
+        if self.label29 ~= nil then self.label29:destroy(); self.label29 = nil; end;
+        if self.edit56 ~= nil then self.edit56:destroy(); self.edit56 = nil; end;
+        if self.edit40 ~= nil then self.edit40:destroy(); self.edit40 = nil; end;
+        if self.label49 ~= nil then self.label49:destroy(); self.label49 = nil; end;
+        if self.CbxMeca1 ~= nil then self.CbxMeca1:destroy(); self.CbxMeca1 = nil; end;
         if self.edit18 ~= nil then self.edit18:destroy(); self.edit18 = nil; end;
-        if self.edit25 ~= nil then self.edit25:destroy(); self.edit25 = nil; end;
-        if self.scrollBox1 ~= nil then self.scrollBox1:destroy(); self.scrollBox1 = nil; end;
+        if self.label2 ~= nil then self.label2:destroy(); self.label2 = nil; end;
+        if self.button13 ~= nil then self.button13:destroy(); self.button13 = nil; end;
         if self.edit60 ~= nil then self.edit60:destroy(); self.edit60 = nil; end;
+        if self.rectangle1 ~= nil then self.rectangle1:destroy(); self.rectangle1 = nil; end;
+        if self.edit37 ~= nil then self.edit37:destroy(); self.edit37 = nil; end;
+        if self.textEditor7 ~= nil then self.textEditor7:destroy(); self.textEditor7 = nil; end;
+        if self.edit53 ~= nil then self.edit53:destroy(); self.edit53 = nil; end;
+        if self.label39 ~= nil then self.label39:destroy(); self.label39 = nil; end;
+        if self.edit3 ~= nil then self.edit3:destroy(); self.edit3 = nil; end;
+        if self.button8 ~= nil then self.button8:destroy(); self.button8 = nil; end;
+        if self.label19 ~= nil then self.label19:destroy(); self.label19 = nil; end;
+        if self.textEditor11 ~= nil then self.textEditor11:destroy(); self.textEditor11 = nil; end;
+        if self.btnMeca1 ~= nil then self.btnMeca1:destroy(); self.btnMeca1 = nil; end;
+        if self.label5 ~= nil then self.label5:destroy(); self.label5 = nil; end;
+        if self.comboBox4 ~= nil then self.comboBox4:destroy(); self.comboBox4 = nil; end;
+        if self.button14 ~= nil then self.button14:destroy(); self.button14 = nil; end;
+        if self.edit21 ~= nil then self.edit21:destroy(); self.edit21 = nil; end;
+        if self.label45 ~= nil then self.label45:destroy(); self.label45 = nil; end;
+        if self.edit6 ~= nil then self.edit6:destroy(); self.edit6 = nil; end;
+        if self.button3 ~= nil then self.button3:destroy(); self.button3 = nil; end;
+        if self.label12 ~= nil then self.label12:destroy(); self.label12 = nil; end;
+        if self.edit12 ~= nil then self.edit12:destroy(); self.edit12 = nil; end;
+        if self.image1 ~= nil then self.image1:destroy(); self.image1 = nil; end;
+        if self.label20 ~= nil then self.label20:destroy(); self.label20 = nil; end;
+        if self.comboBox1 ~= nil then self.comboBox1:destroy(); self.comboBox1 = nil; end;
+        if self.BarraHP ~= nil then self.BarraHP:destroy(); self.BarraHP = nil; end;
+        if self.edit24 ~= nil then self.edit24:destroy(); self.edit24 = nil; end;
+        if self.popMecanica4 ~= nil then self.popMecanica4:destroy(); self.popMecanica4 = nil; end;
+        if self.label9 ~= nil then self.label9:destroy(); self.label9 = nil; end;
+        if self.label33 ~= nil then self.label33:destroy(); self.label33 = nil; end;
+        if self.label40 ~= nil then self.label40:destroy(); self.label40 = nil; end;
+        if self.button6 ~= nil then self.button6:destroy(); self.button6 = nil; end;
+        if self.label17 ~= nil then self.label17:destroy(); self.label17 = nil; end;
+        if self.edit17 ~= nil then self.edit17:destroy(); self.edit17 = nil; end;
+        if self.label27 ~= nil then self.label27:destroy(); self.label27 = nil; end;
+        if self.rclHabilidadeInimigo ~= nil then self.rclHabilidadeInimigo:destroy(); self.rclHabilidadeInimigo = nil; end;
+        if self.edit54 ~= nil then self.edit54:destroy(); self.edit54 = nil; end;
+        if self.edit46 ~= nil then self.edit46:destroy(); self.edit46 = nil; end;
+        if self.button18 ~= nil then self.button18:destroy(); self.button18 = nil; end;
+        if self.URLIMG ~= nil then self.URLIMG:destroy(); self.URLIMG = nil; end;
+        if self.popMecanica3 ~= nil then self.popMecanica3:destroy(); self.popMecanica3 = nil; end;
+        if self.CbxMeca3 ~= nil then self.CbxMeca3:destroy(); self.CbxMeca3 = nil; end;
+        if self.edit62 ~= nil then self.edit62:destroy(); self.edit62 = nil; end;
+        if self.button21 ~= nil then self.button21:destroy(); self.button21 = nil; end;
+        if self.edit31 ~= nil then self.edit31:destroy(); self.edit31 = nil; end;
+        if self.textEditor5 ~= nil then self.textEditor5:destroy(); self.textEditor5 = nil; end;
+        if self.edit51 ~= nil then self.edit51:destroy(); self.edit51 = nil; end;
+        if self.edit1 ~= nil then self.edit1:destroy(); self.edit1 = nil; end;
+        if self.btnMeca3 ~= nil then self.btnMeca3:destroy(); self.btnMeca3 = nil; end;
+        if self.label7 ~= nil then self.label7:destroy(); self.label7 = nil; end;
+        if self.button16 ~= nil then self.button16:destroy(); self.button16 = nil; end;
+        if self.edit23 ~= nil then self.edit23:destroy(); self.edit23 = nil; end;
+        if self.textEditor8 ~= nil then self.textEditor8:destroy(); self.textEditor8 = nil; end;
+        if self.label47 ~= nil then self.label47:destroy(); self.label47 = nil; end;
+        if self.edit4 ~= nil then self.edit4:destroy(); self.edit4 = nil; end;
+        if self.edit48 ~= nil then self.edit48:destroy(); self.edit48 = nil; end;
+        if self.edit10 ~= nil then self.edit10:destroy(); self.edit10 = nil; end;
+        if self.image3 ~= nil then self.image3:destroy(); self.image3 = nil; end;
+        if self.comboBox7 ~= nil then self.comboBox7:destroy(); self.comboBox7 = nil; end;
+        if self.edit26 ~= nil then self.edit26:destroy(); self.edit26 = nil; end;
+        if self.label42 ~= nil then self.label42:destroy(); self.label42 = nil; end;
+        if self.label31 ~= nil then self.label31:destroy(); self.label31 = nil; end;
+        if self.label11 ~= nil then self.label11:destroy(); self.label11 = nil; end;
+        if self.label25 ~= nil then self.label25:destroy(); self.label25 = nil; end;
+        if self.edit15 ~= nil then self.edit15:destroy(); self.edit15 = nil; end;
+        if self.image4 ~= nil then self.image4:destroy(); self.image4 = nil; end;
+        if self.edit8 ~= nil then self.edit8:destroy(); self.edit8 = nil; end;
+        if self.edit29 ~= nil then self.edit29:destroy(); self.edit29 = nil; end;
+        if self.edit44 ~= nil then self.edit44:destroy(); self.edit44 = nil; end;
+        if self.popMecanica1 ~= nil then self.popMecanica1:destroy(); self.popMecanica1 = nil; end;
+        if self.label36 ~= nil then self.label36:destroy(); self.label36 = nil; end;
+        if self.edit33 ~= nil then self.edit33:destroy(); self.edit33 = nil; end;
+        if self.textEditor3 ~= nil then self.textEditor3:destroy(); self.textEditor3 = nil; end;
+        if self.label28 ~= nil then self.label28:destroy(); self.label28 = nil; end;
+        if self.edit57 ~= nil then self.edit57:destroy(); self.edit57 = nil; end;
+        if self.edit43 ~= nil then self.edit43:destroy(); self.edit43 = nil; end;
+        if self.label48 ~= nil then self.label48:destroy(); self.label48 = nil; end;
+        if self.edit19 ~= nil then self.edit19:destroy(); self.edit19 = nil; end;
+        if self.label1 ~= nil then self.label1:destroy(); self.label1 = nil; end;
+        if self.button10 ~= nil then self.button10:destroy(); self.button10 = nil; end;
+        if self.scrollBox1 ~= nil then self.scrollBox1:destroy(); self.scrollBox1 = nil; end;
+        if self.button22 ~= nil then self.button22:destroy(); self.button22 = nil; end;
+        if self.rectangle2 ~= nil then self.rectangle2:destroy(); self.rectangle2 = nil; end;
+        if self.textEditor6 ~= nil then self.textEditor6:destroy(); self.textEditor6 = nil; end;
+        if self.edit34 ~= nil then self.edit34:destroy(); self.edit34 = nil; end;
+        if self.dataLink4 ~= nil then self.dataLink4:destroy(); self.dataLink4 = nil; end;
+        if self.textEditor12 ~= nil then self.textEditor12:destroy(); self.textEditor12 = nil; end;
+        if self.edit2 ~= nil then self.edit2:destroy(); self.edit2 = nil; end;
+        if self.dataLink3 ~= nil then self.dataLink3:destroy(); self.dataLink3 = nil; end;
+        if self.label4 ~= nil then self.label4:destroy(); self.label4 = nil; end;
+        if self.button15 ~= nil then self.button15:destroy(); self.button15 = nil; end;
+        if self.comboBox5 ~= nil then self.comboBox5:destroy(); self.comboBox5 = nil; end;
         if self.edit20 ~= nil then self.edit20:destroy(); self.edit20 = nil; end;
+        if self.label44 ~= nil then self.label44:destroy(); self.label44 = nil; end;
+        if self.button2 ~= nil then self.button2:destroy(); self.button2 = nil; end;
+        if self.label13 ~= nil then self.label13:destroy(); self.label13 = nil; end;
+        if self.edit13 ~= nil then self.edit13:destroy(); self.edit13 = nil; end;
+        if self.label23 ~= nil then self.label23:destroy(); self.label23 = nil; end;
+        if self.edit38 ~= nil then self.edit38:destroy(); self.edit38 = nil; end;
+        if self.comboBox2 ~= nil then self.comboBox2:destroy(); self.comboBox2 = nil; end;
+        if self.edit58 ~= nil then self.edit58:destroy(); self.edit58 = nil; end;
+        if self.label8 ~= nil then self.label8:destroy(); self.label8 = nil; end;
+        if self.label34 ~= nil then self.label34:destroy(); self.label34 = nil; end;
+        if self.button19 ~= nil then self.button19:destroy(); self.button19 = nil; end;
+        if self.button5 ~= nil then self.button5:destroy(); self.button5 = nil; end;
+        if self.label14 ~= nil then self.label14:destroy(); self.label14 = nil; end;
+        if self.textEditor1 ~= nil then self.textEditor1:destroy(); self.textEditor1 = nil; end;
+        if self.label26 ~= nil then self.label26:destroy(); self.label26 = nil; end;
+        if self.edit55 ~= nil then self.edit55:destroy(); self.edit55 = nil; end;
+        if self.edit41 ~= nil then self.edit41:destroy(); self.edit41 = nil; end;
+        if self.edit61 ~= nil then self.edit61:destroy(); self.edit61 = nil; end;
+        if self.popMecanica2 ~= nil then self.popMecanica2:destroy(); self.popMecanica2 = nil; end;
+        if self.label3 ~= nil then self.label3:destroy(); self.label3 = nil; end;
+        if self.dscHabilidadeInimigo ~= nil then self.dscHabilidadeInimigo:destroy(); self.dscHabilidadeInimigo = nil; end;
+        if self.button12 ~= nil then self.button12:destroy(); self.button12 = nil; end;
+        if self.popExtra ~= nil then self.popExtra:destroy(); self.popExtra = nil; end;
+        if self.edit36 ~= nil then self.edit36:destroy(); self.edit36 = nil; end;
+        if self.textEditor4 ~= nil then self.textEditor4:destroy(); self.textEditor4 = nil; end;
+        if self.edit52 ~= nil then self.edit52:destroy(); self.edit52 = nil; end;
+        if self.button20 ~= nil then self.button20:destroy(); self.button20 = nil; end;
+        if self.label38 ~= nil then self.label38:destroy(); self.label38 = nil; end;
+        if self.textEditor10 ~= nil then self.textEditor10:destroy(); self.textEditor10 = nil; end;
+        if self.label18 ~= nil then self.label18:destroy(); self.label18 = nil; end;
+        if self.button9 ~= nil then self.button9:destroy(); self.button9 = nil; end;
+        if self.dataLink1 ~= nil then self.dataLink1:destroy(); self.dataLink1 = nil; end;
+        if self.label6 ~= nil then self.label6:destroy(); self.label6 = nil; end;
+        if self.btnMeca2 ~= nil then self.btnMeca2:destroy(); self.btnMeca2 = nil; end;
+        if self.button17 ~= nil then self.button17:destroy(); self.button17 = nil; end;
+        if self.edit22 ~= nil then self.edit22:destroy(); self.edit22 = nil; end;
+        if self.label46 ~= nil then self.label46:destroy(); self.label46 = nil; end;
+        if self.edit7 ~= nil then self.edit7:destroy(); self.edit7 = nil; end;
+        if self.label21 ~= nil then self.label21:destroy(); self.label21 = nil; end;
+        if self.edit11 ~= nil then self.edit11:destroy(); self.edit11 = nil; end;
+        if self.edit25 ~= nil then self.edit25:destroy(); self.edit25 = nil; end;
+        if self.label41 ~= nil then self.label41:destroy(); self.label41 = nil; end;
+        if self.label32 ~= nil then self.label32:destroy(); self.label32 = nil; end;
+        if self.label16 ~= nil then self.label16:destroy(); self.label16 = nil; end;
+        if self.label24 ~= nil then self.label24:destroy(); self.label24 = nil; end;
+        if self.button7 ~= nil then self.button7:destroy(); self.button7 = nil; end;
         self:_oldLFMDestroy();
     end;
 
@@ -2900,6 +2900,7 @@ local _frmSobrePostaInimigo = {
     dataType = "", 
     formType = "undefined", 
     formComponentName = "popupForm", 
+    cacheMode = "none", 
     title = "", 
     description=""};
 

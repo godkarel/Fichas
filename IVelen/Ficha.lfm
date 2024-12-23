@@ -87,6 +87,14 @@
 		sheet.TipoRecebido = sheet.TipoRecebido or "% Fisico";
 	</event>
 	<import file="CalculadorRESISTLevel.xml"/>
+	<import file="Funct/CalculaDanoFisico.xml"/>
+	<import file="Funct/CalculaDanoMagico.xml"/>
+	<import file="Funct/AjustesFinais.xml"/>
+	<import file="Funct/CalculaChancesCriador.xml"/>
+	<import file="Funct/CalculaDefCriador.xml"/>
+	<import file="Funct/CalculaHPCriador.xml"/>
+	<import file="Funct/CalculaMPCriador.xml"/>
+	<import file="Funct/CalculaResCriador.xml"/>
 	<scrollBox align="client">
 		<image name="URLIMG" left="185" top="-25" width="140" height="190" editable="true" style="autoFit" field="imgInimigo"/>	
 		-- GAMBIARRA PRA RESOLVER A FALHA NA FOTO --
@@ -343,7 +351,64 @@
 				novoForm:show();	
 			</event>
 		</button>
-		<image left="40" top="-50" width="60" height="60" src="/imagens/Tok.png"/>		
+		<image left="40" top="-50" width="60" height="60" src="/imagens/Tok.png"/>	
+
+		<popup name="popCriaInimigo" width="400" visible="false" height="400" backOpacity="0.5">
+            <label left="10" top="10" width="70" height="18" text="Tipo"/>
+			<comboBox left="40" top="10" width="70" height="18" items="{'NPC', 'Boss'}" values="{'1', '2'}" value="1" fontColor="#FF6347" name="cmbNpcBoss"/>
+
+			<label left="115" top="10" width="100" height="18" text="Nivel de Poder"/>
+			<comboBox left="205" top="10" width="70" height="18" items="{'Forte', 'Medio', 'Fraco'}" values="{'1', '2', '3'}" value="1" fontColor="#FF6347" name="cmbPoderNPC"/>
+
+			<label left="280" top="10" width="70" height="18" text="Raça"/>
+			<comboBox left="310" top="10" width="85" height="18" items="{'Besta', 'Desertico', 'Elementais', 'Feras', 'Golens', 'Maritimos', 'Mortos Vivos'}" values="{'1', '2', '3', '4', '5', '6', '7'}" value="1" fontColor="#FF6347" name="cmbRacaBoss"/>
+
+			<label left="10" top="40" width="120" height="18" text="Level do Inimigo"/>  
+			<edit left="120" top="40" width="70" height="18" fontSize="10" field="LevelCriadorInimigo"/>
+
+			<label left="200" top="40" width="70" height="18" text="Classe"/>
+			<comboBox left="240" top="40" width="120" height="18" items="{'Combatente', 'Magico', 'Tanker', 'Agil', 'Guerreiro Magico', 'Arqueiro'}" values="{'1', '2', '3', '4', '5', '6'}" value="1" fontColor="#FF6347" name="cmbClasseNpc"/>
+
+			<label left="200" top="70" width="100" height="18" text="Não Lembro"/>  
+			<edit left="300" top="70" width="70" height="18" fontSize="10" field="NaoLembro"/>
+
+			<label left="10" top="70" width="120" height="18" text="Forte Contra"/>
+			<comboBox left="90" top="70" width="100" height="18" items="{'Cura', 'Tanker', 'Varios Alvos', 'Defesa', 'Resistencia', 'Buffers'}" values="{'1', '2', '3', '4', '5', '6'}" value="1" fontColor="#FF6347" name="cmbForteContra"/>
+			
+			<button align="bottom" width="300" fontColor="#00FFFF" fontStyle="bold" height="30" text="Gerar Inimigo Automaticamente" >
+			 	<event name="onClick">
+						if sheet.LevelCriadorInimigo ~= nil or sheet.LevelCriadorInimigo ~= "" and sheet.LevelCriadorInimigo > 0 then
+							if self.cmbClasseNpc.value == "1" then
+								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+								sheet.DanoMagico = math.random(1, sheet.Dano)
+							end;				
+							if self.cmbClasseNpc.value == "2" then
+								sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
+								sheet.Dano = math.random((sheet.DanoMagico / 2), sheet.DanoMagico)
+							end;
+							if self.cmbClasseNpc.value == "3" then
+								
+							end;
+							if self.cmbClasseNpc.value == "4" then
+								
+							end;
+							if self.cmbClasseNpc.value == "5" then
+								
+							end;
+							if self.cmbClasseNpc.value == "6" then
+								
+							end;
+						else
+							showMessage("Level tem que ser maior que 0 e diferente de vazio")
+						end;
+                </event>
+       		 </button>
+
+        </popup>	
+
+		<button left="400" top="-50" width="63" height="60" opacity="1.0" onClick="self.popCriaInimigo:show();"/>
+			
+		<image left="403" top="-47" width="55" height="55" src="/imagens/robot.png"/>	
 	</scrollBox> 
 	
 	<popup name="popExtra" visible="false" width="500" height="700" backOpacity="0.5">

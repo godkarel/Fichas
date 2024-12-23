@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	<script>
+	<![CDATA[		
+		function calcularDanoMagico(level)
+			local danoFisico = calcularDanoFisico(level) -- Usando a função de dano físico como base
+			return math.floor(danoFisico * 1.1) -- Aumentando o dano em 10% e arredondando para o inteiro mais próximo
+		end
+	]]>
+	</script>

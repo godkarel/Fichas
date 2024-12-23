@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	<script>
+	<![CDATA[		
+		function calcularDanoFisico(level)
+			level = tonumber(level)
+			if level <= 10 then
+				return 34 + (level - 1) * 10 -- Crescimento linear simples para os níveis iniciais
+			elseif level <= 20 then
+				return 128 + (level - 10) * 12 -- Crescimento moderado
+			else
+				return 252 + (level - 20) * 12 -- Crescimento mais linear
+			end		
+		end;
+	]]>
+	</script>
