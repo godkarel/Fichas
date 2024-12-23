@@ -1404,8 +1404,9 @@ local function constructNew_frmpersonagem()
             								mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.HMont);
             								
             								local mesa = Firecast.getMesaDe(sheet); 
-            								Custo2 = mesa.meuJogador:getBarValue(2);
+            								Custo2 = sheet.MPAtual;
             								sheet.Custo2 = (tonumber(Custo2) or 0) - (tonumber(sheet.MontCusto) or 0);
+            								sheet.MPAtual = sheet.Custo2
             								mesa.meuJogador:requestSetBarValue(2, sheet.Custo2);
             																
             									if sheet.CMagico +1 > rolado.resultado then 

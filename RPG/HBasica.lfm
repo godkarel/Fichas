@@ -21,8 +21,9 @@
 						end;
 						
 						local mesa = Firecast.getMesaDe(sheet); 
-						sheet.BasicaBarrinha = mesa.meuJogador:getBarValue(2);
+						sheet.BasicaBarrinha = sheet.MPAtual;
 						sheet.BasicaBarrinha = (tonumber(sheet.BasicaBarrinha) or 0) - (tonumber(sheet.CustoBasica) or 0);
+						sheet.MPAtual = sheet.BasicaBarrinha;
 						mesa.meuJogador:requestSetBarValue(2, sheet.BasicaBarrinha);
 					else
 						mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");

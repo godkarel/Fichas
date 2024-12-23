@@ -553,17 +553,126 @@
 		
 	<comboBox left="273" top="355" width="90" horzTextAlign="center" field="EscolheAtaqueBasico" fontColor="#00FFFF" items="{'PA', 'PF', 'M/PM', 'PM+PA', 'M/PM+PA'}"/>
 	<button name="AtkBasic" left="273" top="380" width="90" height="30"  fontSize="12" fontColor="#00FFFF" text="Ataque Basico" onClick="self.popAtaqueBasico:show('bottom', self.AtkBasic);"/>
-	<popup name="popAtaqueBasico" width="200" height="200" backOpacity="0.5">
+	<popup name="popAtaqueBasico" width="200" height="160" backOpacity="0.5">
 		<flowLayout name="TargetName" scale="1.2" align="top" height="50">
 			<label text="Alvo:" fontColor="red" align="right"  width="75" />
 			<comboBox items="{'Inimigo 1', 'Inimigo 2', 'Inimigo 3'}"
 						values="{'1', '2', '3'}" value="1" fontColor="#FF6347" name="cmbInimigos" width="150" height="25" />
 		</flowLayout>
 		 
-		<flowLayout name="NameTipoDeGrupo" scale="1.2" top="70" width="200" height="60">
+		<flowLayout name="NameTipoDeGrupo" scale="1.2" top="70" width="200" height="50">
 			<label text="Grupo:" fontColor="green" align="right" width="75" />
 			<comboBox items="{'Jogadores', 'Inimigos'}"
 					  values="{'1', '2'}" value="1" fontColor="#00FF7F" name="cmbTipoGrupo" field="cmbTipoDeGrupoF" width="150" height="25" />
+
+			<dataLink field="cmbTipoDeGrupoF">
+                <event name="onChange"> 
+						if self.cmbTipoGrupo.value == "1" then
+								local mesas = rrpg.getRooms();
+								local bibliotecaAtual = mesas[1].library;
+								
+								lista = {}
+
+								local function obterNomesRecursivoCMB1(bibItem)
+									local itensFilhos = bibItem.children;
+									local nomes = bibItem.name;
+
+									
+									
+									for i = 1, #itensFilhos, 1 do
+										local bibItemFilho = itensFilhos[i];
+										local nomesDoFilho = obterNomesRecursivoCMB1(bibItemFilho) or "";
+
+										if nomesDoFilho == "Sistema de Combaate Velen" then
+											-- Obter ID do personagem Loan
+											local idPersonagem = bibItemFilho;
+
+											-- Solicita acesso à ficha do personagem
+											local promise = bibItemFilho:asyncOpenNDB();
+
+											-- Aguarda até que a ficha esteja carregada
+											local nodeExterno = await(promise);
+											
+											local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)											
+											
+											for _, node in ipairs(nodesO) do
+												if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
+													table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
+													
+												end
+											end
+											
+											table.sort(lista)
+											
+										end
+									end
+									return nomes
+								end
+
+								
+
+								local function atualizarComboBox()
+									local comboBox = self.cmbInimigos
+									comboBox.items = lista
+									comboBox.values = lista
+									comboBox.value = lista[1] or ""
+								end
+
+								local nomesDeTodosOsItens = obterNomesRecursivoCMB1(bibliotecaAtual);
+								atualizarComboBox()
+							end
+
+							if self.cmbTipoGrupo.value == "2" then
+								local mesas = rrpg.getRooms();
+								local bibliotecaAtual = mesas[1].library;
+								
+								lista = {}
+
+								local function obterNomesRecursivoCMB2(bibItem)
+									local itensFilhos = bibItem.children;
+									local nomes = bibItem.name;
+									
+									for i = 1, #itensFilhos, 1 do
+										local bibItemFilho = itensFilhos[i];
+										local nomesDoFilho = obterNomesRecursivoCMB2(bibItemFilho) or "";
+
+										if nomesDoFilho == "Sistema de Combaate Velen" then
+											-- Obter ID do personagem Loan
+											local idPersonagem = bibItemFilho;
+
+											-- Solicita acesso à ficha do personagem
+											local promise = bibItemFilho:asyncOpenNDB();
+
+											-- Aguarda até que a ficha esteja carregada
+											local nodeExterno = await(promise);
+											
+											local nodesJ = ndb.getChildNodes(nodeExterno.NomeJogador)
+											
+											for _, node in ipairs(nodesJ) do
+												if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
+													table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
+												end
+											end
+											
+											table.sort(lista)
+											
+										end
+									end
+									return nomes
+								end
+
+								local function atualizarComboBox()
+									local comboBox = self.cmbInimigos
+									comboBox.items = lista
+									comboBox.values = lista
+									comboBox.value = lista[1] or ""  -- Defina o primeiro item como selecionado por padrão
+								end
+
+								local nomesDeTodosOsItens = obterNomesRecursivoCMB2(bibliotecaAtual);
+								atualizarComboBox()
+							end;
+                </event>
+        </dataLink>
 		</flowLayout>
 		<button align="bottom" width="90" height="30"  fontSize="12" fontColor="#00FFFF" text="Ataque Basico" onClick="AtaqueBasico();"/>             
         </popup>                     	

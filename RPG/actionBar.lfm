@@ -393,9 +393,10 @@
 									end;
 									mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriHabilidade1);
 									local mesa = Firecast.getMesaDe(sheet); 
-									local Custo2 = mesa.meuJogador:getBarValue(2);
-									node.Custo2 = mesa.meuJogador:getBarValue(2);
+									local Custo2 = sheet.MPAtual;
+									node.Custo2 = sheet.MPAtual;
 									node.Custo2 = (tonumber(node.Custo2) or 0) - (tonumber(node.CustoHabilidade) or 0);
+									sheet.MPAtual = node.Custo2;
 									mesa.meuJogador:requestSetBarValue(2, node.Custo2);
 									if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
 										if 1 == rolado.resultado then										
@@ -584,9 +585,10 @@
 									end;
 									mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriHabilidade1);
 									local mesa = Firecast.getMesaDe(sheet); 
-									local Custo2 = mesa.meuJogador:getBarValue(2);
-									node.Custo2 = mesa.meuJogador:getBarValue(2);
+									local Custo2 = sheet.MPAtual;
+									node.Custo2 = sheet.MPAtual;
 									node.Custo2 = (tonumber(node.Custo2) or 0) - (tonumber(node.CustoHabilidade) or 0);
+									sheet.MPAtual = node.Custo2;
 									mesa.meuJogador:requestSetBarValue(2, node.Custo2);
 									if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
 										if 1 == rolado.resultado then										

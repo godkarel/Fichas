@@ -3777,7 +3777,7 @@ local function constructNew_frmvelen()
     obj.popAtaqueBasico:setParent(obj.scrollBox1);
     obj.popAtaqueBasico:setName("popAtaqueBasico");
     obj.popAtaqueBasico:setWidth(200);
-    obj.popAtaqueBasico:setHeight(200);
+    obj.popAtaqueBasico:setHeight(160);
     obj.popAtaqueBasico:setBackOpacity(0.5);
 
     obj.TargetName = GUI.fromHandle(_obj_newObject("flowLayout"));
@@ -3811,7 +3811,7 @@ local function constructNew_frmvelen()
     obj.NameTipoDeGrupo:setScale(1.2);
     obj.NameTipoDeGrupo:setTop(70);
     obj.NameTipoDeGrupo:setWidth(200);
-    obj.NameTipoDeGrupo:setHeight(60);
+    obj.NameTipoDeGrupo:setHeight(50);
 
     obj.label26 = GUI.fromHandle(_obj_newObject("label"));
     obj.label26:setParent(obj.NameTipoDeGrupo);
@@ -3831,6 +3831,11 @@ local function constructNew_frmvelen()
     obj.cmbTipoGrupo:setField("cmbTipoDeGrupoF");
     obj.cmbTipoGrupo:setWidth(150);
     obj.cmbTipoGrupo:setHeight(25);
+
+    obj.dataLink11 = GUI.fromHandle(_obj_newObject("dataLink"));
+    obj.dataLink11:setParent(obj.NameTipoDeGrupo);
+    obj.dataLink11:setField("cmbTipoDeGrupoF");
+    obj.dataLink11:setName("dataLink11");
 
     obj.button27 = GUI.fromHandle(_obj_newObject("button"));
     obj.button27:setParent(obj.popAtaqueBasico);
@@ -4116,35 +4121,35 @@ local function constructNew_frmvelen()
     obj.label27:setField("XPNecessario");
     obj.label27:setName("label27");
 
-    obj.dataLink11 = GUI.fromHandle(_obj_newObject("dataLink"));
-    obj.dataLink11:setParent(obj.scrollBox1);
-    obj.dataLink11:setFields({'XPAtual', 'Level'});
-    obj.dataLink11:setName("dataLink11");
-
     obj.dataLink12 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink12:setParent(obj.scrollBox1);
-    obj.dataLink12:setFields({'XPAtual', 'XPNecessario'});
+    obj.dataLink12:setFields({'XPAtual', 'Level'});
     obj.dataLink12:setName("dataLink12");
 
     obj.dataLink13 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink13:setParent(obj.scrollBox1);
-    obj.dataLink13:setField("Nome");
+    obj.dataLink13:setFields({'XPAtual', 'XPNecessario'});
     obj.dataLink13:setName("dataLink13");
 
     obj.dataLink14 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink14:setParent(obj.scrollBox1);
-    obj.dataLink14:setFields({'PA', 'PM', 'PF', 'DEFRED', 'RESRED', 'Acerto', 'AcertoMagico', 'Esquiva', 'Persistencia', 'Critical', 'CMagico', 'Classe', 'Espec'});
+    obj.dataLink14:setField("Nome");
     obj.dataLink14:setName("dataLink14");
 
     obj.dataLink15 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink15:setParent(obj.scrollBox1);
-    obj.dataLink15:setFields({'HPTotal', 'MPTotal'});
+    obj.dataLink15:setFields({'PA', 'PM', 'PF', 'DEFRED', 'RESRED', 'Acerto', 'AcertoMagico', 'Esquiva', 'Persistencia', 'Critical', 'CMagico', 'Classe', 'Espec'});
     obj.dataLink15:setName("dataLink15");
 
     obj.dataLink16 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink16:setParent(obj.scrollBox1);
-    obj.dataLink16:setFields({'HPAtual', 'MPAtual'});
+    obj.dataLink16:setFields({'HPTotal', 'MPTotal'});
     obj.dataLink16:setName("dataLink16");
+
+    obj.dataLink17 = GUI.fromHandle(_obj_newObject("dataLink"));
+    obj.dataLink17:setParent(obj.scrollBox1);
+    obj.dataLink17:setFields({'HPAtual', 'MPAtual'});
+    obj.dataLink17:setName("dataLink17");
 
     obj._e_event0 = obj:addEventListener("onNodeReady",
         function ()
@@ -4674,39 +4679,147 @@ local function constructNew_frmvelen()
             self.popAtaqueBasico:show('bottom', self.AtkBasic);
         end);
 
-    obj._e_event38 = obj.button27:addEventListener("onClick",
+    obj._e_event38 = obj.dataLink11:addEventListener("onChange",
+        function (field, oldValue, newValue)
+            if self.cmbTipoGrupo.value == "1" then
+            								local mesas = rrpg.getRooms();
+            								local bibliotecaAtual = mesas[1].library;
+            								
+            								lista = {}
+            
+            								local function obterNomesRecursivoCMB1(bibItem)
+            									local itensFilhos = bibItem.children;
+            									local nomes = bibItem.name;
+            
+            									
+            									
+            									for i = 1, #itensFilhos, 1 do
+            										local bibItemFilho = itensFilhos[i];
+            										local nomesDoFilho = obterNomesRecursivoCMB1(bibItemFilho) or "";
+            
+            										if nomesDoFilho == "Sistema de Combaate Velen" then
+            											-- Obter ID do personagem Loan
+            											local idPersonagem = bibItemFilho;
+            
+            											-- Solicita acesso à ficha do personagem
+            											local promise = bibItemFilho:asyncOpenNDB();
+            
+            											-- Aguarda até que a ficha esteja carregada
+            											local nodeExterno = await(promise);
+            											
+            											local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)											
+            											
+            											for _, node in ipairs(nodesO) do
+            												if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
+            													table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
+            													
+            												end
+            											end
+            											
+            											table.sort(lista)
+            											
+            										end
+            									end
+            									return nomes
+            								end
+            
+            								
+            
+            								local function atualizarComboBox()
+            									local comboBox = self.cmbInimigos
+            									comboBox.items = lista
+            									comboBox.values = lista
+            									comboBox.value = lista[1] or ""
+            								end
+            
+            								local nomesDeTodosOsItens = obterNomesRecursivoCMB1(bibliotecaAtual);
+            								atualizarComboBox()
+            							end
+            
+            							if self.cmbTipoGrupo.value == "2" then
+            								local mesas = rrpg.getRooms();
+            								local bibliotecaAtual = mesas[1].library;
+            								
+            								lista = {}
+            
+            								local function obterNomesRecursivoCMB2(bibItem)
+            									local itensFilhos = bibItem.children;
+            									local nomes = bibItem.name;
+            									
+            									for i = 1, #itensFilhos, 1 do
+            										local bibItemFilho = itensFilhos[i];
+            										local nomesDoFilho = obterNomesRecursivoCMB2(bibItemFilho) or "";
+            
+            										if nomesDoFilho == "Sistema de Combaate Velen" then
+            											-- Obter ID do personagem Loan
+            											local idPersonagem = bibItemFilho;
+            
+            											-- Solicita acesso à ficha do personagem
+            											local promise = bibItemFilho:asyncOpenNDB();
+            
+            											-- Aguarda até que a ficha esteja carregada
+            											local nodeExterno = await(promise);
+            											
+            											local nodesJ = ndb.getChildNodes(nodeExterno.NomeJogador)
+            											
+            											for _, node in ipairs(nodesJ) do
+            												if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
+            													table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
+            												end
+            											end
+            											
+            											table.sort(lista)
+            											
+            										end
+            									end
+            									return nomes
+            								end
+            
+            								local function atualizarComboBox()
+            									local comboBox = self.cmbInimigos
+            									comboBox.items = lista
+            									comboBox.values = lista
+            									comboBox.value = lista[1] or ""  -- Defina o primeiro item como selecionado por padrão
+            								end
+            
+            								local nomesDeTodosOsItens = obterNomesRecursivoCMB2(bibliotecaAtual);
+            								atualizarComboBox()
+            							end;
+        end);
+
+    obj._e_event39 = obj.button27:addEventListener("onClick",
         function (event)
             AtaqueBasico();
         end);
 
-    obj._e_event39 = obj.button28:addEventListener("onClick",
+    obj._e_event40 = obj.button28:addEventListener("onClick",
         function (event)
             local novoForm = GUI.newForm("frmBasica");
             			novoForm:setNodeObject(sheet);
             			novoForm:show();
         end);
 
-    obj._e_event40 = obj.btnUpaLevel:addEventListener("onClick",
+    obj._e_event41 = obj.btnUpaLevel:addEventListener("onClick",
         function (event)
             RolarAtributoPorUpar()
         end);
 
-    obj._e_event41 = obj.dataLink11:addEventListener("onChange",
+    obj._e_event42 = obj.dataLink12:addEventListener("onChange",
         function (field, oldValue, newValue)
             SistemaXPLevel();
         end);
 
-    obj._e_event42 = obj.dataLink12:addEventListener("onChange",
+    obj._e_event43 = obj.dataLink13:addEventListener("onChange",
         function (field, oldValue, newValue)
             XPTotalPraUpar();
         end);
 
-    obj._e_event43 = obj.dataLink13:addEventListener("onChange",
+    obj._e_event44 = obj.dataLink14:addEventListener("onChange",
         function (field, oldValue, newValue)
             ComandoADM();
         end);
 
-    obj._e_event44 = obj.dataLink14:addEventListener("onChange",
+    obj._e_event45 = obj.dataLink15:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then				
             					if sheet.Level >= 1 then 
@@ -4717,7 +4830,7 @@ local function constructNew_frmvelen()
             				end;
         end);
 
-    obj._e_event45 = obj.dataLink15:addEventListener("onChange",
+    obj._e_event46 = obj.dataLink16:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then				
             					if sheet.Level >= 1 then 
@@ -4729,7 +4842,7 @@ local function constructNew_frmvelen()
             				end;
         end);
 
-    obj._e_event46 = obj.dataLink16:addEventListener("onChange",
+    obj._e_event47 = obj.dataLink17:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then				
             					if sheet.Level >= 1 then 
@@ -4742,6 +4855,7 @@ local function constructNew_frmvelen()
         end);
 
     function obj:_releaseEvents()
+        __o_rrpgObjs.removeEventListenerById(self._e_event47);
         __o_rrpgObjs.removeEventListenerById(self._e_event46);
         __o_rrpgObjs.removeEventListenerById(self._e_event45);
         __o_rrpgObjs.removeEventListenerById(self._e_event44);
@@ -4860,8 +4974,8 @@ local function constructNew_frmvelen()
         if self.label20 ~= nil then self.label20:destroy(); self.label20 = nil; end;
         if self.comboBox1 ~= nil then self.comboBox1:destroy(); self.comboBox1 = nil; end;
         if self.edit12 ~= nil then self.edit12:destroy(); self.edit12 = nil; end;
-        if self.edit24 ~= nil then self.edit24:destroy(); self.edit24 = nil; end;
         if self.dataLink11 ~= nil then self.dataLink11:destroy(); self.dataLink11 = nil; end;
+        if self.edit24 ~= nil then self.edit24:destroy(); self.edit24 = nil; end;
         if self.label9 ~= nil then self.label9:destroy(); self.label9 = nil; end;
         if self.button18 ~= nil then self.button18:destroy(); self.button18 = nil; end;
         if self.button6 ~= nil then self.button6:destroy(); self.button6 = nil; end;
@@ -4886,6 +5000,7 @@ local function constructNew_frmvelen()
         if self.image14 ~= nil then self.image14:destroy(); self.image14 = nil; end;
         if self.edit10 ~= nil then self.edit10:destroy(); self.edit10 = nil; end;
         if self.image3 ~= nil then self.image3:destroy(); self.image3 = nil; end;
+        if self.dataLink17 ~= nil then self.dataLink17:destroy(); self.dataLink17 = nil; end;
         if self.edit26 ~= nil then self.edit26:destroy(); self.edit26 = nil; end;
         if self.label11 ~= nil then self.label11:destroy(); self.label11 = nil; end;
         if self.rectangle8 ~= nil then self.rectangle8:destroy(); self.rectangle8 = nil; end;

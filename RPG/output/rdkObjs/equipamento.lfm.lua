@@ -1449,7 +1449,7 @@ local function constructNew_frmequip()
             									NDB.deleteNode(self.rclListaDePotion.selectedNode);
             									self.dscPotion.visible = false;
             								elseif node.EscolherPote == "MP" then
-            									local MPATUAL = mesa.meuJogador:getBarValue(2, currentValue)
+            									local MPATUAL = sheet.MPAtual
             									local MPPRAREGENERAR = tonumber(MPATUAL) + tonumber(self.dscPotion.node.ItemRegen);
             									mesa.meuJogador:requestSetBarValue(2, MPPRAREGENERAR, nil);
             									local minhaMesa = Firecast.getRoomOf(sheet);
