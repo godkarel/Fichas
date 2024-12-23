@@ -57,9 +57,10 @@ local function constructNew_frmhabilidade()
 				end;	
 				showMessage(CustoSkill)
 				local mesa = Firecast.getMesaDe(sheet); 
-				local Custo2 = mesa.meuJogador:getBarValue(2);
-				Custo2 = mesa.meuJogador:getBarValue(2);
+				local Custo2 = sheet.MPAtual;
+				Custo2 = sheet.MPAtual;
 				Custo2 = (tonumber(Custo2) or 0) - (tonumber(CustoSkill) or 0);
+				sheet.MPAtual = Custo2;
 				mesa.meuJogador:requestSetBarValue(2, Custo2);
 			else
 				mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
@@ -637,10 +638,12 @@ local function constructNew_frmhabilidade()
 									end;
 									mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriHabilidade1);
 									local mesa = Firecast.getMesaDe(sheet); 
-									local Custo2 = mesa.meuJogador:getBarValue(2);
-									node.Custo2 = mesa.meuJogador:getBarValue(2);
+									local Custo2 = sheet.MPAtual;
+									node.Custo2 = sheet.MPAtual;
 									node.Custo2 = (tonumber(node.Custo2) or 0) - (tonumber(node.CustoHabilidade) or 0);
+									sheet.MPAtual = node.Custo2;
 									mesa.meuJogador:requestSetBarValue(2, node.Custo2);
+									sheet.MPAtual = node.Custo2;
 									if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
 										if 1 == rolado.resultado then										
 											nodeExterno.AlvoRecebido = self.cmbInimigosH.value
@@ -828,9 +831,10 @@ local function constructNew_frmhabilidade()
 									end;
 									mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriHabilidade1);
 									local mesa = Firecast.getMesaDe(sheet); 
-									local Custo2 = mesa.meuJogador:getBarValue(2);
-									node.Custo2 = mesa.meuJogador:getBarValue(2);
+									local Custo2 = sheet.MPAtual;
+									node.Custo2 = sheet.MPAtual;
 									node.Custo2 = (tonumber(node.Custo2) or 0) - (tonumber(node.CustoHabilidade) or 0);
+									sheet.MPAtual = node.Custo2;
 									mesa.meuJogador:requestSetBarValue(2, node.Custo2);
 									if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
 										if 1 == rolado.resultado then										

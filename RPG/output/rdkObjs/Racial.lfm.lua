@@ -344,8 +344,9 @@ local function constructNew_frmRacial()
             						end;
             						
             						local mesa = Firecast.getMesaDe(sheet); 
-            						sheet.RacialBarrinha = mesa.meuJogador:getBarValue(2);
+            						sheet.RacialBarrinha = sheet.MPAtual;
             						sheet.RacialBarrinha = (tonumber(sheet.RacialBarrinha) or 0) - (tonumber(sheet.CustoRacial) or 0);
+            						sheet.MPAtual = sheet.RacialBarrinha;
             						mesa.meuJogador:requestSetBarValue(2, sheet.RacialBarrinha);
             					else
             						mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
