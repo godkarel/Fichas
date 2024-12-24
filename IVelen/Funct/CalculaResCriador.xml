@@ -2,7 +2,29 @@
 	<script>
 	<![CDATA[		
 		function calcularResCriador(level)
-				
+			local divisores = {
+				[30] = 6, [29] = 5.6, [28] = 5.3, [27] = 5, [26] = 4.75,
+				[25] = 4.6, [24] = 4.3, [23] = 4, [22] = 3.8, [21] = 3.6,
+				[20] = 3.4, [19] = 3.2, [18] = 3, [17] = 2.7, [16] = 2.55,
+				[15] = 2.4, [14] = 2.2, [13] = 2, [12] = 1.8, [11] = 1.65,
+				[10] = 1.55, [9] = 1.35, [8] = 1.25, [7] = 1, [6] = 0.9,
+				[5] = 0.8, [4] = 0.65, [3] = 0.47, [2] = 0.37, [1] = 0.25
+			}
+
+			-- Verifica se o nível está dentro do intervalo permitido
+			if not divisores[level] then
+				showMessage("Erro: Nível do NPC fora do intervalo permitido (1 a 30).")
+				return nil
+			end
+
+			-- Seleciona um valor aleatório para a redução de dano entre 9% e 16%
+			local reducaoPercentual = math.random(10, 18)
+
+			-- Calcula a defesa necessária para atingir a redução de dano desejada
+			local divisor = divisores[level]
+			local defesaNecessaria = reducaoPercentual * divisor
+
+			return math.floor(defesaNecessaria + 0.5) -- Retorna o valor arredondado
 		end;
 	]]>
 	</script>

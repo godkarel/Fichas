@@ -116,8 +116,63 @@ local function constructNew_frmIVelen()
 
 
 		
-		function calcularChancesCriador(level)
-			
+		function calcularChancesCriador(level, race)
+			if race == '1' then
+				sheet.Acerto = 1 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 12 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 15 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 20 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 2 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 1 + math.ceil(tonumber(level / 15))
+			end;
+			if race == '2' then
+				sheet.Acerto = 1 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 11 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 14 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 20 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 1 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 2 + math.ceil(tonumber(level / 15))
+			end;
+			if race == '3' then
+				sheet.Acerto = 1 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 12 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 15 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 20 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 2 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 3 + math.ceil(tonumber(level / 15))
+			end;
+			if race == '4' then
+				sheet.Acerto = 2 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 11 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 14 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 19 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 1 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 1 + math.ceil(tonumber(level / 15))
+			end;
+			if race == '6' then
+				sheet.Acerto = 1 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 11 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 15 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 19 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 1 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 1 + math.ceil(tonumber(level / 15))
+			end;
+			if race == '7' then
+				sheet.Acerto = 2 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 12 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 15 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 19 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 2 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 2 + math.ceil(tonumber(level / 15))
+			end;
+			if race == '5' then
+				sheet.Acerto = 2 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 11 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 14 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 20 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 1 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 5
+			end;
 		end;
 	
 
@@ -132,8 +187,30 @@ local function constructNew_frmIVelen()
 
 		
 		function calcularDefCriador(level)
-			
-		end;
+				local divisores = {
+				[30] = 6, [29] = 5.6, [28] = 5.3, [27] = 5, [26] = 4.75,
+				[25] = 4.6, [24] = 4.3, [23] = 4, [22] = 3.8, [21] = 3.6,
+				[20] = 3.4, [19] = 3.2, [18] = 3, [17] = 2.7, [16] = 2.55,
+				[15] = 2.4, [14] = 2.2, [13] = 2, [12] = 1.8, [11] = 1.65,
+				[10] = 1.55, [9] = 1.35, [8] = 1.25, [7] = 1, [6] = 0.9,
+				[5] = 0.8, [4] = 0.65, [3] = 0.47, [2] = 0.37, [1] = 0.25
+			}
+
+			-- Verifica se o nível está dentro do intervalo permitido
+			if not divisores[level] then
+				showMessage("Erro: Nível do NPC fora do intervalo permitido (1 a 30).")
+				return nil
+			end
+
+			-- Seleciona um valor aleatório para a redução de dano entre 9% e 16%
+			local reducaoPercentual = math.random(10, 18)
+
+			-- Calcula a defesa necessária para atingir a redução de dano desejada
+			local divisor = divisores[level]
+			local defesaNecessaria = reducaoPercentual * divisor
+
+			return math.floor(defesaNecessaria + 0.5) -- Retorna o valor arredondado
+		end
 	
 
 
@@ -177,7 +254,29 @@ local function constructNew_frmIVelen()
 
 		
 		function calcularResCriador(level)
-				
+			local divisores = {
+				[30] = 6, [29] = 5.6, [28] = 5.3, [27] = 5, [26] = 4.75,
+				[25] = 4.6, [24] = 4.3, [23] = 4, [22] = 3.8, [21] = 3.6,
+				[20] = 3.4, [19] = 3.2, [18] = 3, [17] = 2.7, [16] = 2.55,
+				[15] = 2.4, [14] = 2.2, [13] = 2, [12] = 1.8, [11] = 1.65,
+				[10] = 1.55, [9] = 1.35, [8] = 1.25, [7] = 1, [6] = 0.9,
+				[5] = 0.8, [4] = 0.65, [3] = 0.47, [2] = 0.37, [1] = 0.25
+			}
+
+			-- Verifica se o nível está dentro do intervalo permitido
+			if not divisores[level] then
+				showMessage("Erro: Nível do NPC fora do intervalo permitido (1 a 30).")
+				return nil
+			end
+
+			-- Seleciona um valor aleatório para a redução de dano entre 9% e 16%
+			local reducaoPercentual = math.random(10, 18)
+
+			-- Calcula a defesa necessária para atingir a redução de dano desejada
+			local divisor = divisores[level]
+			local defesaNecessaria = reducaoPercentual * divisor
+
+			return math.floor(defesaNecessaria + 0.5) -- Retorna o valor arredondado
 		end;
 	
 
@@ -1613,6 +1712,7 @@ local function constructNew_frmIVelen()
     obj.cmbRacaBoss:setValues({'1', '2', '3', '4', '5', '6', '7'});
     obj.cmbRacaBoss:setValue("1");
     obj.cmbRacaBoss:setFontColor("#FF6347");
+    obj.cmbRacaBoss:setField("RacaCriadorNPC");
     obj.cmbRacaBoss:setName("cmbRacaBoss");
 
     obj.label49 = GUI.fromHandle(_obj_newObject("label"));
@@ -2791,14 +2891,27 @@ local function constructNew_frmIVelen()
             if sheet.LevelCriadorInimigo ~= nil or sheet.LevelCriadorInimigo ~= "" and sheet.LevelCriadorInimigo > 0 then
             							if self.cmbClasseNpc.value == "1" then
             								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
-            								sheet.DanoMagico = math.random(1, sheet.Dano)
+            								sheet.DanoMagico = math.random(1, sheet.Dano);
+            								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+            								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+            								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
             							end;				
             							if self.cmbClasseNpc.value == "2" then
             								sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
             								sheet.Dano = math.random((sheet.DanoMagico / 2), sheet.DanoMagico)
+            								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+            								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+            								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+            								
             							end;
             							if self.cmbClasseNpc.value == "3" then
-            								
+            								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+            								sheet.DanoMagico = math.random(1, sheet.Dano);
+            								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+            								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+            								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+            								sheet.Defesa = math.random(sheet.Defesa, math.floor(sheet.Defesa * 1.5))
+            								sheet.Resistencia = math.random(math.floor(sheet.Resistencia * 1.3), math.floor(sheet.Resistencia * 1.8))
             							end;
             							if self.cmbClasseNpc.value == "4" then
             								

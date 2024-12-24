@@ -361,7 +361,7 @@
 			<comboBox left="205" top="10" width="70" height="18" items="{'Forte', 'Medio', 'Fraco'}" values="{'1', '2', '3'}" value="1" fontColor="#FF6347" name="cmbPoderNPC"/>
 
 			<label left="280" top="10" width="70" height="18" text="Raça"/>
-			<comboBox left="310" top="10" width="85" height="18" items="{'Besta', 'Desertico', 'Elementais', 'Feras', 'Golens', 'Maritimos', 'Mortos Vivos'}" values="{'1', '2', '3', '4', '5', '6', '7'}" value="1" fontColor="#FF6347" name="cmbRacaBoss"/>
+			<comboBox left="310" top="10" width="85" height="18" items="{'Besta', 'Desertico', 'Elementais', 'Feras', 'Golens', 'Maritimos', 'Mortos Vivos'}" values="{'1', '2', '3', '4', '5', '6', '7'}" value="1" fontColor="#FF6347" field="RacaCriadorNPC" name="cmbRacaBoss"/>
 
 			<label left="10" top="40" width="120" height="18" text="Level do Inimigo"/>  
 			<edit left="120" top="40" width="70" height="18" fontSize="10" field="LevelCriadorInimigo"/>
@@ -380,23 +380,48 @@
 						if sheet.LevelCriadorInimigo ~= nil or sheet.LevelCriadorInimigo ~= "" and sheet.LevelCriadorInimigo > 0 then
 							if self.cmbClasseNpc.value == "1" then
 								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
-								sheet.DanoMagico = math.random(1, sheet.Dano)
+								sheet.DanoMagico = math.random(1, sheet.Dano);
+								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
 							end;				
 							if self.cmbClasseNpc.value == "2" then
 								sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
 								sheet.Dano = math.random((sheet.DanoMagico / 2), sheet.DanoMagico)
+								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
 							end;
 							if self.cmbClasseNpc.value == "3" then
-								
+								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+								sheet.DanoMagico = math.random(1, sheet.Dano);
+								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+								sheet.Defesa = math.random(sheet.Defesa, math.floor(sheet.Defesa * 1.5))
+								sheet.Resistencia = math.random(math.floor(sheet.Resistencia * 1.2), math.floor(sheet.Resistencia * 1.6))
 							end;
 							if self.cmbClasseNpc.value == "4" then
-								
+								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+								sheet.DanoMagico = math.random(1, sheet.Dano);
+								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
 							end;
 							if self.cmbClasseNpc.value == "5" then
-								
+								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+								sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
+								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
 							end;
 							if self.cmbClasseNpc.value == "6" then
-								
+								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+								sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
+								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+								sheet.sheet.Dano = math.random(math.floor(sheet.sheet.Dano * 1.2), math.floor(sheet.sheet.Dano * 1.5))
 							end;
 						else
 							showMessage("Level tem que ser maior que 0 e diferente de vazio")

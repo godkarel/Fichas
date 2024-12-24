@@ -1,8 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>		
 	<script>
 	<![CDATA[		
-		function calcularChancesCriador(level)
-			
+		function calcularChancesCriador(level, race)
+			if race == '1' then
+				sheet.Acerto = 1 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 12 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 15 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 20 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 2 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 1 + math.ceil(tonumber(level / 15))
+			end;
+			if race == '2' then
+				sheet.Acerto = 1 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 11 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 14 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 20 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 1 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 2 + math.ceil(tonumber(level / 15))
+			end;
+			if race == '3' then
+				sheet.Acerto = 1 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 12 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 15 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 20 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 2 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 3 + math.ceil(tonumber(level / 15))
+			end;
+			if race == '4' then
+				sheet.Acerto = 2 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 11 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 14 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 19 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 1 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 1 + math.ceil(tonumber(level / 15))
+			end;
+			if race == '6' then
+				sheet.Acerto = 1 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 11 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 15 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 19 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 1 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 1 + math.ceil(tonumber(level / 15))
+			end;
+			if race == '7' then
+				sheet.Acerto = 2 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 12 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 15 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 19 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 2 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 2 + math.ceil(tonumber(level / 15))
+			end;
+			if race == '5' then
+				sheet.Acerto = 2 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 11 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 14 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 20 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 1 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 5
+			end;
 		end;
 	]]>
 	</script>
