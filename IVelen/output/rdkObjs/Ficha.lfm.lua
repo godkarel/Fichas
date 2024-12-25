@@ -224,7 +224,19 @@ local function constructNew_frmIVelen()
 
 		
 		function calcularHPCriador(level)
-			
+			-- Tabela de HP por nível
+			local hpPorNivel = {
+				330, 400, 470, 540, 610, 680, 750, 820, 890, 1020,
+				1090, 1160, 1230, 1300, 1370, 1450, 1530, 1640, 1770, 1820,
+				2518, 2716, 2834, 2952, 3110, 3268, 3426, 3584, 3790, 4060, 4500
+			}
+
+			-- Verifica se o nível está na tabela
+			if level >= 1 and level <= #hpPorNivel then
+				return hpPorNivel[level]
+			else
+				return nil -- Retorna nil para níveis fora do intervalo
+			end
 		end;
 	
 
@@ -239,7 +251,18 @@ local function constructNew_frmIVelen()
 
 		
 		function calcularMPCriador(level)
-			
+			local mpPorNivel = {
+				114, 116, 118, 120, 122, 124, 126, 128, 130, 133,
+				135, 137, 139, 141, 143, 145, 147, 149, 151, 154,
+				158, 160, 164, 166, 170, 172, 176, 178, 186, 186, 174
+			}
+
+			-- Verifica se o nível está na tabela
+			if level >= 1 and level <= #mpPorNivel then
+				return mpPorNivel[level]
+			else
+				return nil -- Retorna nil para níveis fora do intervalo
+			end
 		end;
 	
 
@@ -1761,7 +1784,8 @@ local function constructNew_frmIVelen()
     obj.label51:setTop(70);
     obj.label51:setWidth(100);
     obj.label51:setHeight(18);
-    obj.label51:setText("Não Lembro");
+    obj.label51:setEnabled(false);
+    obj.label51:setText("Numero de Alvos");
     obj.label51:setName("label51");
 
     obj.edit50 = GUI.fromHandle(_obj_newObject("edit"));
@@ -1771,7 +1795,8 @@ local function constructNew_frmIVelen()
     obj.edit50:setWidth(70);
     obj.edit50:setHeight(18);
     obj.edit50:setFontSize(10);
-    obj.edit50:setField("NaoLembro");
+    obj.edit50:setEnabled(false);
+    obj.edit50:setField("NumeroDeAlvos");
     obj.edit50:setName("edit50");
 
     obj.label52 = GUI.fromHandle(_obj_newObject("label"));
@@ -1780,6 +1805,7 @@ local function constructNew_frmIVelen()
     obj.label52:setTop(70);
     obj.label52:setWidth(120);
     obj.label52:setHeight(18);
+    obj.label52:setEnabled(false);
     obj.label52:setText("Forte Contra");
     obj.label52:setName("label52");
 
@@ -1790,6 +1816,7 @@ local function constructNew_frmIVelen()
     obj.cmbForteContra:setWidth(100);
     obj.cmbForteContra:setHeight(18);
     obj.cmbForteContra:setItems({'Cura', 'Tanker', 'Varios Alvos', 'Defesa', 'Resistencia', 'Buffers'});
+    obj.cmbForteContra:setEnabled(false);
     obj.cmbForteContra:setValues({'1', '2', '3', '4', '5', '6'});
     obj.cmbForteContra:setValue("1");
     obj.cmbForteContra:setFontColor("#FF6347");
@@ -2891,18 +2918,23 @@ local function constructNew_frmIVelen()
             if sheet.LevelCriadorInimigo ~= nil or sheet.LevelCriadorInimigo ~= "" and sheet.LevelCriadorInimigo > 0 then
             							if self.cmbClasseNpc.value == "1" then
             								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
-            								sheet.DanoMagico = math.random(1, sheet.Dano);
+            								sheet.DanoMagico = math.floor(math.random(1, sheet.Dano));
             								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
             								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
             								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+            								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
             							end;				
             							if self.cmbClasseNpc.value == "2" then
             								sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
-            								sheet.Dano = math.random((sheet.DanoMagico / 2), sheet.DanoMagico)
+            								sheet.Dano = math.floor(math.random((math.floor(sheet.DanoMagico / 2)), math.floor(sheet.DanoMagico)))
             								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
             								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
             								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
-            								
+            								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.HPTotal = math.floor(math.random(math.floor(sheet.HPTotal * 0.8), math.floor(sheet.HPTotal * 1.1)))
+            								sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 1.5), math.floor(sheet.MPTotal * 2.5)))
             							end;
             							if self.cmbClasseNpc.value == "3" then
             								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
@@ -2911,16 +2943,42 @@ local function constructNew_frmIVelen()
             								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
             								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
             								sheet.Defesa = math.random(sheet.Defesa, math.floor(sheet.Defesa * 1.5))
-            								sheet.Resistencia = math.random(math.floor(sheet.Resistencia * 1.3), math.floor(sheet.Resistencia * 1.8))
+            								sheet.Resistencia = math.random(math.floor(sheet.Resistencia * 1.2), math.floor(sheet.Resistencia * 1.6))
+            								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.HPTotal = math.floor(math.random(math.floor(sheet.HPTotal * 1.3), math.floor(sheet.HPTotal * 1.6)))
             							end;
             							if self.cmbClasseNpc.value == "4" then
-            								
+            								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+            								sheet.DanoMagico = math.random(1, sheet.Dano);
+            								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+            								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+            								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+            								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.HPTotal = math.floor(math.random(math.floor(sheet.HPTotal * 0.9), math.floor(sheet.HPTotal * 1.1)))
+            								sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 0.9), math.floor(sheet.MPTotal * 1.1)))
             							end;
             							if self.cmbClasseNpc.value == "5" then
-            								
+            								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+            								sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
+            								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+            								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+            								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+            								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 1.2), math.floor(sheet.MPTotal * 1.6)))
             							end;
             							if self.cmbClasseNpc.value == "6" then
-            								
+            								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+            								sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
+            								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+            								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+            								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+            								sheet.Dano = math.random(math.floor(sheet.Dano * 1.1), math.floor(sheet.Dano * 1.3))
+            								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 0.8), math.floor(sheet.MPTotal * 1.2)))
             							end;
             						else
             							showMessage("Level tem que ser maior que 0 e diferente de vazio")

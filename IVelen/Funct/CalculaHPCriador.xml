@@ -2,7 +2,19 @@
 	<script>
 	<![CDATA[		
 		function calcularHPCriador(level)
-			
+			-- Tabela de HP por nível
+			local hpPorNivel = {
+				330, 400, 470, 540, 610, 680, 750, 820, 890, 1020,
+				1090, 1160, 1230, 1300, 1370, 1450, 1530, 1640, 1770, 1820,
+				2518, 2716, 2834, 2952, 3110, 3268, 3426, 3584, 3790, 4060, 4500
+			}
+
+			-- Verifica se o nível está na tabela
+			if level >= 1 and level <= #hpPorNivel then
+				return hpPorNivel[level]
+			else
+				return nil -- Retorna nil para níveis fora do intervalo
+			end
 		end;
 	]]>
 	</script>
