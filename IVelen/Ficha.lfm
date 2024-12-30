@@ -95,6 +95,7 @@
 	<import file="Funct/CalculaHPCriador.xml"/>
 	<import file="Funct/CalculaMPCriador.xml"/>
 	<import file="Funct/CalculaResCriador.xml"/>
+	<import file="Funct/CalculadorDeBoss.xml"/>
 	<scrollBox align="client">
 		<image name="URLIMG" left="185" top="-25" width="140" height="190" editable="true" style="autoFit" field="imgInimigo"/>	
 		-- GAMBIARRA PRA RESOLVER A FALHA NA FOTO --
@@ -344,6 +345,20 @@
 			</rectangle>
         </dataScopeBox>	
 
+		<dataLink fields="{'FieldNPCBOSS'}">
+			<event name="onChange">                
+				if self.cmbNpcBoss.value == '2' then
+					self.edtNdeAlvos.enabled = true
+					self.edtMaiorHP.enabled = true
+					self.edtMaiorDano.enabled = true
+				else
+					self.edtNdeAlvos.enabled = false
+					self.edtMaiorHP.enabled = false
+					self.edtMaiorDano.enabled = false
+				end
+			</event>
+		</dataLink>
+
 		<button left="38" top="-50" width="63" height="60" opacity="1.0" text="Ficha1">
 			<event name="onClick">										
 				local novoForm = GUI.newForm("frmSobrePostaInimigo");
@@ -355,7 +370,7 @@
 
 		<popup name="popCriaInimigo" width="400" visible="false" height="400" backOpacity="0.5">
             <label left="10" top="10" width="70" height="18" text="Tipo"/>
-			<comboBox left="40" top="10" width="70" height="18" items="{'NPC', 'Boss'}" values="{'1', '2'}" value="1" fontColor="#FF6347" name="cmbNpcBoss"/>
+			<comboBox left="40" top="10" width="70" height="18" items="{'NPC', 'Boss'}" values="{'1', '2'}" value="1" fontColor="#FF6347" name="cmbNpcBoss" field="FieldNPCBOSS"/>
 
 			<label left="115" top="10" width="100" height="18" text="Nivel de Poder"/>
 			<comboBox left="205" top="10" width="70" height="18" items="{'Forte', 'Medio', 'Fraco'}" values="{'1', '2', '3'}" value="1" fontColor="#FF6347" name="cmbPoderNPC"/>
@@ -369,88 +384,113 @@
 			<label left="200" top="40" width="70" height="18" text="Classe"/>
 			<comboBox left="240" top="40" width="120" height="18" items="{'Combatente', 'Magico', 'Tanker', 'Agil', 'Guerreiro Magico', 'Arqueiro'}" values="{'1', '2', '3', '4', '5', '6'}" value="1" fontColor="#FF6347" name="cmbClasseNpc"/>
 
-			<label left="200" top="70" width="100" height="18" enabled="false" text="Numero de Alvos"/>  
-			<edit left="300" top="70" width="70" height="18" fontSize="10" enabled="false" field="NumeroDeAlvos"/>
+			<label left="200" top="70" width="120" height="18" enabled="true" text="Numero de Alvos"/>  
+			<edit name="edtNdeAlvos" left="310" top="70" width="70" height="18" fontSize="10" enabled="false" field="NumeroDeAlvos"/>
 
-			<label left="10" top="70" width="120" height="18" enabled="false" text="Forte Contra"/>
+			<label left="10" top="100" width="120" height="18" visible="false" enabled="true" text="Maior HP do Grupo"/>  
+			<edit name="edtMaiorHP" left="130" top="100" width="70" visible="false" height="18" fontSize="10" enabled="false" field="MaiorHP"/>
+
+			<label left="215" top="100" width="140" height="18" visible="false" enabled="true" text="Maior Dano do Grupo"/>  
+			<edit name="edtMaiorDano" left="345" top="100" width="50" visible="false" height="18" fontSize="10" enabled="false" field="MaiorDano"/>
+
+			<label left="10" top="70" width="120" height="18" enabled="true" text="Forte Contra"/>
 			<comboBox left="90" top="70" width="100" height="18" items="{'Cura', 'Tanker', 'Varios Alvos', 'Defesa', 'Resistencia', 'Buffers'}" enabled="false" values="{'1', '2', '3', '4', '5', '6'}" value="1" fontColor="#FF6347" name="cmbForteContra"/>
 			
 			<button align="bottom" width="300" fontColor="#00FFFF" fontStyle="bold" height="30" text="Gerar Inimigo Automaticamente" >
 			 	<event name="onClick">
-						if sheet.LevelCriadorInimigo ~= nil or sheet.LevelCriadorInimigo ~= "" and sheet.LevelCriadorInimigo > 0 then
-							if self.cmbClasseNpc.value == "1" then
-								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
-								sheet.DanoMagico = math.floor(math.random(1, sheet.Dano));
-								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
-								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
-								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
-								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
-								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
-							end;				
-							if self.cmbClasseNpc.value == "2" then
-								sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
-								sheet.Dano = math.floor(math.random((math.floor(sheet.DanoMagico / 2)), math.floor(sheet.DanoMagico)))
-								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
-								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
-								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
-								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
-								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
-								sheet.HPTotal = math.floor(math.random(math.floor(sheet.HPTotal * 0.8), math.floor(sheet.HPTotal * 1.1)))
-								sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 1.5), math.floor(sheet.MPTotal * 2.5)))
+						if sheet.level ~= nil and sheet.level ~= "" and sheet.level > 0 then
+							sheet.LevelCriadorInimigo = tonumber(sheet.level)
+							if sheet.LevelCriadorInimigo ~= nil or sheet.LevelCriadorInimigo ~= "" and sheet.LevelCriadorInimigo > 0 then
+								if self.cmbClasseNpc.value == "1" then
+									sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+									sheet.DanoMagico = math.floor(math.random(1, math.floor(sheet.Dano / 2)));
+									sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+									sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+									calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+									sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+									sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+									ajusteFinal();
+								end;				
+								if self.cmbClasseNpc.value == "2" then
+									sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
+									sheet.Dano = math.floor(math.random((math.floor(sheet.DanoMagico / 2)), math.floor(sheet.DanoMagico)))
+									sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+									sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+									calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+									sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+									sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+									sheet.HPTotal = math.floor(math.random(math.floor(sheet.HPTotal * 0.8), math.floor(sheet.HPTotal * 1.1)))
+									sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 1.3), math.floor(sheet.MPTotal * 2.0)))
+									ajusteFinal();
+								end;
+								if self.cmbClasseNpc.value == "3" then
+									sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+									sheet.DanoMagico = math.random(1, sheet.Dano);
+									sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+									sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+									calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+									sheet.Defesa = math.random(math.floor(sheet.Defesa * 1.3), math.floor(sheet.Defesa * 1.5))
+									sheet.Resistencia = math.random(math.floor(sheet.Resistencia * 1.3), math.floor(sheet.Resistencia * 1.5))
+									sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+									sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+									sheet.HPTotal = math.floor(math.random(math.floor(sheet.HPTotal * 1.1), math.floor(sheet.HPTotal * 1.3)))
+									ajusteFinal();
+								end;
+								if self.cmbClasseNpc.value == "4" then
+									sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+									sheet.DanoMagico = math.random(1, sheet.Dano);
+									sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+									sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+									calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+									sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+									sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+									sheet.HPTotal = math.floor(math.random(math.floor(sheet.HPTotal * 0.9), math.floor(sheet.HPTotal * 1.1)))
+									sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 0.9), math.floor(sheet.MPTotal * 1.1)))
+									ajusteFinal();
+								end;
+								if self.cmbClasseNpc.value == "5" then
+									sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+									sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
+									sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+									sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+									calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+									sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+									sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+									sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 1.2), math.floor(sheet.MPTotal * 1.5)))
+									ajusteFinal();
+								end;
+								if self.cmbClasseNpc.value == "6" then
+									sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+									sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
+									sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+									sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+									calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+									sheet.Dano = math.random(math.floor(sheet.Dano * 1.1), math.floor(sheet.Dano * 1.2))
+									sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+									sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+									sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 0.8), math.floor(sheet.MPTotal * 1.2)))
+									ajusteFinal();
+								end;
+							else
+								showMessage("Level tem que ser maior que 0 e diferente de vazio")
 							end;
-							if self.cmbClasseNpc.value == "3" then
-								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
-								sheet.DanoMagico = math.random(1, sheet.Dano);
-								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
-								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
-								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
-								sheet.Defesa = math.random(sheet.Defesa, math.floor(sheet.Defesa * 1.5))
-								sheet.Resistencia = math.random(math.floor(sheet.Resistencia * 1.2), math.floor(sheet.Resistencia * 1.6))
-								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
-								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
-								sheet.HPTotal = math.floor(math.random(math.floor(sheet.HPTotal * 1.3), math.floor(sheet.HPTotal * 1.6)))
-							end;
-							if self.cmbClasseNpc.value == "4" then
-								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
-								sheet.DanoMagico = math.random(1, sheet.Dano);
-								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
-								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
-								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
-								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
-								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
-								sheet.HPTotal = math.floor(math.random(math.floor(sheet.HPTotal * 0.9), math.floor(sheet.HPTotal * 1.1)))
-								sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 0.9), math.floor(sheet.MPTotal * 1.1)))
-							end;
-							if self.cmbClasseNpc.value == "5" then
-								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
-								sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
-								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
-								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
-								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
-								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
-								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
-								sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 1.2), math.floor(sheet.MPTotal * 1.6)))
-							end;
-							if self.cmbClasseNpc.value == "6" then
-								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
-								sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
-								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
-								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
-								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
-								sheet.Dano = math.random(math.floor(sheet.Dano * 1.1), math.floor(sheet.Dano * 1.3))
-								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
-								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
-								sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 0.8), math.floor(sheet.MPTotal * 1.2)))
-							end;
-						else
-							showMessage("Level tem que ser maior que 0 e diferente de vazio")
 						end;
+
+						if self.cmbNpcBoss.value == '2' then
+							calcularDeBoss(sheet.NumeroDeAlvos)
+						end
+						
                 </event>
        		 </button>
 
         </popup>	
 
-		<button left="400" top="-50" width="63" height="60" opacity="1.0" onClick="self.popCriaInimigo:show();"/>
+		<button left="400" top="-50" width="63" height="60" opacity="1.0">
+			<event name="onClick">
+				self.popCriaInimigo:show();
+				sheet.LevelCriadorInimigo = tonumber(sheet.level)
+			</event>
+		</button>
 			
 		<image left="403" top="-47" width="55" height="55" src="/imagens/robot.png"/>	
 	</scrollBox> 
@@ -717,6 +757,12 @@
 		<event name="onChange">                
 			self.BarraHP.value = tonumber(sheet.HPAtual);
 			self.BarraHP.max = tonumber(sheet.HPTotal);		
+		</event>
+	</dataLink>
+
+	<dataLink fields="{'LevelCriadorInimigo'}">
+		<event name="onChange">                
+			sheet.level = tonumber(sheet.LevelCriadorInimigo)
 		</event>
 	</dataLink>
 	

@@ -146,7 +146,7 @@ local function constructNew_frmIVelen()
 
 		function ajusteBesta()
 			local chance = math.random(1, 10)				
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
@@ -158,27 +158,34 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
-					-0.05, -0.04, -0.03, -0.02, -0.01,
+					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
 					0, 
 					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10,
-					0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20
+					0.11, 0.12, 0.13, 0.14, 0.15
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
 				sheet.MPTotal = math.floor(sheet.MPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			end
 
+			local chance = math.random(1, 10)
+			if chance == 1 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.Critical
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.Critical = sheet.Critical + ajuste  -- Aplicando o ajuste
+			end
+
 			local chance = math.random(1, 10)			
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório de -1 ou +1 no sheet.acerto
 				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
 				sheet.acerto = sheet.acerto + ajuste  -- Aplicando o ajuste
 			end
 
 			local chance = math.random(1, 10)			
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
@@ -190,7 +197,7 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)			
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
@@ -204,32 +211,28 @@ local function constructNew_frmIVelen()
 
 		function ajusteDesertico()
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
-					-0.05, -0.04, -0.03, -0.02, -0.01,
-					0, 
-					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10,
-					0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20,
+					-0.05, -0.04, -0.03, -0.02, -0.01, 0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
 				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			end
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
-					-0.05, -0.04, -0.03, -0.02, -0.01,
-					0, 
-					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10,
-					0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20,
+					-0.05, -0.04, -0.03, -0.02, -0.01, 0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
 				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			end
 
 			local chance = math.random(1, 10) 
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
@@ -241,7 +244,7 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório de -1 ou +1 no sheet.Persistencia
 				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
 				sheet.Persistencia = sheet.Persistencia + ajuste  -- Aplicando o ajuste
@@ -251,7 +254,7 @@ local function constructNew_frmIVelen()
 
 		function ajusteElementais()
 			local chance = math.random(1, 10)			
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
@@ -263,7 +266,7 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)			
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.05, -0.04, -0.03, -0.02, -0.01,
@@ -275,14 +278,14 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)			
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório de -1 ou +1 no sheet.acerto
 				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
 				sheet.acerto = sheet.acerto + ajuste  -- Aplicando o ajuste
 			end
 
 			local chance = math.random(1, 10)				
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
@@ -294,7 +297,7 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
@@ -308,17 +311,24 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório de -1 ou +1 no sheet.AcertoMagico
 				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
 				sheet.AcertoMagico = sheet.AcertoMagico + ajuste  -- Aplicando o ajuste
+			end
+
+			local chance = math.random(1, 10)
+			if chance == 1 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.CriticalMagico
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.CriticalMagico = sheet.CriticalMagico + ajuste  -- Aplicando o ajuste
 			end
 
 		end;
 
 		function ajusteFeras()
 			local chance = math.random(1, 10)
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
@@ -330,14 +340,14 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)			
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório de -1 ou +1 no sheet.acerto
 				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
 				sheet.acerto = sheet.acerto + ajuste  -- Aplicando o ajuste
 			end
 
 			local chance = math.random(1, 10)			
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
@@ -348,30 +358,39 @@ local function constructNew_frmIVelen()
 				sheet.Dano = math.floor(sheet.Dano * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			end
 
+			local chance = math.random(1, 10)
+			if chance == 1 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.Critical
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.Critical = sheet.Critical + ajuste  -- Aplicando o ajuste
+			end
+
+
 		end;
 
 		function ajusteGolens()
 			local chance = math.random(1, 10)
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
+					-0.05, -0.04, -0.03, -0.02, -0.01,
 					0, 
 					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10,
-					0.11, 0.12, 0.13, 0.14, 0.15					
+					
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
 				sheet.HPTotal = math.floor(sheet.HPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			end
 
 			local chance = math.random(1, 10)			
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório de -1 ou +1 no sheet.acerto
 				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
 				sheet.acerto = sheet.acerto + ajuste  -- Aplicando o ajuste
 			end
 
 			local chance = math.random(1, 10)			
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					
@@ -382,28 +401,28 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório de -1 ou +1 no sheet.Persistencia
 				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
 				sheet.Persistencia = sheet.Persistencia + ajuste  -- Aplicando o ajuste
 			end
 
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
-					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+					-0.05, -0.04, -0.03, -0.02, -0.01, 0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
 				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			end
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
-					0, 
+					-0.05, -0.04, -0.03, -0.02, -0.01, 0, 
 					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10,
-					0.11, 0.12, 0.13, 0.14, 0.15	
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
 				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
@@ -412,7 +431,7 @@ local function constructNew_frmIVelen()
 
 		function ajusteMaritimo()
 			local chance = math.random(1, 10)
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.05, -0.04, -0.03, -0.02, -0.01,
@@ -424,7 +443,7 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
@@ -437,25 +456,33 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.05, -0.04, -0.03, -0.02, -0.01, 0, 
-					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10,
+					0.11, 0.12, 0.13, 0.14, 0.15
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
 				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			end
 
 			local chance = math.random(1, 10)
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório de -1 ou +1 no sheet.AcertoMagico
 				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
 				sheet.AcertoMagico = sheet.AcertoMagico + ajuste  -- Aplicando o ajuste
 			end
 
+			local chance = math.random(1, 10)
+			if chance == 1 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.CriticalMagico
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.CriticalMagico = sheet.CriticalMagico + ajuste  -- Aplicando o ajuste
+			end
+
 			local chance = math.random(1, 10)			
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
@@ -468,7 +495,7 @@ local function constructNew_frmIVelen()
 
 		function ajusteMortosVivos()
 			local chance = math.random(1, 10)
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
@@ -480,7 +507,7 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
@@ -493,28 +520,49 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório de -1 ou +1 no sheet.acerto
 				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
 				sheet.acerto = sheet.acerto + ajuste  -- Aplicando o ajuste
 			end
 
 			local chance = math.random(1, 10)
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório de -1 ou +1 no sheet.AcertoMagico
 				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
 				sheet.AcertoMagico = sheet.AcertoMagico + ajuste  -- Aplicando o ajuste
 			end
 
 			local chance = math.random(1, 10)
-			if chance == 3 then
+			if chance == 1 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.CriticalMagico
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.CriticalMagico = sheet.CriticalMagico + ajuste  -- Aplicando o ajuste
+			end
+
+			local chance = math.random(1, 10)
+			if chance == 1 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.Esquiva
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.Esquiva = sheet.Esquiva + ajuste  -- Aplicando o ajuste
+			end
+
+			local chance = math.random(1, 10)
+			if chance == 1 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.Critical
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.Critical = sheet.Critical + ajuste  -- Aplicando o ajuste
+			end
+
+			local chance = math.random(1, 10)
+			if chance == 1 then
 				-- Ajuste aleatório de -1 ou +1 no sheet.Persistencia
 				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
 				sheet.Persistencia = sheet.Persistencia + ajuste  -- Aplicando o ajuste
 			end
 
 			local chance = math.random(1, 10)
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
@@ -526,7 +574,7 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
@@ -538,7 +586,7 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.05, -0.04, -0.03, -0.02, -0.01, 0, 
@@ -548,7 +596,7 @@ local function constructNew_frmIVelen()
 				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			end
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance == 1 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.05, -0.04, -0.03, -0.02, -0.01, 0, 
@@ -575,8 +623,6 @@ local function constructNew_frmIVelen()
 			sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			sheet.HPTotal = math.floor(sheet.HPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			sheet.MPTotal = math.floor(sheet.MPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
-
-			
 		end;
 
 		function ajusteFraco()
@@ -587,13 +633,16 @@ local function constructNew_frmIVelen()
 			local ajuste = ajustes[math.random(#ajustes)]
 			sheet.Dano = math.floor(sheet.Dano * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			sheet.DanoMagico = math.floor(sheet.DanoMagico * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.Acerto = math.floor(sheet.Acerto * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.AcertoMagico = math.floor(sheet.AcertoMagico * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.Esquiva = math.floor(sheet.Esquiva * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.Persistencia = math.floor(sheet.Persistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			sheet.HPTotal = math.floor(sheet.HPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			sheet.MPTotal = math.floor(sheet.MPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
 
 		end;
-
 	
 
 
@@ -608,59 +657,59 @@ local function constructNew_frmIVelen()
 		
 		function calcularChancesCriador(level, race)
 			if race == '1' then
-				sheet.Acerto = 1 + math.floor(tonumber(level / 10))
-				sheet.Esquiva = 11 + math.floor(tonumber(level / 15))
-				sheet.AcertoMagico = 14 + math.floor(tonumber(level / 10))
-				sheet.Critical = 20 - math.floor(tonumber(level / 15))
-				sheet.CriticalMagico = 2 + math.floor(tonumber(level / 15))
-				sheet.Persistencia = 1 + math.floor(tonumber(level / 15))
+				sheet.Acerto = 1 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 12 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 15 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 20 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 2 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 1 + math.ceil(tonumber(level / 15))
 			end;
 			if race == '2' then
-				sheet.Acerto = 1 + math.floor(tonumber(level / 10))
-				sheet.Esquiva = 10 + math.floor(tonumber(level / 15))
-				sheet.AcertoMagico = 14 + math.floor(tonumber(level / 10))
-				sheet.Critical = 20 - math.floor(tonumber(level / 15))
-				sheet.CriticalMagico = 1 + math.floor(tonumber(level / 15))
-				sheet.Persistencia = 2 + math.floor(tonumber(level / 15))
+				sheet.Acerto = 1 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 11 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 14 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 20 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 1 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 2 + math.ceil(tonumber(level / 15))
 			end;
 			if race == '3' then
-				sheet.Acerto = 1 + math.floor(tonumber(level / 10))
-				sheet.Esquiva = 10 + math.floor(tonumber(level / 15))
-				sheet.AcertoMagico = 14 + math.floor(tonumber(level / 10))
-				sheet.Critical = 20 - math.floor(tonumber(level / 15))
-				sheet.CriticalMagico = 2 + math.floor(tonumber(level / 15))
-				sheet.Persistencia = 3 + math.floor(tonumber(level / 15))
+				sheet.Acerto = 1 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 12 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 15 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 20 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 2 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 3 + math.ceil(tonumber(level / 15))
 			end;
 			if race == '4' then
-				sheet.Acerto = 2 + math.floor(tonumber(level / 10))
-				sheet.Esquiva = 10 + math.floor(tonumber(level / 15))
-				sheet.AcertoMagico = 14 + math.floor(tonumber(level / 10))
-				sheet.Critical = 20 - math.floor(tonumber(level / 15))
-				sheet.CriticalMagico = 1 + math.floor(tonumber(level / 15))
-				sheet.Persistencia = 1 + math.floor(tonumber(level / 15))
+				sheet.Acerto = 2 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 11 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 14 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 19 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 1 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 1 + math.ceil(tonumber(level / 15))
 			end;
 			if race == '6' then
-				sheet.Acerto = 1 + math.floor(tonumber(level / 10))
-				sheet.Esquiva = 10 + math.floor(tonumber(level / 15))
-				sheet.AcertoMagico = 15 + math.floor(tonumber(level / 10))
-				sheet.Critical = 19 - math.floor(tonumber(level / 15))
-				sheet.CriticalMagico = 1 + math.floor(tonumber(level / 15))
-				sheet.Persistencia = 1 + math.floor(tonumber(level / 15))
+				sheet.Acerto = 1 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 11 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 15 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 19 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 1 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 1 + math.ceil(tonumber(level / 15))
 			end;
 			if race == '7' then
-				sheet.Acerto = 2 + math.floor(tonumber(level / 10))
-				sheet.Esquiva = 11 + math.floor(tonumber(level / 15))
-				sheet.AcertoMagico = 15 + math.floor(tonumber(level / 10))
-				sheet.Critical = 19 - math.floor(tonumber(level / 15))
-				sheet.CriticalMagico = 2 + math.floor(tonumber(level / 15))
-				sheet.Persistencia = 2 + math.floor(tonumber(level / 15))
+				sheet.Acerto = 2 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 12 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 15 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 19 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 2 + math.ceil(tonumber(level / 15))
+				sheet.Persistencia = 2 + math.ceil(tonumber(level / 15))
 			end;
 			if race == '5' then
-				sheet.Acerto = 2 + math.floor(tonumber(level / 10))
-				sheet.Esquiva = 10 + math.floor(tonumber(level / 15))
-				sheet.AcertoMagico = 14 + math.floor(tonumber(level / 10))
-				sheet.Critical = 20 - math.floor(tonumber(level / 15))
-				sheet.CriticalMagico = 1 + math.floor(tonumber(level / 15))
+				sheet.Acerto = 2 + math.ceil(tonumber(level / 15))
+				sheet.Esquiva = 11 + math.ceil(tonumber(level / 15))
+				sheet.AcertoMagico = 14 + math.ceil(tonumber(level / 15))
+				sheet.Critical = 20 - math.ceil(tonumber(level / 15))
+				sheet.CriticalMagico = 1 + math.ceil(tonumber(level / 15))
 				sheet.Persistencia = 5
 			end;
 		end;
@@ -693,7 +742,7 @@ local function constructNew_frmIVelen()
 			end
 
 			-- Seleciona um valor aleatório para a redução de dano entre 9% e 16%
-			local reducaoPercentual = math.random(10, 17)
+			local reducaoPercentual = math.random(10, 18)
 
 			-- Calcula a defesa necessária para atingir a redução de dano desejada
 			local divisor = divisores[level]
@@ -716,9 +765,9 @@ local function constructNew_frmIVelen()
 		function calcularHPCriador(level)
 			-- Tabela de HP por nível
 			local hpPorNivel = {
-				264, 320, 376, 432, 488, 544, 600, 656, 712, 816,
-				872, 928, 984, 1040, 1096, 1160, 1224, 1312, 1416, 1456,
-				2014, 2173, 2267, 2362, 2488, 2614, 2741, 2867, 3032, 3248, 3600
+				330, 400, 470, 540, 610, 680, 750, 820, 890, 1020,
+				1090, 1160, 1230, 1300, 1370, 1450, 1530, 1640, 1770, 1820,
+				2518, 2716, 2834, 2952, 3110, 3268, 3426, 3584, 3790, 4060, 4500
 			}
 
 			-- Verifica se o nível está na tabela
@@ -783,47 +832,13 @@ local function constructNew_frmIVelen()
 			end
 
 			-- Seleciona um valor aleatório para a redução de dano entre 9% e 16%
-			local reducaoPercentual = math.random(10, 17)
+			local reducaoPercentual = math.random(10, 18)
 
 			-- Calcula a defesa necessária para atingir a redução de dano desejada
 			local divisor = divisores[level]
 			local defesaNecessaria = reducaoPercentual * divisor
 
 			return math.floor(defesaNecessaria + 0.5) -- Retorna o valor arredondado
-		end;
-	
-
-
-
-	
-
-
-
-	
-
-
-		
-		function calcularDeBoss(NumeroDeAlvos)
-		 -- Certifique-se de que NumeroDeAlvos é um número
-			NumeroDeAlvos = tonumber(NumeroDeAlvos)
-			
-			if NumeroDeAlvos then
-				sheet.Dano = math.floor(sheet.Dano * 1.2)
-				sheet.DanoMagico = math.floor(sheet.DanoMagico * 1.2)
-				sheet.Defesa = math.floor(sheet.Defesa * 1.3)
-				sheet.Resistencia = math.floor(sheet.Resistencia * 1.3)
-				local percentual = 0.1 + (0.1 * NumeroDeAlvos)
-				sheet.HPTotal = math.floor(sheet.HPTotal * 1.2)
-
-				sheet.HPTotal = math.floor(sheet.HPTotal) * tonumber(NumeroDeAlvos)
-				sheet.HPTotal = math.floor(sheet.HPTotal * (1 + percentual))
-
-				sheet.MPTotal = math.floor(sheet.MPTotal) * tonumber(NumeroDeAlvos)
-				sheet.MPTotal = math.floor(sheet.MPTotal * (1 + percentual))
-
-				sheet.Dano = math.floor(sheet.Dano * (1 + percentual))
-				sheet.DanoMagico = math.floor(sheet.DanoMagico * (1 + percentual))
-			end;
 		end;
 	
 
@@ -2171,11 +2186,6 @@ local function constructNew_frmIVelen()
     obj.button13:setText("Usar");
     obj.button13:setName("button13");
 
-    obj.dataLink2 = GUI.fromHandle(_obj_newObject("dataLink"));
-    obj.dataLink2:setParent(obj.scrollBox1);
-    obj.dataLink2:setFields({'FieldNPCBOSS'});
-    obj.dataLink2:setName("dataLink2");
-
     obj.button14 = GUI.fromHandle(_obj_newObject("button"));
     obj.button14:setParent(obj.scrollBox1);
     obj.button14:setLeft(38);
@@ -2223,7 +2233,6 @@ local function constructNew_frmIVelen()
     obj.cmbNpcBoss:setValue("1");
     obj.cmbNpcBoss:setFontColor("#FF6347");
     obj.cmbNpcBoss:setName("cmbNpcBoss");
-    obj.cmbNpcBoss:setField("FieldNPCBOSS");
 
     obj.label47 = GUI.fromHandle(_obj_newObject("label"));
     obj.label47:setParent(obj.popCriaInimigo);
@@ -2312,78 +2321,32 @@ local function constructNew_frmIVelen()
     obj.label51:setParent(obj.popCriaInimigo);
     obj.label51:setLeft(200);
     obj.label51:setTop(70);
-    obj.label51:setWidth(120);
+    obj.label51:setWidth(100);
     obj.label51:setHeight(18);
-    obj.label51:setEnabled(true);
+    obj.label51:setEnabled(false);
     obj.label51:setText("Numero de Alvos");
     obj.label51:setName("label51");
 
-    obj.edtNdeAlvos = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edtNdeAlvos:setParent(obj.popCriaInimigo);
-    obj.edtNdeAlvos:setName("edtNdeAlvos");
-    obj.edtNdeAlvos:setLeft(310);
-    obj.edtNdeAlvos:setTop(70);
-    obj.edtNdeAlvos:setWidth(70);
-    obj.edtNdeAlvos:setHeight(18);
-    obj.edtNdeAlvos:setFontSize(10);
-    obj.edtNdeAlvos:setEnabled(false);
-    obj.edtNdeAlvos:setField("NumeroDeAlvos");
+    obj.edit50 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit50:setParent(obj.popCriaInimigo);
+    obj.edit50:setLeft(300);
+    obj.edit50:setTop(70);
+    obj.edit50:setWidth(70);
+    obj.edit50:setHeight(18);
+    obj.edit50:setFontSize(10);
+    obj.edit50:setEnabled(false);
+    obj.edit50:setField("NumeroDeAlvos");
+    obj.edit50:setName("edit50");
 
     obj.label52 = GUI.fromHandle(_obj_newObject("label"));
     obj.label52:setParent(obj.popCriaInimigo);
     obj.label52:setLeft(10);
-    obj.label52:setTop(100);
+    obj.label52:setTop(70);
     obj.label52:setWidth(120);
     obj.label52:setHeight(18);
-    obj.label52:setVisible(false);
-    obj.label52:setEnabled(true);
-    obj.label52:setText("Maior HP do Grupo");
+    obj.label52:setEnabled(false);
+    obj.label52:setText("Forte Contra");
     obj.label52:setName("label52");
-
-    obj.edtMaiorHP = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edtMaiorHP:setParent(obj.popCriaInimigo);
-    obj.edtMaiorHP:setName("edtMaiorHP");
-    obj.edtMaiorHP:setLeft(130);
-    obj.edtMaiorHP:setTop(100);
-    obj.edtMaiorHP:setWidth(70);
-    obj.edtMaiorHP:setVisible(false);
-    obj.edtMaiorHP:setHeight(18);
-    obj.edtMaiorHP:setFontSize(10);
-    obj.edtMaiorHP:setEnabled(false);
-    obj.edtMaiorHP:setField("MaiorHP");
-
-    obj.label53 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label53:setParent(obj.popCriaInimigo);
-    obj.label53:setLeft(215);
-    obj.label53:setTop(100);
-    obj.label53:setWidth(140);
-    obj.label53:setHeight(18);
-    obj.label53:setVisible(false);
-    obj.label53:setEnabled(true);
-    obj.label53:setText("Maior Dano do Grupo");
-    obj.label53:setName("label53");
-
-    obj.edtMaiorDano = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edtMaiorDano:setParent(obj.popCriaInimigo);
-    obj.edtMaiorDano:setName("edtMaiorDano");
-    obj.edtMaiorDano:setLeft(345);
-    obj.edtMaiorDano:setTop(100);
-    obj.edtMaiorDano:setWidth(50);
-    obj.edtMaiorDano:setVisible(false);
-    obj.edtMaiorDano:setHeight(18);
-    obj.edtMaiorDano:setFontSize(10);
-    obj.edtMaiorDano:setEnabled(false);
-    obj.edtMaiorDano:setField("MaiorDano");
-
-    obj.label54 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label54:setParent(obj.popCriaInimigo);
-    obj.label54:setLeft(10);
-    obj.label54:setTop(70);
-    obj.label54:setWidth(120);
-    obj.label54:setHeight(18);
-    obj.label54:setEnabled(true);
-    obj.label54:setText("Forte Contra");
-    obj.label54:setName("label54");
 
     obj.cmbForteContra = GUI.fromHandle(_obj_newObject("comboBox"));
     obj.cmbForteContra:setParent(obj.popCriaInimigo);
@@ -2440,105 +2403,105 @@ local function constructNew_frmIVelen()
     obj.image6:setSRC("/imagens/3.png");
     obj.image6:setName("image6");
 
-    obj.edit50 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit50:setParent(obj.popExtra);
-    obj.edit50:setLeft(230);
-    obj.edit50:setTop(132);
-    obj.edit50:setWidth(50);
-    obj.edit50:setHeight(18);
-    obj.edit50:setFontSize(12);
-    obj.edit50:setField("Atletismo");
-    obj.edit50:setName("edit50");
-
     obj.edit51 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit51:setParent(obj.popExtra);
     obj.edit51:setLeft(230);
-    obj.edit51:setTop(156);
+    obj.edit51:setTop(132);
     obj.edit51:setWidth(50);
     obj.edit51:setHeight(18);
     obj.edit51:setFontSize(12);
-    obj.edit51:setField("Sabedoria");
+    obj.edit51:setField("Atletismo");
     obj.edit51:setName("edit51");
 
     obj.edit52 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit52:setParent(obj.popExtra);
     obj.edit52:setLeft(230);
-    obj.edit52:setTop(180);
+    obj.edit52:setTop(156);
     obj.edit52:setWidth(50);
     obj.edit52:setHeight(18);
     obj.edit52:setFontSize(12);
-    obj.edit52:setField("Percepcao");
+    obj.edit52:setField("Sabedoria");
     obj.edit52:setName("edit52");
 
     obj.edit53 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit53:setParent(obj.popExtra);
     obj.edit53:setLeft(230);
-    obj.edit53:setTop(204);
+    obj.edit53:setTop(180);
     obj.edit53:setWidth(50);
     obj.edit53:setHeight(18);
     obj.edit53:setFontSize(12);
-    obj.edit53:setField("Acrobacia");
+    obj.edit53:setField("Percepcao");
     obj.edit53:setName("edit53");
 
     obj.edit54 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit54:setParent(obj.popExtra);
     obj.edit54:setLeft(230);
-    obj.edit54:setTop(228);
+    obj.edit54:setTop(204);
     obj.edit54:setWidth(50);
     obj.edit54:setHeight(18);
     obj.edit54:setFontSize(12);
-    obj.edit54:setField("Vigor");
+    obj.edit54:setField("Acrobacia");
     obj.edit54:setName("edit54");
 
     obj.edit55 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit55:setParent(obj.popExtra);
     obj.edit55:setLeft(230);
-    obj.edit55:setTop(324);
+    obj.edit55:setTop(228);
     obj.edit55:setWidth(50);
     obj.edit55:setHeight(18);
     obj.edit55:setFontSize(12);
-    obj.edit55:setField("Visao");
+    obj.edit55:setField("Vigor");
     obj.edit55:setName("edit55");
 
     obj.edit56 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit56:setParent(obj.popExtra);
     obj.edit56:setLeft(230);
-    obj.edit56:setTop(346);
+    obj.edit56:setTop(324);
     obj.edit56:setWidth(50);
     obj.edit56:setHeight(18);
     obj.edit56:setFontSize(12);
-    obj.edit56:setField("DistanciaA");
+    obj.edit56:setField("Visao");
     obj.edit56:setName("edit56");
 
     obj.edit57 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit57:setParent(obj.popExtra);
     obj.edit57:setLeft(230);
-    obj.edit57:setTop(368);
+    obj.edit57:setTop(346);
     obj.edit57:setWidth(50);
     obj.edit57:setHeight(18);
     obj.edit57:setFontSize(12);
-    obj.edit57:setField("RegenMP");
+    obj.edit57:setField("DistanciaA");
     obj.edit57:setName("edit57");
 
     obj.edit58 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit58:setParent(obj.popExtra);
     obj.edit58:setLeft(230);
-    obj.edit58:setTop(390);
+    obj.edit58:setTop(368);
     obj.edit58:setWidth(50);
     obj.edit58:setHeight(18);
     obj.edit58:setFontSize(12);
-    obj.edit58:setField("Deslocamento");
+    obj.edit58:setField("RegenMP");
     obj.edit58:setName("edit58");
 
     obj.edit59 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit59:setParent(obj.popExtra);
     obj.edit59:setLeft(230);
-    obj.edit59:setTop(412);
+    obj.edit59:setTop(390);
     obj.edit59:setWidth(50);
     obj.edit59:setHeight(18);
     obj.edit59:setFontSize(12);
-    obj.edit59:setField("Corrida");
+    obj.edit59:setField("Deslocamento");
     obj.edit59:setName("edit59");
+
+    obj.edit60 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit60:setParent(obj.popExtra);
+    obj.edit60:setLeft(230);
+    obj.edit60:setTop(412);
+    obj.edit60:setWidth(50);
+    obj.edit60:setHeight(18);
+    obj.edit60:setFontSize(12);
+    obj.edit60:setField("Corrida");
+    obj.edit60:setName("edit60");
 
     obj.button17 = GUI.fromHandle(_obj_newObject("button"));
     obj.button17:setParent(obj.popExtra);
@@ -2550,25 +2513,25 @@ local function constructNew_frmIVelen()
     obj.button17:setText("DROP 1");
     obj.button17:setName("button17");
 
-    obj.label55 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label55:setParent(obj.popExtra);
-    obj.label55:setLeft(150);
-    obj.label55:setTop(450);
-    obj.label55:setWidth(50);
-    obj.label55:setHeight(18);
-    obj.label55:setFontSize(12);
-    obj.label55:setText("CHANCE");
-    obj.label55:setName("label55");
+    obj.label53 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label53:setParent(obj.popExtra);
+    obj.label53:setLeft(150);
+    obj.label53:setTop(450);
+    obj.label53:setWidth(50);
+    obj.label53:setHeight(18);
+    obj.label53:setFontSize(12);
+    obj.label53:setText("CHANCE");
+    obj.label53:setName("label53");
 
-    obj.edit60 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit60:setParent(obj.popExtra);
-    obj.edit60:setLeft(203);
-    obj.edit60:setTop(450);
-    obj.edit60:setWidth(30);
-    obj.edit60:setHeight(18);
-    obj.edit60:setFontSize(12);
-    obj.edit60:setField("ChanceDrop1");
-    obj.edit60:setName("edit60");
+    obj.edit61 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit61:setParent(obj.popExtra);
+    obj.edit61:setLeft(203);
+    obj.edit61:setTop(450);
+    obj.edit61:setWidth(30);
+    obj.edit61:setHeight(18);
+    obj.edit61:setFontSize(12);
+    obj.edit61:setField("ChanceDrop1");
+    obj.edit61:setName("edit61");
 
     obj.textEditor10 = GUI.fromHandle(_obj_newObject("textEditor"));
     obj.textEditor10:setParent(obj.popExtra);
@@ -2589,25 +2552,25 @@ local function constructNew_frmIVelen()
     obj.button18:setText("DROP 2");
     obj.button18:setName("button18");
 
-    obj.label56 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label56:setParent(obj.popExtra);
-    obj.label56:setLeft(317);
-    obj.label56:setTop(450);
-    obj.label56:setWidth(50);
-    obj.label56:setHeight(18);
-    obj.label56:setFontSize(12);
-    obj.label56:setText("CHANCE");
-    obj.label56:setName("label56");
+    obj.label54 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label54:setParent(obj.popExtra);
+    obj.label54:setLeft(317);
+    obj.label54:setTop(450);
+    obj.label54:setWidth(50);
+    obj.label54:setHeight(18);
+    obj.label54:setFontSize(12);
+    obj.label54:setText("CHANCE");
+    obj.label54:setName("label54");
 
-    obj.edit61 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit61:setParent(obj.popExtra);
-    obj.edit61:setLeft(370);
-    obj.edit61:setTop(450);
-    obj.edit61:setWidth(30);
-    obj.edit61:setHeight(18);
-    obj.edit61:setFontSize(12);
-    obj.edit61:setField("ChanceDrop2");
-    obj.edit61:setName("edit61");
+    obj.edit62 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit62:setParent(obj.popExtra);
+    obj.edit62:setLeft(370);
+    obj.edit62:setTop(450);
+    obj.edit62:setWidth(30);
+    obj.edit62:setHeight(18);
+    obj.edit62:setFontSize(12);
+    obj.edit62:setField("ChanceDrop2");
+    obj.edit62:setName("edit62");
 
     obj.textEditor11 = GUI.fromHandle(_obj_newObject("textEditor"));
     obj.textEditor11:setParent(obj.popExtra);
@@ -2628,25 +2591,25 @@ local function constructNew_frmIVelen()
     obj.button19:setText("DROP 3");
     obj.button19:setName("button19");
 
-    obj.label57 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label57:setParent(obj.popExtra);
-    obj.label57:setLeft(150);
-    obj.label57:setTop(530);
-    obj.label57:setWidth(50);
-    obj.label57:setHeight(18);
-    obj.label57:setFontSize(12);
-    obj.label57:setText("CHANCE");
-    obj.label57:setName("label57");
+    obj.label55 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label55:setParent(obj.popExtra);
+    obj.label55:setLeft(150);
+    obj.label55:setTop(530);
+    obj.label55:setWidth(50);
+    obj.label55:setHeight(18);
+    obj.label55:setFontSize(12);
+    obj.label55:setText("CHANCE");
+    obj.label55:setName("label55");
 
-    obj.edit62 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit62:setParent(obj.popExtra);
-    obj.edit62:setLeft(203);
-    obj.edit62:setTop(530);
-    obj.edit62:setWidth(30);
-    obj.edit62:setHeight(18);
-    obj.edit62:setFontSize(12);
-    obj.edit62:setField("ChanceDrop3");
-    obj.edit62:setName("edit62");
+    obj.edit63 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit63:setParent(obj.popExtra);
+    obj.edit63:setLeft(203);
+    obj.edit63:setTop(530);
+    obj.edit63:setWidth(30);
+    obj.edit63:setHeight(18);
+    obj.edit63:setFontSize(12);
+    obj.edit63:setField("ChanceDrop3");
+    obj.edit63:setName("edit63");
 
     obj.textEditor12 = GUI.fromHandle(_obj_newObject("textEditor"));
     obj.textEditor12:setParent(obj.popExtra);
@@ -2667,25 +2630,25 @@ local function constructNew_frmIVelen()
     obj.button20:setText("DROP 4");
     obj.button20:setName("button20");
 
-    obj.label58 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label58:setParent(obj.popExtra);
-    obj.label58:setLeft(317);
-    obj.label58:setTop(530);
-    obj.label58:setWidth(50);
-    obj.label58:setHeight(18);
-    obj.label58:setFontSize(12);
-    obj.label58:setText("CHANCE");
-    obj.label58:setName("label58");
+    obj.label56 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label56:setParent(obj.popExtra);
+    obj.label56:setLeft(317);
+    obj.label56:setTop(530);
+    obj.label56:setWidth(50);
+    obj.label56:setHeight(18);
+    obj.label56:setFontSize(12);
+    obj.label56:setText("CHANCE");
+    obj.label56:setName("label56");
 
-    obj.edit63 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit63:setParent(obj.popExtra);
-    obj.edit63:setLeft(370);
-    obj.edit63:setTop(530);
-    obj.edit63:setWidth(30);
-    obj.edit63:setHeight(18);
-    obj.edit63:setFontSize(12);
-    obj.edit63:setField("ChanceDrop4");
-    obj.edit63:setName("edit63");
+    obj.edit64 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit64:setParent(obj.popExtra);
+    obj.edit64:setLeft(370);
+    obj.edit64:setTop(530);
+    obj.edit64:setWidth(30);
+    obj.edit64:setHeight(18);
+    obj.edit64:setFontSize(12);
+    obj.edit64:setField("ChanceDrop4");
+    obj.edit64:setName("edit64");
 
     obj.textEditor13 = GUI.fromHandle(_obj_newObject("textEditor"));
     obj.textEditor13:setParent(obj.popExtra);
@@ -2796,25 +2759,20 @@ local function constructNew_frmIVelen()
 			
 
 
+    obj.dataLink2 = GUI.fromHandle(_obj_newObject("dataLink"));
+    obj.dataLink2:setParent(obj);
+    obj.dataLink2:setFields({'Defesa', 'Resistencia', 'level'});
+    obj.dataLink2:setName("dataLink2");
+
     obj.dataLink3 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink3:setParent(obj);
-    obj.dataLink3:setFields({'Defesa', 'Resistencia', 'level'});
+    obj.dataLink3:setFields({'HPAtual', 'HPTotal'});
     obj.dataLink3:setName("dataLink3");
 
     obj.dataLink4 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink4:setParent(obj);
-    obj.dataLink4:setFields({'HPAtual', 'HPTotal'});
+    obj.dataLink4:setFields({'MPAtual', 'MPTotal'});
     obj.dataLink4:setName("dataLink4");
-
-    obj.dataLink5 = GUI.fromHandle(_obj_newObject("dataLink"));
-    obj.dataLink5:setParent(obj);
-    obj.dataLink5:setFields({'LevelCriadorInimigo'});
-    obj.dataLink5:setName("dataLink5");
-
-    obj.dataLink6 = GUI.fromHandle(_obj_newObject("dataLink"));
-    obj.dataLink6:setParent(obj);
-    obj.dataLink6:setFields({'MPAtual', 'MPTotal'});
-    obj.dataLink6:setName("dataLink6");
 
 
 		local function ToparStatus()   
@@ -3487,163 +3445,142 @@ local function constructNew_frmIVelen()
             UsarHabilidade()
         end);
 
-    obj._e_event21 = obj.dataLink2:addEventListener("onChange",
-        function (field, oldValue, newValue)
-            if self.cmbNpcBoss.value == '2' then
-            					self.edtNdeAlvos.enabled = true
-            					self.edtMaiorHP.enabled = true
-            					self.edtMaiorDano.enabled = true
-            				else
-            					self.edtNdeAlvos.enabled = false
-            					self.edtMaiorHP.enabled = false
-            					self.edtMaiorDano.enabled = false
-            				end
-        end);
-
-    obj._e_event22 = obj.button14:addEventListener("onClick",
+    obj._e_event21 = obj.button14:addEventListener("onClick",
         function (event)
             local novoForm = GUI.newForm("frmSobrePostaInimigo");
             				novoForm:setNodeObject(sheet);
             				novoForm:show();
         end);
 
-    obj._e_event23 = obj.button15:addEventListener("onClick",
+    obj._e_event22 = obj.button15:addEventListener("onClick",
         function (event)
-            if sheet.level ~= nil and sheet.level ~= "" and sheet.level > 0 then
-            							sheet.LevelCriadorInimigo = tonumber(sheet.level)
-            							if sheet.LevelCriadorInimigo ~= nil or sheet.LevelCriadorInimigo ~= "" and sheet.LevelCriadorInimigo > 0 then
-            								if self.cmbClasseNpc.value == "1" then
-            									sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
-            									sheet.DanoMagico = math.floor(math.random(1, math.floor(sheet.Dano / 2)));
-            									sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
-            									sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
-            									calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
-            									sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
-            									sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
-            									ajusteFinal();
-            								end;				
-            								if self.cmbClasseNpc.value == "2" then
-            									sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
-            									sheet.Dano = math.floor(math.random((math.floor(sheet.DanoMagico / 2)), math.floor(sheet.DanoMagico)))
-            									sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
-            									sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
-            									calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
-            									sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
-            									sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
-            									sheet.HPTotal = math.floor(math.random(math.floor(sheet.HPTotal * 0.8), math.floor(sheet.HPTotal * 1.1)))
-            									sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 1.3), math.floor(sheet.MPTotal * 2.0)))
-            									ajusteFinal();
-            								end;
-            								if self.cmbClasseNpc.value == "3" then
-            									sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
-            									sheet.DanoMagico = math.random(1, sheet.Dano);
-            									sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
-            									sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
-            									calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
-            									sheet.Defesa = math.random(math.floor(sheet.Defesa * 1.3), math.floor(sheet.Defesa * 1.5))
-            									sheet.Resistencia = math.random(math.floor(sheet.Resistencia * 1.3), math.floor(sheet.Resistencia * 1.5))
-            									sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
-            									sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
-            									sheet.HPTotal = math.floor(math.random(math.floor(sheet.HPTotal * 1.1), math.floor(sheet.HPTotal * 1.3)))
-            									ajusteFinal();
-            								end;
-            								if self.cmbClasseNpc.value == "4" then
-            									sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
-            									sheet.DanoMagico = math.random(1, sheet.Dano);
-            									sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
-            									sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
-            									calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
-            									sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
-            									sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
-            									sheet.HPTotal = math.floor(math.random(math.floor(sheet.HPTotal * 0.9), math.floor(sheet.HPTotal * 1.1)))
-            									sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 0.9), math.floor(sheet.MPTotal * 1.1)))
-            									ajusteFinal();
-            								end;
-            								if self.cmbClasseNpc.value == "5" then
-            									sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
-            									sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
-            									sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
-            									sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
-            									calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
-            									sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
-            									sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
-            									sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 1.2), math.floor(sheet.MPTotal * 1.5)))
-            									ajusteFinal();
-            								end;
-            								if self.cmbClasseNpc.value == "6" then
-            									sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
-            									sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
-            									sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
-            									sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
-            									calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
-            									sheet.Dano = math.random(math.floor(sheet.Dano * 1.1), math.floor(sheet.Dano * 1.2))
-            									sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
-            									sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
-            									sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 0.8), math.floor(sheet.MPTotal * 1.2)))
-            									ajusteFinal();
-            								end;
-            							else
-            								showMessage("Level tem que ser maior que 0 e diferente de vazio")
+            if sheet.LevelCriadorInimigo ~= nil or sheet.LevelCriadorInimigo ~= "" and sheet.LevelCriadorInimigo > 0 then
+            							if self.cmbClasseNpc.value == "1" then
+            								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+            								sheet.DanoMagico = math.floor(math.random(1, math.floor(sheet.Dano / 2)));
+            								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+            								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+            								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+            								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								ajusteFinal();
+            							end;				
+            							if self.cmbClasseNpc.value == "2" then
+            								sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
+            								sheet.Dano = math.floor(math.random((math.floor(sheet.DanoMagico / 2)), math.floor(sheet.DanoMagico)))
+            								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+            								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+            								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+            								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.HPTotal = math.floor(math.random(math.floor(sheet.HPTotal * 0.8), math.floor(sheet.HPTotal * 1.1)))
+            								sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 1.3), math.floor(sheet.MPTotal * 2.0)))
+            								ajusteFinal();
             							end;
+            							if self.cmbClasseNpc.value == "3" then
+            								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+            								sheet.DanoMagico = math.random(1, sheet.Dano);
+            								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+            								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+            								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+            								sheet.Defesa = math.random(sheet.Defesa, math.floor(sheet.Defesa * 1.3))
+            								sheet.Resistencia = math.random(math.floor(sheet.Resistencia * 1), math.floor(sheet.Resistencia * 1.3))
+            								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.HPTotal = math.floor(math.random(math.floor(sheet.HPTotal * 1.2), math.floor(sheet.HPTotal * 1.4)))
+            								ajusteFinal();
+            							end;
+            							if self.cmbClasseNpc.value == "4" then
+            								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+            								sheet.DanoMagico = math.random(1, sheet.Dano);
+            								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+            								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+            								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+            								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.HPTotal = math.floor(math.random(math.floor(sheet.HPTotal * 0.9), math.floor(sheet.HPTotal * 1.1)))
+            								sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 0.9), math.floor(sheet.MPTotal * 1.1)))
+            								ajusteFinal();
+            							end;
+            							if self.cmbClasseNpc.value == "5" then
+            								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+            								sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
+            								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+            								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+            								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+            								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 1.2), math.floor(sheet.MPTotal * 1.5)))
+            								ajusteFinal();
+            							end;
+            							if self.cmbClasseNpc.value == "6" then
+            								sheet.Dano = calcularDanoFisico(sheet.LevelCriadorInimigo);
+            								sheet.DanoMagico = calcularDanoMagico(sheet.LevelCriadorInimigo);
+            								sheet.Defesa = calcularDefCriador(tonumber(sheet.LevelCriadorInimigo));
+            								sheet.Resistencia = calcularResCriador(tonumber(sheet.LevelCriadorInimigo))
+            								calcularChancesCriador(sheet.LevelCriadorInimigo, sheet.RacaCriadorNPC);
+            								sheet.Dano = math.random(math.floor(sheet.Dano * 1.1), math.floor(sheet.Dano * 1.2))
+            								sheet.HPTotal = math.floor(calcularHPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(calcularMPCriador(tonumber(sheet.LevelCriadorInimigo)))
+            								sheet.MPTotal = math.floor(math.random(math.floor(sheet.MPTotal * 0.8), math.floor(sheet.MPTotal * 1.2)))
+            								ajusteFinal();
+            							end;
+            						else
+            							showMessage("Level tem que ser maior que 0 e diferente de vazio")
             						end;
-            
-            						if self.cmbNpcBoss.value == '2' then
-            							calcularDeBoss(sheet.NumeroDeAlvos)
-            						end
         end);
 
-    obj._e_event24 = obj.button16:addEventListener("onClick",
+    obj._e_event23 = obj.button16:addEventListener("onClick",
         function (event)
             self.popCriaInimigo:show();
-            				sheet.LevelCriadorInimigo = tonumber(sheet.level)
         end);
 
-    obj._e_event25 = obj.button17:addEventListener("onClick",
+    obj._e_event24 = obj.button17:addEventListener("onClick",
         function (event)
             Drop1();
         end);
 
-    obj._e_event26 = obj.button18:addEventListener("onClick",
+    obj._e_event25 = obj.button18:addEventListener("onClick",
         function (event)
             Drop2();
         end);
 
-    obj._e_event27 = obj.button19:addEventListener("onClick",
+    obj._e_event26 = obj.button19:addEventListener("onClick",
         function (event)
             Drop3();
         end);
 
-    obj._e_event28 = obj.button20:addEventListener("onClick",
+    obj._e_event27 = obj.button20:addEventListener("onClick",
         function (event)
             Drop4();
         end);
 
-    obj._e_event29 = obj.button21:addEventListener("onClick",
+    obj._e_event28 = obj.button21:addEventListener("onClick",
         function (event)
             RolarTesteAtletismo()
         end);
 
-    obj._e_event30 = obj.button22:addEventListener("onClick",
+    obj._e_event29 = obj.button22:addEventListener("onClick",
         function (event)
             RolarTesteSabedoria()
         end);
 
-    obj._e_event31 = obj.button23:addEventListener("onClick",
+    obj._e_event30 = obj.button23:addEventListener("onClick",
         function (event)
             RolarTestePercepcao()
         end);
 
-    obj._e_event32 = obj.button24:addEventListener("onClick",
+    obj._e_event31 = obj.button24:addEventListener("onClick",
         function (event)
             RolarTesteAcrobacia()
         end);
 
-    obj._e_event33 = obj.button25:addEventListener("onClick",
+    obj._e_event32 = obj.button25:addEventListener("onClick",
         function (event)
             RolarTesteVigor()
         end);
 
-    obj._e_event34 = obj.dataLink3:addEventListener("onChange",
+    obj._e_event33 = obj.dataLink2:addEventListener("onChange",
         function (field, oldValue, newValue)
             CalculadorRESISTLevel();
             			
@@ -3803,26 +3740,19 @@ local function constructNew_frmIVelen()
             			sheet.ResistenciaPorCent = math.floor(tonumber(sheet.ResistenciaPorCent) or 0);
         end);
 
-    obj._e_event35 = obj.dataLink4:addEventListener("onChange",
+    obj._e_event34 = obj.dataLink3:addEventListener("onChange",
         function (field, oldValue, newValue)
             self.BarraHP.value = tonumber(sheet.HPAtual);
             			self.BarraHP.max = tonumber(sheet.HPTotal);
         end);
 
-    obj._e_event36 = obj.dataLink5:addEventListener("onChange",
-        function (field, oldValue, newValue)
-            sheet.level = tonumber(sheet.LevelCriadorInimigo)
-        end);
-
-    obj._e_event37 = obj.dataLink6:addEventListener("onChange",
+    obj._e_event35 = obj.dataLink4:addEventListener("onChange",
         function (field, oldValue, newValue)
             self.BarraMP.value = tonumber(sheet.MPAtual);
             			self.BarraMP.max = tonumber(sheet.MPTotal);
         end);
 
     function obj:_releaseEvents()
-        __o_rrpgObjs.removeEventListenerById(self._e_event37);
-        __o_rrpgObjs.removeEventListenerById(self._e_event36);
         __o_rrpgObjs.removeEventListenerById(self._e_event35);
         __o_rrpgObjs.removeEventListenerById(self._e_event34);
         __o_rrpgObjs.removeEventListenerById(self._e_event33);
@@ -3896,11 +3826,10 @@ local function constructNew_frmIVelen()
         if self.label56 ~= nil then self.label56:destroy(); self.label56 = nil; end;
         if self.edit56 ~= nil then self.edit56:destroy(); self.edit56 = nil; end;
         if self.edit60 ~= nil then self.edit60:destroy(); self.edit60 = nil; end;
-        if self.dataLink5 ~= nil then self.dataLink5:destroy(); self.dataLink5 = nil; end;
         if self.rectangle1 ~= nil then self.rectangle1:destroy(); self.rectangle1 = nil; end;
         if self.textEditor7 ~= nil then self.textEditor7:destroy(); self.textEditor7 = nil; end;
-        if self.label53 ~= nil then self.label53:destroy(); self.label53 = nil; end;
         if self.edit53 ~= nil then self.edit53:destroy(); self.edit53 = nil; end;
+        if self.label53 ~= nil then self.label53:destroy(); self.label53 = nil; end;
         if self.label39 ~= nil then self.label39:destroy(); self.label39 = nil; end;
         if self.edit3 ~= nil then self.edit3:destroy(); self.edit3 = nil; end;
         if self.button8 ~= nil then self.button8:destroy(); self.button8 = nil; end;
@@ -3934,11 +3863,11 @@ local function constructNew_frmIVelen()
         if self.edit15 ~= nil then self.edit15:destroy(); self.edit15 = nil; end;
         if self.edit8 ~= nil then self.edit8:destroy(); self.edit8 = nil; end;
         if self.edit29 ~= nil then self.edit29:destroy(); self.edit29 = nil; end;
+        if self.edit64 ~= nil then self.edit64:destroy(); self.edit64 = nil; end;
         if self.popMecanica1 ~= nil then self.popMecanica1:destroy(); self.popMecanica1 = nil; end;
         if self.label28 ~= nil then self.label28:destroy(); self.label28 = nil; end;
         if self.textEditor3 ~= nil then self.textEditor3:destroy(); self.textEditor3 = nil; end;
         if self.edit57 ~= nil then self.edit57:destroy(); self.edit57 = nil; end;
-        if self.label57 ~= nil then self.label57:destroy(); self.label57 = nil; end;
         if self.dataLink4 ~= nil then self.dataLink4:destroy(); self.dataLink4 = nil; end;
         if self.scrollBox1 ~= nil then self.scrollBox1:destroy(); self.scrollBox1 = nil; end;
         if self.rectangle2 ~= nil then self.rectangle2:destroy(); self.rectangle2 = nil; end;
@@ -3967,7 +3896,6 @@ local function constructNew_frmIVelen()
         if self.label6 ~= nil then self.label6:destroy(); self.label6 = nil; end;
         if self.btnMeca2 ~= nil then self.btnMeca2:destroy(); self.btnMeca2 = nil; end;
         if self.button17 ~= nil then self.button17:destroy(); self.button17 = nil; end;
-        if self.edtNdeAlvos ~= nil then self.edtNdeAlvos:destroy(); self.edtNdeAlvos = nil; end;
         if self.edit22 ~= nil then self.edit22:destroy(); self.edit22 = nil; end;
         if self.cmbNpcBoss ~= nil then self.cmbNpcBoss:destroy(); self.cmbNpcBoss = nil; end;
         if self.label21 ~= nil then self.label21:destroy(); self.label21 = nil; end;
@@ -3992,7 +3920,6 @@ local function constructNew_frmIVelen()
         if self.label30 ~= nil then self.label30:destroy(); self.label30 = nil; end;
         if self.button1 ~= nil then self.button1:destroy(); self.button1 = nil; end;
         if self.edit39 ~= nil then self.edit39:destroy(); self.edit39 = nil; end;
-        if self.edtMaiorDano ~= nil then self.edtMaiorDano:destroy(); self.edtMaiorDano = nil; end;
         if self.edit45 ~= nil then self.edit45:destroy(); self.edit45 = nil; end;
         if self.CbxMeca4 ~= nil then self.CbxMeca4:destroy(); self.CbxMeca4 = nil; end;
         if self.label35 ~= nil then self.label35:destroy(); self.label35 = nil; end;
@@ -4023,7 +3950,6 @@ local function constructNew_frmIVelen()
         if self.label27 ~= nil then self.label27:destroy(); self.label27 = nil; end;
         if self.edit17 ~= nil then self.edit17:destroy(); self.edit17 = nil; end;
         if self.edit54 ~= nil then self.edit54:destroy(); self.edit54 = nil; end;
-        if self.label58 ~= nil then self.label58:destroy(); self.label58 = nil; end;
         if self.URLIMG ~= nil then self.URLIMG:destroy(); self.URLIMG = nil; end;
         if self.popMecanica3 ~= nil then self.popMecanica3:destroy(); self.popMecanica3 = nil; end;
         if self.edit62 ~= nil then self.edit62:destroy(); self.edit62 = nil; end;
@@ -4031,7 +3957,6 @@ local function constructNew_frmIVelen()
         if self.textEditor5 ~= nil then self.textEditor5:destroy(); self.textEditor5 = nil; end;
         if self.edit51 ~= nil then self.edit51:destroy(); self.edit51 = nil; end;
         if self.edit1 ~= nil then self.edit1:destroy(); self.edit1 = nil; end;
-        if self.dataLink6 ~= nil then self.dataLink6:destroy(); self.dataLink6 = nil; end;
         if self.label47 ~= nil then self.label47:destroy(); self.label47 = nil; end;
         if self.textEditor8 ~= nil then self.textEditor8:destroy(); self.textEditor8 = nil; end;
         if self.edit4 ~= nil then self.edit4:destroy(); self.edit4 = nil; end;
@@ -4070,7 +3995,6 @@ local function constructNew_frmIVelen()
         if self.textEditor4 ~= nil then self.textEditor4:destroy(); self.textEditor4 = nil; end;
         if self.edit52 ~= nil then self.edit52:destroy(); self.edit52 = nil; end;
         if self.label38 ~= nil then self.label38:destroy(); self.label38 = nil; end;
-        if self.edtMaiorHP ~= nil then self.edtMaiorHP:destroy(); self.edtMaiorHP = nil; end;
         if self.button9 ~= nil then self.button9:destroy(); self.button9 = nil; end;
         if self.dataLink1 ~= nil then self.dataLink1:destroy(); self.dataLink1 = nil; end;
         if self.label46 ~= nil then self.label46:destroy(); self.label46 = nil; end;

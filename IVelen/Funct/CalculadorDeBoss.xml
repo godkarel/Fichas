@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	<script>
+	<![CDATA[		
+		function calcularDeBoss(NumeroDeAlvos)
+		 -- Certifique-se de que NumeroDeAlvos é um número
+			NumeroDeAlvos = tonumber(NumeroDeAlvos)
+			
+			if NumeroDeAlvos then
+				sheet.Dano = math.floor(sheet.Dano * 1.2)
+				sheet.DanoMagico = math.floor(sheet.DanoMagico * 1.2)
+				sheet.Defesa = math.floor(sheet.Defesa * 1.3)
+				sheet.Resistencia = math.floor(sheet.Resistencia * 1.3)
+				local percentual = 0.1 + (0.1 * NumeroDeAlvos)
+				sheet.HPTotal = math.floor(sheet.HPTotal * 1.2)
+
+				sheet.HPTotal = math.floor(sheet.HPTotal) * tonumber(NumeroDeAlvos)
+				sheet.HPTotal = math.floor(sheet.HPTotal * (1 + percentual))
+
+				sheet.MPTotal = math.floor(sheet.MPTotal) * tonumber(NumeroDeAlvos)
+				sheet.MPTotal = math.floor(sheet.MPTotal * (1 + percentual))
+
+				sheet.Dano = math.floor(sheet.Dano * (1 + percentual))
+				sheet.DanoMagico = math.floor(sheet.DanoMagico * (1 + percentual))
+			end;
+		end;
+	]]>
+	</script>

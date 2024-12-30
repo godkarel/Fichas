@@ -1,8 +1,498 @@
 <?xml version="1.0" encoding="UTF-8"?>		
 	<script>
 	<![CDATA[		
-		function ajusteFinal(level)
+		function ajusteFinal()
+			if self.cmbRacaBoss.value == "1" then
+				ajusteBesta();
+			end;
+
+			if self.cmbRacaBoss.value == "2" then
+				ajusteDesertico();
+			end;
+
+			if self.cmbRacaBoss.value == "3" then
+				ajusteElementais();
+			end;
+
+			if self.cmbRacaBoss.value == "4" then
+				ajusteFeras();
+			end;
+
+			if self.cmbRacaBoss.value == "5" then
+				ajusteGolens();
+			end;
+
+			if self.cmbRacaBoss.value == "6" then
+				ajusteMaritimo();
+			end;
+
+			if self.cmbRacaBoss.value == "7" then
+				ajusteMortosVivos();
+			end;
+
+
+			if self.cmbPoderNPC.value == "1" then
+				ajusteForte()
+			end;
+
+			if self.cmbPoderNPC.value == "2" then
 				
+			end;
+
+			if self.cmbPoderNPC.value == "3" then
+				ajusteFraco()
+			end;
 		end;
+
+		function ajusteBesta()
+			local chance = math.random(1, 10)				
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.HPTotal = math.floor(sheet.HPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)    
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10,
+					0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.MPTotal = math.floor(sheet.MPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)			
+			if chance == 3 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.acerto
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.acerto = sheet.acerto + ajuste  -- Aplicando o ajuste
+			end
+
+			local chance = math.random(1, 10)			
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.Dano = math.floor(sheet.Dano * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)			
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.DanoMagico = math.floor(sheet.DanoMagico * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+		end;
+
+		function ajusteDesertico()
+			local chance = math.random(1, 10)    
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10,
+					0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20,
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+			local chance = math.random(1, 10)    
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10,
+					0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20,
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10) 
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.HPTotal = math.floor(sheet.HPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)
+			if chance == 3 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.Persistencia
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.Persistencia = sheet.Persistencia + ajuste  -- Aplicando o ajuste
+			end
+
+		end;
+
+		function ajusteElementais()
+			local chance = math.random(1, 10)			
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.Dano = math.floor(sheet.Dano * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)			
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.DanoMagico = math.floor(sheet.DanoMagico * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)			
+			if chance == 3 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.acerto
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.acerto = sheet.acerto + ajuste  -- Aplicando o ajuste
+			end
+
+			local chance = math.random(1, 10)				
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.HPTotal = math.floor(sheet.HPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)    
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10,
+					0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20,
+					0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.30
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.MPTotal = math.floor(sheet.MPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)
+			if chance == 3 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.AcertoMagico
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.AcertoMagico = sheet.AcertoMagico + ajuste  -- Aplicando o ajuste
+			end
+
+		end;
+
+		function ajusteFeras()
+			local chance = math.random(1, 10)
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.HPTotal = math.floor(sheet.HPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)			
+			if chance == 3 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.acerto
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.acerto = sheet.acerto + ajuste  -- Aplicando o ajuste
+			end
+
+			local chance = math.random(1, 10)			
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.Dano = math.floor(sheet.Dano * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+		end;
+
+		function ajusteGolens()
+			local chance = math.random(1, 10)
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10,
+					0.11, 0.12, 0.13, 0.14, 0.15					
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.HPTotal = math.floor(sheet.HPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)			
+			if chance == 3 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.acerto
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.acerto = sheet.acerto + ajuste  -- Aplicando o ajuste
+			end
+
+			local chance = math.random(1, 10)			
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					
+					0.01, 0.02, 0.03, 0.04, 0.05
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.Dano = math.floor(sheet.Dano * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)
+			if chance == 3 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.Persistencia
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.Persistencia = sheet.Persistencia + ajuste  -- Aplicando o ajuste
+			end
+
+			local chance = math.random(1, 10)    
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+			local chance = math.random(1, 10)    
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10,
+					0.11, 0.12, 0.13, 0.14, 0.15	
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+		end;
+
+		function ajusteMaritimo()
+			local chance = math.random(1, 10)
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.HPTotal = math.floor(sheet.HPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)    
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10,
+					0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.MPTotal = math.floor(sheet.MPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.05, -0.04, -0.03, -0.02, -0.01, 0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)
+			if chance == 3 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.AcertoMagico
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.AcertoMagico = sheet.AcertoMagico + ajuste  -- Aplicando o ajuste
+			end
+
+			local chance = math.random(1, 10)			
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.DanoMagico = math.floor(sheet.DanoMagico * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+		end;
+
+		function ajusteMortosVivos()
+			local chance = math.random(1, 10)
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.HPTotal = math.floor(sheet.HPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10,
+					0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.MPTotal = math.floor(sheet.MPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)
+			if chance == 3 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.acerto
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.acerto = sheet.acerto + ajuste  -- Aplicando o ajuste
+			end
+
+			local chance = math.random(1, 10)
+			if chance == 3 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.AcertoMagico
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.AcertoMagico = sheet.AcertoMagico + ajuste  -- Aplicando o ajuste
+			end
+
+			local chance = math.random(1, 10)
+			if chance == 3 then
+				-- Ajuste aleatório de -1 ou +1 no sheet.Persistencia
+				local ajuste = math.random() < 0.5 and -1 or 1  -- -1 ou +1
+				sheet.Persistencia = sheet.Persistencia + ajuste  -- Aplicando o ajuste
+			end
+
+			local chance = math.random(1, 10)
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.Dano = math.floor(sheet.Dano * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.10, -0.09, -0.08, -0.07, -0.06, -0.05, -0.04, -0.03, -0.02, -0.01,
+					0, 
+					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.DanoMagico = math.floor(sheet.DanoMagico * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+
+			local chance = math.random(1, 10)    
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.05, -0.04, -0.03, -0.02, -0.01, 0, 
+					0.01, 0.02, 0.03, 0.04, 0.05
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+			local chance = math.random(1, 10)    
+			if chance == 3 then
+				-- Ajuste aleatório entre -10% a +10%
+				local ajustes = {
+					-0.05, -0.04, -0.03, -0.02, -0.01, 0, 
+					0.01, 0.02, 0.03, 0.04, 0.05
+				}
+				local ajuste = ajustes[math.random(#ajustes)]
+				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			end
+		end;
+
+		function ajusteForte()
+			-- Ajuste aleatório entre -10% a +10%
+			local ajustes = {
+				0.05, 0.06, 0.07, 0.08, 0.09, 0.10
+			}
+			local ajuste = ajustes[math.random(#ajustes)]
+			sheet.Dano = math.floor(sheet.Dano * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.DanoMagico = math.floor(sheet.DanoMagico * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.Acerto = math.floor(sheet.Acerto * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.AcertoMagico = math.floor(sheet.AcertoMagico * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.Esquiva = math.floor(sheet.Esquiva * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.Persistencia = math.floor(sheet.Persistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.HPTotal = math.floor(sheet.HPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.MPTotal = math.floor(sheet.MPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
+
+			
+		end;
+
+		function ajusteFraco()
+			-- Ajuste aleatório entre -10% a +10%
+			local ajustes = {
+				-0.05, -0.06, -0.07, -0.08, -0.09, -0.10
+			}
+			local ajuste = ajustes[math.random(#ajustes)]
+			sheet.Dano = math.floor(sheet.Dano * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.DanoMagico = math.floor(sheet.DanoMagico * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.HPTotal = math.floor(sheet.HPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.MPTotal = math.floor(sheet.MPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
+
+		end;
+
 	]]>
 	</script>
