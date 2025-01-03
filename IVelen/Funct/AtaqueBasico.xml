@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	 <script>
+			local function AtaqueBasicoR()   
+				if sheet.cmbTipoDeGrupoF == "1" then   
+					-- obter a mesa do personagem
+					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
+					local mesas = rrpg.getRooms();
+					local bibliotecaAtual = mesas[1].library;
+
+						local function obterNomesRecursivo(bibItem)
+							local itensFilhos = bibItem.children;
+							local nomes = bibItem.name;
+							
+							for i = 1, #itensFilhos, 1 do
+								local bibItemFilho = itensFilhos[i];
+								local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+
+								if nomesDoFilho == "Sistema de Combaate Velen" then
+									-- Obter ID do personagem Loan
+									local idPersonagem = self.cmbInimigos.value;
+									
+									-- Solicita acesso à ficha do personagem
+									local promise = bibItemFilho:asyncOpenNDB();
+
+									-- Aguarda até que a ficha esteja carregada
+									nodeExterno = await(promise);
+									
+									local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)								
+									
+									for _, node in ipairs(nodesO) do
+
+										if node.NomeDoOponenteVez == idPersonagem then  -- Verifica se o campo NomeDoOponenteVez existe
+											EsqAlvo = node.ESQ
+											RESAlvo = node.RES
+											DefAlvo = node.DEF
+										end
+									end
+								end
+							end
+							return nomes
+						end
+
+						local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+
+					
+					------------------------------------------------------------------
+					
+					-- se o usuário não preencheu modificador, vamos usar o valor 0
+					sheet.Acerto = sheet.Acerto or 0;                      
+					if sheet.TipoAtaque == nil then
+						showMessage("Escolha uma Base de Dano para seu Ataque Basico na lista acima");
+					else				
+						mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
+							function (rolado)	
+							EsqAlvo = EsqAlvo + 1
+							local soDado = rolado.resultado + 1 - tonumber(sheet.Acerto);
+							if rolado.resultado + sheet.acerto > EsqAlvo then
+								if soDado > tonumber(sheet.Critical) then
+									if sheet.TipoAtaque == 'Dano Fisico' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((sheet.Dano * 2) * (1 - (DefAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano * 2)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
+									elseif sheet.TipoAtaque == 'Dano Magico' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((sheet.DanoMagico * 2) * (1 - (RESAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor((sheet.DanoMagico * 2))
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");																			
+									end;	
+								else
+									if sheet.TipoAtaque == 'Dano Fisico' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((sheet.Dano) * (1 - (DefAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] »");
+									elseif sheet.TipoAtaque == 'Dano Magico' then			
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((sheet.DanoMagico) * (1 - (RESAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor((sheet.DanoMagico))
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
+									end;							
+								end;	
+							else
+								mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] Errou o ataque no oponente");
+								nodeExterno.DanoRecebido = 0
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+							end;
+								
+						end); 
+					end;
+				end;
+
+				if sheet.cmbTipoDeGrupoF == "2" then   
+						-- obter a mesa do personagem
+					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
+					local mesas = rrpg.getRooms();
+					local bibliotecaAtual = mesas[1].library;
+
+						local function obterNomesRecursivo2(bibItem)
+							local itensFilhos = bibItem.children;
+							local nomes = bibItem.name;
+							
+							for i = 1, #itensFilhos, 1 do
+								local bibItemFilho = itensFilhos[i];
+								local nomesDoFilho = obterNomesRecursivo2(bibItemFilho) or "";
+
+								if nomesDoFilho == "Sistema de Combaate Velen" then
+									-- Obter ID do personagem Loan
+									local idPersonagem = self.cmbInimigos.value;
+									
+									-- Solicita acesso à ficha do personagem
+									local promise = bibItemFilho:asyncOpenNDB();
+
+									-- Aguarda até que a ficha esteja carregada
+									nodeExterno = await(promise);
+									
+									local nodesO = ndb.getChildNodes(nodeExterno.NomeJogador)								
+									
+									for _, node in ipairs(nodesO) do
+
+										if node.NomeDoPersonagemVez == idPersonagem then  -- Verifica se o campo NomeDoPersonagemVez existe
+											EsqAlvo = node.ESQ
+											RESAlvo = node.RES
+											DefAlvo = node.DEF
+										end
+									end
+								end
+							end
+							return nomes
+						end
+
+						local nomesDeTodosOsItens = obterNomesRecursivo2(bibliotecaAtual);
+
+						
+						------------------------------------------------------------------
+						
+						-- se o usuário não preencheu modificador, vamos usar o valor 0
+						sheet.Acerto = sheet.Acerto or 0;                        
+						if sheet.TipoAtaque == nil then
+							showMessage("Escolha uma Base de Dano para seu Ataque Basico na lista acima");
+						else				
+							mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
+							function (rolado)	
+							EsqAlvo = EsqAlvo + 1
+							local soDado = rolado.resultado + 1 - tonumber(sheet.Acerto);
+							if rolado.resultado + sheet.acerto > EsqAlvo then
+								if soDado > tonumber(sheet.Critical) then
+									if sheet.TipoAtaque == 'Dano Fisico' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((sheet.Dano * 2) * (1 - (DefAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano * 2)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
+									elseif sheet.TipoAtaque == 'Dano Magico' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((sheet.DanoMagico * 2) * (1 - (RESAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor((sheet.DanoMagico * 2))
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");																			
+									end;	
+								else
+									if sheet.TipoAtaque == 'Dano Fisico' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((sheet.Dano) * (1 - (DefAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] »");
+									elseif sheet.TipoAtaque == 'Dano Magico' then			
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((sheet.DanoMagico) * (1 - (RESAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor((sheet.DanoMagico))
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
+									end;							
+								end;	
+							else
+								mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] Errou o ataque no oponente");
+								nodeExterno.DanoRecebido = 0
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+							end;
+							end); 
+						end;
+					end;
+				end;
+        </script> 
