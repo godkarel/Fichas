@@ -97,6 +97,7 @@
 	<import file="Funct/CalculaResCriador.xml"/>
 	<import file="Funct/CalculadorDeBoss.xml"/>
 	<import file="Funct/AtaqueBasico.xml"/>
+	<import file="Funct/MecanicaUnificada.xml"/>
 	<scrollBox align="client">
 		<image name="URLIMG" left="185" top="-25" width="140" height="190" editable="true" style="autoFit" field="imgInimigo"/>	
 		-- GAMBIARRA PRA RESOLVER A FALHA NA FOTO --
@@ -286,16 +287,149 @@
 		<button align="bottom" width="90" height="30"  fontSize="12" fontColor="#00FFFF" text="Ataque Basico" onClick="AtaqueBasicoR();"/>             
         </popup>     
 
+		----- POP DA MECANICA E HABILIDADE -----
+		<popup name="PopUPMecanicasHabilidade" width="200" height="160" backOpacity="0.5">
+		<flowLayout name="TargetNameHM" scale="1.2" align="top" height="50">
+			<label text="Alvo:" fontColor="red" align="right"  width="75" />
+			<comboBox items="{'Inimigo 1', 'Inimigo 2', 'Inimigo 3'}"
+						values="{'1', '2', '3'}" value="1" fontColor="#FF6347" name="cmbInimigosHM" width="150" height="25" />
+		</flowLayout>
+		 
+		<flowLayout name="NameTipoDeGrupoHM" scale="1.2" top="70" width="200" height="50">
+			<label text="Grupo:" fontColor="green" align="right" width="75" />
+			<comboBox items="{'Jogadores', 'Inimigos'}"
+					  values="{'1', '2'}" value="1" fontColor="#00FF7F" name="cmbTipoGrupoHM" field="cmbTipoDeGrupoHM" width="150" height="25" />
+
+			<dataLink field="cmbTipoDeGrupoHM">
+                <event name="onChange"> 
+						if self.cmbTipoGrupoHM.value == "1" then
+								local mesas = rrpg.getRooms();
+								local bibliotecaAtual = mesas[1].library;
+								
+								lista = {}
+
+								local function obterNomesRecursivoCMB3(bibItem)
+									local itensFilhos = bibItem.children;
+									local nomes = bibItem.name;
+
+									
+									
+									for i = 1, #itensFilhos, 1 do
+										local bibItemFilho = itensFilhos[i];
+										local nomesDoFilho = obterNomesRecursivoCMB3(bibItemFilho) or "";
+
+										if nomesDoFilho == "Sistema de Combaate Velen" then
+											-- Obter ID do personagem Loan
+											local idPersonagem = bibItemFilho;
+
+											-- Solicita acesso à ficha do personagem
+											local promise = bibItemFilho:asyncOpenNDB();
+
+											-- Aguarda até que a ficha esteja carregada
+											local nodeExterno = await(promise);
+											
+											local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)											
+											
+											for _, node in ipairs(nodesO) do
+												if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
+													table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
+													
+												end
+											end
+											
+											table.sort(lista)
+											
+										end
+									end
+									return nomes
+								end
+
+								
+
+								local function atualizarComboBox()
+									local comboBox = self.cmbInimigosHM
+									comboBox.items = lista
+									comboBox.values = lista
+									comboBox.value = lista[1] or ""
+								end
+
+								local nomesDeTodosOsItens = obterNomesRecursivoCMB3(bibliotecaAtual);
+								atualizarComboBox()
+							end
+
+							if self.cmbTipoGrupoHM.value == "2" then
+								local mesas = rrpg.getRooms();
+								local bibliotecaAtual = mesas[1].library;
+								
+								lista = {}
+
+								local function obterNomesRecursivoCMB4(bibItem)
+									local itensFilhos = bibItem.children;
+									local nomes = bibItem.name;
+									
+									for i = 1, #itensFilhos, 1 do
+										local bibItemFilho = itensFilhos[i];
+										local nomesDoFilho = obterNomesRecursivoCMB4(bibItemFilho) or "";
+
+										if nomesDoFilho == "Sistema de Combaate Velen" then
+											-- Obter ID do personagem Loan
+											local idPersonagem = bibItemFilho;
+
+											-- Solicita acesso à ficha do personagem
+											local promise = bibItemFilho:asyncOpenNDB();
+
+											-- Aguarda até que a ficha esteja carregada
+											local nodeExterno = await(promise);
+											
+											local nodesJ = ndb.getChildNodes(nodeExterno.NomeJogador)
+											
+											for _, node in ipairs(nodesJ) do
+												if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
+													table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
+												end
+											end
+											
+											table.sort(lista)
+											
+										end
+									end
+									return nomes
+								end
+
+								local function atualizarComboBox()
+									local comboBox = self.cmbInimigosHM
+									comboBox.items = lista
+									comboBox.values = lista
+									comboBox.value = lista[1] or ""  -- Defina o primeiro item como selecionado por padrão
+								end
+
+								local nomesDeTodosOsItens = obterNomesRecursivoCMB4(bibliotecaAtual);
+								atualizarComboBox()
+							end;
+                </event>
+        </dataLink>
+		</flowLayout>
+		<button name="UsarMecanicaAtual" align="bottom" width="90" height="30"  fontSize="12" fontColor="#00FFFF" text="Ataque Basico"/>             
+        </popup>     
+		
+
 		<button left="310" top="388" width="100" height="20"  fontSize="12" fontColor="#00FFFF" text="Extra" onClick="self.popExtra:show();"/>		
 		
-		<button name="btnMeca1" left="280" top="215" width="75" height="20" horzTextAlign="center" text="Mecanica 1" onClick="self.popMecanica1:show();"/>
+		<button name="btnMeca1" left="280" top="215" width="75" height="20" horzTextAlign="center" text="Mecanica 1">
+			<event name="onClick">
+				self.popMecanica1:show()
+				self.UsarMecanicaAtual.onClick = function() 
+					MecanicaDinamica(sheet.TipoMecanica1, sheet.DanoMecanica1, sheet.CuraMecanica1, sheet.FixoMecanica1, sheet.DescriMecanica1, sheet.FalhaMecanica1, sheet.CustoMecanica1, sheet.CDMecanica1, sheet.IntensidadeMecanica1, self.CbxMeca1.checked) 
+				end
+			</event>
+        </button>
 		<popup name="popMecanica1" width="420" height="420" backOpacity="0.5">
         <label left="10" top="10" fontSize="22" height="25" text="Mecanica 1"/>		
 		<label left="10" top="45" text="Habilidade :"/>	
 		<edit left="100" top="40" width="278" field="NomeMecanica1"/>
 		<label left="10" top="80"  text="Descrição Comum:"/>	
 		<textEditor left="130" top="80" width="248" height="100" field="DescriMecanica1"/>
-		<button left="10" top="100" width="105" height="80" horzTextAlign="center" text="Enviar"  onClick="MecanicaComum1()"/>
+		<button left="10" top="100" width="105" height="80" horzTextAlign="center" text="Enviar"  onClick="self.PopUPMecanicasHabilidade:show()"/>
 		<label left="10" top="190" text="Descrição Completa:"/>	
 		<textEditor left="130" top="190" width="248" height="100" field="FalhaMecanica1"/>
 		<label left="10" top="303" text="Tipo:"/>	
@@ -315,14 +449,21 @@
 		
         </popup>     
 		
-		<button name="btnMeca2" left="280" top="237" width="75" height="20" horzTextAlign="center" text="Mecanica 2" onClick="self.popMecanica2:show();"/>
+		<button name="btnMeca2" left="280" top="237" width="75" height="20" horzTextAlign="center" text="Mecanica 2" >
+			<event name="onClick">
+				self.popMecanica2:show()
+				self.UsarMecanicaAtual.onClick = function() 
+					MecanicaDinamica(sheet.TipoMecanica2, sheet.DanoMecanica2, sheet.CuraMecanica2, sheet.FixoMecanica2, sheet.DescriMecanica2, sheet.FalhaMecanica2, sheet.CustoMecanica2, sheet.CDMecanica2, sheet.IntensidadeMecanica2, self.CbxMeca2.checked) 
+				end
+			</event>
+        </button>
 		<popup name="popMecanica2" width="420" height="420" backOpacity="0.5">
         <label left="10" top="10" fontSize="22" height="25" text="Mecanica 2"/>		
 		<label left="10" top="45" text="Habilidade :"/>	
 		<edit left="100" top="40" width="278" field="NomeMecanica2"/>
 		<label left="10" top="80"  text="Descrição Comum:"/>	
 		<textEditor left="130" top="80" width="248" height="100" field="DescriMecanica2"/>
-		<button left="10" top="100" width="105" height="80" horzTextAlign="center" text="Enviar"  onClick="MecanicaComum2()"/>
+		<button left="10" top="100" width="105" height="80" horzTextAlign="center" text="Enviar"  onClick="self.PopUPMecanicasHabilidade:show()"/>
 		<label left="10" top="190" text="Descrição Completa:"/>	
 		<textEditor left="130" top="190" width="248" height="100" field="FalhaMecanica2"/>
 		<label left="10" top="305" text="Tipo:"/>	
@@ -342,14 +483,21 @@
 		
         </popup>     
 		
-		<button name="btnMeca3" left="360" top="215" width="75" height="20" horzTextAlign="center" text="Mecanica 3" onClick="self.popMecanica3:show();"/>
+		<button name="btnMeca3" left="360" top="215" width="75" height="20" horzTextAlign="center" text="Mecanica 3" >
+			<event name="onClick">
+				self.popMecanica3:show()
+				self.UsarMecanicaAtual.onClick = function() 
+					MecanicaDinamica(sheet.TipoMecanica3, sheet.DanoMecanica3, sheet.CuraMecanica3, sheet.FixoMecanica3, sheet.DescriMecanica3, sheet.FalhaMecanica3, sheet.CustoMecanica3, sheet.CDMecanica3, sheet.IntensidadeMecanica3, self.CbxMeca3.checked) 
+				end
+			</event>
+        </button>
 		<popup name="popMecanica3" width="420" height="420" backOpacity="0.5">
         <label left="10" top="10" fontSize="22" height="25" text="Mecanica 3"/>		
 		<label left="10" top="45" text="Habilidade :"/>	
 		<edit left="100" top="40" width="278" field="NomeMecanica3"/>
 		<label left="10" top="80"  text="Descrição Comum:"/>	
 		<textEditor left="130" top="80" width="248" height="100" field="DescriMecanica3"/>
-		<button left="10" top="100" width="105" height="80" horzTextAlign="center" text="Enviar"  onClick="MecanicaComum3()"/>
+		<button left="10" top="100" width="105" height="80" horzTextAlign="center" text="Enviar"  onClick="self.PopUPMecanicasHabilidade:show()"/>
 		<label left="10" top="190" text="Descrição Completa:"/>	
 		<textEditor left="130" top="190" width="248" height="100" field="FalhaMecanica3"/>
 		<label left="10" top="303" text="Tipo:"/>	
@@ -369,14 +517,21 @@
 		
         </popup>     
 		
-		<button name="btnMeca4" left="360" top="237" width="75" height="20" horzTextAlign="center" text="Mecanica 4" onClick="self.popMecanica4:show();"/>
+		<button name="btnMeca4" left="360" top="237" width="75" height="20" horzTextAlign="center" text="Mecanica 4" >
+			<event name="onClick">
+				self.popMecanica4:show()
+				self.UsarMecanicaAtual.onClick = function() 
+					MecanicaDinamica(sheet.TipoMecanica4, sheet.DanoMecanica4, sheet.CuraMecanica4, sheet.FixoMecanica4, sheet.DescriMecanica4, sheet.FalhaMecanica4, sheet.CustoMecanica4, sheet.CDMecanica4, sheet.IntensidadeMecanica4, self.CbxMeca4.checked) 
+				end
+			</event>
+        </button>
 		<popup name="popMecanica4" width="420" height="420" backOpacity="0.5">
         <label left="10" top="10" fontSize="22" height="25" text="Mecanica 4"/>		
 		<label left="10" top="45" text="Habilidade :"/>	
 		<edit left="100" top="40" width="278" field="NomeMecanica4"/>
 		<label left="10" top="80"  text="Descrição Comum:"/>	
 		<textEditor left="130" top="80" width="248" height="100" field="DescriMecanica4"/>
-		<button left="10" top="100" width="105" height="80" horzTextAlign="center" text="Enviar"  onClick="MecanicaComum4()"/>
+		<button left="10" top="100" width="105" height="80" horzTextAlign="center" text="Enviar"  onClick="self.PopUPMecanicasHabilidade:show()"/>
 		<label left="10" top="190" text="Descrição Completa:"/>	
 		<textEditor left="130" top="190" width="248" height="100" field="FalhaMecanica4"/>
 		<label left="10" top="303" text="Tipo:"/>	
@@ -1014,235 +1169,7 @@
 	-------------------------------------------------------------------------------------------
 	-------------------------------------------------------------------------------------------
 	-------------------------------------------------------------------------------------------
-	
-	<script>
-		local function MecanicaComum1() 
-		--[[ MECANICA 1 ]]--								
-		local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
-		sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
-		mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
-		function (rolado)					
-		if sheet.TipoMecanica1 ~= nil then
-			if sheet.AcertoMagico + 1 > rolado.resultado then							
-				if sheet.TipoMecanica1 == 'Dano' then
-					sheet.IntensidadeMecanica1 = (tonumber(sheet.DanoMecanica1) or 0) + (tonumber(sheet.Dano) or 0);							
-				end;			
-				if sheet.TipoMecanica1 == 'Dano Magico' then
-					sheet.IntensidadeMecanica1 = (tonumber(sheet.DanoMecanica1) or 0) + (tonumber(sheet.DanoMagico) or 0);								
-				end;
-				if sheet.TipoMecanica1 == 'Cura' then
-					sheet.IntensidadeMecanica1 = (tonumber(sheet.CuraMecanica1) or 0) + (tonumber(sheet.DanoMagico) or 0);	
-				end;
-				
-				if sheet.TipoMecanica1 == 'Fixo' then
-					sheet.IntensidadeMecanica1 = (tonumber(sheet.FixoMecanica1) or 0);	
-				end;
-
-				if sheet.AcertoMagico >= rolado.resultado then
-					if self.CbxMeca1.checked then
-						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica1);
-						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.FalhaMecanica1);
-					else					
-						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica1);
-					end;
-					if sheet.TipoMecanica1 == 'Cura' then
-						if sheet.CriticalMagico +1 > rolado.resultado then 
-							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. (sheet.IntensidadeMecanica1 * 2 or 0) .. "[§K8,0] »");
-						else
-							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. sheet.IntensidadeMecanica1 or 0 .. "[§K8,0] »");
-						end;	
-					else
-						if sheet.CriticalMagico +1 > rolado.resultado then 
-							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (sheet.IntensidadeMecanica1 * 2 or 0) .. "[§K9,0] »");
-						else
-							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. sheet.IntensidadeMecanica1 or 0 .. "[§K9,0] »");
-						end;	
-					end;
-					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(sheet.CustoMecanica1) or 0; 
-				else
-					mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
-				end;
-			else							
-				mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");	
-			end;
-		else
-			showMessage("A Habilidade ta sem tipo");
-		end;
-		end);					
-		end; 				
-	</script> 
-	
-	<script>
-		local function MecanicaComum2() 
-		--[[ MECANICA 2 ]]--								
-		local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
-		sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
-		mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
-		function (rolado)					
-		if sheet.TipoMecanica2 ~= nil then
-			if sheet.AcertoMagico + 1 > rolado.resultado then							
-				if sheet.TipoMecanica2 == 'Dano' then
-					sheet.IntensidadeMecanica2 = (tonumber(sheet.DanoMecanica2) or 0) + (tonumber(sheet.Dano) or 0);							
-				end;			
-				if sheet.TipoMecanica2 == 'Dano Magico' then
-					sheet.IntensidadeMecanica2 = (tonumber(sheet.DanoMecanica2) or 0) + (tonumber(sheet.DanoMagico) or 0);								
-				end;
-				if sheet.TipoMecanica2 == 'Cura' then
-					sheet.IntensidadeMecanica2 = (tonumber(sheet.CuraMecanica2) or 0) + (tonumber(sheet.DanoMagico) or 0);	
-				end;
-				
-				if sheet.TipoMecanica2 == 'Fixo' then
-					sheet.IntensidadeMecanica2 = (tonumber(sheet.FixoMecanica2) or 0);	
-				end;
-
-				if sheet.AcertoMagico >= rolado.resultado then
-					if self.CbxMeca2.checked then
-						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica2);
-						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.FalhaMecanica2);
-					else					
-						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica2);
-					end;
-					if sheet.TipoMecanica2 == 'Cura' then
-						if sheet.CriticalMagico +1 > rolado.resultado then 
-							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. (sheet.IntensidadeMecanica2 * 2 or 0) .. "[§K8,0] »");
-						else
-							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. sheet.IntensidadeMecanica2 or 0 .. "[§K8,0] »");
-						end;	
-					else
-						if sheet.CriticalMagico +1 > rolado.resultado then 
-							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (sheet.IntensidadeMecanica2 * 2 or 0) .. "[§K9,0] »");
-						else
-							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. sheet.IntensidadeMecanica2 or 0 .. "[§K9,0] »");
-						end;	
-					end;
-					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(sheet.CustoMecanica2) or 0; 
-				else
-					mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
-				end;
-			else							
-				mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");	
-			end;
-		else
-			showMessage("A Habilidade ta sem tipo");
-		end;
-		end);					
-		end; 				
-	</script> 
-	
-	<script>
-		local function MecanicaComum3() 
-		--[[ MECANICA 3 ]]--								
-		local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
-		sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
-		mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
-		function (rolado)					
-		if sheet.TipoMecanica3 ~= nil then
-			if sheet.AcertoMagico + 1 > rolado.resultado then							
-				if sheet.TipoMecanica3 == 'Dano' then
-					sheet.IntensidadeMecanica3 = (tonumber(sheet.DanoMecanica3) or 0) + (tonumber(sheet.Dano) or 0);							
-				end;			
-				if sheet.TipoMecanica3 == 'Dano Magico' then
-					sheet.IntensidadeMecanica3 = (tonumber(sheet.DanoMecanica3) or 0) + (tonumber(sheet.DanoMagico) or 0);								
-				end;
-				if sheet.TipoMecanica3 == 'Cura' then
-					sheet.IntensidadeMecanica3 = (tonumber(sheet.CuraMecanica3) or 0) + (tonumber(sheet.DanoMagico) or 0);	
-				end;
-				
-				if sheet.TipoMecanica3 == 'Fixo' then
-					sheet.IntensidadeMecanica3 = (tonumber(sheet.FixoMecanica3) or 0);	
-				end;
-
-				if sheet.AcertoMagico >= rolado.resultado then
-					if self.CbxMeca3.checked then
-						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica3);
-						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.FalhaMecanica3);
-					else					
-						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica3);
-					end;
-					if sheet.TipoMecanica3 == 'Cura' then
-						if sheet.CriticalMagico +1 > rolado.resultado then 
-							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. (sheet.IntensidadeMecanica3 * 2 or 0) .. "[§K8,0] »");
-						else
-							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. sheet.IntensidadeMecanica3 or 0 .. "[§K8,0] »");
-						end;	
-					else
-						if sheet.CriticalMagico +1 > rolado.resultado then 
-							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (sheet.IntensidadeMecanica3 * 2 or 0) .. "[§K9,0] »");
-						else
-							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. sheet.IntensidadeMecanica3 or 0 .. "[§K9,0] »");
-						end;	
-					end;
-					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(sheet.CustoMecanica3) or 0; 
-				else
-					mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
-				end;
-			else							
-				mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");	
-			end;
-		else
-			showMessage("A Habilidade ta sem tipo");
-		end;
-		end);					
-		end; 				
-	</script> 
-	
-	<script>
-		local function MecanicaComum4() 
-		--[[ Mecanica4 4 ]]--								
-		local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
-		sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
-		mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
-		function (rolado)					
-		if sheet.TipoMecanica4 ~= nil then
-			if sheet.AcertoMagico + 1 > rolado.resultado then							
-				if sheet.TipoMecanica4 == 'Dano' then
-					sheet.IntensidadeMecanica4 = (tonumber(sheet.DanoMecanica4) or 0) + (tonumber(sheet.Dano) or 0);							
-				end;			
-				if sheet.TipoMecanica4 == 'Dano Magico' then
-					sheet.IntensidadeMecanica4 = (tonumber(sheet.DanoMecanica4) or 0) + (tonumber(sheet.DanoMagico) or 0);								
-				end;
-				if sheet.TipoMecanica4 == 'Cura' then
-					sheet.IntensidadeMecanica4 = (tonumber(sheet.CuraMecanica4) or 0) + (tonumber(sheet.DanoMagico) or 0);	
-				end;
-				
-				if sheet.TipoMecanica4 == 'Fixo' then
-					sheet.IntensidadeMecanica4 = (tonumber(sheet.FixoMecanica4) or 0);	
-				end;
-
-				if sheet.AcertoMagico >= rolado.resultado then
-					if self.CbxMeca4.checked then
-						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica4);
-						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.FalhaMecanica4);
-					else					
-						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. sheet.DescriMecanica4);
-					end;
-					if sheet.TipoMecanica4 == 'Cura' then
-						if sheet.CriticalMagico +1 > rolado.resultado then 
-							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. (sheet.IntensidadeMecanica4 * 2 or 0) .. "[§K8,0] »");
-						else
-							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. sheet.IntensidadeMecanica4 or 0 .. "[§K8,0] »");
-						end;	
-					else
-						if sheet.CriticalMagico +1 > rolado.resultado then 
-							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (sheet.IntensidadeMecanica4 * 2 or 0) .. "[§K9,0] »");
-						else
-							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. sheet.IntensidadeMecanica4 or 0 .. "[§K9,0] »");
-						end;	
-					end;
-					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(sheet.CustoMecanica4) or 0; 
-				else
-					mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
-				end;
-			else							
-				mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");	
-			end;
-		else
-			showMessage("A Habilidade ta sem tipo");
-		end;
-		end);					
-		end; 				
-	</script> 
-	
+		
 	<script>
 		local function RetiraHP()
 			if sheet.TipoRecebido == '% Fisico' then
