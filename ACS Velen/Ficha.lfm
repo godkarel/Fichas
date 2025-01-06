@@ -99,29 +99,54 @@
 											local nodeExterno = await(promise);
 
 											-- Acessa o valor da força do personagem
-											
-											node.PA = nodeExterno.PA or '0';
-											node.PM = nodeExterno.PM or '0';
-											node.PF = nodeExterno.PF or '0';
-											node.DEF = nodeExterno.DEFRED or '0';
-											node.RES = nodeExterno.RESRED or '0';
-											node.AC = nodeExterno.Acerto or '0';
-											node.ACM = nodeExterno.AcertoMagico or '0';
-											node.CR = nodeExterno.Critical or '0';
-											node.CRM = nodeExterno.CMagico or '0';
-											node.ESQ = nodeExterno.Esquiva or '0';
-											node.Pers = math.floor(nodeExterno.Persistencia) or '0';
-											node.Vez = node.Vez or '0';
-											node.Atletismo = nodeExterno.TAtletismo or '0';
-											node.Sabedoria = nodeExterno.TSabedoria or '0';
-											node.Percepcao = nodeExterno.TPercepcao or '0';
-											node.Acrobacia = nodeExterno.TAcrobacia or '0';
-											node.Vigor = nodeExterno.TVigor or '0';
-											node.HPBarMax = nodeExterno.HPTotal or '0';
-											node.MPBarMax = nodeExterno.MPTotal or '0';
-											node.HPBar = nodeExterno.HPAtual or '0';
-											node.MPBar = nodeExterno.MPAtual or '0';
-											node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoPersonagem
+
+											if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
+												node.PA = nodeExterno.PA or '0';
+												node.PM = nodeExterno.PM or '0';
+												node.PF = nodeExterno.PF or '0';
+												node.DEF = nodeExterno.DEFRED or '0';
+												node.RES = nodeExterno.RESRED or '0';
+												node.AC = nodeExterno.Acerto or '0';
+												node.ACM = nodeExterno.AcertoMagico or '0';
+												node.CR = nodeExterno.Critical or '0';
+												node.CRM = nodeExterno.CMagico or '0';
+												node.ESQ = nodeExterno.Esquiva or '0';
+												node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+												node.Vez = node.Vez or '0';
+												node.Atletismo = nodeExterno.TAtletismo or '0';
+												node.Sabedoria = nodeExterno.TSabedoria or '0';
+												node.Percepcao = nodeExterno.TPercepcao or '0';
+												node.Acrobacia = nodeExterno.TAcrobacia or '0';
+												node.Vigor = nodeExterno.TVigor or '0';
+												node.HPBarMax = nodeExterno.HPTotal or '0';
+												node.MPBarMax = nodeExterno.MPTotal or '0';
+												node.HPBar = nodeExterno.HPAtual or '0';
+												node.MPBar = nodeExterno.MPAtual or '0';
+												node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoPersonagem
+											else
+												node.PA = nodeExterno.Dano or '0';
+												node.PM = nodeExterno.DanoMagico or '0';
+												node.PF = "NPC";
+												node.DEF = nodeExterno.DefesaPorCent or '0';
+												node.RES = nodeExterno.ResistenciaPorCent or '0';
+												node.AC = nodeExterno.Acerto or '0';
+												node.ACM = nodeExterno.AcertoMagico or '0';
+												node.CR = nodeExterno.Critical or '0';
+												node.CRM = nodeExterno.CriticalMagico or '0';
+												node.ESQ = nodeExterno.Esquiva or '0';
+												node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+												node.Vez = node.Vez or '0';
+												node.Atletismo = nodeExterno.Atletismo or '0';
+												node.Sabedoria = nodeExterno.Sabedoria or '0';
+												node.Percepcao = nodeExterno.Percepcao or '0';
+												node.Acrobacia = nodeExterno.Acrobacia or '0';
+												node.Vigor = nodeExterno.TVigor or '0';
+												node.HPBarMax = nodeExterno.HPTotal or '0';
+												node.MPBarMax = nodeExterno.MPTotal or '0';
+												node.HPBar = nodeExterno.HPAtual or '0';
+												node.MPBar = nodeExterno.MPAtual or '0';
+												node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
+											end;
 										end
 									end
 								return nomes								
@@ -458,28 +483,53 @@ end
 
 										-- Acessa o valor da força do personagem
 										
-										node.PA = nodeExterno.PA or '0';
-										node.PM = nodeExterno.PM or '0';
-										node.PF = nodeExterno.PF or '0';
-										node.DEF = nodeExterno.DEFRED or '0';
-										node.RES = nodeExterno.RESRED or '0';
-										node.AC = nodeExterno.Acerto or '0';
-										node.ACM = nodeExterno.AcertoMagico or '0';
-										node.CR = nodeExterno.Critical or '0';
-										node.CRM = nodeExterno.CMagico or '0';
-										node.ESQ = nodeExterno.Esquiva or '0';
-										node.Pers = (nodeExterno.Persistencia) or '0';
-										node.Vez = node.Vez or '0';
-										node.Atletismo = nodeExterno.TAtletismo or '0';
-										node.Sabedoria = nodeExterno.TSabedoria or '0';
-										node.Percepcao = nodeExterno.TPercepcao or '0';
-										node.Acrobacia = nodeExterno.TAcrobacia or '0';
-										node.Vigor = nodeExterno.TVigor or '0';
-										node.HPBarMaxO = nodeExterno.HPTotal or '0';
-										node.MPBarMaxO = nodeExterno.MPTotal or '0';
-										node.HPBarO = nodeExterno.HPAtual or '0';
-										node.MPBarO = nodeExterno.MPAtual or '0';
-										node.NomeDoOponenteVez = node.Vez .. " - " ..  node.NomeDoOponente
+										if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
+											node.PA = nodeExterno.PA or '0';
+											node.PM = nodeExterno.PM or '0';
+											node.PF = nodeExterno.PF or '0';
+											node.DEF = nodeExterno.DEFRED or '0';
+											node.RES = nodeExterno.RESRED or '0';
+											node.AC = nodeExterno.Acerto or '0';
+											node.ACM = nodeExterno.AcertoMagico or '0';
+											node.CR = nodeExterno.Critical or '0';
+											node.CRM = nodeExterno.CMagico or '0';
+											node.ESQ = nodeExterno.Esquiva or '0';
+											node.Pers = (nodeExterno.Persistencia) or '0';
+											node.Vez = node.Vez or '0';
+											node.Atletismo = nodeExterno.TAtletismo or '0';
+											node.Sabedoria = nodeExterno.TSabedoria or '0';
+											node.Percepcao = nodeExterno.TPercepcao or '0';
+											node.Acrobacia = nodeExterno.TAcrobacia or '0';
+											node.Vigor = nodeExterno.TVigor or '0';
+											node.HPBarMaxO = nodeExterno.HPTotal or '0';
+											node.MPBarMaxO = nodeExterno.MPTotal or '0';
+											node.HPBarO = nodeExterno.HPAtual or '0';
+											node.MPBarO = nodeExterno.MPAtual or '0';
+											node.NomeDoOponenteVez = node.Vez .. " - " ..  node.NomeDoOponente
+										else
+											node.PA = nodeExterno.Dano or '0';
+											node.PM = nodeExterno.DanoMagico or '0';
+											node.PF = "NPC";
+											node.DEF = nodeExterno.DefesaPorCent or '0';
+											node.RES = nodeExterno.ResistenciaPorCent or '0';
+											node.AC = nodeExterno.Acerto or '0';
+											node.ACM = nodeExterno.AcertoMagico or '0';
+											node.CR = nodeExterno.Critical or '0';
+											node.CRM = nodeExterno.CriticalMagico or '0';
+											node.ESQ = nodeExterno.Esquiva or '0';
+											node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+											node.Vez = node.Vez or '0';
+											node.Atletismo = nodeExterno.Atletismo or '0';
+											node.Sabedoria = nodeExterno.Sabedoria or '0';
+											node.Percepcao = nodeExterno.Percepcao or '0';
+											node.Acrobacia = nodeExterno.Acrobacia or '0';
+											node.Vigor = nodeExterno.TVigor or '0';
+											node.HPBarMaxO = nodeExterno.HPTotal or '0';
+											node.MPBarMaxO = nodeExterno.MPTotal or '0';
+											node.HPBarO = nodeExterno.HPAtual or '0';
+											node.MPBarO = nodeExterno.MPAtual or '0';
+											node.NomeDoOponenteVez = node.Vez .. " - " ..  nodeExterno.Nome
+										end;
 									end
 								end
 							return nomes
