@@ -98,6 +98,7 @@
 	<import file="Funct/CalculadorDeBoss.xml"/>
 	<import file="Funct/AtaqueBasico.xml"/>
 	<import file="Funct/MecanicaUnificada.xml"/>
+	<import file="Funct/UsoDeHabilidade.xml"/>
 	<scrollBox align="client">
 		<image name="URLIMG" left="185" top="-25" width="140" height="190" editable="true" style="autoFit" field="imgInimigo"/>	
 		-- GAMBIARRA PRA RESOLVER A FALHA NA FOTO --
@@ -409,7 +410,7 @@
                 </event>
         </dataLink>
 		</flowLayout>
-		<button name="UsarMecanicaAtual" align="bottom" width="90" height="30"  fontSize="12" fontColor="#00FFFF" text="Ataque Basico"/>             
+		<button name="UsarMecanicaAtual" align="bottom" width="90" height="30"  fontSize="12" fontColor="#00FFFF" text="Lançar Habilidade"/>             
         </popup>     
 		
 
@@ -621,7 +622,15 @@
 				<label left="10" top="175" width="70" height="18" text="Intensidade"/>
 				<edit left="85" top="175" width="70" canFocus="false" type="number" height="18" field="Intensidade"/> 
 				<textEditor left="10" top="40" width="160" height="100" fontSize="10" field="DescriHabilidade"/>
-				<button left="175" top="60" width="60" height="60" fontSize="12" fontColor="blue" text="Usar" onClick="UsarHabilidade()"/>
+				<button left="175" top="60" width="60" height="60" fontSize="12" fontColor="blue" text="Usar" >
+					<event name="onClick">
+						local node = self.rclHabilidadeInimigo.selectedNode; 
+						self.PopUPMecanicasHabilidade:show()
+						self.UsarMecanicaAtual.onClick = function() 
+							UsarHabilidades(node.TipoSkill, node.Foco, nil, nil, node.DescriHabilidade, nil, node.Custo, nil, node.Intensidade, nil) 
+						end
+					</event>
+				</button>
 				
 			</rectangle>
         </dataScopeBox>	
@@ -1091,64 +1100,7 @@
 	</script>
 	
 	<script>					
-		local function UsarHabilidade() 
-		--[[ HABILIDADE DE DANO ]]--								
-		local node = self.dscHabilidadeInimigo.node;
-		local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
-		sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
-		mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
-		function (rolado)					
-		if node.TipoSkill ~= nil then
-			if sheet.AcertoMagico + 1 > rolado.resultado then							
-				if node.TipoSkill == 'Dano' then
-					node.Intensidade = (tonumber(sheet.Dano) or 0) + (tonumber(node.Foco) or 0);							
-				end;			
-				if node.TipoSkill == 'Dano Magico' then
-					node.Intensidade = (tonumber(sheet.DanoMagico) or 0) + (tonumber(node.Foco) or 0);								
-				end;
-				if node.TipoSkill == 'Cura' then
-					node.Intensidade = (tonumber(sheet.DanoMagico) or 0) + (tonumber(node.Foco) or 0);	
-				end;
-				if node.TipoSkill == 'Buff' then
-					node.Intensidade = 0;	
-				end;
-				if node.TipoSkill == 'Real' then
-					node.Intensidade = (tonumber(node.Foco) or 0);
-				end;
-				if node.TipoSkill == 'Defensiva' then
-					node.Intensidade = 0;
-				end;
-				if sheet.AcertoMagico >= rolado.resultado then				
-					mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriHabilidade);
-					if node.TipoSkill == 'Cura' then
-						if sheet.CriticalMagico +1 > rolado.resultado then 
-							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. (node.Intensidade * 2 or 0) .. "[§K8,0] »");
-						else
-							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. node.Intensidade or 0 .. "[§K8,0] »");
-						end;	
-					else
-						if sheet.CriticalMagico +1 > rolado.resultado then 
-							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (node.Intensidade * 2 or 0) .. "[§K9,0] »");
-						else
-							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. node.Intensidade or 0 .. "[§K9,0] »");
-						end;	
-					end;
-					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(node.Custo) or 0; 
-				else
-					mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
-				end;
-			else							
-				mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
-				if node.TipoSkill == 'Buff' then
-					mesaDoPersonagem.chat:enviarMensagem("[§K3,15]ERA BUFF ESSA MERDA");	
-				else 	
-				end;
-			end;
-		else
-			mesaDoPersonagem.chat:enviarMensagem("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE,[§K4,0] ROLA DNV");
-		end;
-		end);					
-		end; 														
+					
 	</script> 
 
 	<script>

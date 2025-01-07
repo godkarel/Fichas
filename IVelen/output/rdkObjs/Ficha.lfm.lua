@@ -834,6 +834,7 @@ local function constructNew_frmIVelen()
 
 
 			local function AtaqueBasicoR()   
+				
 				if sheet.cmbTipoDeGrupoF == "1" then   
 					-- obter a mesa do personagem
 					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
@@ -885,9 +886,8 @@ local function constructNew_frmIVelen()
 					else				
 						mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
 							function (rolado)	
-							EsqAlvo = EsqAlvo + 1
 							local soDado = rolado.resultado + 1 - tonumber(sheet.Acerto);
-							if rolado.resultado + sheet.acerto > EsqAlvo then
+							if rolado.resultado > EsqAlvo then							
 								if soDado > tonumber(sheet.Critical) then
 									if sheet.TipoAtaque == 'Dano Fisico' then
 										nodeExterno.AlvoRecebido = self.cmbInimigos.value
@@ -982,9 +982,8 @@ local function constructNew_frmIVelen()
 						else				
 							mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
 							function (rolado)	
-							EsqAlvo = EsqAlvo + 1
 							local soDado = rolado.resultado + 1 - tonumber(sheet.Acerto);
-							if rolado.resultado + sheet.acerto > EsqAlvo then
+							if rolado.resultado > EsqAlvo then
 								if soDado > tonumber(sheet.Critical) then
 									if sheet.TipoAtaque == 'Dano Fisico' then
 										nodeExterno.AlvoRecebido = self.cmbInimigos.value
@@ -1203,6 +1202,243 @@ local function constructNew_frmIVelen()
 				
 				if sTipoMecanica == 'Fixo' then
 					IntensidadeMecanica = (tonumber(FixoMecanica) or 0);	
+				end;
+
+				if sheet.AcertoMagico >= rolado.resultado then
+					if cbxMeca then
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. DescriMecanica);
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. FalhaMecanica);
+					else					
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. DescriMecanica);
+					end;
+					if TipoMecanica == 'Cura' then
+						if sheet.CriticalMagico +1 > rolado.resultado then 
+							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. (IntensidadeMecanica * 2 or 0) .. "[§K8,0] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. IntensidadeMecanica or 0 .. "[§K8,0] »");
+						end;	
+					else
+						if TipoMecanica == 'Dano' then
+							if sheet.CriticalMagico +1 > rolado.resultado then 
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica * 2) * (1 - (DefAlvo / 100)))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido or 0) .. "[§K9,0] »");
+							else
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica) * (1 - (DefAlvo / 100)))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] »");
+							end;
+						end;
+						if TipoMecanica == 'Dano Magico' then
+							if sheet.CriticalMagico +1 > rolado.resultado then 
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica * 2) * (1 - (RESAlvo / 100)))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido or 0) .. "[§K9,0] »");
+							else
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica) * (1 - (RESAlvo / 100)))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] »");
+							end;
+						end;		
+					end;
+					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(CustoMecanica) or 0; 
+				else
+					mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+				end;
+			else							
+				mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");	
+			end;
+		else
+			showMessage("A Habilidade ta sem tipo");
+		end;
+		end);					
+		end;
+		end; 						
+				
+    
+
+
+
+		local function UsarHabilidades(TipoMecanica, DanoMecanica, CuraMecanica, FixoMecanica, DescriMecanica, FalhaMecanica, CustoMecanica, CDMecanica, IntensidadeMecanica, cbxMeca) 
+		--[[ MECANICA 1 ]]--	
+		local mesaDoPersonagem = Firecast.getMesaDe(sheet);
+		local mesas = rrpg.getRooms();
+		local bibliotecaAtual = mesas[1].library;
+
+		if self.cmbTipoGrupoHM.value == "1" then 
+			local function obterNomesRecursivoHM1(bibItem)
+			local itensFilhos = bibItem.children;
+			local nomes = bibItem.name;
+			
+			for i = 1, #itensFilhos, 1 do
+				local bibItemFilho = itensFilhos[i];
+				local nomesDoFilho = obterNomesRecursivoHM1(bibItemFilho) or "";
+
+				if nomesDoFilho == "Sistema de Combaate Velen" then
+					-- Obter ID do personagem Loan
+					local idPersonagem = self.cmbInimigosHM.value;
+					
+					-- Solicita acesso à ficha do personagem
+					local promise = bibItemFilho:asyncOpenNDB();
+
+					-- Aguarda até que a ficha esteja carregada
+					nodeExterno = await(promise);
+					
+					local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)
+					
+					
+					for _, node in ipairs(nodesO) do
+						if node.NomeDoOponenteVez == idPersonagem then  -- Verifica se o campo NomeDoOponenteVez existe
+							DefAlvo = node.DEF
+							PERAlvo = node.Pers
+							RESAlvo = node.RES
+						end
+					end
+				end
+			end
+			return nomes
+		end
+
+		local nomesDeTodosOsItens = obterNomesRecursivoHM1(bibliotecaAtual);
+
+		sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;	
+		mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+		function (rolado)					
+		if TipoMecanica ~= nil then
+			if sheet.AcertoMagico + 1 > rolado.resultado then							
+				if TipoMecanica == 'Dano' then
+					IntensidadeMecanica = (tonumber(DanoMecanica) or 0) + (tonumber(sheet.Dano) or 0);							
+				end;			
+				if TipoMecanica == 'Dano Magico' then
+					IntensidadeMecanica = (tonumber(DanoMecanica) or 0) + (tonumber(sheet.DanoMagico) or 0);								
+				end;
+				if TipoMecanica == 'Cura' then
+					IntensidadeMecanica = (tonumber(DanoMecanica) or 0) + (tonumber(sheet.DanoMagico) or 0);	
+				end;
+				
+				if TipoMecanica == 'Fixo' then
+					IntensidadeMecanica = (tonumber(DanoMecanica) or 0);	
+				end;
+
+				if sheet.AcertoMagico >= rolado.resultado then
+					if cbxMeca then
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. DescriMecanica);
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. FalhaMecanica);
+					else					
+						mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. DescriMecanica);
+					end;
+					if TipoMecanica == 'Cura' then
+						if sheet.CriticalMagico +1 > rolado.resultado then 
+							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. (IntensidadeMecanica * 2 or 0) .. "[§K8,0] »");
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. IntensidadeMecanica or 0 .. "[§K8,0] »");
+						end;	
+					else
+						if TipoMecanica == 'Dano' then
+							if sheet.CriticalMagico +1 > rolado.resultado then 
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica * 2) * (1 - (DefAlvo / 100)))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido or 0) .. "[§K9,0] »");
+							else
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica) * (1 - (DefAlvo / 100)))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] »");
+							end;
+						end;
+						if TipoMecanica == 'Dano Magico' then
+							if sheet.CriticalMagico +1 > rolado.resultado then 
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica * 2) * (1 - (RESAlvo / 100)))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido or 0) .. "[§K9,0] »");
+							else
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica) * (1 - (RESAlvo / 100)))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] »");
+							end;
+						end;		
+					end;
+					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(CustoMecanica) or 0; 
+				else
+					mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+				end;
+			else							
+				mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");	
+			end;
+		else
+			showMessage("A Habilidade ta sem tipo");
+		end;
+		end);					
+		end;
+
+		if self.cmbTipoGrupoHM.value == "2" then 
+		local function obterNomesRecursivoHM2(bibItem)
+			local itensFilhos = bibItem.children;
+			local nomes = bibItem.name;
+			
+			for i = 1, #itensFilhos, 1 do
+				local bibItemFilho = itensFilhos[i];
+				local nomesDoFilho = obterNomesRecursivoHM2(bibItemFilho) or "";
+
+				if nomesDoFilho == "Sistema de Combaate Velen" then
+					-- Obter ID do personagem Loan
+					local idPersonagem = self.cmbInimigosHM.value;
+					
+					-- Solicita acesso à ficha do personagem
+					local promise = bibItemFilho:asyncOpenNDB();
+
+					-- Aguarda até que a ficha esteja carregada
+					nodeExterno = await(promise);
+					
+					local nodesO = ndb.getChildNodes(nodeExterno.NomeJogador)		
+					
+					
+					for _, node in ipairs(nodesO) do
+						if node.NomeDoPersonagemVez == idPersonagem then  -- Verifica se o campo NomeDoPersonagemVez existe
+							PERAlvo = node.Pers
+							RESAlvo = node.RES
+							DefAlvo = node.DEF
+						end
+					end
+				end
+			end
+			return nomes
+		end
+
+		local nomesDeTodosOsItens = obterNomesRecursivoHM2(bibliotecaAtual);
+
+		sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;	
+		mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+		function (rolado)					
+		if TipoMecanica ~= nil then
+			if sheet.AcertoMagico + 1 > rolado.resultado then							
+				if TipoMecanica == 'Dano' then
+					IntensidadeMecanica = (tonumber(DanoMecanica) or 0) + (tonumber(sheet.Dano) or 0);							
+				end;			
+				if TipoMecanica == 'Dano Magico' then
+					IntensidadeMecanica = (tonumber(DanoMecanica) or 0) + (tonumber(sheet.DanoMagico) or 0);								
+				end;
+				if TipoMecanica == 'Cura' then
+					IntensidadeMecanica = (tonumber(DanoMecanica) or 0) + (tonumber(sheet.DanoMagico) or 0);	
+				end;
+				
+				if sTipoMecanica == 'Fixo' then
+					IntensidadeMecanica = (tonumber(DanoMecanica) or 0);	
 				end;
 
 				if sheet.AcertoMagico >= rolado.resultado then
@@ -1817,7 +2053,7 @@ local function constructNew_frmIVelen()
     obj.UsarMecanicaAtual:setHeight(30);
     obj.UsarMecanicaAtual:setFontSize(12);
     obj.UsarMecanicaAtual:setFontColor("#00FFFF");
-    obj.UsarMecanicaAtual:setText("Ataque Basico");
+    obj.UsarMecanicaAtual:setText("Lançar Habilidade");
 
     obj.button6 = GUI.fromHandle(_obj_newObject("button"));
     obj.button6:setParent(obj.scrollBox1);
@@ -3438,64 +3674,7 @@ local function constructNew_frmIVelen()
 
 
 					
-		local function UsarHabilidade() 
-		--[[ HABILIDADE DE DANO ]]--								
-		local node = self.dscHabilidadeInimigo.node;
-		local mesaDoPersonagem = rrpg.getMesaDe(sheet);		
-		sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
-		mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
-		function (rolado)					
-		if node.TipoSkill ~= nil then
-			if sheet.AcertoMagico + 1 > rolado.resultado then							
-				if node.TipoSkill == 'Dano' then
-					node.Intensidade = (tonumber(sheet.Dano) or 0) + (tonumber(node.Foco) or 0);							
-				end;			
-				if node.TipoSkill == 'Dano Magico' then
-					node.Intensidade = (tonumber(sheet.DanoMagico) or 0) + (tonumber(node.Foco) or 0);								
-				end;
-				if node.TipoSkill == 'Cura' then
-					node.Intensidade = (tonumber(sheet.DanoMagico) or 0) + (tonumber(node.Foco) or 0);	
-				end;
-				if node.TipoSkill == 'Buff' then
-					node.Intensidade = 0;	
-				end;
-				if node.TipoSkill == 'Real' then
-					node.Intensidade = (tonumber(node.Foco) or 0);
-				end;
-				if node.TipoSkill == 'Defensiva' then
-					node.Intensidade = 0;
-				end;
-				if sheet.AcertoMagico >= rolado.resultado then				
-					mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriHabilidade);
-					if node.TipoSkill == 'Cura' then
-						if sheet.CriticalMagico +1 > rolado.resultado then 
-							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. (node.Intensidade * 2 or 0) .. "[§K8,0] »");
-						else
-							mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. node.Intensidade or 0 .. "[§K8,0] »");
-						end;	
-					else
-						if sheet.CriticalMagico +1 > rolado.resultado then 
-							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (node.Intensidade * 2 or 0) .. "[§K9,0] »");
-						else
-							mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. node.Intensidade or 0 .. "[§K9,0] »");
-						end;	
-					end;
-					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(node.Custo) or 0; 
-				else
-					mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
-				end;
-			else							
-				mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
-				if node.TipoSkill == 'Buff' then
-					mesaDoPersonagem.chat:enviarMensagem("[§K3,15]ERA BUFF ESSA MERDA");	
-				else 	
-				end;
-			end;
-		else
-			mesaDoPersonagem.chat:enviarMensagem("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE,[§K4,0] ROLA DNV");
-		end;
-		end);					
-		end; 														
+					
 	
 
 
@@ -4068,7 +4247,11 @@ local function constructNew_frmIVelen()
 
     obj._e_event23 = obj.button13:addEventListener("onClick",
         function (event)
-            UsarHabilidade()
+            local node = self.rclHabilidadeInimigo.selectedNode; 
+            						self.PopUPMecanicasHabilidade:show()
+            						self.UsarMecanicaAtual.onClick = function() 
+            							UsarHabilidades(node.TipoSkill, node.Foco, nil, nil, node.DescriHabilidade, nil, node.Custo, nil, node.Intensidade, nil) 
+            						end
         end);
 
     obj._e_event24 = obj.dataLink4:addEventListener("onChange",

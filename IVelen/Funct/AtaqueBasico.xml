@@ -2,6 +2,7 @@
 	
 	 <script>
 			local function AtaqueBasicoR()   
+				
 				if sheet.cmbTipoDeGrupoF == "1" then   
 					-- obter a mesa do personagem
 					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
@@ -53,9 +54,8 @@
 					else				
 						mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
 							function (rolado)	
-							EsqAlvo = EsqAlvo + 1
 							local soDado = rolado.resultado + 1 - tonumber(sheet.Acerto);
-							if rolado.resultado + sheet.acerto > EsqAlvo then
+							if rolado.resultado > EsqAlvo then							
 								if soDado > tonumber(sheet.Critical) then
 									if sheet.TipoAtaque == 'Dano Fisico' then
 										nodeExterno.AlvoRecebido = self.cmbInimigos.value
@@ -150,9 +150,8 @@
 						else				
 							mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
 							function (rolado)	
-							EsqAlvo = EsqAlvo + 1
 							local soDado = rolado.resultado + 1 - tonumber(sheet.Acerto);
-							if rolado.resultado + sheet.acerto > EsqAlvo then
+							if rolado.resultado > EsqAlvo then
 								if soDado > tonumber(sheet.Critical) then
 									if sheet.TipoAtaque == 'Dano Fisico' then
 										nodeExterno.AlvoRecebido = self.cmbInimigos.value
