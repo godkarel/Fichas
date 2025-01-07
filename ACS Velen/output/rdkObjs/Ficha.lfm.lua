@@ -338,6 +338,7 @@ local function constructNew_frmACSVelen()
     obj.image1:setAlign("top");
     obj.image1:setWidth(100);
     obj.image1:setMargins({top=1});
+    obj.image1:setField("imagemDoPersonagem");
     obj.image1:setSRC("http://fc03.deviantart.net/fs70/i/2011/234/5/4/dragon_aspects_by_rattlesnakedefender-d47ii5y.jpg");
     obj.image1:setName("image1");
 
@@ -1142,6 +1143,7 @@ end
     obj.image2:setAlign("top");
     obj.image2:setWidth(100);
     obj.image2:setMargins({top=1});
+    obj.image2:setField("imagemInimigo");
     obj.image2:setSRC("http://fc03.deviantart.net/fs70/i/2011/234/5/4/dragon_aspects_by_rattlesnakedefender-d47ii5y.jpg");
     obj.image2:setName("image2");
 
@@ -1700,6 +1702,7 @@ end
             												node.HPBar = nodeExterno.HPAtual or '0';
             												node.MPBar = nodeExterno.MPAtual or '0';
             												node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoPersonagem
+            												node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
             											else
             												node.PA = nodeExterno.Dano or '0';
             												node.PM = nodeExterno.DanoMagico or '0';
@@ -1723,6 +1726,7 @@ end
             												node.HPBar = nodeExterno.HPAtual or '0';
             												node.MPBar = nodeExterno.MPAtual or '0';
             												node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
+            												node.imagemDoPersonagem = nodeExterno.imgInimigo
             											end;
             										end
             									end
@@ -1848,6 +1852,7 @@ end
             											node.HPBarO = nodeExterno.HPAtual or '0';
             											node.MPBarO = nodeExterno.MPAtual or '0';
             											node.NomeDoOponenteVez = node.Vez .. " - " ..  node.NomeDoOponente
+            											node.imagemInimigo = nodeExterno.imagemDoPersonagem
             										else
             											node.PA = nodeExterno.Dano or '0';
             											node.PM = nodeExterno.DanoMagico or '0';
@@ -1871,6 +1876,7 @@ end
             											node.HPBarO = nodeExterno.HPAtual or '0';
             											node.MPBarO = nodeExterno.MPAtual or '0';
             											node.NomeDoOponenteVez = node.Vez .. " - " ..  nodeExterno.Nome
+            											node.imagemInimigo = nodeExterno.imgInimigo
             										end;
             									end
             								end

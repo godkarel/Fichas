@@ -35,6 +35,7 @@ local function constructNew_frmItemOponente()
     obj.image1:setAlign("left");
     obj.image1:setWidth(100);
     obj.image1:setMargins({top=1});
+    obj.image1:setField("imagemInimigo");
     obj.image1:setSRC("http://fc03.deviantart.net/fs70/i/2011/234/5/4/dragon_aspects_by_rattlesnakedefender-d47ii5y.jpg");
     obj.image1:setName("image1");
 

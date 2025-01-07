@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form name="frmItemOponente" height="100" margins="{top=2,bottom=2}">
-	<image align="left" width="100" margins="{top=1}" src="http://fc03.deviantart.net/fs70/i/2011/234/5/4/dragon_aspects_by_rattlesnakedefender-d47ii5y.jpg"/>
+	<image align="left" width="100" margins="{top=1}" field="imagemInimigo" src="http://fc03.deviantart.net/fs70/i/2011/234/5/4/dragon_aspects_by_rattlesnakedefender-d47ii5y.jpg"/>
 	<layout align="left" width="150" margins="{right=1}">
 	
 		<label align="top" width="150" field="NomeDoOponenteVez" margins="{top=1}"/>
