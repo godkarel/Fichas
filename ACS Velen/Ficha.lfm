@@ -162,7 +162,7 @@
 						</event>
 					</button>			
 					<progressBar align="top" width="150" color="red" field="HPBar" fieldMax="HPBarMax" margins="{top=1}">
-					<edit name="edtHPAtual" align="left" transparent="false" hitTest="false" horzTextAlign="center" field="HPBar"/>
+					<edit name="edtHPAtual" align="left" transparent="true" hitTest="false" horzTextAlign="center" field="HPBar"/>
 					<label align="client" horzTextAlign="center" text="/"/>
 					<label align="right" horzTextAlign="center" field="HPBarMax"/>
 					</progressBar>
@@ -198,6 +198,45 @@
 								edtHP.hitTest = true
 								edtMP.transparent = false
 								edtMP.hitTest = true
+
+								if self.BoxDetalheJogadores.visible == true then
+									local node = self.rclGrupoJogadores.selectedNode;   
+									self.rclGrupoJogadores.node = node;
+									
+									local mesas = rrpg.getRooms();
+									local bibliotecaAtual = mesas[1].library;
+
+									local function obterNomesRecursivo(bibItem)
+										local itensFilhos = bibItem.children;
+										local nomes = bibItem.name;
+
+										for i = 1, #itensFilhos, 1 do
+											local bibItemFilho = itensFilhos[i];
+											local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+
+											if nomesDoFilho == node.NomeDoPersonagem then
+												-- Obter ID do personagem Loan
+												local idPersonagem = bibItemFilho;
+
+												-- Solicita acesso à ficha do personagem
+												local promise = bibItemFilho:asyncOpenNDB();
+
+												-- Aguarda até que a ficha esteja carregada
+												local nodeExterno = await(promise);
+
+												-- Acessa o valor da força do personagem
+												node.HPBarMax = tonumber(nodeExterno.HPTotal);
+												node.MPBarMax = tonumber(nodeExterno.MPTotal);
+												node.HPBar = tonumber(nodeExterno.HPAtual);
+												node.MPBar = tonumber(nodeExterno.MPAtual);
+											end
+										end
+										return nomes;
+									end
+
+									-- Certifique-se de chamar a função, se necessário
+									obterNomesRecursivo(bibliotecaAtual);
+								end
 							else
 								btn.fontColor = "white";
 								btn.text = "Editar ✎";
@@ -709,16 +748,225 @@ end
 						end;	
 					</event>
 				</button>			
-				<progressBar align="top" width="150" color="yellow" field="HPBarO" fieldMax="HPBarMaxO" margins="{top=1}">
-				<label align="left" horzTextAlign="center" field="HPBarO"/>
+				<progressBar align="top" width="150" color="red" field="HPBarO" fieldMax="HPBarMaxO" margins="{top=1}">
+				<edit name="edtHPAtualI" align="left" transparent="true" hitTest="false" horzTextAlign="center" field="HPBarO"/>
 				<label align="client" horzTextAlign="center" text="/"/>
 				<label align="right" horzTextAlign="center" field="HPBarMaxO"/>
 				</progressBar>
 				<progressBar align="top" width="150" color="blue" field="MPBarO" fieldMax="MPBarMaxO" margins="{top=1}">	
-				<label align="left" horzTextAlign="center" field="MPBarO"/>
+				<edit name="edtMPAtualI" align="left" transparent="true" hitTest="false" horzTextAlign="center" field="MPBarO"/>
 				<label align="right" horzTextAlign="center" text="---/---"/>
 				<label align="right" horzTextAlign="center" field="MPBarMaxO"/>						
 				</progressBar>
+				<button name="btnEditStatusI" align="top" fontColor="white" width="150" text="Editar ✎" margins="{top=1}">
+						<event name="onClick">
+							
+							
+
+							-- Obtém o nó selecionado do recordList
+							local node = self.rclGrupoOponentes.selectedNode;
+							if not node then
+								showMessage("Nenhum item foi selecionado!");
+								return;
+							end
+
+							-- Localiza o botão dentro do contexto do item selecionado
+							local btn = self:findControlByName("btnEditStatusI");
+							local edtHP = self:findControlByName("edtHPAtualI");
+							local edtMP = self:findControlByName("edtMPAtualI");
+							if not btn then
+								showMessage("Botão não encontrado no item selecionado!");
+								return;
+							end
+
+							-- Lógica para alternar entre editar e aplicar
+							if btn.text == "Editar ✎" then
+								btn.fontColor = "red";
+								btn.text = "Aplicar 💾";
+								edtHP.transparent = false
+								edtHP.hitTest = true
+								edtMP.transparent = false
+								edtMP.hitTest = true
+
+								if self.BoxDetalheOponentes.visible == true then
+									local node = self.rclGrupoOponentes.selectedNode;   
+									self.rclGrupoOponentes.node = node;
+									
+									local mesas = rrpg.getRooms();
+									local bibliotecaAtual = mesas[1].library;
+
+									local function obterNomesRecursivo(bibItem)
+										local itensFilhos = bibItem.children;
+										local nomes = bibItem.name;
+
+										for i = 1, #itensFilhos, 1 do
+											local bibItemFilho = itensFilhos[i];
+											local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+
+											if nomesDoFilho == node.NomeDoOponente then
+												-- Obter ID do personagem Loan
+												local idPersonagem = bibItemFilho;
+
+												-- Solicita acesso à ficha do personagem
+												local promise = bibItemFilho:asyncOpenNDB();
+
+												-- Aguarda até que a ficha esteja carregada
+												local nodeExterno = await(promise);
+
+												-- Acessa o valor da força do personagem
+												node.HPBarMaxO = tonumber(nodeExterno.HPTotal);
+												node.MPBarMaxO = tonumber(nodeExterno.MPTotal);
+												node.HPBarO = tonumber(nodeExterno.HPAtual);
+												node.MPBarO = tonumber(nodeExterno.MPAtual);
+											end
+										end
+										return nomes;
+									end
+
+									-- Certifique-se de chamar a função, se necessário
+									obterNomesRecursivo(bibliotecaAtual);
+								end
+
+							else
+								btn.fontColor = "white";
+								btn.text = "Editar ✎";
+								edtHP.transparent = true
+								edtHP.hitTest = false
+								edtMP.transparent = true
+								edtMP.hitTest = false
+
+								if	self.BoxDetalheOponentes.visible == true then
+								local node = self.rclGrupoOponentes.selectedNode;   
+								self.rclGrupoOponentes.node = node;
+								
+								local mesas = rrpg.getRooms();
+								local bibliotecaAtual = mesas[1].library;
+
+								local function obterNomesRecursivo(bibItem)
+									local itensFilhos = bibItem.children;
+									local nomes = bibItem.name;
+
+									for i = 1, #itensFilhos, 1 do
+										local bibItemFilho = itensFilhos[i];
+										local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+
+										if nomesDoFilho == node.NomeDoOponente then
+											-- Obter ID do personagem Loan
+											local idPersonagem = bibItemFilho;
+
+											-- Solicita acesso à ficha do personagem
+											local promise = bibItemFilho:asyncOpenNDB();
+
+											-- Aguarda até que a ficha esteja carregada
+											local nodeExterno = await(promise);
+
+											-- Acessa o valor da força do personagem
+
+											nodeExterno.HPTotal = tonumber(node.HPBarMaxO);
+											nodeExterno.MPTotal = tonumber(node.MPBarMaxO);
+											nodeExterno.HPAtual = tonumber(node.HPBarO);
+											nodeExterno.MPAtual = tonumber(node.MPBarO);
+
+										end
+									end
+								return nomes								
+									
+								end
+
+								local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+								
+							end;	
+
+							if	self.BoxDetalheOponentes.visible == true then
+								local node = self.rclGrupoOponentes.selectedNode;   
+								self.rclGrupoOponentes.node = node;
+								
+								local mesas = rrpg.getRooms();
+								local bibliotecaAtual = mesas[1].library;
+
+								local function obterNomesRecursivo(bibItem)
+									local itensFilhos = bibItem.children;
+									local nomes = bibItem.name;
+
+									for i = 1, #itensFilhos, 1 do
+										local bibItemFilho = itensFilhos[i];
+										local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+
+										if nomesDoFilho == node.NomeDoOponente then
+											-- Obter ID do personagem Loan
+											local idPersonagem = bibItemFilho;
+
+											-- Solicita acesso à ficha do personagem
+											local promise = bibItemFilho:asyncOpenNDB();
+
+											-- Aguarda até que a ficha esteja carregada
+											local nodeExterno = await(promise);
+
+											-- Acessa o valor da força do personagem
+
+											if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
+												node.PA = nodeExterno.PA or '0';
+												node.PM = nodeExterno.PM or '0';
+												node.PF = nodeExterno.PF or '0';
+												node.DEF = nodeExterno.DEFRED or '0';
+												node.RES = nodeExterno.RESRED or '0';
+												node.AC = nodeExterno.Acerto or '0';
+												node.ACM = nodeExterno.AcertoMagico or '0';
+												node.CR = nodeExterno.Critical or '0';
+												node.CRM = nodeExterno.CMagico or '0';
+												node.ESQ = nodeExterno.Esquiva or '0';
+												node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+												node.Vez = node.Vez or '0';
+												node.Atletismo = nodeExterno.TAtletismo or '0';
+												node.Sabedoria = nodeExterno.TSabedoria or '0';
+												node.Percepcao = nodeExterno.TPercepcao or '0';
+												node.Acrobacia = nodeExterno.TAcrobacia or '0';
+												node.Vigor = nodeExterno.TVigor or '0';
+												node.HPBarMax = nodeExterno.HPTotal or '0';
+												node.MPBarMax = nodeExterno.MPTotal or '0';
+												node.HPBar = nodeExterno.HPAtual or '0';
+												node.MPBar = nodeExterno.MPAtual or '0';
+												node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoOponente
+												node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
+											else
+												node.PA = nodeExterno.Dano or '0';
+												node.PM = nodeExterno.DanoMagico or '0';
+												node.PF = "NPC";
+												node.DEF = nodeExterno.DefesaPorCent or '0';
+												node.RES = nodeExterno.ResistenciaPorCent or '0';
+												node.AC = nodeExterno.Acerto or '0';
+												node.ACM = nodeExterno.AcertoMagico or '0';
+												node.CR = nodeExterno.Critical or '0';
+												node.CRM = nodeExterno.CriticalMagico or '0';
+												node.ESQ = nodeExterno.Esquiva or '0';
+												node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+												node.Vez = node.Vez or '0';
+												node.Atletismo = nodeExterno.Atletismo or '0';
+												node.Sabedoria = nodeExterno.Sabedoria or '0';
+												node.Percepcao = nodeExterno.Percepcao or '0';
+												node.Acrobacia = nodeExterno.Acrobacia or '0';
+												node.Vigor = nodeExterno.TVigor or '0';
+												node.HPBarMax = nodeExterno.HPTotal or '0';
+												node.MPBarMax = nodeExterno.MPTotal or '0';
+												node.HPBar = nodeExterno.HPAtual or '0';
+												node.MPBar = nodeExterno.MPAtual or '0';
+												node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
+												node.imagemDoPersonagem = nodeExterno.imgInimigo
+											end;
+										end
+									end
+								return nomes								
+									
+								end
+
+								local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+								
+							end;	
+
+							end
+						</event>	
+					</button>	
+
 			</layout>
 			
 			<layout align="left" width="50" margins="{right=1}" >
@@ -779,11 +1027,40 @@ end
 	
 	<dataLink fields="{'ACAOTURNO'}">
 		<event name="onChange">            
+
+			if sheet.AlvoRecebido ~= nil and sheet.AlvoRecebido ~= "" then
+				-- Acessa o RecordList do grupo de jogadores
+				local nodes = ndb.getChildNodes(sheet.NomeJogador) -- Substitua pelo campo correto
+
+				for _, node in ipairs(nodes) do
+					-- Verifica se o NomeDoPersonagem coincide com o AlvoRecebido
+					if node.NomeDoPersonagemVez == sheet.AlvoRecebido then
+						-- Seleciona automaticamente o item no RecordList
+						self.rclGrupoJogadores.selectedNode = node
+						break -- Encerra o loop ao encontrar o item correspondente
+					end
+				end
+			end
+
+			if sheet.AlvoRecebido ~= nil and sheet.AlvoRecebido ~= "" then
+				-- Acessa o RecordList do grupo de jogadores
+				local nodes = ndb.getChildNodes(sheet.NomeOponentes) -- Substitua pelo campo correto
+
+				for _, node in ipairs(nodes) do
+					-- Verifica se o NomeDoPersonagem coincide com o AlvoRecebido
+					if node.NomeDoPersonagemVez == sheet.AlvoRecebido then
+						-- Seleciona automaticamente o item no RecordList
+						self.rclGrupoOponentes.selectedNode = node
+						break -- Encerra o loop ao encontrar o item correspondente
+					end
+				end
+			end
+
 		    if sheet.GrupoRecebido == "1" then
 				local nodes = ndb.getChildNodes(sheet.NomeOponentes)
 					
 				for _, node in ipairs(nodes) do
-					if node.NomeDoOponenteVez == sheet.AlvoRecebido then
+					if node.NomeDoOponenteVez == sheet.AlvoRecebido then						
 						
 						--AQUI--
 						if	self.BoxDetalheOponentes.visible == true then
@@ -807,9 +1084,64 @@ end
 
 										-- Solicita acesso à ficha do personagem
 										local promise = bibItemFilho:asyncOpenNDB();
+										
+										
 
 										-- Aguarda até que a ficha esteja carregada
 										local nodeExterno = await(promise);
+
+										-- Sincronizando
+
+										if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
+											node.PA = nodeExterno.PA or '0';
+											node.PM = nodeExterno.PM or '0';
+											node.PF = nodeExterno.PF or '0';
+											node.DEF = nodeExterno.DEFRED or '0';
+											node.RES = nodeExterno.RESRED or '0';
+											node.AC = nodeExterno.Acerto or '0';
+											node.ACM = nodeExterno.AcertoMagico or '0';
+											node.CR = nodeExterno.Critical or '0';
+											node.CRM = nodeExterno.CMagico or '0';
+											node.ESQ = nodeExterno.Esquiva or '0';
+											node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+											node.Vez = node.Vez or '0';
+											node.Atletismo = nodeExterno.TAtletismo or '0';
+											node.Sabedoria = nodeExterno.TSabedoria or '0';
+											node.Percepcao = nodeExterno.TPercepcao or '0';
+											node.Acrobacia = nodeExterno.TAcrobacia or '0';
+											node.Vigor = nodeExterno.TVigor or '0';
+											node.HPBarMax = nodeExterno.HPTotal or '0';
+											node.MPBarMax = nodeExterno.MPTotal or '0';
+											node.HPBar = nodeExterno.HPAtual or '0';
+											node.MPBar = nodeExterno.MPAtual or '0';
+											node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoOponente
+											node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
+										else
+											node.PA = nodeExterno.Dano or '0';
+											node.PM = nodeExterno.DanoMagico or '0';
+											node.PF = "NPC";
+											node.DEF = nodeExterno.DefesaPorCent or '0';
+											node.RES = nodeExterno.ResistenciaPorCent or '0';
+											node.AC = nodeExterno.Acerto or '0';
+											node.ACM = nodeExterno.AcertoMagico or '0';
+											node.CR = nodeExterno.Critical or '0';
+											node.CRM = nodeExterno.CriticalMagico or '0';
+											node.ESQ = nodeExterno.Esquiva or '0';
+											node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+											node.Vez = node.Vez or '0';
+											node.Atletismo = nodeExterno.Atletismo or '0';
+											node.Sabedoria = nodeExterno.Sabedoria or '0';
+											node.Percepcao = nodeExterno.Percepcao or '0';
+											node.Acrobacia = nodeExterno.Acrobacia or '0';
+											node.Vigor = nodeExterno.TVigor or '0';
+											node.HPBarMax = nodeExterno.HPTotal or '0';
+											node.MPBarMax = nodeExterno.MPTotal or '0';
+											node.HPBar = nodeExterno.HPAtual or '0';
+											node.MPBar = nodeExterno.MPAtual or '0';
+											node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
+											node.imagemDoPersonagem = nodeExterno.imgInimigo
+										end;
+
 										node.HPBarO = (node.HPBarO - await(sheet.DanoRecebido))
 										nodeExterno.HPAtual = node.HPBarO or '0';
 
@@ -853,6 +1185,60 @@ end
 
 										-- Aguarda até que a ficha esteja carregada
 										local nodeExterno = await(promise);
+
+										-- Sincronizando
+
+										if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
+											node.PA = nodeExterno.PA or '0';
+											node.PM = nodeExterno.PM or '0';
+											node.PF = nodeExterno.PF or '0';
+											node.DEF = nodeExterno.DEFRED or '0';
+											node.RES = nodeExterno.RESRED or '0';
+											node.AC = nodeExterno.Acerto or '0';
+											node.ACM = nodeExterno.AcertoMagico or '0';
+											node.CR = nodeExterno.Critical or '0';
+											node.CRM = nodeExterno.CMagico or '0';
+											node.ESQ = nodeExterno.Esquiva or '0';
+											node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+											node.Vez = node.Vez or '0';
+											node.Atletismo = nodeExterno.TAtletismo or '0';
+											node.Sabedoria = nodeExterno.TSabedoria or '0';
+											node.Percepcao = nodeExterno.TPercepcao or '0';
+											node.Acrobacia = nodeExterno.TAcrobacia or '0';
+											node.Vigor = nodeExterno.TVigor or '0';
+											node.HPBarMax = nodeExterno.HPTotal or '0';
+											node.MPBarMax = nodeExterno.MPTotal or '0';
+											node.HPBar = nodeExterno.HPAtual or '0';
+											node.MPBar = nodeExterno.MPAtual or '0';
+											node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoPersonagem
+											node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
+										else
+											node.PA = nodeExterno.Dano or '0';
+											node.PM = nodeExterno.DanoMagico or '0';
+											node.PF = "NPC";
+											node.DEF = nodeExterno.DefesaPorCent or '0';
+											node.RES = nodeExterno.ResistenciaPorCent or '0';
+											node.AC = nodeExterno.Acerto or '0';
+											node.ACM = nodeExterno.AcertoMagico or '0';
+											node.CR = nodeExterno.Critical or '0';
+											node.CRM = nodeExterno.CriticalMagico or '0';
+											node.ESQ = nodeExterno.Esquiva or '0';
+											node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+											node.Vez = node.Vez or '0';
+											node.Atletismo = nodeExterno.Atletismo or '0';
+											node.Sabedoria = nodeExterno.Sabedoria or '0';
+											node.Percepcao = nodeExterno.Percepcao or '0';
+											node.Acrobacia = nodeExterno.Acrobacia or '0';
+											node.Vigor = nodeExterno.TVigor or '0';
+											node.HPBarMax = nodeExterno.HPTotal or '0';
+											node.MPBarMax = nodeExterno.MPTotal or '0';
+											node.HPBar = nodeExterno.HPAtual or '0';
+											node.MPBar = nodeExterno.MPAtual or '0';
+											node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
+											node.imagemDoPersonagem = nodeExterno.imgInimigo
+										end;
+
+										
 										node.HPBar = (node.HPBar - await(sheet.DanoRecebido))
 										nodeExterno.HPAtual = node.HPBar or '0';
 										

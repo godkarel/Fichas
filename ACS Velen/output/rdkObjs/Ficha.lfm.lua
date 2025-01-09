@@ -381,7 +381,7 @@ local function constructNew_frmACSVelen()
     obj.edtHPAtual:setParent(obj.progressBar1);
     obj.edtHPAtual:setName("edtHPAtual");
     obj.edtHPAtual:setAlign("left");
-    obj.edtHPAtual:setTransparent(false);
+    obj.edtHPAtual:setTransparent(true);
     obj.edtHPAtual:setHitTest(false);
     obj.edtHPAtual:setHorzTextAlign("center");
     obj.edtHPAtual:setField("HPBar");
@@ -1189,32 +1189,34 @@ end
     obj.progressBar3:setParent(obj.layout9);
     obj.progressBar3:setAlign("top");
     obj.progressBar3:setWidth(150);
-    obj.progressBar3:setColor("yellow");
+    obj.progressBar3:setColor("red");
     obj.progressBar3:setField("HPBarO");
     obj.progressBar3:setFieldMax("HPBarMaxO");
     obj.progressBar3:setMargins({top=1});
     obj.progressBar3:setName("progressBar3");
 
+    obj.edtHPAtualI = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edtHPAtualI:setParent(obj.progressBar3);
+    obj.edtHPAtualI:setName("edtHPAtualI");
+    obj.edtHPAtualI:setAlign("left");
+    obj.edtHPAtualI:setTransparent(true);
+    obj.edtHPAtualI:setHitTest(false);
+    obj.edtHPAtualI:setHorzTextAlign("center");
+    obj.edtHPAtualI:setField("HPBarO");
+
     obj.label52 = GUI.fromHandle(_obj_newObject("label"));
     obj.label52:setParent(obj.progressBar3);
-    obj.label52:setAlign("left");
+    obj.label52:setAlign("client");
     obj.label52:setHorzTextAlign("center");
-    obj.label52:setField("HPBarO");
+    obj.label52:setText("/");
     obj.label52:setName("label52");
 
     obj.label53 = GUI.fromHandle(_obj_newObject("label"));
     obj.label53:setParent(obj.progressBar3);
-    obj.label53:setAlign("client");
+    obj.label53:setAlign("right");
     obj.label53:setHorzTextAlign("center");
-    obj.label53:setText("/");
+    obj.label53:setField("HPBarMaxO");
     obj.label53:setName("label53");
-
-    obj.label54 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label54:setParent(obj.progressBar3);
-    obj.label54:setAlign("right");
-    obj.label54:setHorzTextAlign("center");
-    obj.label54:setField("HPBarMaxO");
-    obj.label54:setName("label54");
 
     obj.progressBar4 = GUI.fromHandle(_obj_newObject("progressBar"));
     obj.progressBar4:setParent(obj.layout9);
@@ -1226,26 +1228,37 @@ end
     obj.progressBar4:setMargins({top=1});
     obj.progressBar4:setName("progressBar4");
 
+    obj.edtMPAtualI = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edtMPAtualI:setParent(obj.progressBar4);
+    obj.edtMPAtualI:setName("edtMPAtualI");
+    obj.edtMPAtualI:setAlign("left");
+    obj.edtMPAtualI:setTransparent(true);
+    obj.edtMPAtualI:setHitTest(false);
+    obj.edtMPAtualI:setHorzTextAlign("center");
+    obj.edtMPAtualI:setField("MPBarO");
+
+    obj.label54 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label54:setParent(obj.progressBar4);
+    obj.label54:setAlign("right");
+    obj.label54:setHorzTextAlign("center");
+    obj.label54:setText("---/---");
+    obj.label54:setName("label54");
+
     obj.label55 = GUI.fromHandle(_obj_newObject("label"));
     obj.label55:setParent(obj.progressBar4);
-    obj.label55:setAlign("left");
+    obj.label55:setAlign("right");
     obj.label55:setHorzTextAlign("center");
-    obj.label55:setField("MPBarO");
+    obj.label55:setField("MPBarMaxO");
     obj.label55:setName("label55");
 
-    obj.label56 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label56:setParent(obj.progressBar4);
-    obj.label56:setAlign("right");
-    obj.label56:setHorzTextAlign("center");
-    obj.label56:setText("---/---");
-    obj.label56:setName("label56");
-
-    obj.label57 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label57:setParent(obj.progressBar4);
-    obj.label57:setAlign("right");
-    obj.label57:setHorzTextAlign("center");
-    obj.label57:setField("MPBarMaxO");
-    obj.label57:setName("label57");
+    obj.btnEditStatusI = GUI.fromHandle(_obj_newObject("button"));
+    obj.btnEditStatusI:setParent(obj.layout9);
+    obj.btnEditStatusI:setName("btnEditStatusI");
+    obj.btnEditStatusI:setAlign("top");
+    obj.btnEditStatusI:setFontColor("white");
+    obj.btnEditStatusI:setWidth(150);
+    obj.btnEditStatusI:setText("Editar ✎");
+    obj.btnEditStatusI:setMargins({top=1});
 
     obj.layout10 = GUI.fromHandle(_obj_newObject("layout"));
     obj.layout10:setParent(obj.rectangle2);
@@ -1254,10 +1267,26 @@ end
     obj.layout10:setMargins({right=1});
     obj.layout10:setName("layout10");
 
+    obj.label56 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label56:setParent(obj.layout10);
+    obj.label56:setAlign("top");
+    obj.label56:setText("PA:");
+    obj.label56:setWidth(50);
+    obj.label56:setMargins({left=10});
+    obj.label56:setName("label56");
+
+    obj.label57 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label57:setParent(obj.layout10);
+    obj.label57:setAlign("top");
+    obj.label57:setText("PM:");
+    obj.label57:setWidth(50);
+    obj.label57:setMargins({left=10});
+    obj.label57:setName("label57");
+
     obj.label58 = GUI.fromHandle(_obj_newObject("label"));
     obj.label58:setParent(obj.layout10);
     obj.label58:setAlign("top");
-    obj.label58:setText("PA:");
+    obj.label58:setText("PF:");
     obj.label58:setWidth(50);
     obj.label58:setMargins({left=10});
     obj.label58:setName("label58");
@@ -1265,7 +1294,7 @@ end
     obj.label59 = GUI.fromHandle(_obj_newObject("label"));
     obj.label59:setParent(obj.layout10);
     obj.label59:setAlign("top");
-    obj.label59:setText("PM:");
+    obj.label59:setText("DEF:");
     obj.label59:setWidth(50);
     obj.label59:setMargins({left=10});
     obj.label59:setName("label59");
@@ -1273,7 +1302,7 @@ end
     obj.label60 = GUI.fromHandle(_obj_newObject("label"));
     obj.label60:setParent(obj.layout10);
     obj.label60:setAlign("top");
-    obj.label60:setText("PF:");
+    obj.label60:setText("RES:");
     obj.label60:setWidth(50);
     obj.label60:setMargins({left=10});
     obj.label60:setName("label60");
@@ -1281,7 +1310,7 @@ end
     obj.label61 = GUI.fromHandle(_obj_newObject("label"));
     obj.label61:setParent(obj.layout10);
     obj.label61:setAlign("top");
-    obj.label61:setText("DEF:");
+    obj.label61:setText("---");
     obj.label61:setWidth(50);
     obj.label61:setMargins({left=10});
     obj.label61:setName("label61");
@@ -1289,7 +1318,7 @@ end
     obj.label62 = GUI.fromHandle(_obj_newObject("label"));
     obj.label62:setParent(obj.layout10);
     obj.label62:setAlign("top");
-    obj.label62:setText("RES:");
+    obj.label62:setText("AC:");
     obj.label62:setWidth(50);
     obj.label62:setMargins({left=10});
     obj.label62:setName("label62");
@@ -1297,7 +1326,7 @@ end
     obj.label63 = GUI.fromHandle(_obj_newObject("label"));
     obj.label63:setParent(obj.layout10);
     obj.label63:setAlign("top");
-    obj.label63:setText("---");
+    obj.label63:setText("ACM:");
     obj.label63:setWidth(50);
     obj.label63:setMargins({left=10});
     obj.label63:setName("label63");
@@ -1305,7 +1334,7 @@ end
     obj.label64 = GUI.fromHandle(_obj_newObject("label"));
     obj.label64:setParent(obj.layout10);
     obj.label64:setAlign("top");
-    obj.label64:setText("AC:");
+    obj.label64:setText("CR:");
     obj.label64:setWidth(50);
     obj.label64:setMargins({left=10});
     obj.label64:setName("label64");
@@ -1313,7 +1342,7 @@ end
     obj.label65 = GUI.fromHandle(_obj_newObject("label"));
     obj.label65:setParent(obj.layout10);
     obj.label65:setAlign("top");
-    obj.label65:setText("ACM:");
+    obj.label65:setText("CRM:");
     obj.label65:setWidth(50);
     obj.label65:setMargins({left=10});
     obj.label65:setName("label65");
@@ -1321,7 +1350,7 @@ end
     obj.label66 = GUI.fromHandle(_obj_newObject("label"));
     obj.label66:setParent(obj.layout10);
     obj.label66:setAlign("top");
-    obj.label66:setText("CR:");
+    obj.label66:setText("---");
     obj.label66:setWidth(50);
     obj.label66:setMargins({left=10});
     obj.label66:setName("label66");
@@ -1329,7 +1358,7 @@ end
     obj.label67 = GUI.fromHandle(_obj_newObject("label"));
     obj.label67:setParent(obj.layout10);
     obj.label67:setAlign("top");
-    obj.label67:setText("CRM:");
+    obj.label67:setText("ESQ:");
     obj.label67:setWidth(50);
     obj.label67:setMargins({left=10});
     obj.label67:setName("label67");
@@ -1337,7 +1366,7 @@ end
     obj.label68 = GUI.fromHandle(_obj_newObject("label"));
     obj.label68:setParent(obj.layout10);
     obj.label68:setAlign("top");
-    obj.label68:setText("---");
+    obj.label68:setText("Pers:");
     obj.label68:setWidth(50);
     obj.label68:setMargins({left=10});
     obj.label68:setName("label68");
@@ -1345,7 +1374,7 @@ end
     obj.label69 = GUI.fromHandle(_obj_newObject("label"));
     obj.label69:setParent(obj.layout10);
     obj.label69:setAlign("top");
-    obj.label69:setText("ESQ:");
+    obj.label69:setText("---");
     obj.label69:setWidth(50);
     obj.label69:setMargins({left=10});
     obj.label69:setName("label69");
@@ -1353,27 +1382,11 @@ end
     obj.label70 = GUI.fromHandle(_obj_newObject("label"));
     obj.label70:setParent(obj.layout10);
     obj.label70:setAlign("top");
-    obj.label70:setText("Pers:");
+    obj.label70:setText("Vez:");
+    obj.label70:setFontColor("red");
     obj.label70:setWidth(50);
     obj.label70:setMargins({left=10});
     obj.label70:setName("label70");
-
-    obj.label71 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label71:setParent(obj.layout10);
-    obj.label71:setAlign("top");
-    obj.label71:setText("---");
-    obj.label71:setWidth(50);
-    obj.label71:setMargins({left=10});
-    obj.label71:setName("label71");
-
-    obj.label72 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label72:setParent(obj.layout10);
-    obj.label72:setAlign("top");
-    obj.label72:setText("Vez:");
-    obj.label72:setFontColor("red");
-    obj.label72:setWidth(50);
-    obj.label72:setMargins({left=10});
-    obj.label72:setName("label72");
 
     obj.layout11 = GUI.fromHandle(_obj_newObject("layout"));
     obj.layout11:setParent(obj.rectangle2);
@@ -1382,10 +1395,26 @@ end
     obj.layout11:setMargins({right=1});
     obj.layout11:setName("layout11");
 
+    obj.label71 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label71:setParent(obj.layout11);
+    obj.label71:setAlign("top");
+    obj.label71:setField("PA");
+    obj.label71:setWidth(50);
+    obj.label71:setMargins({left=10});
+    obj.label71:setName("label71");
+
+    obj.label72 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label72:setParent(obj.layout11);
+    obj.label72:setAlign("top");
+    obj.label72:setField("PM");
+    obj.label72:setWidth(50);
+    obj.label72:setMargins({left=10});
+    obj.label72:setName("label72");
+
     obj.label73 = GUI.fromHandle(_obj_newObject("label"));
     obj.label73:setParent(obj.layout11);
     obj.label73:setAlign("top");
-    obj.label73:setField("PA");
+    obj.label73:setField("PF");
     obj.label73:setWidth(50);
     obj.label73:setMargins({left=10});
     obj.label73:setName("label73");
@@ -1393,7 +1422,7 @@ end
     obj.label74 = GUI.fromHandle(_obj_newObject("label"));
     obj.label74:setParent(obj.layout11);
     obj.label74:setAlign("top");
-    obj.label74:setField("PM");
+    obj.label74:setField("DEF");
     obj.label74:setWidth(50);
     obj.label74:setMargins({left=10});
     obj.label74:setName("label74");
@@ -1401,7 +1430,7 @@ end
     obj.label75 = GUI.fromHandle(_obj_newObject("label"));
     obj.label75:setParent(obj.layout11);
     obj.label75:setAlign("top");
-    obj.label75:setField("PF");
+    obj.label75:setField("RES");
     obj.label75:setWidth(50);
     obj.label75:setMargins({left=10});
     obj.label75:setName("label75");
@@ -1409,7 +1438,7 @@ end
     obj.label76 = GUI.fromHandle(_obj_newObject("label"));
     obj.label76:setParent(obj.layout11);
     obj.label76:setAlign("top");
-    obj.label76:setField("DEF");
+    obj.label76:setText("---");
     obj.label76:setWidth(50);
     obj.label76:setMargins({left=10});
     obj.label76:setName("label76");
@@ -1417,7 +1446,7 @@ end
     obj.label77 = GUI.fromHandle(_obj_newObject("label"));
     obj.label77:setParent(obj.layout11);
     obj.label77:setAlign("top");
-    obj.label77:setField("RES");
+    obj.label77:setField("AC");
     obj.label77:setWidth(50);
     obj.label77:setMargins({left=10});
     obj.label77:setName("label77");
@@ -1425,7 +1454,7 @@ end
     obj.label78 = GUI.fromHandle(_obj_newObject("label"));
     obj.label78:setParent(obj.layout11);
     obj.label78:setAlign("top");
-    obj.label78:setText("---");
+    obj.label78:setField("ACM");
     obj.label78:setWidth(50);
     obj.label78:setMargins({left=10});
     obj.label78:setName("label78");
@@ -1433,7 +1462,7 @@ end
     obj.label79 = GUI.fromHandle(_obj_newObject("label"));
     obj.label79:setParent(obj.layout11);
     obj.label79:setAlign("top");
-    obj.label79:setField("AC");
+    obj.label79:setField("CR");
     obj.label79:setWidth(50);
     obj.label79:setMargins({left=10});
     obj.label79:setName("label79");
@@ -1441,7 +1470,7 @@ end
     obj.label80 = GUI.fromHandle(_obj_newObject("label"));
     obj.label80:setParent(obj.layout11);
     obj.label80:setAlign("top");
-    obj.label80:setField("ACM");
+    obj.label80:setField("CRM");
     obj.label80:setWidth(50);
     obj.label80:setMargins({left=10});
     obj.label80:setName("label80");
@@ -1449,7 +1478,7 @@ end
     obj.label81 = GUI.fromHandle(_obj_newObject("label"));
     obj.label81:setParent(obj.layout11);
     obj.label81:setAlign("top");
-    obj.label81:setField("CR");
+    obj.label81:setText("---");
     obj.label81:setWidth(50);
     obj.label81:setMargins({left=10});
     obj.label81:setName("label81");
@@ -1457,7 +1486,7 @@ end
     obj.label82 = GUI.fromHandle(_obj_newObject("label"));
     obj.label82:setParent(obj.layout11);
     obj.label82:setAlign("top");
-    obj.label82:setField("CRM");
+    obj.label82:setField("ESQ");
     obj.label82:setWidth(50);
     obj.label82:setMargins({left=10});
     obj.label82:setName("label82");
@@ -1465,7 +1494,7 @@ end
     obj.label83 = GUI.fromHandle(_obj_newObject("label"));
     obj.label83:setParent(obj.layout11);
     obj.label83:setAlign("top");
-    obj.label83:setText("---");
+    obj.label83:setField("Pers");
     obj.label83:setWidth(50);
     obj.label83:setMargins({left=10});
     obj.label83:setName("label83");
@@ -1473,26 +1502,10 @@ end
     obj.label84 = GUI.fromHandle(_obj_newObject("label"));
     obj.label84:setParent(obj.layout11);
     obj.label84:setAlign("top");
-    obj.label84:setField("ESQ");
+    obj.label84:setText("---");
     obj.label84:setWidth(50);
     obj.label84:setMargins({left=10});
     obj.label84:setName("label84");
-
-    obj.label85 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label85:setParent(obj.layout11);
-    obj.label85:setAlign("top");
-    obj.label85:setField("Pers");
-    obj.label85:setWidth(50);
-    obj.label85:setMargins({left=10});
-    obj.label85:setName("label85");
-
-    obj.label86 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label86:setParent(obj.layout11);
-    obj.label86:setAlign("top");
-    obj.label86:setText("---");
-    obj.label86:setWidth(50);
-    obj.label86:setMargins({left=10});
-    obj.label86:setName("label86");
 
     obj.edit4 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit4:setParent(obj.layout11);
@@ -1510,10 +1523,26 @@ end
     obj.layout12:setMargins({right=1});
     obj.layout12:setName("layout12");
 
+    obj.label85 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label85:setParent(obj.layout12);
+    obj.label85:setAlign("top");
+    obj.label85:setText("Atletismo:");
+    obj.label85:setAutoSize(true);
+    obj.label85:setMargins({left=10});
+    obj.label85:setName("label85");
+
+    obj.label86 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label86:setParent(obj.layout12);
+    obj.label86:setAlign("top");
+    obj.label86:setText("Sabedoria:");
+    obj.label86:setAutoSize(true);
+    obj.label86:setMargins({left=10});
+    obj.label86:setName("label86");
+
     obj.label87 = GUI.fromHandle(_obj_newObject("label"));
     obj.label87:setParent(obj.layout12);
     obj.label87:setAlign("top");
-    obj.label87:setText("Atletismo:");
+    obj.label87:setText("Percepcao:");
     obj.label87:setAutoSize(true);
     obj.label87:setMargins({left=10});
     obj.label87:setName("label87");
@@ -1521,7 +1550,7 @@ end
     obj.label88 = GUI.fromHandle(_obj_newObject("label"));
     obj.label88:setParent(obj.layout12);
     obj.label88:setAlign("top");
-    obj.label88:setText("Sabedoria:");
+    obj.label88:setText("Acrobacia:");
     obj.label88:setAutoSize(true);
     obj.label88:setMargins({left=10});
     obj.label88:setName("label88");
@@ -1529,7 +1558,7 @@ end
     obj.label89 = GUI.fromHandle(_obj_newObject("label"));
     obj.label89:setParent(obj.layout12);
     obj.label89:setAlign("top");
-    obj.label89:setText("Percepcao:");
+    obj.label89:setText("Vigor:");
     obj.label89:setAutoSize(true);
     obj.label89:setMargins({left=10});
     obj.label89:setName("label89");
@@ -1537,26 +1566,10 @@ end
     obj.label90 = GUI.fromHandle(_obj_newObject("label"));
     obj.label90:setParent(obj.layout12);
     obj.label90:setAlign("top");
-    obj.label90:setText("Acrobacia:");
-    obj.label90:setAutoSize(true);
+    obj.label90:setText("---");
+    obj.label90:setWidth(50);
     obj.label90:setMargins({left=10});
     obj.label90:setName("label90");
-
-    obj.label91 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label91:setParent(obj.layout12);
-    obj.label91:setAlign("top");
-    obj.label91:setText("Vigor:");
-    obj.label91:setAutoSize(true);
-    obj.label91:setMargins({left=10});
-    obj.label91:setName("label91");
-
-    obj.label92 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label92:setParent(obj.layout12);
-    obj.label92:setAlign("top");
-    obj.label92:setText("---");
-    obj.label92:setWidth(50);
-    obj.label92:setMargins({left=10});
-    obj.label92:setName("label92");
 
     obj.layout13 = GUI.fromHandle(_obj_newObject("layout"));
     obj.layout13:setParent(obj.rectangle2);
@@ -1565,10 +1578,26 @@ end
     obj.layout13:setMargins({right=1});
     obj.layout13:setName("layout13");
 
+    obj.label91 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label91:setParent(obj.layout13);
+    obj.label91:setAlign("top");
+    obj.label91:setField("Atletismo");
+    obj.label91:setWidth(50);
+    obj.label91:setMargins({left=10});
+    obj.label91:setName("label91");
+
+    obj.label92 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label92:setParent(obj.layout13);
+    obj.label92:setAlign("top");
+    obj.label92:setField("Sabedoria");
+    obj.label92:setWidth(50);
+    obj.label92:setMargins({left=10});
+    obj.label92:setName("label92");
+
     obj.label93 = GUI.fromHandle(_obj_newObject("label"));
     obj.label93:setParent(obj.layout13);
     obj.label93:setAlign("top");
-    obj.label93:setField("Atletismo");
+    obj.label93:setField("Percepcao");
     obj.label93:setWidth(50);
     obj.label93:setMargins({left=10});
     obj.label93:setName("label93");
@@ -1576,7 +1605,7 @@ end
     obj.label94 = GUI.fromHandle(_obj_newObject("label"));
     obj.label94:setParent(obj.layout13);
     obj.label94:setAlign("top");
-    obj.label94:setField("Sabedoria");
+    obj.label94:setField("Acrobacia");
     obj.label94:setWidth(50);
     obj.label94:setMargins({left=10});
     obj.label94:setName("label94");
@@ -1584,7 +1613,7 @@ end
     obj.label95 = GUI.fromHandle(_obj_newObject("label"));
     obj.label95:setParent(obj.layout13);
     obj.label95:setAlign("top");
-    obj.label95:setField("Percepcao");
+    obj.label95:setField("Vigor");
     obj.label95:setWidth(50);
     obj.label95:setMargins({left=10});
     obj.label95:setName("label95");
@@ -1592,26 +1621,10 @@ end
     obj.label96 = GUI.fromHandle(_obj_newObject("label"));
     obj.label96:setParent(obj.layout13);
     obj.label96:setAlign("top");
-    obj.label96:setField("Acrobacia");
+    obj.label96:setText("---");
     obj.label96:setWidth(50);
     obj.label96:setMargins({left=10});
     obj.label96:setName("label96");
-
-    obj.label97 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label97:setParent(obj.layout13);
-    obj.label97:setAlign("top");
-    obj.label97:setField("Vigor");
-    obj.label97:setWidth(50);
-    obj.label97:setMargins({left=10});
-    obj.label97:setName("label97");
-
-    obj.label98 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label98:setParent(obj.layout13);
-    obj.label98:setAlign("top");
-    obj.label98:setText("---");
-    obj.label98:setWidth(50);
-    obj.label98:setMargins({left=10});
-    obj.label98:setName("label98");
 
     obj.dataLink1 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink1:setParent(obj);
@@ -1779,6 +1792,45 @@ end
             								edtHP.hitTest = true
             								edtMP.transparent = false
             								edtMP.hitTest = true
+            
+            								if self.BoxDetalheJogadores.visible == true then
+            									local node = self.rclGrupoJogadores.selectedNode;   
+            									self.rclGrupoJogadores.node = node;
+            									
+            									local mesas = rrpg.getRooms();
+            									local bibliotecaAtual = mesas[1].library;
+            
+            									local function obterNomesRecursivo(bibItem)
+            										local itensFilhos = bibItem.children;
+            										local nomes = bibItem.name;
+            
+            										for i = 1, #itensFilhos, 1 do
+            											local bibItemFilho = itensFilhos[i];
+            											local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+            
+            											if nomesDoFilho == node.NomeDoPersonagem then
+            												-- Obter ID do personagem Loan
+            												local idPersonagem = bibItemFilho;
+            
+            												-- Solicita acesso à ficha do personagem
+            												local promise = bibItemFilho:asyncOpenNDB();
+            
+            												-- Aguarda até que a ficha esteja carregada
+            												local nodeExterno = await(promise);
+            
+            												-- Acessa o valor da força do personagem
+            												node.HPBarMax = tonumber(nodeExterno.HPTotal);
+            												node.MPBarMax = tonumber(nodeExterno.MPTotal);
+            												node.HPBar = tonumber(nodeExterno.HPAtual);
+            												node.MPBar = tonumber(nodeExterno.MPAtual);
+            											end
+            										end
+            										return nomes;
+            									end
+            
+            									-- Certifique-se de chamar a função, se necessário
+            									obterNomesRecursivo(bibliotecaAtual);
+            								end
             							else
             								btn.fontColor = "white";
             								btn.text = "Editar ✎";
@@ -1814,10 +1866,10 @@ end
             
             											-- Acessa o valor da força do personagem
             
-            											nodeExterno.HPTotal = node.HPBarMax;
-            											nodeExterno.MPTotal = node.MPBarMax;
-            											nodeExterno.HPAtual = node.HPBar;
-            											nodeExterno.MPAtual = node.MPBar;
+            											nodeExterno.HPTotal = tonumber(node.HPBarMax);
+            											nodeExterno.MPTotal = tonumber(node.MPBarMax);
+            											nodeExterno.HPAtual = tonumber(node.HPBar);
+            											nodeExterno.MPAtual = tonumber(node.MPBar);
             
             										end
             									end
@@ -2065,13 +2117,247 @@ end
             						end;
         end);
 
-    obj._e_event20 = obj.dataLink1:addEventListener("onChange",
+    obj._e_event20 = obj.btnEditStatusI:addEventListener("onClick",
+        function (event)
+            -- Obtém o nó selecionado do recordList
+            							local node = self.rclGrupoOponentes.selectedNode;
+            							if not node then
+            								showMessage("Nenhum item foi selecionado!");
+            								return;
+            							end
+            
+            							-- Localiza o botão dentro do contexto do item selecionado
+            							local btn = self:findControlByName("btnEditStatusI");
+            							local edtHP = self:findControlByName("edtHPAtualI");
+            							local edtMP = self:findControlByName("edtMPAtualI");
+            							if not btn then
+            								showMessage("Botão não encontrado no item selecionado!");
+            								return;
+            							end
+            
+            							-- Lógica para alternar entre editar e aplicar
+            							if btn.text == "Editar ✎" then
+            								btn.fontColor = "red";
+            								btn.text = "Aplicar 💾";
+            								edtHP.transparent = false
+            								edtHP.hitTest = true
+            								edtMP.transparent = false
+            								edtMP.hitTest = true
+            
+            								if self.BoxDetalheOponentes.visible == true then
+            									local node = self.rclGrupoOponentes.selectedNode;   
+            									self.rclGrupoOponentes.node = node;
+            									
+            									local mesas = rrpg.getRooms();
+            									local bibliotecaAtual = mesas[1].library;
+            
+            									local function obterNomesRecursivo(bibItem)
+            										local itensFilhos = bibItem.children;
+            										local nomes = bibItem.name;
+            
+            										for i = 1, #itensFilhos, 1 do
+            											local bibItemFilho = itensFilhos[i];
+            											local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+            
+            											if nomesDoFilho == node.NomeDoOponente then
+            												-- Obter ID do personagem Loan
+            												local idPersonagem = bibItemFilho;
+            
+            												-- Solicita acesso à ficha do personagem
+            												local promise = bibItemFilho:asyncOpenNDB();
+            
+            												-- Aguarda até que a ficha esteja carregada
+            												local nodeExterno = await(promise);
+            
+            												-- Acessa o valor da força do personagem
+            												node.HPBarMaxO = tonumber(nodeExterno.HPTotal);
+            												node.MPBarMaxO = tonumber(nodeExterno.MPTotal);
+            												node.HPBarO = tonumber(nodeExterno.HPAtual);
+            												node.MPBarO = tonumber(nodeExterno.MPAtual);
+            											end
+            										end
+            										return nomes;
+            									end
+            
+            									-- Certifique-se de chamar a função, se necessário
+            									obterNomesRecursivo(bibliotecaAtual);
+            								end
+            
+            							else
+            								btn.fontColor = "white";
+            								btn.text = "Editar ✎";
+            								edtHP.transparent = true
+            								edtHP.hitTest = false
+            								edtMP.transparent = true
+            								edtMP.hitTest = false
+            
+            								if	self.BoxDetalheOponentes.visible == true then
+            								local node = self.rclGrupoOponentes.selectedNode;   
+            								self.rclGrupoOponentes.node = node;
+            								
+            								local mesas = rrpg.getRooms();
+            								local bibliotecaAtual = mesas[1].library;
+            
+            								local function obterNomesRecursivo(bibItem)
+            									local itensFilhos = bibItem.children;
+            									local nomes = bibItem.name;
+            
+            									for i = 1, #itensFilhos, 1 do
+            										local bibItemFilho = itensFilhos[i];
+            										local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+            
+            										if nomesDoFilho == node.NomeDoOponente then
+            											-- Obter ID do personagem Loan
+            											local idPersonagem = bibItemFilho;
+            
+            											-- Solicita acesso à ficha do personagem
+            											local promise = bibItemFilho:asyncOpenNDB();
+            
+            											-- Aguarda até que a ficha esteja carregada
+            											local nodeExterno = await(promise);
+            
+            											-- Acessa o valor da força do personagem
+            
+            											nodeExterno.HPTotal = tonumber(node.HPBarMaxO);
+            											nodeExterno.MPTotal = tonumber(node.MPBarMaxO);
+            											nodeExterno.HPAtual = tonumber(node.HPBarO);
+            											nodeExterno.MPAtual = tonumber(node.MPBarO);
+            
+            										end
+            									end
+            								return nomes								
+            									
+            								end
+            
+            								local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+            								
+            							end;	
+            
+            							if	self.BoxDetalheOponentes.visible == true then
+            								local node = self.rclGrupoOponentes.selectedNode;   
+            								self.rclGrupoOponentes.node = node;
+            								
+            								local mesas = rrpg.getRooms();
+            								local bibliotecaAtual = mesas[1].library;
+            
+            								local function obterNomesRecursivo(bibItem)
+            									local itensFilhos = bibItem.children;
+            									local nomes = bibItem.name;
+            
+            									for i = 1, #itensFilhos, 1 do
+            										local bibItemFilho = itensFilhos[i];
+            										local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+            
+            										if nomesDoFilho == node.NomeDoOponente then
+            											-- Obter ID do personagem Loan
+            											local idPersonagem = bibItemFilho;
+            
+            											-- Solicita acesso à ficha do personagem
+            											local promise = bibItemFilho:asyncOpenNDB();
+            
+            											-- Aguarda até que a ficha esteja carregada
+            											local nodeExterno = await(promise);
+            
+            											-- Acessa o valor da força do personagem
+            
+            											if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
+            												node.PA = nodeExterno.PA or '0';
+            												node.PM = nodeExterno.PM or '0';
+            												node.PF = nodeExterno.PF or '0';
+            												node.DEF = nodeExterno.DEFRED or '0';
+            												node.RES = nodeExterno.RESRED or '0';
+            												node.AC = nodeExterno.Acerto or '0';
+            												node.ACM = nodeExterno.AcertoMagico or '0';
+            												node.CR = nodeExterno.Critical or '0';
+            												node.CRM = nodeExterno.CMagico or '0';
+            												node.ESQ = nodeExterno.Esquiva or '0';
+            												node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+            												node.Vez = node.Vez or '0';
+            												node.Atletismo = nodeExterno.TAtletismo or '0';
+            												node.Sabedoria = nodeExterno.TSabedoria or '0';
+            												node.Percepcao = nodeExterno.TPercepcao or '0';
+            												node.Acrobacia = nodeExterno.TAcrobacia or '0';
+            												node.Vigor = nodeExterno.TVigor or '0';
+            												node.HPBarMax = nodeExterno.HPTotal or '0';
+            												node.MPBarMax = nodeExterno.MPTotal or '0';
+            												node.HPBar = nodeExterno.HPAtual or '0';
+            												node.MPBar = nodeExterno.MPAtual or '0';
+            												node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoOponente
+            												node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
+            											else
+            												node.PA = nodeExterno.Dano or '0';
+            												node.PM = nodeExterno.DanoMagico or '0';
+            												node.PF = "NPC";
+            												node.DEF = nodeExterno.DefesaPorCent or '0';
+            												node.RES = nodeExterno.ResistenciaPorCent or '0';
+            												node.AC = nodeExterno.Acerto or '0';
+            												node.ACM = nodeExterno.AcertoMagico or '0';
+            												node.CR = nodeExterno.Critical or '0';
+            												node.CRM = nodeExterno.CriticalMagico or '0';
+            												node.ESQ = nodeExterno.Esquiva or '0';
+            												node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+            												node.Vez = node.Vez or '0';
+            												node.Atletismo = nodeExterno.Atletismo or '0';
+            												node.Sabedoria = nodeExterno.Sabedoria or '0';
+            												node.Percepcao = nodeExterno.Percepcao or '0';
+            												node.Acrobacia = nodeExterno.Acrobacia or '0';
+            												node.Vigor = nodeExterno.TVigor or '0';
+            												node.HPBarMax = nodeExterno.HPTotal or '0';
+            												node.MPBarMax = nodeExterno.MPTotal or '0';
+            												node.HPBar = nodeExterno.HPAtual or '0';
+            												node.MPBar = nodeExterno.MPAtual or '0';
+            												node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
+            												node.imagemDoPersonagem = nodeExterno.imgInimigo
+            											end;
+            										end
+            									end
+            								return nomes								
+            									
+            								end
+            
+            								local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+            								
+            							end;	
+            
+            							end
+        end);
+
+    obj._e_event21 = obj.dataLink1:addEventListener("onChange",
         function (field, oldValue, newValue)
-            if sheet.GrupoRecebido == "1" then
+            if sheet.AlvoRecebido ~= nil and sheet.AlvoRecebido ~= "" then
+            				-- Acessa o RecordList do grupo de jogadores
+            				local nodes = ndb.getChildNodes(sheet.NomeJogador) -- Substitua pelo campo correto
+            
+            				for _, node in ipairs(nodes) do
+            					-- Verifica se o NomeDoPersonagem coincide com o AlvoRecebido
+            					if node.NomeDoPersonagemVez == sheet.AlvoRecebido then
+            						-- Seleciona automaticamente o item no RecordList
+            						self.rclGrupoJogadores.selectedNode = node
+            						break -- Encerra o loop ao encontrar o item correspondente
+            					end
+            				end
+            			end
+            
+            			if sheet.AlvoRecebido ~= nil and sheet.AlvoRecebido ~= "" then
+            				-- Acessa o RecordList do grupo de jogadores
+            				local nodes = ndb.getChildNodes(sheet.NomeOponentes) -- Substitua pelo campo correto
+            
+            				for _, node in ipairs(nodes) do
+            					-- Verifica se o NomeDoPersonagem coincide com o AlvoRecebido
+            					if node.NomeDoPersonagemVez == sheet.AlvoRecebido then
+            						showMessage("ACHOU")
+            						-- Seleciona automaticamente o item no RecordList
+            						self.rclGrupoOponentes.selectedNode = node
+            						break -- Encerra o loop ao encontrar o item correspondente
+            					end
+            				end
+            			end
+            
+            		    if sheet.GrupoRecebido == "1" then
             				local nodes = ndb.getChildNodes(sheet.NomeOponentes)
             					
             				for _, node in ipairs(nodes) do
-            					if node.NomeDoOponenteVez == sheet.AlvoRecebido then
+            					if node.NomeDoOponenteVez == sheet.AlvoRecebido then						
             						
             						--AQUI--
             						if	self.BoxDetalheOponentes.visible == true then
@@ -2095,9 +2381,64 @@ end
             
             										-- Solicita acesso à ficha do personagem
             										local promise = bibItemFilho:asyncOpenNDB();
+            										
+            										
             
             										-- Aguarda até que a ficha esteja carregada
             										local nodeExterno = await(promise);
+            
+            										-- Sincronizando
+            
+            										if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
+            											node.PA = nodeExterno.PA or '0';
+            											node.PM = nodeExterno.PM or '0';
+            											node.PF = nodeExterno.PF or '0';
+            											node.DEF = nodeExterno.DEFRED or '0';
+            											node.RES = nodeExterno.RESRED or '0';
+            											node.AC = nodeExterno.Acerto or '0';
+            											node.ACM = nodeExterno.AcertoMagico or '0';
+            											node.CR = nodeExterno.Critical or '0';
+            											node.CRM = nodeExterno.CMagico or '0';
+            											node.ESQ = nodeExterno.Esquiva or '0';
+            											node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+            											node.Vez = node.Vez or '0';
+            											node.Atletismo = nodeExterno.TAtletismo or '0';
+            											node.Sabedoria = nodeExterno.TSabedoria or '0';
+            											node.Percepcao = nodeExterno.TPercepcao or '0';
+            											node.Acrobacia = nodeExterno.TAcrobacia or '0';
+            											node.Vigor = nodeExterno.TVigor or '0';
+            											node.HPBarMax = nodeExterno.HPTotal or '0';
+            											node.MPBarMax = nodeExterno.MPTotal or '0';
+            											node.HPBar = nodeExterno.HPAtual or '0';
+            											node.MPBar = nodeExterno.MPAtual or '0';
+            											node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoOponente
+            											node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
+            										else
+            											node.PA = nodeExterno.Dano or '0';
+            											node.PM = nodeExterno.DanoMagico or '0';
+            											node.PF = "NPC";
+            											node.DEF = nodeExterno.DefesaPorCent or '0';
+            											node.RES = nodeExterno.ResistenciaPorCent or '0';
+            											node.AC = nodeExterno.Acerto or '0';
+            											node.ACM = nodeExterno.AcertoMagico or '0';
+            											node.CR = nodeExterno.Critical or '0';
+            											node.CRM = nodeExterno.CriticalMagico or '0';
+            											node.ESQ = nodeExterno.Esquiva or '0';
+            											node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+            											node.Vez = node.Vez or '0';
+            											node.Atletismo = nodeExterno.Atletismo or '0';
+            											node.Sabedoria = nodeExterno.Sabedoria or '0';
+            											node.Percepcao = nodeExterno.Percepcao or '0';
+            											node.Acrobacia = nodeExterno.Acrobacia or '0';
+            											node.Vigor = nodeExterno.TVigor or '0';
+            											node.HPBarMax = nodeExterno.HPTotal or '0';
+            											node.MPBarMax = nodeExterno.MPTotal or '0';
+            											node.HPBar = nodeExterno.HPAtual or '0';
+            											node.MPBar = nodeExterno.MPAtual or '0';
+            											node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
+            											node.imagemDoPersonagem = nodeExterno.imgInimigo
+            										end;
+            
             										node.HPBarO = (node.HPBarO - await(sheet.DanoRecebido))
             										nodeExterno.HPAtual = node.HPBarO or '0';
             
@@ -2141,6 +2482,60 @@ end
             
             										-- Aguarda até que a ficha esteja carregada
             										local nodeExterno = await(promise);
+            
+            										-- Sincronizando
+            
+            										if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
+            											node.PA = nodeExterno.PA or '0';
+            											node.PM = nodeExterno.PM or '0';
+            											node.PF = nodeExterno.PF or '0';
+            											node.DEF = nodeExterno.DEFRED or '0';
+            											node.RES = nodeExterno.RESRED or '0';
+            											node.AC = nodeExterno.Acerto or '0';
+            											node.ACM = nodeExterno.AcertoMagico or '0';
+            											node.CR = nodeExterno.Critical or '0';
+            											node.CRM = nodeExterno.CMagico or '0';
+            											node.ESQ = nodeExterno.Esquiva or '0';
+            											node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+            											node.Vez = node.Vez or '0';
+            											node.Atletismo = nodeExterno.TAtletismo or '0';
+            											node.Sabedoria = nodeExterno.TSabedoria or '0';
+            											node.Percepcao = nodeExterno.TPercepcao or '0';
+            											node.Acrobacia = nodeExterno.TAcrobacia or '0';
+            											node.Vigor = nodeExterno.TVigor or '0';
+            											node.HPBarMax = nodeExterno.HPTotal or '0';
+            											node.MPBarMax = nodeExterno.MPTotal or '0';
+            											node.HPBar = nodeExterno.HPAtual or '0';
+            											node.MPBar = nodeExterno.MPAtual or '0';
+            											node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoPersonagem
+            											node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
+            										else
+            											node.PA = nodeExterno.Dano or '0';
+            											node.PM = nodeExterno.DanoMagico or '0';
+            											node.PF = "NPC";
+            											node.DEF = nodeExterno.DefesaPorCent or '0';
+            											node.RES = nodeExterno.ResistenciaPorCent or '0';
+            											node.AC = nodeExterno.Acerto or '0';
+            											node.ACM = nodeExterno.AcertoMagico or '0';
+            											node.CR = nodeExterno.Critical or '0';
+            											node.CRM = nodeExterno.CriticalMagico or '0';
+            											node.ESQ = nodeExterno.Esquiva or '0';
+            											node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+            											node.Vez = node.Vez or '0';
+            											node.Atletismo = nodeExterno.Atletismo or '0';
+            											node.Sabedoria = nodeExterno.Sabedoria or '0';
+            											node.Percepcao = nodeExterno.Percepcao or '0';
+            											node.Acrobacia = nodeExterno.Acrobacia or '0';
+            											node.Vigor = nodeExterno.TVigor or '0';
+            											node.HPBarMax = nodeExterno.HPTotal or '0';
+            											node.MPBarMax = nodeExterno.MPTotal or '0';
+            											node.HPBar = nodeExterno.HPAtual or '0';
+            											node.MPBar = nodeExterno.MPAtual or '0';
+            											node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
+            											node.imagemDoPersonagem = nodeExterno.imgInimigo
+            										end;
+            
+            										
             										node.HPBar = (node.HPBar - await(sheet.DanoRecebido))
             										nodeExterno.HPAtual = node.HPBar or '0';
             										
@@ -2157,6 +2552,7 @@ end
         end);
 
     function obj:_releaseEvents()
+        __o_rrpgObjs.removeEventListenerById(self._e_event21);
         __o_rrpgObjs.removeEventListenerById(self._e_event20);
         __o_rrpgObjs.removeEventListenerById(self._e_event19);
         __o_rrpgObjs.removeEventListenerById(self._e_event18);
@@ -2239,9 +2635,10 @@ end
         if self.label20 ~= nil then self.label20:destroy(); self.label20 = nil; end;
         if self.image1 ~= nil then self.image1:destroy(); self.image1 = nil; end;
         if self.BoxDetalheOponentes ~= nil then self.BoxDetalheOponentes:destroy(); self.BoxDetalheOponentes = nil; end;
+        if self.edtHPAtualI ~= nil then self.edtHPAtualI:destroy(); self.edtHPAtualI = nil; end;
         if self.label60 ~= nil then self.label60:destroy(); self.label60 = nil; end;
-        if self.label76 ~= nil then self.label76:destroy(); self.label76 = nil; end;
         if self.label40 ~= nil then self.label40:destroy(); self.label40 = nil; end;
+        if self.label76 ~= nil then self.label76:destroy(); self.label76 = nil; end;
         if self.label87 ~= nil then self.label87:destroy(); self.label87 = nil; end;
         if self.label9 ~= nil then self.label9:destroy(); self.label9 = nil; end;
         if self.label33 ~= nil then self.label33:destroy(); self.label33 = nil; end;
@@ -2258,6 +2655,7 @@ end
         if self.layout2 ~= nil then self.layout2:destroy(); self.layout2 = nil; end;
         if self.edit1 ~= nil then self.edit1:destroy(); self.edit1 = nil; end;
         if self.label7 ~= nil then self.label7:destroy(); self.label7 = nil; end;
+        if self.btnEditStatusI ~= nil then self.btnEditStatusI:destroy(); self.btnEditStatusI = nil; end;
         if self.progressBar1 ~= nil then self.progressBar1:destroy(); self.progressBar1 = nil; end;
         if self.label47 ~= nil then self.label47:destroy(); self.label47 = nil; end;
         if self.editAcaoAtual ~= nil then self.editAcaoAtual:destroy(); self.editAcaoAtual = nil; end;
@@ -2317,7 +2715,6 @@ end
         if self.label92 ~= nil then self.label92:destroy(); self.label92 = nil; end;
         if self.label3 ~= nil then self.label3:destroy(); self.label3 = nil; end;
         if self.label52 ~= nil then self.label52:destroy(); self.label52 = nil; end;
-        if self.label97 ~= nil then self.label97:destroy(); self.label97 = nil; end;
         if self.layout1 ~= nil then self.layout1:destroy(); self.layout1 = nil; end;
         if self.label38 ~= nil then self.label38:destroy(); self.label38 = nil; end;
         if self.btnAcaoAnterior ~= nil then self.btnAcaoAnterior:destroy(); self.btnAcaoAnterior = nil; end;
@@ -2326,7 +2723,7 @@ end
         if self.label6 ~= nil then self.label6:destroy(); self.label6 = nil; end;
         if self.dataLink1 ~= nil then self.dataLink1:destroy(); self.dataLink1 = nil; end;
         if self.label46 ~= nil then self.label46:destroy(); self.label46 = nil; end;
-        if self.label98 ~= nil then self.label98:destroy(); self.label98 = nil; end;
+        if self.edtMPAtualI ~= nil then self.edtMPAtualI:destroy(); self.edtMPAtualI = nil; end;
         if self.label21 ~= nil then self.label21:destroy(); self.label21 = nil; end;
         if self.label75 ~= nil then self.label75:destroy(); self.label75 = nil; end;
         if self.label80 ~= nil then self.label80:destroy(); self.label80 = nil; end;
