@@ -383,7 +383,7 @@
 		<rectangle left="498" top="732" color="black"  width="75" height="20"/>
 		<label left="500" top="732" width="75" height="20" field="CMagico" />
 ------------- LevelZeira --------------------------------------
-		<edit left="295" top="807" fontColor="#00008B" scale="2.0" width="21"  height="50" type="number" horzTextAlign="center" textPrompt="0" canFocus="false" hitTest="false" enabled="true" max="30" field="Level" transparent="true" />
+		<edit left="295" top="807" fontColor="#00008B" scale="2.0" width="21"  height="50" type="number" horzTextAlign="center" textPrompt="0" canFocus="true" hitTest="false" enabled="true" max="30" field="Level" transparent="true" />
 		<edit left="295" top="700" fontColor="#00008B" scale="2.0" width="21" visible="false"  height="50" field="Elevel" transparent="false" />
 			
     --------------------- Outras Forms --------------------------------	
@@ -708,7 +708,7 @@
 	</button>
 	
 	=============== CONTROLA TUDO DO LEVELUP ========================
-	<edit top="440" left="292" width="50" height="30" max="160" min="0" hitTest="true" canFocus="true" horzTextAlign="center" type="number" text="120" transparent="true" fontColor="black" fontSize="22" enabled="true" field="ControladorAtributos"/>
+	<edit top="440" left="292" width="50" height="30" max="160" min="0" hitTest="false" canFocus="true" horzTextAlign="center" type="number" text="120" transparent="true" fontColor="black" fontSize="22" enabled="true" field="ControladorAtributos"/>
 	<edit top="530" left="292" width="50" height="30" max="160" min="0" horzTextAlign="center" type="number" text="120" visible="false" fontColor="RED" fontSize="22" enabled="true" field="LiberarRolagemUp"/>
 	<edit top="850" left="400" width="50" height="30" max="20" min="0" horzTextAlign="center" type="number" visible="false" fontSize="22" enabled="true" field="CLevel"/>
 				

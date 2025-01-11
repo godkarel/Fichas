@@ -43,7 +43,6 @@
 
 						local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
 
-					
 					------------------------------------------------------------------
 					
 					-- se o usuário não preencheu modificador, vamos usar o valor 0
@@ -61,8 +60,7 @@
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 											nodeExterno.DanoRecebido = math.floor((sheet.PA * 2) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor(sheet.PA * 2)										
+											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)										
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
 										elseif sheet.EscolheAtaqueBasico == 'PF' then	
 											if sheet.AtualFlecha ~= 0 then									
@@ -71,7 +69,6 @@
 												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 												nodeExterno.DanoRecebido = math.floor((sheet.PF * 2) * (1 - (DefAlvo / 100)))
 												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												sheet.nodeExterno = math.floor(sheet.PF * 2)
 												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
 											else
 												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
@@ -83,21 +80,18 @@
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 											nodeExterno.DanoRecebido = math.floor((sheet.PM) * (1 - (RESAlvo / 100)))
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor(sheet.PM)
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
 										elseif sheet.EscolheAtaqueBasico == 'PM+PA' then								
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 											nodeExterno.DanoRecebido = math.floor((sheet.PM * 2) + math.floor((sheet.PA * 2)) * (1 - (DefAlvo / 100)))
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor((sheet.PM * 2)) + math.floor((sheet.PA * 2))
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
 										elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA * 2)) * (1 - (DefAlvo / 100)))
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor((sheet.PM)) + math.floor((sheet.PA * 2))
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
 										end;
 									else
@@ -106,7 +100,6 @@
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 											nodeExterno.DanoRecebido = math.floor((sheet.PA) * (1 - (DefAlvo / 100)))
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor(sheet.PA)
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
 										elseif sheet.EscolheAtaqueBasico == 'PF' then		
 											if sheet.AtualFlecha ~= 0 then									
@@ -115,7 +108,6 @@
 												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 												nodeExterno.DanoRecebido = math.floor((sheet.PF) * (1 - (DefAlvo / 100)))
 												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												sheet.nodeExterno = math.floor(sheet.PF)
 												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
 											else
 												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
@@ -127,21 +119,18 @@
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 											nodeExterno.DanoRecebido = math.floor((sheet.PM / 2) * (1 - (RESAlvo / 100)))
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor(sheet.PM / 2)
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
 										elseif sheet.EscolheAtaqueBasico == 'PM+PA' then								
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA)) * (1 - (DefAlvo / 100)))
+											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA)) * (1 - (RESAlvo / 100)))
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor((sheet.PM)) + math.floor((sheet.PA))
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
 										elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 											nodeExterno.DanoRecebido = math.floor(((sheet.PM / 2)) + math.floor((sheet.PA)) * (1 - (DefAlvo / 100)))
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor((sheet.PM / 2)) + math.floor((sheet.PA))
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
 										end;
 											
@@ -216,8 +205,7 @@
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 											nodeExterno.DanoRecebido = math.floor((sheet.PA * 2) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor(sheet.PA * 2)										
+											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)									
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
 										elseif sheet.EscolheAtaqueBasico == 'PF' then	
 											if sheet.AtualFlecha ~= 0 then									
@@ -226,7 +214,6 @@
 												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 												nodeExterno.DanoRecebido = math.floor((sheet.PF * 2) * (1 - (DefAlvo / 100)))
 												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												sheet.nodeExterno = math.floor(sheet.PF * 2)
 												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
 											else
 												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
@@ -238,21 +225,18 @@
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 											nodeExterno.DanoRecebido = math.floor((sheet.PM) * (1 - (RESAlvo / 100)))
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor(sheet.PM)
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
 										elseif sheet.EscolheAtaqueBasico == 'PM+PA' then								
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 											nodeExterno.DanoRecebido = math.floor((sheet.PM * 2) + math.floor((sheet.PA * 2)) * (1 - (DefAlvo / 100)))
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor((sheet.PM * 2)) + math.floor((sheet.PA * 2))
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
 										elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA * 2)) * (1 - (DefAlvo / 100)))
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor((sheet.PM)) + math.floor((sheet.PA * 2))
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
 										end;
 									else
@@ -261,7 +245,6 @@
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 											nodeExterno.DanoRecebido = math.floor((sheet.PA) * (1 - (DefAlvo / 100)))
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor(sheet.PA)
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
 										elseif sheet.EscolheAtaqueBasico == 'PF' then		
 											if sheet.AtualFlecha ~= 0 then									
@@ -270,7 +253,6 @@
 												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 												nodeExterno.DanoRecebido = math.floor((sheet.PF) * (1 - (DefAlvo / 100)))
 												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												sheet.nodeExterno = math.floor(sheet.PF)
 												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
 											else
 												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
@@ -282,21 +264,18 @@
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 											nodeExterno.DanoRecebido = math.floor((sheet.PM / 2) * (1 - (RESAlvo / 100)))
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor(sheet.PM / 2)
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
 										elseif sheet.EscolheAtaqueBasico == 'PM+PA' then								
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA)) * (1 - (DefAlvo / 100)))
+											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA)) * (1 - (RESAlvo / 100)))
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor((sheet.PM)) + math.floor((sheet.PA))
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
 										elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
 											nodeExterno.AlvoRecebido = self.cmbInimigos.value
 											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 											nodeExterno.DanoRecebido = math.floor(((sheet.PM / 2)) + math.floor((sheet.PA)) * (1 - (DefAlvo / 100)))
 											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											sheet.nodeExterno = math.floor((sheet.PM / 2)) + math.floor((sheet.PA))
 											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
 										end;
 											
