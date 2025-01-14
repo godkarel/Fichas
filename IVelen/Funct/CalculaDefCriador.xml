@@ -18,7 +18,7 @@
 			end
 
 			-- Seleciona um valor aleatório para a redução de dano entre 9% e 16%
-			local reducaoPercentual = math.random(10, 17)
+			local reducaoPercentual = math.random(12, 17)
 
 			-- Calcula a defesa necessária para atingir a redução de dano desejada
 			local divisor = divisores[level]

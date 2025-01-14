@@ -104,7 +104,7 @@
 
 		function ajusteDesertico()
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance > 3 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.05, -0.04, -0.03, -0.02, -0.01,
@@ -113,7 +113,7 @@
 					0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20,
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
-				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
+				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			end
 			local chance = math.random(1, 10)    
 			if chance == 3 then
@@ -125,7 +125,7 @@
 					0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20,
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
-				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			end
 
 			local chance = math.random(1, 10) 
@@ -289,16 +289,16 @@
 			end
 
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance > 5 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
-				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
+				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			end
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance > 5 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					0, 
@@ -306,7 +306,7 @@
 					0.11, 0.12, 0.13, 0.14, 0.15	
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
-				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			end
 		end;
 
@@ -344,7 +344,7 @@
 					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
-				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			end
 
 			local chance = math.random(1, 10)
@@ -438,24 +438,24 @@
 			end
 
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance > 2 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.05, -0.04, -0.03, -0.02, -0.01, 0, 
 					0.01, 0.02, 0.03, 0.04, 0.05
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
-				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
+				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			end
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance > 2 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.05, -0.04, -0.03, -0.02, -0.01, 0, 
 					0.01, 0.02, 0.03, 0.04, 0.05
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
-				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			end
 		end;
 
@@ -471,8 +471,8 @@
 			sheet.AcertoMagico = math.floor(sheet.AcertoMagico * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			sheet.Esquiva = math.floor(sheet.Esquiva * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			sheet.Persistencia = math.floor(sheet.Persistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
-			sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
-			sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
+			sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			sheet.HPTotal = math.floor(sheet.HPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			sheet.MPTotal = math.floor(sheet.MPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
 

@@ -204,7 +204,7 @@ local function constructNew_frmIVelen()
 
 		function ajusteDesertico()
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance > 3 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.05, -0.04, -0.03, -0.02, -0.01,
@@ -213,7 +213,7 @@ local function constructNew_frmIVelen()
 					0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20,
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
-				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
+				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			end
 			local chance = math.random(1, 10)    
 			if chance == 3 then
@@ -225,7 +225,7 @@ local function constructNew_frmIVelen()
 					0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.20,
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
-				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			end
 
 			local chance = math.random(1, 10) 
@@ -389,16 +389,16 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance > 5 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
-				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
+				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			end
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance > 5 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					0, 
@@ -406,7 +406,7 @@ local function constructNew_frmIVelen()
 					0.11, 0.12, 0.13, 0.14, 0.15	
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
-				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			end
 		end;
 
@@ -444,7 +444,7 @@ local function constructNew_frmIVelen()
 					0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
-				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			end
 
 			local chance = math.random(1, 10)
@@ -538,24 +538,24 @@ local function constructNew_frmIVelen()
 			end
 
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance > 2 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.05, -0.04, -0.03, -0.02, -0.01, 0, 
 					0.01, 0.02, 0.03, 0.04, 0.05
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
-				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
+				sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			end
 			local chance = math.random(1, 10)    
-			if chance == 3 then
+			if chance > 2 then
 				-- Ajuste aleatório entre -10% a +10%
 				local ajustes = {
 					-0.05, -0.04, -0.03, -0.02, -0.01, 0, 
 					0.01, 0.02, 0.03, 0.04, 0.05
 				}
 				local ajuste = ajustes[math.random(#ajustes)]
-				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+				sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			end
 		end;
 
@@ -571,8 +571,8 @@ local function constructNew_frmIVelen()
 			sheet.AcertoMagico = math.floor(sheet.AcertoMagico * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			sheet.Esquiva = math.floor(sheet.Esquiva * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			sheet.Persistencia = math.floor(sheet.Persistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
-			sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste))  -- Aplicando o ajuste ao HP
-			sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste))  -- Aplicando o ajuste ao HP
+			sheet.Defesa = math.floor(sheet.Defesa * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
+			sheet.Resistencia = math.floor(sheet.Resistencia * (1 + ajuste * 2))  -- Aplicando o ajuste ao HP
 			sheet.HPTotal = math.floor(sheet.HPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
 			sheet.MPTotal = math.floor(sheet.MPTotal * (1 + ajuste))  -- Aplicando o ajuste ao HP
 
@@ -693,7 +693,7 @@ local function constructNew_frmIVelen()
 			end
 
 			-- Seleciona um valor aleatório para a redução de dano entre 9% e 16%
-			local reducaoPercentual = math.random(10, 17)
+			local reducaoPercentual = math.random(12, 17)
 
 			-- Calcula a defesa necessária para atingir a redução de dano desejada
 			local divisor = divisores[level]
@@ -783,7 +783,7 @@ local function constructNew_frmIVelen()
 			end
 
 			-- Seleciona um valor aleatório para a redução de dano entre 9% e 16%
-			local reducaoPercentual = math.random(10, 17)
+			local reducaoPercentual = math.random(12, 17)
 
 			-- Calcula a defesa necessária para atingir a redução de dano desejada
 			local divisor = divisores[level]
@@ -1026,6 +1026,8 @@ local function constructNew_frmIVelen()
 						end;
 					end;
 				end;
+
+			
         
 
 
@@ -1087,7 +1089,7 @@ local function constructNew_frmIVelen()
 					IntensidadeMecanica = (tonumber(CuraMecanica) or 0) + (tonumber(sheet.DanoMagico) or 0);	
 				end;
 				
-				if TipoMecanica == 'Fixo' then
+				if TipoMecanica == 'Real' then
 					IntensidadeMecanica = (tonumber(FixoMecanica) or 0);	
 				end;
 
@@ -1134,7 +1136,22 @@ local function constructNew_frmIVelen()
 								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] »");
 							end;
-						end;		
+						end;
+						if TipoMecanica == 'Real' then
+							if sheet.CriticalMagico +1 > rolado.resultado then 
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica * 2))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido or 0) .. "[§K9,0] » [§K3,0]Dano Real");
+							else
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] » [§K3,0]Dano Real");
+							end;
+						end;
 					end;
 					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(CustoMecanica) or 0; 
 				else
@@ -1200,7 +1217,7 @@ local function constructNew_frmIVelen()
 					IntensidadeMecanica = (tonumber(CuraMecanica) or 0) + (tonumber(sheet.DanoMagico) or 0);	
 				end;
 				
-				if sTipoMecanica == 'Fixo' then
+				if TipoMecanica == 'Real' then
 					IntensidadeMecanica = (tonumber(FixoMecanica) or 0);	
 				end;
 
@@ -1246,6 +1263,21 @@ local function constructNew_frmIVelen()
 								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica) * (1 - (RESAlvo / 100)))
 								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] »");
+							end;
+						end;
+						if TipoMecanica == 'Real' then
+							if sheet.CriticalMagico +1 > rolado.resultado then 
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica * 2))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido or 0) .. "[§K9,0] » [§K3,0]Dano Real");
+							else
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] » [§K3,0]Dano Real");
 							end;
 						end;		
 					end;
@@ -1324,7 +1356,11 @@ local function constructNew_frmIVelen()
 					IntensidadeMecanica = (tonumber(DanoMecanica) or 0) + (tonumber(sheet.DanoMagico) or 0);	
 				end;
 				
-				if TipoMecanica == 'Fixo' then
+				if TipoMecanica == 'Real' then
+					IntensidadeMecanica = (tonumber(DanoMecanica) or 0);	
+				end;
+
+				if TipoMecanica == 'Defensivo' then
 					IntensidadeMecanica = (tonumber(DanoMecanica) or 0);	
 				end;
 
@@ -1371,7 +1407,44 @@ local function constructNew_frmIVelen()
 								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] »");
 							end;
-						end;		
+						end;
+						if TipoMecanica == 'Buff' then
+							if sheet.CriticalMagico +1 > rolado.resultado then 
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica * 2) * (1 - (RESAlvo / 100)))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido or 0) .. "[§K9,0] » [§K3,0]Buff");
+							else
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica) * (1 - (RESAlvo / 100)))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] » [§K3,0]Buff");
+							end;
+						end;
+						if TipoMecanica == 'Real' then
+							if sheet.CriticalMagico +1 > rolado.resultado then 
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica * 2))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido or 0) .. "[§K9,0] » [§K3,0]Dano Real");
+							else
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] » [§K3,0]Dano Real");
+							end;
+						end;
+						if TipoMecanica == 'Defensivo' then
+							if sheet.CriticalMagico +1 > rolado.resultado then 
+								mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Defensivo com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. (IntensidadeMecanica * 2 or 0) .. "[§K8,0] » [§K3,0]Defensivo");
+							else
+								mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. IntensidadeMecanica or 0 .. "[§K8,0] » [§K3,0]Defensivo");
+							end;
+						end;			
 					end;
 					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(CustoMecanica) or 0; 
 				else
@@ -1437,7 +1510,11 @@ local function constructNew_frmIVelen()
 					IntensidadeMecanica = (tonumber(DanoMecanica) or 0) + (tonumber(sheet.DanoMagico) or 0);	
 				end;
 				
-				if sTipoMecanica == 'Fixo' then
+				if TipoMecanica == 'Real' then
+					IntensidadeMecanica = (tonumber(DanoMecanica) or 0);	
+				end;
+
+				if TipoMecanica == 'Defensivo' then
 					IntensidadeMecanica = (tonumber(DanoMecanica) or 0);	
 				end;
 
@@ -1484,7 +1561,44 @@ local function constructNew_frmIVelen()
 								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] »");
 							end;
-						end;		
+						end;
+						if TipoMecanica == 'Buff' then
+							if sheet.CriticalMagico +1 > rolado.resultado then 
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica * 2) * (1 - (RESAlvo / 100)))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido or 0) .. "[§K9,0] » [§K3,0]Buff");
+							else
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica) * (1 - (RESAlvo / 100)))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] » [§K3,0]Buff");
+							end;
+						end;
+						if TipoMecanica == 'Real' then
+							if sheet.CriticalMagico +1 > rolado.resultado then 
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica * 2))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido or 0) .. "[§K9,0] » [§K3,0]Dano Real");
+							else
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] » [§K3,0]Dano Real");
+							end;
+						end;
+						if TipoMecanica == 'Defensivo' then
+							if sheet.CriticalMagico +1 > rolado.resultado then 
+								mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Defensivo com [§K4,0] CRITICAL [§K8,0] « [§K4,0] " .. (IntensidadeMecanica * 2 or 0) .. "[§K8,0] » [§K3,0]Defensivo");
+							else
+								mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. IntensidadeMecanica or 0 .. "[§K8,0] » [§K3,0]Defensivo");
+							end;
+						end;			
 					end;
 					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(CustoMecanica) or 0; 
 				else
@@ -2161,7 +2275,7 @@ local function constructNew_frmIVelen()
     obj.comboBox3:setLeft(50);
     obj.comboBox3:setTop(300);
     obj.comboBox3:setWidth(105);
-    obj.comboBox3:setItems({'Dano', 'Dano Magico', 'Cura', 'Fixo'});
+    obj.comboBox3:setItems({'Dano', 'Dano Magico', 'Cura', 'Real'});
     obj.comboBox3:setField("TipoMecanica1");
     obj.comboBox3:setName("comboBox3");
 
@@ -2199,7 +2313,7 @@ local function constructNew_frmIVelen()
     obj.label12:setParent(obj.popMecanica1);
     obj.label12:setLeft(265);
     obj.label12:setTop(335);
-    obj.label12:setText("Fixo:");
+    obj.label12:setText("Real:");
     obj.label12:setName("label12");
 
     obj.edit24 = GUI.fromHandle(_obj_newObject("edit"));
@@ -4153,6 +4267,7 @@ local function constructNew_frmIVelen()
             self.popMecanica2:show()
             				self.UsarMecanicaAtual.onClick = function() 
             					MecanicaDinamica(sheet.TipoMecanica2, sheet.DanoMecanica2, sheet.CuraMecanica2, sheet.FixoMecanica2, sheet.DescriMecanica2, sheet.FalhaMecanica2, sheet.CustoMecanica2, sheet.CDMecanica2, sheet.IntensidadeMecanica2, self.CbxMeca2.checked) 
+            					
             				end
         end);
 
@@ -4227,6 +4342,18 @@ local function constructNew_frmIVelen()
             						self.dscHabilidadeInimigo.node.Custo = tonumber(self.dscHabilidadeInimigo.node.Custo) or 0;
             						self.dscHabilidadeInimigo.node.Intensidade = tonumber(self.dscHabilidadeInimigo.node.Intensidade) or 0;
             						self.dscHabilidadeInimigo.node.DescriHabilidade = self.dscHabilidadeInimigo.node.DescriHabilidade or 'Descrição da Habilidade'
+            					end;
+            
+            					if self.dscHabilidadeInimigo.visible == true then
+            						if self.dscHabilidadeInimigo.node.TipoSkill == 'Dano' then
+            							self.dscHabilidadeInimigo.node.Intensidade = tonumber(sheet.Dano) + (tonumber(self.dscHabilidadeInimigo.node.Foco) or 0);
+            						end;
+            						if self.dscHabilidadeInimigo.node.TipoSkill == 'Dano Magico' then
+            							self.dscHabilidadeInimigo.node.Intensidade = tonumber(sheet.DanoMagico) + (tonumber(self.dscHabilidadeInimigo.node.Foco) or 0);
+            						end;
+            						if self.dscHabilidadeInimigo.node.TipoSkill == 'Real' or self.dscHabilidadeInimigo.node.TipoSkill == 'Cura' then
+            							self.dscHabilidadeInimigo.node.Intensidade = (tonumber(self.dscHabilidadeInimigo.node.Foco) or 0);
+            						end;
             					end;
         end);
 

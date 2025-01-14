@@ -58,7 +58,7 @@
 					IntensidadeMecanica = (tonumber(CuraMecanica) or 0) + (tonumber(sheet.DanoMagico) or 0);	
 				end;
 				
-				if TipoMecanica == 'Fixo' then
+				if TipoMecanica == 'Real' then
 					IntensidadeMecanica = (tonumber(FixoMecanica) or 0);	
 				end;
 
@@ -105,7 +105,22 @@
 								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] »");
 							end;
-						end;		
+						end;
+						if TipoMecanica == 'Real' then
+							if sheet.CriticalMagico +1 > rolado.resultado then 
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica * 2))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido or 0) .. "[§K9,0] » [§K3,0]Dano Real");
+							else
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] » [§K3,0]Dano Real");
+							end;
+						end;
 					end;
 					sheet.MPAtual = tonumber(sheet.MPAtual) - tonumber(CustoMecanica) or 0; 
 				else
@@ -171,7 +186,7 @@
 					IntensidadeMecanica = (tonumber(CuraMecanica) or 0) + (tonumber(sheet.DanoMagico) or 0);	
 				end;
 				
-				if sTipoMecanica == 'Fixo' then
+				if TipoMecanica == 'Real' then
 					IntensidadeMecanica = (tonumber(FixoMecanica) or 0);	
 				end;
 
@@ -217,6 +232,21 @@
 								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica) * (1 - (RESAlvo / 100)))
 								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] »");
+							end;
+						end;
+						if TipoMecanica == 'Real' then
+							if sheet.CriticalMagico +1 > rolado.resultado then 
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica * 2))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido or 0) .. "[§K9,0] » [§K3,0]Dano Real");
+							else
+								nodeExterno.AlvoRecebido = self.cmbInimigosHM.value
+								nodeExterno.GrupoRecebido = self.cmbTipoGrupoHM.value
+								nodeExterno.DanoRecebido = math.floor((IntensidadeMecanica))
+								nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+								mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido or 0 .. "[§K9,0] » [§K3,0]Dano Real");
 							end;
 						end;		
 					end;

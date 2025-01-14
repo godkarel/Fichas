@@ -434,12 +434,12 @@
 		<label left="10" top="190" text="Descrição Completa:"/>	
 		<textEditor left="130" top="190" width="248" height="100" field="FalhaMecanica1"/>
 		<label left="10" top="303" text="Tipo:"/>	
-		<comboBox left="50" top="300" width="105" items="{'Dano', 'Dano Magico', 'Cura', 'Fixo'}" field="TipoMecanica1"/>
+		<comboBox left="50" top="300" width="105" items="{'Dano', 'Dano Magico', 'Cura', 'Real'}" field="TipoMecanica1"/>
 		<label left="10" top="335" text="Dano:"/>	
 		<edit left="50" top="330" width="75" field="DanoMecanica1"/>
 		<label left="135" top="335" text="Cura:"/>	
 		<edit left="180" top="330" width="75" field="CuraMecanica1"/>
-		<label left="265" top="335" text="Fixo:"/>	
+		<label left="265" top="335" text="Real:"/>	
 		<edit left="305" top="330" width="75" field="FixoMecanica1"/>
 		<label left="10" top="370" visible="true" text="Custo:"/>	
 		<edit left="50" top="365" visible="true" width="75" field="CustoMecanica1"/>
@@ -455,6 +455,7 @@
 				self.popMecanica2:show()
 				self.UsarMecanicaAtual.onClick = function() 
 					MecanicaDinamica(sheet.TipoMecanica2, sheet.DanoMecanica2, sheet.CuraMecanica2, sheet.FixoMecanica2, sheet.DescriMecanica2, sheet.FalhaMecanica2, sheet.CustoMecanica2, sheet.CDMecanica2, sheet.IntensidadeMecanica2, self.CbxMeca2.checked) 
+					
 				end
 			</event>
         </button>
@@ -550,7 +551,7 @@
 		
 		<checkBox name="CbxMeca4" left="265" top="370" width="75" fontColor="red" text="Mecanica Completa" field="ConheceMecanica4"/>
 		
-        </popup>    
+        </popup>   
 
 		<dataLink fields="{'NomeMecanica1', 'NomeMecanica2', 'NomeMecanica3', 'NomeMecanica4'}">
                 <event name="onChange">
@@ -595,6 +596,18 @@
 						self.dscHabilidadeInimigo.node.Custo = tonumber(self.dscHabilidadeInimigo.node.Custo) or 0;
 						self.dscHabilidadeInimigo.node.Intensidade = tonumber(self.dscHabilidadeInimigo.node.Intensidade) or 0;
 						self.dscHabilidadeInimigo.node.DescriHabilidade = self.dscHabilidadeInimigo.node.DescriHabilidade or 'Descrição da Habilidade'
+					end;
+
+					if self.dscHabilidadeInimigo.visible == true then
+						if self.dscHabilidadeInimigo.node.TipoSkill == 'Dano' then
+							self.dscHabilidadeInimigo.node.Intensidade = tonumber(sheet.Dano) + (tonumber(self.dscHabilidadeInimigo.node.Foco) or 0);
+						end;
+						if self.dscHabilidadeInimigo.node.TipoSkill == 'Dano Magico' then
+							self.dscHabilidadeInimigo.node.Intensidade = tonumber(sheet.DanoMagico) + (tonumber(self.dscHabilidadeInimigo.node.Foco) or 0);
+						end;
+						if self.dscHabilidadeInimigo.node.TipoSkill == 'Real' or self.dscHabilidadeInimigo.node.TipoSkill == 'Cura' then
+							self.dscHabilidadeInimigo.node.Intensidade = (tonumber(self.dscHabilidadeInimigo.node.Foco) or 0);
+						end;
 					end;
 			</event>
 			
