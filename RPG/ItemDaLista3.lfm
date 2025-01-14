@@ -7,7 +7,7 @@
 		end;
 	</event>
 	<layout align="client" margins="{left=1, right=4, top=0, bottom=0}">
-		<button name="btnAtualSkill" left="1" width="50" height="50" opacity="1.0">
+		<button name="btnAtualSkill" left="0" width="50" height="47" opacity="1.0">
 			<image name="imgIconSkill" align="client" field="fldImgIconSkill" src="/imagens/tt.png"/>
 				<event name="onClick">  
 					local node = nodeSelecionado; -- Acessa o nó armazenado.
@@ -34,7 +34,7 @@
 					end
 				</event>
 			</button>
-		<label align="client" text="Teste de label" visible="false" fontColor="blue" field="NomeHabilidade" margins="{left=10}"/>
+		<label align="client" text="Teste de label" fontSize="15" fontStyle="bold" visible="true" fontColor="blue" field="NomeHabilidade" margins="{left=60}"/>
 	</layout>
 
 	<script>					

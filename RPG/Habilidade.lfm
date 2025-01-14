@@ -17,7 +17,7 @@
 			</event>
         </dataLink>
 		------------------------- Habilidade 1 --------------------------------------------------		
-		<label left="250" top="15" width="200" height="40" fontColor="Indigo" fontStyle="bold" fontFamily="Nyala" fontSize="20" text="Pontos de Habilidade"/>
+		<label left="200" top="15" width="250" height="40" fontColor="Indigo" fontStyle="bold" fontFamily="Nyala" fontSize="20" text="Pontos de Habilidade"/>
 		<edit  left="413" top="20" width="30" fontSize="15" horzTextAlign="center" fontStyle="bold" hitTest="false" canFocus="false" height="30" field="PontoHabilidade"/>	
 		<button text="Nova Magia"  width="125" height="40" left="10" top="10">
 			<event name="onClick">
@@ -59,8 +59,8 @@
 			<image name="imghability" align="client" style="stretch" visible="false" animate="true" src="https://i.pinimg.com/originals/91/95/f4/9195f4dd1b69f90038f627c8af422429.gif"/>
 				<label left="60" top="10" width="200" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Habilidade:"/>
 				<image left="140" top="15" width="40" height="30" visible="true" field="fldImgIconSkill"/>
-				<edit  left="180" top="15" width="230" height="30" field="NomeHabilidade"/>				
-				<textEditor left="60" top="60" width="350" height="240" field="DescriHabilidade1"/>
+				<edit  left="180" top="15" width="230" height="30" fontSize="15" fontStyle="bold" field="NomeHabilidade"/>				
+				<textEditor left="60" top="60" width="350" height="240" fontSize="15" fontStyle="bold" field="DescriHabilidade1"/>
 				<label left="60" top="350" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Dano"/>
 				<edit left="115" top="355" width="50" height="30" type="number" field="DanoHabilidade1"/>
 				<label left="310" top="350" width="60" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Fixo"/>

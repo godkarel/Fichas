@@ -39,9 +39,9 @@ local function constructNew_frmItemDaLista3()
     obj.btnAtualSkill = GUI.fromHandle(_obj_newObject("button"));
     obj.btnAtualSkill:setParent(obj.layout1);
     obj.btnAtualSkill:setName("btnAtualSkill");
-    obj.btnAtualSkill:setLeft(1);
+    obj.btnAtualSkill:setLeft(0);
     obj.btnAtualSkill:setWidth(50);
-    obj.btnAtualSkill:setHeight(50);
+    obj.btnAtualSkill:setHeight(47);
     obj.btnAtualSkill:setOpacity(1.0);
 
     obj.imgIconSkill = GUI.fromHandle(_obj_newObject("image"));
@@ -55,10 +55,12 @@ local function constructNew_frmItemDaLista3()
     obj.label1:setParent(obj.layout1);
     obj.label1:setAlign("client");
     obj.label1:setText("Teste de label");
-    obj.label1:setVisible(false);
+    obj.label1:setFontSize(15);
+    lfm_setPropAsString(obj.label1, "fontStyle", "bold");
+    obj.label1:setVisible(true);
     obj.label1:setFontColor("blue");
     obj.label1:setField("NomeHabilidade");
-    obj.label1:setMargins({left=10});
+    obj.label1:setMargins({left=60});
     obj.label1:setName("label1");
 
 					

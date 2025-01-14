@@ -106,9 +106,9 @@ local function constructNew_frmhabilidade()
 
     obj.label1 = GUI.fromHandle(_obj_newObject("label"));
     obj.label1:setParent(obj.scrollBox1);
-    obj.label1:setLeft(250);
+    obj.label1:setLeft(200);
     obj.label1:setTop(15);
-    obj.label1:setWidth(200);
+    obj.label1:setWidth(250);
     obj.label1:setHeight(40);
     obj.label1:setFontColor("Indigo");
     lfm_setPropAsString(obj.label1, "fontStyle", "bold");
@@ -208,6 +208,8 @@ local function constructNew_frmhabilidade()
     obj.edit2:setTop(15);
     obj.edit2:setWidth(230);
     obj.edit2:setHeight(30);
+    obj.edit2:setFontSize(15);
+    lfm_setPropAsString(obj.edit2, "fontStyle", "bold");
     obj.edit2:setField("NomeHabilidade");
     obj.edit2:setName("edit2");
 
@@ -217,6 +219,8 @@ local function constructNew_frmhabilidade()
     obj.textEditor1:setTop(60);
     obj.textEditor1:setWidth(350);
     obj.textEditor1:setHeight(240);
+    obj.textEditor1:setFontSize(15);
+    lfm_setPropAsString(obj.textEditor1, "fontStyle", "bold");
     obj.textEditor1:setField("DescriHabilidade1");
     obj.textEditor1:setName("textEditor1");
 
