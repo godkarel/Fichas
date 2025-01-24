@@ -191,6 +191,73 @@
 				if node then
 					nodeSelecionado = node; -- Salva o nó selecionado no `sheet`.
 				end
+
+				local node = self.rclListaDosItens3.selectedNode; 
+				self.ListaJutsus3.node = node;                       
+				self.ListaJutsus3.visible = (node ~= nil);
+
+				if self.ListaJutsus3.visible == true then
+					self.ListaJutsus3.node.NomeHabilidade = self.ListaJutsus3.node.NomeHabilidade or 'Nome da Habilidade';
+					self.ListaJutsus3.node.DescriHabilidade1 = self.ListaJutsus3.node.DescriHabilidade1 or 'Descrição da Habilidade';
+					self.ListaJutsus3.node.DanoHabilidade1 = tonumber(self.ListaJutsus3.node.DanoHabilidade1) or 0;
+					self.ListaJutsus3.node.FixoHabilidade1 = tonumber(self.ListaJutsus3.node.FixoHabilidade1) or 0;
+					self.ListaJutsus3.node.CuraHabilidade1 = tonumber(self.ListaJutsus3.node.CuraHabilidade1) or 0;
+					self.ListaJutsus3.node.CustoHabilidade =tonumber( self.ListaJutsus3.node.CustoHabilidade) or 0;
+					self.ListaJutsus3.node.DanoAtributo1 = self.ListaJutsus3.node.DanoAtributo1 or 'Escolha';
+					self.ListaJutsus3.node.Hintensidade1 = tonumber(self.ListaJutsus3.node.Hintensidade1) or 0;	
+					self.ListaJutsus3.node.LevelHabilidade = tonumber(self.ListaJutsus3.node.LevelHabilidade) or 0;	
+					self.ListaJutsus3.node.CDHabilidade = tonumber(self.ListaJutsus3.node.CDHabilidade) or 0;	
+					self.ListaJutsus3.node.RecargaHabilidade = tonumber(self.ListaJutsus3.node.RecargaHabilidade) or 0;	
+					self.ListaJutsus3.node.ContaRecarga = tonumber(self.ListaJutsus3.node.ContaRecarga) or 0;	
+					self.ListaJutsus3.node.TurnoAtual = tonumber(self.ListaJutsus3.node.TurnoAtual) or 0;
+				end;
+
+				local mesas = rrpg.getRooms();
+				local bibliotecaAtual = mesas[1].library;
+				
+				local function obterNomesRecursivoH(bibItem)
+					local itensFilhos = bibItem.children;
+					local nomes = bibItem.name;
+					
+					for i = 1, #itensFilhos, 1 do
+						local bibItemFilho = itensFilhos[i];
+						local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
+
+						if nomesDoFilho == "Sistema de Combaate Velen" then
+							-- Obter ID do personagem Loan
+							local idPersonagem = bibItemFilho;
+
+							-- Solicita acesso à ficha do personagem
+							local promise = bibItemFilho:asyncOpenNDB();
+
+							-- Aguarda até que a ficha esteja carregada
+							local nodeExterno = await(promise);
+
+							if nodeExterno.TurnoAtualControle ~= nil and nodeExterno.TurnoAtualControle ~= "" then
+								self.ListaJutsus3.node.TurnoAtual = tonumber(nodeExterno.TurnoAtualControle)
+							end;
+
+						end
+					end
+					return nomes
+				end
+
+				if self.ListaJutsus3.node.TurnoAtual == 0 then 
+					self.ListaJutsus3.node.ContaRecarga = 0
+					self.ListaJutsus3.node.RecargaHabilidade = 0
+				end;
+
+				local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
+
+				if self.ListaJutsus3.node.ContaRecarga ~= nil and self.ListaJutsus3.node.ContaRecarga ~= "" and self.ListaJutsus3.node.ContaRecarga > 0 then
+					self.ListaJutsus3.node.RecargaHabilidade = tonumber(self.ListaJutsus3.node.ContaRecarga) + tonumber(self.ListaJutsus3.node.CDHabilidade) + 1 -  tonumber(self.ListaJutsus3.node.TurnoAtual)
+				end;
+
+				if  0 > self.ListaJutsus3.node.RecargaHabilidade then
+					self.ListaJutsus3.node.RecargaHabilidade = 0
+				end;
+
+				
 			</event>	         	
         </recordList>
 		
@@ -246,6 +313,15 @@
 						end;	
 					</event>
 				</button>
+
+				<label left="60" top="420" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="CD"/>
+				<edit left="90" top="425" width="40" height="30" type="number" field="CDHabilidade"/>
+
+				<label left="135" top="420" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Recarga"/>
+				<edit left="210" top="425" width="40" height="30" type="number" field="RecargaHabilidade"/>
+
+				<label left="255" top="420" width="120" height="40" visible="false" fontFamily="Nyala" fontColor="Black" fontSize="20" text="CONTA"/>
+				<edit left="325" top="425" width="40" height="30" visible="false" type="number" field="ContaRecarga"/>
 				
 				<label left="220" top="450" width="120" height="40" fontFamily="Nyala" fontColor="blue" fontSize="20" text="Intensidade"/>
 				<edit left="330" top="455" width="80" height="30" enabled="false" fontColor="Red" type="number" field="Hintensidade1"/>									

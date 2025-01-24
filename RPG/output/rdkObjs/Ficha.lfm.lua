@@ -3460,7 +3460,7 @@ local function constructNew_frmvelen()
     obj.edit12:setHorzTextAlign("center");
     obj.edit12:setTextPrompt("0");
     obj.edit12:setCanFocus(true);
-    obj.edit12:setHitTest(false);
+    obj.edit12:setHitTest(true);
     obj.edit12:setEnabled(true);
     obj.edit12:setMax(30);
     obj.edit12:setField("Level");

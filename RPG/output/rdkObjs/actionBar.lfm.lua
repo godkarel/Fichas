@@ -703,27 +703,95 @@ local function constructNew_frmActionBar()
 
     obj.label10 = GUI.fromHandle(_obj_newObject("label"));
     obj.label10:setParent(obj.rectangle1);
-    obj.label10:setLeft(220);
-    obj.label10:setTop(450);
+    obj.label10:setLeft(60);
+    obj.label10:setTop(420);
     obj.label10:setWidth(120);
     obj.label10:setHeight(40);
     obj.label10:setFontFamily("Nyala");
-    obj.label10:setFontColor("blue");
+    obj.label10:setFontColor("Black");
     obj.label10:setFontSize(20);
-    obj.label10:setText("Intensidade");
+    obj.label10:setText("CD");
     obj.label10:setName("label10");
 
     obj.edit8 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit8:setParent(obj.rectangle1);
-    obj.edit8:setLeft(330);
-    obj.edit8:setTop(455);
-    obj.edit8:setWidth(80);
+    obj.edit8:setLeft(90);
+    obj.edit8:setTop(425);
+    obj.edit8:setWidth(40);
     obj.edit8:setHeight(30);
-    obj.edit8:setEnabled(false);
-    obj.edit8:setFontColor("Red");
     obj.edit8:setType("number");
-    obj.edit8:setField("Hintensidade1");
+    obj.edit8:setField("CDHabilidade");
     obj.edit8:setName("edit8");
+
+    obj.label11 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label11:setParent(obj.rectangle1);
+    obj.label11:setLeft(135);
+    obj.label11:setTop(420);
+    obj.label11:setWidth(120);
+    obj.label11:setHeight(40);
+    obj.label11:setFontFamily("Nyala");
+    obj.label11:setFontColor("Black");
+    obj.label11:setFontSize(20);
+    obj.label11:setText("Recarga");
+    obj.label11:setName("label11");
+
+    obj.edit9 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit9:setParent(obj.rectangle1);
+    obj.edit9:setLeft(210);
+    obj.edit9:setTop(425);
+    obj.edit9:setWidth(40);
+    obj.edit9:setHeight(30);
+    obj.edit9:setType("number");
+    obj.edit9:setField("RecargaHabilidade");
+    obj.edit9:setName("edit9");
+
+    obj.label12 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label12:setParent(obj.rectangle1);
+    obj.label12:setLeft(255);
+    obj.label12:setTop(420);
+    obj.label12:setWidth(120);
+    obj.label12:setHeight(40);
+    obj.label12:setVisible(false);
+    obj.label12:setFontFamily("Nyala");
+    obj.label12:setFontColor("Black");
+    obj.label12:setFontSize(20);
+    obj.label12:setText("CONTA");
+    obj.label12:setName("label12");
+
+    obj.edit10 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit10:setParent(obj.rectangle1);
+    obj.edit10:setLeft(325);
+    obj.edit10:setTop(425);
+    obj.edit10:setWidth(40);
+    obj.edit10:setHeight(30);
+    obj.edit10:setVisible(false);
+    obj.edit10:setType("number");
+    obj.edit10:setField("ContaRecarga");
+    obj.edit10:setName("edit10");
+
+    obj.label13 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label13:setParent(obj.rectangle1);
+    obj.label13:setLeft(220);
+    obj.label13:setTop(450);
+    obj.label13:setWidth(120);
+    obj.label13:setHeight(40);
+    obj.label13:setFontFamily("Nyala");
+    obj.label13:setFontColor("blue");
+    obj.label13:setFontSize(20);
+    obj.label13:setText("Intensidade");
+    obj.label13:setName("label13");
+
+    obj.edit11 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit11:setParent(obj.rectangle1);
+    obj.edit11:setLeft(330);
+    obj.edit11:setTop(455);
+    obj.edit11:setWidth(80);
+    obj.edit11:setHeight(30);
+    obj.edit11:setEnabled(false);
+    obj.edit11:setFontColor("Red");
+    obj.edit11:setType("number");
+    obj.edit11:setField("Hintensidade1");
+    obj.edit11:setName("edit11");
 
     obj.image2 = GUI.fromHandle(_obj_newObject("image"));
     obj.image2:setParent(obj.rectangle1);
@@ -744,12 +812,12 @@ local function constructNew_frmActionBar()
     obj.button3:setWidth(150);
     obj.button3:setName("button3");
 
-    obj.edit9 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit9:setParent(obj.rectangle1);
-    obj.edit9:setWidth(120);
-    obj.edit9:setVisible(false);
-    obj.edit9:setField("naoEBuff");
-    obj.edit9:setName("edit9");
+    obj.edit12 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit12:setParent(obj.rectangle1);
+    obj.edit12:setWidth(120);
+    obj.edit12:setVisible(false);
+    obj.edit12:setField("naoEBuff");
+    obj.edit12:setName("edit12");
 
     obj.image3 = GUI.fromHandle(_obj_newObject("image"));
     obj.image3:setParent(obj);
@@ -991,6 +1059,71 @@ local function constructNew_frmActionBar()
             				if node then
             					nodeSelecionado = node; -- Salva o nó selecionado no `sheet`.
             				end
+            
+            				local node = self.rclListaDosItens3.selectedNode; 
+            				self.ListaJutsus3.node = node;                       
+            				self.ListaJutsus3.visible = (node ~= nil);
+            
+            				if self.ListaJutsus3.visible == true then
+            					self.ListaJutsus3.node.NomeHabilidade = self.ListaJutsus3.node.NomeHabilidade or 'Nome da Habilidade';
+            					self.ListaJutsus3.node.DescriHabilidade1 = self.ListaJutsus3.node.DescriHabilidade1 or 'Descrição da Habilidade';
+            					self.ListaJutsus3.node.DanoHabilidade1 = tonumber(self.ListaJutsus3.node.DanoHabilidade1) or 0;
+            					self.ListaJutsus3.node.FixoHabilidade1 = tonumber(self.ListaJutsus3.node.FixoHabilidade1) or 0;
+            					self.ListaJutsus3.node.CuraHabilidade1 = tonumber(self.ListaJutsus3.node.CuraHabilidade1) or 0;
+            					self.ListaJutsus3.node.CustoHabilidade =tonumber( self.ListaJutsus3.node.CustoHabilidade) or 0;
+            					self.ListaJutsus3.node.DanoAtributo1 = self.ListaJutsus3.node.DanoAtributo1 or 'Escolha';
+            					self.ListaJutsus3.node.Hintensidade1 = tonumber(self.ListaJutsus3.node.Hintensidade1) or 0;	
+            					self.ListaJutsus3.node.LevelHabilidade = tonumber(self.ListaJutsus3.node.LevelHabilidade) or 0;	
+            					self.ListaJutsus3.node.CDHabilidade = tonumber(self.ListaJutsus3.node.CDHabilidade) or 0;	
+            					self.ListaJutsus3.node.RecargaHabilidade = tonumber(self.ListaJutsus3.node.RecargaHabilidade) or 0;	
+            					self.ListaJutsus3.node.ContaRecarga = tonumber(self.ListaJutsus3.node.ContaRecarga) or 0;	
+            					self.ListaJutsus3.node.TurnoAtual = tonumber(self.ListaJutsus3.node.TurnoAtual) or 0;
+            				end;
+            
+            				local mesas = rrpg.getRooms();
+            				local bibliotecaAtual = mesas[1].library;
+            				
+            				local function obterNomesRecursivoH(bibItem)
+            					local itensFilhos = bibItem.children;
+            					local nomes = bibItem.name;
+            					
+            					for i = 1, #itensFilhos, 1 do
+            						local bibItemFilho = itensFilhos[i];
+            						local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
+            
+            						if nomesDoFilho == "Sistema de Combaate Velen" then
+            							-- Obter ID do personagem Loan
+            							local idPersonagem = bibItemFilho;
+            
+            							-- Solicita acesso à ficha do personagem
+            							local promise = bibItemFilho:asyncOpenNDB();
+            
+            							-- Aguarda até que a ficha esteja carregada
+            							local nodeExterno = await(promise);
+            
+            							if nodeExterno.TurnoAtualControle ~= nil and nodeExterno.TurnoAtualControle ~= "" then
+            								self.ListaJutsus3.node.TurnoAtual = tonumber(nodeExterno.TurnoAtualControle)
+            							end;
+            
+            						end
+            					end
+            					return nomes
+            				end
+            
+            				if self.ListaJutsus3.node.TurnoAtual == 0 then 
+            					self.ListaJutsus3.node.ContaRecarga = 0
+            					self.ListaJutsus3.node.RecargaHabilidade = 0
+            				end;
+            
+            				local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
+            
+            				if self.ListaJutsus3.node.ContaRecarga ~= nil and self.ListaJutsus3.node.ContaRecarga ~= "" and self.ListaJutsus3.node.ContaRecarga > 0 then
+            					self.ListaJutsus3.node.RecargaHabilidade = tonumber(self.ListaJutsus3.node.ContaRecarga) + tonumber(self.ListaJutsus3.node.CDHabilidade) + 1 -  tonumber(self.ListaJutsus3.node.TurnoAtual)
+            				end;
+            
+            				if  0 > self.ListaJutsus3.node.RecargaHabilidade then
+            					self.ListaJutsus3.node.RecargaHabilidade = 0
+            				end;
         end);
 
     obj._e_event6 = obj.button1:addEventListener("onClick",
@@ -1073,12 +1206,15 @@ local function constructNew_frmActionBar()
         if self.NameTipoDeGrupo ~= nil then self.NameTipoDeGrupo:destroy(); self.NameTipoDeGrupo = nil; end;
         if self.rectangle1 ~= nil then self.rectangle1:destroy(); self.rectangle1 = nil; end;
         if self.edit4 ~= nil then self.edit4:destroy(); self.edit4 = nil; end;
-        if self.image3 ~= nil then self.image3:destroy(); self.image3 = nil; end;
+        if self.edit10 ~= nil then self.edit10:destroy(); self.edit10 = nil; end;
         if self.edit3 ~= nil then self.edit3:destroy(); self.edit3 = nil; end;
         if self.label8 ~= nil then self.label8:destroy(); self.label8 = nil; end;
+        if self.label13 ~= nil then self.label13:destroy(); self.label13 = nil; end;
+        if self.image3 ~= nil then self.image3:destroy(); self.image3 = nil; end;
         if self.label5 ~= nil then self.label5:destroy(); self.label5 = nil; end;
         if self.cmbInimigos ~= nil then self.cmbInimigos:destroy(); self.cmbInimigos = nil; end;
         if self.textEditor1 ~= nil then self.textEditor1:destroy(); self.textEditor1 = nil; end;
+        if self.label11 ~= nil then self.label11:destroy(); self.label11 = nil; end;
         if self.imghability ~= nil then self.imghability:destroy(); self.imghability = nil; end;
         if self.rclListaDosItens3 ~= nil then self.rclListaDosItens3:destroy(); self.rclListaDosItens3 = nil; end;
         if self.edit6 ~= nil then self.edit6:destroy(); self.edit6 = nil; end;
@@ -1088,10 +1224,12 @@ local function constructNew_frmActionBar()
         if self.image1 ~= nil then self.image1:destroy(); self.image1 = nil; end;
         if self.edit5 ~= nil then self.edit5:destroy(); self.edit5 = nil; end;
         if self.comboBox1 ~= nil then self.comboBox1:destroy(); self.comboBox1 = nil; end;
-        if self.button3 ~= nil then self.button3:destroy(); self.button3 = nil; end;
+        if self.label12 ~= nil then self.label12:destroy(); self.label12 = nil; end;
         if self.dataLink2 ~= nil then self.dataLink2:destroy(); self.dataLink2 = nil; end;
         if self.image2 ~= nil then self.image2:destroy(); self.image2 = nil; end;
+        if self.button3 ~= nil then self.button3:destroy(); self.button3 = nil; end;
         if self.label9 ~= nil then self.label9:destroy(); self.label9 = nil; end;
+        if self.edit12 ~= nil then self.edit12:destroy(); self.edit12 = nil; end;
         if self.dataLink1 ~= nil then self.dataLink1:destroy(); self.dataLink1 = nil; end;
         if self.label6 ~= nil then self.label6:destroy(); self.label6 = nil; end;
         if self.btnFinalizarDefesa ~= nil then self.btnFinalizarDefesa:destroy(); self.btnFinalizarDefesa = nil; end;
@@ -1101,6 +1239,7 @@ local function constructNew_frmActionBar()
         if self.btnFinalizarBuff ~= nil then self.btnFinalizarBuff:destroy(); self.btnFinalizarBuff = nil; end;
         if self.edit7 ~= nil then self.edit7:destroy(); self.edit7 = nil; end;
         if self.edit9 ~= nil then self.edit9:destroy(); self.edit9 = nil; end;
+        if self.edit11 ~= nil then self.edit11:destroy(); self.edit11 = nil; end;
         if self.TargetName ~= nil then self.TargetName:destroy(); self.TargetName = nil; end;
         if self.edit2 ~= nil then self.edit2:destroy(); self.edit2 = nil; end;
         if self.label4 ~= nil then self.label4:destroy(); self.label4 = nil; end;
