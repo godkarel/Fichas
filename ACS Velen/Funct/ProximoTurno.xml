@@ -38,8 +38,8 @@
 
 			sheet.TurnoAtualControle = tonumber(sheet.TurnoAtualControle) - 1
 
-			if sheet.TurnoAtualControle < 1 then
-				sheet.TurnoAtualControle = 1
+			if sheet.TurnoAtualControle < 0 then
+				sheet.TurnoAtualControle = 0
 			end;
 
 			chat:enviarNarracao("[§K4]TURNO [§K1]ALTERADO PELO MESTRE | [§K4]" .. sheet.TurnoAtualControle)

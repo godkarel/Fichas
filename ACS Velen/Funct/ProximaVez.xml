@@ -5,7 +5,7 @@
 			local minhaMesa = Firecast.getRoomOf(sheet)
 			local chat = minhaMesa.chat
 			acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
-			lista2 = criarEIncrementarLista();
+			lista2 = criarEIncrementarListaVez();
 			
 			if acoes == nil then
 				acoes = sheet.AcaoAtual
@@ -19,6 +19,7 @@
 
 			if sheet.VezAtualIndex > #lista2 then
 				sheet.VezAtualIndex = 1 -- reinicia o player para começar dnv
+				sheet.TurnoAtualControle = tonumber(sheet.TurnoAtualControle) + 1
 			end;
 
 			sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
@@ -27,7 +28,7 @@
 				sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
 			end;
 
-			chat:enviarNarracao("[§K4]VEZ [§K1]ALTERADA PELO MESTRE [§K4]" .. sheet.VezAtualControle)
+			chat:enviarNarracao("[§K4]VEZ [§K1]ALTERADA PELO MESTRE [§K4]" .. sheet.VezAtualControle .. "[§K4] VEZ [§K1]DO TURNO [§K4]" .. sheet.TurnoAtualControle)
 						
 		end;
 		
@@ -36,7 +37,7 @@
 			local minhaMesa = Firecast.getRoomOf(sheet)
 			local chat = minhaMesa.chat
 			acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
-			lista2 = criarEIncrementarLista();
+			lista2 = criarEIncrementarListaVez();
 			
 			if acoes == nil then
 				acoes = sheet.AcaoAtual
@@ -50,6 +51,7 @@
 
 			if sheet.VezAtualIndex < 1 then
 				sheet.VezAtualIndex = #lista2 -- reinicia o player para começar dnv
+				sheet.TurnoAtualControle = tonumber(sheet.TurnoAtualControle) - 1
 			end;
 
 			sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
@@ -58,9 +60,51 @@
 				sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
 			end;
 
-			chat:enviarNarracao("[§K4]VEZ [§K1]ALTERADA PELO MESTRE [§K4]" .. sheet.VezAtualControle)
+			if sheet.TurnoAtualControle < 0 then
+				sheet.TurnoAtualControle = 0
+			end;
+
+			chat:enviarNarracao("[§K4]VEZ [§K1]ALTERADA PELO MESTRE [§K4]" .. sheet.VezAtualControle .. "[§K4] VEZ [§K1]DO TURNO [§K4]" .. sheet.TurnoAtualControle)
 						
 		end;
 		]]>
 		
+		function criarEIncrementarListaVez()
+    if sheet ~= nil then
+        local nodesJ = ndb.getChildNodes(sheet.NomeJogador)  -- Obtém todos os nós filhos do campo NomeJogador
+        local nodesO = ndb.getChildNodes(sheet.NomeOponentes)  -- Obtém todos os nós filhos do campo NomeOponentes
+        
+        lista = {}  -- Cria uma nova lista
+
+        -- Itera sobre os nós e adiciona o NomeDoPersonagemVez de cada um à lista
+        for _, node in ipairs(nodesJ) do
+            if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
+                table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
+            end
+        end
+        
+        -- Itera sobre os nós e adiciona o NomeDoOponenteVez de cada um à lista
+        for _, node in ipairs(nodesO) do
+            if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
+                table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
+            end
+        end
+
+        -- Ordena a lista em ordem alfabética
+        table.sort(lista)
+
+        -- Concatena todos os itens da lista em uma única string
+        local listaStr = ""
+        for i, item in ipairs(lista) do
+            listaStr = listaStr .. "Item " .. i .. ": " .. tostring(item) .. "\n"
+        end
+
+        -- Exibe a lista concatenada em um único showMessage
+        sheet.PersonagensEmCombate = listaStr
+    else
+        showMessage("A 'sheet' não está definida.")
+    end
+
+    return lista
+	end
 	</script>

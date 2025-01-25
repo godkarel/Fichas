@@ -19,8 +19,6 @@
 	
 	<button top="10" left="200" text="Combatentes" width="150" height="30">
 		<event name="onClick">				                          
-			
-
 			-- Chama a função para criar e incrementar a lista
 			criarEIncrementarLista()
 			showMessage(sheet.PersonagensEmCombate)
@@ -54,6 +52,95 @@
 			
 			self.BoxDetalheJogadores.visible = (node ~= nil);
 
+			if	self.BoxDetalheJogadores.visible == true then
+				local node = self.rclGrupoJogadores.selectedNode;   
+				self.rclGrupoJogadores.node = node;
+
+				if node.NomeDoPersonagemVez ~= nil or node.NomeDoPersonagemVez ~= "" then
+				
+					local mesas = rrpg.getRooms();
+					local bibliotecaAtual = mesas[1].library;
+
+					local function obterNomesRecursivo(bibItem)
+						local itensFilhos = bibItem.children;
+						local nomes = bibItem.name;
+
+						for i = 1, #itensFilhos, 1 do
+							local bibItemFilho = itensFilhos[i];
+							local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+
+							if nomesDoFilho == node.NomeDoPersonagem then
+								-- Obter ID do personagem Loan
+								local idPersonagem = bibItemFilho;
+
+								-- Solicita acesso à ficha do personagem
+								local promise = bibItemFilho:asyncOpenNDB();
+
+								-- Aguarda até que a ficha esteja carregada
+								local nodeExterno = await(promise);
+
+								-- Acessa o valor da força do personagem
+
+								if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
+									node.PA = nodeExterno.PA or '0';
+									node.PM = nodeExterno.PM or '0';
+									node.PF = nodeExterno.PF or '0';
+									node.DEF = nodeExterno.DEFRED or '0';
+									node.RES = nodeExterno.RESRED or '0';
+									node.AC = nodeExterno.Acerto or '0';
+									node.ACM = nodeExterno.AcertoMagico or '0';
+									node.CR = nodeExterno.Critical or '0';
+									node.CRM = nodeExterno.CMagico or '0';
+									node.ESQ = nodeExterno.Esquiva or '0';
+									node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+									node.Vez = node.Vez or '0';
+									node.Atletismo = nodeExterno.TAtletismo or '0';
+									node.Sabedoria = nodeExterno.TSabedoria or '0';
+									node.Percepcao = nodeExterno.TPercepcao or '0';
+									node.Acrobacia = nodeExterno.TAcrobacia or '0';
+									node.Vigor = nodeExterno.TVigor or '0';
+									node.HPBarMax = nodeExterno.HPTotal or '0';
+									node.MPBarMax = nodeExterno.MPTotal or '0';
+									node.HPBar = nodeExterno.HPAtual or '0';
+									node.MPBar = nodeExterno.MPAtual or '0';
+									node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoPersonagem
+									node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
+								else
+									node.PA = nodeExterno.Dano or '0';
+									node.PM = nodeExterno.DanoMagico or '0';
+									node.PF = "NPC";
+									node.DEF = nodeExterno.DefesaPorCent or '0';
+									node.RES = nodeExterno.ResistenciaPorCent or '0';
+									node.AC = nodeExterno.Acerto or '0';
+									node.ACM = nodeExterno.AcertoMagico or '0';
+									node.CR = nodeExterno.Critical or '0';
+									node.CRM = nodeExterno.CriticalMagico or '0';
+									node.ESQ = nodeExterno.Esquiva or '0';
+									node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+									node.Vez = node.Vez or '0';
+									node.Atletismo = nodeExterno.Atletismo or '0';
+									node.Sabedoria = nodeExterno.Sabedoria or '0';
+									node.Percepcao = nodeExterno.Percepcao or '0';
+									node.Acrobacia = nodeExterno.Acrobacia or '0';
+									node.Vigor = nodeExterno.TVigor or '0';
+									node.HPBarMax = nodeExterno.HPTotal or '0';
+									node.MPBarMax = nodeExterno.MPTotal or '0';
+									node.HPBar = nodeExterno.HPAtual or '0';
+									node.MPBar = nodeExterno.MPAtual or '0';
+									node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
+									node.imagemDoPersonagem = nodeExterno.imgInimigo
+								end;
+							end
+						end
+					return nomes								
+						
+					end
+
+					local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+				end;
+								
+			end;	
+
 		</event>
 		
 		<event name="onCompare">
@@ -73,7 +160,7 @@
 					<label align="top" text="Jogador:" horzTextAlign="center" width="150" margins="{top=1}"/>
 					<edit align="top" width="150" field="NomeDoPersonagem" margins="{top=1}"/>
 					<button align="top" width="150" text="Sincronizar" margins="{right=1}"	>
-						<event name="onClick">										
+						<event name="onClick">		
 							if	self.BoxDetalheJogadores.visible == true then
 								local node = self.rclGrupoJogadores.selectedNode;   
 								self.rclGrupoJogadores.node = node;
@@ -162,12 +249,14 @@
 						</event>
 					</button>			
 					<progressBar align="top" width="150" color="red" field="HPBar" fieldMax="HPBarMax" margins="{top=1}">
-					<edit name="edtHPAtual" align="left" transparent="true" hitTest="false" horzTextAlign="center" field="HPBar"/>
+					<edit name="gambiHP" align="left" transparent="true" hitTest="false" horzTextAlign="center" field="HPBar"/>
+					<edit name="edtHPAtual" visible="false" align="left" canFocus="false" transparent="true" hitTest="false" horzTextAlign="center" field="HPBarResolve"/>
 					<label align="client" horzTextAlign="center" text="/"/>
 					<label align="right" horzTextAlign="center" field="HPBarMax"/>
 					</progressBar>
 					<progressBar align="top" width="150" color="blue" field="MPBar" fieldMax="MPBarMax" margins="{top=1}">	
-					<edit name="edtMPAtual" align="left" transparent="true" hitTest="false" horzTextAlign="center" field="MPBar"/>
+					<edit name="gambiMP" align="left" transparent="true" hitTest="false" horzTextAlign="center" field="MPBar"/>
+					<edit name="edtMPAtual" visible="false" align="left" canFocus="false" transparent="true" hitTest="false" horzTextAlign="center" field="MPBarResolve"/>
 					<label align="right" horzTextAlign="center" text="---/---"/>
 					<label align="right" horzTextAlign="center" field="MPBarMax"/>						
 					</progressBar>
@@ -183,7 +272,9 @@
 
 							-- Localiza o botão dentro do contexto do item selecionado
 							local btn = self:findControlByName("btnEditStatus");
+							local gambiHP = self:findControlByName("gambiHP");
 							local edtHP = self:findControlByName("edtHPAtual");
+							local gambiMP = self:findControlByName("gambiMP");
 							local edtMP = self:findControlByName("edtMPAtual");
 							if not btn then
 								showMessage("Botão não encontrado no item selecionado!");
@@ -195,9 +286,16 @@
 								btn.fontColor = "red";
 								btn.text = "Aplicar 💾";
 								edtHP.transparent = false
-								edtHP.hitTest = true
+								edtHP.hitTest = true								
+								edtHP.visible = true;
+								edtHP.canFocus = true;
+								gambiHP.visible = false;
+								
 								edtMP.transparent = false
 								edtMP.hitTest = true
+								edtMP.visible = true;
+								edtMP.canFocus = true;
+								gambiMP.visible = false;
 
 								if self.BoxDetalheJogadores.visible == true then
 									local node = self.rclGrupoJogadores.selectedNode;   
@@ -242,8 +340,13 @@
 								btn.text = "Editar ✎";
 								edtHP.transparent = true
 								edtHP.hitTest = false
+								edtHP.visible = false;
+								gambiHP.visible = true;
+
 								edtMP.transparent = true
 								edtMP.hitTest = false
+								edtMP.visible = false;
+								gambiMP.visible = true;
 
 								if	self.BoxDetalheJogadores.visible == true then
 								local node = self.rclGrupoJogadores.selectedNode;   
@@ -274,8 +377,35 @@
 
 											nodeExterno.HPTotal = tonumber(node.HPBarMax);
 											nodeExterno.MPTotal = tonumber(node.MPBarMax);
-											nodeExterno.HPAtual = tonumber(node.HPBar);
-											nodeExterno.MPAtual = tonumber(node.MPBar);
+
+											local hpBarInput = tostring(node.HPBarResolve) -- Converte o valor para string, caso não seja
+											if hpBarInput:match("^%+%d+$") then
+												-- Se começar com "+", soma ao valor existente
+												local valor = tonumber(hpBarInput:sub(2)) -- Remove o "+" e converte para número
+												nodeExterno.HPAtual = (tonumber(node.HPBar) or 0) + valor
+											elseif hpBarInput:match("^%-%d+$") then
+												-- Se começar com "-", subtrai do valor existente
+												local valor = tonumber(hpBarInput:sub(2)) -- Remove o "-" e converte para número
+												nodeExterno.HPAtual = (tonumber(node.HPBar) or 0) - valor
+											else
+												-- Se não tiver "+" ou "-", aplica o valor diretamente
+												nodeExterno.HPAtual = tonumber(hpBarInput)
+											end
+
+											-- Ajuste para MPAtual
+											local mpBarInput = tostring(node.MPBarResolve) -- Converte o valor para string, caso não seja
+											if mpBarInput:match("^%+%d+$") then
+												-- Se começar com "+", soma ao valor existente
+												local valor = tonumber(mpBarInput:sub(2)) -- Remove o "+" e converte para número
+												nodeExterno.MPAtual = (tonumber(node.MPBar) or 0) + valor
+											elseif mpBarInput:match("^%-%d+$") then
+												-- Se começar com "-", subtrai do valor existente
+												local valor = tonumber(mpBarInput:sub(2)) -- Remove o "-" e converte para número
+												nodeExterno.MPAtual = (tonumber(node.MPBar) or 0) - valor
+											else
+												-- Se não tiver "+" ou "-", aplica o valor diretamente
+												nodeExterno.MPAtual = tonumber(mpBarInput)
+											end
 
 										end
 									end
@@ -376,6 +506,109 @@
 							end
 						</event>	
 					</button>	
+					<image align="top" width="64" height="64" src="./imagens/buff.png" margins="{top=5}">
+					<button name="btnEffect" opacity="0.0" align="client">
+						<event name="onClick">
+							self.popEffect:show();
+                		</event>
+					</button>
+					</image>
+					<popup name="popEffect" width="600" height="300" backOpacity="0.5">
+						<layout align="top" height="30" margins="{bottom=4}">
+							<button text="Criar Novo Item" width="150" align="left">
+								<event name="onClick">
+									-- Usuário clicou no botão de criar novo item.
+									-- Vamos inserir um novo item no nosso recordList                              
+									self.rclBuffs:append();
+								</event>
+							</button>
+						</layout>  
+						 <recordList name="rclBuffs" field="campoDosItens" templateForm="frmEffect" align="top" selectable="true" layout="horizontal" height="40">                       
+							<event name="onSelect">
+								local node = self.rclBuffs.selectedNode;  
+								self.dscBuffSlot.node = node;                       
+								self.dscBuffSlot.visible = (node ~= nil);
+							</event>
+						</recordList>  
+
+						<dataScopeBox name="dscBuffSlot" visible="false" align="client"
+									margins="{left=4, right=4, top=2}">
+								<!-- Faça um layout "bonito" para sua caixa de detalhes =). Utilize a propriedade "field" nas tags aqui dentro   -->      
+
+								<rectangle align="client" color="black" xradius="10" yradius="10"
+										padding="{top=3, left=3, right=3, bottom=3}">                                   
+
+										<layout align="top" height="30" margins="{bottom=4}">
+												<label align="left" text="PA" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="PAEffect"/>
+												<label align="left" text="PM" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="PMEffect"/>
+												<label align="left" text="PF" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="PFEffect"/>
+												<label align="left" text="DEF" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="DEFEffect"/>
+												<label align="left" text="RES" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="RESEffect"/>
+																			
+
+											<!-- Botão de apagar o item -->
+											<button align="right" fontColor="red" visible="false" text="Apagar!" 
+													margins="{left=4, right=4, top=2, bottom=2}" width="150"
+													onClick="ndb.deleteNode(self.dscBuffSlot.node);" />
+
+										</layout>                       
+
+										<layout align="top" height="30" margins="{bottom=4}">              
+												<label align="left" text="AC" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="ACEffect"/>
+												<label align="left" text="ACM" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="ACMEffect"/>
+												<label align="left" text="CR" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="CREffect"/>
+												<label align="left" text="CRM" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="CRMEffect"/>
+												<label align="left" text="Proc" fontColor="#FF1493" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" fontColor="#FF1493" margins="{left=15, right=-10}" field="DadoEffect"/>
+                                               
+										</layout>
+
+										<layout align="top" height="30" margins="{bottom=4}">              
+												<label align="left" text="ESQ" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="ESQEffect"/>
+												<label align="left" text="Pers" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="PersEffect"/>
+												<label align="left" text="VEZ" fontColor="green" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" fontColor="green" margins="{left=15, right=-10}" field="VezEffect"/>  
+												<label align="left" text="Dano" fontColor="red" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="DanoEffect"/>
+												<label align="left" text="Mana" fontColor="blue" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" fontColor="blue" margins="{left=15, right=-10}" field="ManaEffect"/>                                
+                   
+										</layout>
+
+										<layout align="top" height="30" margins="{bottom=4}">              
+												<label align="left" text="CD" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="CDEffect"/>
+												<label align="left" text="Duração" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="DuraEffect"/>
+												<label align="left" text="Conta" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="ContaEffect"/> 
+												<label align="left" text="Tipo" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="TipoEffect"/> 
+												<label align="left" text="Outro" width="50" margins="{left=15, right=-10}"/>
+												<edit align="left" width="50" margins="{left=15, right=-10}" field="OutroEffect"/> 
+                           
+                   
+										</layout>
+										<layout align="client" margins="{top=5, left=5 , bottom=4}">
+												<textEditor align="top" field="DescriBuff" height="100"/>
+										</layout> 
+								</rectangle>
+						</dataScopeBox>        
+						       
+					</popup>  
+
+					
 				</layout>
 				
 				<layout align="left" width="50" margins="{right=1}" >
@@ -393,7 +626,7 @@
 					<label align="top" text="ESQ:" width="50" margins="{left=10}"/>
 					<label align="top" text="Pers:" width="50" margins="{left=10}"/>
 					<label align="top" text="---" width="50" margins="{left=10}"/>
-					<label align="top" text="Vez:" fontColor="red" width="50" margins="{left=10}"/>
+					<label align="top" text="Vez:" fontColor="green" width="50" margins="{left=10}"/>
 				</layout>
 				
 				<layout align="left" width="50" margins="{right=1}" >						
@@ -411,7 +644,7 @@
 					<label align="top" field="ESQ" width="50" margins="{left=10}"/>
 					<label align="top" field="Pers" width="50" margins="{left=10}"/>
 					<label align="top" text="---" width="50" margins="{left=10}"/>
-					<edit align="top" field="Vez" fontColor="red" width="50" margins="{left=10}"/>						
+					<edit align="top" field="Vez" fontColor="green" width="50" margins="{left=10}"/>						
 				</layout>
 				
 				<layout align="left" width="75" margins="{right=1}" >						
@@ -430,7 +663,9 @@
 					<label align="top" field="Acrobacia" width="50" margins="{left=10}"/>
 					<label align="top" field="Vigor" width="50" margins="{left=10}"/>
 					<label align="top" text="---" width="50" margins="{left=10}"/>		
-				</layout>               
+				</layout>       
+
+				        
 			</rectangle>
 	</dataScopeBox>
 	
@@ -624,7 +859,7 @@
     end
 
     return lista
-end
+	end
 
 
 			
@@ -644,10 +879,99 @@ end
 			local node = self.rclGrupoOponentes.selectedNode; 
 				
 			self.BoxDetalheOponentes.node = node; 
+
+			self.rclGrupoOponentes:sort();
 			
 			self.BoxDetalheOponentes.visible = (node ~= nil);
+
 			
-			self.rclGrupoOponentes:sort();
+			
+				if	self.BoxDetalheOponentes.visible == true then
+					local node = self.rclGrupoOponentes.selectedNode;   
+					self.rclGrupoOponentes.node = node;
+					
+					if node.NomeDoOponenteVez ~= nil or node.NomeDoOponenteVez ~= "" then
+
+						local mesas = rrpg.getRooms();
+						local bibliotecaAtual = mesas[1].library;
+
+						local function obterNomesRecursivoO(bibItem)
+							local itensFilhos = bibItem.children;
+							local nomes = bibItem.name;
+
+							for i = 1, #itensFilhos, 1 do
+								local bibItemFilho = itensFilhos[i];
+								local nomesDoFilho = obterNomesRecursivoO(bibItemFilho) or "";
+
+								if nomesDoFilho == node.NomeDoOponente then
+									-- Obter ID do personagem Loan
+									local idPersonagem = bibItemFilho;
+
+									-- Solicita acesso à ficha do personagem
+									local promise = bibItemFilho:asyncOpenNDB();
+
+									-- Aguarda até que a ficha esteja carregada
+									local nodeExterno = await(promise);
+
+									-- Acessa o valor da força do personagem
+									
+									if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
+										node.PA = nodeExterno.PA or '0';
+										node.PM = nodeExterno.PM or '0';
+										node.PF = nodeExterno.PF or '0';
+										node.DEF = nodeExterno.DEFRED or '0';
+										node.RES = nodeExterno.RESRED or '0';
+										node.AC = nodeExterno.Acerto or '0';
+										node.ACM = nodeExterno.AcertoMagico or '0';
+										node.CR = nodeExterno.Critical or '0';
+										node.CRM = nodeExterno.CMagico or '0';
+										node.ESQ = nodeExterno.Esquiva or '0';
+										node.Pers = (nodeExterno.Persistencia) or '0';
+										node.Vez = node.Vez or '0';
+										node.Atletismo = nodeExterno.TAtletismo or '0';
+										node.Sabedoria = nodeExterno.TSabedoria or '0';
+										node.Percepcao = nodeExterno.TPercepcao or '0';
+										node.Acrobacia = nodeExterno.TAcrobacia or '0';
+										node.Vigor = nodeExterno.TVigor or '0';
+										node.HPBarMaxO = nodeExterno.HPTotal or '0';
+										node.MPBarMaxO = nodeExterno.MPTotal or '0';
+										node.HPBarO = nodeExterno.HPAtual or '0';
+										node.MPBarO = nodeExterno.MPAtual or '0';
+										node.NomeDoOponenteVez = node.Vez .. " - " ..  node.NomeDoOponente
+										node.imagemInimigo = nodeExterno.imagemDoPersonagem
+									else
+										node.PA = nodeExterno.Dano or '0';
+										node.PM = nodeExterno.DanoMagico or '0';
+										node.PF = "NPC";
+										node.DEF = nodeExterno.DefesaPorCent or '0';
+										node.RES = nodeExterno.ResistenciaPorCent or '0';
+										node.AC = nodeExterno.Acerto or '0';
+										node.ACM = nodeExterno.AcertoMagico or '0';
+										node.CR = nodeExterno.Critical or '0';
+										node.CRM = nodeExterno.CriticalMagico or '0';
+										node.ESQ = nodeExterno.Esquiva or '0';
+										node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+										node.Vez = node.Vez or '0';
+										node.Atletismo = nodeExterno.Atletismo or '0';
+										node.Sabedoria = nodeExterno.Sabedoria or '0';
+										node.Percepcao = nodeExterno.Percepcao or '0';
+										node.Acrobacia = nodeExterno.Acrobacia or '0';
+										node.Vigor = nodeExterno.TVigor or '0';
+										node.HPBarMaxO = nodeExterno.HPTotal or '0';
+										node.MPBarMaxO = nodeExterno.MPTotal or '0';
+										node.HPBarO = nodeExterno.HPAtual or '0';
+										node.MPBarO = nodeExterno.MPAtual or '0';
+										node.NomeDoOponenteVez = node.Vez .. " - " ..  nodeExterno.Nome
+										node.imagemInimigo = nodeExterno.imgInimigo
+									end;
+								end
+							end
+						return nomes
+						end
+						local nomesDeTodosOsItens = obterNomesRecursivoO(bibliotecaAtual);
+					end;
+				end;
+				
 		</event>
 		<event name="onCompare">
 			return utils.compareStringPtBr(nodeA.Vez, nodeB.Vez);
@@ -747,14 +1071,23 @@ end
 							local nomesDeTodosOsItens = obterNomesRecursivoO(bibliotecaAtual);
 						end;	
 					</event>
-				</button>			
+				</button>		
+
+				-- tem que fazer essa parte adicionar o edit novo
+				-- tem que adicionar o findcontrolbyname
+				-- adicionar a regra de edtHP de objeto
+				-- adicionar a regra que quem tem nome é o resolve 
+				-- lembrar que a maioria das sheets aqui tem o O no final da variavel
+					
 				<progressBar align="top" width="150" color="red" field="HPBarO" fieldMax="HPBarMaxO" margins="{top=1}">
-				<edit name="edtHPAtualI" align="left" transparent="true" hitTest="false" horzTextAlign="center" field="HPBarO"/>
+				<edit name="gambiHPO" align="left" transparent="true" hitTest="false" horzTextAlign="center" field="HPBarO"/>
+				<edit name="edtHPAtualO" visible="false" align="left" canFocus="false" transparent="true" hitTest="false" horzTextAlign="center" field="HPBarResolveO"/>
 				<label align="client" horzTextAlign="center" text="/"/>
 				<label align="right" horzTextAlign="center" field="HPBarMaxO"/>
 				</progressBar>
 				<progressBar align="top" width="150" color="blue" field="MPBarO" fieldMax="MPBarMaxO" margins="{top=1}">	
-				<edit name="edtMPAtualI" align="left" transparent="true" hitTest="false" horzTextAlign="center" field="MPBarO"/>
+				<edit name="gambiMPO" align="left" transparent="true" hitTest="false" horzTextAlign="center" field="MPBarO"/>
+				<edit name="edtMPAtualO" visible="false" align="left" canFocus="false" transparent="true" hitTest="false" horzTextAlign="center" field="MPBarResolveO"/>
 				<label align="right" horzTextAlign="center" text="---/---"/>
 				<label align="right" horzTextAlign="center" field="MPBarMaxO"/>						
 				</progressBar>
@@ -772,8 +1105,10 @@ end
 
 							-- Localiza o botão dentro do contexto do item selecionado
 							local btn = self:findControlByName("btnEditStatusI");
-							local edtHP = self:findControlByName("edtHPAtualI");
-							local edtMP = self:findControlByName("edtMPAtualI");
+							local gambiHP = self:findControlByName("gambiHPO");
+							local edtHP = self:findControlByName("edtHPAtualO");
+							local gambiMP = self:findControlByName("gambiMPO");
+							local edtMP = self:findControlByName("edtMPAtualO");
 							if not btn then
 								showMessage("Botão não encontrado no item selecionado!");
 								return;
@@ -785,8 +1120,15 @@ end
 								btn.text = "Aplicar 💾";
 								edtHP.transparent = false
 								edtHP.hitTest = true
+								edtHP.visible = true;
+								edtHP.canFocus = true;
+								gambiHP.visible = false;
+
 								edtMP.transparent = false
 								edtMP.hitTest = true
+								edtMP.visible = true;
+								edtMP.canFocus = true;
+								gambiMP.visible = false;
 
 								if self.BoxDetalheOponentes.visible == true then
 									local node = self.rclGrupoOponentes.selectedNode;   
@@ -832,8 +1174,13 @@ end
 								btn.text = "Editar ✎";
 								edtHP.transparent = true
 								edtHP.hitTest = false
+								edtHP.visible = false;
+								gambiHP.visible = true;
+
 								edtMP.transparent = true
 								edtMP.hitTest = false
+								edtMP.visible = false;
+								gambiMP.visible = true;
 
 								if	self.BoxDetalheOponentes.visible == true then
 								local node = self.rclGrupoOponentes.selectedNode;   
@@ -864,8 +1211,43 @@ end
 
 											nodeExterno.HPTotal = tonumber(node.HPBarMaxO);
 											nodeExterno.MPTotal = tonumber(node.MPBarMaxO);
-											nodeExterno.HPAtual = tonumber(node.HPBarO);
-											nodeExterno.MPAtual = tonumber(node.MPBarO);
+											
+											if node.HPBarResolveO ~= 0 then 
+												local hpBarInput = tostring(node.HPBarResolveO) -- Converte o valor para string, caso não seja
+												if hpBarInput:match("^%+%d+$") then
+													-- Se começar com "+", soma ao valor existente
+													local valor = tonumber(hpBarInput:sub(2)) -- Remove o "+" e converte para número
+													nodeExterno.HPAtual = (tonumber(node.HPBarO) or 0) + valor
+												elseif hpBarInput:match("^%-%d+$") then
+													-- Se começar com "-", subtrai do valor existente
+													local valor = tonumber(hpBarInput:sub(2)) -- Remove o "-" e converte para número
+													nodeExterno.HPAtual = (tonumber(node.HPBarO) or 0) - valor
+												else
+													-- Se não tiver "+" ou "-", aplica o valor diretamente
+													nodeExterno.HPAtual = tonumber(hpBarInput)
+												end
+
+											node.HPBarResolveO = 0
+											end;
+
+											if node.MPBarResolveO ~= 0 then 
+												-- Ajuste para MPAtual
+												local mpBarInput = tostring(node.MPBarResolveO) -- Converte o valor para string, caso não seja
+												if mpBarInput:match("^%+%d+$") then
+													-- Se começar com "+", soma ao valor existente
+													local valor = tonumber(mpBarInput:sub(2)) -- Remove o "+" e converte para número
+													nodeExterno.MPAtual = (tonumber(node.MPBarO) or 0) + valor
+												elseif mpBarInput:match("^%-%d+$") then
+													-- Se começar com "-", subtrai do valor existente
+													local valor = tonumber(mpBarInput:sub(2)) -- Remove o "-" e converte para número
+													nodeExterno.MPAtual = (tonumber(node.MPBarO) or 0) - valor
+												else
+													-- Se não tiver "+" ou "-", aplica o valor diretamente
+													nodeExterno.MPAtual = tonumber(mpBarInput)
+												end
+
+												node.MPBarResolveO = 0
+											end;
 
 										end
 									end
@@ -922,10 +1304,10 @@ end
 												node.Percepcao = nodeExterno.TPercepcao or '0';
 												node.Acrobacia = nodeExterno.TAcrobacia or '0';
 												node.Vigor = nodeExterno.TVigor or '0';
-												node.HPBarMax = nodeExterno.HPTotal or '0';
-												node.MPBarMax = nodeExterno.MPTotal or '0';
-												node.HPBar = nodeExterno.HPAtual or '0';
-												node.MPBar = nodeExterno.MPAtual or '0';
+												node.HPBarMaxO = nodeExterno.HPTotal or '0';
+												node.MPBarMaxO = nodeExterno.MPTotal or '0';
+												node.HPBarO = nodeExterno.HPAtual or '0';
+												node.MPBarO = nodeExterno.MPAtual or '0';
 												node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoOponente
 												node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
 											else
@@ -946,10 +1328,10 @@ end
 												node.Percepcao = nodeExterno.Percepcao or '0';
 												node.Acrobacia = nodeExterno.Acrobacia or '0';
 												node.Vigor = nodeExterno.TVigor or '0';
-												node.HPBarMax = nodeExterno.HPTotal or '0';
-												node.MPBarMax = nodeExterno.MPTotal or '0';
-												node.HPBar = nodeExterno.HPAtual or '0';
-												node.MPBar = nodeExterno.MPAtual or '0';
+												node.HPBarMaxO = nodeExterno.HPTotal or '0';
+												node.MPBarMaxO = nodeExterno.MPTotal or '0';
+												node.HPBarO = nodeExterno.HPAtual or '0';
+												node.MPBarO = nodeExterno.MPAtual or '0';
 												node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
 												node.imagemDoPersonagem = nodeExterno.imgInimigo
 											end;
@@ -984,7 +1366,7 @@ end
 				<label align="top" text="ESQ:" width="50" margins="{left=10}"/>
 				<label align="top" text="Pers:" width="50" margins="{left=10}"/>
 				<label align="top" text="---" width="50" margins="{left=10}"/>
-				<label align="top" text="Vez:" fontColor="red" width="50" margins="{left=10}"/>
+				<label align="top" text="Vez:" fontColor="green" width="50" margins="{left=10}"/>
 			</layout>
 			
 			<layout align="left" width="50" margins="{right=1}" >
@@ -1002,7 +1384,7 @@ end
 				<label align="top" field="ESQ" width="50" margins="{left=10}"/>
 				<label align="top" field="Pers" width="50" margins="{left=10}"/>
 				<label align="top" text="---" width="50" margins="{left=10}"/>
-				<edit align="top" field="Vez" fontColor="red" width="50" margins="{left=10}"/>
+				<edit align="top" field="Vez" fontColor="green" width="50" margins="{left=10}"/>
 			</layout>
 			
 			<layout align="left" width="75" margins="{right=1}" >
