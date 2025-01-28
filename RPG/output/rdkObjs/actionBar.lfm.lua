@@ -945,7 +945,12 @@ local function constructNew_frmActionBar()
 
     obj._e_event4 = obj.dataLink2:addEventListener("onChange",
         function (field, oldValue, newValue)
-            if self.cmbTipoGrupo.value == "1" then
+            if self.rclListaDosItens3.selectedNode then
+            						local node = self.rclListaDosItens3.selectedNode; 
+            						self.ListaJutsus3.node = node;                       
+            						self.ListaJutsus3.visible = (node ~= nil);
+            
+            						if self.cmbTipoGrupo.value == "1" then
             								local mesas = rrpg.getRooms();
             								local bibliotecaAtual = mesas[1].library;
             								
@@ -1049,6 +1054,116 @@ local function constructNew_frmActionBar()
             								local nomesDeTodosOsItens = obterNomesRecursivoCMB2(bibliotecaAtual);
             								atualizarComboBox()
             							end;
+            
+            											if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
+            												if self.cmbTipoGrupo.value == "1" then
+            												local mesas = rrpg.getRooms();
+            												local bibliotecaAtual = mesas[1].library;
+            												
+            												lista = {}
+            
+            												local function obterNomesRecursivoH(bibItem)
+            													local itensFilhos = bibItem.children;
+            													local nomes = bibItem.name;
+            
+            													
+            													
+            													for i = 1, #itensFilhos, 1 do
+            														local bibItemFilho = itensFilhos[i];
+            														local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
+            
+            														if nomesDoFilho == "Sistema de Combaate Velen" then
+            															-- Obter ID do personagem Loan
+            															local idPersonagem = bibItemFilho;
+            
+            															-- Solicita acesso à ficha do personagem
+            															local promise = bibItemFilho:asyncOpenNDB();
+            
+            															-- Aguarda até que a ficha esteja carregada
+            															local nodeExterno = await(promise);
+            															
+            															local nodesO = ndb.getChildNodes(nodeExterno.NomeJogador)								
+            															
+            															for _, node in ipairs(nodesO) do
+            																if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
+            																	table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
+            																end
+            															end
+            															
+            															table.sort(lista)
+            															
+            														end
+            													end
+            													return nomes
+            												end
+            
+            												
+            
+            												local function atualizarComboBoxH()
+            													local comboBox = self.cmbInimigos
+            													comboBox.items = lista
+            													comboBox.values = lista
+            													comboBox.value = lista[1] or ""
+            												end
+            
+            												local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
+            												atualizarComboBoxH()
+            											end
+            
+            											if self.cmbTipoGrupo.value == "2" then
+            												local mesas = rrpg.getRooms();
+            												local bibliotecaAtual = mesas[1].library;
+            												
+            												lista = {}
+            
+            												local function obterNomesRecursivoH(bibItem)
+            													local itensFilhos = bibItem.children;
+            													local nomes = bibItem.name;
+            													
+            													for i = 1, #itensFilhos, 1 do
+            														local bibItemFilho = itensFilhos[i];
+            														local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
+            
+            														if nomesDoFilho == "Sistema de Combaate Velen" then
+            															-- Obter ID do personagem Loan
+            															local idPersonagem = bibItemFilho;
+            
+            															-- Solicita acesso à ficha do personagem
+            															local promise = bibItemFilho:asyncOpenNDB();
+            
+            															-- Aguarda até que a ficha esteja carregada
+            															local nodeExterno = await(promise);
+            															
+            															local nodesJ = ndb.getChildNodes(nodeExterno.NomeJogador)
+            															
+            															for _, node in ipairs(nodesJ) do
+            																
+            																if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
+            																	table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
+            																	
+            																end
+            															end
+            															
+            															table.sort(lista)
+            															
+            														end
+            													end
+            													return nomes
+            												end
+            
+            												local function atualizarComboBoxH()
+            													local comboBox = self.cmbInimigos
+            													comboBox.items = lista
+            													comboBox.values = lista
+            													comboBox.value = lista[1] or ""  -- Defina o primeiro item como selecionado por padrão
+            												end
+            
+            												local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
+            												atualizarComboBoxH()
+            											end;
+            					else
+            					end;
+            				end;
         end);
 
     obj._e_event5 = obj.rclListaDosItens3:addEventListener("onSelect",

@@ -2,7 +2,7 @@
 	
 <script>		
 	<![CDATA[ 
-		function self.CalculaHP()
+		function self.CalculaMPAtual()
 			if sheet.Level < 21 then
 				sheet.EHPNivel = 0;
 				sheet.HPRACAATE30 = 0;

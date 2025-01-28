@@ -489,10 +489,31 @@ local function constructNew_frmpersonagem()
     obj.button1:setName("button1");
 
 
-				local function RolarTesteAtletismo()      
-					local mesaDoPersonagem = Firecast.getMesaDe(sheet);      
-					sheet.TAtletismo = math.floor(tonumber(sheet.TAtletismo or 0));                        
-					mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.TAtletismo, "[§K2]Teste de Atletismo"); 
+				local function RolarTesteAtletismo()
+					local mesas = rrpg.getMesas();
+					
+
+					for i = 1, #mesas, 1 do
+							local objMesa = mesas[i];      
+
+							if objMesa.me.login == "shiyori" then 							
+								local resultado = showMessage(objMesa.me.login .. " Clicou errado denovo XIORI ?", {"Sim", "Não"})
+								-- Verifica a escolha do usuário
+								if resultado == "Sim" then
+									break
+								elseif resultado == "Não" then
+									local mesaDoPersonagem = Firecast.getMesaDe(sheet);      
+									sheet.TAtletismo = math.floor(tonumber(sheet.TAtletismo or 0));                        
+									mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.TAtletismo, "[§K2]Teste de Atletismo");
+									break
+								end;
+							end
+							local mesaDoPersonagem = Firecast.getMesaDe(sheet);      
+							sheet.TAtletismo = math.floor(tonumber(sheet.TAtletismo or 0));                        
+							mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.TAtletismo, "[§K2]Teste de Atletismo");
+					end; 
+
+					
 				end; 	   
 			
 

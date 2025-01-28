@@ -43,11 +43,13 @@
 		if sheet.Vitalidade == nil then
 			sheet.Vitalidade = 0;
 		end;	
-		
+		FichaPrincipal = sheet
 		sheet.ELevel = (tonumber(sheet.Elevel) or 0); 
 		sheet.PontoSkill = (tonumber(sheet.PontoSkill) or 1); 
 		sheet.PontosUlt = (tonumber(sheet.PontosUlt) or 0); 
 		sheet.ForcaTotal = (tonumber(sheet.ForcaTotal) or 0); 
+		sheet.VitalidadeTotal = (tonumber(sheet.ForcaTotal) or 0); 
+		sheet.InteligenciaTotal = (tonumber(sheet.ForcaTotal) or 0); 
 		sheet.Acerto = (tonumber(sheet.Acerto) or 0); 
 		sheet.AcertoMagico	= (tonumber(sheet.AcertoMagico) or 0); 
 		sheet.Critical = (tonumber(sheet.Critical) or 0); 
@@ -385,6 +387,205 @@
 ------------- LevelZeira --------------------------------------
 		<edit left="295" top="807" fontColor="#00008B" scale="2.0" width="21"  height="50" type="number" horzTextAlign="center" textPrompt="0" canFocus="true" hitTest="true" enabled="true" max="30" field="Level" transparent="true" />
 		<edit left="295" top="700" fontColor="#00008B" scale="2.0" width="21" visible="false"  height="50" field="Elevel" transparent="false" />
+
+		
+		<image left="295" top="700" width="64" height="64" src="./imagens/buff.png" >
+			<button name="btnEffect" opacity="0.0" align="client">
+				<event name="onClick">
+					self.popEffect:show();
+					if sheet then
+						FichaPrincipal = sheet
+					end;
+				</event>
+			</button>
+		</image>
+		<popup name="popEffect" width="600" height="400" backOpacity="0.5">
+			<layout align="top" height="30" margins="{bottom=4}">
+				<button text="Criar Novo Item" width="150" align="left">
+					<event name="onClick">
+						-- Usuário clicou no botão de criar novo item.
+						-- Vamos inserir um novo item no nosso recordList                              
+						self.rclBuffs:append();
+						
+					</event>
+				</button>
+			</layout>  
+				<recordList name="rclBuffs" field="Efeitos" templateForm="frmEffect" align="top" selectable="true" layout="horizontal" height="40">                       
+				<event name="onSelect">
+					sheet.PAEffectTotal = 0
+					sheet.PMEffectTotal = 0
+					sheet.PFEffectTotal = 0
+					sheet.DEFEffectTotal = 0
+					sheet.RESEffectTotal = 0
+					sheet.ACEffectTotal = 0
+					sheet.ACMEffectTotal = 0
+					sheet.CREffectTotal = 0
+					sheet.CRMEffectTotal = 0
+					sheet.DadoEffectTotal = 0
+					sheet.ESQEffectTotal = 0
+					sheet.PersEffectTotal = 0
+					sheet.VezEffectTotal = 0
+					sheet.ManaEffectTotal = 0
+					sheet.CDEffectTotal = 0
+					sheet.DuraEffectTotal = 0
+					sheet.ContaEffectTotal = 0
+					sheet.TipoEffectTotal = 0
+					sheet.OutroEffectTotal = 0
+					sheet.DanoEffectTotal = 0
+					sheet.HPTotalEffectTotal = 0
+					sheet.MPTotalEffectTotal = 0
+
+					local node = self.rclBuffs.selectedNode;  
+					self.dscBuffSlot.node = node;                       
+					self.dscBuffSlot.visible = (node ~= nil);
+
+					if self.dscBuffSlot.visible == true then
+						self.dscBuffSlot.node.PAEffect = tonumber(self.dscBuffSlot.node.PAEffect) or 0;
+						self.dscBuffSlot.node.PMEffect = tonumber(self.dscBuffSlot.node.PMEffect) or 0;
+						self.dscBuffSlot.node.PFEffect = tonumber(self.dscBuffSlot.node.PFEffect) or 0;
+						self.dscBuffSlot.node.DEFEffect = tonumber(self.dscBuffSlot.node.DEFEffect) or 0;
+						self.dscBuffSlot.node.RESEffect = tonumber(self.dscBuffSlot.node.RESEffect) or 0;
+						self.dscBuffSlot.node.ACEffect = tonumber(self.dscBuffSlot.node.ACEffect) or 0;
+						self.dscBuffSlot.node.ACMEffect = tonumber(self.dscBuffSlot.node.ACMEffect) or 0;
+						self.dscBuffSlot.node.CREffect = tonumber(self.dscBuffSlot.node.CREffect) or 0;
+						self.dscBuffSlot.node.CRMEffect = tonumber(self.dscBuffSlot.node.CRMEffect) or 0;
+						self.dscBuffSlot.node.DadoEffect = tonumber(self.dscBuffSlot.node.DadoEffect) or 0;
+						self.dscBuffSlot.node.ESQEffect = tonumber(self.dscBuffSlot.node.ESQEffect) or 0;
+						self.dscBuffSlot.node.PersEffect = tonumber(self.dscBuffSlot.node.PersEffect) or 0;
+						self.dscBuffSlot.node.VezEffect = tonumber(self.dscBuffSlot.node.VezEffect) or 0;
+						self.dscBuffSlot.node.DanoEffect = tonumber(self.dscBuffSlot.node.DanoEffect) or 0;
+						self.dscBuffSlot.node.ManaEffect = tonumber(self.dscBuffSlot.node.ManaEffect) or 0;
+						self.dscBuffSlot.node.CDEffect = tonumber(self.dscBuffSlot.node.CDEffect) or 0;
+						self.dscBuffSlot.node.DuraEffect = tonumber(self.dscBuffSlot.node.DuraEffect) or 9999;
+						self.dscBuffSlot.node.ContaEffect = tonumber(self.dscBuffSlot.node.ContaEffect) or 0;
+						self.dscBuffSlot.node.TipoEffect = tonumber(self.dscBuffSlot.node.TipoEffect) or 0;
+						self.dscBuffSlot.node.OutroEffect = tonumber(self.dscBuffSlot.node.OutroEffect) or 0;
+						self.dscBuffSlot.node.HPTotalEffect = tonumber(self.dscBuffSlot.node.HPTotalEffect) or 0;
+						self.dscBuffSlot.node.MPTotalEffect = tonumber(self.dscBuffSlot.node.MPTotalEffect) or 0;
+					end;
+
+					-- Acessa o RecordList do grupo de jogadores
+					local nodes = ndb.getChildNodes(sheet.Efeitos) -- Substitua pelo campo correto
+
+					for _, node in ipairs(nodes) do
+						sheet.PAEffectTotal = tonumber(sheet.PAEffectTotal or 0) + tonumber(node.PAEffect or 0)
+						sheet.PMEffectTotal = tonumber(sheet.PMEffectTotal or 0) + tonumber(node.PMEffect or 0)
+						sheet.PFEffectTotal = tonumber(sheet.PFEffectTotal or 0) + tonumber(node.PFEffect or 0)
+						sheet.DEFEffectTotal = tonumber(sheet.DEFEffectTotal or 0) + tonumber(node.DEFEffect or 0)
+						sheet.RESEffectTotal = tonumber(sheet.RESEffectTotal or 0) + tonumber(node.RESEffect or 0)
+						sheet.ACEffectTotal = tonumber(sheet.ACEffectTotal or 0) + tonumber(node.ACEffect or 0)
+						sheet.ACMEffectTotal = tonumber(sheet.ACMEffectTotal or 0) + tonumber(node.ACMEffect or 0)
+						sheet.CREffectTotal = tonumber(sheet.CREffectTotal or 0) + tonumber(node.CREffect or 0)
+						sheet.CRMEffectTotal = tonumber(sheet.CRMEffectTotal or 0) + tonumber(node.CRMEffect or 0)
+						sheet.DadoEffectTotal = tonumber(sheet.DadoEffectTotal or 0) + tonumber(node.DadoEffect or 0)
+						sheet.ESQEffectTotal = tonumber(sheet.ESQEffectTotal or 0) + tonumber(node.ESQEffect or 0)
+						sheet.PersEffectTotal = tonumber(sheet.PersEffectTotal or 0) + tonumber(node.PersEffect or 0)
+						sheet.VezEffectTotal = tonumber(sheet.VezEffectTotal or 0) + tonumber(node.VezEffect or 0)
+						sheet.ManaEffectTotal = tonumber(sheet.ManaEffectTotal or 0) + tonumber(node.ManaEffect or 0)
+						sheet.CDEffectTotal = tonumber(sheet.CDEffectTotal or 0) + tonumber(node.CDEffect or 0)
+						sheet.DuraEffectTotal = tonumber(sheet.DuraEffectTotal or 0) + tonumber(node.DuraEffect or 0)
+						sheet.ContaEffectTotal = tonumber(sheet.ContaEffectTotal or 0) + tonumber(node.ContaEffect or 0)
+						sheet.TipoEffectTotal = tonumber(sheet.TipoEffectTotal or 0) + tonumber(node.TipoEffect or 0)
+						sheet.OutroEffectTotal = tonumber(sheet.OutroEffectTotal or 0) + tonumber(node.OutroEffect or 0)
+						sheet.DanoEffectTotal = tonumber(sheet.DanoEffectTotal or 0) + tonumber(node.DanoEffect or 0)
+						sheet.HPTotalEffectTotal = tonumber(sheet.HPTotalEffectTotal or 0) + tonumber(node.HPTotalEffect or 0)
+						sheet.MPTotalEffectTotal = tonumber(sheet.MPTotalEffectTotal or 0) + tonumber(node.MPTotalEffect or 0)
+						
+						-- Chama a função específica após processar cada node
+						ORCRacial()
+						StatusDeChances()
+						self.CalculaHP()
+						CalculaMP()
+					end
+
+				</event>
+			</recordList>  
+
+			<dataScopeBox name="dscBuffSlot" visible="false" align="client"
+						margins="{left=4, right=4, top=2}">
+					<!-- Faça um layout "bonito" para sua caixa de detalhes =). Utilize a propriedade "field" nas tags aqui dentro   -->      
+
+					<rectangle align="client" color="black" xradius="10" yradius="10"
+							padding="{top=3, left=3, right=3, bottom=3}">       
+
+							<layout align="top" height="30" margins="{bottom=4}">
+									<label align="left" text="Efeito" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" field="NomeDoEfeito"/>	
+									<label align="left" text="Dano" fontColor="red" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="DanoEffect"/>
+									<label align="left" text="Consumo MP" fontColor="blue" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" fontColor="blue" margins="{left=15, right=-10}" type="number" field="ManaEffect"/>
+									<button align="right" fontColor="red" text="Apagar!" 
+									margins="{left=4, right=4, top=2, bottom=2}" width="150"
+									onClick="ndb.deleteNode(self.dscBuffSlot.node);" />   					
+							</layout>                            
+
+							<layout align="top" height="30" margins="{bottom=4}">
+									<label align="left" text="PA" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="PAEffect"/>
+									<label align="left" text="PM" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="PMEffect"/>
+									<label align="left" text="PF" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="PFEffect"/>
+									<label align="left" text="DEF" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="DEFEffect"/>
+									<label align="left" text="RES" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="RESEffect"/>
+							</layout>                       
+
+							<layout align="top" height="30" margins="{bottom=4}">              
+									<label align="left" text="AC" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="ACEffect"/>
+									<label align="left" text="ACM" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="ACMEffect"/>
+									<label align="left" text="CR" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="CREffect"/>
+									<label align="left" text="CRM" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="CRMEffect"/>
+									<label align="left" text="Proc" fontColor="#FF1493" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" fontColor="#FF1493" margins="{left=15, right=-10}" type="number" field="DadoEffect"/>
+									
+							</layout>
+
+							<layout align="top" height="30" margins="{bottom=4}">              
+									<label align="left" text="ESQ" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="ESQEffect"/>
+									<label align="left" text="Pers" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="PersEffect"/>
+									<label align="left" text="VEZ" fontColor="green" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" fontColor="green" margins="{left=15, right=-10}" type="number" field="VezEffect"/>  
+									<label align="left" text="HP Total" fontColor="red" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="HPTotalEffect"/>
+									<label align="left" text="MP Total" fontColor="blue" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" fontColor="blue" margins="{left=15, right=-10}" type="number" field="MPTotalEffect"/>                                
+		
+							</layout>
+
+							<layout align="top" height="30" margins="{bottom=4}">              
+									<label align="left" text="CD" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="CDEffect"/>
+									<label align="left" text="Duração" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="DuraEffect"/>
+									<label align="left" text="Conta" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="ContaEffect"/> 
+									<label align="left" text="Tipo" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="TipoEffect"/> 
+									<label align="left" text="Outro" width="50" margins="{left=15, right=-10}"/>
+									<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="OutroEffect"/> 
+				
+		
+							</layout>
+
+							<layout align="client" margins="{top=5, left=5 , bottom=4}">
+									<textEditor align="top" field="DescriBuff" height="100"/>
+							</layout> 
+					</rectangle>
+			</dataScopeBox>        
+					
+		</popup>  
+
+					
+
 			
     --------------------- Outras Forms --------------------------------	
 	
@@ -434,7 +635,7 @@
 		</button>		
 		<image left="467" top="110" width="200" height="200" src="/imagens/TAGS/Sobre.png"/>
 		
-		<button left="290" top="160" width="60" height="55" opacity="0.1">
+		<button left="290" top="160" visible="false" width="60" height="55" opacity="0.1">
 			<event name="onClick">
 				local novoForm = GUI.newForm("frmActionBar");
 				novoForm:setNodeObject(sheet);

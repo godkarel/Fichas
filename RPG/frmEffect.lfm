@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form name="frmEffect" height="50" width="100">
+        <!-- O título do item que aparece na lista -->
+        <image align="left" top="15" width="40" height="30" visible="true" field="fldImgIconEffect"/> 
+        <label align="client" text="Teste de label" field="NomeDoEfeito" 
+               margins="{left=4, right=4, top=4, bottom=4}"/>       
+
+
+        <!-- Adicionar um valor padrão para o campoTitulo caso esteja vazio.
+                Isto é especialmente útil em novos itens -->
+        <dataLink field="NomeDoEfeito" defaultValue="Nome do Efeito"/>
+        <dataLink fields="{'DuraEffect', 'CDEffect', 'ContaEffect', 'TipoEffect', 'OutroEffect'}">
+                <event name="onChange">
+                        if sheet.DuraEffect == 0 then
+                           ndb.deleteNode(sheet)
+                        end;
+                </event>
+        </dataLink>
+
+        <dataLink field="NomeDoEfeito">
+                <event name="onChange">
+                        AplicaPassiva();
+                </event>
+        </dataLink>
+
+
+        <script>
+                local function AplicaPassiva()
+                        --[[if sheet.NomeDoEfeito == "Defender(Nível Unico)" then
+                                sheet.fldImgIconEffect = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df926ni-6d6a0a7d-c139-4ada-b60f-0d600b0e6018.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGY5MjZuaS02ZDZhMGE3ZC1jMTM5LTRhZGEtYjYwZi0wZDYwMGIwZTYwMTgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.AdwBUJAvbLkYsHMymGRCxNm-llWUmfXwEScNeIfbvVs"       
+                                sheet.DadoEffect = FichaPrincipal.Persistencia
+                        end; 
+
+                        if sheet.NomeDoEfeito == "Statica(Nível 1)" or sheet.NomeDoEfeito == "Statica(Nível 2)" or sheet.NomeDoEfeito == "Statica(Nível 3)" then
+				sheet.fldImgIconEffect = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3axqt-07d619c9-7242-423f-bac8-07656326b95e.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzYXhxdC0wN2Q2MTljOS03MjQyLTQyM2YtYmFjOC0wNzY1NjMyNmI5NWUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ng6pOotncQrNcnLwRQE10Hhg2QDhMQWGl-x3ZYTM0oA"
+                                sheet.DadoEffect = 2
+                        end; 
+                        
+                        if sheet.NomeDoEfeito == "( Ultima )Mago Pesado(Nível Único)" then
+                                sheet.fldImgIconEffect = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3axqh-e0e824e0-3d84-4e2e-815a-d53242a3025b.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzYXhxaC1lMGU4MjRlMC0zZDg0LTRlMmUtODE1YS1kNTMyNDJhMzAyNWIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.d3oc8D-5LJ-9vyL8NiT8GCwJHwXc_y_LY5uD-2ascCg"
+                                sheet.ACEffect = 1
+                                sheet.ESQEffect = 1
+                                sheet.CREffect = -1
+                                sheet.CRMEffect = 1
+                                sheet.PersEffect = 1
+                                sheet.ACMEffect = 1
+                                sheet.ACMEffect = 1
+                        end; 
+
+                        if sheet.NomeDoEfeito == "Regeneração(Nível 1)" or sheet.NomeDoEfeito == "Regeneração(Nível 2)" or sheet.NomeDoEfeito == "Regeneração(Nível 3)" then
+				sheet.fldImgIconEffect = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df2gaez-9628a43d-1a35-4d85-a9a6-bef8cc0e658a.png/v1/fill/w_64,h_64,strp/4_regenerao_by_karelsama_df2gaez-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RmMmdhZXotOTYyOGE0M2QtMWEzNS00ZDg1LWE5YTYtYmVmOGNjMGU2NThhLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.aPAtBW3sZ7iqvlELR5d-e8fP8hw7N6Mhnp1oJVbHNK4"
+			end;
+
+                        if sheet.NomeDoEfeito == "Espinhos(Nível 1)" or sheet.NomeDoEfeito == "Espinhos(Nível 2)" or sheet.NomeDoEfeito == "Espinhos(Nível 3)" or sheet.NomeDoEfeito == "Espinhos(Nível 4)"  or sheet.NomeDoEfeito == "Espinhos(Nível 5)" then
+				sheet.fldImgIconEffect = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df2gaf8-96090d7c-f02f-49f0-a32d-c7287e954fe9.png/v1/fill/w_64,h_64,strp/7_espinhos_by_karelsama_df2gaf8-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RmMmdhZjgtOTYwOTBkN2MtZjAyZi00OWYwLWEzMmQtYzcyODdlOTU0ZmU5LnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.Ij2u7Y_KniT4suOU5mtkiCnrLnofJy88ji_Vhqmk3D0"
+                                sheet.DanoEffect = FichaPrincipal.Inteligencia
+                        end;]]
+                           
+                end;
+        </script>
+</form>
+

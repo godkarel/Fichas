@@ -6,36 +6,40 @@
 				if sheet.Classe == 'Monge' then
 					if sheet.Raca == 'Orc' then
 						sheet.ORCRacial = (math.floor((tonumber(sheet.ForcaTotal) or 0) *4 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0)) * 0.10);
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) * 0.10) + (tonumber(sheet.PAEffectTotal) or 0));
+
 											 
 						sheet.PA = math.floor((tonumber(sheet.ForcaTotal) or 0) *4 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.ORCRacial) or 0));
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.ORCRacial) or 0) + (tonumber(sheet.PAEffectTotal) or 0));
 					else
 						sheet.PA = math.floor((tonumber(sheet.ForcaTotal) or 0) *4 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0));
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.PAEffectTotal) or 0));
 					end;
 				else 
 					if sheet.Raca == 'Orc' then 
 						sheet.ORCRacial = (math.floor((tonumber(sheet.ForcaTotal) or 0) *2 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0)) * 0.10);
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0)) * 0.10 + (tonumber(sheet.PAEffectTotal) or 0));
 											 
 						sheet.PA =  math.floor((tonumber(sheet.ForcaTotal) or 0) *2 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											  (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.ORCRacial) or 0));									
+											  (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.ORCRacial) or 0) + (tonumber(sheet.PAEffectTotal) or 0));									
 					else
 						sheet.PA =  math.floor((tonumber(sheet.ForcaTotal) or 0) *2 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											  (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0));
+											  (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.PAEffectTotal) or 0));
 					end;
 				end;
 				 
 				sheet.PM =  math.floor((tonumber(sheet.InteligenciaTotal) or 0) *2 + (tonumber(sheet.ArmaPM) or 0) + (tonumber(sheet.OutraPM) or 0) + (tonumber(sheet.ArmaduraPM) or 0) + (tonumber(sheet.AcessorioPM) or 0) +
-									  (tonumber(sheet.PMRacial) or 0) + (tonumber(sheet.MontPM) or 0) + (tonumber(sheet.PMBasica) or 0));
+									  (tonumber(sheet.PMRacial) or 0) + (tonumber(sheet.MontPM) or 0) + (tonumber(sheet.PMBasica) or 0) + (tonumber(sheet.PMEffectTotal) or 0));
+
 				sheet.PF =  math.floor((tonumber(sheet.DestrezaTotal) or 0) *2 + (tonumber(sheet.ArmaPF) or 0) + (tonumber(sheet.OutraPF) or 0) + (tonumber(sheet.ArmaduraPF) or 0) + (tonumber(sheet.AcessorioPF) or 0) +
-									  (tonumber(sheet.PFRacial) or 0) + (tonumber(sheet.MontPF) or 0) + (tonumber(sheet.PFBasica) or 0));			
+									  (tonumber(sheet.PFRacial) or 0) + (tonumber(sheet.MontPF) or 0) + (tonumber(sheet.PFBasica) or 0) + (tonumber(sheet.PFEffectTotal) or 0));
+
 				sheet.Defesa =  math.floor((tonumber(sheet.VitalidadeTotal) or 0) /2 + (tonumber(sheet.AgilidadeTotal) or 0) /2 + (tonumber(sheet.ArmaDEF) or 0) + 
-										  (tonumber(sheet.OutraDEF) or 0) + (tonumber(sheet.ArmaduraDEF) or 0) + (tonumber(sheet.AcessorioDEF) or 0) + (tonumber(sheet.DEFRacial) or 0) + (tonumber(sheet.DEFBasica) or 0));
-				sheet.Resistencia = math.floor((tonumber(sheet.VitalidadeTotal) or 0) /2) + ((tonumber(sheet.Defesa) or 0) /2) +
+										  (tonumber(sheet.OutraDEF) or 0) + (tonumber(sheet.ArmaduraDEF) or 0) + (tonumber(sheet.AcessorioDEF) or 0) + (tonumber(sheet.DEFRacial) or 0) + (tonumber(sheet.DEFBasica) or 0) + (tonumber(sheet.DEFEffectTotal) or 0));
+										  
+				sheet.Resistencia = math.floor(math.floor((tonumber(sheet.VitalidadeTotal) or 0) /2) + ((tonumber(sheet.Defesa) or 0) /2) +
 											   ((tonumber(sheet.InteligenciaTotal) or 0) /2) + (tonumber(sheet.ArmaRES) or 0) + (tonumber(sheet.OutraRES) or 0) + 
-											   (tonumber(sheet.ArmaduraRES) or 0) + (tonumber(sheet.AcessorioRES) or 0) + (tonumber(sheet.RESRacial) or 0) + (tonumber(sheet.RESBasica	) or 0) + math.floor(tonumber(sheet.ForcaTotal * 0.25) or 0);
+											   (tonumber(sheet.ArmaduraRES) or 0) + (tonumber(sheet.AcessorioRES) or 0) + (tonumber(sheet.RESRacial) or 0) + (tonumber(sheet.RESBasica	) or 0) + math.floor(tonumber(sheet.ForcaTotal * 0.25) or 0) + (tonumber(sheet.RESEffectTotal) or 0));
 			end;
 		end;
 	</script>

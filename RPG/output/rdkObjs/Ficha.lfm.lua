@@ -608,10 +608,10 @@ local function constructNew_frmvelen()
 				sheet.HPRACAATE30 = 0;
 			end;
 			
-			sheet.HPTotal = (tonumber(sheet.VitalidadeTotal) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + 
+			sheet.HPTotal = math.floor((tonumber(sheet.VitalidadeTotal) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + 
 			(tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
 			(tonumber(sheet.PHPRacial) or 0) + (tonumber(sheet.PHPBasica) or 0) + (tonumber(sheet.HPRACAATE20) or 0) + (tonumber(sheet.CHPNivel) or 0) + 
-			(tonumber(sheet.EHPNivel) or 0) + (tonumber(sheet.HPRACAATE30) or 0);
+			(tonumber(sheet.EHPNivel) or 0) + (tonumber(sheet.HPRACAATE30) or 0)  + (tonumber(sheet.HPTotalEffectTotal) or 0));
 		end;
 	
 
@@ -630,10 +630,10 @@ local function constructNew_frmvelen()
 				sheet.EMPNivel = 0;
 			end;
 
-			sheet.MPTotal = (tonumber(sheet.InteligenciaTotal * 1.5) or 0) + (tonumber(sheet.ArmaMP) or 0) + 
+			sheet.MPTotal = math.floor((tonumber(sheet.InteligenciaTotal * 1.5) or 0) + (tonumber(sheet.ArmaMP) or 0) + 
 			(tonumber(sheet.OutraMP) or 0) + (tonumber(sheet.ArmaduraMP) or 0) + (tonumber(sheet.AcessorioMP) or 0) + (tonumber(sheet.MPMont) or 0) +
-			(tonumber(sheet.PMPRacial) or 0) + (tonumber(sheet.PMPBasica) or 0) + (tonumber(sheet.CMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0) + (tonumber(sheet.DMP) or 0)+ 
-			(tonumber(sheet.ConEscolhidoBlume) or 0);	
+			(tonumber(sheet.PMPRacial) or 0) + (tonumber(sheet.PMPBasica) or 0) + (tonumber(sheet.CMPNivel) or 0) + (tonumber(sheet.EMPNivel) or 0) + (tonumber(sheet.DMP) or 0) + 
+			(tonumber(sheet.ConEscolhidoBlume) or 0) + (tonumber(sheet.MPTotalEffectTotal) or 0));	
 		end;
 	
 
@@ -1326,36 +1326,36 @@ local function constructNew_frmvelen()
 
 					sheet.ForcaPer =  ((tonumber(sheet.ForcaTotal) or 0) /30);
 						
-					sheet.Acerto = math.floor((tonumber(sheet.ClasseAcerto) or 0) + (tonumber(sheet.EspecAcerto) or 0) + (tonumber(sheet.DestrezaAcerto) or 0) + (tonumber(sheet.AcertoBasica) or 0) + (tonumber(sheet.AcertoRacial) or 0) + (tonumber(sheet.ConBoaMira) or 0));
+					sheet.Acerto = math.floor((tonumber(sheet.ClasseAcerto) or 0) + (tonumber(sheet.EspecAcerto) or 0) + (tonumber(sheet.DestrezaAcerto) or 0) + (tonumber(sheet.AcertoBasica) or 0) + (tonumber(sheet.AcertoRacial) or 0) + (tonumber(sheet.ConBoaMira) or 0) + (tonumber(sheet.ACEffectTotal) or 0)) ;
 
 					if sheet.Level > 20 then
-						sheet.AcertoMagico = math.floor((tonumber(sheet.ClasseAM) or 0) + (tonumber(sheet.EspecAM) or 0) + (tonumber(sheet.AMBasica) or 0) + (tonumber(sheet.ConMestreMagico) or 0) + (tonumber(sheet.AMRacial) or 0));
+						sheet.AcertoMagico = math.floor((tonumber(sheet.ClasseAM) or 0) + (tonumber(sheet.EspecAM) or 0) + (tonumber(sheet.AMBasica) or 0) + (tonumber(sheet.ConMestreMagico) or 0) + (tonumber(sheet.AMRacial) or 0) + (tonumber(sheet.ACMEffectTotal) or 0));
 					else 
-						sheet.AcertoMagico = math.floor((tonumber(sheet.ClasseAM) or 0) + (tonumber(sheet.AMBasica) or 0) + (tonumber(sheet.AMRacial) or 0) + (tonumber(sheet.ConMestreMagico) or 0));
+						sheet.AcertoMagico = math.floor((tonumber(sheet.ClasseAM) or 0) + (tonumber(sheet.AMBasica) or 0) + (tonumber(sheet.AMRacial) or 0) + (tonumber(sheet.ConMestreMagico) or 0) + (tonumber(sheet.ACMEffectTotal) or 0));
 					end;
 					
 					if sheet.Level > 20 then
-						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.EspecCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0));
+						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.EspecCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0) + (tonumber(sheet.CREffectTotal) or 0));
 					else 
-						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0));
+						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0) + (tonumber(sheet.CREffectTotal) or 0));
 					end;
 					
 					if sheet.Level > 20 then
-						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.EspecCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0));
+						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.EspecCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0) + (tonumber(sheet.CRMEffectTotal) or 0));
 					else 
-						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0));
+						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0) + (tonumber(sheet.CRMEffectTotal) or 0));
 					end;
 					
 					if sheet.Level > 20 then
-						sheet.Esquiva = math.floor((tonumber(sheet.ClasseEsquiva) or 0) + (tonumber(sheet.EspecEsquiva) or 0) + (tonumber(sheet.ESQBasica) or 0) + (tonumber(sheet.ESQRacial) or 0) + (tonumber(sheet.ConEvasivo) or 0) + (tonumber(sheet.AgilidadeESQ) or 0) - (tonumber(sheet.OutraDebuffShield) or 0));
+						sheet.Esquiva = math.floor((tonumber(sheet.ClasseEsquiva) or 0) + (tonumber(sheet.EspecEsquiva) or 0) + (tonumber(sheet.ESQBasica) or 0) + (tonumber(sheet.ESQRacial) or 0) + (tonumber(sheet.ConEvasivo) or 0) + (tonumber(sheet.AgilidadeESQ) or 0) - (tonumber(sheet.OutraDebuffShield) or 0) + (tonumber(sheet.ESQEffectTotal) or 0));
 					else 
-						sheet.Esquiva = math.floor((tonumber(sheet.ClasseEsquiva) or 0) + (tonumber(sheet.ESQBasica) or 0) + (tonumber(sheet.ESQRacial) or 0) + (tonumber(sheet.AgilidadeESQ) or 0) + (tonumber(sheet.ConEvasivo) or 0) - (tonumber(sheet.OutraDebuffShield) or 0));
+						sheet.Esquiva = math.floor((tonumber(sheet.ClasseEsquiva) or 0) + (tonumber(sheet.ESQBasica) or 0) + (tonumber(sheet.ESQRacial) or 0) + (tonumber(sheet.AgilidadeESQ) or 0) + (tonumber(sheet.ConEvasivo) or 0) - (tonumber(sheet.OutraDebuffShield) or 0) + (tonumber(sheet.ESQEffectTotal) or 0));
 					end;
 
 					if sheet.Level > 20 then
-						sheet.Persistencia = (tonumber(sheet.ClassePer) or 0) + (tonumber(sheet.EspecPer) or 0) + (tonumber(sheet.PersistBasica) or 0) + (tonumber(sheet.PersistRacial) or 0) + (tonumber(sheet.ForcaPer) or 0) + (tonumber(sheet.ConPersistente) or 0); 
+						sheet.Persistencia = math.floor((tonumber(sheet.ClassePer) or 0) + (tonumber(sheet.EspecPer) or 0) + (tonumber(sheet.PersistBasica) or 0) + (tonumber(sheet.PersistRacial) or 0) + (tonumber(sheet.ForcaPer) or 0) + (tonumber(sheet.ConPersistente) or 0)  + (tonumber(sheet.PersEffectTotal) or 0)); 
 					else 
-						sheet.Persistencia = (tonumber(sheet.ClassePer) or 0) + (tonumber(sheet.PersistBasica) or 0) + (tonumber(sheet.PersistRacial) or 0) + (tonumber(sheet.ForcaPer) or 0) + (tonumber(sheet.ConPersistente) or 0); 
+						sheet.Persistencia = math.floor((tonumber(sheet.ClassePer) or 0) + (tonumber(sheet.PersistBasica) or 0) + (tonumber(sheet.PersistRacial) or 0) + (tonumber(sheet.ForcaPer) or 0) + (tonumber(sheet.ConPersistente) or 0)  + (tonumber(sheet.PersEffectTotal) or 0)); 
 					end;		
 						
 					if sheet.Esquiva > 14 then
@@ -1902,36 +1902,40 @@ local function constructNew_frmvelen()
 				if sheet.Classe == 'Monge' then
 					if sheet.Raca == 'Orc' then
 						sheet.ORCRacial = (math.floor((tonumber(sheet.ForcaTotal) or 0) *4 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0)) * 0.10);
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) * 0.10) + (tonumber(sheet.PAEffectTotal) or 0));
+
 											 
 						sheet.PA = math.floor((tonumber(sheet.ForcaTotal) or 0) *4 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.ORCRacial) or 0));
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.ORCRacial) or 0) + (tonumber(sheet.PAEffectTotal) or 0));
 					else
 						sheet.PA = math.floor((tonumber(sheet.ForcaTotal) or 0) *4 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0));
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.PAEffectTotal) or 0));
 					end;
 				else 
 					if sheet.Raca == 'Orc' then 
 						sheet.ORCRacial = (math.floor((tonumber(sheet.ForcaTotal) or 0) *2 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0)) * 0.10);
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0)) * 0.10 + (tonumber(sheet.PAEffectTotal) or 0));
 											 
 						sheet.PA =  math.floor((tonumber(sheet.ForcaTotal) or 0) *2 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											  (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.ORCRacial) or 0));									
+											  (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.ORCRacial) or 0) + (tonumber(sheet.PAEffectTotal) or 0));									
 					else
 						sheet.PA =  math.floor((tonumber(sheet.ForcaTotal) or 0) *2 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											  (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0));
+											  (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.PAEffectTotal) or 0));
 					end;
 				end;
 				 
 				sheet.PM =  math.floor((tonumber(sheet.InteligenciaTotal) or 0) *2 + (tonumber(sheet.ArmaPM) or 0) + (tonumber(sheet.OutraPM) or 0) + (tonumber(sheet.ArmaduraPM) or 0) + (tonumber(sheet.AcessorioPM) or 0) +
-									  (tonumber(sheet.PMRacial) or 0) + (tonumber(sheet.MontPM) or 0) + (tonumber(sheet.PMBasica) or 0));
+									  (tonumber(sheet.PMRacial) or 0) + (tonumber(sheet.MontPM) or 0) + (tonumber(sheet.PMBasica) or 0) + (tonumber(sheet.PMEffectTotal) or 0));
+
 				sheet.PF =  math.floor((tonumber(sheet.DestrezaTotal) or 0) *2 + (tonumber(sheet.ArmaPF) or 0) + (tonumber(sheet.OutraPF) or 0) + (tonumber(sheet.ArmaduraPF) or 0) + (tonumber(sheet.AcessorioPF) or 0) +
-									  (tonumber(sheet.PFRacial) or 0) + (tonumber(sheet.MontPF) or 0) + (tonumber(sheet.PFBasica) or 0));			
+									  (tonumber(sheet.PFRacial) or 0) + (tonumber(sheet.MontPF) or 0) + (tonumber(sheet.PFBasica) or 0) + (tonumber(sheet.PFEffectTotal) or 0));
+
 				sheet.Defesa =  math.floor((tonumber(sheet.VitalidadeTotal) or 0) /2 + (tonumber(sheet.AgilidadeTotal) or 0) /2 + (tonumber(sheet.ArmaDEF) or 0) + 
-										  (tonumber(sheet.OutraDEF) or 0) + (tonumber(sheet.ArmaduraDEF) or 0) + (tonumber(sheet.AcessorioDEF) or 0) + (tonumber(sheet.DEFRacial) or 0) + (tonumber(sheet.DEFBasica) or 0));
-				sheet.Resistencia = math.floor((tonumber(sheet.VitalidadeTotal) or 0) /2) + ((tonumber(sheet.Defesa) or 0) /2) +
+										  (tonumber(sheet.OutraDEF) or 0) + (tonumber(sheet.ArmaduraDEF) or 0) + (tonumber(sheet.AcessorioDEF) or 0) + (tonumber(sheet.DEFRacial) or 0) + (tonumber(sheet.DEFBasica) or 0) + (tonumber(sheet.DEFEffectTotal) or 0));
+										  
+				sheet.Resistencia = math.floor(math.floor((tonumber(sheet.VitalidadeTotal) or 0) /2) + ((tonumber(sheet.Defesa) or 0) /2) +
 											   ((tonumber(sheet.InteligenciaTotal) or 0) /2) + (tonumber(sheet.ArmaRES) or 0) + (tonumber(sheet.OutraRES) or 0) + 
-											   (tonumber(sheet.ArmaduraRES) or 0) + (tonumber(sheet.AcessorioRES) or 0) + (tonumber(sheet.RESRacial) or 0) + (tonumber(sheet.RESBasica	) or 0) + math.floor(tonumber(sheet.ForcaTotal * 0.25) or 0);
+											   (tonumber(sheet.ArmaduraRES) or 0) + (tonumber(sheet.AcessorioRES) or 0) + (tonumber(sheet.RESRacial) or 0) + (tonumber(sheet.RESBasica	) or 0) + math.floor(tonumber(sheet.ForcaTotal * 0.25) or 0) + (tonumber(sheet.RESEffectTotal) or 0));
 			end;
 		end;
 	
@@ -3480,113 +3484,632 @@ local function constructNew_frmvelen()
     obj.edit13:setTransparent(false);
     obj.edit13:setName("edit13");
 
-    obj.button16 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button16:setParent(obj.scrollBox1);
-    obj.button16:setLeft(33);
-    obj.button16:setTop(160);
-    obj.button16:setWidth(60);
-    obj.button16:setHeight(60);
-    obj.button16:setOpacity(0.1);
-    obj.button16:setName("button16");
-
     obj.image6 = GUI.fromHandle(_obj_newObject("image"));
     obj.image6:setParent(obj.scrollBox1);
-    obj.image6:setLeft(-40);
-    obj.image6:setTop(110);
-    obj.image6:setWidth(200);
-    obj.image6:setHeight(200);
-    obj.image6:setSRC("/imagens/TAGS/TIER.png");
+    obj.image6:setLeft(295);
+    obj.image6:setTop(700);
+    obj.image6:setWidth(64);
+    obj.image6:setHeight(64);
+    obj.image6:setSRC("./imagens/buff.png");
     obj.image6:setName("image6");
 
+    obj.btnEffect = GUI.fromHandle(_obj_newObject("button"));
+    obj.btnEffect:setParent(obj.image6);
+    obj.btnEffect:setName("btnEffect");
+    obj.btnEffect:setOpacity(0.0);
+    obj.btnEffect:setAlign("client");
+
+    obj.popEffect = GUI.fromHandle(_obj_newObject("popup"));
+    obj.popEffect:setParent(obj.scrollBox1);
+    obj.popEffect:setName("popEffect");
+    obj.popEffect:setWidth(600);
+    obj.popEffect:setHeight(400);
+    obj.popEffect:setBackOpacity(0.5);
+
+    obj.layout1 = GUI.fromHandle(_obj_newObject("layout"));
+    obj.layout1:setParent(obj.popEffect);
+    obj.layout1:setAlign("top");
+    obj.layout1:setHeight(30);
+    obj.layout1:setMargins({bottom=4});
+    obj.layout1:setName("layout1");
+
+    obj.button16 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button16:setParent(obj.layout1);
+    obj.button16:setText("Criar Novo Item");
+    obj.button16:setWidth(150);
+    obj.button16:setAlign("left");
+    obj.button16:setName("button16");
+
+    obj.rclBuffs = GUI.fromHandle(_obj_newObject("recordList"));
+    obj.rclBuffs:setParent(obj.popEffect);
+    obj.rclBuffs:setName("rclBuffs");
+    obj.rclBuffs:setField("Efeitos");
+    obj.rclBuffs:setTemplateForm("frmEffect");
+    obj.rclBuffs:setAlign("top");
+    obj.rclBuffs:setSelectable(true);
+    obj.rclBuffs:setLayout("horizontal");
+    obj.rclBuffs:setHeight(40);
+
+    obj.dscBuffSlot = GUI.fromHandle(_obj_newObject("dataScopeBox"));
+    obj.dscBuffSlot:setParent(obj.popEffect);
+    obj.dscBuffSlot:setName("dscBuffSlot");
+    obj.dscBuffSlot:setVisible(false);
+    obj.dscBuffSlot:setAlign("client");
+    obj.dscBuffSlot:setMargins({left=4, right=4, top=2});
+
+    obj.rectangle19 = GUI.fromHandle(_obj_newObject("rectangle"));
+    obj.rectangle19:setParent(obj.dscBuffSlot);
+    obj.rectangle19:setAlign("client");
+    obj.rectangle19:setColor("black");
+    obj.rectangle19:setXradius(10);
+    obj.rectangle19:setYradius(10);
+    obj.rectangle19:setPadding({top=3, left=3, right=3, bottom=3});
+    obj.rectangle19:setName("rectangle19");
+
+    obj.layout2 = GUI.fromHandle(_obj_newObject("layout"));
+    obj.layout2:setParent(obj.rectangle19);
+    obj.layout2:setAlign("top");
+    obj.layout2:setHeight(30);
+    obj.layout2:setMargins({bottom=4});
+    obj.layout2:setName("layout2");
+
+    obj.label25 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label25:setParent(obj.layout2);
+    obj.label25:setAlign("left");
+    obj.label25:setText("Efeito");
+    obj.label25:setWidth(50);
+    obj.label25:setMargins({left=15, right=-10});
+    obj.label25:setName("label25");
+
+    obj.edit14 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit14:setParent(obj.layout2);
+    obj.edit14:setAlign("left");
+    obj.edit14:setWidth(50);
+    obj.edit14:setMargins({left=15, right=-10});
+    obj.edit14:setField("NomeDoEfeito");
+    obj.edit14:setName("edit14");
+
+    obj.label26 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label26:setParent(obj.layout2);
+    obj.label26:setAlign("left");
+    obj.label26:setText("Dano");
+    obj.label26:setFontColor("red");
+    obj.label26:setWidth(50);
+    obj.label26:setMargins({left=15, right=-10});
+    obj.label26:setName("label26");
+
+    obj.edit15 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit15:setParent(obj.layout2);
+    obj.edit15:setAlign("left");
+    obj.edit15:setWidth(50);
+    obj.edit15:setMargins({left=15, right=-10});
+    obj.edit15:setType("number");
+    obj.edit15:setField("DanoEffect");
+    obj.edit15:setName("edit15");
+
+    obj.label27 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label27:setParent(obj.layout2);
+    obj.label27:setAlign("left");
+    obj.label27:setText("Consumo MP");
+    obj.label27:setFontColor("blue");
+    obj.label27:setWidth(50);
+    obj.label27:setMargins({left=15, right=-10});
+    obj.label27:setName("label27");
+
+    obj.edit16 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit16:setParent(obj.layout2);
+    obj.edit16:setAlign("left");
+    obj.edit16:setWidth(50);
+    obj.edit16:setFontColor("blue");
+    obj.edit16:setMargins({left=15, right=-10});
+    obj.edit16:setType("number");
+    obj.edit16:setField("ManaEffect");
+    obj.edit16:setName("edit16");
+
     obj.button17 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button17:setParent(obj.scrollBox1);
-    obj.button17:setLeft(120);
-    obj.button17:setTop(160);
-    obj.button17:setWidth(60);
-    obj.button17:setHeight(60);
-    obj.button17:setOpacity(0.1);
+    obj.button17:setParent(obj.layout2);
+    obj.button17:setAlign("right");
+    obj.button17:setFontColor("red");
+    obj.button17:setText("Apagar!");
+    obj.button17:setMargins({left=4, right=4, top=2, bottom=2});
+    obj.button17:setWidth(150);
     obj.button17:setName("button17");
 
-    obj.image7 = GUI.fromHandle(_obj_newObject("image"));
-    obj.image7:setParent(obj.scrollBox1);
-    obj.image7:setLeft(47);
-    obj.image7:setTop(110);
-    obj.image7:setWidth(200);
-    obj.image7:setHeight(200);
-    obj.image7:setSRC("/imagens/TAGS/SKILL.png");
-    obj.image7:setName("image7");
+    obj.layout3 = GUI.fromHandle(_obj_newObject("layout"));
+    obj.layout3:setParent(obj.rectangle19);
+    obj.layout3:setAlign("top");
+    obj.layout3:setHeight(30);
+    obj.layout3:setMargins({bottom=4});
+    obj.layout3:setName("layout3");
+
+    obj.label28 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label28:setParent(obj.layout3);
+    obj.label28:setAlign("left");
+    obj.label28:setText("PA");
+    obj.label28:setWidth(50);
+    obj.label28:setMargins({left=15, right=-10});
+    obj.label28:setName("label28");
+
+    obj.edit17 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit17:setParent(obj.layout3);
+    obj.edit17:setAlign("left");
+    obj.edit17:setWidth(50);
+    obj.edit17:setMargins({left=15, right=-10});
+    obj.edit17:setType("number");
+    obj.edit17:setField("PAEffect");
+    obj.edit17:setName("edit17");
+
+    obj.label29 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label29:setParent(obj.layout3);
+    obj.label29:setAlign("left");
+    obj.label29:setText("PM");
+    obj.label29:setWidth(50);
+    obj.label29:setMargins({left=15, right=-10});
+    obj.label29:setName("label29");
+
+    obj.edit18 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit18:setParent(obj.layout3);
+    obj.edit18:setAlign("left");
+    obj.edit18:setWidth(50);
+    obj.edit18:setMargins({left=15, right=-10});
+    obj.edit18:setType("number");
+    obj.edit18:setField("PMEffect");
+    obj.edit18:setName("edit18");
+
+    obj.label30 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label30:setParent(obj.layout3);
+    obj.label30:setAlign("left");
+    obj.label30:setText("PF");
+    obj.label30:setWidth(50);
+    obj.label30:setMargins({left=15, right=-10});
+    obj.label30:setName("label30");
+
+    obj.edit19 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit19:setParent(obj.layout3);
+    obj.edit19:setAlign("left");
+    obj.edit19:setWidth(50);
+    obj.edit19:setMargins({left=15, right=-10});
+    obj.edit19:setType("number");
+    obj.edit19:setField("PFEffect");
+    obj.edit19:setName("edit19");
+
+    obj.label31 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label31:setParent(obj.layout3);
+    obj.label31:setAlign("left");
+    obj.label31:setText("DEF");
+    obj.label31:setWidth(50);
+    obj.label31:setMargins({left=15, right=-10});
+    obj.label31:setName("label31");
+
+    obj.edit20 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit20:setParent(obj.layout3);
+    obj.edit20:setAlign("left");
+    obj.edit20:setWidth(50);
+    obj.edit20:setMargins({left=15, right=-10});
+    obj.edit20:setType("number");
+    obj.edit20:setField("DEFEffect");
+    obj.edit20:setName("edit20");
+
+    obj.label32 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label32:setParent(obj.layout3);
+    obj.label32:setAlign("left");
+    obj.label32:setText("RES");
+    obj.label32:setWidth(50);
+    obj.label32:setMargins({left=15, right=-10});
+    obj.label32:setName("label32");
+
+    obj.edit21 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit21:setParent(obj.layout3);
+    obj.edit21:setAlign("left");
+    obj.edit21:setWidth(50);
+    obj.edit21:setMargins({left=15, right=-10});
+    obj.edit21:setType("number");
+    obj.edit21:setField("RESEffect");
+    obj.edit21:setName("edit21");
+
+    obj.layout4 = GUI.fromHandle(_obj_newObject("layout"));
+    obj.layout4:setParent(obj.rectangle19);
+    obj.layout4:setAlign("top");
+    obj.layout4:setHeight(30);
+    obj.layout4:setMargins({bottom=4});
+    obj.layout4:setName("layout4");
+
+    obj.label33 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label33:setParent(obj.layout4);
+    obj.label33:setAlign("left");
+    obj.label33:setText("AC");
+    obj.label33:setWidth(50);
+    obj.label33:setMargins({left=15, right=-10});
+    obj.label33:setName("label33");
+
+    obj.edit22 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit22:setParent(obj.layout4);
+    obj.edit22:setAlign("left");
+    obj.edit22:setWidth(50);
+    obj.edit22:setMargins({left=15, right=-10});
+    obj.edit22:setType("number");
+    obj.edit22:setField("ACEffect");
+    obj.edit22:setName("edit22");
+
+    obj.label34 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label34:setParent(obj.layout4);
+    obj.label34:setAlign("left");
+    obj.label34:setText("ACM");
+    obj.label34:setWidth(50);
+    obj.label34:setMargins({left=15, right=-10});
+    obj.label34:setName("label34");
+
+    obj.edit23 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit23:setParent(obj.layout4);
+    obj.edit23:setAlign("left");
+    obj.edit23:setWidth(50);
+    obj.edit23:setMargins({left=15, right=-10});
+    obj.edit23:setType("number");
+    obj.edit23:setField("ACMEffect");
+    obj.edit23:setName("edit23");
+
+    obj.label35 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label35:setParent(obj.layout4);
+    obj.label35:setAlign("left");
+    obj.label35:setText("CR");
+    obj.label35:setWidth(50);
+    obj.label35:setMargins({left=15, right=-10});
+    obj.label35:setName("label35");
+
+    obj.edit24 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit24:setParent(obj.layout4);
+    obj.edit24:setAlign("left");
+    obj.edit24:setWidth(50);
+    obj.edit24:setMargins({left=15, right=-10});
+    obj.edit24:setType("number");
+    obj.edit24:setField("CREffect");
+    obj.edit24:setName("edit24");
+
+    obj.label36 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label36:setParent(obj.layout4);
+    obj.label36:setAlign("left");
+    obj.label36:setText("CRM");
+    obj.label36:setWidth(50);
+    obj.label36:setMargins({left=15, right=-10});
+    obj.label36:setName("label36");
+
+    obj.edit25 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit25:setParent(obj.layout4);
+    obj.edit25:setAlign("left");
+    obj.edit25:setWidth(50);
+    obj.edit25:setMargins({left=15, right=-10});
+    obj.edit25:setType("number");
+    obj.edit25:setField("CRMEffect");
+    obj.edit25:setName("edit25");
+
+    obj.label37 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label37:setParent(obj.layout4);
+    obj.label37:setAlign("left");
+    obj.label37:setText("Proc");
+    obj.label37:setFontColor("#FF1493");
+    obj.label37:setWidth(50);
+    obj.label37:setMargins({left=15, right=-10});
+    obj.label37:setName("label37");
+
+    obj.edit26 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit26:setParent(obj.layout4);
+    obj.edit26:setAlign("left");
+    obj.edit26:setWidth(50);
+    obj.edit26:setFontColor("#FF1493");
+    obj.edit26:setMargins({left=15, right=-10});
+    obj.edit26:setType("number");
+    obj.edit26:setField("DadoEffect");
+    obj.edit26:setName("edit26");
+
+    obj.layout5 = GUI.fromHandle(_obj_newObject("layout"));
+    obj.layout5:setParent(obj.rectangle19);
+    obj.layout5:setAlign("top");
+    obj.layout5:setHeight(30);
+    obj.layout5:setMargins({bottom=4});
+    obj.layout5:setName("layout5");
+
+    obj.label38 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label38:setParent(obj.layout5);
+    obj.label38:setAlign("left");
+    obj.label38:setText("ESQ");
+    obj.label38:setWidth(50);
+    obj.label38:setMargins({left=15, right=-10});
+    obj.label38:setName("label38");
+
+    obj.edit27 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit27:setParent(obj.layout5);
+    obj.edit27:setAlign("left");
+    obj.edit27:setWidth(50);
+    obj.edit27:setMargins({left=15, right=-10});
+    obj.edit27:setType("number");
+    obj.edit27:setField("ESQEffect");
+    obj.edit27:setName("edit27");
+
+    obj.label39 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label39:setParent(obj.layout5);
+    obj.label39:setAlign("left");
+    obj.label39:setText("Pers");
+    obj.label39:setWidth(50);
+    obj.label39:setMargins({left=15, right=-10});
+    obj.label39:setName("label39");
+
+    obj.edit28 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit28:setParent(obj.layout5);
+    obj.edit28:setAlign("left");
+    obj.edit28:setWidth(50);
+    obj.edit28:setMargins({left=15, right=-10});
+    obj.edit28:setType("number");
+    obj.edit28:setField("PersEffect");
+    obj.edit28:setName("edit28");
+
+    obj.label40 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label40:setParent(obj.layout5);
+    obj.label40:setAlign("left");
+    obj.label40:setText("VEZ");
+    obj.label40:setFontColor("green");
+    obj.label40:setWidth(50);
+    obj.label40:setMargins({left=15, right=-10});
+    obj.label40:setName("label40");
+
+    obj.edit29 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit29:setParent(obj.layout5);
+    obj.edit29:setAlign("left");
+    obj.edit29:setWidth(50);
+    obj.edit29:setFontColor("green");
+    obj.edit29:setMargins({left=15, right=-10});
+    obj.edit29:setType("number");
+    obj.edit29:setField("VezEffect");
+    obj.edit29:setName("edit29");
+
+    obj.label41 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label41:setParent(obj.layout5);
+    obj.label41:setAlign("left");
+    obj.label41:setText("HP Total");
+    obj.label41:setFontColor("red");
+    obj.label41:setWidth(50);
+    obj.label41:setMargins({left=15, right=-10});
+    obj.label41:setName("label41");
+
+    obj.edit30 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit30:setParent(obj.layout5);
+    obj.edit30:setAlign("left");
+    obj.edit30:setWidth(50);
+    obj.edit30:setMargins({left=15, right=-10});
+    obj.edit30:setType("number");
+    obj.edit30:setField("HPTotalEffect");
+    obj.edit30:setName("edit30");
+
+    obj.label42 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label42:setParent(obj.layout5);
+    obj.label42:setAlign("left");
+    obj.label42:setText("MP Total");
+    obj.label42:setFontColor("blue");
+    obj.label42:setWidth(50);
+    obj.label42:setMargins({left=15, right=-10});
+    obj.label42:setName("label42");
+
+    obj.edit31 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit31:setParent(obj.layout5);
+    obj.edit31:setAlign("left");
+    obj.edit31:setWidth(50);
+    obj.edit31:setFontColor("blue");
+    obj.edit31:setMargins({left=15, right=-10});
+    obj.edit31:setType("number");
+    obj.edit31:setField("MPTotalEffect");
+    obj.edit31:setName("edit31");
+
+    obj.layout6 = GUI.fromHandle(_obj_newObject("layout"));
+    obj.layout6:setParent(obj.rectangle19);
+    obj.layout6:setAlign("top");
+    obj.layout6:setHeight(30);
+    obj.layout6:setMargins({bottom=4});
+    obj.layout6:setName("layout6");
+
+    obj.label43 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label43:setParent(obj.layout6);
+    obj.label43:setAlign("left");
+    obj.label43:setText("CD");
+    obj.label43:setWidth(50);
+    obj.label43:setMargins({left=15, right=-10});
+    obj.label43:setName("label43");
+
+    obj.edit32 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit32:setParent(obj.layout6);
+    obj.edit32:setAlign("left");
+    obj.edit32:setWidth(50);
+    obj.edit32:setMargins({left=15, right=-10});
+    obj.edit32:setType("number");
+    obj.edit32:setField("CDEffect");
+    obj.edit32:setName("edit32");
+
+    obj.label44 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label44:setParent(obj.layout6);
+    obj.label44:setAlign("left");
+    obj.label44:setText("Duração");
+    obj.label44:setWidth(50);
+    obj.label44:setMargins({left=15, right=-10});
+    obj.label44:setName("label44");
+
+    obj.edit33 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit33:setParent(obj.layout6);
+    obj.edit33:setAlign("left");
+    obj.edit33:setWidth(50);
+    obj.edit33:setMargins({left=15, right=-10});
+    obj.edit33:setType("number");
+    obj.edit33:setField("DuraEffect");
+    obj.edit33:setName("edit33");
+
+    obj.label45 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label45:setParent(obj.layout6);
+    obj.label45:setAlign("left");
+    obj.label45:setText("Conta");
+    obj.label45:setWidth(50);
+    obj.label45:setMargins({left=15, right=-10});
+    obj.label45:setName("label45");
+
+    obj.edit34 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit34:setParent(obj.layout6);
+    obj.edit34:setAlign("left");
+    obj.edit34:setWidth(50);
+    obj.edit34:setMargins({left=15, right=-10});
+    obj.edit34:setType("number");
+    obj.edit34:setField("ContaEffect");
+    obj.edit34:setName("edit34");
+
+    obj.label46 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label46:setParent(obj.layout6);
+    obj.label46:setAlign("left");
+    obj.label46:setText("Tipo");
+    obj.label46:setWidth(50);
+    obj.label46:setMargins({left=15, right=-10});
+    obj.label46:setName("label46");
+
+    obj.edit35 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit35:setParent(obj.layout6);
+    obj.edit35:setAlign("left");
+    obj.edit35:setWidth(50);
+    obj.edit35:setMargins({left=15, right=-10});
+    obj.edit35:setType("number");
+    obj.edit35:setField("TipoEffect");
+    obj.edit35:setName("edit35");
+
+    obj.label47 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label47:setParent(obj.layout6);
+    obj.label47:setAlign("left");
+    obj.label47:setText("Outro");
+    obj.label47:setWidth(50);
+    obj.label47:setMargins({left=15, right=-10});
+    obj.label47:setName("label47");
+
+    obj.edit36 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit36:setParent(obj.layout6);
+    obj.edit36:setAlign("left");
+    obj.edit36:setWidth(50);
+    obj.edit36:setMargins({left=15, right=-10});
+    obj.edit36:setType("number");
+    obj.edit36:setField("OutroEffect");
+    obj.edit36:setName("edit36");
+
+    obj.layout7 = GUI.fromHandle(_obj_newObject("layout"));
+    obj.layout7:setParent(obj.rectangle19);
+    obj.layout7:setAlign("client");
+    obj.layout7:setMargins({top=5, left=5 , bottom=4});
+    obj.layout7:setName("layout7");
+
+    obj.textEditor1 = GUI.fromHandle(_obj_newObject("textEditor"));
+    obj.textEditor1:setParent(obj.layout7);
+    obj.textEditor1:setAlign("top");
+    obj.textEditor1:setField("DescriBuff");
+    obj.textEditor1:setHeight(100);
+    obj.textEditor1:setName("textEditor1");
 
     obj.button18 = GUI.fromHandle(_obj_newObject("button"));
     obj.button18:setParent(obj.scrollBox1);
-    obj.button18:setLeft(460);
+    obj.button18:setLeft(33);
     obj.button18:setTop(160);
     obj.button18:setWidth(60);
     obj.button18:setHeight(60);
     obj.button18:setOpacity(0.1);
     obj.button18:setName("button18");
 
-    obj.image8 = GUI.fromHandle(_obj_newObject("image"));
-    obj.image8:setParent(obj.scrollBox1);
-    obj.image8:setLeft(390);
-    obj.image8:setTop(110);
-    obj.image8:setWidth(200);
-    obj.image8:setHeight(200);
-    obj.image8:setSRC("/imagens/TAGS/HISTORIA.png");
-    obj.image8:setName("image8");
+    obj.image7 = GUI.fromHandle(_obj_newObject("image"));
+    obj.image7:setParent(obj.scrollBox1);
+    obj.image7:setLeft(-40);
+    obj.image7:setTop(110);
+    obj.image7:setWidth(200);
+    obj.image7:setHeight(200);
+    obj.image7:setSRC("/imagens/TAGS/TIER.png");
+    obj.image7:setName("image7");
 
     obj.button19 = GUI.fromHandle(_obj_newObject("button"));
     obj.button19:setParent(obj.scrollBox1);
-    obj.button19:setLeft(287);
-    obj.button19:setTop(290);
+    obj.button19:setLeft(120);
+    obj.button19:setTop(160);
     obj.button19:setWidth(60);
     obj.button19:setHeight(60);
     obj.button19:setOpacity(0.1);
     obj.button19:setName("button19");
 
-    obj.image9 = GUI.fromHandle(_obj_newObject("image"));
-    obj.image9:setParent(obj.scrollBox1);
-    obj.image9:setLeft(216);
-    obj.image9:setTop(243);
-    obj.image9:setWidth(200);
-    obj.image9:setHeight(200);
-    obj.image9:setSRC("/imagens/TAGS/SUMMON.png");
-    obj.image9:setName("image9");
+    obj.image8 = GUI.fromHandle(_obj_newObject("image"));
+    obj.image8:setParent(obj.scrollBox1);
+    obj.image8:setLeft(47);
+    obj.image8:setTop(110);
+    obj.image8:setWidth(200);
+    obj.image8:setHeight(200);
+    obj.image8:setSRC("/imagens/TAGS/SKILL.png");
+    obj.image8:setName("image8");
 
     obj.button20 = GUI.fromHandle(_obj_newObject("button"));
     obj.button20:setParent(obj.scrollBox1);
-    obj.button20:setLeft(542);
+    obj.button20:setLeft(460);
     obj.button20:setTop(160);
     obj.button20:setWidth(60);
     obj.button20:setHeight(60);
     obj.button20:setOpacity(0.1);
     obj.button20:setName("button20");
 
-    obj.image10 = GUI.fromHandle(_obj_newObject("image"));
-    obj.image10:setParent(obj.scrollBox1);
-    obj.image10:setLeft(467);
-    obj.image10:setTop(110);
-    obj.image10:setWidth(200);
-    obj.image10:setHeight(200);
-    obj.image10:setSRC("/imagens/TAGS/Sobre.png");
-    obj.image10:setName("image10");
+    obj.image9 = GUI.fromHandle(_obj_newObject("image"));
+    obj.image9:setParent(obj.scrollBox1);
+    obj.image9:setLeft(390);
+    obj.image9:setTop(110);
+    obj.image9:setWidth(200);
+    obj.image9:setHeight(200);
+    obj.image9:setSRC("/imagens/TAGS/HISTORIA.png");
+    obj.image9:setName("image9");
 
     obj.button21 = GUI.fromHandle(_obj_newObject("button"));
     obj.button21:setParent(obj.scrollBox1);
-    obj.button21:setLeft(290);
-    obj.button21:setTop(160);
+    obj.button21:setLeft(287);
+    obj.button21:setTop(290);
     obj.button21:setWidth(60);
-    obj.button21:setHeight(55);
+    obj.button21:setHeight(60);
     obj.button21:setOpacity(0.1);
     obj.button21:setName("button21");
 
+    obj.image10 = GUI.fromHandle(_obj_newObject("image"));
+    obj.image10:setParent(obj.scrollBox1);
+    obj.image10:setLeft(216);
+    obj.image10:setTop(243);
+    obj.image10:setWidth(200);
+    obj.image10:setHeight(200);
+    obj.image10:setSRC("/imagens/TAGS/SUMMON.png");
+    obj.image10:setName("image10");
+
+    obj.button22 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button22:setParent(obj.scrollBox1);
+    obj.button22:setLeft(542);
+    obj.button22:setTop(160);
+    obj.button22:setWidth(60);
+    obj.button22:setHeight(60);
+    obj.button22:setOpacity(0.1);
+    obj.button22:setName("button22");
+
     obj.image11 = GUI.fromHandle(_obj_newObject("image"));
     obj.image11:setParent(obj.scrollBox1);
-    obj.image11:setLeft(290);
-    obj.image11:setTop(160);
-    obj.image11:setWidth(60);
-    obj.image11:setHeight(60);
-    obj.image11:setSRC("/imagens/TAGS/ActionBar.png");
+    obj.image11:setLeft(467);
+    obj.image11:setTop(110);
+    obj.image11:setWidth(200);
+    obj.image11:setHeight(200);
+    obj.image11:setSRC("/imagens/TAGS/Sobre.png");
     obj.image11:setName("image11");
+
+    obj.button23 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button23:setParent(obj.scrollBox1);
+    obj.button23:setLeft(290);
+    obj.button23:setTop(160);
+    obj.button23:setWidth(60);
+    obj.button23:setHeight(55);
+    obj.button23:setOpacity(0.1);
+    obj.button23:setName("button23");
+
+    obj.image12 = GUI.fromHandle(_obj_newObject("image"));
+    obj.image12:setParent(obj.scrollBox1);
+    obj.image12:setLeft(290);
+    obj.image12:setTop(160);
+    obj.image12:setWidth(60);
+    obj.image12:setHeight(60);
+    obj.image12:setSRC("/imagens/TAGS/ActionBar.png");
+    obj.image12:setName("image12");
 
     obj.dataLink2 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink2:setParent(obj.scrollBox1);
@@ -3640,95 +4163,95 @@ local function constructNew_frmvelen()
     obj.dataLink10:setFields({'Classe', 'Espec', 'Level'});
     obj.dataLink10:setName("dataLink10");
 
-    obj.button22 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button22:setParent(obj.scrollBox1);
-    obj.button22:setLeft(388);
-    obj.button22:setTop(255);
-    obj.button22:setWidth(60);
-    obj.button22:setHeight(55);
-    obj.button22:setOpacity(0.1);
-    obj.button22:setName("button22");
-
-    obj.image12 = GUI.fromHandle(_obj_newObject("image"));
-    obj.image12:setParent(obj.scrollBox1);
-    obj.image12:setLeft(317);
-    obj.image12:setTop(205);
-    obj.image12:setWidth(200);
-    obj.image12:setHeight(200);
-    obj.image12:setSRC("/imagens/TAGS/PA.png");
-    obj.image12:setName("image12");
-
-    obj.button23 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button23:setParent(obj.scrollBox1);
-    obj.button23:setLeft(388);
-    obj.button23:setTop(317);
-    obj.button23:setWidth(60);
-    obj.button23:setHeight(55);
-    obj.button23:setOpacity(0.1);
-    obj.button23:setName("button23");
-
-    obj.image13 = GUI.fromHandle(_obj_newObject("image"));
-    obj.image13:setParent(obj.scrollBox1);
-    obj.image13:setLeft(317);
-    obj.image13:setTop(267);
-    obj.image13:setWidth(200);
-    obj.image13:setHeight(200);
-    obj.image13:setSRC("/imagens/TAGS/PM.png");
-    obj.image13:setName("image13");
-
     obj.button24 = GUI.fromHandle(_obj_newObject("button"));
     obj.button24:setParent(obj.scrollBox1);
     obj.button24:setLeft(388);
-    obj.button24:setTop(377);
+    obj.button24:setTop(255);
     obj.button24:setWidth(60);
     obj.button24:setHeight(55);
     obj.button24:setOpacity(0.1);
     obj.button24:setName("button24");
 
-    obj.image14 = GUI.fromHandle(_obj_newObject("image"));
-    obj.image14:setParent(obj.scrollBox1);
-    obj.image14:setLeft(317);
-    obj.image14:setTop(327);
-    obj.image14:setWidth(200);
-    obj.image14:setHeight(200);
-    obj.image14:setSRC("/imagens/TAGS/PF.png");
-    obj.image14:setName("image14");
+    obj.image13 = GUI.fromHandle(_obj_newObject("image"));
+    obj.image13:setParent(obj.scrollBox1);
+    obj.image13:setLeft(317);
+    obj.image13:setTop(205);
+    obj.image13:setWidth(200);
+    obj.image13:setHeight(200);
+    obj.image13:setSRC("/imagens/TAGS/PA.png");
+    obj.image13:setName("image13");
 
     obj.button25 = GUI.fromHandle(_obj_newObject("button"));
     obj.button25:setParent(obj.scrollBox1);
     obj.button25:setLeft(388);
-    obj.button25:setTop(435);
+    obj.button25:setTop(317);
     obj.button25:setWidth(60);
     obj.button25:setHeight(55);
     obj.button25:setOpacity(0.1);
     obj.button25:setName("button25");
 
-    obj.image15 = GUI.fromHandle(_obj_newObject("image"));
-    obj.image15:setParent(obj.scrollBox1);
-    obj.image15:setLeft(317);
-    obj.image15:setTop(385);
-    obj.image15:setWidth(200);
-    obj.image15:setHeight(200);
-    obj.image15:setSRC("/imagens/TAGS/DEF.png");
-    obj.image15:setName("image15");
+    obj.image14 = GUI.fromHandle(_obj_newObject("image"));
+    obj.image14:setParent(obj.scrollBox1);
+    obj.image14:setLeft(317);
+    obj.image14:setTop(267);
+    obj.image14:setWidth(200);
+    obj.image14:setHeight(200);
+    obj.image14:setSRC("/imagens/TAGS/PM.png");
+    obj.image14:setName("image14");
 
     obj.button26 = GUI.fromHandle(_obj_newObject("button"));
     obj.button26:setParent(obj.scrollBox1);
     obj.button26:setLeft(388);
-    obj.button26:setTop(493);
+    obj.button26:setTop(377);
     obj.button26:setWidth(60);
     obj.button26:setHeight(55);
     obj.button26:setOpacity(0.1);
     obj.button26:setName("button26");
 
+    obj.image15 = GUI.fromHandle(_obj_newObject("image"));
+    obj.image15:setParent(obj.scrollBox1);
+    obj.image15:setLeft(317);
+    obj.image15:setTop(327);
+    obj.image15:setWidth(200);
+    obj.image15:setHeight(200);
+    obj.image15:setSRC("/imagens/TAGS/PF.png");
+    obj.image15:setName("image15");
+
+    obj.button27 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button27:setParent(obj.scrollBox1);
+    obj.button27:setLeft(388);
+    obj.button27:setTop(435);
+    obj.button27:setWidth(60);
+    obj.button27:setHeight(55);
+    obj.button27:setOpacity(0.1);
+    obj.button27:setName("button27");
+
     obj.image16 = GUI.fromHandle(_obj_newObject("image"));
     obj.image16:setParent(obj.scrollBox1);
     obj.image16:setLeft(317);
-    obj.image16:setTop(443);
+    obj.image16:setTop(385);
     obj.image16:setWidth(200);
     obj.image16:setHeight(200);
-    obj.image16:setSRC("/imagens/TAGS/RES.png");
+    obj.image16:setSRC("/imagens/TAGS/DEF.png");
     obj.image16:setName("image16");
+
+    obj.button28 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button28:setParent(obj.scrollBox1);
+    obj.button28:setLeft(388);
+    obj.button28:setTop(493);
+    obj.button28:setWidth(60);
+    obj.button28:setHeight(55);
+    obj.button28:setOpacity(0.1);
+    obj.button28:setName("button28");
+
+    obj.image17 = GUI.fromHandle(_obj_newObject("image"));
+    obj.image17:setParent(obj.scrollBox1);
+    obj.image17:setLeft(317);
+    obj.image17:setTop(443);
+    obj.image17:setWidth(200);
+    obj.image17:setHeight(200);
+    obj.image17:setSRC("/imagens/TAGS/RES.png");
+    obj.image17:setName("image17");
 
     obj.comboBox3 = GUI.fromHandle(_obj_newObject("comboBox"));
     obj.comboBox3:setParent(obj.scrollBox1);
@@ -3766,13 +4289,13 @@ local function constructNew_frmvelen()
     obj.TargetName:setAlign("top");
     obj.TargetName:setHeight(50);
 
-    obj.label25 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label25:setParent(obj.TargetName);
-    obj.label25:setText("Alvo:");
-    obj.label25:setFontColor("red");
-    obj.label25:setAlign("right");
-    obj.label25:setWidth(75);
-    obj.label25:setName("label25");
+    obj.label48 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label48:setParent(obj.TargetName);
+    obj.label48:setText("Alvo:");
+    obj.label48:setFontColor("red");
+    obj.label48:setAlign("right");
+    obj.label48:setWidth(75);
+    obj.label48:setName("label48");
 
     obj.cmbInimigos = GUI.fromHandle(_obj_newObject("comboBox"));
     obj.cmbInimigos:setParent(obj.TargetName);
@@ -3792,13 +4315,13 @@ local function constructNew_frmvelen()
     obj.NameTipoDeGrupo:setWidth(200);
     obj.NameTipoDeGrupo:setHeight(50);
 
-    obj.label26 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label26:setParent(obj.NameTipoDeGrupo);
-    obj.label26:setText("Grupo:");
-    obj.label26:setFontColor("green");
-    obj.label26:setAlign("right");
-    obj.label26:setWidth(75);
-    obj.label26:setName("label26");
+    obj.label49 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label49:setParent(obj.NameTipoDeGrupo);
+    obj.label49:setText("Grupo:");
+    obj.label49:setFontColor("green");
+    obj.label49:setAlign("right");
+    obj.label49:setWidth(75);
+    obj.label49:setName("label49");
 
     obj.cmbTipoGrupo = GUI.fromHandle(_obj_newObject("comboBox"));
     obj.cmbTipoGrupo:setParent(obj.NameTipoDeGrupo);
@@ -3816,243 +4339,243 @@ local function constructNew_frmvelen()
     obj.dataLink11:setField("cmbTipoDeGrupoF");
     obj.dataLink11:setName("dataLink11");
 
-    obj.button27 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button27:setParent(obj.popAtaqueBasico);
-    obj.button27:setAlign("bottom");
-    obj.button27:setWidth(90);
-    obj.button27:setHeight(30);
-    obj.button27:setFontSize(12);
-    obj.button27:setFontColor("#00FFFF");
-    obj.button27:setText("Ataque Basico");
-    obj.button27:setName("button27");
+    obj.button29 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button29:setParent(obj.popAtaqueBasico);
+    obj.button29:setAlign("bottom");
+    obj.button29:setWidth(90);
+    obj.button29:setHeight(30);
+    obj.button29:setFontSize(12);
+    obj.button29:setFontColor("#00FFFF");
+    obj.button29:setText("Ataque Basico");
+    obj.button29:setName("button29");
 
-    obj.edit14 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit14:setParent(obj.scrollBox1);
-    obj.edit14:setLeft(270);
-    obj.edit14:setTop(670);
-    obj.edit14:setWidth(90);
-    obj.edit14:setType("number");
-    obj.edit14:setHeight(30);
-    obj.edit14:setVisible(false);
-    obj.edit14:setField("ClasseAcerto");
-    obj.edit14:setName("edit14");
+    obj.edit37 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit37:setParent(obj.scrollBox1);
+    obj.edit37:setLeft(270);
+    obj.edit37:setTop(670);
+    obj.edit37:setWidth(90);
+    obj.edit37:setType("number");
+    obj.edit37:setHeight(30);
+    obj.edit37:setVisible(false);
+    obj.edit37:setField("ClasseAcerto");
+    obj.edit37:setName("edit37");
 
-    obj.edit15 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit15:setParent(obj.scrollBox1);
-    obj.edit15:setLeft(270);
-    obj.edit15:setTop(720);
-    obj.edit15:setWidth(90);
-    obj.edit15:setType("number");
-    obj.edit15:setHeight(30);
-    obj.edit15:setVisible(false);
-    obj.edit15:setField("DestrezaAcerto");
-    obj.edit15:setName("edit15");
+    obj.edit38 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit38:setParent(obj.scrollBox1);
+    obj.edit38:setLeft(270);
+    obj.edit38:setTop(720);
+    obj.edit38:setWidth(90);
+    obj.edit38:setType("number");
+    obj.edit38:setHeight(30);
+    obj.edit38:setVisible(false);
+    obj.edit38:setField("DestrezaAcerto");
+    obj.edit38:setName("edit38");
 
-    obj.edit16 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit16:setParent(obj.scrollBox1);
-    obj.edit16:setLeft(270);
-    obj.edit16:setTop(770);
-    obj.edit16:setWidth(90);
-    obj.edit16:setType("number");
-    obj.edit16:setHeight(30);
-    obj.edit16:setVisible(false);
-    obj.edit16:setField("EspecAcerto");
-    obj.edit16:setName("edit16");
+    obj.edit39 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit39:setParent(obj.scrollBox1);
+    obj.edit39:setLeft(270);
+    obj.edit39:setTop(770);
+    obj.edit39:setWidth(90);
+    obj.edit39:setType("number");
+    obj.edit39:setHeight(30);
+    obj.edit39:setVisible(false);
+    obj.edit39:setField("EspecAcerto");
+    obj.edit39:setName("edit39");
 
-    obj.edit17 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit17:setParent(obj.scrollBox1);
-    obj.edit17:setLeft(270);
-    obj.edit17:setTop(670);
-    obj.edit17:setWidth(90);
-    obj.edit17:setType("number");
-    obj.edit17:setHeight(30);
-    obj.edit17:setVisible(false);
-    obj.edit17:setField("ClasseAM");
-    obj.edit17:setName("edit17");
+    obj.edit40 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit40:setParent(obj.scrollBox1);
+    obj.edit40:setLeft(270);
+    obj.edit40:setTop(670);
+    obj.edit40:setWidth(90);
+    obj.edit40:setType("number");
+    obj.edit40:setHeight(30);
+    obj.edit40:setVisible(false);
+    obj.edit40:setField("ClasseAM");
+    obj.edit40:setName("edit40");
 
-    obj.edit18 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit18:setParent(obj.scrollBox1);
-    obj.edit18:setLeft(270);
-    obj.edit18:setTop(770);
-    obj.edit18:setWidth(90);
-    obj.edit18:setType("number");
-    obj.edit18:setHeight(30);
-    obj.edit18:setVisible(false);
-    obj.edit18:setField("EspecAM");
-    obj.edit18:setName("edit18");
+    obj.edit41 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit41:setParent(obj.scrollBox1);
+    obj.edit41:setLeft(270);
+    obj.edit41:setTop(770);
+    obj.edit41:setWidth(90);
+    obj.edit41:setType("number");
+    obj.edit41:setHeight(30);
+    obj.edit41:setVisible(false);
+    obj.edit41:setField("EspecAM");
+    obj.edit41:setName("edit41");
 
-    obj.edit19 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit19:setParent(obj.scrollBox1);
-    obj.edit19:setLeft(270);
-    obj.edit19:setTop(670);
-    obj.edit19:setWidth(90);
-    obj.edit19:setType("number");
-    obj.edit19:setHeight(30);
-    obj.edit19:setVisible(false);
-    obj.edit19:setField("ClasseCR");
-    obj.edit19:setName("edit19");
+    obj.edit42 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit42:setParent(obj.scrollBox1);
+    obj.edit42:setLeft(270);
+    obj.edit42:setTop(670);
+    obj.edit42:setWidth(90);
+    obj.edit42:setType("number");
+    obj.edit42:setHeight(30);
+    obj.edit42:setVisible(false);
+    obj.edit42:setField("ClasseCR");
+    obj.edit42:setName("edit42");
 
-    obj.edit20 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit20:setParent(obj.scrollBox1);
-    obj.edit20:setLeft(270);
-    obj.edit20:setTop(770);
-    obj.edit20:setWidth(90);
-    obj.edit20:setType("number");
-    obj.edit20:setHeight(30);
-    obj.edit20:setVisible(false);
-    obj.edit20:setField("EspecCR");
-    obj.edit20:setName("edit20");
+    obj.edit43 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit43:setParent(obj.scrollBox1);
+    obj.edit43:setLeft(270);
+    obj.edit43:setTop(770);
+    obj.edit43:setWidth(90);
+    obj.edit43:setType("number");
+    obj.edit43:setHeight(30);
+    obj.edit43:setVisible(false);
+    obj.edit43:setField("EspecCR");
+    obj.edit43:setName("edit43");
 
-    obj.edit21 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit21:setParent(obj.scrollBox1);
-    obj.edit21:setLeft(270);
-    obj.edit21:setTop(670);
-    obj.edit21:setWidth(90);
-    obj.edit21:setType("number");
-    obj.edit21:setHeight(30);
-    obj.edit21:setVisible(false);
-    obj.edit21:setField("ClasseCM");
-    obj.edit21:setName("edit21");
+    obj.edit44 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit44:setParent(obj.scrollBox1);
+    obj.edit44:setLeft(270);
+    obj.edit44:setTop(670);
+    obj.edit44:setWidth(90);
+    obj.edit44:setType("number");
+    obj.edit44:setHeight(30);
+    obj.edit44:setVisible(false);
+    obj.edit44:setField("ClasseCM");
+    obj.edit44:setName("edit44");
 
-    obj.edit22 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit22:setParent(obj.scrollBox1);
-    obj.edit22:setLeft(270);
-    obj.edit22:setTop(770);
-    obj.edit22:setWidth(90);
-    obj.edit22:setType("number");
-    obj.edit22:setHeight(30);
-    obj.edit22:setVisible(false);
-    obj.edit22:setField("EspecCM");
-    obj.edit22:setName("edit22");
+    obj.edit45 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit45:setParent(obj.scrollBox1);
+    obj.edit45:setLeft(270);
+    obj.edit45:setTop(770);
+    obj.edit45:setWidth(90);
+    obj.edit45:setType("number");
+    obj.edit45:setHeight(30);
+    obj.edit45:setVisible(false);
+    obj.edit45:setField("EspecCM");
+    obj.edit45:setName("edit45");
 
-    obj.edit23 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit23:setParent(obj.scrollBox1);
-    obj.edit23:setLeft(270);
-    obj.edit23:setTop(670);
-    obj.edit23:setWidth(90);
-    obj.edit23:setType("number");
-    obj.edit23:setHeight(30);
-    obj.edit23:setVisible(false);
-    obj.edit23:setField("ClasseEsquiva");
-    obj.edit23:setName("edit23");
+    obj.edit46 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit46:setParent(obj.scrollBox1);
+    obj.edit46:setLeft(270);
+    obj.edit46:setTop(670);
+    obj.edit46:setWidth(90);
+    obj.edit46:setType("number");
+    obj.edit46:setHeight(30);
+    obj.edit46:setVisible(false);
+    obj.edit46:setField("ClasseEsquiva");
+    obj.edit46:setName("edit46");
 
-    obj.edit24 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit24:setParent(obj.scrollBox1);
-    obj.edit24:setLeft(270);
-    obj.edit24:setTop(770);
-    obj.edit24:setWidth(90);
-    obj.edit24:setType("number");
-    obj.edit24:setHeight(30);
-    obj.edit24:setVisible(false);
-    obj.edit24:setField("EspecEsquiva");
-    obj.edit24:setName("edit24");
+    obj.edit47 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit47:setParent(obj.scrollBox1);
+    obj.edit47:setLeft(270);
+    obj.edit47:setTop(770);
+    obj.edit47:setWidth(90);
+    obj.edit47:setType("number");
+    obj.edit47:setHeight(30);
+    obj.edit47:setVisible(false);
+    obj.edit47:setField("EspecEsquiva");
+    obj.edit47:setName("edit47");
 
-    obj.edit25 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit25:setParent(obj.scrollBox1);
-    obj.edit25:setLeft(270);
-    obj.edit25:setTop(670);
-    obj.edit25:setWidth(90);
-    obj.edit25:setType("number");
-    obj.edit25:setHeight(30);
-    obj.edit25:setVisible(false);
-    obj.edit25:setField("ClassePer");
-    obj.edit25:setName("edit25");
+    obj.edit48 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit48:setParent(obj.scrollBox1);
+    obj.edit48:setLeft(270);
+    obj.edit48:setTop(670);
+    obj.edit48:setWidth(90);
+    obj.edit48:setType("number");
+    obj.edit48:setHeight(30);
+    obj.edit48:setVisible(false);
+    obj.edit48:setField("ClassePer");
+    obj.edit48:setName("edit48");
 
-    obj.edit26 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit26:setParent(obj.scrollBox1);
-    obj.edit26:setLeft(270);
-    obj.edit26:setTop(770);
-    obj.edit26:setWidth(90);
-    obj.edit26:setType("number");
-    obj.edit26:setHeight(30);
-    obj.edit26:setVisible(false);
-    obj.edit26:setField("EspecPer");
-    obj.edit26:setName("edit26");
+    obj.edit49 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit49:setParent(obj.scrollBox1);
+    obj.edit49:setLeft(270);
+    obj.edit49:setTop(770);
+    obj.edit49:setWidth(90);
+    obj.edit49:setType("number");
+    obj.edit49:setHeight(30);
+    obj.edit49:setVisible(false);
+    obj.edit49:setField("EspecPer");
+    obj.edit49:setName("edit49");
 
-    obj.edit27 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit27:setParent(obj.scrollBox1);
-    obj.edit27:setLeft(270);
-    obj.edit27:setTop(770);
-    obj.edit27:setWidth(90);
-    obj.edit27:setType("number");
-    obj.edit27:setHeight(30);
-    obj.edit27:setVisible(false);
-    obj.edit27:setField("AgilidadeESQ");
-    obj.edit27:setName("edit27");
+    obj.edit50 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit50:setParent(obj.scrollBox1);
+    obj.edit50:setLeft(270);
+    obj.edit50:setTop(770);
+    obj.edit50:setWidth(90);
+    obj.edit50:setType("number");
+    obj.edit50:setHeight(30);
+    obj.edit50:setVisible(false);
+    obj.edit50:setField("AgilidadeESQ");
+    obj.edit50:setName("edit50");
 
-    obj.edit28 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit28:setParent(obj.scrollBox1);
-    obj.edit28:setLeft(270);
-    obj.edit28:setTop(770);
-    obj.edit28:setWidth(90);
-    obj.edit28:setType("number");
-    obj.edit28:setHeight(30);
-    obj.edit28:setVisible(false);
-    obj.edit28:setField("ForcaPer");
-    obj.edit28:setName("edit28");
+    obj.edit51 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit51:setParent(obj.scrollBox1);
+    obj.edit51:setLeft(270);
+    obj.edit51:setTop(770);
+    obj.edit51:setWidth(90);
+    obj.edit51:setType("number");
+    obj.edit51:setHeight(30);
+    obj.edit51:setVisible(false);
+    obj.edit51:setField("ForcaPer");
+    obj.edit51:setName("edit51");
 
-    obj.button28 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button28:setParent(obj.scrollBox1);
-    obj.button28:setLeft(600);
-    obj.button28:setTop(900);
-    obj.button28:setWidth(20);
-    obj.button28:setHeight(20);
-    obj.button28:setOpacity(0.0);
-    obj.button28:setName("button28");
+    obj.button30 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button30:setParent(obj.scrollBox1);
+    obj.button30:setLeft(600);
+    obj.button30:setTop(900);
+    obj.button30:setWidth(20);
+    obj.button30:setHeight(20);
+    obj.button30:setOpacity(0.0);
+    obj.button30:setName("button30");
 
-    obj.edit29 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit29:setParent(obj.scrollBox1);
-    obj.edit29:setTop(440);
-    obj.edit29:setLeft(292);
-    obj.edit29:setWidth(50);
-    obj.edit29:setHeight(30);
-    obj.edit29:setMax(160);
-    obj.edit29:setMin(0);
-    obj.edit29:setHitTest(false);
-    obj.edit29:setCanFocus(true);
-    obj.edit29:setHorzTextAlign("center");
-    obj.edit29:setType("number");
-    obj.edit29:setText("120");
-    obj.edit29:setTransparent(true);
-    obj.edit29:setFontColor("black");
-    obj.edit29:setFontSize(22);
-    obj.edit29:setEnabled(true);
-    obj.edit29:setField("ControladorAtributos");
-    obj.edit29:setName("edit29");
+    obj.edit52 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit52:setParent(obj.scrollBox1);
+    obj.edit52:setTop(440);
+    obj.edit52:setLeft(292);
+    obj.edit52:setWidth(50);
+    obj.edit52:setHeight(30);
+    obj.edit52:setMax(160);
+    obj.edit52:setMin(0);
+    obj.edit52:setHitTest(false);
+    obj.edit52:setCanFocus(true);
+    obj.edit52:setHorzTextAlign("center");
+    obj.edit52:setType("number");
+    obj.edit52:setText("120");
+    obj.edit52:setTransparent(true);
+    obj.edit52:setFontColor("black");
+    obj.edit52:setFontSize(22);
+    obj.edit52:setEnabled(true);
+    obj.edit52:setField("ControladorAtributos");
+    obj.edit52:setName("edit52");
 
-    obj.edit30 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit30:setParent(obj.scrollBox1);
-    obj.edit30:setTop(530);
-    obj.edit30:setLeft(292);
-    obj.edit30:setWidth(50);
-    obj.edit30:setHeight(30);
-    obj.edit30:setMax(160);
-    obj.edit30:setMin(0);
-    obj.edit30:setHorzTextAlign("center");
-    obj.edit30:setType("number");
-    obj.edit30:setText("120");
-    obj.edit30:setVisible(false);
-    obj.edit30:setFontColor("RED");
-    obj.edit30:setFontSize(22);
-    obj.edit30:setEnabled(true);
-    obj.edit30:setField("LiberarRolagemUp");
-    obj.edit30:setName("edit30");
+    obj.edit53 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit53:setParent(obj.scrollBox1);
+    obj.edit53:setTop(530);
+    obj.edit53:setLeft(292);
+    obj.edit53:setWidth(50);
+    obj.edit53:setHeight(30);
+    obj.edit53:setMax(160);
+    obj.edit53:setMin(0);
+    obj.edit53:setHorzTextAlign("center");
+    obj.edit53:setType("number");
+    obj.edit53:setText("120");
+    obj.edit53:setVisible(false);
+    obj.edit53:setFontColor("RED");
+    obj.edit53:setFontSize(22);
+    obj.edit53:setEnabled(true);
+    obj.edit53:setField("LiberarRolagemUp");
+    obj.edit53:setName("edit53");
 
-    obj.edit31 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit31:setParent(obj.scrollBox1);
-    obj.edit31:setTop(850);
-    obj.edit31:setLeft(400);
-    obj.edit31:setWidth(50);
-    obj.edit31:setHeight(30);
-    obj.edit31:setMax(20);
-    obj.edit31:setMin(0);
-    obj.edit31:setHorzTextAlign("center");
-    obj.edit31:setType("number");
-    obj.edit31:setVisible(false);
-    obj.edit31:setFontSize(22);
-    obj.edit31:setEnabled(true);
-    obj.edit31:setField("CLevel");
-    obj.edit31:setName("edit31");
+    obj.edit54 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit54:setParent(obj.scrollBox1);
+    obj.edit54:setTop(850);
+    obj.edit54:setLeft(400);
+    obj.edit54:setWidth(50);
+    obj.edit54:setHeight(30);
+    obj.edit54:setMax(20);
+    obj.edit54:setMin(0);
+    obj.edit54:setHorzTextAlign("center");
+    obj.edit54:setType("number");
+    obj.edit54:setVisible(false);
+    obj.edit54:setFontSize(22);
+    obj.edit54:setEnabled(true);
+    obj.edit54:setField("CLevel");
+    obj.edit54:setName("edit54");
 
     obj.btnUpaLevel = GUI.fromHandle(_obj_newObject("button"));
     obj.btnUpaLevel:setParent(obj.scrollBox1);
@@ -4076,29 +4599,29 @@ local function constructNew_frmvelen()
     obj.BarraXP:setPosition(50);
     obj.BarraXP:setMax(100);
 
-    obj.edit32 = GUI.fromHandle(_obj_newObject("edit"));
-    obj.edit32:setParent(obj.scrollBox1);
-    obj.edit32:setWidth(35);
-    obj.edit32:setHeight(20);
-    obj.edit32:setTop(675);
-    obj.edit32:setLeft(157);
-    obj.edit32:setType("number");
-    obj.edit32:setMax(9999);
-    obj.edit32:setTransparent(true);
-    obj.edit32:setHorzTextAlign("center");
-    obj.edit32:setField("XPAtual");
-    obj.edit32:setName("edit32");
+    obj.edit55 = GUI.fromHandle(_obj_newObject("edit"));
+    obj.edit55:setParent(obj.scrollBox1);
+    obj.edit55:setWidth(35);
+    obj.edit55:setHeight(20);
+    obj.edit55:setTop(675);
+    obj.edit55:setLeft(157);
+    obj.edit55:setType("number");
+    obj.edit55:setMax(9999);
+    obj.edit55:setTransparent(true);
+    obj.edit55:setHorzTextAlign("center");
+    obj.edit55:setField("XPAtual");
+    obj.edit55:setName("edit55");
 
-    obj.label27 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label27:setParent(obj.scrollBox1);
-    obj.label27:setWidth(35);
-    obj.label27:setHeight(20);
-    obj.label27:setTop(675);
-    obj.label27:setLeft(205);
-    obj.label27:setHorzTextAlign("center");
-    obj.label27:setFontColor("black");
-    obj.label27:setField("XPNecessario");
-    obj.label27:setName("label27");
+    obj.label50 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label50:setParent(obj.scrollBox1);
+    obj.label50:setWidth(35);
+    obj.label50:setHeight(20);
+    obj.label50:setTop(675);
+    obj.label50:setLeft(205);
+    obj.label50:setHorzTextAlign("center");
+    obj.label50:setFontColor("black");
+    obj.label50:setField("XPNecessario");
+    obj.label50:setName("label50");
 
     obj.dataLink12 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink12:setParent(obj.scrollBox1);
@@ -4172,11 +4695,13 @@ local function constructNew_frmvelen()
             		if sheet.Vitalidade == nil then
             			sheet.Vitalidade = 0;
             		end;	
-            		
+            		FichaPrincipal = sheet
             		sheet.ELevel = (tonumber(sheet.Elevel) or 0); 
             		sheet.PontoSkill = (tonumber(sheet.PontoSkill) or 1); 
             		sheet.PontosUlt = (tonumber(sheet.PontosUlt) or 0); 
             		sheet.ForcaTotal = (tonumber(sheet.ForcaTotal) or 0); 
+            		sheet.VitalidadeTotal = (tonumber(sheet.ForcaTotal) or 0); 
+            		sheet.InteligenciaTotal = (tonumber(sheet.ForcaTotal) or 0); 
             		sheet.Acerto = (tonumber(sheet.Acerto) or 0); 
             		sheet.AcertoMagico	= (tonumber(sheet.AcertoMagico) or 0); 
             		sheet.Critical = (tonumber(sheet.Critical) or 0); 
@@ -4513,71 +5038,180 @@ local function constructNew_frmvelen()
             IgualarMPMesa()
         end);
 
-    obj._e_event17 = obj.button16:addEventListener("onClick",
+    obj._e_event17 = obj.btnEffect:addEventListener("onClick",
+        function (event)
+            self.popEffect:show();
+            					if sheet then
+            						FichaPrincipal = sheet
+            					end;
+        end);
+
+    obj._e_event18 = obj.button16:addEventListener("onClick",
+        function (event)
+            -- Usuário clicou no botão de criar novo item.
+            						-- Vamos inserir um novo item no nosso recordList                              
+            						self.rclBuffs:append();
+        end);
+
+    obj._e_event19 = obj.rclBuffs:addEventListener("onSelect",
+        function ()
+            sheet.PAEffectTotal = 0
+            					sheet.PMEffectTotal = 0
+            					sheet.PFEffectTotal = 0
+            					sheet.DEFEffectTotal = 0
+            					sheet.RESEffectTotal = 0
+            					sheet.ACEffectTotal = 0
+            					sheet.ACMEffectTotal = 0
+            					sheet.CREffectTotal = 0
+            					sheet.CRMEffectTotal = 0
+            					sheet.DadoEffectTotal = 0
+            					sheet.ESQEffectTotal = 0
+            					sheet.PersEffectTotal = 0
+            					sheet.VezEffectTotal = 0
+            					sheet.ManaEffectTotal = 0
+            					sheet.CDEffectTotal = 0
+            					sheet.DuraEffectTotal = 0
+            					sheet.ContaEffectTotal = 0
+            					sheet.TipoEffectTotal = 0
+            					sheet.OutroEffectTotal = 0
+            					sheet.DanoEffectTotal = 0
+            					sheet.HPTotalEffectTotal = 0
+            					sheet.MPTotalEffectTotal = 0
+            
+            					local node = self.rclBuffs.selectedNode;  
+            					self.dscBuffSlot.node = node;                       
+            					self.dscBuffSlot.visible = (node ~= nil);
+            
+            					if self.dscBuffSlot.visible == true then
+            						self.dscBuffSlot.node.PAEffect = tonumber(self.dscBuffSlot.node.PAEffect) or 0;
+            						self.dscBuffSlot.node.PMEffect = tonumber(self.dscBuffSlot.node.PMEffect) or 0;
+            						self.dscBuffSlot.node.PFEffect = tonumber(self.dscBuffSlot.node.PFEffect) or 0;
+            						self.dscBuffSlot.node.DEFEffect = tonumber(self.dscBuffSlot.node.DEFEffect) or 0;
+            						self.dscBuffSlot.node.RESEffect = tonumber(self.dscBuffSlot.node.RESEffect) or 0;
+            						self.dscBuffSlot.node.ACEffect = tonumber(self.dscBuffSlot.node.ACEffect) or 0;
+            						self.dscBuffSlot.node.ACMEffect = tonumber(self.dscBuffSlot.node.ACMEffect) or 0;
+            						self.dscBuffSlot.node.CREffect = tonumber(self.dscBuffSlot.node.CREffect) or 0;
+            						self.dscBuffSlot.node.CRMEffect = tonumber(self.dscBuffSlot.node.CRMEffect) or 0;
+            						self.dscBuffSlot.node.DadoEffect = tonumber(self.dscBuffSlot.node.DadoEffect) or 0;
+            						self.dscBuffSlot.node.ESQEffect = tonumber(self.dscBuffSlot.node.ESQEffect) or 0;
+            						self.dscBuffSlot.node.PersEffect = tonumber(self.dscBuffSlot.node.PersEffect) or 0;
+            						self.dscBuffSlot.node.VezEffect = tonumber(self.dscBuffSlot.node.VezEffect) or 0;
+            						self.dscBuffSlot.node.DanoEffect = tonumber(self.dscBuffSlot.node.DanoEffect) or 0;
+            						self.dscBuffSlot.node.ManaEffect = tonumber(self.dscBuffSlot.node.ManaEffect) or 0;
+            						self.dscBuffSlot.node.CDEffect = tonumber(self.dscBuffSlot.node.CDEffect) or 0;
+            						self.dscBuffSlot.node.DuraEffect = tonumber(self.dscBuffSlot.node.DuraEffect) or 9999;
+            						self.dscBuffSlot.node.ContaEffect = tonumber(self.dscBuffSlot.node.ContaEffect) or 0;
+            						self.dscBuffSlot.node.TipoEffect = tonumber(self.dscBuffSlot.node.TipoEffect) or 0;
+            						self.dscBuffSlot.node.OutroEffect = tonumber(self.dscBuffSlot.node.OutroEffect) or 0;
+            						self.dscBuffSlot.node.HPTotalEffect = tonumber(self.dscBuffSlot.node.HPTotalEffect) or 0;
+            						self.dscBuffSlot.node.MPTotalEffect = tonumber(self.dscBuffSlot.node.MPTotalEffect) or 0;
+            					end;
+            
+            					-- Acessa o RecordList do grupo de jogadores
+            					local nodes = ndb.getChildNodes(sheet.Efeitos) -- Substitua pelo campo correto
+            
+            					for _, node in ipairs(nodes) do
+            						sheet.PAEffectTotal = tonumber(sheet.PAEffectTotal or 0) + tonumber(node.PAEffect or 0)
+            						sheet.PMEffectTotal = tonumber(sheet.PMEffectTotal or 0) + tonumber(node.PMEffect or 0)
+            						sheet.PFEffectTotal = tonumber(sheet.PFEffectTotal or 0) + tonumber(node.PFEffect or 0)
+            						sheet.DEFEffectTotal = tonumber(sheet.DEFEffectTotal or 0) + tonumber(node.DEFEffect or 0)
+            						sheet.RESEffectTotal = tonumber(sheet.RESEffectTotal or 0) + tonumber(node.RESEffect or 0)
+            						sheet.ACEffectTotal = tonumber(sheet.ACEffectTotal or 0) + tonumber(node.ACEffect or 0)
+            						sheet.ACMEffectTotal = tonumber(sheet.ACMEffectTotal or 0) + tonumber(node.ACMEffect or 0)
+            						sheet.CREffectTotal = tonumber(sheet.CREffectTotal or 0) + tonumber(node.CREffect or 0)
+            						sheet.CRMEffectTotal = tonumber(sheet.CRMEffectTotal or 0) + tonumber(node.CRMEffect or 0)
+            						sheet.DadoEffectTotal = tonumber(sheet.DadoEffectTotal or 0) + tonumber(node.DadoEffect or 0)
+            						sheet.ESQEffectTotal = tonumber(sheet.ESQEffectTotal or 0) + tonumber(node.ESQEffect or 0)
+            						sheet.PersEffectTotal = tonumber(sheet.PersEffectTotal or 0) + tonumber(node.PersEffect or 0)
+            						sheet.VezEffectTotal = tonumber(sheet.VezEffectTotal or 0) + tonumber(node.VezEffect or 0)
+            						sheet.ManaEffectTotal = tonumber(sheet.ManaEffectTotal or 0) + tonumber(node.ManaEffect or 0)
+            						sheet.CDEffectTotal = tonumber(sheet.CDEffectTotal or 0) + tonumber(node.CDEffect or 0)
+            						sheet.DuraEffectTotal = tonumber(sheet.DuraEffectTotal or 0) + tonumber(node.DuraEffect or 0)
+            						sheet.ContaEffectTotal = tonumber(sheet.ContaEffectTotal or 0) + tonumber(node.ContaEffect or 0)
+            						sheet.TipoEffectTotal = tonumber(sheet.TipoEffectTotal or 0) + tonumber(node.TipoEffect or 0)
+            						sheet.OutroEffectTotal = tonumber(sheet.OutroEffectTotal or 0) + tonumber(node.OutroEffect or 0)
+            						sheet.DanoEffectTotal = tonumber(sheet.DanoEffectTotal or 0) + tonumber(node.DanoEffect or 0)
+            						sheet.HPTotalEffectTotal = tonumber(sheet.HPTotalEffectTotal or 0) + tonumber(node.HPTotalEffect or 0)
+            						sheet.MPTotalEffectTotal = tonumber(sheet.MPTotalEffectTotal or 0) + tonumber(node.MPTotalEffect or 0)
+            						
+            						-- Chama a função específica após processar cada node
+            						ORCRacial()
+            						StatusDeChances()
+            						self.CalculaHP()
+            						CalculaMP()
+            					end
+        end);
+
+    obj._e_event20 = obj.button17:addEventListener("onClick",
+        function (event)
+            ndb.deleteNode(self.dscBuffSlot.node);
+        end);
+
+    obj._e_event21 = obj.button18:addEventListener("onClick",
         function (event)
             local novoForm = GUI.newForm("frmequip");
             				novoForm:setNodeObject(sheet);
             				novoForm:show();
         end);
 
-    obj._e_event18 = obj.button17:addEventListener("onClick",
+    obj._e_event22 = obj.button19:addEventListener("onClick",
         function (event)
             local novoForm = GUI.newForm("frmhabilidade");
             				novoForm:setNodeObject(sheet);
             				novoForm:show();
         end);
 
-    obj._e_event19 = obj.button18:addEventListener("onClick",
+    obj._e_event23 = obj.button20:addEventListener("onClick",
         function (event)
             local novoForm = GUI.newForm("frmHistoria");
             				novoForm:setNodeObject(sheet);
             				novoForm:show();
         end);
 
-    obj._e_event20 = obj.button19:addEventListener("onClick",
+    obj._e_event24 = obj.button21:addEventListener("onClick",
         function (event)
             local novoForm = GUI.newForm("frmsummon");
             				novoForm:setNodeObject(sheet);
             				novoForm:show();
         end);
 
-    obj._e_event21 = obj.button20:addEventListener("onClick",
+    obj._e_event25 = obj.button22:addEventListener("onClick",
         function (event)
             local novoForm = GUI.newForm("frmpersonagem");
             				novoForm:setNodeObject(sheet);
             				novoForm:show();
         end);
 
-    obj._e_event22 = obj.button21:addEventListener("onClick",
+    obj._e_event26 = obj.button23:addEventListener("onClick",
         function (event)
             local novoForm = GUI.newForm("frmActionBar");
             				novoForm:setNodeObject(sheet);
             				novoForm:show();
         end);
 
-    obj._e_event23 = obj.dataLink2:addEventListener("onChange",
+    obj._e_event27 = obj.dataLink2:addEventListener("onChange",
         function (field, oldValue, newValue)
             AtualizaAtributos();
         end);
 
-    obj._e_event24 = obj.dataLink3:addEventListener("onChange",
+    obj._e_event28 = obj.dataLink3:addEventListener("onChange",
         function (field, oldValue, newValue)
             AtualizaStatusMapa();
             			StatusPorRaca();
             			StatusDeChances();
         end);
 
-    obj._e_event25 = obj.dataLink4:addEventListener("onChange",
+    obj._e_event29 = obj.dataLink4:addEventListener("onChange",
         function (field, oldValue, newValue)
             ORCRacial();
         end);
 
-    obj._e_event26 = obj.dataLink5:addEventListener("onChange",
+    obj._e_event30 = obj.dataLink5:addEventListener("onChange",
         function (field, oldValue, newValue)
             CalculaDefesaResistenciaPorNivel();
         end);
 
-    obj._e_event27 = obj.dataLink6:addEventListener("onChange",
+    obj._e_event31 = obj.dataLink6:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then
             				StatusPorRaca(); 
@@ -4588,7 +5222,7 @@ local function constructNew_frmvelen()
             			end;
         end);
 
-    obj._e_event28 = obj.dataLink7:addEventListener("onChange",
+    obj._e_event32 = obj.dataLink7:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then
             				self.ControlaRacaHPAte20();
@@ -4602,7 +5236,7 @@ local function constructNew_frmvelen()
             			end;
         end);
 
-    obj._e_event29 = obj.dataLink8:addEventListener("onChange",
+    obj._e_event33 = obj.dataLink8:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then
             				self.ControlaClasseMP();
@@ -4613,7 +5247,7 @@ local function constructNew_frmvelen()
             			end;
         end);
 
-    obj._e_event30 = obj.dataLink9:addEventListener("onChange",
+    obj._e_event34 = obj.dataLink9:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then
             				StatusDeChances();
@@ -4621,44 +5255,44 @@ local function constructNew_frmvelen()
             			end;
         end);
 
-    obj._e_event31 = obj.dataLink10:addEventListener("onChange",
+    obj._e_event35 = obj.dataLink10:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then
             				self.ChecaLevel20();					
             			end;
         end);
 
-    obj._e_event32 = obj.button22:addEventListener("onClick",
+    obj._e_event36 = obj.button24:addEventListener("onClick",
         function (event)
             showMessage('P.A = Poder de Ataque 2x a Força, Se for Monge 4x Força');
         end);
 
-    obj._e_event33 = obj.button23:addEventListener("onClick",
+    obj._e_event37 = obj.button25:addEventListener("onClick",
         function (event)
             showMessage('P.M = Poder Magico 2x a Inteligencia');
         end);
 
-    obj._e_event34 = obj.button24:addEventListener("onClick",
+    obj._e_event38 = obj.button26:addEventListener("onClick",
         function (event)
             showMessage('P.F = Poder de Fogo 2x a Destreza');
         end);
 
-    obj._e_event35 = obj.button25:addEventListener("onClick",
+    obj._e_event39 = obj.button27:addEventListener("onClick",
         function (event)
             showMessage('DEF = Defesa Fisica que é Armadura + Metade da Vitalidade e Metade da Agilidade');
         end);
 
-    obj._e_event36 = obj.button26:addEventListener("onClick",
+    obj._e_event40 = obj.button28:addEventListener("onClick",
         function (event)
             showMessage('RES = Resistencia Magica que é Metade da Força + Metade da Vitalidade + Metade da Defesa');
         end);
 
-    obj._e_event37 = obj.AtkBasic:addEventListener("onClick",
+    obj._e_event41 = obj.AtkBasic:addEventListener("onClick",
         function (event)
             self.popAtaqueBasico:show('bottom', self.AtkBasic);
         end);
 
-    obj._e_event38 = obj.dataLink11:addEventListener("onChange",
+    obj._e_event42 = obj.dataLink11:addEventListener("onChange",
         function (field, oldValue, newValue)
             if self.cmbTipoGrupo.value == "1" then
             								local mesas = rrpg.getRooms();
@@ -4766,39 +5400,39 @@ local function constructNew_frmvelen()
             							end;
         end);
 
-    obj._e_event39 = obj.button27:addEventListener("onClick",
+    obj._e_event43 = obj.button29:addEventListener("onClick",
         function (event)
             AtaqueBasico();
         end);
 
-    obj._e_event40 = obj.button28:addEventListener("onClick",
+    obj._e_event44 = obj.button30:addEventListener("onClick",
         function (event)
             local novoForm = GUI.newForm("frmBasica");
             			novoForm:setNodeObject(sheet);
             			novoForm:show();
         end);
 
-    obj._e_event41 = obj.btnUpaLevel:addEventListener("onClick",
+    obj._e_event45 = obj.btnUpaLevel:addEventListener("onClick",
         function (event)
             RolarAtributoPorUpar()
         end);
 
-    obj._e_event42 = obj.dataLink12:addEventListener("onChange",
+    obj._e_event46 = obj.dataLink12:addEventListener("onChange",
         function (field, oldValue, newValue)
             SistemaXPLevel();
         end);
 
-    obj._e_event43 = obj.dataLink13:addEventListener("onChange",
+    obj._e_event47 = obj.dataLink13:addEventListener("onChange",
         function (field, oldValue, newValue)
             XPTotalPraUpar();
         end);
 
-    obj._e_event44 = obj.dataLink14:addEventListener("onChange",
+    obj._e_event48 = obj.dataLink14:addEventListener("onChange",
         function (field, oldValue, newValue)
             ComandoADM();
         end);
 
-    obj._e_event45 = obj.dataLink15:addEventListener("onChange",
+    obj._e_event49 = obj.dataLink15:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then				
             					if sheet.Level >= 1 then 
@@ -4809,7 +5443,7 @@ local function constructNew_frmvelen()
             				end;
         end);
 
-    obj._e_event46 = obj.dataLink16:addEventListener("onChange",
+    obj._e_event50 = obj.dataLink16:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then				
             					if sheet.Level >= 1 then 
@@ -4821,7 +5455,7 @@ local function constructNew_frmvelen()
             				end;
         end);
 
-    obj._e_event47 = obj.dataLink17:addEventListener("onChange",
+    obj._e_event51 = obj.dataLink17:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then				
             					if sheet.Level >= 1 then 
@@ -4834,6 +5468,10 @@ local function constructNew_frmvelen()
         end);
 
     function obj:_releaseEvents()
+        __o_rrpgObjs.removeEventListenerById(self._e_event51);
+        __o_rrpgObjs.removeEventListenerById(self._e_event50);
+        __o_rrpgObjs.removeEventListenerById(self._e_event49);
+        __o_rrpgObjs.removeEventListenerById(self._e_event48);
         __o_rrpgObjs.removeEventListenerById(self._e_event47);
         __o_rrpgObjs.removeEventListenerById(self._e_event46);
         __o_rrpgObjs.removeEventListenerById(self._e_event45);
@@ -4894,158 +5532,220 @@ local function constructNew_frmvelen()
         end;
 
         if self.image5 ~= nil then self.image5:destroy(); self.image5 = nil; end;
-        if self.button7 ~= nil then self.button7:destroy(); self.button7 = nil; end;
-        if self.rectangle10 ~= nil then self.rectangle10:destroy(); self.rectangle10 = nil; end;
-        if self.edit16 ~= nil then self.edit16:destroy(); self.edit16 = nil; end;
-        if self.edit28 ~= nil then self.edit28:destroy(); self.edit28 = nil; end;
-        if self.rectangle6 ~= nil then self.rectangle6:destroy(); self.rectangle6 = nil; end;
+        if self.edit47 ~= nil then self.edit47:destroy(); self.edit47 = nil; end;
+        if self.label37 ~= nil then self.label37:destroy(); self.label37 = nil; end;
         if self.edit30 ~= nil then self.edit30:destroy(); self.edit30 = nil; end;
-        if self.image12 ~= nil then self.image12:destroy(); self.image12 = nil; end;
-        if self.dataLink7 ~= nil then self.dataLink7:destroy(); self.dataLink7 = nil; end;
+        if self.layout3 ~= nil then self.layout3:destroy(); self.layout3 = nil; end;
+        if self.edit42 ~= nil then self.edit42:destroy(); self.edit42 = nil; end;
         if self.button11 ~= nil then self.button11:destroy(); self.button11 = nil; end;
         if self.button25 ~= nil then self.button25:destroy(); self.button25 = nil; end;
-        if self.rectangle3 ~= nil then self.rectangle3:destroy(); self.rectangle3 = nil; end;
-        if self.edit5 ~= nil then self.edit5:destroy(); self.edit5 = nil; end;
-        if self.image15 ~= nil then self.image15:destroy(); self.image15 = nil; end;
-        if self.dataLink2 ~= nil then self.dataLink2:destroy(); self.dataLink2 = nil; end;
-        if self.image2 ~= nil then self.image2:destroy(); self.image2 = nil; end;
+        if self.edit35 ~= nil then self.edit35:destroy(); self.edit35 = nil; end;
+        if self.edit49 ~= nil then self.edit49:destroy(); self.edit49 = nil; end;
         if self.button28 ~= nil then self.button28:destroy(); self.button28 = nil; end;
-        if self.dataLink16 ~= nil then self.dataLink16:destroy(); self.dataLink16 = nil; end;
         if self.edit27 ~= nil then self.edit27:destroy(); self.edit27 = nil; end;
-        if self.button1 ~= nil then self.button1:destroy(); self.button1 = nil; end;
         if self.label10 ~= nil then self.label10:destroy(); self.label10 = nil; end;
-        if self.rectangle16 ~= nil then self.rectangle16:destroy(); self.rectangle16 = nil; end;
         if self.label22 ~= nil then self.label22:destroy(); self.label22 = nil; end;
-        if self.image7 ~= nil then self.image7:destroy(); self.image7 = nil; end;
-        if self.dataLink9 ~= nil then self.dataLink9:destroy(); self.dataLink9 = nil; end;
-        if self.edit9 ~= nil then self.edit9:destroy(); self.edit9 = nil; end;
-        if self.comboBox3 ~= nil then self.comboBox3:destroy(); self.comboBox3 = nil; end;
         if self.edit14 ~= nil then self.edit14:destroy(); self.edit14 = nil; end;
-        if self.TargetName ~= nil then self.TargetName:destroy(); self.TargetName = nil; end;
-        if self.dataLink13 ~= nil then self.dataLink13:destroy(); self.dataLink13 = nil; end;
-        if self.button4 ~= nil then self.button4:destroy(); self.button4 = nil; end;
-        if self.rectangle4 ~= nil then self.rectangle4:destroy(); self.rectangle4 = nil; end;
+        if self.comboBox3 ~= nil then self.comboBox3:destroy(); self.comboBox3 = nil; end;
+        if self.edit9 ~= nil then self.edit9:destroy(); self.edit9 = nil; end;
         if self.label15 ~= nil then self.label15:destroy(); self.label15 = nil; end;
-        if self.image8 ~= nil then self.image8:destroy(); self.image8 = nil; end;
-        if self.edit32 ~= nil then self.edit32:destroy(); self.edit32 = nil; end;
+        if self.rectangle4 ~= nil then self.rectangle4:destroy(); self.rectangle4 = nil; end;
+        if self.label29 ~= nil then self.label29:destroy(); self.label29 = nil; end;
         if self.dataLink5 ~= nil then self.dataLink5:destroy(); self.dataLink5 = nil; end;
-        if self.label2 ~= nil then self.label2:destroy(); self.label2 = nil; end;
-        if self.button13 ~= nil then self.button13:destroy(); self.button13 = nil; end;
-        if self.button23 ~= nil then self.button23:destroy(); self.button23 = nil; end;
-        if self.edit18 ~= nil then self.edit18:destroy(); self.edit18 = nil; end;
         if self.rectangle1 ~= nil then self.rectangle1:destroy(); self.rectangle1 = nil; end;
-        if self.rectangle18 ~= nil then self.rectangle18:destroy(); self.rectangle18 = nil; end;
         if self.NameTipoDeGrupo ~= nil then self.NameTipoDeGrupo:destroy(); self.NameTipoDeGrupo = nil; end;
+        if self.edit53 ~= nil then self.edit53:destroy(); self.edit53 = nil; end;
+        if self.label39 ~= nil then self.label39:destroy(); self.label39 = nil; end;
         if self.edit3 ~= nil then self.edit3:destroy(); self.edit3 = nil; end;
         if self.button8 ~= nil then self.button8:destroy(); self.button8 = nil; end;
-        if self.label19 ~= nil then self.label19:destroy(); self.label19 = nil; end;
-        if self.label5 ~= nil then self.label5:destroy(); self.label5 = nil; end;
-        if self.button14 ~= nil then self.button14:destroy(); self.button14 = nil; end;
-        if self.button26 ~= nil then self.button26:destroy(); self.button26 = nil; end;
+        if self.image17 ~= nil then self.image17:destroy(); self.image17 = nil; end;
         if self.cmbInimigos ~= nil then self.cmbInimigos:destroy(); self.cmbInimigos = nil; end;
-        if self.edit21 ~= nil then self.edit21:destroy(); self.edit21 = nil; end;
         if self.dataLink14 ~= nil then self.dataLink14:destroy(); self.dataLink14 = nil; end;
+        if self.label45 ~= nil then self.label45:destroy(); self.label45 = nil; end;
         if self.edit6 ~= nil then self.edit6:destroy(); self.edit6 = nil; end;
         if self.button3 ~= nil then self.button3:destroy(); self.button3 = nil; end;
-        if self.label12 ~= nil then self.label12:destroy(); self.label12 = nil; end;
         if self.rectangle14 ~= nil then self.rectangle14:destroy(); self.rectangle14 = nil; end;
         if self.image1 ~= nil then self.image1:destroy(); self.image1 = nil; end;
-        if self.label20 ~= nil then self.label20:destroy(); self.label20 = nil; end;
-        if self.comboBox1 ~= nil then self.comboBox1:destroy(); self.comboBox1 = nil; end;
-        if self.edit12 ~= nil then self.edit12:destroy(); self.edit12 = nil; end;
         if self.dataLink11 ~= nil then self.dataLink11:destroy(); self.dataLink11 = nil; end;
-        if self.edit24 ~= nil then self.edit24:destroy(); self.edit24 = nil; end;
+        if self.label40 ~= nil then self.label40:destroy(); self.label40 = nil; end;
         if self.label9 ~= nil then self.label9:destroy(); self.label9 = nil; end;
+        if self.label33 ~= nil then self.label33:destroy(); self.label33 = nil; end;
         if self.button18 ~= nil then self.button18:destroy(); self.button18 = nil; end;
         if self.button6 ~= nil then self.button6:destroy(); self.button6 = nil; end;
-        if self.label17 ~= nil then self.label17:destroy(); self.label17 = nil; end;
         if self.rectangle13 ~= nil then self.rectangle13:destroy(); self.rectangle13 = nil; end;
-        if self.edit17 ~= nil then self.edit17:destroy(); self.edit17 = nil; end;
-        if self.label27 ~= nil then self.label27:destroy(); self.label27 = nil; end;
+        if self.layout7 ~= nil then self.layout7:destroy(); self.layout7 = nil; end;
+        if self.edit46 ~= nil then self.edit46:destroy(); self.edit46 = nil; end;
         if self.BarraXP ~= nil then self.BarraXP:destroy(); self.BarraXP = nil; end;
         if self.button21 ~= nil then self.button21:destroy(); self.button21 = nil; end;
-        if self.rectangle7 ~= nil then self.rectangle7:destroy(); self.rectangle7 = nil; end;
         if self.edit31 ~= nil then self.edit31:destroy(); self.edit31 = nil; end;
-        if self.edit1 ~= nil then self.edit1:destroy(); self.edit1 = nil; end;
-        if self.image11 ~= nil then self.image11:destroy(); self.image11 = nil; end;
-        if self.dataLink6 ~= nil then self.dataLink6:destroy(); self.dataLink6 = nil; end;
+        if self.layout2 ~= nil then self.layout2:destroy(); self.layout2 = nil; end;
         if self.button16 ~= nil then self.button16:destroy(); self.button16 = nil; end;
         if self.label7 ~= nil then self.label7:destroy(); self.label7 = nil; end;
         if self.button24 ~= nil then self.button24:destroy(); self.button24 = nil; end;
         if self.progressBar1 ~= nil then self.progressBar1:destroy(); self.progressBar1 = nil; end;
         if self.edit23 ~= nil then self.edit23:destroy(); self.edit23 = nil; end;
-        if self.cmbTipoGrupo ~= nil then self.cmbTipoGrupo:destroy(); self.cmbTipoGrupo = nil; end;
-        if self.edit4 ~= nil then self.edit4:destroy(); self.edit4 = nil; end;
-        if self.image14 ~= nil then self.image14:destroy(); self.image14 = nil; end;
+        if self.edit48 ~= nil then self.edit48:destroy(); self.edit48 = nil; end;
         if self.edit10 ~= nil then self.edit10:destroy(); self.edit10 = nil; end;
-        if self.image3 ~= nil then self.image3:destroy(); self.image3 = nil; end;
-        if self.dataLink17 ~= nil then self.dataLink17:destroy(); self.dataLink17 = nil; end;
         if self.edit26 ~= nil then self.edit26:destroy(); self.edit26 = nil; end;
         if self.label11 ~= nil then self.label11:destroy(); self.label11 = nil; end;
         if self.rectangle8 ~= nil then self.rectangle8:destroy(); self.rectangle8 = nil; end;
-        if self.rectangle11 ~= nil then self.rectangle11:destroy(); self.rectangle11 = nil; end;
-        if self.image4 ~= nil then self.image4:destroy(); self.image4 = nil; end;
-        if self.dataLink8 ~= nil then self.dataLink8:destroy(); self.dataLink8 = nil; end;
         if self.label25 ~= nil then self.label25:destroy(); self.label25 = nil; end;
-        if self.edit8 ~= nil then self.edit8:destroy(); self.edit8 = nil; end;
         if self.edit15 ~= nil then self.edit15:destroy(); self.edit15 = nil; end;
+        if self.edit8 ~= nil then self.edit8:destroy(); self.edit8 = nil; end;
+        if self.dscBuffSlot ~= nil then self.dscBuffSlot:destroy(); self.dscBuffSlot = nil; end;
         if self.edit29 ~= nil then self.edit29:destroy(); self.edit29 = nil; end;
-        if self.btnUpaLevel ~= nil then self.btnUpaLevel:destroy(); self.btnUpaLevel = nil; end;
         if self.rectangle5 ~= nil then self.rectangle5:destroy(); self.rectangle5 = nil; end;
-        if self.image9 ~= nil then self.image9:destroy(); self.image9 = nil; end;
+        if self.label28 ~= nil then self.label28:destroy(); self.label28 = nil; end;
         if self.image13 ~= nil then self.image13:destroy(); self.image13 = nil; end;
         if self.dataLink4 ~= nil then self.dataLink4:destroy(); self.dataLink4 = nil; end;
-        if self.label1 ~= nil then self.label1:destroy(); self.label1 = nil; end;
-        if self.button10 ~= nil then self.button10:destroy(); self.button10 = nil; end;
+        if self.button30 ~= nil then self.button30:destroy(); self.button30 = nil; end;
         if self.scrollBox1 ~= nil then self.scrollBox1:destroy(); self.scrollBox1 = nil; end;
-        if self.button22 ~= nil then self.button22:destroy(); self.button22 = nil; end;
         if self.rectangle2 ~= nil then self.rectangle2:destroy(); self.rectangle2 = nil; end;
-        if self.edit19 ~= nil then self.edit19:destroy(); self.edit19 = nil; end;
+        if self.label50 ~= nil then self.label50:destroy(); self.label50 = nil; end;
         if self.edit2 ~= nil then self.edit2:destroy(); self.edit2 = nil; end;
         if self.image16 ~= nil then self.image16:destroy(); self.image16 = nil; end;
         if self.dataLink3 ~= nil then self.dataLink3:destroy(); self.dataLink3 = nil; end;
-        if self.label4 ~= nil then self.label4:destroy(); self.label4 = nil; end;
-        if self.button15 ~= nil then self.button15:destroy(); self.button15 = nil; end;
         if self.dataLink15 ~= nil then self.dataLink15:destroy(); self.dataLink15 = nil; end;
         if self.popAtaqueBasico ~= nil then self.popAtaqueBasico:destroy(); self.popAtaqueBasico = nil; end;
-        if self.progressBar2 ~= nil then self.progressBar2:destroy(); self.progressBar2 = nil; end;
-        if self.edit20 ~= nil then self.edit20:destroy(); self.edit20 = nil; end;
+        if self.label44 ~= nil then self.label44:destroy(); self.label44 = nil; end;
         if self.cmbEspecializa ~= nil then self.cmbEspecializa:destroy(); self.cmbEspecializa = nil; end;
         if self.button2 ~= nil then self.button2:destroy(); self.button2 = nil; end;
-        if self.label13 ~= nil then self.label13:destroy(); self.label13 = nil; end;
         if self.rectangle17 ~= nil then self.rectangle17:destroy(); self.rectangle17 = nil; end;
-        if self.label23 ~= nil then self.label23:destroy(); self.label23 = nil; end;
-        if self.edit13 ~= nil then self.edit13:destroy(); self.edit13 = nil; end;
-        if self.comboBox2 ~= nil then self.comboBox2:destroy(); self.comboBox2 = nil; end;
+        if self.edit38 ~= nil then self.edit38:destroy(); self.edit38 = nil; end;
         if self.image6 ~= nil then self.image6:destroy(); self.image6 = nil; end;
-        if self.AtkBasic ~= nil then self.AtkBasic:destroy(); self.AtkBasic = nil; end;
         if self.dataLink12 ~= nil then self.dataLink12:destroy(); self.dataLink12 = nil; end;
         if self.label8 ~= nil then self.label8:destroy(); self.label8 = nil; end;
-        if self.button19 ~= nil then self.button19:destroy(); self.button19 = nil; end;
+        if self.rclBuffs ~= nil then self.rclBuffs:destroy(); self.rclBuffs = nil; end;
+        if self.popEffect ~= nil then self.popEffect:destroy(); self.popEffect = nil; end;
         if self.button5 ~= nil then self.button5:destroy(); self.button5 = nil; end;
         if self.rectangle12 ~= nil then self.rectangle12:destroy(); self.rectangle12 = nil; end;
-        if self.label14 ~= nil then self.label14:destroy(); self.label14 = nil; end;
-        if self.label26 ~= nil then self.label26:destroy(); self.label26 = nil; end;
+        if self.label34 ~= nil then self.label34:destroy(); self.label34 = nil; end;
+        if self.layout6 ~= nil then self.layout6:destroy(); self.layout6 = nil; end;
+        if self.button19 ~= nil then self.button19:destroy(); self.button19 = nil; end;
+        if self.edit41 ~= nil then self.edit41:destroy(); self.edit41 = nil; end;
         if self.label3 ~= nil then self.label3:destroy(); self.label3 = nil; end;
         if self.button12 ~= nil then self.button12:destroy(); self.button12 = nil; end;
         if self.button20 ~= nil then self.button20:destroy(); self.button20 = nil; end;
-        if self.button9 ~= nil then self.button9:destroy(); self.button9 = nil; end;
+        if self.rectangle19 ~= nil then self.rectangle19:destroy(); self.rectangle19 = nil; end;
+        if self.edit36 ~= nil then self.edit36:destroy(); self.edit36 = nil; end;
+        if self.layout1 ~= nil then self.layout1:destroy(); self.layout1 = nil; end;
         if self.label18 ~= nil then self.label18:destroy(); self.label18 = nil; end;
-        if self.dataLink1 ~= nil then self.dataLink1:destroy(); self.dataLink1 = nil; end;
         if self.label6 ~= nil then self.label6:destroy(); self.label6 = nil; end;
         if self.button17 ~= nil then self.button17:destroy(); self.button17 = nil; end;
-        if self.image10 ~= nil then self.image10:destroy(); self.image10 = nil; end;
         if self.button27 ~= nil then self.button27:destroy(); self.button27 = nil; end;
         if self.edit22 ~= nil then self.edit22:destroy(); self.edit22 = nil; end;
-        if self.edit7 ~= nil then self.edit7:destroy(); self.edit7 = nil; end;
-        if self.rectangle15 ~= nil then self.rectangle15:destroy(); self.rectangle15 = nil; end;
-        if self.edit11 ~= nil then self.edit11:destroy(); self.edit11 = nil; end;
         if self.label21 ~= nil then self.label21:destroy(); self.label21 = nil; end;
-        if self.dataLink10 ~= nil then self.dataLink10:destroy(); self.dataLink10 = nil; end;
+        if self.edit11 ~= nil then self.edit11:destroy(); self.edit11 = nil; end;
         if self.edit25 ~= nil then self.edit25:destroy(); self.edit25 = nil; end;
         if self.label16 ~= nil then self.label16:destroy(); self.label16 = nil; end;
         if self.rectangle9 ~= nil then self.rectangle9:destroy(); self.rectangle9 = nil; end;
+        if self.edit16 ~= nil then self.edit16:destroy(); self.edit16 = nil; end;
         if self.label24 ~= nil then self.label24:destroy(); self.label24 = nil; end;
+        if self.edit28 ~= nil then self.edit28:destroy(); self.edit28 = nil; end;
+        if self.rectangle6 ~= nil then self.rectangle6:destroy(); self.rectangle6 = nil; end;
+        if self.edit50 ~= nil then self.edit50:destroy(); self.edit50 = nil; end;
+        if self.image12 ~= nil then self.image12:destroy(); self.image12 = nil; end;
+        if self.dataLink7 ~= nil then self.dataLink7:destroy(); self.dataLink7 = nil; end;
+        if self.rectangle3 ~= nil then self.rectangle3:destroy(); self.rectangle3 = nil; end;
+        if self.edit5 ~= nil then self.edit5:destroy(); self.edit5 = nil; end;
+        if self.image15 ~= nil then self.image15:destroy(); self.image15 = nil; end;
+        if self.dataLink2 ~= nil then self.dataLink2:destroy(); self.dataLink2 = nil; end;
+        if self.image2 ~= nil then self.image2:destroy(); self.image2 = nil; end;
+        if self.dataLink16 ~= nil then self.dataLink16:destroy(); self.dataLink16 = nil; end;
+        if self.label43 ~= nil then self.label43:destroy(); self.label43 = nil; end;
+        if self.label30 ~= nil then self.label30:destroy(); self.label30 = nil; end;
+        if self.button1 ~= nil then self.button1:destroy(); self.button1 = nil; end;
+        if self.rectangle16 ~= nil then self.rectangle16:destroy(); self.rectangle16 = nil; end;
+        if self.dataLink9 ~= nil then self.dataLink9:destroy(); self.dataLink9 = nil; end;
+        if self.image7 ~= nil then self.image7:destroy(); self.image7 = nil; end;
+        if self.edit39 ~= nil then self.edit39:destroy(); self.edit39 = nil; end;
+        if self.dataLink13 ~= nil then self.dataLink13:destroy(); self.dataLink13 = nil; end;
+        if self.edit45 ~= nil then self.edit45:destroy(); self.edit45 = nil; end;
+        if self.TargetName ~= nil then self.TargetName:destroy(); self.TargetName = nil; end;
+        if self.label35 ~= nil then self.label35:destroy(); self.label35 = nil; end;
+        if self.button4 ~= nil then self.button4:destroy(); self.button4 = nil; end;
+        if self.edit32 ~= nil then self.edit32:destroy(); self.edit32 = nil; end;
+        if self.layout5 ~= nil then self.layout5:destroy(); self.layout5 = nil; end;
+        if self.image8 ~= nil then self.image8:destroy(); self.image8 = nil; end;
+        if self.edit40 ~= nil then self.edit40:destroy(); self.edit40 = nil; end;
+        if self.label49 ~= nil then self.label49:destroy(); self.label49 = nil; end;
+        if self.edit18 ~= nil then self.edit18:destroy(); self.edit18 = nil; end;
+        if self.label2 ~= nil then self.label2:destroy(); self.label2 = nil; end;
+        if self.button13 ~= nil then self.button13:destroy(); self.button13 = nil; end;
+        if self.button23 ~= nil then self.button23:destroy(); self.button23 = nil; end;
+        if self.rectangle18 ~= nil then self.rectangle18:destroy(); self.rectangle18 = nil; end;
+        if self.edit37 ~= nil then self.edit37:destroy(); self.edit37 = nil; end;
+        if self.label19 ~= nil then self.label19:destroy(); self.label19 = nil; end;
+        if self.label5 ~= nil then self.label5:destroy(); self.label5 = nil; end;
+        if self.button14 ~= nil then self.button14:destroy(); self.button14 = nil; end;
+        if self.button26 ~= nil then self.button26:destroy(); self.button26 = nil; end;
+        if self.edit21 ~= nil then self.edit21:destroy(); self.edit21 = nil; end;
+        if self.label12 ~= nil then self.label12:destroy(); self.label12 = nil; end;
+        if self.label20 ~= nil then self.label20:destroy(); self.label20 = nil; end;
+        if self.edit12 ~= nil then self.edit12:destroy(); self.edit12 = nil; end;
+        if self.comboBox1 ~= nil then self.comboBox1:destroy(); self.comboBox1 = nil; end;
+        if self.edit24 ~= nil then self.edit24:destroy(); self.edit24 = nil; end;
+        if self.label17 ~= nil then self.label17:destroy(); self.label17 = nil; end;
+        if self.label27 ~= nil then self.label27:destroy(); self.label27 = nil; end;
+        if self.edit17 ~= nil then self.edit17:destroy(); self.edit17 = nil; end;
+        if self.edit54 ~= nil then self.edit54:destroy(); self.edit54 = nil; end;
+        if self.rectangle7 ~= nil then self.rectangle7:destroy(); self.rectangle7 = nil; end;
+        if self.edit51 ~= nil then self.edit51:destroy(); self.edit51 = nil; end;
+        if self.edit1 ~= nil then self.edit1:destroy(); self.edit1 = nil; end;
+        if self.image11 ~= nil then self.image11:destroy(); self.image11 = nil; end;
+        if self.dataLink6 ~= nil then self.dataLink6:destroy(); self.dataLink6 = nil; end;
+        if self.label47 ~= nil then self.label47:destroy(); self.label47 = nil; end;
+        if self.cmbTipoGrupo ~= nil then self.cmbTipoGrupo:destroy(); self.cmbTipoGrupo = nil; end;
+        if self.edit4 ~= nil then self.edit4:destroy(); self.edit4 = nil; end;
+        if self.image14 ~= nil then self.image14:destroy(); self.image14 = nil; end;
+        if self.image3 ~= nil then self.image3:destroy(); self.image3 = nil; end;
+        if self.dataLink17 ~= nil then self.dataLink17:destroy(); self.dataLink17 = nil; end;
+        if self.label42 ~= nil then self.label42:destroy(); self.label42 = nil; end;
+        if self.label31 ~= nil then self.label31:destroy(); self.label31 = nil; end;
+        if self.rectangle11 ~= nil then self.rectangle11:destroy(); self.rectangle11 = nil; end;
+        if self.dataLink8 ~= nil then self.dataLink8:destroy(); self.dataLink8 = nil; end;
+        if self.image4 ~= nil then self.image4:destroy(); self.image4 = nil; end;
+        if self.btnUpaLevel ~= nil then self.btnUpaLevel:destroy(); self.btnUpaLevel = nil; end;
+        if self.edit44 ~= nil then self.edit44:destroy(); self.edit44 = nil; end;
+        if self.label36 ~= nil then self.label36:destroy(); self.label36 = nil; end;
+        if self.edit33 ~= nil then self.edit33:destroy(); self.edit33 = nil; end;
+        if self.layout4 ~= nil then self.layout4:destroy(); self.layout4 = nil; end;
+        if self.image9 ~= nil then self.image9:destroy(); self.image9 = nil; end;
+        if self.edit43 ~= nil then self.edit43:destroy(); self.edit43 = nil; end;
+        if self.label48 ~= nil then self.label48:destroy(); self.label48 = nil; end;
+        if self.edit19 ~= nil then self.edit19:destroy(); self.edit19 = nil; end;
+        if self.label1 ~= nil then self.label1:destroy(); self.label1 = nil; end;
+        if self.button10 ~= nil then self.button10:destroy(); self.button10 = nil; end;
+        if self.button22 ~= nil then self.button22:destroy(); self.button22 = nil; end;
+        if self.edit34 ~= nil then self.edit34:destroy(); self.edit34 = nil; end;
+        if self.label4 ~= nil then self.label4:destroy(); self.label4 = nil; end;
+        if self.button15 ~= nil then self.button15:destroy(); self.button15 = nil; end;
+        if self.button29 ~= nil then self.button29:destroy(); self.button29 = nil; end;
+        if self.progressBar2 ~= nil then self.progressBar2:destroy(); self.progressBar2 = nil; end;
+        if self.edit20 ~= nil then self.edit20:destroy(); self.edit20 = nil; end;
+        if self.label13 ~= nil then self.label13:destroy(); self.label13 = nil; end;
+        if self.label23 ~= nil then self.label23:destroy(); self.label23 = nil; end;
+        if self.edit13 ~= nil then self.edit13:destroy(); self.edit13 = nil; end;
+        if self.AtkBasic ~= nil then self.AtkBasic:destroy(); self.AtkBasic = nil; end;
+        if self.comboBox2 ~= nil then self.comboBox2:destroy(); self.comboBox2 = nil; end;
+        if self.label14 ~= nil then self.label14:destroy(); self.label14 = nil; end;
+        if self.label26 ~= nil then self.label26:destroy(); self.label26 = nil; end;
+        if self.textEditor1 ~= nil then self.textEditor1:destroy(); self.textEditor1 = nil; end;
+        if self.edit55 ~= nil then self.edit55:destroy(); self.edit55 = nil; end;
+        if self.edit52 ~= nil then self.edit52:destroy(); self.edit52 = nil; end;
+        if self.label38 ~= nil then self.label38:destroy(); self.label38 = nil; end;
+        if self.button9 ~= nil then self.button9:destroy(); self.button9 = nil; end;
+        if self.image10 ~= nil then self.image10:destroy(); self.image10 = nil; end;
+        if self.dataLink1 ~= nil then self.dataLink1:destroy(); self.dataLink1 = nil; end;
+        if self.label46 ~= nil then self.label46:destroy(); self.label46 = nil; end;
+        if self.edit7 ~= nil then self.edit7:destroy(); self.edit7 = nil; end;
+        if self.rectangle15 ~= nil then self.rectangle15:destroy(); self.rectangle15 = nil; end;
+        if self.dataLink10 ~= nil then self.dataLink10:destroy(); self.dataLink10 = nil; end;
+        if self.label41 ~= nil then self.label41:destroy(); self.label41 = nil; end;
+        if self.btnEffect ~= nil then self.btnEffect:destroy(); self.btnEffect = nil; end;
+        if self.label32 ~= nil then self.label32:destroy(); self.label32 = nil; end;
+        if self.button7 ~= nil then self.button7:destroy(); self.button7 = nil; end;
+        if self.rectangle10 ~= nil then self.rectangle10:destroy(); self.rectangle10 = nil; end;
         self:_oldLFMDestroy();
     end;
 

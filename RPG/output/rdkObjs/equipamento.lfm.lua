@@ -1431,7 +1431,7 @@ local function constructNew_frmequip()
 
     obj._e_event8 = obj.button7:addEventListener("onClick",
         function (event)
-            local mesa = Firecast.getMesaDe(sheet)
+            local mesa = Firecast.getRoomOf(sheet)
             							local node = self.rclListaDePotion.selectedNode; 
             							self.dscPotion.node = node;   	
             							
@@ -1439,25 +1439,27 @@ local function constructNew_frmequip()
             							
             							if sheet.limitePotion > 0 then
             								if node.EscolherPote == "HP" then
-            									local HPATUAL = mesa.meuJogador:getBarValue(1, currentValue)
+            									local HPATUAL = sheet.HPAtual
             									local HPPRAREGENERAR = tonumber(HPATUAL) + tonumber(self.dscPotion.node.ItemRegen);
-            									mesa.meuJogador:requestSetBarValue(1, HPPRAREGENERAR, nil);
+            									sheet.HPAtual = tonumber(HPPRAREGENERAR)
+            									mesa.meuJogador:requestSetBarValue(1, sheet.HPAtual, nil);
             									local minhaMesa = Firecast.getRoomOf(sheet);
             									local chat = minhaMesa.chat;                      
             									chat:enviarMensagem("[§K3]O Jogador " .. sheet.Nome .. "[§K4] consumiu o Potion de HP: " .. self.dscPotion.node.campoTextoGrande .. " Regenerando [" .. self.dscPotion.node.ItemRegen .. "]");							
             									sheet.limitePotion = tonumber(sheet.limitePotion) - 1;
-            									NDB.deleteNode(self.rclListaDePotion.selectedNode);
             									self.dscPotion.visible = false;
+            									NDB.deleteNode(self.rclListaDePotion.selectedNode);
             								elseif node.EscolherPote == "MP" then
             									local MPATUAL = sheet.MPAtual
             									local MPPRAREGENERAR = tonumber(MPATUAL) + tonumber(self.dscPotion.node.ItemRegen);
-            									mesa.meuJogador:requestSetBarValue(2, MPPRAREGENERAR, nil);
+            									sheet.MPAtual = tonumber(MPPRAREGENERAR)
+            									mesa.meuJogador:requestSetBarValue(2, sheet.MPAtual, nil);
             									local minhaMesa = Firecast.getRoomOf(sheet);
             									local chat = minhaMesa.chat;                      
             									chat:enviarMensagem("[§K3]O Jogador " .. sheet.Nome .. "[§K2] consumiu o Potion de MP: " .. self.dscPotion.node.campoTextoGrande .. " [ Regenerando [" .. self.dscPotion.node.ItemRegen .. "]");								
             									sheet.limitePotion = tonumber(sheet.limitePotion) - 1;
-            									NDB.deleteNode(self.rclListaDePotion.selectedNode);
             									self.dscPotion.visible = false;
+            									NDB.deleteNode(self.rclListaDePotion.selectedNode);
             								end;														
             							else
             								local minhaMesa = Firecast.getRoomOf(sheet);
