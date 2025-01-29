@@ -55,7 +55,7 @@
 						mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
 							function (rolado)	
 							local soDado = rolado.resultado + 1 - tonumber(sheet.Acerto);
-							if rolado.resultado > EsqAlvo then							
+							if rolado.resultado > EsqAlvo then						
 								if soDado > tonumber(sheet.Critical) then
 									if sheet.TipoAtaque == 'Dano Fisico' then
 										nodeExterno.AlvoRecebido = self.cmbInimigos.value
@@ -64,14 +64,39 @@
 										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 										sheet.nodeExterno = math.floor(sheet.Dano * 2)										
 										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
-									elseif sheet.TipoAtaque == 'Dano Magico' then
+									end;
+									if sheet.TipoAtaque == 'Dano Magico' then
 										nodeExterno.AlvoRecebido = self.cmbInimigos.value
 										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 										nodeExterno.DanoRecebido = math.floor((sheet.DanoMagico * 2) * (1 - (RESAlvo / 100)))
 										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 										sheet.nodeExterno = math.floor((sheet.DanoMagico * 2))
 										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");																			
-									end;	
+									end;
+									if sheet.TipoAtaque == 'Real' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((sheet.Dano * 2))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano * 2)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Real« [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
+									end;
+									if sheet.TipoAtaque == 'M/Fisico + M/Magico' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((tonumber(sheet.Dano + sheet.DanoMagico)) * (1 - (RESAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano * 2)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Metade do Dano Fisico e Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
+									end;
+									if sheet.TipoAtaque == 'M/Fisico + M/Magico' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((tonumber(sheet.Dano + sheet.DanoMagico) * 2) * (1 - (RESAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano * 2)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico e Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
+									end;		
 								else
 									if sheet.TipoAtaque == 'Dano Fisico' then
 										nodeExterno.AlvoRecebido = self.cmbInimigos.value
@@ -80,14 +105,39 @@
 										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 										sheet.nodeExterno = math.floor(sheet.Dano)										
 										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] »");
-									elseif sheet.TipoAtaque == 'Dano Magico' then			
+									end;
+									if sheet.TipoAtaque == 'Dano Magico' then			
 										nodeExterno.AlvoRecebido = self.cmbInimigos.value
 										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 										nodeExterno.DanoRecebido = math.floor((sheet.DanoMagico) * (1 - (RESAlvo / 100)))
 										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 										sheet.nodeExterno = math.floor((sheet.DanoMagico))
 										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
-									end;							
+									end;
+									if sheet.TipoAtaque == 'Real' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((sheet.Dano))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Real« [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » :dinofauro:");
+									end;
+									if sheet.TipoAtaque == 'M/Fisico + M/Magico' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((tonumber(sheet.Dano + sheet.DanoMagico) / 2) * (1 - (RESAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano * 2)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Metade do Dano Fisico e Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » :dinofauro:");
+									end;
+									if sheet.TipoAtaque == 'M/Fisico + M/Magico' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((tonumber(sheet.Dano + sheet.DanoMagico)) * (1 - (RESAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano * 2)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico e Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » :dinofauro:");
+									end;								
 								end;	
 							else
 								mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] Errou o ataque no oponente");
@@ -160,14 +210,39 @@
 										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 										sheet.nodeExterno = math.floor(sheet.Dano * 2)										
 										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
-									elseif sheet.TipoAtaque == 'Dano Magico' then
+									end;
+									if sheet.TipoAtaque == 'Dano Magico' then
 										nodeExterno.AlvoRecebido = self.cmbInimigos.value
 										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 										nodeExterno.DanoRecebido = math.floor((sheet.DanoMagico * 2) * (1 - (RESAlvo / 100)))
 										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 										sheet.nodeExterno = math.floor((sheet.DanoMagico * 2))
 										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");																			
-									end;	
+									end;
+									if sheet.TipoAtaque == 'Real' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((sheet.Dano * 2))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano * 2)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Real« [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
+									end;
+									if sheet.TipoAtaque == 'M/Fisico + M/Magico' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((tonumber(sheet.Dano + sheet.DanoMagico)) * (1 - (RESAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano * 2)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Metade do Dano Fisico e Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
+									end;
+									if sheet.TipoAtaque == 'M/Fisico + M/Magico' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((tonumber(sheet.Dano + sheet.DanoMagico) * 2) * (1 - (RESAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano * 2)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico e Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
+									end;		
 								else
 									if sheet.TipoAtaque == 'Dano Fisico' then
 										nodeExterno.AlvoRecebido = self.cmbInimigos.value
@@ -176,14 +251,39 @@
 										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 										sheet.nodeExterno = math.floor(sheet.Dano)										
 										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] »");
-									elseif sheet.TipoAtaque == 'Dano Magico' then			
+									end;
+									if sheet.TipoAtaque == 'Dano Magico' then			
 										nodeExterno.AlvoRecebido = self.cmbInimigos.value
 										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
 										nodeExterno.DanoRecebido = math.floor((sheet.DanoMagico) * (1 - (RESAlvo / 100)))
 										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 										sheet.nodeExterno = math.floor((sheet.DanoMagico))
 										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
-									end;							
+									end;
+									if sheet.TipoAtaque == 'Real' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((sheet.Dano))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Real« [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » :dinofauro:");
+									end;
+									if sheet.TipoAtaque == 'M/Fisico + M/Magico' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((tonumber(sheet.Dano + sheet.DanoMagico) / 2) * (1 - (RESAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano * 2)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Metade do Dano Fisico e Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » :dinofauro:");
+									end;
+									if sheet.TipoAtaque == 'M/Fisico + M/Magico' then
+										nodeExterno.AlvoRecebido = self.cmbInimigos.value
+										nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
+										nodeExterno.DanoRecebido = math.floor((tonumber(sheet.Dano + sheet.DanoMagico)) * (1 - (RESAlvo / 100)))
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+										sheet.nodeExterno = math.floor(sheet.Dano * 2)										
+										mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico e Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » :dinofauro:");
+									end;								
 								end;	
 							else
 								mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] Errou o ataque no oponente");

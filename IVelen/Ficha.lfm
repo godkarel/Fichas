@@ -161,7 +161,7 @@
 		<edit left="220" top="363" width="60" height="20" transparent="false" horzTextAlign="center" field="AcertoMagico"/> 
 		<edit left="220" top="388" width="60" height="20" transparent="false" horzTextAlign="center" field="CriticalMagico"/>
 		<edit left="220" top="413" width="60" height="20" transparent="false" horzTextAlign="center" field="Persistencia"/>
-		<comboBox left="310" top="338" width="100" field="TipoAtaque" fontSize="12" fontColor="red" items="{'Dano Fisico', 'Dano Magico'}"/>			
+		<comboBox left="310" top="338" width="130" field="TipoAtaque" fontSize="12" fontColor="red" items="{'Dano Fisico', 'Dano Magico', 'Real', 'M/Fisico + M/Magico', 'Fisico + Magico'}"/>			
 		<button name="AtkBasicI" left="310" top="363" width="100" height="20"  fontSize="12" fontColor="red" text="Ataque Basico" onClick="self.popAtaqueBasico:show('bottom', self.AtkBasicI);"/>
 
 		<popup name="popAtaqueBasico" width="200" height="160" backOpacity="0.5">
@@ -621,8 +621,8 @@
 			</event>
         </recordList>
 		
-        <dataScopeBox name="dscHabilidadeInimigo" top="445" left="230	" visible="false" width="240" height="200">
-			<rectangle height="200" align="top" color="grey" xradius="10" yradius="10" >
+        <dataScopeBox name="dscHabilidadeInimigo" top="445" left="230" visible="false" width="240" height="250">
+			<rectangle height="240" align="top" color="grey" xradius="10" yradius="10" >
 				<label left="10" top="10" width="70" height="18" text="Skill"/>  
 				<edit left="40" top="10" width="70" height="18" fontSize="10" field="NomeSkill"/> 
 				<label left="115" top="10" width="28" height="18" text="Tipo"/> 
@@ -631,9 +631,15 @@
 				<label left="10" top="150" width="70" height="18" text="Foco"/>
 				<edit left="45" top="150" width="50" height="18" type="number" field="Foco"/>
 				<label left="100" top="150" width="70" height="18" text="Custo"/>
-				<edit left="140" top="150" width="50" height="18" type="number" field="Custo"/> 				
-				<label left="10" top="175" width="70" height="18" text="Intensidade"/>
-				<edit left="85" top="175" width="70" canFocus="false" type="number" height="18" field="Intensidade"/> 
+				<edit left="140" top="150" width="50" height="18" type="number" field="Custo"/> 
+				<label left="10" top="175" width="70" height="18" text="CD"/>
+				<edit left="45" top="175" width="50" height="18" type="number" field="CDHabilidade"/>	
+				<label left="100" top="175" width="70" height="18" text="Recarga"/>
+				<edit left="140" top="175" width="50" height="18" type="number" field="RecargaHabilidade"/>	
+				<label left="10" top="200" width="70" height="18" text="Conta"/>
+				<edit left="45" top="200" width="50" height="18" type="number" field="ContaHabilidade"/>			
+				<label left="10" top="220" width="70" height="18" text="Intensidade"/>
+				<edit left="85" top="220" width="70" canFocus="false" type="number" height="18" field="Intensidade"/> 
 				<textEditor left="10" top="40" width="160" height="100" fontSize="10" field="DescriHabilidade"/>
 				<button left="175" top="60" width="60" height="60" fontSize="12" fontColor="blue" text="Usar" >
 					<event name="onClick">
@@ -662,14 +668,14 @@
 			</event>
 		</dataLink>
 
-		<button left="38" top="-50" width="63" height="60" opacity="1.0" text="Ficha1">
+		<button left="38" top="-50" width="63" visible="false" height="60" opacity="1.0" text="Ficha1">
 			<event name="onClick">										
 				local novoForm = GUI.newForm("frmSobrePostaInimigo");
 				novoForm:setNodeObject(sheet);
 				novoForm:show();	
 			</event>
 		</button>
-		<image left="40" top="-50" width="60" height="60" src="/imagens/Tok.png"/>	
+		<image left="40" top="-50" width="60"  visible="false" height="60" src="/imagens/Tok.png"/>	
 
 		<popup name="popCriaInimigo" width="400" visible="false" height="400" backOpacity="0.5">
             <label left="10" top="10" width="70" height="18" text="Tipo"/>
