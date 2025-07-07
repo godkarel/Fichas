@@ -1742,8 +1742,8 @@ local function constructNew_frmpersonagem()
             					sheet.AtivaConhecimento = true;
             					IniciaListaConhecimento(self);
             					AdicionaConhecimentoNomes();					
-            					sheet.PA = sheet.PA + 1;
-            					sheet.PA = sheet.PA - 1;
+            					sheet.PA = tonumber(sheet.PA) + 1;
+            					sheet.PA = tonumber(sheet.PA) - 1;
             					StatusPorRaca()
             					StatusDeChances();
             					AtualizaAtributos();

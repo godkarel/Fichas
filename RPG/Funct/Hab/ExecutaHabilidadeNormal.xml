@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	<script>
+		function ExecutaHabilidadeHabilidadeNormal(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+						
+			if 0 == nodeHabilidade.RecargaHabilidade then
+				nodeExterno.TipoRecebido = nil
+				local mesaDoPersonagem = rrpg.getMesaDe(sheet)
+				sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0
+
+				if nodeHabilidade.DanoAtributo1 ~= nil then
+					nodeExterno.UsuarioEnvio = sheet.Nome
+					nodeExterno.TipoRecebido = "HabilidadeNormal"
+					nodeExterno.AcertoDoJogador = sheet.AcertoMagico
+					nodeExterno.UsuarioEnviouCusto = nodeHabilidade.CustoHabilidade
+					nodeExterno.EscolheTipoAtaque = nodeHabilidade.DanoAtributo1
+					nodeExterno.DanoRecebido = math.floor((nodeHabilidade.Hintensidade1))
+					nodeExterno.VezdeQuem = sheet.Nome
+					nodeExterno.OpcaoRecebida = OpcaoHab
+					
+					nodeExterno.AlvoRecebido = SelfcmbInimigosH
+					nodeExterno.GrupoRecebido = cmbTipoDeGrupoFH
+
+					if nodeHabilidade.fldImgIconSkill ~= nil then
+						mesaDoPersonagem.chat:enviarMensagem("[§I " .. nodeHabilidade.fldImgIconSkill .. "]")
+					end
+
+					mesaDoPersonagem.chat:enviarMensagem(".. [§K3]" .. nodeHabilidade.DescriHabilidade1)
+
+					nodeHabilidade.ContaRecarga = nodeHabilidade.TurnoAtual
+					nodeHabilidade.RecargaHabilidade =
+						tonumber(nodeHabilidade.ContaRecarga)
+						+ tonumber(nodeHabilidade.CDHabilidade)
+						- tonumber(nodeHabilidade.TurnoAtual)
+
+					mesaDoPersonagem.chat:enviarMensagem(
+						"[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido .. "[§K9,0] »"
+					)
+					nodeExterno.TesteDecidido = "Habilidade"
+					nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+				end
+			else
+				showMessage("essa Habilidade ainda esta em recarga")
+			end
+		end
+
+           
+	</script>

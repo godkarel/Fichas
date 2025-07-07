@@ -121,7 +121,7 @@
 ------------- Status de Vida e outros -------------------------
 		<image left="290" top="650" width="60" height="60" visible="false" src="/imagens/info.png"/>
 		<image left="190" top="580" width="250" height="250" visible="false" src="/imagens/TAGS/StatusAtt.png"/>
-		<button left="290" top="650" width="60" opacity="0.1" height="60" visible="false" onClick="AtualizaStatusMesa()"/>
+		<button left="290" top="650" width="60" opacity="0.1" height="60" visible="true" onClick="AtualizaStatusMesa()"/>
 		
 		<button left="80" top="603" width="38" opacity="0.1" height="32" visible="false" onClick="IgualarHPMesa()"/>
 		<progressBar left="148" top="603" color="red"  width="100" value="100" max="100" height="30"  />

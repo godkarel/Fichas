@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	
+	<script>		
+		function SincronizaOponenteTurno(FamosoGrupoAlvo)
+			if	self.BoxDetalheOponentes.visible == true then
+				local node = FamosoGrupoAlvo;   
+				
+				local mesas = rrpg.getRooms();
+				local bibliotecaAtual = mesas[1].library;
+
+				local function obterNomesRecursivoP(bibItem)
+					local itensFilhos = bibItem.children;
+					local nomes = bibItem.name;
+
+					for i = 1, #itensFilhos, 1 do
+						local bibItemFilho = itensFilhos[i];
+						local nomesDoFilho = obterNomesRecursivoP(bibItemFilho) or "";
+
+						if nomesDoFilho == node.NomeDoOponente then
+							-- Obter ID do personagem Loan
+							local idPersonagem = bibItemFilho;
+
+							-- Solicita acesso à ficha do personagem
+							local promise = bibItemFilho:asyncOpenNDB();
+
+							-- Aguarda até que a ficha esteja carregada
+							local nodeExterno = await(promise);
+
+							-- Sincronizando
+
+							nodeExterno.HPAtual = tonumber(node.HPBarO) or '0';	
+							nodeExterno.MPAtual = tonumber(node.MPBarO) or '0';									
+						end
+					end
+				return nomes
+				end
+				local nomesDeTodosOsItens = obterNomesRecursivoP(bibliotecaAtual);
+			end;	
+
+		end		
+	</script>

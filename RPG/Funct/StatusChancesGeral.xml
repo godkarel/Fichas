@@ -6,12 +6,12 @@
 			function StatusDeChances()			
 				sheet.DestrezaAcerto = math.floor((tonumber(sheet.DestrezaTotal) or 0) /4);
 					
-					sheet.AgilidadeESQ = math.floor((tonumber(sheet.AgilidadeTotal) or 0) /5);
-
-					sheet.ForcaPer =  ((tonumber(sheet.ForcaTotal) or 0) /30);
+					sheet.AgilidadeESQ = math.floor((tonumber(sheet.AgilidadeTotal) or 0) /4);
+					
+					sheet.AgiCR = math.floor((tonumber(sheet.AgilidadeTotal / 20) or 0));
+				
+					sheet.ForcaPer = ((tonumber(sheet.ForcaTotal) or 0) /20);
 						
-					sheet.Acerto = math.floor((tonumber(sheet.ClasseAcerto) or 0) + (tonumber(sheet.EspecAcerto) or 0) + (tonumber(sheet.DestrezaAcerto) or 0) + (tonumber(sheet.AcertoBasica) or 0) + (tonumber(sheet.AcertoRacial) or 0) + (tonumber(sheet.ConBoaMira) or 0) + (tonumber(sheet.ACEffectTotal) or 0)) ;
-
 					if sheet.Level > 20 then
 						sheet.AcertoMagico = math.floor((tonumber(sheet.ClasseAM) or 0) + (tonumber(sheet.EspecAM) or 0) + (tonumber(sheet.AMBasica) or 0) + (tonumber(sheet.ConMestreMagico) or 0) + (tonumber(sheet.AMRacial) or 0) + (tonumber(sheet.ACMEffectTotal) or 0));
 					else 
@@ -19,15 +19,15 @@
 					end;
 					
 					if sheet.Level > 20 then
-						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.EspecCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0) + (tonumber(sheet.CREffectTotal) or 0));
+						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.EspecCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0) - (tonumber(sheet.CREffectTotal) or 0) - (tonumber(sheet.AgiCR) or 0));
 					else 
-						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0) + (tonumber(sheet.CREffectTotal) or 0));
+						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0) - (tonumber(sheet.CREffectTotal) or 0) - (tonumber(sheet.AgiCR) or 0));
 					end;
 					
 					if sheet.Level > 20 then
-						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.EspecCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0) + (tonumber(sheet.CRMEffectTotal) or 0));
+						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.EspecCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0) + (tonumber(sheet.CRMEffectTotal) or 0) + (tonumber(sheet.AgiCR) or 0));
 					else 
-						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0) + (tonumber(sheet.CRMEffectTotal) or 0));
+						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0) + (tonumber(sheet.CRMEffectTotal) or 0) + (tonumber(sheet.AgiCR) or 0));
 					end;
 					
 					if sheet.Level > 20 then
@@ -40,20 +40,33 @@
 						sheet.Persistencia = math.floor((tonumber(sheet.ClassePer) or 0) + (tonumber(sheet.EspecPer) or 0) + (tonumber(sheet.PersistBasica) or 0) + (tonumber(sheet.PersistRacial) or 0) + (tonumber(sheet.ForcaPer) or 0) + (tonumber(sheet.ConPersistente) or 0)  + (tonumber(sheet.PersEffectTotal) or 0)); 
 					else 
 						sheet.Persistencia = math.floor((tonumber(sheet.ClassePer) or 0) + (tonumber(sheet.PersistBasica) or 0) + (tonumber(sheet.PersistRacial) or 0) + (tonumber(sheet.ForcaPer) or 0) + (tonumber(sheet.ConPersistente) or 0)  + (tonumber(sheet.PersEffectTotal) or 0)); 
-					end;		
-						
-					if sheet.Esquiva > 14 then
-						sheet.Esquiva = 14;
-					end;
-							
-					if sheet.Acerto > 6 then
-						sheet.Acerto = 6;
 					end;
 					
-					if sheet.Persistencia > 5 then
-						sheet.Persistencia = 5;
-					end;	
-			end;
+
+					sheet.Acerto = math.floor((tonumber(sheet.ClasseAcerto) or 0) + (tonumber(sheet.EspecAcerto) or 0) + (tonumber(sheet.DestrezaAcerto) or 0) + (tonumber(sheet.AcertoBasica) or 0) + (tonumber(sheet.AcertoRacial) or 0) + (tonumber(sheet.ConBoaMira) or 0) + (tonumber(sheet.ACEffectTotal) or 0)) ;
+
+					if sheet.Classe == 'Ladino' then	
+						if sheet.Acerto > 9 then 
+							sheet.Acerto = 9
+						end;
+					else
+						if sheet.Acerto > 8 then 
+							sheet.Acerto = 8
+						end;
+					end;
+
+					if sheet.Classe == 'Ladino' then
+						if sheet.Esquiva > 14 then 
+							sheet.Esquiva = 14
+						end;
+					else
+						if sheet.Esquiva > 13 then 
+							sheet.Esquiva = 13
+						end;	
+					end;
+				end;
+
+				
 		]]>
 		
     </script> 	

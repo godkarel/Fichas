@@ -9,9 +9,81 @@
 			sheet.ClasseCM = 0;
 			sheet.ClasseEsquiva = 0;
 			sheet.ClassePer = 0;
-		
+
+			if sheet.classe == 'Cavaleiro Draconico' then	
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 15;
+				sheet.ClasseCR = 20;
+				sheet.ClasseCM = 2;
+				sheet.ClasseEsquiva = 10;
+				sheet.ClassePer = 1;
+			end;
+
+			if sheet.classe == 'Mago do Caos' then	
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 15;
+				sheet.ClasseCR = 20;
+				sheet.ClasseCM = 2;
+				sheet.ClasseEsquiva = 11;
+				sheet.ClassePer = 1;
+			end;
+
 					
 			if sheet.Classe == 'Animago' then					
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 16
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
+			end;	
+				
+			if sheet.Classe == 'Arqueiro' then
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 19
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
+			end;	
+				
+			if sheet.Classe == 'Bardo' then
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 16
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
+			end;	
+				
+			if sheet.Classe == 'Bispo' then
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 16
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
+			end;	
+				
+			if sheet.Classe == 'Caçador de Almas' then
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 2
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
+			end;	
+				
+			if sheet.Classe == 'Guerreiro' then
+				sheet.ClasseAcerto = 2
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 2	
+			end;	
+				
+			if sheet.Classe == 'Ladino' then
 				sheet.ClasseAcerto = 1
 				sheet.ClasseAM = 15
 				sheet.ClasseCR = 20
@@ -20,95 +92,41 @@
 				sheet.ClassePer = 1		
 			end;	
 				
-			if sheet.Classe == 'Arqueiro' then
-				sheet.ClasseAcerto = 2;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
-			end;	
-				
-			if sheet.Classe == 'Bardo' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 16;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
-			end;	
-				
-			if sheet.Classe == 'Bispo' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 16;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
-			end;	
-				
-			if sheet.Classe == 'Caçador de Almas' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 2;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
-			end;	
-				
-			if sheet.Classe == 'Guerreiro' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 14;
-				sheet.ClasseCR = 19;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 2;
-			end;	
-				
-			if sheet.Classe == 'Ladino' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 12;
-				sheet.ClassePer = 1;
-			end;	
-				
 			if sheet.Classe == 'Mago' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 16;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 16
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
 
 			end;	
 				
 			if sheet.Classe == 'Mercenario' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR = 19;
-				sheet.ClasseCM = 2;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 2
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
 			end;	
 				
 			if sheet.Classe == 'Monge' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 12;
-				sheet.ClassePer = 1;
+				sheet.ClasseAcerto = 2
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
 			end;	
 				
 			if sheet.Classe == 'Paladino' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR= 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 16
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
 			end;
 		end;	
 	]]>	

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	
+	<script>		
+		function VerificaDanoEmAreaGPUm(FamosoGrupoAlvo)
+			for i, oponente in ipairs(FamosoGrupoAlvo) do
+				SelfFichPrincipalASC.rclGrupoOponentes.selectedNode = oponente
+				local nodes = ndb.getChildNodes(sheet.NomeOponentes)
+
+				for _, node in ipairs(nodes) do						
+					if oponente.NomeDoOponente == self.rclGrupoOponentes.node.NomeDoOponente then
+						if	self.BoxDetalheOponentes.visible == true then
+							local node = self.rclGrupoOponentes.selectedNode;   
+							self.rclGrupoOponentes.node = node;
+							
+							local mesas = rrpg.getRooms();
+							local bibliotecaAtual = mesas[1].library;
+
+							local function obterNomesRecursivoI(bibItem)
+								local itensFilhos = bibItem.children;
+								local nomes = bibItem.name;								
+
+								for i = 1, #itensFilhos, 1 do
+									local bibItemFilho = itensFilhos[i];
+									local nomesDoFilho = obterNomesRecursivoI(bibItemFilho) or "";									
+
+									if nomesDoFilho == node.NomeDoOponente then
+										-- Obter ID do personagem Loan
+										local idPersonagem = bibItemFilho;
+										
+
+										-- Solicita acesso à ficha do personagem
+										local promise = bibItemFilho:asyncOpenNDB();
+										
+										-- Aguarda até que a ficha esteja carregada
+										local nodeExterno = await(promise);
+
+										-- Sincronizando
+
+										if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
+											node.PA = tonumber(nodeExterno.PA) or '0';
+											node.PM = tonumber(nodeExterno.PM) or '0';
+											node.PF = tonumber(nodeExterno.PF) or '0';
+											node.DEF = tonumber(nodeExterno.DEFRED) or '0';
+											node.RES = tonumber(nodeExterno.RESRED) or '0';
+											node.AC = tonumber(nodeExterno.Acerto) or '0';
+											node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+											node.CR = tonumber(nodeExterno.Critical) or '0';
+											node.CRM = tonumber(nodeExterno.CMagico) or '0';
+											node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+											node.Pers = math.floor(tonumber(nodeExterno.Persistencia)) or '0';
+											node.Vez = node.Vez or '0';
+											node.Atletismo = tonumber(nodeExterno.TAtletismo) or '0';
+											node.Sabedoria = tonumber(nodeExterno.TSabedoria) or '0';
+											node.Percepcao = tonumber(nodeExterno.TPercepcao) or '0';
+											node.Acrobacia = tonumber(nodeExterno.TAcrobacia) or '0';
+											node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+											node.HPBarMaxO = tonumber(nodeExterno.HPTotal) or '0';
+											node.MPBarMaxO = math.floor(tonumber(nodeExterno.MPTotal)) or '0';
+											node.HPBarO = tonumber(nodeExterno.HPAtual) or '0';
+											node.MPBarO = math.floor(tonumber(nodeExterno.MPAtual)) or '0';
+											node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoOponente
+											node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
+										else
+											node.PA = tonumber(nodeExterno.Dano) or '0';
+											node.PM = tonumber(nodeExterno.DanoMagico) or '0';
+											node.PF = "NPC";
+											node.DEF = tonumber(nodeExterno.DefesaPorCent) or '0';
+											node.RES = tonumber(nodeExterno.ResistenciaPorCent) or '0';
+											node.AC = tonumber(nodeExterno.Acerto) or '0';
+											node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+											node.CR = tonumber(nodeExterno.Critical) or '0';
+											node.CRM = tonumber(nodeExterno.CriticalMagico) or '0';
+											node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+											node.Pers = math.floor(tonumber(nodeExterno.Persistencia)) or '0';
+											node.Vez = node.Vez or '0';
+											node.Atletismo = tonumber(nodeExterno.Atletismo) or '0';
+											node.Sabedoria = tonumber(nodeExterno.Sabedoria) or '0';
+											node.Percepcao = tonumber(nodeExterno.Percepcao) or '0';
+											node.Acrobacia = tonumber(nodeExterno.Acrobacia) or '0';
+											node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+											node.HPBarMaxO = tonumber(nodeExterno.HPTotal) or '0';
+											node.MPBarMaxO = math.floor(tonumber(nodeExterno.MPTotal)) or '0';
+											node.HPBarO = tonumber(nodeExterno.HPAtual) or '0';
+											node.MPBarO = math.floor(tonumber(nodeExterno.MPAtual)) or '0';
+											node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
+											node.imagemDoPersonagem = nodeExterno.imgInimigo
+										end;
+
+										node.HPBarO = tonumber(node.HPBarO - await(sheet.DanoRecebido or 0))
+										nodeExterno.HPAtual = tonumber(node.HPBarO or '0');
+										atualizarLog()
+
+									end
+								end
+							return nomes
+							end
+							
+							local nomesDeTodosOsItens = obterNomesRecursivoI(bibliotecaAtual);
+						end;
+						break
+					end;
+					
+					
+				end
+			end;
+				
+
+		end
+		
+		
+	</script>

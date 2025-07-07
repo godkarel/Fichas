@@ -66,6 +66,15 @@
 						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.2
 						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.2
 						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.2
+					end;
+
+
+					if sheet.classe == 'Mago do Caos' then
+						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.1
+						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.4
+						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.2
+						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.1
+						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.2
 					end;	
 				end;
 			end;

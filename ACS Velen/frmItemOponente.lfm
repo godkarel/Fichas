@@ -19,4 +19,63 @@
 	</layout>
     <button align="right" text="Remover" width="80"
             onClick="NDB.deleteNode(sheet);"/>
+
+	<dataLink fields="{'PAEffectTotal', 'PMEffectTotal', 'PFEffectTotal', 'DEFEffectTotal', 'RESEffectTotal', 
+                   'ACEffectTotal', 'ACMEffectTotal', 'CREffectTotal', 'CRMEffectTotal', 'DadoEffectTotal', 
+                   'ESQEffectTotal', 'PersEffectTotal', 'VezEffectTotal', 'ManaEffectTotal', 'CDEffectTotal', 
+                   'DuraEffectTotal', 'ContaEffectTotal', 'TipoEffectTotal', 'ExpiraEffectTotal', 
+                   'DanoEffectTotal', 'HPTotalEffectTotal', 'MPTotalEffectTotal'}">
+                <event name="onChange">
+				if sheet.PF ~= "NPC" then
+					sheet.PATotal = tonumber(sheet.PAEffectTotal or 0) + tonumber(sheet.PA or 0)
+					sheet.PMTotal = tonumber(sheet.PMEffectTotal or 0) + tonumber(sheet.PM or 0)
+					sheet.PFTotal = tonumber(sheet.PFEffectTotal or 0) + tonumber(sheet.PF or 0)
+					sheet.DEFTotal = tonumber(sheet.DEFEffectTotal or 0) + tonumber(sheet.DEF or 0)
+					sheet.RESTotal = tonumber(sheet.RESEffectTotal or 0) + tonumber(sheet.RES or 0)
+					sheet.ACTotal = tonumber(sheet.ACEffectTotal or 0) + tonumber(sheet.AC or 0)
+					sheet.ACMTotal = tonumber(sheet.ACMEffectTotal or 0) + tonumber(sheet.ACM or 0)
+					sheet.CRTotal = tonumber(sheet.CREffectTotal or 0) + tonumber(sheet.CR or 0)
+					sheet.CRMTotal = tonumber(sheet.CRMEffectTotal or 0) + tonumber(sheet.CRM or 0)
+					sheet.DadoTotal = tonumber(sheet.DadoEffectTotal or 0) + tonumber(sheet.Dado or 0)
+					sheet.ESQTotal = tonumber(sheet.ESQEffectTotal or 0) + tonumber(sheet.ESQ or 0)
+					sheet.PersTotal = tonumber(sheet.PersEffectTotal or 0) + tonumber(sheet.Pers or 0)
+					sheet.ManaTotal = tonumber(sheet.ManaEffectTotal or 0) + tonumber(sheet.Mana or 0)
+					sheet.CDTotal = tonumber(sheet.CDEffectTotal or 0) + tonumber(sheet.CD or 0)
+					sheet.TipoTotal = tonumber(sheet.TipoEffectTotal or 0) + tonumber(sheet.Tipo or 0)
+					
+					sheet.HPTotalTotal = tonumber(sheet.HPTotalEffectTotal or 0) + tonumber(sheet.HPTotal or 0)
+					sheet.MPTotalTotal = tonumber(sheet.MPTotalEffectTotal or 0) + tonumber(sheet.MPTotal or 0)
+				else
+					sheet.PATotal = tonumber(sheet.PAEffectTotal or 0) + tonumber(sheet.PA or 0)
+					sheet.PMTotal = tonumber(sheet.PMEffectTotal or 0) + tonumber(sheet.PM or 0)
+					sheet.DEFTotal = tonumber(sheet.DEFEffectTotal or 0) + tonumber(sheet.DEF or 0)
+					sheet.RESTotal = tonumber(sheet.RESEffectTotal or 0) + tonumber(sheet.RES or 0)
+					sheet.ACTotal = tonumber(sheet.ACEffectTotal or 0) + tonumber(sheet.AC or 0)
+					sheet.ACMTotal = tonumber(sheet.ACMEffectTotal or 0) + tonumber(sheet.ACM or 0)
+					sheet.CRTotal = tonumber(sheet.CREffectTotal or 0) + tonumber(sheet.CR or 0)
+					sheet.CRMTotal = tonumber(sheet.CRMEffectTotal or 0) + tonumber(sheet.CRM or 0)
+					sheet.DadoTotal = tonumber(sheet.DadoEffectTotal or 0) + tonumber(sheet.Dado or 0)
+					sheet.ESQTotal = tonumber(sheet.ESQEffectTotal or 0) + tonumber(sheet.ESQ or 0)
+					sheet.PersTotal = tonumber(sheet.PersEffectTotal or 0) + tonumber(sheet.Pers or 0)
+					sheet.ManaTotal = tonumber(sheet.ManaEffectTotal or 0) + tonumber(sheet.Mana or 0)
+					sheet.CDTotal = tonumber(sheet.CDEffectTotal or 0) + tonumber(sheet.CD or 0)
+					sheet.TipoTotal = tonumber(sheet.TipoEffectTotal or 0) + tonumber(sheet.Tipo or 0)
+					sheet.HPTotalTotal = tonumber(sheet.HPTotalEffectTotal or 0) + tonumber(sheet.HPTotal or 0)
+					sheet.MPTotalTotal = tonumber(sheet.MPTotalEffectTotal or 0) + tonumber(sheet.MPTotal or 0)
+				end;
+				</event>
+        </dataLink>
+
+		<dataLink field="Vez">
+			<event name="onChange">
+				if SelfFichPrincipalASC and SelfFichPrincipalASC.rclGrupoOponentes then
+					-- Força a reordenação do RecordList
+					local nodes = ndb.getChildNodes(SelfFichPrincipalASC.rclGrupoOponentes.node or {})
+					SelfFichPrincipalASC.rclGrupoOponentes:sort()
+					-- Alternativa mais direta (pode funcionar melhor em algumas versões)
+					SelfFichPrincipalASC.rclGrupoOponentes.node = SelfFichPrincipalASC.rclGrupoOponentes.node
+					sheet.NomeDoOponenteVez = sheet.Vez .. " - " ..  sheet.NomeDoOponente
+				end
+			</event>
+		</dataLink>
 </form>

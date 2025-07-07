@@ -32,295 +32,301 @@ local function constructNew_frmvelen()
     obj:setName("frmvelen");
 
 
-			local function AtaqueBasico()   
-				if sheet.cmbTipoDeGrupoF == "1" then   
-					-- obter a mesa do personagem
-					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
-					local mesas = rrpg.getRooms();
-					local bibliotecaAtual = mesas[1].library;
+			function AtaqueBasico(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno)
+				SincronizaTurnoEfeito() 
+				if SelfcmbInimigosH == "Alvo Simulado" then
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet);                      
 
-						local function obterNomesRecursivo(bibItem)
-							local itensFilhos = bibItem.children;
-							local nomes = bibItem.name;
-							
-							for i = 1, #itensFilhos, 1 do
-								local bibItemFilho = itensFilhos[i];
-								local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+                        -- se o usuário não preencheu modificador, vamos usar o valor 0
+                        sheet.Acerto = sheet.Acerto or 0;                        
 
-								if nomesDoFilho == "Sistema de Combaate Velen" then
-									-- Obter ID do personagem Loan
-									local idPersonagem = self.cmbInimigos.value;
-									
-									-- Solicita acesso à ficha do personagem
-									local promise = bibItemFilho:asyncOpenNDB();
-
-									-- Aguarda até que a ficha esteja carregada
-									nodeExterno = await(promise);
-									
-									local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)								
-									
-									for _, node in ipairs(nodesO) do
-
-										if node.NomeDoOponenteVez == idPersonagem then  -- Verifica se o campo NomeDoOponenteVez existe
-											EsqAlvo = node.ESQ
-											RESAlvo = node.RES
-											DefAlvo = node.DEF
-										end
-									end
-								end
-							end
-							return nomes
-						end
-
-						local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
-
-					------------------------------------------------------------------
-					
-					-- se o usuário não preencheu modificador, vamos usar o valor 0
-					sheet.Acerto = sheet.Acerto or 0;                      
-					if sheet.EscolheAtaqueBasico == nil then
-						showMessage("Escolha uma Base de Dano para seu Ataque Basico na lista acima");
-					else				
-						mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
-							function (rolado)	
-							EsqAlvo = EsqAlvo + 1
-							local soDado = rolado.resultado - sheet.acerto;
-								if rolado.resultado + sheet.acerto > EsqAlvo then
-									if soDado >= sheet.Critical then
-										if sheet.EscolheAtaqueBasico == 'PA' then
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PA * 2) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)										
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
-										elseif sheet.EscolheAtaqueBasico == 'PF' then	
-											if sheet.AtualFlecha ~= 0 then									
-												sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
-												nodeExterno.AlvoRecebido = self.cmbInimigos.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-												nodeExterno.DanoRecebido = math.floor((sheet.PF * 2) * (1 - (DefAlvo / 100)))
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
-											else
-												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
-												nodeExterno.DanoRecebido = 0
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											end;
-										elseif sheet.EscolheAtaqueBasico == 'M/PM' then				
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM) * (1 - (RESAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
-										elseif sheet.EscolheAtaqueBasico == 'PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM * 2) + math.floor((sheet.PA * 2)) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
-										elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA * 2)) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
-										end;
-									else
-										if sheet.EscolheAtaqueBasico == 'PA' then
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PA) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
-										elseif sheet.EscolheAtaqueBasico == 'PF' then		
-											if sheet.AtualFlecha ~= 0 then									
-												sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
-												nodeExterno.AlvoRecebido = self.cmbInimigos.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-												nodeExterno.DanoRecebido = math.floor((sheet.PF) * (1 - (DefAlvo / 100)))
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
-											else
-												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
-												nodeExterno.DanoRecebido = 0
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											end;
-										elseif sheet.EscolheAtaqueBasico == 'M/PM' then				
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM / 2) * (1 - (RESAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
-										elseif sheet.EscolheAtaqueBasico == 'PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA)) * (1 - (RESAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
-										elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor(((sheet.PM / 2)) + math.floor((sheet.PA)) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
-										end;
-											
-									end;
-									
-								else
-									mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] Errou o ataque no oponente");
-									nodeExterno.DanoRecebido = 0
-									nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-								end;
-								
-						end); 
-					end;
-				end;
-
-				if sheet.cmbTipoDeGrupoF == "2" then   
-						-- obter a mesa do personagem
-					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
-					local mesas = rrpg.getRooms();
-					local bibliotecaAtual = mesas[1].library;
-
-						local function obterNomesRecursivo2(bibItem)
-							local itensFilhos = bibItem.children;
-							local nomes = bibItem.name;
-							
-							for i = 1, #itensFilhos, 1 do
-								local bibItemFilho = itensFilhos[i];
-								local nomesDoFilho = obterNomesRecursivo2(bibItemFilho) or "";
-
-								if nomesDoFilho == "Sistema de Combaate Velen" then
-									-- Obter ID do personagem Loan
-									local idPersonagem = self.cmbInimigos.value;
-									
-									-- Solicita acesso à ficha do personagem
-									local promise = bibItemFilho:asyncOpenNDB();
-
-									-- Aguarda até que a ficha esteja carregada
-									nodeExterno = await(promise);
-									
-									local nodesO = ndb.getChildNodes(nodeExterno.NomeJogador)								
-									
-									for _, node in ipairs(nodesO) do
-
-										if node.NomeDoPersonagemVez == idPersonagem then  -- Verifica se o campo NomeDoPersonagemVez existe
-											EsqAlvo = node.ESQ
-											RESAlvo = node.RES
-											DefAlvo = node.DEF
-										end
-									end
-								end
-							end
-							return nomes
-						end
-
-						local nomesDeTodosOsItens = obterNomesRecursivo2(bibliotecaAtual);
-
-						
-						------------------------------------------------------------------
-						
-						-- se o usuário não preencheu modificador, vamos usar o valor 0
-						sheet.Acerto = sheet.Acerto or 0;                        
-						if sheet.EscolheAtaqueBasico == nil then
-							showMessage("Escolha uma Base de Dano para seu Ataque Basico na lista acima");
-						else				
-							mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
-								function (rolado)	
-								EsqAlvo = EsqAlvo + 1
+                        mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "Ataque Basico",
+							function (rolado)
 								local soDado = rolado.resultado - sheet.acerto;
-									if rolado.resultado + sheet.acerto > EsqAlvo then
 									if soDado >= sheet.Critical then
 										if sheet.EscolheAtaqueBasico == 'PA' then
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PA * 2) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)									
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
+											sheet.AtaqueBasicoDano = math.floor((sheet.PA * 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
 										elseif sheet.EscolheAtaqueBasico == 'PF' then	
 											if sheet.AtualFlecha ~= 0 then									
 												sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
-												nodeExterno.AlvoRecebido = self.cmbInimigos.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-												nodeExterno.DanoRecebido = math.floor((sheet.PF * 2) * (1 - (DefAlvo / 100)))
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
+												sheet.AtaqueBasicoDano = math.floor((sheet.PF * 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");											
 											else
-												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
-												nodeExterno.DanoRecebido = 0
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.Nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
 											end;
+										elseif sheet.EscolheAtaqueBasico == 'PM' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM * 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
+
+
+										elseif sheet.EscolheAtaqueBasico == 'PA+M/PA' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PA * 3))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
+										elseif sheet.EscolheAtaqueBasico == 'PF+M/PF' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PF * 3))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
+										elseif sheet.EscolheAtaqueBasico == 'PM+M/PM' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM * 3))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
+
+										elseif sheet.EscolheAtaqueBasico == 'M/PA' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PA))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
+										elseif sheet.EscolheAtaqueBasico == 'M/PF' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PF))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
 										elseif sheet.EscolheAtaqueBasico == 'M/PM' then				
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM) * (1 - (RESAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
-										elseif sheet.EscolheAtaqueBasico == 'PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM * 2) + math.floor((sheet.PA * 2)) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+
+										elseif sheet.EscolheAtaqueBasico == 'PA+PF' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PF) * 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
+										elseif sheet.EscolheAtaqueBasico == 'PF+PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PF + sheet.PM) * 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");								
+										elseif sheet.EscolheAtaqueBasico == 'PA+PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PM) * 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
+
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+PF' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + (sheet.PF * 2))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + (sheet.PM * 2))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+										elseif sheet.EscolheAtaqueBasico == 'M/PF+PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PF + (sheet.PM * 2))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+										elseif sheet.EscolheAtaqueBasico == 'M/PF+PA' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PF + (sheet.PA * 2))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+										elseif sheet.EscolheAtaqueBasico == 'M/PM+PF' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PM + (sheet.PF * 2))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
 										elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA * 2)) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PM + (sheet.PA * 2))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+M/PF' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PF)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+										elseif sheet.EscolheAtaqueBasico == 'M/PF+M/PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PF + sheet.PM)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+M/PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PM)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+
+
+										elseif sheet.EscolheAtaqueBasico == 'Real PA' then								
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM + (sheet.PA * 2)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");										
+										elseif sheet.EscolheAtaqueBasico == 'Real PF' then								
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM + (sheet.PF * 2)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");										
+										elseif sheet.EscolheAtaqueBasico == 'Real PM' then								
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM + (sheet.PF * 2)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");										
 										end;
 									else
 										if sheet.EscolheAtaqueBasico == 'PA' then
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PA) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
-										elseif sheet.EscolheAtaqueBasico == 'PF' then		
+											sheet.AtaqueBasicoDano = math.floor((sheet.PA))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+										elseif sheet.EscolheAtaqueBasico == 'PF' then	
 											if sheet.AtualFlecha ~= 0 then									
 												sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
-												nodeExterno.AlvoRecebido = self.cmbInimigos.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-												nodeExterno.DanoRecebido = math.floor((sheet.PF) * (1 - (DefAlvo / 100)))
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
+												sheet.AtaqueBasicoDano = math.floor((sheet.PF))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));											
 											else
-												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
-												nodeExterno.DanoRecebido = 0
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.Nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
 											end;
+										elseif sheet.EscolheAtaqueBasico == 'PM' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+
+										elseif sheet.EscolheAtaqueBasico == 'PA+M/PA' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PA * 1.5))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] »");
+										elseif sheet.EscolheAtaqueBasico == 'PF+M/PF' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PF * 1.5))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] »");
+										elseif sheet.EscolheAtaqueBasico == 'PM+M/PM' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM * 1.5))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] »");
+
+										elseif sheet.EscolheAtaqueBasico == 'M/PA' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PA / 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+										elseif sheet.EscolheAtaqueBasico == 'M/PF' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PF / 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
 										elseif sheet.EscolheAtaqueBasico == 'M/PM' then				
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM / 2) * (1 - (RESAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
-										elseif sheet.EscolheAtaqueBasico == 'PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA)) * (1 - (RESAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM / 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+
+										elseif sheet.EscolheAtaqueBasico == 'PA+PF' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PF)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+										elseif sheet.EscolheAtaqueBasico == 'PF+PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PF + sheet.PM)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));								
+										elseif sheet.EscolheAtaqueBasico == 'PA+PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PM)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+PF' then								
+											sheet.AtaqueBasicoDano = math.floor((((sheet.PA / 2) + (sheet.PF))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+PM' then								
+											sheet.AtaqueBasicoDano = math.floor((((sheet.PA / 2) + (sheet.PM))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+										elseif sheet.EscolheAtaqueBasico == 'M/PF+PM' then								
+											sheet.AtaqueBasicoDano = math.floor((((sheet.PF / 2) + (sheet.PM))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+										elseif sheet.EscolheAtaqueBasico == 'M/PF+PA' then								
+											sheet.AtaqueBasicoDano = math.floor((((sheet.PF / 2) + (sheet.PA))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+										elseif sheet.EscolheAtaqueBasico == 'M/PM+PF' then								
+											sheet.AtaqueBasicoDano = math.floor((((sheet.PM / 2) + (sheet.PF))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
 										elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor(((sheet.PM / 2)) + math.floor((sheet.PA)) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
+											sheet.AtaqueBasicoDano = math.floor((((sheet.PM / 2) + (sheet.PA))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+M/PF' then
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA / 2) + (sheet.PF / 2)))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+										elseif sheet.EscolheAtaqueBasico == 'M/PF+M/PM' then
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PF / 2) + (sheet.PM / 2)))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+M/PM' then
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA / 2) + (sheet.PM / 2)))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+
+										elseif sheet.EscolheAtaqueBasico == 'Real PA' then
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM + sheet.PA))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+										elseif sheet.EscolheAtaqueBasico == 'Real PF' then
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM + sheet.PF))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+										elseif sheet.EscolheAtaqueBasico == 'Real PM' then
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM + sheet.PM))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
 										end;
 											
 									end;
-									
-								else
-									mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] Errou o ataque no oponente");
-									nodeExterno.DanoRecebido = 0
-									nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-								end;
+
 							end); 
+				else				
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+					if sheet.EscolheAtaqueBasico == 'PA' then
+						sheet.AtaqueBasicoDano = math.floor((sheet.PA))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+					elseif sheet.EscolheAtaqueBasico == 'PF' then	
+						if sheet.AtualFlecha ~= 0 then									
+							sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
+							sheet.AtaqueBasicoDano = math.floor((sheet.PF))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));											
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.Nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
 						end;
+					elseif sheet.EscolheAtaqueBasico == 'PM' then				
+						sheet.AtaqueBasicoDano = math.floor((sheet.PM))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+
+					elseif sheet.EscolheAtaqueBasico == 'M/PA' then				
+						sheet.AtaqueBasicoDano = math.floor((sheet.PA / 2))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+					elseif sheet.EscolheAtaqueBasico == 'M/PF' then				
+						sheet.AtaqueBasicoDano = math.floor((sheet.PF / 2))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+					elseif sheet.EscolheAtaqueBasico == 'M/PM' then				
+						sheet.AtaqueBasicoDano = math.floor((sheet.PM / 2))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+
+					elseif sheet.EscolheAtaqueBasico == 'PA+M/PA' then				
+						sheet.AtaqueBasicoDano = math.floor((sheet.PA * 1.5))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] »");
+					elseif sheet.EscolheAtaqueBasico == 'PF+M/PF' then				
+						sheet.AtaqueBasicoDano = math.floor((sheet.PF * 1.5))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] »");
+					elseif sheet.EscolheAtaqueBasico == 'PM+M/PM' then				
+						sheet.AtaqueBasicoDano = math.floor((sheet.PM * 1.5))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] »");
+
+					elseif sheet.EscolheAtaqueBasico == 'PA+PF' then								
+						sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PF)))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+					elseif sheet.EscolheAtaqueBasico == 'PF+PM' then								
+						sheet.AtaqueBasicoDano = math.floor(((sheet.PF + sheet.PM)))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));								
+					elseif sheet.EscolheAtaqueBasico == 'PA+PM' then								
+						sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PM)))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+
+					elseif sheet.EscolheAtaqueBasico == 'M/PA+PF' then								
+						sheet.AtaqueBasicoDano = math.floor((((sheet.PA / 2) + (sheet.PF))))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+					elseif sheet.EscolheAtaqueBasico == 'M/PA+PM' then								
+						sheet.AtaqueBasicoDano = math.floor((((sheet.PA / 2) + (sheet.PM))))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+					elseif sheet.EscolheAtaqueBasico == 'M/PF+PM' then								
+						sheet.AtaqueBasicoDano = math.floor((((sheet.PF / 2) + (sheet.PM))))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+					elseif sheet.EscolheAtaqueBasico == 'M/PF+PA' then								
+						sheet.AtaqueBasicoDano = math.floor((((sheet.PF / 2) + (sheet.PA))))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+					elseif sheet.EscolheAtaqueBasico == 'M/PM+PF' then								
+						sheet.AtaqueBasicoDano = math.floor((((sheet.PM / 2) + (sheet.PF))))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+					elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
+						sheet.AtaqueBasicoDano = math.floor((((sheet.PM / 2) + (sheet.PA))))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+
+					elseif sheet.EscolheAtaqueBasico == 'M/PA+M/PF' then
+						sheet.AtaqueBasicoDano = math.floor(((sheet.PA / 2) + (sheet.PF / 2)))
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+					elseif sheet.EscolheAtaqueBasico == 'M/PF+M/PM' then
+						sheet.AtaqueBasicoDano = math.floor(((sheet.PF / 2) + (sheet.PM / 2)))
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+					elseif sheet.EscolheAtaqueBasico == 'M/PA+M/PM' then
+						sheet.AtaqueBasicoDano = math.floor(((sheet.PA / 2) + (sheet.PM / 2)))
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+
+					elseif sheet.EscolheAtaqueBasico == 'Real PA' then
+						sheet.AtaqueBasicoDano = math.floor((sheet.PM + sheet.PA))
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+					elseif sheet.EscolheAtaqueBasico == 'Real PF' then
+						sheet.AtaqueBasicoDano = math.floor((sheet.PM + sheet.PF))
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+					elseif sheet.EscolheAtaqueBasico == 'Real PM' then
+						sheet.AtaqueBasicoDano = math.floor((sheet.PM + sheet.PM))
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
 					end;
-				end;
+
+					nodeExterno.TipoRecebido = nil
+
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet)
+					sheet.Acerto = tonumber(sheet.Acerto) or 0
+					
+					nodeExterno.UsuarioEnvio = sheet.Nome
+					nodeExterno.AcertoDoJogador = sheet.Acerto
+					nodeExterno.UsuarioEnviouCusto = 0
+					nodeExterno.EscolheTipoAtaque = sheet.EscolheAtaqueBasico
+					nodeExterno.DanoRecebido = math.floor((sheet.AtaqueBasicoDano))
+					nodeExterno.VezdeQuem = sheet.Nome
+					
+					nodeExterno.AlvoRecebido = SelfcmbInimigosH
+					nodeExterno.GrupoRecebido = cmbTipoDeGrupoFH
+
+					nodeExterno.TesteDecidido = "AtaqueBasico"
+					nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+					
+				end
+			end;
         
 
 
@@ -613,6 +619,47 @@ local function constructNew_frmvelen()
 			(tonumber(sheet.PHPRacial) or 0) + (tonumber(sheet.PHPBasica) or 0) + (tonumber(sheet.HPRACAATE20) or 0) + (tonumber(sheet.CHPNivel) or 0) + 
 			(tonumber(sheet.EHPNivel) or 0) + (tonumber(sheet.HPRACAATE30) or 0)  + (tonumber(sheet.HPTotalEffectTotal) or 0));
 		end;
+
+		function GambiCalculaHPAtual()
+			if sheet.Level < 21 then
+				sheet.EHPNivel = 0;
+				sheet.HPRACAATE30 = 0;
+			end;
+			
+			
+		end;
+	
+
+
+		
+    
+
+
+		
+	
+
+
+ 
+		function FichaPrincipalCalculaHP()
+			if sheet.Level < 21 then
+				sheet.EHPNivel = 0;
+				sheet.HPRACAATE30 = 0;
+			end;
+			
+			sheet.HPTotal = math.floor((tonumber(sheet.VitalidadeTotal) or 0) *20 + (tonumber(sheet.ArmaHP) or 0) + (tonumber(sheet.OutraHP) or 0) + 
+			(tonumber(sheet.ArmaduraHP) or 0) + (tonumber(sheet.AcessorioHP) or 0) +
+			(tonumber(sheet.PHPRacial) or 0) + (tonumber(sheet.PHPBasica) or 0) + (tonumber(sheet.HPRACAATE20) or 0) + (tonumber(sheet.CHPNivel) or 0) + 
+			(tonumber(sheet.EHPNivel) or 0) + (tonumber(sheet.HPRACAATE30) or 0)  + (tonumber(sheet.HPTotalEffectTotal) or 0));
+		end;
+
+		function GambiCalculaHPAtual()
+			if sheet.Level < 21 then
+				sheet.EHPNivel = 0;
+				sheet.HPRACAATE30 = 0;
+			end;
+			
+			
+		end;
 	
 
 
@@ -757,7 +804,18 @@ local function constructNew_frmvelen()
 			
 				sheet.HPRACAATE20 = (tonumber(sheet.RHPNivelAte20) or 0) * 11;
 				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 17  + 200;
-			end;					
+			end;
+
+			if sheet.classe == 'Mago do Caos' then
+				sheet.RHPNivelAte20 = sheet.Level;
+			
+				if sheet.RHPNivelAte20 > 20 then
+					sheet.RHPNivelAte20 = 20;
+				end;
+			
+				sheet.HPRACAATE20 = (tonumber(sheet.RHPNivelAte20) or 0) * 7;
+				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 9  + 140;
+			end;						
 		end;
 	
 
@@ -969,6 +1027,25 @@ local function constructNew_frmvelen()
 					
 					sheet.HPRACAATE30 = (tonumber(sheet.RHPNivelAte30) or 0) * 22;
 					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 28 + 600;
+				end;	
+			end;
+
+			if sheet.classe == 'Mago do Caos' then
+				if sheet.Level > 20 then
+					sheet.HPRACAATE30 = 0;        
+					sheet.RHPNivelAte30 = math.floor((sheet.Level) - 20);
+					sheet.EHPNivel = 0;	
+					
+					if sheet.RHPNivelAte30 > 10 then
+						sheet.RHPNivelAte30 = 10;
+					end;
+
+					if sheet.RHPNivelAte30 < 0 then
+						sheet.RHPNivelAte30 = 0;
+					end;
+					
+					sheet.HPRACAATE30 = (tonumber(sheet.RHPNivelAte30) or 0) * 18;
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 18 + 500;
 				end;	
 			end;
 		end;
@@ -1278,6 +1355,33 @@ local function constructNew_frmvelen()
 					
 				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
 				
+			end;	
+
+			if sheet.Classe == 'Mago do Caos' then
+				sheet.RHPNivelAte20 = sheet.Level;
+				
+				if sheet.RHPNivelAte20 > 20 then
+					sheet.RHPNivelAte20 = 20;
+				end;
+						
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 4 + 125;
+				
+				if sheet.Level < 21 then
+					sheet.EMPNivel = 0;
+				end;	
+			 
+				sheet.RHPNivelAte30 = math.floor((sheet.Level) - 20);
+				
+				if sheet.RHPNivelAte30 > 10 then
+					sheet.RHPNivelAte30 = 10;
+				end;
+
+				if sheet.RHPNivelAte30 < 0 then
+					sheet.RHPNivelAte30 = 0;
+				end;	
+					
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 5;
+				
 			end;			
 		end;
 	
@@ -1322,12 +1426,12 @@ local function constructNew_frmvelen()
 			function StatusDeChances()			
 				sheet.DestrezaAcerto = math.floor((tonumber(sheet.DestrezaTotal) or 0) /4);
 					
-					sheet.AgilidadeESQ = math.floor((tonumber(sheet.AgilidadeTotal) or 0) /5);
-
-					sheet.ForcaPer =  ((tonumber(sheet.ForcaTotal) or 0) /30);
+					sheet.AgilidadeESQ = math.floor((tonumber(sheet.AgilidadeTotal) or 0) /4);
+					
+					sheet.AgiCR = math.floor((tonumber(sheet.AgilidadeTotal / 20) or 0));
+				
+					sheet.ForcaPer = ((tonumber(sheet.ForcaTotal) or 0) /20);
 						
-					sheet.Acerto = math.floor((tonumber(sheet.ClasseAcerto) or 0) + (tonumber(sheet.EspecAcerto) or 0) + (tonumber(sheet.DestrezaAcerto) or 0) + (tonumber(sheet.AcertoBasica) or 0) + (tonumber(sheet.AcertoRacial) or 0) + (tonumber(sheet.ConBoaMira) or 0) + (tonumber(sheet.ACEffectTotal) or 0)) ;
-
 					if sheet.Level > 20 then
 						sheet.AcertoMagico = math.floor((tonumber(sheet.ClasseAM) or 0) + (tonumber(sheet.EspecAM) or 0) + (tonumber(sheet.AMBasica) or 0) + (tonumber(sheet.ConMestreMagico) or 0) + (tonumber(sheet.AMRacial) or 0) + (tonumber(sheet.ACMEffectTotal) or 0));
 					else 
@@ -1335,15 +1439,15 @@ local function constructNew_frmvelen()
 					end;
 					
 					if sheet.Level > 20 then
-						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.EspecCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0) + (tonumber(sheet.CREffectTotal) or 0));
+						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.EspecCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0) - (tonumber(sheet.CREffectTotal) or 0) - (tonumber(sheet.AgiCR) or 0));
 					else 
-						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0) + (tonumber(sheet.CREffectTotal) or 0));
+						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0) - (tonumber(sheet.CREffectTotal) or 0) - (tonumber(sheet.AgiCR) or 0));
 					end;
 					
 					if sheet.Level > 20 then
-						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.EspecCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0) + (tonumber(sheet.CRMEffectTotal) or 0));
+						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.EspecCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0) + (tonumber(sheet.CRMEffectTotal) or 0) + (tonumber(sheet.AgiCR) or 0));
 					else 
-						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0) + (tonumber(sheet.CRMEffectTotal) or 0));
+						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0) + (tonumber(sheet.CRMEffectTotal) or 0) + (tonumber(sheet.AgiCR) or 0));
 					end;
 					
 					if sheet.Level > 20 then
@@ -1356,20 +1460,33 @@ local function constructNew_frmvelen()
 						sheet.Persistencia = math.floor((tonumber(sheet.ClassePer) or 0) + (tonumber(sheet.EspecPer) or 0) + (tonumber(sheet.PersistBasica) or 0) + (tonumber(sheet.PersistRacial) or 0) + (tonumber(sheet.ForcaPer) or 0) + (tonumber(sheet.ConPersistente) or 0)  + (tonumber(sheet.PersEffectTotal) or 0)); 
 					else 
 						sheet.Persistencia = math.floor((tonumber(sheet.ClassePer) or 0) + (tonumber(sheet.PersistBasica) or 0) + (tonumber(sheet.PersistRacial) or 0) + (tonumber(sheet.ForcaPer) or 0) + (tonumber(sheet.ConPersistente) or 0)  + (tonumber(sheet.PersEffectTotal) or 0)); 
-					end;		
-						
-					if sheet.Esquiva > 14 then
-						sheet.Esquiva = 14;
-					end;
-							
-					if sheet.Acerto > 6 then
-						sheet.Acerto = 6;
 					end;
 					
-					if sheet.Persistencia > 5 then
-						sheet.Persistencia = 5;
-					end;	
-			end;
+
+					sheet.Acerto = math.floor((tonumber(sheet.ClasseAcerto) or 0) + (tonumber(sheet.EspecAcerto) or 0) + (tonumber(sheet.DestrezaAcerto) or 0) + (tonumber(sheet.AcertoBasica) or 0) + (tonumber(sheet.AcertoRacial) or 0) + (tonumber(sheet.ConBoaMira) or 0) + (tonumber(sheet.ACEffectTotal) or 0)) ;
+
+					if sheet.Classe == 'Ladino' then	
+						if sheet.Acerto > 9 then 
+							sheet.Acerto = 9
+						end;
+					else
+						if sheet.Acerto > 8 then 
+							sheet.Acerto = 8
+						end;
+					end;
+
+					if sheet.Classe == 'Ladino' then
+						if sheet.Esquiva > 14 then 
+							sheet.Esquiva = 14
+						end;
+					else
+						if sheet.Esquiva > 13 then 
+							sheet.Esquiva = 13
+						end;	
+					end;
+				end;
+
+				
 		
 
 
@@ -1390,9 +1507,81 @@ local function constructNew_frmvelen()
 			sheet.ClasseCM = 0;
 			sheet.ClasseEsquiva = 0;
 			sheet.ClassePer = 0;
-		
+
+			if sheet.classe == 'Cavaleiro Draconico' then	
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 15;
+				sheet.ClasseCR = 20;
+				sheet.ClasseCM = 2;
+				sheet.ClasseEsquiva = 10;
+				sheet.ClassePer = 1;
+			end;
+
+			if sheet.classe == 'Mago do Caos' then	
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 15;
+				sheet.ClasseCR = 20;
+				sheet.ClasseCM = 2;
+				sheet.ClasseEsquiva = 11;
+				sheet.ClassePer = 1;
+			end;
+
 					
 			if sheet.Classe == 'Animago' then					
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 16
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
+			end;	
+				
+			if sheet.Classe == 'Arqueiro' then
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 19
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
+			end;	
+				
+			if sheet.Classe == 'Bardo' then
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 16
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
+			end;	
+				
+			if sheet.Classe == 'Bispo' then
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 16
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
+			end;	
+				
+			if sheet.Classe == 'Caçador de Almas' then
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 2
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
+			end;	
+				
+			if sheet.Classe == 'Guerreiro' then
+				sheet.ClasseAcerto = 2
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 2	
+			end;	
+				
+			if sheet.Classe == 'Ladino' then
 				sheet.ClasseAcerto = 1
 				sheet.ClasseAM = 15
 				sheet.ClasseCR = 20
@@ -1401,95 +1590,41 @@ local function constructNew_frmvelen()
 				sheet.ClassePer = 1		
 			end;	
 				
-			if sheet.Classe == 'Arqueiro' then
-				sheet.ClasseAcerto = 2;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
-			end;	
-				
-			if sheet.Classe == 'Bardo' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 16;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
-			end;	
-				
-			if sheet.Classe == 'Bispo' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 16;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
-			end;	
-				
-			if sheet.Classe == 'Caçador de Almas' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 2;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
-			end;	
-				
-			if sheet.Classe == 'Guerreiro' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 14;
-				sheet.ClasseCR = 19;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 2;
-			end;	
-				
-			if sheet.Classe == 'Ladino' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 12;
-				sheet.ClassePer = 1;
-			end;	
-				
 			if sheet.Classe == 'Mago' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 16;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 16
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
 
 			end;	
 				
 			if sheet.Classe == 'Mercenario' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR = 19;
-				sheet.ClasseCM = 2;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 2
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
 			end;	
 				
 			if sheet.Classe == 'Monge' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 12;
-				sheet.ClassePer = 1;
+				sheet.ClasseAcerto = 2
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
 			end;	
 				
 			if sheet.Classe == 'Paladino' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR= 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 16
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
 			end;
 		end;	
 	
@@ -1505,7 +1640,7 @@ local function constructNew_frmvelen()
 
 
 		function self.StatusEspecAteLevel30() 
-			if sheet.Level < 20 then
+			if sheet.Level <= 20 then
 				sheet.EspecAcerto = 0;
 				sheet.EspecAM = 0;
 				sheet.EspecCR = 0;
@@ -1520,22 +1655,22 @@ local function constructNew_frmvelen()
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
-				sheet.EspecPer = 0;							
+				sheet.EspecPer = 1;							
 			end;
 			
 			if sheet.Espec == 'Shaman' then
-				sheet.EspecAcerto = 0;
-				sheet.EspecAM = 0;
+				sheet.EspecAcerto = 1;
+				sheet.EspecAM = 1;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
-				sheet.EspecPer = 1;
+				sheet.EspecPer = 0;
 			end;
 			
 			if sheet.Espec == 'Caçador' then
 				sheet.EspecAcerto = 0;
 				sheet.EspecAM = 0;
-				sheet.EspecCR = 0;
+				sheet.EspecCR = 1;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 1;
 				sheet.EspecPer = 0;
@@ -1546,7 +1681,7 @@ local function constructNew_frmvelen()
 				sheet.EspecAM = 0;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 1;
-				sheet.EspecEsquiva = 0;
+				sheet.EspecEsquiva = 1;
 				sheet.EspecPer = 0;
 			end;
 			
@@ -1555,22 +1690,22 @@ local function constructNew_frmvelen()
 				sheet.EspecAM = 1;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
-				sheet.EspecEsquiva = 1;
-				sheet.EspecPer = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 1;
 			end;
 			
 			if sheet.Espec == 'Musicista da Guerra' then
-				sheet.EspecAcerto = 0;
+				sheet.EspecAcerto = 2;
 				sheet.EspecAM = 0;
 				sheet.EspecCR = 0;
-				sheet.EspecCM = 1;
+				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
 				sheet.EspecPer = 0;
 			end;
 			
 			if sheet.Espec == 'Necromance' then
 				sheet.EspecAcerto = 0;
-				sheet.EspecAM = 0;
+				sheet.EspecAM = 1;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 1;
 				sheet.EspecEsquiva = 0;
@@ -1601,11 +1736,11 @@ local function constructNew_frmvelen()
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
-				sheet.EspecPer = 0;
+				sheet.EspecPer = 1;
 			end;
 			
 			if sheet.Espec == 'Tanker' then
-				sheet.EspecAcerto = 0;
+				sheet.EspecAcerto = 1;
 				sheet.EspecAM = 0;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
@@ -1614,26 +1749,26 @@ local function constructNew_frmvelen()
 			end;
 			
 			if sheet.Espec == 'Acrobata' then
-				sheet.EspecAcerto = 0;
-				sheet.EspecAM = 1;
+				sheet.EspecAcerto = 1;
+				sheet.EspecAM = 0;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
-				sheet.EspecEsquiva = 0;
+				sheet.EspecEsquiva = 1;
 				sheet.EspecPer = 0;
 			end;
 			
 			if sheet.Espec == 'Assassino' then
 				sheet.EspecAcerto = 0;
-				sheet.EspecAM = 0;
-				sheet.EspecCR = 1;
-				sheet.EspecCM = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 1;
 				sheet.EspecEsquiva = 0;
 				sheet.EspecPer = 0;
 			end;
 			
 			if sheet.Espec == 'Arcanista' then
 				sheet.EspecAcerto = 0;
-				sheet.EspecAM = 1;
+				sheet.EspecAM = 2;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
@@ -1645,7 +1780,7 @@ local function constructNew_frmvelen()
 				sheet.EspecAM = 1;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
-				sheet.EspecEsquiva = 0;
+				sheet.EspecEsquiva = 1;
 				sheet.EspecPer = 0;
 			end;
 			
@@ -1655,13 +1790,13 @@ local function constructNew_frmvelen()
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
-				sheet.EspecPer = 0;
+				sheet.EspecPer = 1;
 			end;
 			
 			if sheet.Espec == 'Duelista' then
-				sheet.EspecAcerto = 0;
-				sheet.EspecAM = 0;
-				sheet.EspecCR = 1;
+				sheet.EspecAcerto = 1;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
 				sheet.EspecPer = 0;
@@ -1672,7 +1807,7 @@ local function constructNew_frmvelen()
 				sheet.EspecAM = 0;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
-				sheet.EspecEsquiva = 0;
+				sheet.EspecEsquiva = 1;
 				sheet.EspecPer = 0;
 			end;
 			
@@ -1682,7 +1817,7 @@ local function constructNew_frmvelen()
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
-				sheet.EspecPer = 0;
+				sheet.EspecPer = 1;
 			end;
 			
 			if sheet.Espec == 'Guardião da Serenidade' then
@@ -1695,7 +1830,7 @@ local function constructNew_frmvelen()
 			end;
 			
 			if sheet.Espec == 'Cavaleiro das Trevas' then
-				sheet.EspecAcerto = 0;
+				sheet.EspecAcerto = 1;
 				sheet.EspecAM = 0;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 1;
@@ -1707,7 +1842,25 @@ local function constructNew_frmvelen()
 				sheet.EspecAcerto = 0;
 				sheet.EspecAM = 1;
 				sheet.EspecCR = 0;
+				sheet.EspecCM = 1;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+
+			if sheet.Espec == 'Cavaleiro Draconico' then
+				sheet.EspecAcerto = 1;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+
+			if sheet.Espec == 'Mago do Caos' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 1;
 				sheet.EspecEsquiva = 0;
 				sheet.EspecPer = 0;
 			end;
@@ -1725,18 +1878,8 @@ local function constructNew_frmvelen()
 
  
 		function self.StatusClasseEspecialAteLevel20()	
-			if sheet.classe == 'Cavaleiro Draconico' then						
-				sheet.Deslocamento = 9;
-				sheet.Correndo = 18 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
-				sheet.visao = 10;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 14;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 2;
-				sheet.ClasseEsquiva = 10;
-				sheet.ClassePer = 1;
-			end;
+			
+			
 		end;
 	
 
@@ -1751,16 +1894,7 @@ local function constructNew_frmvelen()
 
  
 		function self.StatusClasseEspecialAteLevel30()
-			if sheet.classe == 'Cavaleiro Draconico' then
-				if sheet.level > 20 then
-					sheet.EspecAcerto = 0;
-					sheet.EspecAM = 1;
-					sheet.EspecCR = 0;
-					sheet.EspecCM = 0;
-					sheet.EspecEsquiva = 0;
-					sheet.EspecPer = 0;
-				end;
-			end;
+			
 		end;
 	
 
@@ -1789,49 +1923,63 @@ local function constructNew_frmvelen()
 				sheet.Deslocamento = 9;
 				sheet.Correndo = 18 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
 				sheet.visao = 10;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);	
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 8 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;	
 			end;
 			
 			if sheet.Raca == 'Elfo' then
 				sheet.Deslocamento = 8;
 				sheet.Correndo = 16 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
 				sheet.visao = 10;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 5 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 10 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;
 			end;					
 			
 			if sheet.Raca == 'Elfo Negro' then
 				sheet.Deslocamento = 10;
 				sheet.Correndo = 20 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
 				sheet.visao = 11;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);	
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 8 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;	
 			end;
 			
 			if sheet.Raca == 'Anão' then
 				sheet.Deslocamento = 7.5;
 				sheet.Correndo = 15 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
 				sheet.visao = 10;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);	
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 8 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;	
 			end;	
 			
 			if sheet.Raca == 'Orc' then
 				sheet.Deslocamento = 8.5;
 				sheet.Correndo = 17 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
 				sheet.visao = 10;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);	
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 8 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;	
 			end;
 			
 			if sheet.Raca == 'Kamael' then
 				sheet.Deslocamento = 8;
 				sheet.Correndo = 16 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
 				sheet.visao = 12;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 5 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 10 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;
 			end;
 			
 			if sheet.Raca == 'Thiefling' then
 				sheet.Deslocamento = 9;
 				sheet.Correndo = 18 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
 				sheet.visao = 11;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);	
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 8 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;	
+			end;
+			
+			if sheet.Classe == 'Cavaleiro Draconico' then
+				sheet.Deslocamento = 9;
+				sheet.Correndo = 18 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
+				sheet.visao = 11;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 8 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;	
+			end;
+			
+			if sheet.Classe == 'Mago do Caos' then
+				sheet.Deslocamento = 10;
+				sheet.Correndo = 20 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
+				sheet.visao = 10;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 10 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;	
 			end;
 		end;							
 	
@@ -1855,9 +2003,10 @@ local function constructNew_frmvelen()
 					end;
 
 					if sheet.classe == 'Cavaleiro Draconico' then
-						self.cmbEspecializa.enabled = false;
-					else	
-					
+						self.cmbEspecializa.value = 'Cavaleiro Draconico';								
+					end;	
+					if sheet.classe == 'Mago do Caos' then
+						self.cmbEspecializa.value = 'Mago do Caos';							
 					end;	
 				end;
 			end;
@@ -1899,28 +2048,28 @@ local function constructNew_frmvelen()
 		function ORCRacial()
 			sheet.ORCRacial = 0;											 
 			if sheet.SequenciaInicial == true then
-				if sheet.Classe == 'Monge' then
+				if sheet.Classe == 'Monge' and sheet.Espec ~= 'Guardião da Serenidade' then
 					if sheet.Raca == 'Orc' then
 						sheet.ORCRacial = (math.floor((tonumber(sheet.ForcaTotal) or 0) *4 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) * 0.10) + (tonumber(sheet.PAEffectTotal) or 0));
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) * 0.10));
 
 											 
 						sheet.PA = math.floor((tonumber(sheet.ForcaTotal) or 0) *4 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.ORCRacial) or 0) + (tonumber(sheet.PAEffectTotal) or 0));
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.ORCRacial) or 0)) + (tonumber(sheet.PAEffectTotal) or 0);
 					else
 						sheet.PA = math.floor((tonumber(sheet.ForcaTotal) or 0) *4 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.PAEffectTotal) or 0));
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0)) + (tonumber(sheet.PAEffectTotal) or 0);
 					end;
 				else 
 					if sheet.Raca == 'Orc' then 
 						sheet.ORCRacial = (math.floor((tonumber(sheet.ForcaTotal) or 0) *2 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0)) * 0.10 + (tonumber(sheet.PAEffectTotal) or 0));
+											 (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0)) * 0.10);
 											 
 						sheet.PA =  math.floor((tonumber(sheet.ForcaTotal) or 0) *2 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											  (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.ORCRacial) or 0) + (tonumber(sheet.PAEffectTotal) or 0));									
+											  (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.ORCRacial) or 0)) + (tonumber(sheet.PAEffectTotal) or 0);									
 					else
 						sheet.PA =  math.floor((tonumber(sheet.ForcaTotal) or 0) *2 + (tonumber(sheet.ArmaPA) or 0) + (tonumber(sheet.OutraPA) or 0) + (tonumber(sheet.ArmaduraPA) or 0) + (tonumber(sheet.AcessorioPA) or 0) +
-											  (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0) + (tonumber(sheet.PAEffectTotal) or 0));
+											  (tonumber(sheet.PARacial) or 0) + (tonumber(sheet.MontPA) or 0) + (tonumber(sheet.PABasica) or 0)) + (tonumber(sheet.PAEffectTotal) or 0);
 					end;
 				end;
 				 
@@ -1931,11 +2080,11 @@ local function constructNew_frmvelen()
 									  (tonumber(sheet.PFRacial) or 0) + (tonumber(sheet.MontPF) or 0) + (tonumber(sheet.PFBasica) or 0) + (tonumber(sheet.PFEffectTotal) or 0));
 
 				sheet.Defesa =  math.floor((tonumber(sheet.VitalidadeTotal) or 0) /2 + (tonumber(sheet.AgilidadeTotal) or 0) /2 + (tonumber(sheet.ArmaDEF) or 0) + 
-										  (tonumber(sheet.OutraDEF) or 0) + (tonumber(sheet.ArmaduraDEF) or 0) + (tonumber(sheet.AcessorioDEF) or 0) + (tonumber(sheet.DEFRacial) or 0) + (tonumber(sheet.DEFBasica) or 0) + (tonumber(sheet.DEFEffectTotal) or 0));
+										  (tonumber(sheet.OutraDEF) or 0) + (tonumber(sheet.ArmaduraDEF) or 0) + (tonumber(sheet.AcessorioDEF) or 0) + (tonumber(sheet.DEFRacial) or 0) + (tonumber(sheet.DEFBasica) or 0) );
 										  
 				sheet.Resistencia = math.floor(math.floor((tonumber(sheet.VitalidadeTotal) or 0) /2) + ((tonumber(sheet.Defesa) or 0) /2) +
 											   ((tonumber(sheet.InteligenciaTotal) or 0) /2) + (tonumber(sheet.ArmaRES) or 0) + (tonumber(sheet.OutraRES) or 0) + 
-											   (tonumber(sheet.ArmaduraRES) or 0) + (tonumber(sheet.AcessorioRES) or 0) + (tonumber(sheet.RESRacial) or 0) + (tonumber(sheet.RESBasica	) or 0) + math.floor(tonumber(sheet.ForcaTotal * 0.25) or 0) + (tonumber(sheet.RESEffectTotal) or 0));
+											   (tonumber(sheet.ArmaduraRES) or 0) + (tonumber(sheet.AcessorioRES) or 0) + (tonumber(sheet.RESRacial) or 0) + (tonumber(sheet.RESBasica	) or 0) + math.floor(tonumber(sheet.ForcaTotal * 0.25) or 0));
 			end;
 		end;
 	
@@ -2098,8 +2247,8 @@ local function constructNew_frmvelen()
 				
 				sheet.RESRED = (tonumber(sheet.RESRED) or 0) + (tonumber(sheet.ResistenciaPadrao) or 0);
 				
-				sheet.DEFRED = math.floor(tonumber(sheet.DEFRED) or 0);
-				sheet.RESRED = math.floor(tonumber(sheet.RESRED) or 0);
+				sheet.DEFRED = math.floor((tonumber(sheet.DEFRED) or 0) + (tonumber(sheet.DEFEffectTotal) or 0) );
+				sheet.RESRED = math.floor((tonumber(sheet.RESRED) or 0) +  (tonumber(sheet.RESEffectTotal) or 0));
 			end;
 		end;
 	
@@ -2112,7 +2261,7 @@ local function constructNew_frmvelen()
 				
 				if sheet.Level > 20 then 
 					if sheet.Elevel > 0 then
-						sheet.XPNecessario = tonumber(sheet.Elevel) * 100;
+						sheet.XPNecessario = 1050 + tonumber(sheet.ELevel) * 100 ;
 					end;
 				else
 					sheet.XPNecessario = 100 + tonumber(sheet.level) * 50;
@@ -2127,10 +2276,7 @@ local function constructNew_frmvelen()
 					sheet.LiberarRolagemUp = tonumber(sheet.LiberarRolagemUp) + 1;
 					AtualizaStatusMesaSilencioso()
 				end;			
-				
-				self.BarraXP.value = tonumber(sheet.XPAtual);
-				self.BarraXP.max = tonumber(sheet.XPNecessario);
-				
+								
 				if sheet.LiberarRolagemUp > 0 then
 					self.btnUpaLevel.visible = true;
 				else
@@ -2142,6 +2288,53 @@ local function constructNew_frmvelen()
 				end;
 			end;	
 		end;
+
+
+			function SincronizaTurnoEfeito()
+			-- Envolver a execução em um pcall para capturar erros silenciosamente
+				local status, err = pcall(function()
+					-- obter a mesa do personagem
+					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
+					local mesas = rrpg.getRooms();
+					local bibliotecaAtual = mesas[1].library;
+
+					local function obterNomesRecursivo(bibItem)
+						local itensFilhos = bibItem.children;
+						local nomes = bibItem.name;
+						
+						for i = 1, #itensFilhos, 1 do
+							local bibItemFilho = itensFilhos[i];
+							local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+
+							if nomesDoFilho == "Sistema de Combaate Velen" then
+								-- Solicita acesso à ficha do personagem
+								local promise = bibItemFilho:asyncOpenNDB();
+
+								-- Aguarda até que a ficha esteja carregada
+								nodeExterno = await(promise);
+							end
+						end
+						return nomes
+					end
+
+					local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+
+					if GlobalSelf ~= nil then
+						local nodePai = GlobalSelf.rclBuffs
+						local filhos = nodePai:getChildren();
+						local i;
+
+						for i = 1, #filhos, 1 do
+							filhos[i].sheet.OutroEffect = tonumber(nodeExterno.TurnoAtualControle)
+						end
+					end
+				end)
+
+				-- Se houver erro, ele é ignorado
+				if not status then
+					-- print("Erro silenciosamente ignorado")  -- Se quiser registrar, descomente
+				end
+			end
 	
 
 
@@ -2682,6 +2875,681 @@ local function constructNew_frmvelen()
 	
 
 
+
+			function RecarregaCD()
+					-- obter a mesa do personagem
+					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
+					local mesas = rrpg.getRooms();
+					local bibliotecaAtual = mesas[1].library;
+
+						local function obterNomesRecursivo(bibItem)
+							local itensFilhos = bibItem.children;
+							local nomes = bibItem.name;
+							
+							for i = 1, #itensFilhos, 1 do
+								local bibItemFilho = itensFilhos[i];
+								local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+
+								if nomesDoFilho == "Sistema de Combaate Velen" then
+									-- Obter ID do personagem Loan
+									
+									-- Solicita acesso à ficha do personagem
+									local promise = bibItemFilho:asyncOpenNDB();
+
+									-- Aguarda até que a ficha esteja carregada
+									nodeExterno = await(promise);
+
+									nodeExterno.QuemRecarregou = sheet.Nome
+									nodeExterno.RecargaNome = tonumber(nodeExterno.RecargaNome ) + 1
+									
+								end
+							end
+							return nomes
+						end
+
+						local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+				
+			end;
+			
+        
+
+
+		
+		function DanoEmAreaResolve()
+			if self.cmbInimigosH.value == "Dano em Área" then
+			local node = self.rclListaDosItens3.selectedNode; 
+			self.ListaJutsus3.node = node;                       
+			self.ListaJutsus3.visible = (node ~= nil);
+
+			if 0 == self.ListaJutsus3.node.RecargaHabilidade then 						
+				--[[ HABILIDADE DE DANO ]]--
+				-- obter a mesa do personagem
+				
+				local mesaDoPersonagem = Firecast.getMesaDe(sheet);
+				local mesas = rrpg.getRooms();
+				local bibliotecaAtual = mesas[1].library;
+
+				if self.cmbTipoGrupoH.value == "1" then 
+					local function obterNomesRecursivoH1(bibItem)
+						local itensFilhos = bibItem.children;
+						local nomes = bibItem.name;
+						
+						for i = 1, #itensFilhos, 1 do
+							local bibItemFilho = itensFilhos[i];
+							local nomesDoFilho = obterNomesRecursivoH1(bibItemFilho) or "";
+
+							if nomesDoFilho == "Sistema de Combaate Velen" then
+								
+								-- Solicita acesso à ficha do personagem
+								local promise = bibItemFilho:asyncOpenNDB();
+
+								-- Aguarda até que a ficha esteja carregada
+								nodeExterno = await(promise);
+								
+							end
+						end
+						return nomes
+					end
+
+					local nomesDeTodosOsItens = obterNomesRecursivoH1(bibliotecaAtual);
+					
+					local node = self.ListaJutsus3.node;
+
+					nodeExterno.TipoRecebido = nil
+					
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet);					
+					sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+					mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+						function(rolado)					
+							if node.DanoAtributo1 ~= nil then
+								if sheet.AcertoMagico + 1 > rolado.resultado then							
+									if node.DanoAtributo1 == 'PA' then
+										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PA) or 0)								
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;			
+									if node.DanoAtributo1 == 'PM' then
+										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)						
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;
+									if node.DanoAtributo1 == 'PF' then
+										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PF) or 0)	
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;							
+									if node.DanoAtributo1 == 'Cura' then
+										node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)	
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;
+									if node.DanoAtributo1 == 'Cura Fixa' then
+										node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0);	
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;
+									if node.DanoAtributo1 == 'Fixo' then
+										node.Hintensidade1 = (tonumber(node.FixoHabilidade1) or 0)	
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;
+									if node.DanoAtributo1 == 'M/PA' then
+										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PA / 2) or 0)	
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;
+									if node.DanoAtributo1 == 'M/PM' then
+										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PM / 2) or 0)	
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;
+									if node.DanoAtributo1 == 'M/PF' then
+										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PF / 2) or 0)		
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;
+									if node.DanoAtributo1 == 'BUFF' then
+										node.Hintensidade1 = "Habilidade de Buff";
+									end;
+									if sheet.AcertoMagico >= rolado.resultado then
+										if node.fldImgIconSkill ~= nil then 
+											mesaDoPersonagem.chat:enviarMensagem("[§I " .. node.fldImgIconSkill .. "]");
+										end;
+										mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriHabilidade1);
+										local mesa = Firecast.getMesaDe(sheet); 
+										local Custo2 = sheet.MPAtual;
+										node.Custo2 = sheet.MPAtual;
+										node.Custo2 = (tonumber(node.Custo2) or 0) - (tonumber(node.CustoHabilidade) or 0);
+										sheet.MPAtual = node.Custo2;
+										mesa.meuJogador:requestSetBarValue(2, node.Custo2);
+										sheet.MPAtual = node.Custo2;
+										self.ListaJutsus3.node.ContaRecarga = self.ListaJutsus3.node.TurnoAtual	
+										self.ListaJutsus3.node.RecargaHabilidade = tonumber(self.ListaJutsus3.node.ContaRecarga) + tonumber(self.ListaJutsus3.node.CDHabilidade) -  tonumber(self.ListaJutsus3.node.TurnoAtual)	
+										if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
+											if 1 == rolado.resultado then										
+												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
+												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value	
+												nodeExterno.TipoRecebido = node.DanoAtributo1	
+												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)	
+												nodeExterno.VezdeQuem = sheet.Nome
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando  com [§K4,0] CRITICAL [§K9,0] « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] » :dinofauro: ");
+												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+											else										
+												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
+												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
+												nodeExterno.TipoRecebido = node.DanoAtributo1	
+												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
+												nodeExterno.VezdeQuem = sheet.Nome
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] »");
+												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+											end;	
+										else
+											if sheet.CMagico +1 > rolado.resultado then 										
+												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
+												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
+												if node.DanoAtributo1 ~= 'BUFF' then
+													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
+													nodeExterno.VezdeQuem = sheet.Nome
+													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+												end;											
+												if node.DanoAtributo1 == 'Fixo' then
+													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
+													nodeExterno.VezdeQuem = sheet.Nome
+													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+												end;
+												
+												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido) .. "[§K9,0] » :dinofauro: ");
+											else
+												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
+												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
+												if node.DanoAtributo1 ~= 'BUFF' then
+													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
+													nodeExterno.VezdeQuem = sheet.Nome
+													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+												end;
+												if node.DanoAtributo1 == 'Fixo' then
+													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
+													nodeExterno.VezdeQuem = sheet.Nome
+													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+												end;
+												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido .. "[§K9,0] »");
+											end;	
+										end;										
+									else
+										mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+										nodeExterno.DanoRecebido = 0
+										nodeExterno.VezdeQuem = sheet.Nome
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+									end;
+								else							
+									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
+									nodeExterno.DanoRecebido = 0
+									nodeExterno.VezdeQuem = sheet.Nome
+									nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+									if node.DanoAtributo1 == 'BUFF' then
+										mesaDoPersonagem.chat:enviarMensagem("[§K3,15]ERA UM BUFF ESSA HABILIDADE,[§K4,0] O Player mantem a ação");	
+									else 	
+									end;
+								end;
+							else
+								nodeExterno.DanoRecebido = 0
+								nodeExterno.VezdeQuem = sheet.Nome
+								nodeExterno.TipoRecebido = nil
+								mesaDoPersonagem.chat:enviarMensagem("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE");
+							end;
+						end);
+					end
+				end;
+											
+				---------- inimigo 2 -----------
+
+				if self.cmbTipoGrupoH.value == "2" then 
+					local function obterNomesRecursivoH2(bibItem)
+						local itensFilhos = bibItem.children;
+						local nomes = bibItem.name;
+						
+						for i = 1, #itensFilhos, 1 do
+							local bibItemFilho = itensFilhos[i];
+							local nomesDoFilho = obterNomesRecursivoH2(bibItemFilho) or "";
+
+							if nomesDoFilho == "Sistema de Combaate Velen" then
+								-- Solicita acesso à ficha do personagem
+								local promise = bibItemFilho:asyncOpenNDB();
+
+								-- Aguarda até que a ficha esteja carregada
+								nodeExterno = await(promise);
+								
+							end
+						end
+						return nomes
+					end
+
+					local nomesDeTodosOsItens = obterNomesRecursivoH2(bibliotecaAtual);
+					
+					local node = self.ListaJutsus3.node;
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet);
+					if node.DanoAtributo1 == 'BUFF' then
+						if node.naoEBuff == true then
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+							mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
+						return 
+						else															
+						end;
+					end;										
+					sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+					mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+						function (rolado)					
+							if node.DanoAtributo1 ~= nil then
+								if sheet.AcertoMagico + 1 > rolado.resultado then							
+									if node.DanoAtributo1 == 'PA' then
+										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PA) or 0)								
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;			
+									if node.DanoAtributo1 == 'PM' then
+										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)						
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;
+									if node.DanoAtributo1 == 'PF' then
+										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PF) or 0)	
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;							
+									if node.DanoAtributo1 == 'Cura' then
+										node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)	
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;
+									if node.DanoAtributo1 == 'Cura Fixa' then
+										node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0);	
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;
+									if node.DanoAtributo1 == 'Fixo' then
+										node.Hintensidade1 = (tonumber(node.FixoHabilidade1) or 0)	
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;
+									if node.DanoAtributo1 == 'M/PA' then
+										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PA / 2) or 0)	
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;
+									if node.DanoAtributo1 == 'M/PM' then
+										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PM / 2) or 0)	
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;
+									if node.DanoAtributo1 == 'M/PF' then
+										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PF / 2) or 0)		
+										node.naoEBuff = true;
+										node.verificaBuff = node.naoEBuff;
+									end;
+									if node.DanoAtributo1 == 'BUFF' then
+										node.Hintensidade1 = "Habilidade de Buff";
+									end;
+									if sheet.AcertoMagico >= rolado.resultado then
+										if node.fldImgIconSkill ~= nil then 
+											mesaDoPersonagem.chat:enviarMensagem("[§I " .. node.fldImgIconSkill .. "]");
+										end;
+										mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriHabilidade1);
+										local mesa = Firecast.getMesaDe(sheet); 
+										local Custo2 = sheet.MPAtual;
+										node.Custo2 = sheet.MPAtual;
+										node.Custo2 = (tonumber(node.Custo2) or 0) - (tonumber(node.CustoHabilidade) or 0);
+										sheet.MPAtual = node.Custo2;
+										mesa.meuJogador:requestSetBarValue(2, node.Custo2);
+										self.ListaJutsus3.node.ContaRecarga = self.ListaJutsus3.node.TurnoAtual	
+										self.ListaJutsus3.node.RecargaHabilidade = tonumber(self.ListaJutsus3.node.ContaRecarga) + tonumber(self.ListaJutsus3.node.CDHabilidade) -  tonumber(self.ListaJutsus3.node.TurnoAtual)	
+										if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
+											if 1 == rolado.resultado then										
+												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
+												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value		
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando  com [§K4,0] CRITICAL [§K9,0] « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] » :dinofauro: ");
+											else										
+												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
+												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] »");
+											end;	
+										else
+											if sheet.CMagico +1 > rolado.resultado then 										
+												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
+												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
+												if node.DanoAtributo1 ~= 'BUFF' then
+													nodeExterno.VezdeQuem = sheet.Nome
+													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
+													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+												end;
+												if node.DanoAtributo1 == 'Fixo' then
+													nodeExterno.VezdeQuem = sheet.Nome
+													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
+													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+												end;
+												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido) .. "[§K9,0] » :dinofauro: ");
+											else
+												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
+												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
+												if node.DanoAtributo1 ~= 'BUFF' then
+													nodeExterno.VezdeQuem = sheet.Nome
+													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
+													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+												end;
+												if node.DanoAtributo1 == 'Fixo' then
+													nodeExterno.VezdeQuem = sheet.Nome
+													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
+													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+												end;
+												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido .. "[§K9,0] »");
+											end;	
+										end;
+																			
+									else
+										mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+										nodeExterno.VezdeQuem = sheet.Nome
+										nodeExterno.DanoRecebido = 0
+										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+									end;
+								else							
+									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
+									nodeExterno.VezdeQuem = sheet.Nome
+									nodeExterno.DanoRecebido = 0
+									nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
+									if node.DanoAtributo1 == 'BUFF' then
+										mesaDoPersonagem.chat:enviarMensagem("[§K3,15]ERA BUFF ESSA MERDA");
+									else 	
+									end;
+								end;
+							else							
+								mesaDoPersonagem.chat:enviarMensagem("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE");
+								nodeExterno.VezdeQuem = sheet.Nome
+								nodeExterno.DanoRecebido = 0
+							end;
+					end);
+				end;
+			
+			else
+				showMessage("Sua Habilidade ainda esta em Recarga!")
+			end;
+				
+		end;
+	
+	
+
+
+
+		function ConsegueAlvoExterno(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH)            
+			local mesaDoPersonagem = Firecast.getMesaDe(sheet);
+			local mesas = rrpg.getRooms();
+			local bibliotecaAtual = mesas[1].library;
+
+			local function obterNomesRecursivo(bibItem)
+				local itensFilhos = bibItem.children;
+				
+				for i = 1, #itensFilhos do
+					local bibItemFilho = itensFilhos[i];
+
+					if bibItemFilho.name == "Sistema de Combaate Velen" then
+						local idPersonagem = SelfcmbInimigosH;
+						local promise = bibItemFilho:asyncOpenNDB();
+						local nodeExterno = await(promise);
+						return nodeExterno;
+					else
+						local resultado = obterNomesRecursivo(bibItemFilho);
+						if resultado ~= nil then
+							return resultado;
+						end
+					end
+				end
+				return nil;
+			end
+
+			return obterNomesRecursivo(bibliotecaAtual);
+		end;         
+	
+
+
+
+				function RolarHabilidadeNovo(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab)            
+					SincronizaTurnoEfeito()
+					if OpcaoHab == nil or OpcaoHab == "" then
+
+						showMessage("Escolha uma opção para sua habilidade")
+
+					elseif OpcaoHab == "Ofensiva" or OpcaoHab == "Defensiva" then
+
+						if nodeHabilidade.NomeHabilidade == 'Defender' or nodeHabilidade.NomeHabilidade == 'Defender(Nível Unico)' then 
+
+							ProcuraHabilidadeEspecifica(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+						elseif SelfcmbInimigosH == 'Alvo Simulado' then
+
+							ExecutaAlvoSimulado(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+						elseif nodeHabilidade.DanoAtributo1 == 'Cura' or nodeHabilidade.DanoAtributo1 == 'Cura Fixa' then
+
+							ExecutaHabilidadeCura(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+						elseif SelfcmbInimigosH == "Dano em Área" or SelfcmbInimigosH == "Cura em Área" then
+
+							ExecutaHabilidadeHabilidadeEmArea(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+						else 
+
+							ExecutaHabilidadeHabilidadeNormal(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+						end;
+
+					elseif OpcaoHab == "Cura" then
+
+						ExecutaHabilidadeCura(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+					elseif OpcaoHab == "Cura em Area" then
+
+						ExecutaHabilidadeHabilidadeEmArea(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+					elseif OpcaoHab == "Dano em Area" then
+
+						ExecutaHabilidadeHabilidadeEmArea(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+					end;
+
+					
+				end;               
+	
+
+
+
+				function ProcuraHabilidadeEspecifica(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, OpcaoHab)       	
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet);					
+					sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+					mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+						function (rolado)					
+						if nodeHabilidade.DanoAtributo1 ~= nil then
+							if 6 > rolado.resultado then							
+								if 5 >= rolado.resultado then
+									if nodeHabilidade.fldImgIconSkill ~= nil then 
+										mesaDoPersonagem.chat:enviarMensagem("[§I " .. nodeHabilidade.fldImgIconSkill .. "]");
+									end;
+									mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. nodeHabilidade.DescriHabilidade1);
+									local mesa = Firecast.getMesaDe(sheet); 
+									local Custo2 = sheet.MPAtual;
+									nodeHabilidade.Custo2 = sheet.MPAtual;
+									nodeHabilidade.Custo2 = (tonumber(nodeHabilidade.Custo2) or 0) - (tonumber(nodeHabilidade.CustoHabilidade) or 0);										
+									sheet.MPAtual = nodeHabilidade.Custo2;
+									mesa.meuJogador:requestSetBarValue(2, sheet.MPAtual);
+									nodeHabilidade.ContaRecarga = nodeHabilidade.TurnoAtual	
+									nodeHabilidade.RecargaHabilidade = tonumber(nodeHabilidade.ContaRecarga) + tonumber(nodeHabilidade.CDHabilidade) -  tonumber(nodeHabilidade.TurnoAtual)	
+									mesaDoPersonagem.chat:enviarMensagem("[§K8,0]DEFENDEU A HABILIDADE REDUZINDO O DANO PELA METADE :dinofauro: ");	
+																		
+								else
+									mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+									sheet.DanoHabilidadeSimulada = 0
+								end;
+							else							
+								mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
+								sheet.DanoHabilidadeSimulada = 0
+							end;
+						else
+							sheet.DanoHabilidadeSimulada = 0
+							showMessage("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE");
+						end;
+						
+					end);
+				end;               
+	
+
+
+
+				function ExecutaHabilidadeCura(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab)    
+					showMessage("cura")
+				end;               
+	
+
+
+
+				function ExecutaAlvoSimulado(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab)       			
+						local mesaDoPersonagem = rrpg.getMesaDe(sheet);					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+						mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+							function (rolado)					
+							if nodeHabilidade.DanoAtributo1 ~= nil then
+								if sheet.AcertoMagico + 1 > rolado.resultado then							
+									if sheet.AcertoMagico >= rolado.resultado then
+										if nodeHabilidade.fldImgIconSkill ~= nil then 
+											mesaDoPersonagem.chat:enviarMensagem("[§I " .. nodeHabilidade.fldImgIconSkill .. "]");
+										end;
+										mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. nodeHabilidade.DescriHabilidade1);
+										local mesa = Firecast.getMesaDe(sheet); 
+										local Custo2 = sheet.MPAtual;
+										nodeHabilidade.Custo2 = sheet.MPAtual;
+										nodeHabilidade.Custo2 = (tonumber(nodeHabilidade.Custo2) or 0) - (tonumber(nodeHabilidade.CustoHabilidade) or 0);
+										sheet.MPAtual = nodeHabilidade.Custo2;
+										mesa.meuJogador:requestSetBarValue(2, sheet.MPAtual);
+										nodeHabilidade.ContaRecarga = nodeHabilidade.TurnoAtual	
+										nodeHabilidade.RecargaHabilidade = tonumber(nodeHabilidade.ContaRecarga) + tonumber(nodeHabilidade.CDHabilidade) -  tonumber(nodeHabilidade.TurnoAtual)	
+										if nodeHabilidade.DanoAtributo1 == 'Cura' or nodeHabilidade.DanoAtributo1 == 'Cura Fixa' then
+											if 1 == rolado.resultado then										
+												sheet.DanoHabilidadeSimulada = math.floor((node.Hintensidade1 * 2)) * -1	
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando  com [§K4,0] CRITICAL [§K9,0] « [§K4,0]" .. sheet.DanoHabilidadeSimulada .. "[§K8,0] » :dinofauro: ");
+											else										
+												sheet.DanoHabilidadeSimulada = math.floor((node.Hintensidade1)) * -1
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. sheet.DanoHabilidadeSimulada .. "[§K8,0] »");
+											end;	
+										else
+											if sheet.CMagico +1 > rolado.resultado then 										
+												if nodeHabilidade.DanoAtributo1 ~= 'BUFF' then
+													sheet.DanoHabilidadeSimulada = math.floor((nodeHabilidade.Hintensidade1 * 2))
+												end;											
+												if nodeHabilidade.DanoAtributo1 == 'Real' then
+													sheet.DanoHabilidadeSimulada = math.floor(nodeHabilidade.Hintensidade1 * 2)
+												end;
+												
+												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (sheet.DanoHabilidadeSimulada) .. "[§K9,0] » :dinofauro: ");
+											else
+												if nodeHabilidade.DanoAtributo1 ~= 'BUFF' then
+													sheet.DanoHabilidadeSimulada = math.floor((nodeHabilidade.Hintensidade1))
+												end;
+												if nodeHabilidade.DanoAtributo1 == 'Real' then
+													sheet.DanoHabilidadeSimulada = math.floor(nodeHabilidade.Hintensidade1)
+												end;
+												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. sheet.DanoHabilidadeSimulada .. "[§K9,0] »");
+											end;	
+										end;										
+									else
+										mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+										sheet.DanoHabilidadeSimulada = 0
+									end;
+								else							
+									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
+									sheet.DanoHabilidadeSimulada = 0
+									if nodeHabilidade.DanoAtributo1 == 'BUFF' then
+										mesaDoPersonagem.chat:enviarMensagem("[§K3,15]ERA UM BUFF ESSA HABILIDADE,[§K4,0] O Player mantem a ação");	
+									else 	
+									end;
+								end;
+							else
+								sheet.DanoHabilidadeSimulada = 0
+								showMessage("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE");
+							end;
+						end);			
+				end;               
+	
+
+
+
+				function ExecutaHabilidadeHabilidadeEmArea(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab)        			
+						showMessage("Habilidade em Area")
+				end;               
+	
+
+
+
+		function ExecutaHabilidadeHabilidadeNormal(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+						
+			if 0 == nodeHabilidade.RecargaHabilidade then
+				nodeExterno.TipoRecebido = nil
+				local mesaDoPersonagem = rrpg.getMesaDe(sheet)
+				sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0
+
+				if nodeHabilidade.DanoAtributo1 ~= nil then
+					nodeExterno.UsuarioEnvio = sheet.Nome
+					nodeExterno.TipoRecebido = "HabilidadeNormal"
+					nodeExterno.AcertoDoJogador = sheet.AcertoMagico
+					nodeExterno.UsuarioEnviouCusto = nodeHabilidade.CustoHabilidade
+					nodeExterno.EscolheTipoAtaque = nodeHabilidade.DanoAtributo1
+					nodeExterno.DanoRecebido = math.floor((nodeHabilidade.Hintensidade1))
+					nodeExterno.VezdeQuem = sheet.Nome
+					nodeExterno.OpcaoRecebida = OpcaoHab
+					
+					nodeExterno.AlvoRecebido = SelfcmbInimigosH
+					nodeExterno.GrupoRecebido = cmbTipoDeGrupoFH
+
+					if nodeHabilidade.fldImgIconSkill ~= nil then
+						mesaDoPersonagem.chat:enviarMensagem("[§I " .. nodeHabilidade.fldImgIconSkill .. "]")
+					end
+
+					mesaDoPersonagem.chat:enviarMensagem(".. [§K3]" .. nodeHabilidade.DescriHabilidade1)
+
+					nodeHabilidade.ContaRecarga = nodeHabilidade.TurnoAtual
+					nodeHabilidade.RecargaHabilidade =
+						tonumber(nodeHabilidade.ContaRecarga)
+						+ tonumber(nodeHabilidade.CDHabilidade)
+						- tonumber(nodeHabilidade.TurnoAtual)
+
+					mesaDoPersonagem.chat:enviarMensagem(
+						"[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido .. "[§K9,0] »"
+					)
+					nodeExterno.TesteDecidido = "Habilidade"
+					nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+				end
+			else
+				showMessage("essa Habilidade ainda esta em recarga")
+			end
+		end
+
+           
+	
+
+
     obj.scrollBox1 = GUI.fromHandle(_obj_newObject("scrollBox"));
     obj.scrollBox1:setParent(obj);
     obj.scrollBox1:setAlign("client");
@@ -2698,19 +3566,34 @@ local function constructNew_frmvelen()
 
     obj.button1 = GUI.fromHandle(_obj_newObject("button"));
     obj.button1:setParent(obj.scrollBox1);
-    obj.button1:setLeft(288);
-    obj.button1:setTop(550);
-    obj.button1:setWidth(60);
-    obj.button1:setHeight(60);
-    obj.button1:setOpacity(0.1);
-    obj.button1:setText("Ficha1");
+    obj.button1:setLeft(300);
+    obj.button1:setTop(610);
+    obj.button1:setWidth(40);
+    obj.button1:setFontColor("red");
+    obj.button1:setText("⟳");
+    obj.button1:setFontSize(20);
+    obj.button1:setOpacity(1.0);
+    obj.button1:setHeight(40);
+    obj.button1:setVisible(true);
     obj.button1:setName("button1");
+
+    obj.button2 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button2:setParent(obj.scrollBox1);
+    obj.button2:setLeft(288);
+    obj.button2:setTop(550);
+    obj.button2:setWidth(60);
+    obj.button2:setVisible(false);
+    obj.button2:setHeight(60);
+    obj.button2:setOpacity(0.1);
+    obj.button2:setText("Ficha1");
+    obj.button2:setName("button2");
 
     obj.image2 = GUI.fromHandle(_obj_newObject("image"));
     obj.image2:setParent(obj.scrollBox1);
     obj.image2:setLeft(288);
     obj.image2:setTop(550);
     obj.image2:setWidth(60);
+    obj.image2:setVisible(false);
     obj.image2:setHeight(60);
     obj.image2:setSRC("/imagens/Tok.png");
     obj.image2:setName("image2");
@@ -2720,6 +3603,7 @@ local function constructNew_frmvelen()
     obj.image3:setLeft(190);
     obj.image3:setTop(475);
     obj.image3:setWidth(250);
+    obj.image3:setVisible(false);
     obj.image3:setHeight(250);
     obj.image3:setSRC("/imagens/TAGS/Sobreposi.png");
     obj.image3:setName("image3");
@@ -2742,13 +3626,13 @@ local function constructNew_frmvelen()
     obj.edit2:setField("idade");
     obj.edit2:setName("edit2");
 
-    obj.button2 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button2:setParent(obj.scrollBox1);
-    obj.button2:setLeft(600);
-    obj.button2:setVisible(false);
-    obj.button2:setTop(10);
-    obj.button2:setText("Ficha1");
-    obj.button2:setName("button2");
+    obj.button3 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button3:setParent(obj.scrollBox1);
+    obj.button3:setLeft(600);
+    obj.button3:setVisible(false);
+    obj.button3:setTop(10);
+    obj.button3:setText("Ficha1");
+    obj.button3:setName("button3");
 
     obj.comboBox1 = GUI.fromHandle(_obj_newObject("comboBox"));
     obj.comboBox1:setParent(obj.scrollBox1);
@@ -2758,7 +3642,7 @@ local function constructNew_frmvelen()
     obj.comboBox1:setHeight(20);
     obj.comboBox1:setField("Classe");
     obj.comboBox1:setItems({'Escolha', 'Animago', 'Arqueiro', 'Bardo', 'Bispo', 'Caçador de Almas', 'Guerreiro', 
-		'Ladino', 'Mago', 'Mercenario', 'Monge', 'Paladino','Cavaleiro Draconico' });
+		'Ladino', 'Mago', 'Mercenario', 'Monge', 'Paladino','Cavaleiro Draconico', 'Mago do Caos' });
     obj.comboBox1:setName("comboBox1");
 
     obj.cmbEspecializa = GUI.fromHandle(_obj_newObject("comboBox"));
@@ -2772,7 +3656,7 @@ local function constructNew_frmvelen()
     obj.cmbEspecializa:setEnabled(false);
     obj.cmbEspecializa:setItems({'Escolha', 'Druida', 'Shaman', 'Caçador', 'Sentinela Lunar', 'Encantador de Almas', 'Musicista da Guerra',
 		'Necromance', 'Sacerdote', 'Juiz', 'Barbaro', 'Tanker', 'Acrobata', 'Assassino', 'Arcanista', 'Elementalista', 'Summoner', 'Duelista', 'Pirata', 'Guardião da Serenidade', 'Guardião Espiritual', 
-		'Cavaleiro das Trevas', 'Templario' });
+		'Cavaleiro das Trevas', 'Templario', 'Cavaleiro Draconico', 'Mago do Caos' });
 
     obj.edit3 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit3:setParent(obj.scrollBox1);
@@ -2802,23 +3686,23 @@ local function constructNew_frmvelen()
     obj.comboBox2:setItems({'Escolha', 'Humano', 'Elfo', 'Elfo Negro', 'Anão', 'Orc', 'Kamael', 'Thiefling' });
     obj.comboBox2:setName("comboBox2");
 
-    obj.button3 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button3:setParent(obj.scrollBox1);
-    obj.button3:setLeft(175);
-    obj.button3:setTop(288);
-    obj.button3:setWidth(30);
-    obj.button3:setFontSize(18);
-    obj.button3:setText("-");
-    obj.button3:setName("button3");
-
     obj.button4 = GUI.fromHandle(_obj_newObject("button"));
     obj.button4:setParent(obj.scrollBox1);
-    obj.button4:setLeft(208);
+    obj.button4:setLeft(175);
     obj.button4:setTop(288);
     obj.button4:setWidth(30);
     obj.button4:setFontSize(18);
-    obj.button4:setText("+");
+    obj.button4:setText("-");
     obj.button4:setName("button4");
+
+    obj.button5 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button5:setParent(obj.scrollBox1);
+    obj.button5:setLeft(208);
+    obj.button5:setTop(288);
+    obj.button5:setWidth(30);
+    obj.button5:setFontSize(18);
+    obj.button5:setText("+");
+    obj.button5:setName("button5");
 
     obj.edit5 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit5:setParent(obj.scrollBox1);
@@ -2850,23 +3734,23 @@ local function constructNew_frmvelen()
     obj.label1:setField("ForcaTotal");
     obj.label1:setName("label1");
 
-    obj.button5 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button5:setParent(obj.scrollBox1);
-    obj.button5:setLeft(175);
-    obj.button5:setTop(350);
-    obj.button5:setWidth(30);
-    obj.button5:setFontSize(18);
-    obj.button5:setText("-");
-    obj.button5:setName("button5");
-
     obj.button6 = GUI.fromHandle(_obj_newObject("button"));
     obj.button6:setParent(obj.scrollBox1);
-    obj.button6:setLeft(208);
+    obj.button6:setLeft(175);
     obj.button6:setTop(350);
     obj.button6:setWidth(30);
     obj.button6:setFontSize(18);
-    obj.button6:setText("+");
+    obj.button6:setText("-");
     obj.button6:setName("button6");
+
+    obj.button7 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button7:setParent(obj.scrollBox1);
+    obj.button7:setLeft(208);
+    obj.button7:setTop(350);
+    obj.button7:setWidth(30);
+    obj.button7:setFontSize(18);
+    obj.button7:setText("+");
+    obj.button7:setName("button7");
 
     obj.edit6 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit6:setParent(obj.scrollBox1);
@@ -2898,23 +3782,23 @@ local function constructNew_frmvelen()
     obj.label2:setField("InteligenciaTotal");
     obj.label2:setName("label2");
 
-    obj.button7 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button7:setParent(obj.scrollBox1);
-    obj.button7:setLeft(175);
-    obj.button7:setTop(411);
-    obj.button7:setWidth(30);
-    obj.button7:setFontSize(18);
-    obj.button7:setText("-");
-    obj.button7:setName("button7");
-
     obj.button8 = GUI.fromHandle(_obj_newObject("button"));
     obj.button8:setParent(obj.scrollBox1);
-    obj.button8:setLeft(208);
+    obj.button8:setLeft(175);
     obj.button8:setTop(411);
     obj.button8:setWidth(30);
     obj.button8:setFontSize(18);
-    obj.button8:setText("+");
+    obj.button8:setText("-");
     obj.button8:setName("button8");
+
+    obj.button9 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button9:setParent(obj.scrollBox1);
+    obj.button9:setLeft(208);
+    obj.button9:setTop(411);
+    obj.button9:setWidth(30);
+    obj.button9:setFontSize(18);
+    obj.button9:setText("+");
+    obj.button9:setName("button9");
 
     obj.edit7 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit7:setParent(obj.scrollBox1);
@@ -2946,23 +3830,23 @@ local function constructNew_frmvelen()
     obj.label3:setField("DestrezaTotal");
     obj.label3:setName("label3");
 
-    obj.button9 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button9:setParent(obj.scrollBox1);
-    obj.button9:setLeft(175);
-    obj.button9:setTop(472);
-    obj.button9:setWidth(30);
-    obj.button9:setFontSize(18);
-    obj.button9:setText("-");
-    obj.button9:setName("button9");
-
     obj.button10 = GUI.fromHandle(_obj_newObject("button"));
     obj.button10:setParent(obj.scrollBox1);
-    obj.button10:setLeft(208);
+    obj.button10:setLeft(175);
     obj.button10:setTop(472);
     obj.button10:setWidth(30);
     obj.button10:setFontSize(18);
-    obj.button10:setText("+");
+    obj.button10:setText("-");
     obj.button10:setName("button10");
+
+    obj.button11 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button11:setParent(obj.scrollBox1);
+    obj.button11:setLeft(208);
+    obj.button11:setTop(472);
+    obj.button11:setWidth(30);
+    obj.button11:setFontSize(18);
+    obj.button11:setText("+");
+    obj.button11:setName("button11");
 
     obj.edit8 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit8:setParent(obj.scrollBox1);
@@ -2994,23 +3878,23 @@ local function constructNew_frmvelen()
     obj.label4:setField("AgilidadeTotal");
     obj.label4:setName("label4");
 
-    obj.button11 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button11:setParent(obj.scrollBox1);
-    obj.button11:setLeft(175);
-    obj.button11:setTop(533);
-    obj.button11:setWidth(30);
-    obj.button11:setFontSize(18);
-    obj.button11:setText("-");
-    obj.button11:setName("button11");
-
     obj.button12 = GUI.fromHandle(_obj_newObject("button"));
     obj.button12:setParent(obj.scrollBox1);
-    obj.button12:setLeft(208);
+    obj.button12:setLeft(175);
     obj.button12:setTop(533);
     obj.button12:setWidth(30);
     obj.button12:setFontSize(18);
-    obj.button12:setText("+");
+    obj.button12:setText("-");
     obj.button12:setName("button12");
+
+    obj.button13 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button13:setParent(obj.scrollBox1);
+    obj.button13:setLeft(208);
+    obj.button13:setTop(533);
+    obj.button13:setWidth(30);
+    obj.button13:setFontSize(18);
+    obj.button13:setText("+");
+    obj.button13:setName("button13");
 
     obj.edit9 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit9:setParent(obj.scrollBox1);
@@ -3215,25 +4099,25 @@ local function constructNew_frmvelen()
     obj.image5:setSRC("/imagens/TAGS/StatusAtt.png");
     obj.image5:setName("image5");
 
-    obj.button13 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button13:setParent(obj.scrollBox1);
-    obj.button13:setLeft(290);
-    obj.button13:setTop(650);
-    obj.button13:setWidth(60);
-    obj.button13:setOpacity(1.0);
-    obj.button13:setHeight(60);
-    obj.button13:setVisible(false);
-    obj.button13:setName("button13");
-
     obj.button14 = GUI.fromHandle(_obj_newObject("button"));
     obj.button14:setParent(obj.scrollBox1);
-    obj.button14:setLeft(80);
-    obj.button14:setTop(603);
-    obj.button14:setWidth(38);
-    obj.button14:setOpacity(0.1);
-    obj.button14:setHeight(32);
+    obj.button14:setLeft(290);
+    obj.button14:setTop(650);
+    obj.button14:setWidth(60);
+    obj.button14:setOpacity(1.0);
+    obj.button14:setHeight(60);
     obj.button14:setVisible(false);
     obj.button14:setName("button14");
+
+    obj.button15 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button15:setParent(obj.scrollBox1);
+    obj.button15:setLeft(80);
+    obj.button15:setTop(603);
+    obj.button15:setWidth(38);
+    obj.button15:setOpacity(0.1);
+    obj.button15:setHeight(32);
+    obj.button15:setVisible(false);
+    obj.button15:setName("button15");
 
     obj.progressBar1 = GUI.fromHandle(_obj_newObject("progressBar"));
     obj.progressBar1:setParent(obj.scrollBox1);
@@ -3241,9 +4125,9 @@ local function constructNew_frmvelen()
     obj.progressBar1:setTop(603);
     obj.progressBar1:setColor("red");
     obj.progressBar1:setWidth(130);
-    obj.progressBar1:setPosition(100);
-    obj.progressBar1:setMax(100);
     obj.progressBar1:setHeight(30);
+    obj.progressBar1:setField("HPAtual");
+    obj.progressBar1:setFieldMax("HPTotal");
     obj.progressBar1:setName("progressBar1");
 
     obj.label15 = GUI.fromHandle(_obj_newObject("label"));
@@ -3252,7 +4136,7 @@ local function constructNew_frmvelen()
     obj.label15:setFontSize(18);
     obj.label15:setTop(2);
     obj.label15:setAutoSize(true);
-    obj.label15:setFontColor("white");
+    obj.label15:setFontColor("black");
     obj.label15:setHorzTextAlign("center");
     obj.label15:setHeight(30);
     obj.label15.format = "%d";
@@ -3284,15 +4168,15 @@ local function constructNew_frmvelen()
     obj.edit10:setField("HPAtual");
     obj.edit10:setName("edit10");
 
-    obj.button15 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button15:setParent(obj.scrollBox1);
-    obj.button15:setLeft(80);
-    obj.button15:setTop(637);
-    obj.button15:setWidth(38);
-    obj.button15:setOpacity(0.1);
-    obj.button15:setHeight(32);
-    obj.button15:setVisible(false);
-    obj.button15:setName("button15");
+    obj.button16 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button16:setParent(obj.scrollBox1);
+    obj.button16:setLeft(80);
+    obj.button16:setTop(637);
+    obj.button16:setWidth(38);
+    obj.button16:setOpacity(0.1);
+    obj.button16:setHeight(32);
+    obj.button16:setVisible(false);
+    obj.button16:setName("button16");
 
     obj.progressBar2 = GUI.fromHandle(_obj_newObject("progressBar"));
     obj.progressBar2:setParent(obj.scrollBox1);
@@ -3300,9 +4184,9 @@ local function constructNew_frmvelen()
     obj.progressBar2:setTop(640);
     obj.progressBar2:setColor("blue");
     obj.progressBar2:setWidth(130);
-    obj.progressBar2:setPosition(100);
-    obj.progressBar2:setMax(100);
     obj.progressBar2:setHeight(30);
+    obj.progressBar2:setField("MPAtual");
+    obj.progressBar2:setFieldMax("MPTotal");
     obj.progressBar2:setName("progressBar2");
 
     obj.label17 = GUI.fromHandle(_obj_newObject("label"));
@@ -3311,7 +4195,7 @@ local function constructNew_frmvelen()
     obj.label17:setFontSize(18);
     obj.label17:setTop(2);
     obj.label17:setAutoSize(true);
-    obj.label17:setFontColor("white");
+    obj.label17:setFontColor("black");
     obj.label17:setHorzTextAlign("center");
     obj.label17:setHeight(30);
     obj.label17.format = "%d";
@@ -3513,12 +4397,12 @@ local function constructNew_frmvelen()
     obj.layout1:setMargins({bottom=4});
     obj.layout1:setName("layout1");
 
-    obj.button16 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button16:setParent(obj.layout1);
-    obj.button16:setText("Criar Novo Item");
-    obj.button16:setWidth(150);
-    obj.button16:setAlign("left");
-    obj.button16:setName("button16");
+    obj.button17 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button17:setParent(obj.layout1);
+    obj.button17:setText("Criar Novo Item");
+    obj.button17:setWidth(150);
+    obj.button17:setAlign("left");
+    obj.button17:setName("button17");
 
     obj.rclBuffs = GUI.fromHandle(_obj_newObject("recordList"));
     obj.rclBuffs:setParent(obj.popEffect);
@@ -3606,14 +4490,14 @@ local function constructNew_frmvelen()
     obj.edit16:setField("ManaEffect");
     obj.edit16:setName("edit16");
 
-    obj.button17 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button17:setParent(obj.layout2);
-    obj.button17:setAlign("right");
-    obj.button17:setFontColor("red");
-    obj.button17:setText("Apagar!");
-    obj.button17:setMargins({left=4, right=4, top=2, bottom=2});
-    obj.button17:setWidth(150);
-    obj.button17:setName("button17");
+    obj.button18 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button18:setParent(obj.layout2);
+    obj.button18:setAlign("right");
+    obj.button18:setFontColor("red");
+    obj.button18:setText("Apagar!");
+    obj.button18:setMargins({left=4, right=4, top=2, bottom=2});
+    obj.button18:setWidth(150);
+    obj.button18:setName("button18");
 
     obj.layout3 = GUI.fromHandle(_obj_newObject("layout"));
     obj.layout3:setParent(obj.rectangle19);
@@ -3976,7 +4860,7 @@ local function constructNew_frmvelen()
     obj.label47 = GUI.fromHandle(_obj_newObject("label"));
     obj.label47:setParent(obj.layout6);
     obj.label47:setAlign("left");
-    obj.label47:setText("Outro");
+    obj.label47:setText("Turno");
     obj.label47:setWidth(50);
     obj.label47:setMargins({left=15, right=-10});
     obj.label47:setName("label47");
@@ -4003,14 +4887,14 @@ local function constructNew_frmvelen()
     obj.textEditor1:setHeight(100);
     obj.textEditor1:setName("textEditor1");
 
-    obj.button18 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button18:setParent(obj.scrollBox1);
-    obj.button18:setLeft(33);
-    obj.button18:setTop(160);
-    obj.button18:setWidth(60);
-    obj.button18:setHeight(60);
-    obj.button18:setOpacity(0.1);
-    obj.button18:setName("button18");
+    obj.button19 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button19:setParent(obj.scrollBox1);
+    obj.button19:setLeft(33);
+    obj.button19:setTop(160);
+    obj.button19:setWidth(60);
+    obj.button19:setHeight(60);
+    obj.button19:setOpacity(0.1);
+    obj.button19:setName("button19");
 
     obj.image7 = GUI.fromHandle(_obj_newObject("image"));
     obj.image7:setParent(obj.scrollBox1);
@@ -4021,14 +4905,14 @@ local function constructNew_frmvelen()
     obj.image7:setSRC("/imagens/TAGS/TIER.png");
     obj.image7:setName("image7");
 
-    obj.button19 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button19:setParent(obj.scrollBox1);
-    obj.button19:setLeft(120);
-    obj.button19:setTop(160);
-    obj.button19:setWidth(60);
-    obj.button19:setHeight(60);
-    obj.button19:setOpacity(0.1);
-    obj.button19:setName("button19");
+    obj.button20 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button20:setParent(obj.scrollBox1);
+    obj.button20:setLeft(120);
+    obj.button20:setTop(160);
+    obj.button20:setWidth(60);
+    obj.button20:setHeight(60);
+    obj.button20:setOpacity(0.1);
+    obj.button20:setName("button20");
 
     obj.image8 = GUI.fromHandle(_obj_newObject("image"));
     obj.image8:setParent(obj.scrollBox1);
@@ -4039,14 +4923,14 @@ local function constructNew_frmvelen()
     obj.image8:setSRC("/imagens/TAGS/SKILL.png");
     obj.image8:setName("image8");
 
-    obj.button20 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button20:setParent(obj.scrollBox1);
-    obj.button20:setLeft(460);
-    obj.button20:setTop(160);
-    obj.button20:setWidth(60);
-    obj.button20:setHeight(60);
-    obj.button20:setOpacity(0.1);
-    obj.button20:setName("button20");
+    obj.button21 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button21:setParent(obj.scrollBox1);
+    obj.button21:setLeft(460);
+    obj.button21:setTop(160);
+    obj.button21:setWidth(60);
+    obj.button21:setHeight(60);
+    obj.button21:setOpacity(0.1);
+    obj.button21:setName("button21");
 
     obj.image9 = GUI.fromHandle(_obj_newObject("image"));
     obj.image9:setParent(obj.scrollBox1);
@@ -4057,14 +4941,14 @@ local function constructNew_frmvelen()
     obj.image9:setSRC("/imagens/TAGS/HISTORIA.png");
     obj.image9:setName("image9");
 
-    obj.button21 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button21:setParent(obj.scrollBox1);
-    obj.button21:setLeft(287);
-    obj.button21:setTop(290);
-    obj.button21:setWidth(60);
-    obj.button21:setHeight(60);
-    obj.button21:setOpacity(0.1);
-    obj.button21:setName("button21");
+    obj.button22 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button22:setParent(obj.scrollBox1);
+    obj.button22:setLeft(287);
+    obj.button22:setTop(290);
+    obj.button22:setWidth(60);
+    obj.button22:setHeight(60);
+    obj.button22:setOpacity(0.1);
+    obj.button22:setName("button22");
 
     obj.image10 = GUI.fromHandle(_obj_newObject("image"));
     obj.image10:setParent(obj.scrollBox1);
@@ -4075,14 +4959,14 @@ local function constructNew_frmvelen()
     obj.image10:setSRC("/imagens/TAGS/SUMMON.png");
     obj.image10:setName("image10");
 
-    obj.button22 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button22:setParent(obj.scrollBox1);
-    obj.button22:setLeft(542);
-    obj.button22:setTop(160);
-    obj.button22:setWidth(60);
-    obj.button22:setHeight(60);
-    obj.button22:setOpacity(0.1);
-    obj.button22:setName("button22");
+    obj.button23 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button23:setParent(obj.scrollBox1);
+    obj.button23:setLeft(542);
+    obj.button23:setTop(160);
+    obj.button23:setWidth(60);
+    obj.button23:setHeight(60);
+    obj.button23:setOpacity(0.1);
+    obj.button23:setName("button23");
 
     obj.image11 = GUI.fromHandle(_obj_newObject("image"));
     obj.image11:setParent(obj.scrollBox1);
@@ -4093,20 +4977,22 @@ local function constructNew_frmvelen()
     obj.image11:setSRC("/imagens/TAGS/Sobre.png");
     obj.image11:setName("image11");
 
-    obj.button23 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button23:setParent(obj.scrollBox1);
-    obj.button23:setLeft(290);
-    obj.button23:setTop(160);
-    obj.button23:setWidth(60);
-    obj.button23:setHeight(55);
-    obj.button23:setOpacity(0.1);
-    obj.button23:setName("button23");
+    obj.button24 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button24:setParent(obj.scrollBox1);
+    obj.button24:setLeft(290);
+    obj.button24:setTop(160);
+    obj.button24:setVisible(false);
+    obj.button24:setWidth(60);
+    obj.button24:setHeight(55);
+    obj.button24:setOpacity(0.1);
+    obj.button24:setName("button24");
 
     obj.image12 = GUI.fromHandle(_obj_newObject("image"));
     obj.image12:setParent(obj.scrollBox1);
     obj.image12:setLeft(290);
     obj.image12:setTop(160);
     obj.image12:setWidth(60);
+    obj.image12:setVisible(false);
     obj.image12:setHeight(60);
     obj.image12:setSRC("/imagens/TAGS/ActionBar.png");
     obj.image12:setName("image12");
@@ -4163,14 +5049,14 @@ local function constructNew_frmvelen()
     obj.dataLink10:setFields({'Classe', 'Espec', 'Level'});
     obj.dataLink10:setName("dataLink10");
 
-    obj.button24 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button24:setParent(obj.scrollBox1);
-    obj.button24:setLeft(388);
-    obj.button24:setTop(255);
-    obj.button24:setWidth(60);
-    obj.button24:setHeight(55);
-    obj.button24:setOpacity(0.1);
-    obj.button24:setName("button24");
+    obj.button25 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button25:setParent(obj.scrollBox1);
+    obj.button25:setLeft(388);
+    obj.button25:setTop(255);
+    obj.button25:setWidth(60);
+    obj.button25:setHeight(55);
+    obj.button25:setOpacity(0.1);
+    obj.button25:setName("button25");
 
     obj.image13 = GUI.fromHandle(_obj_newObject("image"));
     obj.image13:setParent(obj.scrollBox1);
@@ -4181,14 +5067,14 @@ local function constructNew_frmvelen()
     obj.image13:setSRC("/imagens/TAGS/PA.png");
     obj.image13:setName("image13");
 
-    obj.button25 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button25:setParent(obj.scrollBox1);
-    obj.button25:setLeft(388);
-    obj.button25:setTop(317);
-    obj.button25:setWidth(60);
-    obj.button25:setHeight(55);
-    obj.button25:setOpacity(0.1);
-    obj.button25:setName("button25");
+    obj.button26 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button26:setParent(obj.scrollBox1);
+    obj.button26:setLeft(388);
+    obj.button26:setTop(317);
+    obj.button26:setWidth(60);
+    obj.button26:setHeight(55);
+    obj.button26:setOpacity(0.1);
+    obj.button26:setName("button26");
 
     obj.image14 = GUI.fromHandle(_obj_newObject("image"));
     obj.image14:setParent(obj.scrollBox1);
@@ -4199,14 +5085,14 @@ local function constructNew_frmvelen()
     obj.image14:setSRC("/imagens/TAGS/PM.png");
     obj.image14:setName("image14");
 
-    obj.button26 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button26:setParent(obj.scrollBox1);
-    obj.button26:setLeft(388);
-    obj.button26:setTop(377);
-    obj.button26:setWidth(60);
-    obj.button26:setHeight(55);
-    obj.button26:setOpacity(0.1);
-    obj.button26:setName("button26");
+    obj.button27 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button27:setParent(obj.scrollBox1);
+    obj.button27:setLeft(388);
+    obj.button27:setTop(377);
+    obj.button27:setWidth(60);
+    obj.button27:setHeight(55);
+    obj.button27:setOpacity(0.1);
+    obj.button27:setName("button27");
 
     obj.image15 = GUI.fromHandle(_obj_newObject("image"));
     obj.image15:setParent(obj.scrollBox1);
@@ -4217,14 +5103,14 @@ local function constructNew_frmvelen()
     obj.image15:setSRC("/imagens/TAGS/PF.png");
     obj.image15:setName("image15");
 
-    obj.button27 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button27:setParent(obj.scrollBox1);
-    obj.button27:setLeft(388);
-    obj.button27:setTop(435);
-    obj.button27:setWidth(60);
-    obj.button27:setHeight(55);
-    obj.button27:setOpacity(0.1);
-    obj.button27:setName("button27");
+    obj.button28 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button28:setParent(obj.scrollBox1);
+    obj.button28:setLeft(388);
+    obj.button28:setTop(435);
+    obj.button28:setWidth(60);
+    obj.button28:setHeight(55);
+    obj.button28:setOpacity(0.1);
+    obj.button28:setName("button28");
 
     obj.image16 = GUI.fromHandle(_obj_newObject("image"));
     obj.image16:setParent(obj.scrollBox1);
@@ -4235,14 +5121,14 @@ local function constructNew_frmvelen()
     obj.image16:setSRC("/imagens/TAGS/DEF.png");
     obj.image16:setName("image16");
 
-    obj.button28 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button28:setParent(obj.scrollBox1);
-    obj.button28:setLeft(388);
-    obj.button28:setTop(493);
-    obj.button28:setWidth(60);
-    obj.button28:setHeight(55);
-    obj.button28:setOpacity(0.1);
-    obj.button28:setName("button28");
+    obj.button29 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button29:setParent(obj.scrollBox1);
+    obj.button29:setLeft(388);
+    obj.button29:setTop(493);
+    obj.button29:setWidth(60);
+    obj.button29:setHeight(55);
+    obj.button29:setOpacity(0.1);
+    obj.button29:setName("button29");
 
     obj.image17 = GUI.fromHandle(_obj_newObject("image"));
     obj.image17:setParent(obj.scrollBox1);
@@ -4255,13 +5141,15 @@ local function constructNew_frmvelen()
 
     obj.comboBox3 = GUI.fromHandle(_obj_newObject("comboBox"));
     obj.comboBox3:setParent(obj.scrollBox1);
-    obj.comboBox3:setLeft(273);
+    obj.comboBox3:setLeft(270);
     obj.comboBox3:setTop(355);
-    obj.comboBox3:setWidth(90);
+    obj.comboBox3:setWidth(105);
+    obj.comboBox3:setScale(0.9);
     obj.comboBox3:setHorzTextAlign("center");
     obj.comboBox3:setField("EscolheAtaqueBasico");
     obj.comboBox3:setFontColor("#00FFFF");
-    obj.comboBox3:setItems({'PA', 'PF', 'M/PM', 'PM+PA', 'M/PM+PA'});
+    obj.comboBox3:setItems({'PA', 'PF', 'PM', 'PA+M/PA', 'PF+M/PF', 'PM+M/PM', 'M/PA', 'M/PF', 'M/PM', 'PA+PF', 'PF+PM', 'PA+PM', 'M/PA+PF', 'M/PA+PM', 'M/PF+PM', 'M/PF+PA', 'M/PM+PF',
+	 'M/PM+PA', 'M/PA+M/PF', 'M/PF+M/PM', 'M/PA+M/PM', 'REAL PA', 'REAL PF', 'REAL PM', 'Buff'});
     obj.comboBox3:setName("comboBox3");
 
     obj.AtkBasic = GUI.fromHandle(_obj_newObject("button"));
@@ -4274,80 +5162,6 @@ local function constructNew_frmvelen()
     obj.AtkBasic:setFontSize(12);
     obj.AtkBasic:setFontColor("#00FFFF");
     obj.AtkBasic:setText("Ataque Basico");
-
-    obj.popAtaqueBasico = GUI.fromHandle(_obj_newObject("popup"));
-    obj.popAtaqueBasico:setParent(obj.scrollBox1);
-    obj.popAtaqueBasico:setName("popAtaqueBasico");
-    obj.popAtaqueBasico:setWidth(200);
-    obj.popAtaqueBasico:setHeight(160);
-    obj.popAtaqueBasico:setBackOpacity(0.5);
-
-    obj.TargetName = GUI.fromHandle(_obj_newObject("flowLayout"));
-    obj.TargetName:setParent(obj.popAtaqueBasico);
-    obj.TargetName:setName("TargetName");
-    obj.TargetName:setScale(1.2);
-    obj.TargetName:setAlign("top");
-    obj.TargetName:setHeight(50);
-
-    obj.label48 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label48:setParent(obj.TargetName);
-    obj.label48:setText("Alvo:");
-    obj.label48:setFontColor("red");
-    obj.label48:setAlign("right");
-    obj.label48:setWidth(75);
-    obj.label48:setName("label48");
-
-    obj.cmbInimigos = GUI.fromHandle(_obj_newObject("comboBox"));
-    obj.cmbInimigos:setParent(obj.TargetName);
-    obj.cmbInimigos:setItems({'Inimigo 1', 'Inimigo 2', 'Inimigo 3'});
-    obj.cmbInimigos:setValues({'1', '2', '3'});
-    obj.cmbInimigos:setValue("1");
-    obj.cmbInimigos:setFontColor("#FF6347");
-    obj.cmbInimigos:setName("cmbInimigos");
-    obj.cmbInimigos:setWidth(150);
-    obj.cmbInimigos:setHeight(25);
-
-    obj.NameTipoDeGrupo = GUI.fromHandle(_obj_newObject("flowLayout"));
-    obj.NameTipoDeGrupo:setParent(obj.popAtaqueBasico);
-    obj.NameTipoDeGrupo:setName("NameTipoDeGrupo");
-    obj.NameTipoDeGrupo:setScale(1.2);
-    obj.NameTipoDeGrupo:setTop(70);
-    obj.NameTipoDeGrupo:setWidth(200);
-    obj.NameTipoDeGrupo:setHeight(50);
-
-    obj.label49 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label49:setParent(obj.NameTipoDeGrupo);
-    obj.label49:setText("Grupo:");
-    obj.label49:setFontColor("green");
-    obj.label49:setAlign("right");
-    obj.label49:setWidth(75);
-    obj.label49:setName("label49");
-
-    obj.cmbTipoGrupo = GUI.fromHandle(_obj_newObject("comboBox"));
-    obj.cmbTipoGrupo:setParent(obj.NameTipoDeGrupo);
-    obj.cmbTipoGrupo:setItems({'Jogadores', 'Inimigos'});
-    obj.cmbTipoGrupo:setValues({'1', '2'});
-    obj.cmbTipoGrupo:setValue("1");
-    obj.cmbTipoGrupo:setFontColor("#00FF7F");
-    obj.cmbTipoGrupo:setName("cmbTipoGrupo");
-    obj.cmbTipoGrupo:setField("cmbTipoDeGrupoF");
-    obj.cmbTipoGrupo:setWidth(150);
-    obj.cmbTipoGrupo:setHeight(25);
-
-    obj.dataLink11 = GUI.fromHandle(_obj_newObject("dataLink"));
-    obj.dataLink11:setParent(obj.NameTipoDeGrupo);
-    obj.dataLink11:setField("cmbTipoDeGrupoF");
-    obj.dataLink11:setName("dataLink11");
-
-    obj.button29 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button29:setParent(obj.popAtaqueBasico);
-    obj.button29:setAlign("bottom");
-    obj.button29:setWidth(90);
-    obj.button29:setHeight(30);
-    obj.button29:setFontSize(12);
-    obj.button29:setFontColor("#00FFFF");
-    obj.button29:setText("Ataque Basico");
-    obj.button29:setName("button29");
 
     obj.edit37 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit37:setParent(obj.scrollBox1);
@@ -4596,8 +5410,8 @@ local function constructNew_frmvelen()
     obj.BarraXP:setColor("purple");
     obj.BarraXP:setTop(675);
     obj.BarraXP:setLeft(150);
-    obj.BarraXP:setPosition(50);
-    obj.BarraXP:setMax(100);
+    obj.BarraXP:setField("XPAtual");
+    obj.BarraXP:setFieldMax("XPNecessario");
 
     obj.edit55 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit55:setParent(obj.scrollBox1);
@@ -4612,278 +5426,285 @@ local function constructNew_frmvelen()
     obj.edit55:setField("XPAtual");
     obj.edit55:setName("edit55");
 
-    obj.label50 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label50:setParent(obj.scrollBox1);
-    obj.label50:setWidth(35);
-    obj.label50:setHeight(20);
-    obj.label50:setTop(675);
-    obj.label50:setLeft(205);
-    obj.label50:setHorzTextAlign("center");
-    obj.label50:setFontColor("black");
-    obj.label50:setField("XPNecessario");
-    obj.label50:setName("label50");
+    obj.label48 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label48:setParent(obj.scrollBox1);
+    obj.label48:setWidth(35);
+    obj.label48:setHeight(20);
+    obj.label48:setTop(675);
+    obj.label48:setLeft(205);
+    obj.label48:setHorzTextAlign("center");
+    obj.label48:setFontColor("black");
+    obj.label48:setField("XPNecessario");
+    obj.label48:setName("label48");
+
+    obj.dataLink11 = GUI.fromHandle(_obj_newObject("dataLink"));
+    obj.dataLink11:setParent(obj.scrollBox1);
+    obj.dataLink11:setFields({'XPAtual', 'Level'});
+    obj.dataLink11:setName("dataLink11");
 
     obj.dataLink12 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink12:setParent(obj.scrollBox1);
-    obj.dataLink12:setFields({'XPAtual', 'Level'});
+    obj.dataLink12:setFields({'XPAtual', 'XPNecessario'});
     obj.dataLink12:setName("dataLink12");
 
     obj.dataLink13 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink13:setParent(obj.scrollBox1);
-    obj.dataLink13:setFields({'XPAtual', 'XPNecessario'});
+    obj.dataLink13:setField("Nome");
     obj.dataLink13:setName("dataLink13");
 
     obj.dataLink14 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink14:setParent(obj.scrollBox1);
-    obj.dataLink14:setField("Nome");
+    obj.dataLink14:setFields({'PA', 'PM', 'PF', 'DEFRED', 'RESRED', 'Acerto', 'AcertoMagico', 'Esquiva', 'Persistencia', 'Critical', 'CMagico', 'Classe', 'Espec'});
     obj.dataLink14:setName("dataLink14");
 
     obj.dataLink15 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink15:setParent(obj.scrollBox1);
-    obj.dataLink15:setFields({'PA', 'PM', 'PF', 'DEFRED', 'RESRED', 'Acerto', 'AcertoMagico', 'Esquiva', 'Persistencia', 'Critical', 'CMagico', 'Classe', 'Espec'});
+    obj.dataLink15:setFields({'HPTotal', 'MPTotal'});
     obj.dataLink15:setName("dataLink15");
 
     obj.dataLink16 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink16:setParent(obj.scrollBox1);
-    obj.dataLink16:setFields({'HPTotal', 'MPTotal'});
+    obj.dataLink16:setFields({'HPAtual', 'MPAtual'});
     obj.dataLink16:setName("dataLink16");
-
-    obj.dataLink17 = GUI.fromHandle(_obj_newObject("dataLink"));
-    obj.dataLink17:setParent(obj.scrollBox1);
-    obj.dataLink17:setFields({'HPAtual', 'MPAtual'});
-    obj.dataLink17:setName("dataLink17");
 
     obj._e_event0 = obj:addEventListener("onNodeReady",
         function ()
-            sheet.Classe = sheet.Classe or "Animago";
-            		sheet.Espec = sheet.Espec or "Escolha";
-            		sheet.Raca = sheet.Raca or "Humano";
-            		sheet.LiberarRolagemUp = tonumber(sheet.LiberarRolagemUp or 0);
-            		
-            		if sheet.Level == nil then
-            			sheet.Level = 0; 
-            		end;
-            		
-            		if sheet.Velis == nil then
-            			sheet.Velis = "D10+10"; 		
-            		end;
-            		
-            		if sheet.Nome == nil then
-            			sheet.Nome = "Escolha o Nome";
-            		end;	
+            if sheet ~= nil then
+            				
+            			FichaPrincipal = sheet
+            	 		GlobalSelf = self
+            			sheet.Classe = sheet.Classe or "Animago";
+            			sheet.Espec = sheet.Espec or "Escolha";
+            			sheet.Raca = sheet.Raca or "Humano";
+            			sheet.LiberarRolagemUp = tonumber(sheet.LiberarRolagemUp or 0);
             
-            		if sheet.sloot == nil then
-            			sheet.sloot = 4;
-            		end;
-            		
-            		if sheet.Forca == nil then
-            			sheet.Forca = 0; 		
-            		end;
-            		
-            		if sheet.Inteligencia == nil then
-            			sheet.Inteligencia = 0;
-            		end;	
+            			if sheet.Level == nil then
+            				sheet.Level = 0; 
+            			end;
+            			
+            			if sheet.Velis == nil then
+            				sheet.Velis = "D10+10"; 		
+            			end;
+            			
+            			if sheet.Nome == nil then
+            				sheet.Nome = "Escolha o Nome";
+            			end;	
             
-            		if sheet.Destreza == nil then
-            			sheet.Destreza = 0;
+            			if sheet.sloot == nil then
+            				sheet.sloot = 4;
+            			end;
+            			
+            			if sheet.Forca == nil then
+            				sheet.Forca = 0; 		
+            			end;
+            			
+            			if sheet.Inteligencia == nil then
+            				sheet.Inteligencia = 0;
+            			end;	
+            
+            			if sheet.Destreza == nil then
+            				sheet.Destreza = 0;
+            			end;
+            			
+            			if sheet.Agilidade == nil then
+            				sheet.Agilidade = 0; 		
+            			end;
+            			
+            			if sheet.Vitalidade == nil then
+            				sheet.Vitalidade = 0;
+            			end;	
+            			
+            
+            			sheet.ELevel = (tonumber(sheet.Elevel) or 0); 
+            			sheet.PontoSkill = (tonumber(sheet.PontoSkill) or 1); 
+            			sheet.PontosUlt = (tonumber(sheet.PontosUlt) or 0); 
+            			sheet.ForcaTotal = (tonumber(sheet.ForcaTotal) or 0); 
+            			sheet.VitalidadeTotal = (tonumber(sheet.ForcaTotal) or 0); 
+            			sheet.InteligenciaTotal = (tonumber(sheet.ForcaTotal) or 0); 
+            			sheet.Acerto = (tonumber(sheet.Acerto) or 0); 
+            			sheet.AcertoMagico	= (tonumber(sheet.AcertoMagico) or 0); 
+            			sheet.Critical = (tonumber(sheet.Critical) or 0); 
+            			sheet.CMagico = (tonumber(sheet.CMagico) or 0); 
+            			sheet.Esquiva = (tonumber(sheet.Esquiva) or 0); 
+            			sheet.Persistencia = (tonumber(sheet.Persistencia) or 0); 
+            			sheet.ArmaPA = (tonumber(sheet.ArmaPA) or 0); 
+            			sheet.ArmaPM = (tonumber(sheet.ArmaPM) or 0); 
+            			sheet.ArmaPF = (tonumber(sheet.ArmaPF) or 0); 
+            			sheet.ArmaDEF = (tonumber(sheet.ArmaDEF) or 0); 
+            			sheet.ArmaRES = (tonumber(sheet.ArmaRES) or 0); 
+            			sheet.ArmaHP = (tonumber(sheet.ArmaHP) or 0); 
+            			sheet.ArmaMP = (tonumber(sheet.ArmaMP) or 0); 
+            			sheet.OutraPA = (tonumber(sheet.OutraPA) or 0); 
+            			sheet.OutraPM = (tonumber(sheet.OutraPM) or 0); 
+            			sheet.OutraPF = (tonumber(sheet.OutraPF) or 0); 
+            			sheet.OutraDEF = (tonumber(sheet.OutraDEF) or 0); 
+            			sheet.OutraRES = (tonumber(sheet.OutraRES) or 0); 
+            			sheet.OutraHP = (tonumber(sheet.OutraHP) or 0); 
+            			sheet.OutraMP = (tonumber(sheet.OutraMP) or 0); 
+            			sheet.ArmaduraPA = (tonumber(sheet.ArmaduraPA) or 0); 
+            			sheet.ArmaduraPM = (tonumber(sheet.ArmaduraPM) or 0); 
+            			sheet.ArmaduraPF = (tonumber(sheet.ArmaduraPF) or 0); 
+            			sheet.ArmaduraDEF = (tonumber(sheet.ArmaduraDEF) or 0); 
+            			sheet.ArmaduraRES = (tonumber(sheet.ArmaduraRES) or 0); 
+            			sheet.ArmaduraHP = (tonumber(sheet.ArmaduraHP) or 0); 
+            			sheet.ArmaduraMP = (tonumber(sheet.ArmaduraMP) or 0); 
+            			sheet.AcessorioPA = (tonumber(sheet.AcessorioPA) or 0); 
+            			sheet.AcessorioPM = (tonumber(sheet.AcessorioPM) or 0); 
+            			sheet.AcessorioPF = (tonumber(sheet.AcessorioPF) or 0); 
+            			sheet.AcessorioDEF = (tonumber(sheet.AcessorioDEF) or 0); 
+            			sheet.AcessorioRES = (tonumber(sheet.AcessorioRES) or 0); 
+            			sheet.AcessorioHP = (tonumber(sheet.AcessorioHP) or 0); 
+            			sheet.AcessorioMP = (tonumber(sheet.AcessorioMP) or 0); 
+            			sheet.AcessorioRegenMP = (tonumber(sheet.AcessorioRegenMP) or 0); 
+            			sheet.ArmaDistancia = (tonumber(sheet.ArmaDistancia) or 0); 
+            			sheet.OutraDistancia = (tonumber(sheet.OutraDistancia) or 0); 
+            			sheet.ArmaduraDistancia = (tonumber(sheet.ArmaduraDistancia) or 0); 
+            			sheet.AcessorioDistancia = (tonumber(sheet.AcessorioDistancia) or 0); 
+            			sheet.Sabedoria = (tonumber(sheet.Sabedoria) or 0); 
+            			sheet.Atletismo = (tonumber(sheet.Atletismo) or 0); 
+            			sheet.Acrobacia = (tonumber(sheet.Acrobacia) or 0); 
+            			sheet.Vigor = (tonumber(sheet.Vigor) or 0); 
+            			sheet.Percepcao = (tonumber(sheet.Percepcao) or 0); 
+            			sheet.Deslocamento = (tonumber(sheet.Deslocamento) or 0); 
+            			sheet.Distancia = (tonumber(sheet.Distancia) or 0); 
+            			sheet.Potes = (tonumber(sheet.Potes) or 0); 
+            			sheet.MontAtletismo = (tonumber(sheet.MontAtletismo) or 0); 
+            			sheet.MontAcrobacia = (tonumber(sheet.MontAcrobacia) or 0); 
+            			sheet.MontSabedoria = (tonumber(sheet.MontSabedoria) or 0); 
+            			sheet.Montpercepcao = (tonumber(sheet.MontPercepcao) or 0); 
+            			sheet.MontVigor = (tonumber(sheet.MontVigor) or 0); 
+            			sheet.MPMont = (tonumber(sheet.MPMont) or 0); 
+            			sheet.MontESPACO = (tonumber(sheet.MontESPACO) or 0); 
+            			sheet.idade = sheet.idade or "Depende da sua Raça"; 
+            			sheet.HPTotal = (tonumber(sheet.HPTotal) or 0); 
+            			sheet.MPTotal = (tonumber(sheet.MPTotal) or 0); 
+            			sheet.HPAtual = (tonumber(sheet.HPAtual) or 0); 
+            			sheet.MPAtual = (tonumber(sheet.MPAtual) or 0); 		
+            			sheet.DanoHabilidade1 = (tonumber(sheet.DanoHabilidade1) or 0); 
+            			sheet.CuraHabilidade1 = (tonumber(sheet.CuraHabilidade1) or 0); 
+            			sheet.Current = (tonumber(sheet.Current) or 0); 
+            			sheet.DPTHabilidade1 = (tonumber(sheet.DPTHabilidade1) or 0); 
+            			sheet.Hintensidade1 = (tonumber(sheet.Hintensidade1) or 0); 		
+            			sheet.NomeBasica = (tonumber(sheet.NomeBasica) or 0); 	
+            			sheet.BasicaDescri = (sheet.BasicaDescri) or "Adicione suas Habilidades Basicas";
+            			sheet.DanoBasica = (tonumber(sheet.DanoBasica) or 0); 	
+            			sheet.CustoBasica = (tonumber(sheet.CustoBasica) or 0); 	
+            			sheet.DTBasica = (tonumber(sheet.DTBasica) or 0); 
+            			sheet.PABasica = (tonumber(sheet.PABasica) or 0); 
+            			sheet.PMBasica = (tonumber(sheet.PMBasica) or 0); 	
+            			sheet.PFBasica = (tonumber(sheet.PFBasica) or 0); 	
+            			sheet.DEFBasica = (tonumber(sheet.DEFBasica) or 0); 	
+            			sheet.RESBasica = (tonumber(sheet.RESBasica) or 0); 
+            			sheet.AcertoBasica = (tonumber(sheet.AcertoBasica) or 0); 	
+            			sheet.AMBasica = (tonumber(sheet.AMBasica) or 0); 	
+            			sheet.ESQBasica = (tonumber(sheet.ESQBasica) or 0); 
+            			sheet.CritBasica = (tonumber(sheet.CritBasica) or 0); 	
+            			sheet.CMBasica = (tonumber(sheet.CMBasica) or 0); 	
+            			sheet.PersistBasica = (tonumber(sheet.PersistBasica) or 0); 	
+            			sheet.PHPBasica = (tonumber(sheet.PHPBasica) or 0); 	
+            			sheet.PMPBasica = (tonumber(sheet.PMPBasica) or 0); 		
+            			sheet.NomeRacial = (tonumber(sheet.NomeRacial) or 0); 	
+            			sheet.RacialDescri = (tonumber(sheet.RacialDescri) or 0);
+            			sheet.DanoRacial = (tonumber(sheet.DanoRacial) or 0); 	
+            			sheet.CustoRacial = (tonumber(sheet.CustoRacial) or 0); 	
+            			sheet.DTRacial = (tonumber(sheet.DTRacial) or 0); 
+            			sheet.PARacial = (tonumber(sheet.PARacial) or 0); 
+            			sheet.PMRacial = (tonumber(sheet.PMRacial) or 0); 	
+            			sheet.PFRacial = (tonumber(sheet.PFRacial) or 0); 	
+            			sheet.DEFRacial = (tonumber(sheet.DEFRacial) or 0); 	
+            			sheet.RESRacial = (tonumber(sheet.RESRacial) or 0); 
+            			sheet.AcertoRacial = (tonumber(sheet.AcertoRacial) or 0); 	
+            			sheet.AMRacial = (tonumber(sheet.AMRacial) or 0); 	
+            			sheet.ESQRacial = (tonumber(sheet.ESQRacial) or 0); 
+            			sheet.CritRacial = (tonumber(sheet.CritRacial) or 0); 	
+            			sheet.CMRacial = (tonumber(sheet.CMRacial) or 0); 	
+            			sheet.PersistRacial = (tonumber(sheet.PersistRacial) or 0); 	
+            			sheet.PHPRacial = (tonumber(sheet.PHPRacial) or 0); 	
+            			sheet.PMPRacial = (tonumber(sheet.PMPRacial) or 0); 		
+            			sheet.R30HPNivel = (tonumber(sheet.R30HPNivel) or 0); 	
+            			sheet.MHPNivel = (tonumber(sheet.MHPNivel) or 0); 
+            			sheet.MMPNivel = (tonumber(sheet.MMPNivel) or 0); 		
+            			sheet.HPRACAATE40 = (tonumber(sheet.HPRACAATE40) or 0);		
+            			sheet.DForca = (tonumber(sheet.DForca) or 0); 	
+            			sheet.DAgilidade = (tonumber(sheet.DAgilidade) or 0); 
+            			sheet.DInteligencia = (tonumber(sheet.DInteligencia) or 0); 
+            			sheet.DVitalidade = (tonumber(sheet.DVitalidade) or 0); 	
+            			sheet.DDestreza = (tonumber(sheet.DDestreza) or 0); 
+            			sheet.DMP = (tonumber(sheet.DMP) or 0);
+            			sheet.RHPNivel = (tonumber(sheet.RHPNivel) or 0);
+            			sheet.CHPNivel = (tonumber(sheet.CHPNivel) or 0); 
+            			sheet.EHPNivel = (tonumber(sheet.EHPNivel) or 0); 
+            			sheet.R20HPNivel = (tonumber(sheet.R20HPNivel) or 0); 
+            			sheet.RMPNivel = (tonumber(sheet.RMPNivel) or 0); 
+            			sheet.EMPNivel = (tonumber(sheet.EMPNivel) or 0); 		 
+            			sheet.LVDivino = (tonumber(sheet.LVDivino) or 0);
+            			sheet.RegenMP = (tonumber(sheet.RegenMP) or 0); 
+            			sheet.Visao = (tonumber(sheet.Visao) or 0); 
+            			sheet.Deslocamento = (tonumber(sheet.Deslocamento) or 0); 
+            			sheet.Correndo = (tonumber(sheet.Correndo) or 0);
+            			sheet.Potes = (tonumber(sheet.Potes) or 0); 
+            			sheet.Distancia = (tonumber(sheet.Distancia) or 0); 	
+            			sheet.RealDeslocamento = (tonumber(sheet.RealDeslocamento) or 0); 	
+            			sheet.RealVisao = (tonumber(sheet.RealVisao) or 0);
+            			sheet.REGMPBasica = (tonumber(sheet.REGMPBasica) or 0);
+            			sheet.VisaoBasica = (tonumber(sheet.VisaoBasica) or 0);
+            			sheet.CorridaBasica = (tonumber(sheet.CorridaBasica) or 0);
+            			sheet.DeslocamentoBasica = (tonumber(sheet.DeslocamentoBasica) or 0);		
+            			sheet.ClasseAM = (tonumber(sheet.ClasseAM) or 0);
+            			sheet.ClasseCM = (tonumber(sheet.ClasseCM) or 0);
+            			sheet.ClasseCR = (tonumber(sheet.ClasseCR) or 0);
+            			sheet.ClasseAcerto = (tonumber(sheet.ClasseAcerto) or 0);
+            			sheet.ClasseEsquiva = (tonumber(sheet.ClasseEsquiva) or 0);
+            			sheet.ClassePer = (tonumber(sheet.ClassePer) or 0);
+            			sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0); 
+            			sheet.MaxFlecha = (tonumber(sheet.MaxFlecha) or 0); 		
+            			sheet.EspecAM = (tonumber(sheet.EspecAM) or 0);
+            			sheet.EspecCM = (tonumber(sheet.EspecCM) or 0);
+            			sheet.EspecCR = (tonumber(sheet.EspecCR) or 0);
+            			sheet.MontPA = (tonumber(sheet.MontPA) or 0);
+            			sheet.MontPM = (tonumber(sheet.MontPM) or 0);
+            			sheet.MontPF = (tonumber(sheet.MontPF) or 0);
+            			sheet.MontNome = sheet.MontPF or 'Nome da Montaria';
+            			sheet.EspecAcerto = (tonumber(sheet.EspecAcerto) or 0);
+            			sheet.EspecEsquiva = (tonumber(sheet.EspecEsquiva) or 0);
+            			sheet.ResistenciaPadrao = (tonumber(sheet.ResistenciaPadrao) or 0)
+            			sheet.EspecPer = (tonumber(sheet.EspecPer) or 0);
+            			self.cmbEspecializa.enabled = false;
+            			sheet.CLevel = (tonumber(sheet.CLevel) or 0);
+            			sheet.ORCRacial = (tonumber(sheet.ORCRacial) or 0);
+            			sheet.XPAtualDivino = tonumber(sheet.XPAtualDivino) or 0;
+            			sheet.LVDivino = tonumber(sheet.LVDivino) or 0;
+            			sheet.XPTotalDivino = tonumber(sheet.XPTotalDivino) or 0;
+            			sheet.limitePotion = tonumber(sheet.limitePotion) or 2;		
+            			sheet.OutraRegenMP = tonumber(sheet.OutraRegenMP) or 0;	
+            			sheet.OutraDebuffShield = tonumber(sheet.OutraDebuffShield) or 0;			
+            			sheet.ControladorAtributos = (tonumber(sheet.ControladorAtributos) or 8);
+            			sheet.PontoHabilidade = tonumber(sheet.PontoHabilidade) or 1;
+            			sheet.jaRecebeu = sheet.jaRecebeu or false;		
+            			
+            			sheet.ConAgil = tonumber(sheet.ConAgil) or 0;
+            			sheet.ConBoaMira = tonumber(sheet.ConBoaMira) or 0;
+            			sheet.ConCriticalMagico = tonumber(sheet.ConCriticalMagico) or 0;
+            			sheet.ConEvasivo = tonumber(sheet.ConEvasivo) or 0;
+            			sheet.ConEstrategista = tonumber(sheet.ConEstrategista) or 0;
+            			sheet.ConEscolhidoBlume = tonumber(sheet.ConEscolhidoBlume) or 0;
+            			sheet.ConForte = tonumber(sheet.ConForte) or 0;
+            			sheet.ConHabilidoso = tonumber(sheet.ConHabilidoso) or 0;
+            			sheet.ConInteligente = tonumber(sheet.ConInteligente) or 0;
+            			sheet.ConMestreMagico = tonumber(sheet.ConMestreMagico) or 0;
+            			sheet.ConPersistente = tonumber(sheet.ConPersistente) or 0;
+            			sheet.ConResistente = tonumber(sheet.ConVigoroso) or 0;
+            			
+            			if sheet.jaRecebeu == false then 
+            				showMessage("Bem vindo a velen");
+            				showMessage("Por padrão classe, especialização e raça foram selecionadas para seu personagem, mas voce deve alterar e escolher a que for de sua vontade");
+            				sheet.jaRecebeu = true;
+            			end; 
+            			
+            			sheet.SequenciaInicial = sheet.SequenciaInicial or true;
+            			self.ChecaLevel20();
+            
             		end;
-            		
-            		if sheet.Agilidade == nil then
-            			sheet.Agilidade = 0; 		
-            		end;
-            		
-            		if sheet.Vitalidade == nil then
-            			sheet.Vitalidade = 0;
-            		end;	
-            		FichaPrincipal = sheet
-            		sheet.ELevel = (tonumber(sheet.Elevel) or 0); 
-            		sheet.PontoSkill = (tonumber(sheet.PontoSkill) or 1); 
-            		sheet.PontosUlt = (tonumber(sheet.PontosUlt) or 0); 
-            		sheet.ForcaTotal = (tonumber(sheet.ForcaTotal) or 0); 
-            		sheet.VitalidadeTotal = (tonumber(sheet.ForcaTotal) or 0); 
-            		sheet.InteligenciaTotal = (tonumber(sheet.ForcaTotal) or 0); 
-            		sheet.Acerto = (tonumber(sheet.Acerto) or 0); 
-            		sheet.AcertoMagico	= (tonumber(sheet.AcertoMagico) or 0); 
-            		sheet.Critical = (tonumber(sheet.Critical) or 0); 
-            		sheet.CMagico = (tonumber(sheet.CMagico) or 0); 
-            		sheet.Esquiva = (tonumber(sheet.Esquiva) or 0); 
-            		sheet.Persistencia = (tonumber(sheet.Persistencia) or 0); 
-            		sheet.ArmaPA = (tonumber(sheet.ArmaPA) or 0); 
-            		sheet.ArmaPM = (tonumber(sheet.ArmaPM) or 0); 
-            		sheet.ArmaPF = (tonumber(sheet.ArmaPF) or 0); 
-            		sheet.ArmaDEF = (tonumber(sheet.ArmaDEF) or 0); 
-            		sheet.ArmaRES = (tonumber(sheet.ArmaRES) or 0); 
-            		sheet.ArmaHP = (tonumber(sheet.ArmaHP) or 0); 
-            		sheet.ArmaMP = (tonumber(sheet.ArmaMP) or 0); 
-            		sheet.OutraPA = (tonumber(sheet.OutraPA) or 0); 
-            		sheet.OutraPM = (tonumber(sheet.OutraPM) or 0); 
-            		sheet.OutraPF = (tonumber(sheet.OutraPF) or 0); 
-            		sheet.OutraDEF = (tonumber(sheet.OutraDEF) or 0); 
-            		sheet.OutraRES = (tonumber(sheet.OutraRES) or 0); 
-            		sheet.OutraHP = (tonumber(sheet.OutraHP) or 0); 
-            		sheet.OutraMP = (tonumber(sheet.OutraMP) or 0); 
-            		sheet.ArmaduraPA = (tonumber(sheet.ArmaduraPA) or 0); 
-            		sheet.ArmaduraPM = (tonumber(sheet.ArmaduraPM) or 0); 
-            		sheet.ArmaduraPF = (tonumber(sheet.ArmaduraPF) or 0); 
-            		sheet.ArmaduraDEF = (tonumber(sheet.ArmaduraDEF) or 0); 
-            		sheet.ArmaduraRES = (tonumber(sheet.ArmaduraRES) or 0); 
-            		sheet.ArmaduraHP = (tonumber(sheet.ArmaduraHP) or 0); 
-            		sheet.ArmaduraMP = (tonumber(sheet.ArmaduraMP) or 0); 
-            		sheet.AcessorioPA = (tonumber(sheet.AcessorioPA) or 0); 
-            		sheet.AcessorioPM = (tonumber(sheet.AcessorioPM) or 0); 
-            		sheet.AcessorioPF = (tonumber(sheet.AcessorioPF) or 0); 
-            		sheet.AcessorioDEF = (tonumber(sheet.AcessorioDEF) or 0); 
-            		sheet.AcessorioRES = (tonumber(sheet.AcessorioRES) or 0); 
-            		sheet.AcessorioHP = (tonumber(sheet.AcessorioHP) or 0); 
-            		sheet.AcessorioMP = (tonumber(sheet.AcessorioMP) or 0); 
-            		sheet.AcessorioRegenMP = (tonumber(sheet.AcessorioRegenMP) or 0); 
-            		sheet.ArmaDistancia = (tonumber(sheet.ArmaDistancia) or 0); 
-            		sheet.OutraDistancia = (tonumber(sheet.OutraDistancia) or 0); 
-            		sheet.ArmaduraDistancia = (tonumber(sheet.ArmaduraDistancia) or 0); 
-            		sheet.AcessorioDistancia = (tonumber(sheet.AcessorioDistancia) or 0); 
-            		sheet.Sabedoria = (tonumber(sheet.Sabedoria) or 0); 
-            		sheet.Atletismo = (tonumber(sheet.Atletismo) or 0); 
-            		sheet.Acrobacia = (tonumber(sheet.Acrobacia) or 0); 
-            		sheet.Vigor = (tonumber(sheet.Vigor) or 0); 
-            		sheet.Percepcao = (tonumber(sheet.Percepcao) or 0); 
-            		sheet.Deslocamento = (tonumber(sheet.Deslocamento) or 0); 
-            		sheet.Distancia = (tonumber(sheet.Distancia) or 0); 
-            		sheet.Potes = (tonumber(sheet.Potes) or 0); 
-            		sheet.MontAtletismo = (tonumber(sheet.MontAtletismo) or 0); 
-            		sheet.MontAcrobacia = (tonumber(sheet.MontAcrobacia) or 0); 
-            		sheet.MontSabedoria = (tonumber(sheet.MontSabedoria) or 0); 
-            		sheet.Montpercepcao = (tonumber(sheet.MontPercepcao) or 0); 
-            		sheet.MontVigor = (tonumber(sheet.MontVigor) or 0); 
-            		sheet.MPMont = (tonumber(sheet.MPMont) or 0); 
-            		sheet.MontESPACO = (tonumber(sheet.MontESPACO) or 0); 
-            		sheet.idade = sheet.idade or "Depende da sua Raça"; 
-            		sheet.HPTotal = (tonumber(sheet.HPTotal) or 0); 
-            		sheet.MPTotal = (tonumber(sheet.MPTotal) or 0); 
-            		sheet.HPAtual = (tonumber(sheet.HPAtual) or 0); 
-            		sheet.MPAtual = (tonumber(sheet.MPAtual) or 0); 		
-            		sheet.DanoHabilidade1 = (tonumber(sheet.DanoHabilidade1) or 0); 
-            		sheet.CuraHabilidade1 = (tonumber(sheet.CuraHabilidade1) or 0); 
-            		sheet.Current = (tonumber(sheet.Current) or 0); 
-            		sheet.DPTHabilidade1 = (tonumber(sheet.DPTHabilidade1) or 0); 
-            		sheet.Hintensidade1 = (tonumber(sheet.Hintensidade1) or 0); 		
-            		sheet.NomeBasica = (tonumber(sheet.NomeBasica) or 0); 	
-            		sheet.BasicaDescri = (sheet.BasicaDescri) or "Adicione suas Habilidades Basicas";
-            		sheet.DanoBasica = (tonumber(sheet.DanoBasica) or 0); 	
-            		sheet.CustoBasica = (tonumber(sheet.CustoBasica) or 0); 	
-            		sheet.DTBasica = (tonumber(sheet.DTBasica) or 0); 
-            		sheet.PABasica = (tonumber(sheet.PABasica) or 0); 
-            		sheet.PMBasica = (tonumber(sheet.PMBasica) or 0); 	
-            		sheet.PFBasica = (tonumber(sheet.PFBasica) or 0); 	
-            		sheet.DEFBasica = (tonumber(sheet.DEFBasica) or 0); 	
-            		sheet.RESBasica = (tonumber(sheet.RESBasica) or 0); 
-            		sheet.AcertoBasica = (tonumber(sheet.AcertoBasica) or 0); 	
-            		sheet.AMBasica = (tonumber(sheet.AMBasica) or 0); 	
-            		sheet.ESQBasica = (tonumber(sheet.ESQBasica) or 0); 
-            		sheet.CritBasica = (tonumber(sheet.CritBasica) or 0); 	
-            		sheet.CMBasica = (tonumber(sheet.CMBasica) or 0); 	
-            		sheet.PersistBasica = (tonumber(sheet.PersistBasica) or 0); 	
-            		sheet.PHPBasica = (tonumber(sheet.PHPBasica) or 0); 	
-            		sheet.PMPBasica = (tonumber(sheet.PMPBasica) or 0); 		
-            		sheet.NomeRacial = (tonumber(sheet.NomeRacial) or 0); 	
-            		sheet.RacialDescri = (tonumber(sheet.RacialDescri) or 0);
-            		sheet.DanoRacial = (tonumber(sheet.DanoRacial) or 0); 	
-            		sheet.CustoRacial = (tonumber(sheet.CustoRacial) or 0); 	
-            		sheet.DTRacial = (tonumber(sheet.DTRacial) or 0); 
-            		sheet.PARacial = (tonumber(sheet.PARacial) or 0); 
-            		sheet.PMRacial = (tonumber(sheet.PMRacial) or 0); 	
-            		sheet.PFRacial = (tonumber(sheet.PFRacial) or 0); 	
-            		sheet.DEFRacial = (tonumber(sheet.DEFRacial) or 0); 	
-            		sheet.RESRacial = (tonumber(sheet.RESRacial) or 0); 
-            		sheet.AcertoRacial = (tonumber(sheet.AcertoRacial) or 0); 	
-            		sheet.AMRacial = (tonumber(sheet.AMRacial) or 0); 	
-            		sheet.ESQRacial = (tonumber(sheet.ESQRacial) or 0); 
-            		sheet.CritRacial = (tonumber(sheet.CritRacial) or 0); 	
-            		sheet.CMRacial = (tonumber(sheet.CMRacial) or 0); 	
-            		sheet.PersistRacial = (tonumber(sheet.PersistRacial) or 0); 	
-            		sheet.PHPRacial = (tonumber(sheet.PHPRacial) or 0); 	
-            		sheet.PMPRacial = (tonumber(sheet.PMPRacial) or 0); 		
-            		sheet.R30HPNivel = (tonumber(sheet.R30HPNivel) or 0); 	
-            		sheet.MHPNivel = (tonumber(sheet.MHPNivel) or 0); 
-            		sheet.MMPNivel = (tonumber(sheet.MMPNivel) or 0); 		
-            		sheet.HPRACAATE40 = (tonumber(sheet.HPRACAATE40) or 0);		
-            		sheet.DForca = (tonumber(sheet.DForca) or 0); 	
-            		sheet.DAgilidade = (tonumber(sheet.DAgilidade) or 0); 
-            		sheet.DInteligencia = (tonumber(sheet.DInteligencia) or 0); 
-            		sheet.DVitalidade = (tonumber(sheet.DVitalidade) or 0); 	
-            		sheet.DDestreza = (tonumber(sheet.DDestreza) or 0); 
-            		sheet.DMP = (tonumber(sheet.DMP) or 0);
-            		sheet.RHPNivel = (tonumber(sheet.RHPNivel) or 0);
-            		sheet.CHPNivel = (tonumber(sheet.CHPNivel) or 0); 
-            		sheet.EHPNivel = (tonumber(sheet.EHPNivel) or 0); 
-            		sheet.R20HPNivel = (tonumber(sheet.R20HPNivel) or 0); 
-            		sheet.RMPNivel = (tonumber(sheet.RMPNivel) or 0); 
-            		sheet.EMPNivel = (tonumber(sheet.EMPNivel) or 0); 		 
-            		sheet.LVDivino = (tonumber(sheet.LVDivino) or 0);
-            		sheet.RegenMP = (tonumber(sheet.RegenMP) or 0); 
-            		sheet.Visao = (tonumber(sheet.Visao) or 0); 
-            		sheet.Deslocamento = (tonumber(sheet.Deslocamento) or 0); 
-            		sheet.Correndo = (tonumber(sheet.Correndo) or 0);
-            		sheet.Potes = (tonumber(sheet.Potes) or 0); 
-            		sheet.Distancia = (tonumber(sheet.Distancia) or 0); 	
-            		sheet.RealDeslocamento = (tonumber(sheet.RealDeslocamento) or 0); 	
-            		sheet.RealVisao = (tonumber(sheet.RealVisao) or 0);
-            		sheet.REGMPBasica = (tonumber(sheet.REGMPBasica) or 0);
-            		sheet.VisaoBasica = (tonumber(sheet.VisaoBasica) or 0);
-            		sheet.CorridaBasica = (tonumber(sheet.CorridaBasica) or 0);
-            		sheet.DeslocamentoBasica = (tonumber(sheet.DeslocamentoBasica) or 0);		
-            		sheet.ClasseAM = (tonumber(sheet.ClasseAM) or 0);
-            		sheet.ClasseCM = (tonumber(sheet.ClasseCM) or 0);
-            		sheet.ClasseCR = (tonumber(sheet.ClasseCR) or 0);
-            		sheet.ClasseAcerto = (tonumber(sheet.ClasseAcerto) or 0);
-            		sheet.ClasseEsquiva = (tonumber(sheet.ClasseEsquiva) or 0);
-            		sheet.ClassePer = (tonumber(sheet.ClassePer) or 0);
-            		sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0); 
-            		sheet.MaxFlecha = (tonumber(sheet.MaxFlecha) or 0); 		
-            		sheet.EspecAM = (tonumber(sheet.EspecAM) or 0);
-            		sheet.EspecCM = (tonumber(sheet.EspecCM) or 0);
-            		sheet.EspecCR = (tonumber(sheet.EspecCR) or 0);
-            		sheet.MontPA = (tonumber(sheet.MontPA) or 0);
-            		sheet.MontPM = (tonumber(sheet.MontPM) or 0);
-            		sheet.MontPF = (tonumber(sheet.MontPF) or 0);
-            		sheet.MontNome = sheet.MontPF or 'Nome da Montaria';
-            		sheet.EspecAcerto = (tonumber(sheet.EspecAcerto) or 0);
-            		sheet.EspecEsquiva = (tonumber(sheet.EspecEsquiva) or 0);
-            		sheet.ResistenciaPadrao = (tonumber(sheet.ResistenciaPadrao) or 0)
-            		sheet.EspecPer = (tonumber(sheet.EspecPer) or 0);
-            		self.cmbEspecializa.enabled = false;
-            		sheet.CLevel = (tonumber(sheet.CLevel) or 0);
-            		sheet.ORCRacial = (tonumber(sheet.ORCRacial) or 0);
-            		sheet.XPAtualDivino = tonumber(sheet.XPAtualDivino) or 0;
-            		sheet.LVDivino = tonumber(sheet.LVDivino) or 0;
-            		sheet.XPTotalDivino = tonumber(sheet.XPTotalDivino) or 0;
-            		sheet.limitePotion = tonumber(sheet.limitePotion) or 2;		
-            		sheet.OutraRegenMP = tonumber(sheet.OutraRegenMP) or 0;	
-            		sheet.OutraDebuffShield = tonumber(sheet.OutraDebuffShield) or 0;			
-            		sheet.ControladorAtributos = (tonumber(sheet.ControladorAtributos) or 8);
-            		sheet.PontoHabilidade = tonumber(sheet.PontoHabilidade) or 1;
-            		sheet.jaRecebeu = sheet.jaRecebeu or false;		
-            		
-            		sheet.ConAgil = tonumber(sheet.ConAgil) or 0;
-            		sheet.ConBoaMira = tonumber(sheet.ConBoaMira) or 0;
-            		sheet.ConCriticalMagico = tonumber(sheet.ConCriticalMagico) or 0;
-            		sheet.ConEvasivo = tonumber(sheet.ConEvasivo) or 0;
-            		sheet.ConEstrategista = tonumber(sheet.ConEstrategista) or 0;
-            		sheet.ConEscolhidoBlume = tonumber(sheet.ConEscolhidoBlume) or 0;
-            		sheet.ConForte = tonumber(sheet.ConForte) or 0;
-            		sheet.ConHabilidoso = tonumber(sheet.ConHabilidoso) or 0;
-            		sheet.ConInteligente = tonumber(sheet.ConInteligente) or 0;
-            		sheet.ConMestreMagico = tonumber(sheet.ConMestreMagico) or 0;
-            		sheet.ConPersistente = tonumber(sheet.ConPersistente) or 0;
-            		sheet.ConResistente = tonumber(sheet.ConVigoroso) or 0;
-            		
-            		if sheet.jaRecebeu == false then 
-            			showMessage("Bem vindo a velen");
-            			showMessage("Por padrão classe, especialização e raça foram selecionadas para seu personagem, mas voce deve alterar e escolher a que for de sua vontade");
-            			sheet.jaRecebeu = true;
-            		end; 
-            		
-            		sheet.SequenciaInicial = sheet.SequenciaInicial or true;
-            		self.ChecaLevel20();
         end);
 
     obj._e_event1 = obj.dataLink1:addEventListener("onChange",
@@ -4953,6 +5774,15 @@ local function constructNew_frmvelen()
             						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.2
             						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.2
             						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.2
+            					end;
+            
+            
+            					if sheet.classe == 'Mago do Caos' then
+            						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.1
+            						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.4
+            						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.2
+            						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.1
+            						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.2
             					end;	
             				end;
             			end;
@@ -4961,101 +5791,110 @@ local function constructNew_frmvelen()
 
     obj._e_event2 = obj.button1:addEventListener("onClick",
         function (event)
-            local novoForm = GUI.newForm("frmVelenSobreposi");
-            				novoForm:setNodeObject(sheet);
-            				novoForm:show();
+            AtualizaStatusMesa()
         end);
 
     obj._e_event3 = obj.button2:addEventListener("onClick",
         function (event)
-            local novoForm = GUI.newForm("frmPVPMod");
+            local novoForm = GUI.newForm("frmVelenSobreposi");
             				novoForm:setNodeObject(sheet);
             				novoForm:show();
         end);
 
     obj._e_event4 = obj.button3:addEventListener("onClick",
         function (event)
-            DiminuirPontosForca();
+            local novoForm = GUI.newForm("frmPVPMod");
+            				novoForm:setNodeObject(sheet);
+            				novoForm:show();
         end);
 
     obj._e_event5 = obj.button4:addEventListener("onClick",
         function (event)
-            AumentarPontosForca();
+            DiminuirPontosForca();
         end);
 
     obj._e_event6 = obj.button5:addEventListener("onClick",
         function (event)
-            DiminuirPontosInteligencia();
+            AumentarPontosForca();
         end);
 
     obj._e_event7 = obj.button6:addEventListener("onClick",
         function (event)
-            AumentarPontosInteligencia();
+            DiminuirPontosInteligencia();
         end);
 
     obj._e_event8 = obj.button7:addEventListener("onClick",
         function (event)
-            DiminuirPontosDestreza();
+            AumentarPontosInteligencia();
         end);
 
     obj._e_event9 = obj.button8:addEventListener("onClick",
         function (event)
-            AumentarPontosDestreza();
+            DiminuirPontosDestreza();
         end);
 
     obj._e_event10 = obj.button9:addEventListener("onClick",
         function (event)
-            DiminuirPontosAgilidade();
+            AumentarPontosDestreza();
         end);
 
     obj._e_event11 = obj.button10:addEventListener("onClick",
         function (event)
-            AumentarPontosAgilidade();
+            DiminuirPontosAgilidade();
         end);
 
     obj._e_event12 = obj.button11:addEventListener("onClick",
         function (event)
-            DiminuirPontosVitalidade();
+            AumentarPontosAgilidade();
         end);
 
     obj._e_event13 = obj.button12:addEventListener("onClick",
         function (event)
-            AumentarPontosVitalidade();
+            DiminuirPontosVitalidade();
         end);
 
     obj._e_event14 = obj.button13:addEventListener("onClick",
         function (event)
-            AtualizaStatusMesa()
+            AumentarPontosVitalidade();
         end);
 
     obj._e_event15 = obj.button14:addEventListener("onClick",
         function (event)
-            IgualarHPMesa()
+            AtualizaStatusMesa()
         end);
 
     obj._e_event16 = obj.button15:addEventListener("onClick",
         function (event)
+            IgualarHPMesa()
+        end);
+
+    obj._e_event17 = obj.button16:addEventListener("onClick",
+        function (event)
             IgualarMPMesa()
         end);
 
-    obj._e_event17 = obj.btnEffect:addEventListener("onClick",
+    obj._e_event18 = obj.btnEffect:addEventListener("onClick",
         function (event)
             self.popEffect:show();
-            					if sheet then
+            					if sheet ~= nil then
             						FichaPrincipal = sheet
             					end;
         end);
 
-    obj._e_event18 = obj.button16:addEventListener("onClick",
+    obj._e_event19 = obj.button17:addEventListener("onClick",
         function (event)
             -- Usuário clicou no botão de criar novo item.
             						-- Vamos inserir um novo item no nosso recordList                              
             						self.rclBuffs:append();
         end);
 
-    obj._e_event19 = obj.rclBuffs:addEventListener("onSelect",
+    obj._e_event20 = obj.rclBuffs:addEventListener("onSelect",
         function ()
-            sheet.PAEffectTotal = 0
+            local node = self.rclBuffs.selectedNode;  
+            					self.dscBuffSlot.node = node;                       
+            					self.dscBuffSlot.visible = (node ~= nil);
+            
+            					sheet.PAEffectTotal = 0
             					sheet.PMEffectTotal = 0
             					sheet.PFEffectTotal = 0
             					sheet.DEFEffectTotal = 0
@@ -5073,14 +5912,9 @@ local function constructNew_frmvelen()
             					sheet.DuraEffectTotal = 0
             					sheet.ContaEffectTotal = 0
             					sheet.TipoEffectTotal = 0
-            					sheet.OutroEffectTotal = 0
-            					sheet.DanoEffectTotal = 0
             					sheet.HPTotalEffectTotal = 0
             					sheet.MPTotalEffectTotal = 0
             
-            					local node = self.rclBuffs.selectedNode;  
-            					self.dscBuffSlot.node = node;                       
-            					self.dscBuffSlot.visible = (node ~= nil);
             
             					if self.dscBuffSlot.visible == true then
             						self.dscBuffSlot.node.PAEffect = tonumber(self.dscBuffSlot.node.PAEffect) or 0;
@@ -5102,116 +5936,84 @@ local function constructNew_frmvelen()
             						self.dscBuffSlot.node.DuraEffect = tonumber(self.dscBuffSlot.node.DuraEffect) or 9999;
             						self.dscBuffSlot.node.ContaEffect = tonumber(self.dscBuffSlot.node.ContaEffect) or 0;
             						self.dscBuffSlot.node.TipoEffect = tonumber(self.dscBuffSlot.node.TipoEffect) or 0;
-            						self.dscBuffSlot.node.OutroEffect = tonumber(self.dscBuffSlot.node.OutroEffect) or 0;
             						self.dscBuffSlot.node.HPTotalEffect = tonumber(self.dscBuffSlot.node.HPTotalEffect) or 0;
             						self.dscBuffSlot.node.MPTotalEffect = tonumber(self.dscBuffSlot.node.MPTotalEffect) or 0;
+            						GambiDoTurno = tonumber(self.dscBuffSlot.node.OutroEffect) or 0;
             					end;
-            
-            					-- Acessa o RecordList do grupo de jogadores
-            					local nodes = ndb.getChildNodes(sheet.Efeitos) -- Substitua pelo campo correto
-            
-            					for _, node in ipairs(nodes) do
-            						sheet.PAEffectTotal = tonumber(sheet.PAEffectTotal or 0) + tonumber(node.PAEffect or 0)
-            						sheet.PMEffectTotal = tonumber(sheet.PMEffectTotal or 0) + tonumber(node.PMEffect or 0)
-            						sheet.PFEffectTotal = tonumber(sheet.PFEffectTotal or 0) + tonumber(node.PFEffect or 0)
-            						sheet.DEFEffectTotal = tonumber(sheet.DEFEffectTotal or 0) + tonumber(node.DEFEffect or 0)
-            						sheet.RESEffectTotal = tonumber(sheet.RESEffectTotal or 0) + tonumber(node.RESEffect or 0)
-            						sheet.ACEffectTotal = tonumber(sheet.ACEffectTotal or 0) + tonumber(node.ACEffect or 0)
-            						sheet.ACMEffectTotal = tonumber(sheet.ACMEffectTotal or 0) + tonumber(node.ACMEffect or 0)
-            						sheet.CREffectTotal = tonumber(sheet.CREffectTotal or 0) + tonumber(node.CREffect or 0)
-            						sheet.CRMEffectTotal = tonumber(sheet.CRMEffectTotal or 0) + tonumber(node.CRMEffect or 0)
-            						sheet.DadoEffectTotal = tonumber(sheet.DadoEffectTotal or 0) + tonumber(node.DadoEffect or 0)
-            						sheet.ESQEffectTotal = tonumber(sheet.ESQEffectTotal or 0) + tonumber(node.ESQEffect or 0)
-            						sheet.PersEffectTotal = tonumber(sheet.PersEffectTotal or 0) + tonumber(node.PersEffect or 0)
-            						sheet.VezEffectTotal = tonumber(sheet.VezEffectTotal or 0) + tonumber(node.VezEffect or 0)
-            						sheet.ManaEffectTotal = tonumber(sheet.ManaEffectTotal or 0) + tonumber(node.ManaEffect or 0)
-            						sheet.CDEffectTotal = tonumber(sheet.CDEffectTotal or 0) + tonumber(node.CDEffect or 0)
-            						sheet.DuraEffectTotal = tonumber(sheet.DuraEffectTotal or 0) + tonumber(node.DuraEffect or 0)
-            						sheet.ContaEffectTotal = tonumber(sheet.ContaEffectTotal or 0) + tonumber(node.ContaEffect or 0)
-            						sheet.TipoEffectTotal = tonumber(sheet.TipoEffectTotal or 0) + tonumber(node.TipoEffect or 0)
-            						sheet.OutroEffectTotal = tonumber(sheet.OutroEffectTotal or 0) + tonumber(node.OutroEffect or 0)
-            						sheet.DanoEffectTotal = tonumber(sheet.DanoEffectTotal or 0) + tonumber(node.DanoEffect or 0)
-            						sheet.HPTotalEffectTotal = tonumber(sheet.HPTotalEffectTotal or 0) + tonumber(node.HPTotalEffect or 0)
-            						sheet.MPTotalEffectTotal = tonumber(sheet.MPTotalEffectTotal or 0) + tonumber(node.MPTotalEffect or 0)
-            						
-            						-- Chama a função específica após processar cada node
-            						ORCRacial()
-            						StatusDeChances()
-            						self.CalculaHP()
-            						CalculaMP()
-            					end
         end);
 
-    obj._e_event20 = obj.button17:addEventListener("onClick",
+    obj._e_event21 = obj.button18:addEventListener("onClick",
         function (event)
             ndb.deleteNode(self.dscBuffSlot.node);
         end);
 
-    obj._e_event21 = obj.button18:addEventListener("onClick",
+    obj._e_event22 = obj.button19:addEventListener("onClick",
         function (event)
             local novoForm = GUI.newForm("frmequip");
             				novoForm:setNodeObject(sheet);
             				novoForm:show();
         end);
 
-    obj._e_event22 = obj.button19:addEventListener("onClick",
-        function (event)
-            local novoForm = GUI.newForm("frmhabilidade");
-            				novoForm:setNodeObject(sheet);
-            				novoForm:show();
-        end);
-
     obj._e_event23 = obj.button20:addEventListener("onClick",
         function (event)
-            local novoForm = GUI.newForm("frmHistoria");
+            FichaPrincipal = sheet
+            				local novoForm = GUI.newForm("frmhabilidade");
             				novoForm:setNodeObject(sheet);
             				novoForm:show();
         end);
 
     obj._e_event24 = obj.button21:addEventListener("onClick",
         function (event)
-            local novoForm = GUI.newForm("frmsummon");
+            local novoForm = GUI.newForm("frmHistoria");
             				novoForm:setNodeObject(sheet);
             				novoForm:show();
         end);
 
     obj._e_event25 = obj.button22:addEventListener("onClick",
         function (event)
-            local novoForm = GUI.newForm("frmpersonagem");
+            local novoForm = GUI.newForm("frmsummon");
             				novoForm:setNodeObject(sheet);
             				novoForm:show();
         end);
 
     obj._e_event26 = obj.button23:addEventListener("onClick",
         function (event)
+            local novoForm = GUI.newForm("frmpersonagem");
+            				novoForm:setNodeObject(sheet);
+            				novoForm:show();
+        end);
+
+    obj._e_event27 = obj.button24:addEventListener("onClick",
+        function (event)
             local novoForm = GUI.newForm("frmActionBar");
             				novoForm:setNodeObject(sheet);
             				novoForm:show();
         end);
 
-    obj._e_event27 = obj.dataLink2:addEventListener("onChange",
+    obj._e_event28 = obj.dataLink2:addEventListener("onChange",
         function (field, oldValue, newValue)
             AtualizaAtributos();
         end);
 
-    obj._e_event28 = obj.dataLink3:addEventListener("onChange",
+    obj._e_event29 = obj.dataLink3:addEventListener("onChange",
         function (field, oldValue, newValue)
             AtualizaStatusMapa();
             			StatusPorRaca();
-            			StatusDeChances();
+            			StatusDeChances();			
+            			SincronizaTurnoEfeito()
         end);
 
-    obj._e_event29 = obj.dataLink4:addEventListener("onChange",
+    obj._e_event30 = obj.dataLink4:addEventListener("onChange",
         function (field, oldValue, newValue)
             ORCRacial();
         end);
 
-    obj._e_event30 = obj.dataLink5:addEventListener("onChange",
+    obj._e_event31 = obj.dataLink5:addEventListener("onChange",
         function (field, oldValue, newValue)
             CalculaDefesaResistenciaPorNivel();
         end);
 
-    obj._e_event31 = obj.dataLink6:addEventListener("onChange",
+    obj._e_event32 = obj.dataLink6:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then
             				StatusPorRaca(); 
@@ -5222,7 +6024,7 @@ local function constructNew_frmvelen()
             			end;
         end);
 
-    obj._e_event32 = obj.dataLink7:addEventListener("onChange",
+    obj._e_event33 = obj.dataLink7:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then
             				self.ControlaRacaHPAte20();
@@ -5236,7 +6038,7 @@ local function constructNew_frmvelen()
             			end;
         end);
 
-    obj._e_event33 = obj.dataLink8:addEventListener("onChange",
+    obj._e_event34 = obj.dataLink8:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then
             				self.ControlaClasseMP();
@@ -5247,192 +6049,82 @@ local function constructNew_frmvelen()
             			end;
         end);
 
-    obj._e_event34 = obj.dataLink9:addEventListener("onChange",
+    obj._e_event35 = obj.dataLink9:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then
             				StatusDeChances();
+            				self.CalculaHP();
             				self.ChecaLevel20();					
             			end;
         end);
 
-    obj._e_event35 = obj.dataLink10:addEventListener("onChange",
+    obj._e_event36 = obj.dataLink10:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then
             				self.ChecaLevel20();					
             			end;
-        end);
-
-    obj._e_event36 = obj.button24:addEventListener("onClick",
-        function (event)
-            showMessage('P.A = Poder de Ataque 2x a Força, Se for Monge 4x Força');
         end);
 
     obj._e_event37 = obj.button25:addEventListener("onClick",
         function (event)
-            showMessage('P.M = Poder Magico 2x a Inteligencia');
+            showMessage('P.A = Poder de Ataque 2x a Força, Se for Monge 4x Força');
         end);
 
     obj._e_event38 = obj.button26:addEventListener("onClick",
         function (event)
-            showMessage('P.F = Poder de Fogo 2x a Destreza');
+            showMessage('P.M = Poder Magico 2x a Inteligencia');
         end);
 
     obj._e_event39 = obj.button27:addEventListener("onClick",
         function (event)
-            showMessage('DEF = Defesa Fisica que é Armadura + Metade da Vitalidade e Metade da Agilidade');
+            showMessage('P.F = Poder de Fogo 2x a Destreza');
         end);
 
     obj._e_event40 = obj.button28:addEventListener("onClick",
         function (event)
+            showMessage('DEF = Defesa Fisica que é Armadura + Metade da Vitalidade e Metade da Agilidade');
+        end);
+
+    obj._e_event41 = obj.button29:addEventListener("onClick",
+        function (event)
             showMessage('RES = Resistencia Magica que é Metade da Força + Metade da Vitalidade + Metade da Defesa');
         end);
 
-    obj._e_event41 = obj.AtkBasic:addEventListener("onClick",
+    obj._e_event42 = obj.AtkBasic:addEventListener("onClick",
         function (event)
-            self.popAtaqueBasico:show('bottom', self.AtkBasic);
+            local novoForm = GUI.newForm("frmPopAtaque");
+            			novoForm:setNodeObject(sheet);
+            			novoForm:show();
         end);
 
-    obj._e_event42 = obj.dataLink11:addEventListener("onChange",
-        function (field, oldValue, newValue)
-            if self.cmbTipoGrupo.value == "1" then
-            								local mesas = rrpg.getRooms();
-            								local bibliotecaAtual = mesas[1].library;
-            								
-            								lista = {}
-            
-            								local function obterNomesRecursivoCMB1(bibItem)
-            									local itensFilhos = bibItem.children;
-            									local nomes = bibItem.name;
-            
-            									
-            									
-            									for i = 1, #itensFilhos, 1 do
-            										local bibItemFilho = itensFilhos[i];
-            										local nomesDoFilho = obterNomesRecursivoCMB1(bibItemFilho) or "";
-            
-            										if nomesDoFilho == "Sistema de Combaate Velen" then
-            											-- Obter ID do personagem Loan
-            											local idPersonagem = bibItemFilho;
-            
-            											-- Solicita acesso à ficha do personagem
-            											local promise = bibItemFilho:asyncOpenNDB();
-            
-            											-- Aguarda até que a ficha esteja carregada
-            											local nodeExterno = await(promise);
-            											
-            											local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)											
-            											
-            											for _, node in ipairs(nodesO) do
-            												if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
-            													table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
-            													
-            												end
-            											end
-            											
-            											table.sort(lista)
-            											
-            										end
-            									end
-            									return nomes
-            								end
-            
-            								
-            
-            								local function atualizarComboBox()
-            									local comboBox = self.cmbInimigos
-            									comboBox.items = lista
-            									comboBox.values = lista
-            									comboBox.value = lista[1] or ""
-            								end
-            
-            								local nomesDeTodosOsItens = obterNomesRecursivoCMB1(bibliotecaAtual);
-            								atualizarComboBox()
-            							end
-            
-            							if self.cmbTipoGrupo.value == "2" then
-            								local mesas = rrpg.getRooms();
-            								local bibliotecaAtual = mesas[1].library;
-            								
-            								lista = {}
-            
-            								local function obterNomesRecursivoCMB2(bibItem)
-            									local itensFilhos = bibItem.children;
-            									local nomes = bibItem.name;
-            									
-            									for i = 1, #itensFilhos, 1 do
-            										local bibItemFilho = itensFilhos[i];
-            										local nomesDoFilho = obterNomesRecursivoCMB2(bibItemFilho) or "";
-            
-            										if nomesDoFilho == "Sistema de Combaate Velen" then
-            											-- Obter ID do personagem Loan
-            											local idPersonagem = bibItemFilho;
-            
-            											-- Solicita acesso à ficha do personagem
-            											local promise = bibItemFilho:asyncOpenNDB();
-            
-            											-- Aguarda até que a ficha esteja carregada
-            											local nodeExterno = await(promise);
-            											
-            											local nodesJ = ndb.getChildNodes(nodeExterno.NomeJogador)
-            											
-            											for _, node in ipairs(nodesJ) do
-            												if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
-            													table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
-            												end
-            											end
-            											
-            											table.sort(lista)
-            											
-            										end
-            									end
-            									return nomes
-            								end
-            
-            								local function atualizarComboBox()
-            									local comboBox = self.cmbInimigos
-            									comboBox.items = lista
-            									comboBox.values = lista
-            									comboBox.value = lista[1] or ""  -- Defina o primeiro item como selecionado por padrão
-            								end
-            
-            								local nomesDeTodosOsItens = obterNomesRecursivoCMB2(bibliotecaAtual);
-            								atualizarComboBox()
-            							end;
-        end);
-
-    obj._e_event43 = obj.button29:addEventListener("onClick",
-        function (event)
-            AtaqueBasico();
-        end);
-
-    obj._e_event44 = obj.button30:addEventListener("onClick",
+    obj._e_event43 = obj.button30:addEventListener("onClick",
         function (event)
             local novoForm = GUI.newForm("frmBasica");
             			novoForm:setNodeObject(sheet);
             			novoForm:show();
         end);
 
-    obj._e_event45 = obj.btnUpaLevel:addEventListener("onClick",
+    obj._e_event44 = obj.btnUpaLevel:addEventListener("onClick",
         function (event)
             RolarAtributoPorUpar()
         end);
 
-    obj._e_event46 = obj.dataLink12:addEventListener("onChange",
+    obj._e_event45 = obj.dataLink11:addEventListener("onChange",
         function (field, oldValue, newValue)
             SistemaXPLevel();
         end);
 
-    obj._e_event47 = obj.dataLink13:addEventListener("onChange",
+    obj._e_event46 = obj.dataLink12:addEventListener("onChange",
         function (field, oldValue, newValue)
             XPTotalPraUpar();
         end);
 
-    obj._e_event48 = obj.dataLink14:addEventListener("onChange",
+    obj._e_event47 = obj.dataLink13:addEventListener("onChange",
         function (field, oldValue, newValue)
             ComandoADM();
         end);
 
-    obj._e_event49 = obj.dataLink15:addEventListener("onChange",
+    obj._e_event48 = obj.dataLink14:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then				
             					if sheet.Level >= 1 then 
@@ -5443,7 +6135,7 @@ local function constructNew_frmvelen()
             				end;
         end);
 
-    obj._e_event50 = obj.dataLink16:addEventListener("onChange",
+    obj._e_event49 = obj.dataLink15:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then				
             					if sheet.Level >= 1 then 
@@ -5455,7 +6147,7 @@ local function constructNew_frmvelen()
             				end;
         end);
 
-    obj._e_event51 = obj.dataLink17:addEventListener("onChange",
+    obj._e_event50 = obj.dataLink16:addEventListener("onChange",
         function (field, oldValue, newValue)
             if sheet.SequenciaInicial == true then				
             					if sheet.Level >= 1 then 
@@ -5468,7 +6160,6 @@ local function constructNew_frmvelen()
         end);
 
     function obj:_releaseEvents()
-        __o_rrpgObjs.removeEventListenerById(self._e_event51);
         __o_rrpgObjs.removeEventListenerById(self._e_event50);
         __o_rrpgObjs.removeEventListenerById(self._e_event49);
         __o_rrpgObjs.removeEventListenerById(self._e_event48);
@@ -5553,13 +6244,11 @@ local function constructNew_frmvelen()
         if self.label29 ~= nil then self.label29:destroy(); self.label29 = nil; end;
         if self.dataLink5 ~= nil then self.dataLink5:destroy(); self.dataLink5 = nil; end;
         if self.rectangle1 ~= nil then self.rectangle1:destroy(); self.rectangle1 = nil; end;
-        if self.NameTipoDeGrupo ~= nil then self.NameTipoDeGrupo:destroy(); self.NameTipoDeGrupo = nil; end;
         if self.edit53 ~= nil then self.edit53:destroy(); self.edit53 = nil; end;
         if self.label39 ~= nil then self.label39:destroy(); self.label39 = nil; end;
         if self.edit3 ~= nil then self.edit3:destroy(); self.edit3 = nil; end;
         if self.button8 ~= nil then self.button8:destroy(); self.button8 = nil; end;
         if self.image17 ~= nil then self.image17:destroy(); self.image17 = nil; end;
-        if self.cmbInimigos ~= nil then self.cmbInimigos:destroy(); self.cmbInimigos = nil; end;
         if self.dataLink14 ~= nil then self.dataLink14:destroy(); self.dataLink14 = nil; end;
         if self.label45 ~= nil then self.label45:destroy(); self.label45 = nil; end;
         if self.edit6 ~= nil then self.edit6:destroy(); self.edit6 = nil; end;
@@ -5569,8 +6258,8 @@ local function constructNew_frmvelen()
         if self.dataLink11 ~= nil then self.dataLink11:destroy(); self.dataLink11 = nil; end;
         if self.label40 ~= nil then self.label40:destroy(); self.label40 = nil; end;
         if self.label9 ~= nil then self.label9:destroy(); self.label9 = nil; end;
-        if self.label33 ~= nil then self.label33:destroy(); self.label33 = nil; end;
         if self.button18 ~= nil then self.button18:destroy(); self.button18 = nil; end;
+        if self.label33 ~= nil then self.label33:destroy(); self.label33 = nil; end;
         if self.button6 ~= nil then self.button6:destroy(); self.button6 = nil; end;
         if self.rectangle13 ~= nil then self.rectangle13:destroy(); self.rectangle13 = nil; end;
         if self.layout7 ~= nil then self.layout7:destroy(); self.layout7 = nil; end;
@@ -5601,12 +6290,10 @@ local function constructNew_frmvelen()
         if self.button30 ~= nil then self.button30:destroy(); self.button30 = nil; end;
         if self.scrollBox1 ~= nil then self.scrollBox1:destroy(); self.scrollBox1 = nil; end;
         if self.rectangle2 ~= nil then self.rectangle2:destroy(); self.rectangle2 = nil; end;
-        if self.label50 ~= nil then self.label50:destroy(); self.label50 = nil; end;
         if self.edit2 ~= nil then self.edit2:destroy(); self.edit2 = nil; end;
         if self.image16 ~= nil then self.image16:destroy(); self.image16 = nil; end;
         if self.dataLink3 ~= nil then self.dataLink3:destroy(); self.dataLink3 = nil; end;
         if self.dataLink15 ~= nil then self.dataLink15:destroy(); self.dataLink15 = nil; end;
-        if self.popAtaqueBasico ~= nil then self.popAtaqueBasico:destroy(); self.popAtaqueBasico = nil; end;
         if self.label44 ~= nil then self.label44:destroy(); self.label44 = nil; end;
         if self.cmbEspecializa ~= nil then self.cmbEspecializa:destroy(); self.cmbEspecializa = nil; end;
         if self.button2 ~= nil then self.button2:destroy(); self.button2 = nil; end;
@@ -5661,14 +6348,12 @@ local function constructNew_frmvelen()
         if self.edit39 ~= nil then self.edit39:destroy(); self.edit39 = nil; end;
         if self.dataLink13 ~= nil then self.dataLink13:destroy(); self.dataLink13 = nil; end;
         if self.edit45 ~= nil then self.edit45:destroy(); self.edit45 = nil; end;
-        if self.TargetName ~= nil then self.TargetName:destroy(); self.TargetName = nil; end;
         if self.label35 ~= nil then self.label35:destroy(); self.label35 = nil; end;
         if self.button4 ~= nil then self.button4:destroy(); self.button4 = nil; end;
         if self.edit32 ~= nil then self.edit32:destroy(); self.edit32 = nil; end;
         if self.layout5 ~= nil then self.layout5:destroy(); self.layout5 = nil; end;
         if self.image8 ~= nil then self.image8:destroy(); self.image8 = nil; end;
         if self.edit40 ~= nil then self.edit40:destroy(); self.edit40 = nil; end;
-        if self.label49 ~= nil then self.label49:destroy(); self.label49 = nil; end;
         if self.edit18 ~= nil then self.edit18:destroy(); self.edit18 = nil; end;
         if self.label2 ~= nil then self.label2:destroy(); self.label2 = nil; end;
         if self.button13 ~= nil then self.button13:destroy(); self.button13 = nil; end;
@@ -5695,11 +6380,9 @@ local function constructNew_frmvelen()
         if self.image11 ~= nil then self.image11:destroy(); self.image11 = nil; end;
         if self.dataLink6 ~= nil then self.dataLink6:destroy(); self.dataLink6 = nil; end;
         if self.label47 ~= nil then self.label47:destroy(); self.label47 = nil; end;
-        if self.cmbTipoGrupo ~= nil then self.cmbTipoGrupo:destroy(); self.cmbTipoGrupo = nil; end;
         if self.edit4 ~= nil then self.edit4:destroy(); self.edit4 = nil; end;
         if self.image14 ~= nil then self.image14:destroy(); self.image14 = nil; end;
         if self.image3 ~= nil then self.image3:destroy(); self.image3 = nil; end;
-        if self.dataLink17 ~= nil then self.dataLink17:destroy(); self.dataLink17 = nil; end;
         if self.label42 ~= nil then self.label42:destroy(); self.label42 = nil; end;
         if self.label31 ~= nil then self.label31:destroy(); self.label31 = nil; end;
         if self.rectangle11 ~= nil then self.rectangle11:destroy(); self.rectangle11 = nil; end;

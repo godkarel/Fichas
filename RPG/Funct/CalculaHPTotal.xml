@@ -13,5 +13,14 @@
 			(tonumber(sheet.PHPRacial) or 0) + (tonumber(sheet.PHPBasica) or 0) + (tonumber(sheet.HPRACAATE20) or 0) + (tonumber(sheet.CHPNivel) or 0) + 
 			(tonumber(sheet.EHPNivel) or 0) + (tonumber(sheet.HPRACAATE30) or 0)  + (tonumber(sheet.HPTotalEffectTotal) or 0));
 		end;
+
+		function GambiCalculaHPAtual()
+			if sheet.Level < 21 then
+				sheet.EHPNivel = 0;
+				sheet.HPRACAATE30 = 0;
+			end;
+			
+			
+		end;
 	]]>		
     </script> 	

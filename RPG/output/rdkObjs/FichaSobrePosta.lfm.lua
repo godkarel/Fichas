@@ -32,295 +32,301 @@ local function constructNew_frmVelenSobreposi()
     obj:setHeight(700);
 
 
-			local function AtaqueBasico()   
-				if sheet.cmbTipoDeGrupoF == "1" then   
-					-- obter a mesa do personagem
-					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
-					local mesas = rrpg.getRooms();
-					local bibliotecaAtual = mesas[1].library;
+			function AtaqueBasico(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno)
+				SincronizaTurnoEfeito() 
+				if SelfcmbInimigosH == "Alvo Simulado" then
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet);                      
 
-						local function obterNomesRecursivo(bibItem)
-							local itensFilhos = bibItem.children;
-							local nomes = bibItem.name;
-							
-							for i = 1, #itensFilhos, 1 do
-								local bibItemFilho = itensFilhos[i];
-								local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+                        -- se o usuário não preencheu modificador, vamos usar o valor 0
+                        sheet.Acerto = sheet.Acerto or 0;                        
 
-								if nomesDoFilho == "Sistema de Combaate Velen" then
-									-- Obter ID do personagem Loan
-									local idPersonagem = self.cmbInimigos.value;
-									
-									-- Solicita acesso à ficha do personagem
-									local promise = bibItemFilho:asyncOpenNDB();
-
-									-- Aguarda até que a ficha esteja carregada
-									nodeExterno = await(promise);
-									
-									local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)								
-									
-									for _, node in ipairs(nodesO) do
-
-										if node.NomeDoOponenteVez == idPersonagem then  -- Verifica se o campo NomeDoOponenteVez existe
-											EsqAlvo = node.ESQ
-											RESAlvo = node.RES
-											DefAlvo = node.DEF
-										end
-									end
-								end
-							end
-							return nomes
-						end
-
-						local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
-
-					------------------------------------------------------------------
-					
-					-- se o usuário não preencheu modificador, vamos usar o valor 0
-					sheet.Acerto = sheet.Acerto or 0;                      
-					if sheet.EscolheAtaqueBasico == nil then
-						showMessage("Escolha uma Base de Dano para seu Ataque Basico na lista acima");
-					else				
-						mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
-							function (rolado)	
-							EsqAlvo = EsqAlvo + 1
-							local soDado = rolado.resultado - sheet.acerto;
-								if rolado.resultado + sheet.acerto > EsqAlvo then
-									if soDado >= sheet.Critical then
-										if sheet.EscolheAtaqueBasico == 'PA' then
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PA * 2) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)										
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
-										elseif sheet.EscolheAtaqueBasico == 'PF' then	
-											if sheet.AtualFlecha ~= 0 then									
-												sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
-												nodeExterno.AlvoRecebido = self.cmbInimigos.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-												nodeExterno.DanoRecebido = math.floor((sheet.PF * 2) * (1 - (DefAlvo / 100)))
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
-											else
-												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
-												nodeExterno.DanoRecebido = 0
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											end;
-										elseif sheet.EscolheAtaqueBasico == 'M/PM' then				
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM) * (1 - (RESAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
-										elseif sheet.EscolheAtaqueBasico == 'PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM * 2) + math.floor((sheet.PA * 2)) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
-										elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA * 2)) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
-										end;
-									else
-										if sheet.EscolheAtaqueBasico == 'PA' then
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PA) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
-										elseif sheet.EscolheAtaqueBasico == 'PF' then		
-											if sheet.AtualFlecha ~= 0 then									
-												sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
-												nodeExterno.AlvoRecebido = self.cmbInimigos.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-												nodeExterno.DanoRecebido = math.floor((sheet.PF) * (1 - (DefAlvo / 100)))
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
-											else
-												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
-												nodeExterno.DanoRecebido = 0
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											end;
-										elseif sheet.EscolheAtaqueBasico == 'M/PM' then				
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM / 2) * (1 - (RESAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
-										elseif sheet.EscolheAtaqueBasico == 'PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA)) * (1 - (RESAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
-										elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor(((sheet.PM / 2)) + math.floor((sheet.PA)) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
-										end;
-											
-									end;
-									
-								else
-									mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] Errou o ataque no oponente");
-									nodeExterno.DanoRecebido = 0
-									nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-								end;
-								
-						end); 
-					end;
-				end;
-
-				if sheet.cmbTipoDeGrupoF == "2" then   
-						-- obter a mesa do personagem
-					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
-					local mesas = rrpg.getRooms();
-					local bibliotecaAtual = mesas[1].library;
-
-						local function obterNomesRecursivo2(bibItem)
-							local itensFilhos = bibItem.children;
-							local nomes = bibItem.name;
-							
-							for i = 1, #itensFilhos, 1 do
-								local bibItemFilho = itensFilhos[i];
-								local nomesDoFilho = obterNomesRecursivo2(bibItemFilho) or "";
-
-								if nomesDoFilho == "Sistema de Combaate Velen" then
-									-- Obter ID do personagem Loan
-									local idPersonagem = self.cmbInimigos.value;
-									
-									-- Solicita acesso à ficha do personagem
-									local promise = bibItemFilho:asyncOpenNDB();
-
-									-- Aguarda até que a ficha esteja carregada
-									nodeExterno = await(promise);
-									
-									local nodesO = ndb.getChildNodes(nodeExterno.NomeJogador)								
-									
-									for _, node in ipairs(nodesO) do
-
-										if node.NomeDoPersonagemVez == idPersonagem then  -- Verifica se o campo NomeDoPersonagemVez existe
-											EsqAlvo = node.ESQ
-											RESAlvo = node.RES
-											DefAlvo = node.DEF
-										end
-									end
-								end
-							end
-							return nomes
-						end
-
-						local nomesDeTodosOsItens = obterNomesRecursivo2(bibliotecaAtual);
-
-						
-						------------------------------------------------------------------
-						
-						-- se o usuário não preencheu modificador, vamos usar o valor 0
-						sheet.Acerto = sheet.Acerto or 0;                        
-						if sheet.EscolheAtaqueBasico == nil then
-							showMessage("Escolha uma Base de Dano para seu Ataque Basico na lista acima");
-						else				
-							mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "[§K2]Ataque Basico",						
-								function (rolado)	
-								EsqAlvo = EsqAlvo + 1
+                        mesaDoPersonagem.chat:rolarDados("1d20 + " .. sheet.Acerto, "Ataque Basico",
+							function (rolado)
 								local soDado = rolado.resultado - sheet.acerto;
-									if rolado.resultado + sheet.acerto > EsqAlvo then
 									if soDado >= sheet.Critical then
 										if sheet.EscolheAtaqueBasico == 'PA' then
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PA * 2) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)									
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0] » CRITICAL :dinofauro:");
+											sheet.AtaqueBasicoDano = math.floor((sheet.PA * 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
 										elseif sheet.EscolheAtaqueBasico == 'PF' then	
 											if sheet.AtualFlecha ~= 0 then									
 												sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
-												nodeExterno.AlvoRecebido = self.cmbInimigos.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-												nodeExterno.DanoRecebido = math.floor((sheet.PF * 2) * (1 - (DefAlvo / 100)))
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
+												sheet.AtaqueBasicoDano = math.floor((sheet.PF * 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");											
 											else
-												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
-												nodeExterno.DanoRecebido = 0
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.Nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
 											end;
+										elseif sheet.EscolheAtaqueBasico == 'PM' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM * 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
+
+
+										elseif sheet.EscolheAtaqueBasico == 'PA+M/PA' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PA * 3))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
+										elseif sheet.EscolheAtaqueBasico == 'PF+M/PF' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PF * 3))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
+										elseif sheet.EscolheAtaqueBasico == 'PM+M/PM' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM * 3))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
+
+										elseif sheet.EscolheAtaqueBasico == 'M/PA' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PA))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
+										elseif sheet.EscolheAtaqueBasico == 'M/PF' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PF))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
 										elseif sheet.EscolheAtaqueBasico == 'M/PM' then				
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM) * (1 - (RESAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
-										elseif sheet.EscolheAtaqueBasico == 'PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM * 2) + math.floor((sheet.PA * 2)) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+
+										elseif sheet.EscolheAtaqueBasico == 'PA+PF' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PF) * 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
+										elseif sheet.EscolheAtaqueBasico == 'PF+PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PF + sheet.PM) * 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");								
+										elseif sheet.EscolheAtaqueBasico == 'PA+PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PM) * 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");
+
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+PF' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + (sheet.PF * 2))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + (sheet.PM * 2))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+										elseif sheet.EscolheAtaqueBasico == 'M/PF+PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PF + (sheet.PM * 2))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+										elseif sheet.EscolheAtaqueBasico == 'M/PF+PA' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PF + (sheet.PA * 2))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+										elseif sheet.EscolheAtaqueBasico == 'M/PM+PF' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PM + (sheet.PF * 2))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
 										elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA * 2)) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]» CRITICAL :dinofauro:");											
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PM + (sheet.PA * 2))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+M/PF' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PF)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+										elseif sheet.EscolheAtaqueBasico == 'M/PF+M/PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PF + sheet.PM)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+M/PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PM)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");	
+
+
+										elseif sheet.EscolheAtaqueBasico == 'Real PA' then								
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM + (sheet.PA * 2)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");										
+										elseif sheet.EscolheAtaqueBasico == 'Real PF' then								
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM + (sheet.PF * 2)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");										
+										elseif sheet.EscolheAtaqueBasico == 'Real PM' then								
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM + (sheet.PF * 2)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] » CRITICAL :dinofauro:");										
 										end;
 									else
 										if sheet.EscolheAtaqueBasico == 'PA' then
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PA) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
-										elseif sheet.EscolheAtaqueBasico == 'PF' then		
+											sheet.AtaqueBasicoDano = math.floor((sheet.PA))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+										elseif sheet.EscolheAtaqueBasico == 'PF' then	
 											if sheet.AtualFlecha ~= 0 then									
 												sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
-												nodeExterno.AlvoRecebido = self.cmbInimigos.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-												nodeExterno.DanoRecebido = math.floor((sheet.PF) * (1 - (DefAlvo / 100)))
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico a distancia « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");
+												sheet.AtaqueBasicoDano = math.floor((sheet.PF))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));											
 											else
-												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
-												nodeExterno.DanoRecebido = 0
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+												mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.Nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
 											end;
+										elseif sheet.EscolheAtaqueBasico == 'PM' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+
+										elseif sheet.EscolheAtaqueBasico == 'PA+M/PA' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PA * 1.5))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] »");
+										elseif sheet.EscolheAtaqueBasico == 'PF+M/PF' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PF * 1.5))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] »");
+										elseif sheet.EscolheAtaqueBasico == 'PM+M/PM' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM * 1.5))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] »");
+
+										elseif sheet.EscolheAtaqueBasico == 'M/PA' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PA / 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+										elseif sheet.EscolheAtaqueBasico == 'M/PF' then				
+											sheet.AtaqueBasicoDano = math.floor((sheet.PF / 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
 										elseif sheet.EscolheAtaqueBasico == 'M/PM' then				
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM / 2) * (1 - (RESAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
-										elseif sheet.EscolheAtaqueBasico == 'PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor((sheet.PM) + math.floor((sheet.PA)) * (1 - (RESAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM / 2))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+
+										elseif sheet.EscolheAtaqueBasico == 'PA+PF' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PF)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+										elseif sheet.EscolheAtaqueBasico == 'PF+PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PF + sheet.PM)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));								
+										elseif sheet.EscolheAtaqueBasico == 'PA+PM' then								
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PM)))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+PF' then								
+											sheet.AtaqueBasicoDano = math.floor((((sheet.PA / 2) + (sheet.PF))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+PM' then								
+											sheet.AtaqueBasicoDano = math.floor((((sheet.PA / 2) + (sheet.PM))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+										elseif sheet.EscolheAtaqueBasico == 'M/PF+PM' then								
+											sheet.AtaqueBasicoDano = math.floor((((sheet.PF / 2) + (sheet.PM))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+										elseif sheet.EscolheAtaqueBasico == 'M/PF+PA' then								
+											sheet.AtaqueBasicoDano = math.floor((((sheet.PF / 2) + (sheet.PA))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+										elseif sheet.EscolheAtaqueBasico == 'M/PM+PF' then								
+											sheet.AtaqueBasicoDano = math.floor((((sheet.PM / 2) + (sheet.PF))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
 										elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
-											nodeExterno.AlvoRecebido = self.cmbInimigos.value
-											nodeExterno.GrupoRecebido = self.cmbTipoGrupo.value
-											nodeExterno.DanoRecebido = math.floor(((sheet.PM / 2)) + math.floor((sheet.PA)) * (1 - (DefAlvo / 100)))
-											nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Metade do Poder Magico + Poder de Ataque « [§K4,0] " .. (nodeExterno.DanoRecebido) .. " [§K9,0]»");											
+											sheet.AtaqueBasicoDano = math.floor((((sheet.PM / 2) + (sheet.PA))))									
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+M/PF' then
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA / 2) + (sheet.PF / 2)))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+										elseif sheet.EscolheAtaqueBasico == 'M/PF+M/PM' then
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PF / 2) + (sheet.PM / 2)))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+										elseif sheet.EscolheAtaqueBasico == 'M/PA+M/PM' then
+											sheet.AtaqueBasicoDano = math.floor(((sheet.PA / 2) + (sheet.PM / 2)))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+
+										elseif sheet.EscolheAtaqueBasico == 'Real PA' then
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM + sheet.PA))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+										elseif sheet.EscolheAtaqueBasico == 'Real PF' then
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM + sheet.PF))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+										elseif sheet.EscolheAtaqueBasico == 'Real PM' then
+											sheet.AtaqueBasicoDano = math.floor((sheet.PM + sheet.PM))
+											mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
 										end;
 											
 									end;
-									
-								else
-									mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.nome) .. "[§K3] Errou o ataque no oponente");
-									nodeExterno.DanoRecebido = 0
-									nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-								end;
+
 							end); 
+				else				
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet); 
+					
+					if sheet.EscolheAtaqueBasico == 'PA' then
+						sheet.AtaqueBasicoDano = math.floor((sheet.PA))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+					elseif sheet.EscolheAtaqueBasico == 'PF' then	
+						if sheet.AtualFlecha ~= 0 then									
+							sheet.AtualFlecha = (tonumber(sheet.AtualFlecha) or 0) - 1;
+							sheet.AtaqueBasicoDano = math.floor((sheet.PF))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));											
+						else
+							mesaDoPersonagem.chat:enviarMensagem("[§K3]O [§K4]" .. (sheet.Nome) .. "[§K3] tentou puxar uma flecha e percebeu que estava sem na aljava");
 						end;
+					elseif sheet.EscolheAtaqueBasico == 'PM' then				
+						sheet.AtaqueBasicoDano = math.floor((sheet.PM))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+
+					elseif sheet.EscolheAtaqueBasico == 'M/PA' then				
+						sheet.AtaqueBasicoDano = math.floor((sheet.PA / 2))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+					elseif sheet.EscolheAtaqueBasico == 'M/PF' then				
+						sheet.AtaqueBasicoDano = math.floor((sheet.PF / 2))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+					elseif sheet.EscolheAtaqueBasico == 'M/PM' then				
+						sheet.AtaqueBasicoDano = math.floor((sheet.PM / 2))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+
+					elseif sheet.EscolheAtaqueBasico == 'PA+M/PA' then				
+						sheet.AtaqueBasicoDano = math.floor((sheet.PA * 1.5))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] »");
+					elseif sheet.EscolheAtaqueBasico == 'PF+M/PF' then				
+						sheet.AtaqueBasicoDano = math.floor((sheet.PF * 1.5))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] »");
+					elseif sheet.EscolheAtaqueBasico == 'PM+M/PM' then				
+						sheet.AtaqueBasicoDano = math.floor((sheet.PM * 1.5))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano) .. " [§K9,0] »");
+
+					elseif sheet.EscolheAtaqueBasico == 'PA+PF' then								
+						sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PF)))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+					elseif sheet.EscolheAtaqueBasico == 'PF+PM' then								
+						sheet.AtaqueBasicoDano = math.floor(((sheet.PF + sheet.PM)))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));								
+					elseif sheet.EscolheAtaqueBasico == 'PA+PM' then								
+						sheet.AtaqueBasicoDano = math.floor(((sheet.PA + sheet.PM)))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));
+
+					elseif sheet.EscolheAtaqueBasico == 'M/PA+PF' then								
+						sheet.AtaqueBasicoDano = math.floor((((sheet.PA / 2) + (sheet.PF))))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+					elseif sheet.EscolheAtaqueBasico == 'M/PA+PM' then								
+						sheet.AtaqueBasicoDano = math.floor((((sheet.PA / 2) + (sheet.PM))))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+					elseif sheet.EscolheAtaqueBasico == 'M/PF+PM' then								
+						sheet.AtaqueBasicoDano = math.floor((((sheet.PF / 2) + (sheet.PM))))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+					elseif sheet.EscolheAtaqueBasico == 'M/PF+PA' then								
+						sheet.AtaqueBasicoDano = math.floor((((sheet.PF / 2) + (sheet.PA))))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+					elseif sheet.EscolheAtaqueBasico == 'M/PM+PF' then								
+						sheet.AtaqueBasicoDano = math.floor((((sheet.PM / 2) + (sheet.PF))))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+					elseif sheet.EscolheAtaqueBasico == 'M/PM+PA' then								
+						sheet.AtaqueBasicoDano = math.floor((((sheet.PM / 2) + (sheet.PA))))									
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano));	
+
+					elseif sheet.EscolheAtaqueBasico == 'M/PA+M/PF' then
+						sheet.AtaqueBasicoDano = math.floor(((sheet.PA / 2) + (sheet.PF / 2)))
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+					elseif sheet.EscolheAtaqueBasico == 'M/PF+M/PM' then
+						sheet.AtaqueBasicoDano = math.floor(((sheet.PF / 2) + (sheet.PM / 2)))
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+					elseif sheet.EscolheAtaqueBasico == 'M/PA+M/PM' then
+						sheet.AtaqueBasicoDano = math.floor(((sheet.PA / 2) + (sheet.PM / 2)))
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+
+					elseif sheet.EscolheAtaqueBasico == 'Real PA' then
+						sheet.AtaqueBasicoDano = math.floor((sheet.PM + sheet.PA))
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+					elseif sheet.EscolheAtaqueBasico == 'Real PF' then
+						sheet.AtaqueBasicoDano = math.floor((sheet.PM + sheet.PF))
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
+					elseif sheet.EscolheAtaqueBasico == 'Real PM' then
+						sheet.AtaqueBasicoDano = math.floor((sheet.PM + sheet.PM))
+						mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando como Dano Fisico « [§K4,0] " .. (sheet.AtaqueBasicoDano))
 					end;
-				end;
+
+					nodeExterno.TipoRecebido = nil
+
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet)
+					sheet.Acerto = tonumber(sheet.Acerto) or 0
+					
+					nodeExterno.UsuarioEnvio = sheet.Nome
+					nodeExterno.AcertoDoJogador = sheet.Acerto
+					nodeExterno.UsuarioEnviouCusto = 0
+					nodeExterno.EscolheTipoAtaque = sheet.EscolheAtaqueBasico
+					nodeExterno.DanoRecebido = math.floor((sheet.AtaqueBasicoDano))
+					nodeExterno.VezdeQuem = sheet.Nome
+					
+					nodeExterno.AlvoRecebido = SelfcmbInimigosH
+					nodeExterno.GrupoRecebido = cmbTipoDeGrupoFH
+
+					nodeExterno.TesteDecidido = "AtaqueBasico"
+					nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
+					
+				end
+			end;
         
 
 
@@ -613,6 +619,15 @@ local function constructNew_frmVelenSobreposi()
 			(tonumber(sheet.PHPRacial) or 0) + (tonumber(sheet.PHPBasica) or 0) + (tonumber(sheet.HPRACAATE20) or 0) + (tonumber(sheet.CHPNivel) or 0) + 
 			(tonumber(sheet.EHPNivel) or 0) + (tonumber(sheet.HPRACAATE30) or 0)  + (tonumber(sheet.HPTotalEffectTotal) or 0));
 		end;
+
+		function GambiCalculaHPAtual()
+			if sheet.Level < 21 then
+				sheet.EHPNivel = 0;
+				sheet.HPRACAATE30 = 0;
+			end;
+			
+			
+		end;
 	
 
 
@@ -757,7 +772,18 @@ local function constructNew_frmVelenSobreposi()
 			
 				sheet.HPRACAATE20 = (tonumber(sheet.RHPNivelAte20) or 0) * 11;
 				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 17  + 200;
-			end;					
+			end;
+
+			if sheet.classe == 'Mago do Caos' then
+				sheet.RHPNivelAte20 = sheet.Level;
+			
+				if sheet.RHPNivelAte20 > 20 then
+					sheet.RHPNivelAte20 = 20;
+				end;
+			
+				sheet.HPRACAATE20 = (tonumber(sheet.RHPNivelAte20) or 0) * 7;
+				sheet.CHPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 9  + 140;
+			end;						
 		end;
 	
 
@@ -969,6 +995,25 @@ local function constructNew_frmVelenSobreposi()
 					
 					sheet.HPRACAATE30 = (tonumber(sheet.RHPNivelAte30) or 0) * 22;
 					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 28 + 600;
+				end;	
+			end;
+
+			if sheet.classe == 'Mago do Caos' then
+				if sheet.Level > 20 then
+					sheet.HPRACAATE30 = 0;        
+					sheet.RHPNivelAte30 = math.floor((sheet.Level) - 20);
+					sheet.EHPNivel = 0;	
+					
+					if sheet.RHPNivelAte30 > 10 then
+						sheet.RHPNivelAte30 = 10;
+					end;
+
+					if sheet.RHPNivelAte30 < 0 then
+						sheet.RHPNivelAte30 = 0;
+					end;
+					
+					sheet.HPRACAATE30 = (tonumber(sheet.RHPNivelAte30) or 0) * 18;
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 18 + 500;
 				end;	
 			end;
 		end;
@@ -1278,6 +1323,33 @@ local function constructNew_frmVelenSobreposi()
 					
 				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 3;
 				
+			end;	
+
+			if sheet.Classe == 'Mago do Caos' then
+				sheet.RHPNivelAte20 = sheet.Level;
+				
+				if sheet.RHPNivelAte20 > 20 then
+					sheet.RHPNivelAte20 = 20;
+				end;
+						
+				sheet.CMPNivel = (tonumber(sheet.RHPNivelAte20) or 0) * 4 + 125;
+				
+				if sheet.Level < 21 then
+					sheet.EMPNivel = 0;
+				end;	
+			 
+				sheet.RHPNivelAte30 = math.floor((sheet.Level) - 20);
+				
+				if sheet.RHPNivelAte30 > 10 then
+					sheet.RHPNivelAte30 = 10;
+				end;
+
+				if sheet.RHPNivelAte30 < 0 then
+					sheet.RHPNivelAte30 = 0;
+				end;	
+					
+				sheet.EMPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 5;
+				
 			end;			
 		end;
 	
@@ -1322,12 +1394,12 @@ local function constructNew_frmVelenSobreposi()
 			function StatusDeChances()			
 				sheet.DestrezaAcerto = math.floor((tonumber(sheet.DestrezaTotal) or 0) /4);
 					
-					sheet.AgilidadeESQ = math.floor((tonumber(sheet.AgilidadeTotal) or 0) /5);
-
-					sheet.ForcaPer =  ((tonumber(sheet.ForcaTotal) or 0) /30);
+					sheet.AgilidadeESQ = math.floor((tonumber(sheet.AgilidadeTotal) or 0) /4);
+					
+					sheet.AgiCR = math.floor((tonumber(sheet.AgilidadeTotal / 20) or 0));
+				
+					sheet.ForcaPer = ((tonumber(sheet.ForcaTotal) or 0) /20);
 						
-					sheet.Acerto = math.floor((tonumber(sheet.ClasseAcerto) or 0) + (tonumber(sheet.EspecAcerto) or 0) + (tonumber(sheet.DestrezaAcerto) or 0) + (tonumber(sheet.AcertoBasica) or 0) + (tonumber(sheet.AcertoRacial) or 0) + (tonumber(sheet.ConBoaMira) or 0) + (tonumber(sheet.ACEffectTotal) or 0)) ;
-
 					if sheet.Level > 20 then
 						sheet.AcertoMagico = math.floor((tonumber(sheet.ClasseAM) or 0) + (tonumber(sheet.EspecAM) or 0) + (tonumber(sheet.AMBasica) or 0) + (tonumber(sheet.ConMestreMagico) or 0) + (tonumber(sheet.AMRacial) or 0) + (tonumber(sheet.ACMEffectTotal) or 0));
 					else 
@@ -1335,15 +1407,15 @@ local function constructNew_frmVelenSobreposi()
 					end;
 					
 					if sheet.Level > 20 then
-						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.EspecCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0) + (tonumber(sheet.CREffectTotal) or 0));
+						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.EspecCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0) - (tonumber(sheet.CREffectTotal) or 0) - (tonumber(sheet.AgiCR) or 0));
 					else 
-						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0) + (tonumber(sheet.CREffectTotal) or 0));
+						sheet.Critical = math.floor((tonumber(sheet.ClasseCR) or 0) - (tonumber(sheet.CritBasica) or 0) - (tonumber(sheet.CritRacial) or 0) - (tonumber(sheet.ConEstrategista) or 0) - (tonumber(sheet.CREffectTotal) or 0) - (tonumber(sheet.AgiCR) or 0));
 					end;
 					
 					if sheet.Level > 20 then
-						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.EspecCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0) + (tonumber(sheet.CRMEffectTotal) or 0));
+						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.EspecCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0) + (tonumber(sheet.CRMEffectTotal) or 0) + (tonumber(sheet.AgiCR) or 0));
 					else 
-						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0) + (tonumber(sheet.CRMEffectTotal) or 0));
+						sheet.CMagico = math.floor((tonumber(sheet.ClasseCM) or 0) + (tonumber(sheet.CMBasica) or 0) + (tonumber(sheet.CMRacial) or 0) + (tonumber(sheet.ConCriticalMagico) or 0) + (tonumber(sheet.CRMEffectTotal) or 0) + (tonumber(sheet.AgiCR) or 0));
 					end;
 					
 					if sheet.Level > 20 then
@@ -1356,20 +1428,33 @@ local function constructNew_frmVelenSobreposi()
 						sheet.Persistencia = math.floor((tonumber(sheet.ClassePer) or 0) + (tonumber(sheet.EspecPer) or 0) + (tonumber(sheet.PersistBasica) or 0) + (tonumber(sheet.PersistRacial) or 0) + (tonumber(sheet.ForcaPer) or 0) + (tonumber(sheet.ConPersistente) or 0)  + (tonumber(sheet.PersEffectTotal) or 0)); 
 					else 
 						sheet.Persistencia = math.floor((tonumber(sheet.ClassePer) or 0) + (tonumber(sheet.PersistBasica) or 0) + (tonumber(sheet.PersistRacial) or 0) + (tonumber(sheet.ForcaPer) or 0) + (tonumber(sheet.ConPersistente) or 0)  + (tonumber(sheet.PersEffectTotal) or 0)); 
-					end;		
-						
-					if sheet.Esquiva > 14 then
-						sheet.Esquiva = 14;
-					end;
-							
-					if sheet.Acerto > 6 then
-						sheet.Acerto = 6;
 					end;
 					
-					if sheet.Persistencia > 5 then
-						sheet.Persistencia = 5;
-					end;	
-			end;
+
+					sheet.Acerto = math.floor((tonumber(sheet.ClasseAcerto) or 0) + (tonumber(sheet.EspecAcerto) or 0) + (tonumber(sheet.DestrezaAcerto) or 0) + (tonumber(sheet.AcertoBasica) or 0) + (tonumber(sheet.AcertoRacial) or 0) + (tonumber(sheet.ConBoaMira) or 0) + (tonumber(sheet.ACEffectTotal) or 0)) ;
+
+					if sheet.Classe == 'Ladino' then	
+						if sheet.Acerto > 9 then 
+							sheet.Acerto = 9
+						end;
+					else
+						if sheet.Acerto > 8 then 
+							sheet.Acerto = 8
+						end;
+					end;
+
+					if sheet.Classe == 'Ladino' then
+						if sheet.Esquiva > 14 then 
+							sheet.Esquiva = 14
+						end;
+					else
+						if sheet.Esquiva > 13 then 
+							sheet.Esquiva = 13
+						end;	
+					end;
+				end;
+
+				
 		
 
 
@@ -1390,9 +1475,81 @@ local function constructNew_frmVelenSobreposi()
 			sheet.ClasseCM = 0;
 			sheet.ClasseEsquiva = 0;
 			sheet.ClassePer = 0;
-		
+
+			if sheet.classe == 'Cavaleiro Draconico' then	
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 15;
+				sheet.ClasseCR = 20;
+				sheet.ClasseCM = 2;
+				sheet.ClasseEsquiva = 10;
+				sheet.ClassePer = 1;
+			end;
+
+			if sheet.classe == 'Mago do Caos' then	
+				sheet.ClasseAcerto = 1;
+				sheet.ClasseAM = 15;
+				sheet.ClasseCR = 20;
+				sheet.ClasseCM = 2;
+				sheet.ClasseEsquiva = 11;
+				sheet.ClassePer = 1;
+			end;
+
 					
 			if sheet.Classe == 'Animago' then					
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 16
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
+			end;	
+				
+			if sheet.Classe == 'Arqueiro' then
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 19
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
+			end;	
+				
+			if sheet.Classe == 'Bardo' then
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 16
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
+			end;	
+				
+			if sheet.Classe == 'Bispo' then
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 16
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
+			end;	
+				
+			if sheet.Classe == 'Caçador de Almas' then
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 2
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
+			end;	
+				
+			if sheet.Classe == 'Guerreiro' then
+				sheet.ClasseAcerto = 2
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 2	
+			end;	
+				
+			if sheet.Classe == 'Ladino' then
 				sheet.ClasseAcerto = 1
 				sheet.ClasseAM = 15
 				sheet.ClasseCR = 20
@@ -1401,95 +1558,41 @@ local function constructNew_frmVelenSobreposi()
 				sheet.ClassePer = 1		
 			end;	
 				
-			if sheet.Classe == 'Arqueiro' then
-				sheet.ClasseAcerto = 2;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
-			end;	
-				
-			if sheet.Classe == 'Bardo' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 16;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
-			end;	
-				
-			if sheet.Classe == 'Bispo' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 16;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
-			end;	
-				
-			if sheet.Classe == 'Caçador de Almas' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 2;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
-			end;	
-				
-			if sheet.Classe == 'Guerreiro' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 14;
-				sheet.ClasseCR = 19;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 2;
-			end;	
-				
-			if sheet.Classe == 'Ladino' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 12;
-				sheet.ClassePer = 1;
-			end;	
-				
 			if sheet.Classe == 'Mago' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 16;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 16
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
 
 			end;	
 				
 			if sheet.Classe == 'Mercenario' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR = 19;
-				sheet.ClasseCM = 2;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 2
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
 			end;	
 				
 			if sheet.Classe == 'Monge' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 12;
-				sheet.ClassePer = 1;
+				sheet.ClasseAcerto = 2
+				sheet.ClasseAM = 15
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
 			end;	
 				
 			if sheet.Classe == 'Paladino' then
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 15;
-				sheet.ClasseCR= 20;
-				sheet.ClasseCM = 1;
-				sheet.ClasseEsquiva = 11;
-				sheet.ClassePer = 1;
+				sheet.ClasseAcerto = 1
+				sheet.ClasseAM = 16
+				sheet.ClasseCR = 20
+				sheet.ClasseCM = 1
+				sheet.ClasseEsquiva = 10
+				sheet.ClassePer = 1		
 			end;
 		end;	
 	
@@ -1505,7 +1608,7 @@ local function constructNew_frmVelenSobreposi()
 
 
 		function self.StatusEspecAteLevel30() 
-			if sheet.Level < 20 then
+			if sheet.Level <= 20 then
 				sheet.EspecAcerto = 0;
 				sheet.EspecAM = 0;
 				sheet.EspecCR = 0;
@@ -1520,22 +1623,22 @@ local function constructNew_frmVelenSobreposi()
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
-				sheet.EspecPer = 0;							
+				sheet.EspecPer = 1;							
 			end;
 			
 			if sheet.Espec == 'Shaman' then
-				sheet.EspecAcerto = 0;
-				sheet.EspecAM = 0;
+				sheet.EspecAcerto = 1;
+				sheet.EspecAM = 1;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
-				sheet.EspecPer = 1;
+				sheet.EspecPer = 0;
 			end;
 			
 			if sheet.Espec == 'Caçador' then
 				sheet.EspecAcerto = 0;
 				sheet.EspecAM = 0;
-				sheet.EspecCR = 0;
+				sheet.EspecCR = 1;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 1;
 				sheet.EspecPer = 0;
@@ -1546,7 +1649,7 @@ local function constructNew_frmVelenSobreposi()
 				sheet.EspecAM = 0;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 1;
-				sheet.EspecEsquiva = 0;
+				sheet.EspecEsquiva = 1;
 				sheet.EspecPer = 0;
 			end;
 			
@@ -1555,22 +1658,22 @@ local function constructNew_frmVelenSobreposi()
 				sheet.EspecAM = 1;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
-				sheet.EspecEsquiva = 1;
-				sheet.EspecPer = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 1;
 			end;
 			
 			if sheet.Espec == 'Musicista da Guerra' then
-				sheet.EspecAcerto = 0;
+				sheet.EspecAcerto = 2;
 				sheet.EspecAM = 0;
 				sheet.EspecCR = 0;
-				sheet.EspecCM = 1;
+				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
 				sheet.EspecPer = 0;
 			end;
 			
 			if sheet.Espec == 'Necromance' then
 				sheet.EspecAcerto = 0;
-				sheet.EspecAM = 0;
+				sheet.EspecAM = 1;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 1;
 				sheet.EspecEsquiva = 0;
@@ -1601,11 +1704,11 @@ local function constructNew_frmVelenSobreposi()
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
-				sheet.EspecPer = 0;
+				sheet.EspecPer = 1;
 			end;
 			
 			if sheet.Espec == 'Tanker' then
-				sheet.EspecAcerto = 0;
+				sheet.EspecAcerto = 1;
 				sheet.EspecAM = 0;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
@@ -1614,26 +1717,26 @@ local function constructNew_frmVelenSobreposi()
 			end;
 			
 			if sheet.Espec == 'Acrobata' then
-				sheet.EspecAcerto = 0;
-				sheet.EspecAM = 1;
+				sheet.EspecAcerto = 1;
+				sheet.EspecAM = 0;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
-				sheet.EspecEsquiva = 0;
+				sheet.EspecEsquiva = 1;
 				sheet.EspecPer = 0;
 			end;
 			
 			if sheet.Espec == 'Assassino' then
 				sheet.EspecAcerto = 0;
-				sheet.EspecAM = 0;
-				sheet.EspecCR = 1;
-				sheet.EspecCM = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 1;
 				sheet.EspecEsquiva = 0;
 				sheet.EspecPer = 0;
 			end;
 			
 			if sheet.Espec == 'Arcanista' then
 				sheet.EspecAcerto = 0;
-				sheet.EspecAM = 1;
+				sheet.EspecAM = 2;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
@@ -1645,7 +1748,7 @@ local function constructNew_frmVelenSobreposi()
 				sheet.EspecAM = 1;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
-				sheet.EspecEsquiva = 0;
+				sheet.EspecEsquiva = 1;
 				sheet.EspecPer = 0;
 			end;
 			
@@ -1655,13 +1758,13 @@ local function constructNew_frmVelenSobreposi()
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
-				sheet.EspecPer = 0;
+				sheet.EspecPer = 1;
 			end;
 			
 			if sheet.Espec == 'Duelista' then
-				sheet.EspecAcerto = 0;
-				sheet.EspecAM = 0;
-				sheet.EspecCR = 1;
+				sheet.EspecAcerto = 1;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
 				sheet.EspecPer = 0;
@@ -1672,7 +1775,7 @@ local function constructNew_frmVelenSobreposi()
 				sheet.EspecAM = 0;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
-				sheet.EspecEsquiva = 0;
+				sheet.EspecEsquiva = 1;
 				sheet.EspecPer = 0;
 			end;
 			
@@ -1682,7 +1785,7 @@ local function constructNew_frmVelenSobreposi()
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
 				sheet.EspecEsquiva = 0;
-				sheet.EspecPer = 0;
+				sheet.EspecPer = 1;
 			end;
 			
 			if sheet.Espec == 'Guardião da Serenidade' then
@@ -1695,7 +1798,7 @@ local function constructNew_frmVelenSobreposi()
 			end;
 			
 			if sheet.Espec == 'Cavaleiro das Trevas' then
-				sheet.EspecAcerto = 0;
+				sheet.EspecAcerto = 1;
 				sheet.EspecAM = 0;
 				sheet.EspecCR = 0;
 				sheet.EspecCM = 1;
@@ -1707,7 +1810,25 @@ local function constructNew_frmVelenSobreposi()
 				sheet.EspecAcerto = 0;
 				sheet.EspecAM = 1;
 				sheet.EspecCR = 0;
+				sheet.EspecCM = 1;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+
+			if sheet.Espec == 'Cavaleiro Draconico' then
+				sheet.EspecAcerto = 1;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
 				sheet.EspecCM = 0;
+				sheet.EspecEsquiva = 0;
+				sheet.EspecPer = 0;
+			end;
+
+			if sheet.Espec == 'Mago do Caos' then
+				sheet.EspecAcerto = 0;
+				sheet.EspecAM = 1;
+				sheet.EspecCR = 0;
+				sheet.EspecCM = 1;
 				sheet.EspecEsquiva = 0;
 				sheet.EspecPer = 0;
 			end;
@@ -1725,18 +1846,8 @@ local function constructNew_frmVelenSobreposi()
 
  
 		function self.StatusClasseEspecialAteLevel20()	
-			if sheet.classe == 'Cavaleiro Draconico' then						
-				sheet.Deslocamento = 9;
-				sheet.Correndo = 18 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
-				sheet.visao = 10;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 14;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 2;
-				sheet.ClasseEsquiva = 10;
-				sheet.ClassePer = 1;
-			end;
+			
+			
 		end;
 	
 
@@ -1751,16 +1862,7 @@ local function constructNew_frmVelenSobreposi()
 
  
 		function self.StatusClasseEspecialAteLevel30()
-			if sheet.classe == 'Cavaleiro Draconico' then
-				if sheet.level > 20 then
-					sheet.EspecAcerto = 0;
-					sheet.EspecAM = 1;
-					sheet.EspecCR = 0;
-					sheet.EspecCM = 0;
-					sheet.EspecEsquiva = 0;
-					sheet.EspecPer = 0;
-				end;
-			end;
+			
 		end;
 	
 
@@ -1789,49 +1891,63 @@ local function constructNew_frmVelenSobreposi()
 				sheet.Deslocamento = 9;
 				sheet.Correndo = 18 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
 				sheet.visao = 10;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);	
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 8 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;	
 			end;
 			
 			if sheet.Raca == 'Elfo' then
 				sheet.Deslocamento = 8;
 				sheet.Correndo = 16 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
 				sheet.visao = 10;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 5 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 10 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;
 			end;					
 			
 			if sheet.Raca == 'Elfo Negro' then
 				sheet.Deslocamento = 10;
 				sheet.Correndo = 20 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
 				sheet.visao = 11;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);	
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 8 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;	
 			end;
 			
 			if sheet.Raca == 'Anão' then
 				sheet.Deslocamento = 7.5;
 				sheet.Correndo = 15 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
 				sheet.visao = 10;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);	
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 8 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;	
 			end;	
 			
 			if sheet.Raca == 'Orc' then
 				sheet.Deslocamento = 8.5;
 				sheet.Correndo = 17 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
 				sheet.visao = 10;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);	
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 8 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;	
 			end;
 			
 			if sheet.Raca == 'Kamael' then
 				sheet.Deslocamento = 8;
 				sheet.Correndo = 16 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
 				sheet.visao = 12;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 5 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 10 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;
 			end;
 			
 			if sheet.Raca == 'Thiefling' then
 				sheet.Deslocamento = 9;
 				sheet.Correndo = 18 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
 				sheet.visao = 11;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);	
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 8 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;	
+			end;
+			
+			if sheet.Classe == 'Cavaleiro Draconico' then
+				sheet.Deslocamento = 9;
+				sheet.Correndo = 18 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
+				sheet.visao = 11;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 8 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;	
+			end;
+			
+			if sheet.Classe == 'Mago do Caos' then
+				sheet.Deslocamento = 10;
+				sheet.Correndo = 20 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
+				sheet.visao = 10;
+				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 10 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0) + (tonumber(sheet.InteligenciaTotal / 10) or 0) ;	
 			end;
 		end;							
 	
@@ -1855,9 +1971,10 @@ local function constructNew_frmVelenSobreposi()
 					end;
 
 					if sheet.classe == 'Cavaleiro Draconico' then
-						self.cmbEspecializa.enabled = false;
-					else	
-					
+						self.cmbEspecializa.value = 'Cavaleiro Draconico';								
+					end;	
+					if sheet.classe == 'Mago do Caos' then
+						self.cmbEspecializa.value = 'Mago do Caos';							
 					end;	
 				end;
 			end;
@@ -2399,7 +2516,7 @@ local function constructNew_frmVelenSobreposi()
     obj.button12:setWidth(60);
     obj.button12:setOpacity(0.1);
     obj.button12:setHeight(60);
-    obj.button12:setVisible(false);
+    obj.button12:setVisible(true);
     obj.button12:setName("button12");
 
     obj.button13 = GUI.fromHandle(_obj_newObject("button"));
@@ -3133,6 +3250,15 @@ local function constructNew_frmVelenSobreposi()
             						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.2
             						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.2
             						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.2
+            						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.2
+            					end;
+            
+            
+            					if sheet.classe == 'Mago do Caos' then
+            						sheet.FNivel = (tonumber(sheet.Level) or 0) * 0.1
+            						sheet.INivel = (tonumber(sheet.Level) or 0) * 0.4
+            						sheet.DNivel = (tonumber(sheet.Level) or 0) * 0.2
+            						sheet.ANivel = (tonumber(sheet.Level) or 0) * 0.1
             						sheet.VNivel = (tonumber(sheet.Level) or 0) * 0.2
             					end;	
             				end;

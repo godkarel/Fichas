@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	<script>
+		function ConsegueAlvoExterno(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH)            
+			local mesaDoPersonagem = Firecast.getMesaDe(sheet);
+			local mesas = rrpg.getRooms();
+			local bibliotecaAtual = mesas[1].library;
+
+			local function obterNomesRecursivo(bibItem)
+				local itensFilhos = bibItem.children;
+				
+				for i = 1, #itensFilhos do
+					local bibItemFilho = itensFilhos[i];
+
+					if bibItemFilho.name == "Sistema de Combaate Velen" then
+						local idPersonagem = SelfcmbInimigosH;
+						local promise = bibItemFilho:asyncOpenNDB();
+						local nodeExterno = await(promise);
+						return nodeExterno;
+					else
+						local resultado = obterNomesRecursivo(bibItemFilho);
+						if resultado ~= nil then
+							return resultado;
+						end
+					end
+				end
+				return nil;
+			end
+
+			return obterNomesRecursivo(bibliotecaAtual);
+		end;         
+	</script>

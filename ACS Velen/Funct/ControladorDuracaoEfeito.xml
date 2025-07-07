@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	
+	<script>		
+		function DiminuiDuracaoEfeito(EffeitoVez)
+			EffeitoVez.DuraEffect = tonumber(EffeitoVez.DuraEffect) - 1
+		end
+
+		function AumentaDuracaoEfeito(EffeitoVez)
+			EffeitoVez.DuraEffect = tonumber(EffeitoVez.DuraEffect) + 1			
+		end
+
+
+		
+		
+	</script>
+	

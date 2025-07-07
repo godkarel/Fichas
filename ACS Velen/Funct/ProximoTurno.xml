@@ -1,50 +1,75 @@
-<?xml version="1.0" encoding="UTF-8"?>		
-	
-	<script>		
-		function ProximoTurno()
-			local minhaMesa = Firecast.getRoomOf(sheet)
-			local chat = minhaMesa.chat
-			acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
-			lista2 = criarEIncrementarLista();
-			
-			if acoes == nil then
-				acoes = sheet.AcaoAtual
-			end;
-			
-			if sheet.TurnoAtualControle == nil or sheet.TurnoAtualControle == "" then
-				sheet.TurnoAtualControle = 1
-			end;
+<script>
+    function ProximoTurno()
+        ASCPrincipal = sheet
+        local minhaMesa = Firecast.getRoomOf(sheet)
+        local chat = minhaMesa.chat
+        acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
+        lista2 = criarEIncrementarLista();
 
-			sheet.TurnoAtualControle = tonumber(sheet.TurnoAtualControle) + 1
+        if acoes == nil then
+            acoes = sheet.AcaoAtual
+        end;
 
-			chat:enviarNarracao("[§K4]TURNO [§K1]ALTERADO PELO MESTRE | [§K4]" .. sheet.TurnoAtualControle)
-						
-		end;
-		
-		<![CDATA[
-		function AnteriorTurno()
-			local minhaMesa = Firecast.getRoomOf(sheet)
-			local chat = minhaMesa.chat
-			acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
-			lista2 = criarEIncrementarLista();
-			
-			if acoes == nil then
-				acoes = sheet.AcaoAtual
-			end;
-			
-			if sheet.TurnoAtualControle == nil or sheet.TurnoAtualControle == "" then
-				sheet.TurnoAtualControle = 1
-			end;
+        if sheet.TurnoAtualControle == nil or sheet.TurnoAtualControle == "" then
+            sheet.TurnoAtualControle = 1
+        end;
 
-			sheet.TurnoAtualControle = tonumber(sheet.TurnoAtualControle) - 1
+        sheet.TurnoAtualControle = tonumber(sheet.TurnoAtualControle) + 1
 
-			if sheet.TurnoAtualControle < 0 then
-				sheet.TurnoAtualControle = 0
-			end;
+        chat:enviarNarracao("[§K4]TURNO [§K1]ALTERADO PELO MESTRE | [§K4]" .. sheet.TurnoAtualControle)
 
-			chat:enviarNarracao("[§K4]TURNO [§K1]ALTERADO PELO MESTRE | [§K4]" .. sheet.TurnoAtualControle)
-						
-		end;
-		]]>
-		
-	</script>
+        -- [[ INÍCIO DA MODIFICAÇÃO COM CALLBACK ]] --
+
+        -- 1. Chamamos a primeira função e passamos a segunda como callback.
+        SincronizaUmJogadorPorVezProximo(ndb.getChildNodes(ASCPrincipal.NomeJogador), function()
+            -- 2. Este código só será executado DEPOIS que a função acima
+            --    terminar 100% sua sincronização.
+        end)
+		 SincronizaUmOponentePorVezProximo(ndb.getChildNodes(ASCPrincipal.NomeOponentes), function()
+			showMessage(0)
+            -- 2. Este código só será executado DEPOIS que a função acima
+            --    terminar 100% sua sincronização.
+        end)
+
+        -- [[ FIM DA MODIFICAÇÃO COM CALLBACK ]] --
+    end
+
+    <![CDATA[
+    function AnteriorTurno()
+        -- (código da função AnteriorTurno permanece o mesmo)
+        local minhaMesa = Firecast.getRoomOf(sheet)
+        local chat = minhaMesa.chat
+        acoes = {"Ação De Buff", "Ação de Ataque", "Ação de Defesa"}
+        lista2 = criarEIncrementarLista();
+
+        if acoes == nil then
+            acoes = sheet.AcaoAtual
+        end;
+
+        if sheet.TurnoAtualControle == nil or sheet.TurnoAtualControle == "" then
+            sheet.TurnoAtualControle = 1
+        end;
+
+        sheet.TurnoAtualControle = tonumber(sheet.TurnoAtualControle) - 1
+
+        if sheet.TurnoAtualControle < 0 then
+            sheet.TurnoAtualControle = 0
+        end;
+
+        chat:enviarNarracao("[§K4]TURNO [§K1]ALTERADO PELO MESTRE | [§K4]" .. sheet.TurnoAtualControle)
+		-- [[ INÍCIO DA MODIFICAÇÃO COM CALLBACK ]] --
+
+        -- 1. Chamamos a primeira função e passamos a segunda como callback.
+        SincronizaUmJogadorPorVezAnterior(ndb.getChildNodes(ASCPrincipal.NomeJogador), function()
+            -- 2. Este código só será executado DEPOIS que a função acima
+            --    terminar 100% sua sincronização.
+        end)
+		        SincronizaUmOponentePorVezAnterior(ndb.getChildNodes(ASCPrincipal.NomeOponentes), function()
+            -- 2. Este código só será executado DEPOIS que a função acima
+            --    terminar 100% sua sincronização.)
+        end)
+
+        -- [[ FIM DA MODIFICAÇÃO COM CALLBACK ]] --
+    end;
+    ]]>
+</script>

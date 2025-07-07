@@ -3,18 +3,8 @@
 <script>		
 	<![CDATA[ 
 		function self.StatusClasseEspecialAteLevel20()	
-			if sheet.classe == 'Cavaleiro Draconico' then						
-				sheet.Deslocamento = 9;
-				sheet.Correndo = 18 + (tonumber(sheet.CorridaBasica) or 0) + (tonumber(sheet.ConMeioMaratonista) or 0);
-				sheet.visao = 10;
-				sheet.RegenMP = (tonumber(sheet.VitalidadeTotal / 5) or 0) + 4 + (tonumber(sheet.REGMPBasica) or 0) + (tonumber(sheet.OutraRegenMP) or 0) + (tonumber(sheet.ConTaRegenerando) or 0);
-				sheet.ClasseAcerto = 1;
-				sheet.ClasseAM = 14;
-				sheet.ClasseCR = 20;
-				sheet.ClasseCM = 2;
-				sheet.ClasseEsquiva = 10;
-				sheet.ClassePer = 1;
-			end;
+			
+			
 		end;
 	]]>		
     </script>

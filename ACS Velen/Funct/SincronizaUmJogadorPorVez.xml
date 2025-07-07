@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	
+<script>
+    function SincronizaUmJogadorPorVezProximo(FamosoGrupoAlvo)
+        for i, oponente in ipairs(FamosoGrupoAlvo) do
+            SelfFichPrincipalASC.rclGrupoJogadores.selectedNode = oponente
+			RclSelecionadoDaVez = SelfFichPrincipalASC.rclGrupoJogadores.selectedNode
+
+            if RclSelecionadoDaVez.GlobalTurnoAnterior ~= ASCPrincipal.TurnoAtualControle then
+                if ASCPrincipal ~= nil then
+                    if sheet.ExpiraEffect ~= ASCPrincipal.TurnoAtualControle then
+                        if RclSelecionadoDaVez ~= nil then
+                            RclSelecionadoDaVez.DanoEffectTotal = 0
+                            RclSelecionadoDaVez.CustoEffectTotal = 0
+                            RclSelecionadoDaVez.CuraEffectTotal = 0
+                            RclSelecionadoDaVez.RegMPEffectTotal = 0
+                            if RclSelecionadoDaVez ~= nil then
+                                local nodes = ndb.getChildNodes(RclSelecionadoDaVez.listaBuffs) -- Substitua pelo campo correto
+                                for _, node in ipairs(nodes) do
+                                    RclSelecionadoDaVez.DanoEffectTotal = tonumber(RclSelecionadoDaVez.DanoEffectTotal or 0) + tonumber(node.DanoEffect or 0)
+                                    RclSelecionadoDaVez.CustoEffectTotal = tonumber(RclSelecionadoDaVez.CustoEffectTotal or 0) + tonumber(node.CustoEffect or 0)
+                                    RclSelecionadoDaVez.CuraEffectTotal = tonumber(RclSelecionadoDaVez.CuraEffectTotal or 0) + tonumber(node.CuraEffect or 0)
+                                    RclSelecionadoDaVez.RegMPEffectTotal = tonumber(RclSelecionadoDaVez.RegMPEffectTotal or 0) + tonumber(node.RegMPEffect or 0)
+                                    DiminuiDuracaoEfeito(node)
+                                end
+                            end
+                        end;
+                    end;
+                end;
+                
+                RclSelecionadoDaVez.HPBar = tonumber(math.floor(RclSelecionadoDaVez.HPBar) - (RclSelecionadoDaVez.DanoEffectTotal) or 0);
+                RclSelecionadoDaVez.MPBar = tonumber(math.floor(RclSelecionadoDaVez.MPBar) - (RclSelecionadoDaVez.CustoEffectTotal) or 0);
+                RclSelecionadoDaVez.HPBar = tonumber(math.floor(RclSelecionadoDaVez.HPBar) + (RclSelecionadoDaVez.CuraEffectTotal) or 0);
+                RclSelecionadoDaVez.MPBar = tonumber(math.floor(RclSelecionadoDaVez.MPBar) + (RclSelecionadoDaVez.RegMPEffectTotal) or 0);
+
+                -- 1. Chamamos a primeira função e passamos a segunda como callback.
+                SincronizaJogadorTurno((RclSelecionadoDaVez), function()
+
+                end)
+                
+            end;
+            
+        end
+        RclSelecionadoDaVez.GlobalTurnoAnterior = tonumber(ASCPrincipal.TurnoAtualControle or 0)
+    end
+
+    function SincronizaUmJogadorPorVezAnterior(FamosoGrupoAlvo)
+        for i, oponente in ipairs(FamosoGrupoAlvo) do
+            SelfFichPrincipalASC.rclGrupoJogadores.selectedNode = oponente
+			RclSelecionadoDaVez = SelfFichPrincipalASC.rclGrupoJogadores.selectedNode
+
+            if RclSelecionadoDaVez.GlobalTurnoAnterior ~= ASCPrincipal.TurnoAtualControle then
+                if ASCPrincipal ~= nil then
+                    if sheet.ExpiraEffect ~= ASCPrincipal.TurnoAtualControle then
+                        if RclSelecionadoDaVez ~= nil then
+                            RclSelecionadoDaVez.DanoEffectTotal = 0
+                            RclSelecionadoDaVez.CustoEffectTotal = 0
+                            RclSelecionadoDaVez.CuraEffectTotal = 0
+                            RclSelecionadoDaVez.RegMPEffectTotal = 0
+                            if RclSelecionadoDaVez ~= nil then
+                                local nodes = ndb.getChildNodes(RclSelecionadoDaVez.listaBuffs) -- Substitua pelo campo correto
+                                for _, node in ipairs(nodes) do
+                                    RclSelecionadoDaVez.DanoEffectTotal = tonumber(RclSelecionadoDaVez.DanoEffectTotal or 0) + tonumber(node.DanoEffect or 0)
+                                    RclSelecionadoDaVez.CustoEffectTotal = tonumber(RclSelecionadoDaVez.CustoEffectTotal or 0) + tonumber(node.CustoEffect or 0)
+                                    RclSelecionadoDaVez.CuraEffectTotal = tonumber(RclSelecionadoDaVez.CuraEffectTotal or 0) + tonumber(node.CuraEffect or 0)
+                                    RclSelecionadoDaVez.RegMPEffectTotal = tonumber(RclSelecionadoDaVez.RegMPEffectTotal or 0) + tonumber(node.RegMPEffect or 0)
+                                    AumentaDuracaoEfeito(node)
+                                end
+                            end
+                        end;
+                    end;
+                end;
+                
+                RclSelecionadoDaVez.HPBar = tonumber(math.floor(RclSelecionadoDaVez.HPBar) + (RclSelecionadoDaVez.DanoEffectTotal) or 0);
+                RclSelecionadoDaVez.MPBar = tonumber(math.floor(RclSelecionadoDaVez.MPBar) + (RclSelecionadoDaVez.CustoEffectTotal) or 0);
+                RclSelecionadoDaVez.HPBar = tonumber(math.floor(RclSelecionadoDaVez.HPBar) - (RclSelecionadoDaVez.CuraEffectTotal) or 0);
+                RclSelecionadoDaVez.MPBar = tonumber(math.floor(RclSelecionadoDaVez.MPBar) - (RclSelecionadoDaVez.RegMPEffectTotal) or 0);
+
+                -- 1. Chamamos a primeira função e passamos a segunda como callback.
+                SincronizaJogadorTurno((RclSelecionadoDaVez), function()
+
+                end)
+                
+            end;
+            
+        end
+        RclSelecionadoDaVez.GlobalTurnoAnterior = tonumber(ASCPrincipal.TurnoAtualControle or 0)
+    end
+</script>
+

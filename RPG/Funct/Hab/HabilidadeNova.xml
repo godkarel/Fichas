@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	<script>
+				function RolarHabilidadeNovo(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab)            
+					SincronizaTurnoEfeito()
+					if OpcaoHab == nil or OpcaoHab == "" then
+
+						showMessage("Escolha uma opção para sua habilidade")
+
+					elseif OpcaoHab == "Ofensiva" or OpcaoHab == "Defensiva" then
+
+						if nodeHabilidade.NomeHabilidade == 'Defender' or nodeHabilidade.NomeHabilidade == 'Defender(Nível Unico)' then 
+
+							ProcuraHabilidadeEspecifica(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+						elseif SelfcmbInimigosH == 'Alvo Simulado' then
+
+							ExecutaAlvoSimulado(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+						elseif nodeHabilidade.DanoAtributo1 == 'Cura' or nodeHabilidade.DanoAtributo1 == 'Cura Fixa' then
+
+							ExecutaHabilidadeCura(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+						elseif SelfcmbInimigosH == "Dano em Área" or SelfcmbInimigosH == "Cura em Área" then
+
+							ExecutaHabilidadeHabilidadeEmArea(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+						else 
+
+							ExecutaHabilidadeHabilidadeNormal(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+						end;
+
+					elseif OpcaoHab == "Cura" then
+
+						ExecutaHabilidadeCura(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+					elseif OpcaoHab == "Cura em Area" then
+
+						ExecutaHabilidadeHabilidadeEmArea(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+					elseif OpcaoHab == "Dano em Area" then
+
+						ExecutaHabilidadeHabilidadeEmArea(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab) 
+
+					end;
+
+					
+				end;               
+	</script>
+

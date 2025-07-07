@@ -7,7 +7,7 @@ require("ndb.lua");
 require("locale.lua");
 local __o_Utils = require("utils.lua");
 
-local function constructNew_frmEffect()
+local function constructNew_frmBuff()
     local obj = GUI.fromHandle(_obj_newObject("form"));
     local self = obj;
     local sheet = nil;
@@ -26,25 +26,202 @@ local function constructNew_frmEffect()
 
     _gui_assignInitialParentForForm(obj.handle);
     obj:beginUpdate();
-    obj:setName("frmEffect");
-    obj:setHeight(50);
-    obj:setWidth(100);
+    obj:setName("frmBuff");
+    obj:setHeight(45);
+    obj:setWidth(200);
+
+    obj.image1 = GUI.fromHandle(_obj_newObject("image"));
+    obj.image1:setParent(obj);
+    obj.image1:setAlign("left");
+    obj.image1:setTop(15);
+    obj.image1:setWidth(40);
+    obj.image1:setHeight(30);
+    obj.image1:setVisible(true);
+    obj.image1:setField("fldImgIconEffect");
+    obj.image1:setName("image1");
 
     obj.label1 = GUI.fromHandle(_obj_newObject("label"));
     obj.label1:setParent(obj);
     obj.label1:setAlign("client");
     obj.label1:setText("Teste de label");
-    obj.label1:setField("NomeEfeito");
+    obj.label1:setField("NomeDOEfeito");
     obj.label1:setMargins({left=4, right=4, top=4, bottom=4});
     obj.label1:setName("label1");
 
     obj.dataLink1 = GUI.fromHandle(_obj_newObject("dataLink"));
     obj.dataLink1:setParent(obj);
-    obj.dataLink1:setField("NomeEfeito");
-    obj.dataLink1:setDefaultValue("Titulo Aqui");
+    obj.dataLink1:setField("NomeDoEfeito");
+    obj.dataLink1:setDefaultValue("Nome do Efeito");
     obj.dataLink1:setName("dataLink1");
 
+    obj.dataLink2 = GUI.fromHandle(_obj_newObject("dataLink"));
+    obj.dataLink2:setParent(obj);
+    obj.dataLink2:setFields({'DuraEffect', 'CDEffect', 'ContaEffect', 'TipoEffect', 'ExpiraEffect'});
+    obj.dataLink2:setName("dataLink2");
+
+    obj.dataLink3 = GUI.fromHandle(_obj_newObject("dataLink"));
+    obj.dataLink3:setParent(obj);
+    obj.dataLink3:setFields({'PAEffect', 'PMEffect', 'PFEffect', 'DEFEffect', 'RESEffect', 
+                   'ACEffect', 'ACMEffect', 'CREffect', 'CRMEffect', 'DadoEffect', 
+                   'ESQEffect', 'PersEffect', 'VezEffect', 'ManaEffect', 'CDEffect', 
+                   'DuraEffect', 'ContaEffect', 'TipoEffect', 'ExpiraEffect', 
+                   'DanoEffect', 'HPTotalEffect', 'MPTotalEffect'});
+    obj.dataLink3:setName("dataLink3");
+
+    obj._e_event0 = obj.dataLink2:addEventListener("onChange",
+        function (field, oldValue, newValue)
+            if ASCPrincipal ~= nil then
+                                            if sheet.DuraEffect ~= nil and sheet.DuraEffect ~= "" and sheet.DuraEffect >= 0 then
+                                                    sheet.ExpiraEffect = tonumber(sheet.DuraEffect) + tonumber(ASCPrincipal.TurnoAtualControle) or 0
+                                            end
+                                    end;
+                                                            
+                                    
+            
+                                    if ASCPrincipal ~= nil then
+                                            if sheet.ExpiraEffect == ASCPrincipal.TurnoAtualControle then  
+                                                    sheet.PAEffect = 0
+                                                    sheet.PMEffect = 0
+                                                    sheet.PFEffect = 0
+                                                    sheet.DEFEffect = 0
+                                                    sheet.RESEffect = 0
+                                                    sheet.ACEffect = 0
+                                                    sheet.ACMEffect = 0
+                                                    sheet.CREffect = 0
+                                                    sheet.CRMEffect = 0
+                                                    sheet.DadoEffect = 0
+                                                    sheet.ESQEffect = 0
+                                                    sheet.PersEffect = 0
+                                                    sheet.ManaEffect = 0
+                                                    sheet.CDEffect = 0
+                                                    sheet.TipoEffect = 0
+                                                    sheet.HPTotalEffect = 0
+                                                    sheet.MPTotalEffect = 0  
+                                                    sheet.DanoEffect = 0
+                                                    sheet.CustoEffect = 0 
+                                                    sheet.CuraEffect = 0  
+                                                    sheet.RegMPEffect = 0                                
+            
+                                                    if RclSelecionadoDaVez ~= nil then  
+                                                    RclSelecionadoDaVez.PAEffectTotal = 0
+                                                    RclSelecionadoDaVez.PMEffectTotal = 0
+                                                    RclSelecionadoDaVez.PFEffectTotal = 0
+                                                    RclSelecionadoDaVez.DEFEffectTotal = 0
+                                                    RclSelecionadoDaVez.RESEffectTotal = 0
+                                                    RclSelecionadoDaVez.ACEffectTotal = 0
+                                                    RclSelecionadoDaVez.ACMEffectTotal = 0
+                                                    RclSelecionadoDaVez.CREffectTotal = 0
+                                                    RclSelecionadoDaVez.CRMEffectTotal = 0
+                                                    RclSelecionadoDaVez.DadoEffectTotal = 0
+                                                    RclSelecionadoDaVez.ESQEffectTotal = 0
+                                                    RclSelecionadoDaVez.PersEffectTotal = 0
+                                                    RclSelecionadoDaVez.ManaEffectTotal = 0
+                                                    RclSelecionadoDaVez.CDEffectTotal = 0
+                                                    RclSelecionadoDaVez.TipoEffectTotal = 0
+                                                    RclSelecionadoDaVez.HPTotalEffectTotal = 0
+                                                    RclSelecionadoDaVez.MPTotalEffectTotal = 0
+                                                    RclSelecionadoDaVez.DanoEffectTotal = 0
+                                                    RclSelecionadoDaVez.CustoEffectTotal = 0
+                                                    RclSelecionadoDaVez.CuraEffectTotal = 0												
+                                                    RclSelecionadoDaVez.RegMPEffectTotal = 0
+                                                    
+                                                    if RclSelecionadoBuff ~= nil then                     
+                                                            local nodes = ndb.getChildNodes(RclSelecionadoBuff) -- Substitua pelo campo correto
+                                                            for _, node in ipairs(nodes) do
+                                                                    RclSelecionadoDaVez.PAEffectTotal = tonumber(RclSelecionadoDaVez.PAEffectTotal or 0) + tonumber(node.PAEffect or 0)
+                                                                    RclSelecionadoDaVez.PMEffectTotal = tonumber(RclSelecionadoDaVez.PMEffectTotal or 0) + tonumber(node.PMEffect or 0)
+                                                                    RclSelecionadoDaVez.PFEffectTotal = tonumber(RclSelecionadoDaVez.PFEffectTotal or 0) + tonumber(node.PFEffect or 0)
+                                                                    RclSelecionadoDaVez.DEFEffectTotal = tonumber(RclSelecionadoDaVez.DEFEffectTotal or 0) + tonumber(node.DEFEffect or 0)
+                                                                    RclSelecionadoDaVez.RESEffectTotal = tonumber(RclSelecionadoDaVez.RESEffectTotal or 0) + tonumber(node.RESEffect or 0)
+                                                                    RclSelecionadoDaVez.ACEffectTotal = tonumber(RclSelecionadoDaVez.ACEffectTotal or 0) + tonumber(node.ACEffect or 0)
+                                                                    RclSelecionadoDaVez.ACMEffectTotal = tonumber(RclSelecionadoDaVez.ACMEffectTotal or 0) + tonumber(node.ACMEffect or 0)
+                                                                    RclSelecionadoDaVez.CREffectTotal = tonumber(RclSelecionadoDaVez.CREffectTotal or 0) + tonumber(node.CREffect or 0)
+                                                                    RclSelecionadoDaVez.CRMEffectTotal = tonumber(RclSelecionadoDaVez.CRMEffectTotal or 0) + tonumber(node.CRMEffect or 0)
+                                                                    RclSelecionadoDaVez.DadoEffectTotal = tonumber(RclSelecionadoDaVez.DadoEffectTotal or 0) + tonumber(node.DadoEffect or 0)
+                                                                    RclSelecionadoDaVez.ESQEffectTotal = tonumber(RclSelecionadoDaVez.ESQEffectTotal or 0) + tonumber(node.ESQEffect or 0)
+                                                                    RclSelecionadoDaVez.PersEffectTotal = tonumber(RclSelecionadoDaVez.PersEffectTotal or 0) + tonumber(node.PersEffect or 0)
+                                                                    RclSelecionadoDaVez.ManaEffectTotal = tonumber(RclSelecionadoDaVez.ManaEffectTotal or 0) + tonumber(node.ManaEffect or 0)
+                                                                    RclSelecionadoDaVez.CDEffectTotal = tonumber(RclSelecionadoDaVez.CDEffectTotal or 0) + tonumber(node.CDEffect or 0)
+                                                                    RclSelecionadoDaVez.TipoEffectTotal = tonumber(RclSelecionadoDaVez.TipoEffectTotal or 0) + tonumber(node.TipoEffect or 0)
+                                                                    RclSelecionadoDaVez.HPTotalEffectTotal = tonumber(RclSelecionadoDaVez.HPTotalEffectTotal or 0) + tonumber(node.HPTotalEffect or 0)
+                                                                    RclSelecionadoDaVez.MPTotalEffectTotal = tonumber(RclSelecionadoDaVez.MPTotalEffectTotal or 0) + tonumber(node.MPTotalEffect or 0)
+                                                                    RclSelecionadoDaVez.DanoEffectTotal = tonumber(RclSelecionadoDaVez.DanoEffectTotal or 0) + tonumber(node.DanoEffect or 0)
+                                                                    RclSelecionadoDaVez.CustoEffectTotal = tonumber(RclSelecionadoDaVez.CustoEffectTotal or 0) + tonumber(node.CustoEffect or 0)
+                                                                    RclSelecionadoDaVez.CuraEffectTotal = tonumber(RclSelecionadoDaVez.CuraEffectTotal or 0) + tonumber(node.CuraEffect or 0)												
+                                                                    RclSelecionadoDaVez.RegMPEffectTotal = tonumber(RclSelecionadoDaVez.RegMPEffectTotal or 0) + tonumber(node.RegMPEffect or 0)	
+                                                                    
+                                                            end
+                                                    end
+            
+                                                    
+                                            end;                    
+                                                    ndb.deleteNode(sheet)                
+                                            end;
+                                            
+                                    end;
+        end);
+
+    obj._e_event1 = obj.dataLink3:addEventListener("onChange",
+        function (field, oldValue, newValue)
+            if RclSelecionadoBuff ~= nil then        
+                                    -- Acessa o RecordList do grupo de jogadores
+                                    RclSelecionadoDaVez.PAEffectTotal = 0
+                                    RclSelecionadoDaVez.PMEffectTotal = 0
+                                    RclSelecionadoDaVez.PFEffectTotal = 0
+                                    RclSelecionadoDaVez.DEFEffectTotal = 0
+                                    RclSelecionadoDaVez.RESEffectTotal = 0
+                                    RclSelecionadoDaVez.ACEffectTotal = 0
+                                    RclSelecionadoDaVez.ACMEffectTotal = 0
+                                    RclSelecionadoDaVez.CREffectTotal = 0
+                                    RclSelecionadoDaVez.CRMEffectTotal = 0
+                                    RclSelecionadoDaVez.DadoEffectTotal = 0
+                                    RclSelecionadoDaVez.ESQEffectTotal = 0
+                                    RclSelecionadoDaVez.PersEffectTotal = 0
+                                    RclSelecionadoDaVez.ManaEffectTotal = 0
+                                    RclSelecionadoDaVez.CDEffectTotal = 0
+                                    RclSelecionadoDaVez.TipoEffectTotal = 0
+                                    RclSelecionadoDaVez.HPTotalEffectTotal = 0
+                                    RclSelecionadoDaVez.MPTotalEffectTotal = 0
+                                    RclSelecionadoDaVez.DanoEffectTotal = 0
+                                    RclSelecionadoDaVez.CustoEffectTotal = 0
+                                    RclSelecionadoDaVez.CuraEffectTotal = 0												
+                                    RclSelecionadoDaVez.RegMPEffectTotal = 0
+                                    
+                                    if RclSelecionadoBuff ~= nil then                     
+                                            local nodes = ndb.getChildNodes(RclSelecionadoBuff) -- Substitua pelo campo correto
+                                            for _, node in ipairs(nodes) do
+                                                    RclSelecionadoDaVez.PAEffectTotal = tonumber(RclSelecionadoDaVez.PAEffectTotal or 0) + tonumber(node.PAEffect or 0)
+                                                    RclSelecionadoDaVez.PMEffectTotal = tonumber(RclSelecionadoDaVez.PMEffectTotal or 0) + tonumber(node.PMEffect or 0)
+                                                    RclSelecionadoDaVez.PFEffectTotal = tonumber(RclSelecionadoDaVez.PFEffectTotal or 0) + tonumber(node.PFEffect or 0)
+                                                    RclSelecionadoDaVez.DEFEffectTotal = tonumber(RclSelecionadoDaVez.DEFEffectTotal or 0) + tonumber(node.DEFEffect or 0)
+                                                    RclSelecionadoDaVez.RESEffectTotal = tonumber(RclSelecionadoDaVez.RESEffectTotal or 0) + tonumber(node.RESEffect or 0)
+                                                    RclSelecionadoDaVez.ACEffectTotal = tonumber(RclSelecionadoDaVez.ACEffectTotal or 0) + tonumber(node.ACEffect or 0)
+                                                    RclSelecionadoDaVez.ACMEffectTotal = tonumber(RclSelecionadoDaVez.ACMEffectTotal or 0) + tonumber(node.ACMEffect or 0)
+                                                    RclSelecionadoDaVez.CREffectTotal = tonumber(RclSelecionadoDaVez.CREffectTotal or 0) + tonumber(node.CREffect or 0)
+                                                    RclSelecionadoDaVez.CRMEffectTotal = tonumber(RclSelecionadoDaVez.CRMEffectTotal or 0) + tonumber(node.CRMEffect or 0)
+                                                    RclSelecionadoDaVez.DadoEffectTotal = tonumber(RclSelecionadoDaVez.DadoEffectTotal or 0) + tonumber(node.DadoEffect or 0)
+                                                    RclSelecionadoDaVez.ESQEffectTotal = tonumber(RclSelecionadoDaVez.ESQEffectTotal or 0) + tonumber(node.ESQEffect or 0)
+                                                    RclSelecionadoDaVez.PersEffectTotal = tonumber(RclSelecionadoDaVez.PersEffectTotal or 0) + tonumber(node.PersEffect or 0)
+                                                    RclSelecionadoDaVez.ManaEffectTotal = tonumber(RclSelecionadoDaVez.ManaEffectTotal or 0) + tonumber(node.ManaEffect or 0)
+                                                    RclSelecionadoDaVez.CDEffectTotal = tonumber(RclSelecionadoDaVez.CDEffectTotal or 0) + tonumber(node.CDEffect or 0)
+                                                    RclSelecionadoDaVez.TipoEffectTotal = tonumber(RclSelecionadoDaVez.TipoEffectTotal or 0) + tonumber(node.TipoEffect or 0)
+                                                    RclSelecionadoDaVez.HPTotalEffectTotal = tonumber(RclSelecionadoDaVez.HPTotalEffectTotal or 0) + tonumber(node.HPTotalEffect or 0)
+                                                    RclSelecionadoDaVez.MPTotalEffectTotal = tonumber(RclSelecionadoDaVez.MPTotalEffectTotal or 0) + tonumber(node.MPTotalEffect or 0)
+                                                    RclSelecionadoDaVez.DanoEffectTotal = tonumber(RclSelecionadoDaVez.DanoEffectTotal or 0) + tonumber(node.DanoEffect or 0)
+                                                    RclSelecionadoDaVez.CustoEffectTotal = tonumber(RclSelecionadoDaVez.CustoEffectTotal or 0) + tonumber(node.CustoEffect or 0)
+                                                    RclSelecionadoDaVez.CuraEffectTotal = tonumber(RclSelecionadoDaVez.CuraEffectTotal or 0) + tonumber(node.CuraEffect or 0)												
+                                                    RclSelecionadoDaVez.RegMPEffectTotal = tonumber(RclSelecionadoDaVez.RegMPEffectTotal or 0) + tonumber(node.RegMPEffect or 0)
+                                                    
+                                            end
+                                    end
+            
+                                    
+                            end;
+        end);
+
     function obj:_releaseEvents()
+        __o_rrpgObjs.removeEventListenerById(self._e_event1);
+        __o_rrpgObjs.removeEventListenerById(self._e_event0);
     end;
 
     obj._oldLFMDestroy = obj.destroy;
@@ -56,8 +233,11 @@ local function constructNew_frmEffect()
           self:setNodeDatabase(nil);
         end;
 
-        if self.dataLink1 ~= nil then self.dataLink1:destroy(); self.dataLink1 = nil; end;
+        if self.dataLink2 ~= nil then self.dataLink2:destroy(); self.dataLink2 = nil; end;
         if self.label1 ~= nil then self.label1:destroy(); self.label1 = nil; end;
+        if self.image1 ~= nil then self.image1:destroy(); self.image1 = nil; end;
+        if self.dataLink1 ~= nil then self.dataLink1:destroy(); self.dataLink1 = nil; end;
+        if self.dataLink3 ~= nil then self.dataLink3:destroy(); self.dataLink3 = nil; end;
         self:_oldLFMDestroy();
     end;
 
@@ -66,13 +246,13 @@ local function constructNew_frmEffect()
     return obj;
 end;
 
-function newfrmEffect()
+function newfrmBuff()
     local retObj = nil;
     __o_rrpgObjs.beginObjectsLoading();
 
     __o_Utils.tryFinally(
       function()
-        retObj = constructNew_frmEffect();
+        retObj = constructNew_frmBuff();
       end,
       function()
         __o_rrpgObjs.endObjectsLoading();
@@ -82,10 +262,10 @@ function newfrmEffect()
     return retObj;
 end;
 
-local _frmEffect = {
-    newEditor = newfrmEffect, 
-    new = newfrmEffect, 
-    name = "frmEffect", 
+local _frmBuff = {
+    newEditor = newfrmBuff, 
+    new = newfrmBuff, 
+    name = "frmBuff", 
     dataType = "", 
     formType = "undefined", 
     formComponentName = "form", 
@@ -93,7 +273,7 @@ local _frmEffect = {
     title = "", 
     description=""};
 
-frmEffect = _frmEffect;
-Firecast.registrarForm(_frmEffect);
+frmBuff = _frmBuff;
+Firecast.registrarForm(_frmBuff);
 
-return _frmEffect;
+return _frmBuff;

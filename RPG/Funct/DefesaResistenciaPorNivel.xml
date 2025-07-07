@@ -156,8 +156,8 @@
 				
 				sheet.RESRED = (tonumber(sheet.RESRED) or 0) + (tonumber(sheet.ResistenciaPadrao) or 0);
 				
-				sheet.DEFRED = math.floor(tonumber(sheet.DEFRED) or 0);
-				sheet.RESRED = math.floor(tonumber(sheet.RESRED) or 0);
+				sheet.DEFRED = math.floor((tonumber(sheet.DEFRED) or 0) + (tonumber(sheet.DEFEffectTotal) or 0) );
+				sheet.RESRED = math.floor((tonumber(sheet.RESRED) or 0) +  (tonumber(sheet.RESEffectTotal) or 0));
 			end;
 		end;
 	</script>

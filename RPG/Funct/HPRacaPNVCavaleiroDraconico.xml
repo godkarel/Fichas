@@ -21,6 +21,25 @@
 					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 28 + 600;
 				end;	
 			end;
+
+			if sheet.classe == 'Mago do Caos' then
+				if sheet.Level > 20 then
+					sheet.HPRACAATE30 = 0;        
+					sheet.RHPNivelAte30 = math.floor((sheet.Level) - 20);
+					sheet.EHPNivel = 0;	
+					
+					if sheet.RHPNivelAte30 > 10 then
+						sheet.RHPNivelAte30 = 10;
+					end;
+
+					if sheet.RHPNivelAte30 < 0 then
+						sheet.RHPNivelAte30 = 0;
+					end;
+					
+					sheet.HPRACAATE30 = (tonumber(sheet.RHPNivelAte30) or 0) * 18;
+					sheet.EHPNivel = (tonumber(sheet.RHPNivelAte30) or 0) * 18 + 500;
+				end;	
+			end;
 		end;
 	]]>		
     </script> 

@@ -11,9 +11,10 @@
 					end;
 
 					if sheet.classe == 'Cavaleiro Draconico' then
-						self.cmbEspecializa.enabled = false;
-					else	
-					
+						self.cmbEspecializa.value = 'Cavaleiro Draconico';								
+					end;	
+					if sheet.classe == 'Mago do Caos' then
+						self.cmbEspecializa.value = 'Mago do Caos';							
 					end;	
 				end;
 			end;

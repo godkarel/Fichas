@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	 <script>
+			function RecarregaCD()
+					-- obter a mesa do personagem
+					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
+					local mesas = rrpg.getRooms();
+					local bibliotecaAtual = mesas[1].library;
+
+						local function obterNomesRecursivo(bibItem)
+							local itensFilhos = bibItem.children;
+							local nomes = bibItem.name;
+							
+							for i = 1, #itensFilhos, 1 do
+								local bibItemFilho = itensFilhos[i];
+								local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+
+								if nomesDoFilho == "Sistema de Combaate Velen" then
+									-- Obter ID do personagem Loan
+									
+									-- Solicita acesso à ficha do personagem
+									local promise = bibItemFilho:asyncOpenNDB();
+
+									-- Aguarda até que a ficha esteja carregada
+									nodeExterno = await(promise);
+
+									nodeExterno.QuemRecarregou = sheet.Nome
+									nodeExterno.RecargaNome = tonumber(nodeExterno.RecargaNome ) + 1
+									
+								end
+							end
+							return nomes
+						end
+
+						local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+				
+			end;
+			
+        </script> 

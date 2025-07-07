@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	<script>
+				function ProcuraHabilidadeEspecifica(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, OpcaoHab)       	
+					local mesaDoPersonagem = rrpg.getMesaDe(sheet);					
+					sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+					mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+						function (rolado)					
+						if nodeHabilidade.DanoAtributo1 ~= nil then
+							if 6 > rolado.resultado then							
+								if 5 >= rolado.resultado then
+									if nodeHabilidade.fldImgIconSkill ~= nil then 
+										mesaDoPersonagem.chat:enviarMensagem("[§I " .. nodeHabilidade.fldImgIconSkill .. "]");
+									end;
+									mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. nodeHabilidade.DescriHabilidade1);
+									local mesa = Firecast.getMesaDe(sheet); 
+									local Custo2 = sheet.MPAtual;
+									nodeHabilidade.Custo2 = sheet.MPAtual;
+									nodeHabilidade.Custo2 = (tonumber(nodeHabilidade.Custo2) or 0) - (tonumber(nodeHabilidade.CustoHabilidade) or 0);										
+									sheet.MPAtual = nodeHabilidade.Custo2;
+									mesa.meuJogador:requestSetBarValue(2, sheet.MPAtual);
+									nodeHabilidade.ContaRecarga = nodeHabilidade.TurnoAtual	
+									nodeHabilidade.RecargaHabilidade = tonumber(nodeHabilidade.ContaRecarga) + tonumber(nodeHabilidade.CDHabilidade) -  tonumber(nodeHabilidade.TurnoAtual)	
+									mesaDoPersonagem.chat:enviarMensagem("[§K8,0]DEFENDEU A HABILIDADE REDUZINDO O DANO PELA METADE :dinofauro: ");	
+																		
+								else
+									mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+									sheet.DanoHabilidadeSimulada = 0
+								end;
+							else							
+								mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
+								sheet.DanoHabilidadeSimulada = 0
+							end;
+						else
+							sheet.DanoHabilidadeSimulada = 0
+							showMessage("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE");
+						end;
+						
+					end);
+				end;               
+	</script>

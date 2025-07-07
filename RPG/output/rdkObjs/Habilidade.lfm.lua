@@ -125,8 +125,8 @@ local function constructNew_frmhabilidade()
     obj.edit1:setFontSize(15);
     obj.edit1:setHorzTextAlign("center");
     lfm_setPropAsString(obj.edit1, "fontStyle", "bold");
-    obj.edit1:setHitTest(false);
-    obj.edit1:setCanFocus(false);
+    obj.edit1:setHitTest(true);
+    obj.edit1:setCanFocus(true);
     obj.edit1:setHeight(30);
     obj.edit1:setField("PontoHabilidade");
     obj.edit1:setName("edit1");
@@ -155,7 +155,7 @@ local function constructNew_frmhabilidade()
     obj.ListaJutsus3:setParent(obj.scrollBox1);
     obj.ListaJutsus3:setName("ListaJutsus3");
     obj.ListaJutsus3:setVisible(false);
-    obj.ListaJutsus3:setWidth(480);
+    obj.ListaJutsus3:setWidth(490);
     obj.ListaJutsus3:setHeight(580);
     obj.ListaJutsus3:setLeft(540);
     obj.ListaJutsus3:setTop(60);
@@ -227,7 +227,7 @@ local function constructNew_frmhabilidade()
     obj.label3 = GUI.fromHandle(_obj_newObject("label"));
     obj.label3:setParent(obj.rectangle1);
     obj.label3:setLeft(60);
-    obj.label3:setTop(350);
+    obj.label3:setTop(370);
     obj.label3:setWidth(120);
     obj.label3:setHeight(40);
     obj.label3:setFontFamily("Nyala");
@@ -239,7 +239,7 @@ local function constructNew_frmhabilidade()
     obj.edit3 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit3:setParent(obj.rectangle1);
     obj.edit3:setLeft(115);
-    obj.edit3:setTop(355);
+    obj.edit3:setTop(375);
     obj.edit3:setWidth(50);
     obj.edit3:setHeight(30);
     obj.edit3:setType("number");
@@ -249,19 +249,19 @@ local function constructNew_frmhabilidade()
     obj.label4 = GUI.fromHandle(_obj_newObject("label"));
     obj.label4:setParent(obj.rectangle1);
     obj.label4:setLeft(310);
-    obj.label4:setTop(350);
+    obj.label4:setTop(370);
     obj.label4:setWidth(60);
     obj.label4:setHeight(40);
     obj.label4:setFontFamily("Nyala");
     obj.label4:setFontColor("Black");
     obj.label4:setFontSize(20);
-    obj.label4:setText("Fixo");
+    obj.label4:setText("Real");
     obj.label4:setName("label4");
 
     obj.edit4 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit4:setParent(obj.rectangle1);
     obj.edit4:setLeft(350);
-    obj.edit4:setTop(355);
+    obj.edit4:setTop(375);
     obj.edit4:setWidth(60);
     obj.edit4:setHeight(30);
     obj.edit4:setType("number");
@@ -271,7 +271,7 @@ local function constructNew_frmhabilidade()
     obj.label5 = GUI.fromHandle(_obj_newObject("label"));
     obj.label5:setParent(obj.rectangle1);
     obj.label5:setLeft(180);
-    obj.label5:setTop(350);
+    obj.label5:setTop(370);
     obj.label5:setWidth(60);
     obj.label5:setHeight(40);
     obj.label5:setFontFamily("Nyala");
@@ -283,7 +283,7 @@ local function constructNew_frmhabilidade()
     obj.edit5 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit5:setParent(obj.rectangle1);
     obj.edit5:setLeft(230);
-    obj.edit5:setTop(355);
+    obj.edit5:setTop(375);
     obj.edit5:setWidth(70);
     obj.edit5:setHeight(30);
     obj.edit5:setType("number");
@@ -293,7 +293,7 @@ local function constructNew_frmhabilidade()
     obj.label6 = GUI.fromHandle(_obj_newObject("label"));
     obj.label6:setParent(obj.rectangle1);
     obj.label6:setLeft(60);
-    obj.label6:setTop(385);
+    obj.label6:setTop(405);
     obj.label6:setWidth(120);
     obj.label6:setHeight(40);
     obj.label6:setFontFamily("Nyala");
@@ -305,7 +305,7 @@ local function constructNew_frmhabilidade()
     obj.edit6 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit6:setParent(obj.rectangle1);
     obj.edit6:setLeft(115);
-    obj.edit6:setTop(390);
+    obj.edit6:setTop(410);
     obj.edit6:setWidth(50);
     obj.edit6:setHeight(30);
     obj.edit6:setType("number");
@@ -315,7 +315,7 @@ local function constructNew_frmhabilidade()
     obj.edit7 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit7:setParent(obj.rectangle1);
     obj.edit7:setLeft(400);
-    obj.edit7:setTop(385);
+    obj.edit7:setTop(405);
     obj.edit7:setWidth(40);
     obj.edit7:setHeight(30);
     obj.edit7:setVisible(false);
@@ -325,8 +325,8 @@ local function constructNew_frmhabilidade()
 
     obj.label7 = GUI.fromHandle(_obj_newObject("label"));
     obj.label7:setParent(obj.rectangle1);
-    obj.label7:setLeft(180);
-    obj.label7:setTop(385);
+    obj.label7:setLeft(172);
+    obj.label7:setTop(410);
     obj.label7:setWidth(120);
     obj.label7:setHeight(40);
     obj.label7:setFontFamily("Nyala");
@@ -335,32 +335,55 @@ local function constructNew_frmhabilidade()
     obj.label7:setText("Tipo");
     obj.label7:setName("label7");
 
-    obj.comboBox1 = GUI.fromHandle(_obj_newObject("comboBox"));
-    obj.comboBox1:setParent(obj.rectangle1);
-    obj.comboBox1:setLeft(230);
-    obj.comboBox1:setTop(395);
-    obj.comboBox1:setWidth(70);
-    obj.comboBox1:setHeight(18);
-    obj.comboBox1:setField("DanoAtributo1");
-    obj.comboBox1:setItems({'PA', 'PM', 'PF', 'Cura', 'Cura Fixa', 'Fixo', 'BUFF', 'M/PA', 'M/PM', 'M/PF'});
-    obj.comboBox1:setName("comboBox1");
-
     obj.label8 = GUI.fromHandle(_obj_newObject("label"));
     obj.label8:setParent(obj.rectangle1);
-    obj.label8:setLeft(310);
-    obj.label8:setTop(385);
-    obj.label8:setWidth(60);
+    obj.label8:setLeft(85);
+    obj.label8:setTop(295);
+    obj.label8:setWidth(120);
     obj.label8:setHeight(40);
     obj.label8:setFontFamily("Nyala");
-    obj.label8:setFontColor("Black");
-    obj.label8:setFontSize(20);
-    obj.label8:setText("Level");
+    obj.label8:setFontColor("Red");
+    obj.label8:setFontSize(16);
+    obj.label8:setText("OPÇÃO:");
     obj.label8:setName("label8");
+
+    obj.comboBox1 = GUI.fromHandle(_obj_newObject("comboBox"));
+    obj.comboBox1:setParent(obj.rectangle1);
+    obj.comboBox1:setLeft(140);
+    obj.comboBox1:setTop(305);
+    obj.comboBox1:setWidth(200);
+    obj.comboBox1:setHeight(20);
+    obj.comboBox1:setField("OpcaoHab");
+    obj.comboBox1:setItems({'Ofensiva', 'Dano em Area', 'Cura', 'Cura em Area', 'Defensiva'});
+    obj.comboBox1:setName("comboBox1");
+
+    obj.comboBox2 = GUI.fromHandle(_obj_newObject("comboBox"));
+    obj.comboBox2:setParent(obj.rectangle1);
+    obj.comboBox2:setLeft(207);
+    obj.comboBox2:setTop(420);
+    obj.comboBox2:setWidth(100);
+    obj.comboBox2:setHeight(18);
+    obj.comboBox2:setField("DanoAtributo1");
+    obj.comboBox2:setItems({'PA', 'PF', 'PM', 'PA+M/PA', 'PF+M/PF', 'PM+M/PM', 'M/PA', 'M/PF', 'M/PM', 'PA+PF', 'PF+PM', 'PA+PM', 'M/PA+PF', 'M/PA+PM', 'M/PF+PM', 'M/PF+PA', 'M/PM+PF',
+	 'M/PM+PA', 'M/PA+M/PF', 'M/PF+M/PM', 'M/PA+M/PM', 'REAL PA', 'REAL PF', 'REAL PM', 'Efeito', 'Buff'});
+    obj.comboBox2:setName("comboBox2");
+
+    obj.label9 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label9:setParent(obj.rectangle1);
+    obj.label9:setLeft(310);
+    obj.label9:setTop(405);
+    obj.label9:setWidth(60);
+    obj.label9:setHeight(40);
+    obj.label9:setFontFamily("Nyala");
+    obj.label9:setFontColor("Black");
+    obj.label9:setFontSize(20);
+    obj.label9:setText("Level");
+    obj.label9:setName("label9");
 
     obj.button2 = GUI.fromHandle(_obj_newObject("button"));
     obj.button2:setParent(obj.rectangle1);
     obj.button2:setLeft(350);
-    obj.button2:setTop(390);
+    obj.button2:setTop(410);
     obj.button2:setWidth(16);
     obj.button2:setHeight(30);
     obj.button2:setText("-");
@@ -369,7 +392,7 @@ local function constructNew_frmhabilidade()
     obj.edit8 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit8:setParent(obj.rectangle1);
     obj.edit8:setLeft(366);
-    obj.edit8:setTop(390);
+    obj.edit8:setTop(410	);
     obj.edit8:setWidth(27);
     obj.edit8:setHeight(30);
     obj.edit8:setCanFocus(true);
@@ -382,73 +405,85 @@ local function constructNew_frmhabilidade()
     obj.button3 = GUI.fromHandle(_obj_newObject("button"));
     obj.button3:setParent(obj.rectangle1);
     obj.button3:setLeft(393);
-    obj.button3:setTop(390);
+    obj.button3:setTop(410);
     obj.button3:setWidth(16);
     obj.button3:setHeight(30);
     obj.button3:setText("+");
     obj.button3:setName("button3");
 
-    obj.label9 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label9:setParent(obj.rectangle1);
-    obj.label9:setLeft(60);
-    obj.label9:setTop(420);
-    obj.label9:setWidth(120);
-    obj.label9:setHeight(40);
-    obj.label9:setFontFamily("Nyala");
-    obj.label9:setFontColor("Black");
-    obj.label9:setFontSize(20);
-    obj.label9:setText("CD");
-    obj.label9:setName("label9");
+    obj.label10 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label10:setParent(obj.rectangle1);
+    obj.label10:setLeft(60);
+    obj.label10:setTop(440);
+    obj.label10:setWidth(120);
+    obj.label10:setHeight(40);
+    obj.label10:setFontFamily("Nyala");
+    obj.label10:setFontColor("Black");
+    obj.label10:setFontSize(20);
+    obj.label10:setText("CD");
+    obj.label10:setName("label10");
 
     obj.edit9 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit9:setParent(obj.rectangle1);
     obj.edit9:setLeft(90);
-    obj.edit9:setTop(425);
+    obj.edit9:setTop(445);
     obj.edit9:setWidth(40);
     obj.edit9:setHeight(30);
     obj.edit9:setType("number");
     obj.edit9:setField("CDHabilidade");
     obj.edit9:setName("edit9");
 
-    obj.label10 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label10:setParent(obj.rectangle1);
-    obj.label10:setLeft(135);
-    obj.label10:setTop(420);
-    obj.label10:setWidth(120);
-    obj.label10:setHeight(40);
-    obj.label10:setFontFamily("Nyala");
-    obj.label10:setFontColor("Black");
-    obj.label10:setFontSize(20);
-    obj.label10:setText("Recarga");
-    obj.label10:setName("label10");
+    obj.label11 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label11:setParent(obj.rectangle1);
+    obj.label11:setLeft(135);
+    obj.label11:setTop(440);
+    obj.label11:setWidth(120);
+    obj.label11:setHeight(40);
+    obj.label11:setFontFamily("Nyala");
+    obj.label11:setFontColor("Black");
+    obj.label11:setFontSize(20);
+    obj.label11:setText("Recarga");
+    obj.label11:setName("label11");
 
     obj.edit10 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit10:setParent(obj.rectangle1);
     obj.edit10:setLeft(210);
-    obj.edit10:setTop(425);
+    obj.edit10:setTop(445);
     obj.edit10:setWidth(40);
     obj.edit10:setHeight(30);
     obj.edit10:setType("number");
     obj.edit10:setField("RecargaHabilidade");
     obj.edit10:setName("edit10");
 
-    obj.label11 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label11:setParent(obj.rectangle1);
-    obj.label11:setLeft(255);
-    obj.label11:setTop(420);
-    obj.label11:setWidth(120);
-    obj.label11:setHeight(40);
-    obj.label11:setVisible(false);
-    obj.label11:setFontFamily("Nyala");
-    obj.label11:setFontColor("Black");
-    obj.label11:setFontSize(20);
-    obj.label11:setText("CONTA");
-    obj.label11:setName("label11");
+    obj.button4 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button4:setParent(obj.rectangle1);
+    obj.button4:setLeft(255);
+    obj.button4:setTop(445);
+    obj.button4:setWidth(80);
+    obj.button4:setHeight(30);
+    obj.button4:setFontFamily("Nyala");
+    obj.button4:setFontColor("White");
+    obj.button4:setFontSize(20);
+    obj.button4:setText("Resetar");
+    obj.button4:setName("button4");
+
+    obj.label12 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label12:setParent(obj.rectangle1);
+    obj.label12:setLeft(255);
+    obj.label12:setTop(440);
+    obj.label12:setWidth(120);
+    obj.label12:setHeight(40);
+    obj.label12:setVisible(false);
+    obj.label12:setFontFamily("Nyala");
+    obj.label12:setFontColor("Black");
+    obj.label12:setFontSize(20);
+    obj.label12:setText("CONTA");
+    obj.label12:setName("label12");
 
     obj.edit11 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit11:setParent(obj.rectangle1);
     obj.edit11:setLeft(325);
-    obj.edit11:setTop(425);
+    obj.edit11:setTop(445);
     obj.edit11:setWidth(40);
     obj.edit11:setHeight(30);
     obj.edit11:setVisible(false);
@@ -456,22 +491,22 @@ local function constructNew_frmhabilidade()
     obj.edit11:setField("ContaRecarga");
     obj.edit11:setName("edit11");
 
-    obj.label12 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label12:setParent(obj.rectangle1);
-    obj.label12:setLeft(220);
-    obj.label12:setTop(480);
-    obj.label12:setWidth(120);
-    obj.label12:setHeight(40);
-    obj.label12:setFontFamily("Nyala");
-    obj.label12:setFontColor("blue");
-    obj.label12:setFontSize(20);
-    obj.label12:setText("Intensidade");
-    obj.label12:setName("label12");
+    obj.label13 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label13:setParent(obj.rectangle1);
+    obj.label13:setLeft(220);
+    obj.label13:setTop(500);
+    obj.label13:setWidth(120);
+    obj.label13:setHeight(40);
+    obj.label13:setFontFamily("Nyala");
+    obj.label13:setFontColor("blue");
+    obj.label13:setFontSize(20);
+    obj.label13:setText("Intensidade");
+    obj.label13:setName("label13");
 
     obj.edit12 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit12:setParent(obj.rectangle1);
     obj.edit12:setLeft(330);
-    obj.edit12:setTop(485);
+    obj.edit12:setTop(505);
     obj.edit12:setWidth(80);
     obj.edit12:setHeight(30);
     obj.edit12:setEnabled(false);
@@ -483,21 +518,21 @@ local function constructNew_frmhabilidade()
     obj.image3 = GUI.fromHandle(_obj_newObject("image"));
     obj.image3:setParent(obj.rectangle1);
     obj.image3:setLeft(60);
-    obj.image3:setTop(450);
+    obj.image3:setTop(460);
     obj.image3:setWidth(150);
     obj.image3:setHeight(150);
     obj.image3:setSRC("/imagens/magia.png");
     obj.image3:setName("image3");
 
-    obj.button4 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button4:setParent(obj.rectangle1);
-    obj.button4:setLeft(220);
-    obj.button4:setTop(540);
-    obj.button4:setFontColor("red");
-    obj.button4:setText("Apagar!");
-    obj.button4:setMargins({left=4, right=4, top=2, bottom=2});
-    obj.button4:setWidth(150);
-    obj.button4:setName("button4");
+    obj.button5 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button5:setParent(obj.rectangle1);
+    obj.button5:setLeft(220);
+    obj.button5:setTop(550);
+    obj.button5:setFontColor("red");
+    obj.button5:setText("Apagar!");
+    obj.button5:setMargins({left=4, right=4, top=2, bottom=2});
+    obj.button5:setWidth(150);
+    obj.button5:setName("button5");
 
     obj.edit13 = GUI.fromHandle(_obj_newObject("edit"));
     obj.edit13:setParent(obj.rectangle1);
@@ -511,17 +546,17 @@ local function constructNew_frmhabilidade()
     obj.TargetName:setName("TargetName");
     obj.TargetName:setScale(1);
     obj.TargetName:setLeft(230);
-    obj.TargetName:setTop(305);
+    obj.TargetName:setTop(325	);
     obj.TargetName:setWidth(150);
     obj.TargetName:setHeight(40);
 
-    obj.label13 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label13:setParent(obj.TargetName);
-    obj.label13:setText("Alvo:");
-    obj.label13:setFontColor("red");
-    obj.label13:setAlign("right");
-    obj.label13:setWidth(75);
-    obj.label13:setName("label13");
+    obj.label14 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label14:setParent(obj.TargetName);
+    obj.label14:setText("Alvo:");
+    obj.label14:setFontColor("red");
+    obj.label14:setAlign("right");
+    obj.label14:setWidth(75);
+    obj.label14:setName("label14");
 
     obj.cmbInimigosH = GUI.fromHandle(_obj_newObject("comboBox"));
     obj.cmbInimigosH:setParent(obj.TargetName);
@@ -538,17 +573,17 @@ local function constructNew_frmhabilidade()
     obj.NameTipoDeGrupo:setName("NameTipoDeGrupo");
     obj.NameTipoDeGrupo:setScale(1);
     obj.NameTipoDeGrupo:setLeft(60);
-    obj.NameTipoDeGrupo:setTop(305);
+    obj.NameTipoDeGrupo:setTop(325);
     obj.NameTipoDeGrupo:setWidth(150);
     obj.NameTipoDeGrupo:setHeight(40);
 
-    obj.label14 = GUI.fromHandle(_obj_newObject("label"));
-    obj.label14:setParent(obj.NameTipoDeGrupo);
-    obj.label14:setText("Grupo:");
-    obj.label14:setFontColor("green");
-    obj.label14:setAlign("right");
-    obj.label14:setWidth(75);
-    obj.label14:setName("label14");
+    obj.label15 = GUI.fromHandle(_obj_newObject("label"));
+    obj.label15:setParent(obj.NameTipoDeGrupo);
+    obj.label15:setText("Grupo:");
+    obj.label15:setFontColor("green");
+    obj.label15:setAlign("right");
+    obj.label15:setWidth(75);
+    obj.label15:setName("label15");
 
     obj.cmbTipoGrupoH = GUI.fromHandle(_obj_newObject("comboBox"));
     obj.cmbTipoGrupoH:setParent(obj.NameTipoDeGrupo);
@@ -566,407 +601,37 @@ local function constructNew_frmhabilidade()
     obj.dataLink2:setField("cmbTipoDeGrupoFH");
     obj.dataLink2:setName("dataLink2");
 
-    obj.button5 = GUI.fromHandle(_obj_newObject("button"));
-    obj.button5:setParent(obj.rectangle1);
-    obj.button5:setLeft(60);
-    obj.button5:setTop(480);
-    obj.button5:setFontSize(20);
-    obj.button5:setOpacity(0.1);
-    obj.button5:setHeight(90);
-    obj.button5:setWidth(150);
-    obj.button5:setText("Usar");
-    obj.button5:setFontColor("White");
-    obj.button5:setName("button5");
+    obj.button6 = GUI.fromHandle(_obj_newObject("button"));
+    obj.button6:setParent(obj.rectangle1);
+    obj.button6:setLeft(60);
+    obj.button6:setTop(490);
+    obj.button6:setFontSize(20);
+    obj.button6:setOpacity(0.1);
+    obj.button6:setHeight(90);
+    obj.button6:setWidth(150);
+    obj.button6:setText("Usar");
+    obj.button6:setFontColor("White");
+    obj.button6:setName("button6");
 
 					
-				local function ExecutarH2() 
+					function SoTesteH()
+						
+						local node = self.rclListaDosItens3.selectedNode; 
+						self.ListaJutsus3.node = node;                       
+						self.ListaJutsus3.visible = (node ~= nil);
 
-				local node = self.rclListaDosItens3.selectedNode; 
-				self.ListaJutsus3.node = node;                       
-				self.ListaJutsus3.visible = (node ~= nil);
-
-				if 0 == self.ListaJutsus3.node.RecargaHabilidade then 
-				
-					--[[ HABILIDADE DE DANO ]]--
-					-- obter a mesa do personagem
-
-					
-					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
-					local mesas = rrpg.getRooms();
-					local bibliotecaAtual = mesas[1].library;
-
-
-						if self.cmbTipoGrupoH.value == "1" then 
-							local function obterNomesRecursivoH1(bibItem)
-								local itensFilhos = bibItem.children;
-								local nomes = bibItem.name;
-								
-								for i = 1, #itensFilhos, 1 do
-									local bibItemFilho = itensFilhos[i];
-									local nomesDoFilho = obterNomesRecursivoH1(bibItemFilho) or "";
-
-									if nomesDoFilho == "Sistema de Combaate Velen" then
-										-- Obter ID do personagem Loan
-										local idPersonagem = self.cmbInimigosH.value;
-										
-										-- Solicita acesso à ficha do personagem
-										local promise = bibItemFilho:asyncOpenNDB();
-
-										-- Aguarda até que a ficha esteja carregada
-										nodeExterno = await(promise);
-										
-										local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)
-										
-										
-										for _, node in ipairs(nodesO) do
-											if node.NomeDoOponenteVez == idPersonagem then  -- Verifica se o campo NomeDoOponenteVez existe
-												PERAlvo = node.Pers
-												RESAlvo = node.RES
-											end
-										end
-									end
-								end
-								return nomes
-							end
-
-							local nomesDeTodosOsItens = obterNomesRecursivoH1(bibliotecaAtual);
+						if self.cmbInimigosH.value == "" then
+							showMessage("CADE O ALVO ?")
+						else
+							local nodeInimigo = await(ConsegueAlvoExterno(self, node, self.cmbInimigosH.value, node.cmbTipoDeGrupoFH, node.OpcaoHab));
 							
-							local node = self.ListaJutsus3.node;
-
-							nodeExterno.TipoRecebido = nil
-							
-							local mesaDoPersonagem = rrpg.getMesaDe(sheet);					
-							sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
-							mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
-							function (rolado)					
-							if node.DanoAtributo1 ~= nil then
-								if sheet.AcertoMagico + 1 > rolado.resultado then							
-									if node.DanoAtributo1 == 'PA' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PA) or 0)								
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;			
-									if node.DanoAtributo1 == 'PM' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)						
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'PF' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PF) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;							
-									if node.DanoAtributo1 == 'Cura' then
-										node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'Cura Fixa' then
-										node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0);	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'Fixo' then
-										node.Hintensidade1 = (tonumber(node.FixoHabilidade1) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'M/PA' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PA / 2) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'M/PM' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PM / 2) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'M/PF' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PF / 2) or 0)		
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'BUFF' then
-										node.Hintensidade1 = "Habilidade de Buff";
-									end;
-									if sheet.AcertoMagico >= rolado.resultado then
-										if node.fldImgIconSkill ~= nil then 
-											mesaDoPersonagem.chat:enviarMensagem("[§I " .. node.fldImgIconSkill .. "]");
-										end;
-										mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriHabilidade1);
-										local mesa = Firecast.getMesaDe(sheet); 
-										local Custo2 = sheet.MPAtual;
-										node.Custo2 = sheet.MPAtual;
-										node.Custo2 = (tonumber(node.Custo2) or 0) - (tonumber(node.CustoHabilidade) or 0);
-										sheet.MPAtual = node.Custo2;
-										mesa.meuJogador:requestSetBarValue(2, node.Custo2);
-										sheet.MPAtual = node.Custo2;
-										self.ListaJutsus3.node.ContaRecarga = self.ListaJutsus3.node.TurnoAtual	
-										self.ListaJutsus3.node.RecargaHabilidade = tonumber(self.ListaJutsus3.node.ContaRecarga) + tonumber(self.ListaJutsus3.node.CDHabilidade) + 1 -  tonumber(self.ListaJutsus3.node.TurnoAtual)	
-										if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
-											if 1 == rolado.resultado then										
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value	
-												nodeExterno.TipoRecebido = node.DanoAtributo1	
-												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1 * 2)) * -1		
-												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando  com [§K4,0] CRITICAL [§K9,0] « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] » :dinofauro: ");
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											else										
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-												nodeExterno.TipoRecebido = node.DanoAtributo1	
-												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1)) * -1
-												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] »");
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											end;	
-										else
-											if sheet.CMagico +1 > rolado.resultado then 										
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-												if node.DanoAtributo1 ~= 'BUFF' then
-													nodeExterno.DanoRecebido = math.floor((node.Hintensidade1 * 2) * (1 - (RESAlvo / 100)))
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												end;											
-												if node.DanoAtributo1 == 'Fixo' then
-													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												end;
-												
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido) .. "[§K9,0] » :dinofauro: ");
-											else
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-												if node.DanoAtributo1 ~= 'BUFF' then
-													nodeExterno.DanoRecebido = math.floor((node.Hintensidade1) * (1 - (RESAlvo / 100)))
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												end;
-												if node.DanoAtributo1 == 'Fixo' then
-													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												end;
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido .. "[§K9,0] »");
-											end;	
-										end;										
-									else
-										mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
-										nodeExterno.DanoRecebido = 0
-										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-									end;
-								else							
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
-									nodeExterno.DanoRecebido = 0
-									nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-									if node.DanoAtributo1 == 'BUFF' then
-										mesaDoPersonagem.chat:enviarMensagem("[§K3,15]ERA UM BUFF ESSA HABILIDADE,[§K4,0] O Player mantem a ação");	
-									else 	
-									end;
-								end;
+							if nodeInimigo ~= nil then
+								RolarHabilidadeNovo(self, node, self.cmbInimigosH.value, node.cmbTipoDeGrupoFH, nodeInimigo, node.OpcaoHab);
 							else
-								nodeExterno.DanoRecebido = 0
-								nodeExterno.TipoRecebido = nil
-								mesaDoPersonagem.chat:enviarMensagem("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE");
-							end;
-							end);
-						
-						end;
-
-						
-						---------- inimigo 2 -----------
-
-						if self.cmbTipoGrupoH.value == "2" then 
-							local function obterNomesRecursivoH2(bibItem)
-								local itensFilhos = bibItem.children;
-								local nomes = bibItem.name;
-								
-								for i = 1, #itensFilhos, 1 do
-									local bibItemFilho = itensFilhos[i];
-									local nomesDoFilho = obterNomesRecursivoH2(bibItemFilho) or "";
-
-									if nomesDoFilho == "Sistema de Combaate Velen" then
-										-- Obter ID do personagem Loan
-										local idPersonagem = self.cmbInimigosH.value;
-										
-										-- Solicita acesso à ficha do personagem
-										local promise = bibItemFilho:asyncOpenNDB();
-
-										-- Aguarda até que a ficha esteja carregada
-										nodeExterno = await(promise);
-										
-										local nodesO = ndb.getChildNodes(nodeExterno.NomeJogador)		
-										
-										
-										for _, node in ipairs(nodesO) do
-											if node.NomeDoPersonagemVez == idPersonagem then  -- Verifica se o campo NomeDoPersonagemVez existe
-												PERAlvo = node.Pers
-												RESAlvo = node.RES
-											end
-										end
-									end
-								end
-								return nomes
+								showMessage("Inimigo não encontrado.");
 							end
-
-							local nomesDeTodosOsItens = obterNomesRecursivoH2(bibliotecaAtual);
-							
-							local node = self.ListaJutsus3.node;
-							local mesaDoPersonagem = rrpg.getMesaDe(sheet);
-							if node.DanoAtributo1 == 'BUFF' then
-								if node.naoEBuff == true then
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-								return 
-								else															
-								end;
-							end;										
-							sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
-							mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
-							function (rolado)					
-							if node.DanoAtributo1 ~= nil then
-								if sheet.AcertoMagico + 1 > rolado.resultado then							
-									if node.DanoAtributo1 == 'PA' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PA) or 0)								
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;			
-									if node.DanoAtributo1 == 'PM' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)						
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'PF' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PF) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;							
-									if node.DanoAtributo1 == 'Cura' then
-										node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'Cura Fixa' then
-										node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0);	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'Fixo' then
-										node.Hintensidade1 = (tonumber(node.FixoHabilidade1) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'M/PA' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PA / 2) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'M/PM' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PM / 2) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'M/PF' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PF / 2) or 0)		
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'BUFF' then
-										node.Hintensidade1 = "Habilidade de Buff";
-									end;
-									if sheet.AcertoMagico >= rolado.resultado then
-										if node.fldImgIconSkill ~= nil then 
-											mesaDoPersonagem.chat:enviarMensagem("[§I " .. node.fldImgIconSkill .. "]");
-										end;
-										mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriHabilidade1);
-										local mesa = Firecast.getMesaDe(sheet); 
-										local Custo2 = sheet.MPAtual;
-										node.Custo2 = sheet.MPAtual;
-										node.Custo2 = (tonumber(node.Custo2) or 0) - (tonumber(node.CustoHabilidade) or 0);
-										sheet.MPAtual = node.Custo2;
-										mesa.meuJogador:requestSetBarValue(2, node.Custo2);
-										self.ListaJutsus3.node.ContaRecarga = self.ListaJutsus3.node.TurnoAtual	
-										self.ListaJutsus3.node.RecargaHabilidade = tonumber(self.ListaJutsus3.node.ContaRecarga) + tonumber(self.ListaJutsus3.node.CDHabilidade) + 1 -  tonumber(self.ListaJutsus3.node.TurnoAtual)	
-										if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
-											if 1 == rolado.resultado then										
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value		
-												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando  com [§K4,0] CRITICAL [§K9,0] « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] » :dinofauro: ");
-											else										
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] »");
-											end;	
-										else
-											if sheet.CMagico +1 > rolado.resultado then 										
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-												if node.DanoAtributo1 ~= 'BUFF' then
-													nodeExterno.DanoRecebido = math.floor((node.Hintensidade1 * 2) * (1 - (RESAlvo / 100)))
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
-												end;
-												if node.DanoAtributo1 == 'Fixo' then
-													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
-												end;
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido) .. "[§K9,0] » :dinofauro: ");
-											else
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-												if node.DanoAtributo1 ~= 'BUFF' then
-													nodeExterno.DanoRecebido = math.floor((node.Hintensidade1) * (1 - (RESAlvo / 100)))
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
-												end;
-												if node.DanoAtributo1 == 'Fixo' then
-													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
-												end;
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido .. "[§K9,0] »");
-											end;	
-										end;
-																			
-									else
-										mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
-										nodeExterno.DanoRecebido = 0
-										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
-									end;
-								else							
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
-									nodeExterno.DanoRecebido = 0
-									nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
-									if node.DanoAtributo1 == 'BUFF' then
-										mesaDoPersonagem.chat:enviarMensagem("[§K3,15]ERA BUFF ESSA MERDA");	
-									else 	
-									end;
-								end;
-							else							
-								mesaDoPersonagem.chat:enviarMensagem("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE");
-								nodeExterno.DanoRecebido = 0
-							end;
-							end);
-						
 						end;
-					else
-						showMessage("Sua Habilidade ainda esta em Recarga!")
-					end;
-
-										
-				end; 																				
+					end																
 				
 
 
@@ -988,59 +653,13 @@ local function constructNew_frmhabilidade()
 
     obj._e_event2 = obj.rclListaDosItens3:addEventListener("onSelect",
         function ()
-            local node = self.rclListaDosItens3.selectedNode; 
+            if sheet then
+            					FichaPrincipal = sheet
+            				end;          
+            				local node = self.rclListaDosItens3.selectedNode; 
             				self.ListaJutsus3.node = node;                       
             				self.ListaJutsus3.visible = (node ~= nil);
             
-            				if node.DanoAtributo1 == 'PA' then
-            					node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PA) or 0)								
-            					node.naoEBuff = true;
-            					node.verificaBuff = node.naoEBuff;
-            				end;			
-            				if node.DanoAtributo1 == 'PM' then
-            					node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)						
-            					node.naoEBuff = true;
-            					node.verificaBuff = node.naoEBuff;
-            				end;
-            				if node.DanoAtributo1 == 'PF' then
-            					node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PF) or 0)	
-            					node.naoEBuff = true;
-            					node.verificaBuff = node.naoEBuff;
-            				end;							
-            				if node.DanoAtributo1 == 'Cura' then
-            					node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)	
-            					node.naoEBuff = true;
-            					node.verificaBuff = node.naoEBuff;
-            				end;
-            				if node.DanoAtributo1 == 'Cura Fixa' then
-            					node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0);	
-            					node.naoEBuff = true;
-            					node.verificaBuff = node.naoEBuff;
-            				end;
-            				if node.DanoAtributo1 == 'Fixo' then
-            					node.Hintensidade1 = (tonumber(node.FixoHabilidade1) or 0)	
-            					node.naoEBuff = true;
-            					node.verificaBuff = node.naoEBuff;
-            				end;
-            				if node.DanoAtributo1 == 'M/PA' then
-            					node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PA / 2) or 0)	
-            					node.naoEBuff = true;
-            					node.verificaBuff = node.naoEBuff;
-            				end;
-            				if node.DanoAtributo1 == 'M/PM' then
-            					node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PM / 2) or 0)	
-            					node.naoEBuff = true;
-            					node.verificaBuff = node.naoEBuff;
-            				end;
-            				if node.DanoAtributo1 == 'M/PF' then
-            					node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PF / 2) or 0)		
-            					node.naoEBuff = true;
-            					node.verificaBuff = node.naoEBuff;
-            				end;
-            				if node.DanoAtributo1 == 'BUFF' then
-            					node.Hintensidade1 = "Habilidade de Buff";
-            				end;
-            				
             				if self.ListaJutsus3.visible == true then
             					self.ListaJutsus3.node.NomeHabilidade = self.ListaJutsus3.node.NomeHabilidade or 'Nome da Habilidade';
             					self.ListaJutsus3.node.DescriHabilidade1 = self.ListaJutsus3.node.DescriHabilidade1 or 'Descrição da Habilidade';
@@ -1086,7 +705,7 @@ local function constructNew_frmhabilidade()
             					end
             					return nomes
             				end
-            
+            				
             				if self.ListaJutsus3.node.TurnoAtual == 0 then 
             					self.ListaJutsus3.node.ContaRecarga = 0
             					self.ListaJutsus3.node.RecargaHabilidade = 0
@@ -1095,12 +714,33 @@ local function constructNew_frmhabilidade()
             				local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
             
             				if self.ListaJutsus3.node.ContaRecarga ~= nil and self.ListaJutsus3.node.ContaRecarga ~= "" and self.ListaJutsus3.node.ContaRecarga > 0 then
-            					self.ListaJutsus3.node.RecargaHabilidade = tonumber(self.ListaJutsus3.node.ContaRecarga) + tonumber(self.ListaJutsus3.node.CDHabilidade) + 1 -  tonumber(self.ListaJutsus3.node.TurnoAtual)
+            					self.ListaJutsus3.node.RecargaHabilidade = tonumber(self.ListaJutsus3.node.ContaRecarga) + tonumber(self.ListaJutsus3.node.CDHabilidade) -  tonumber(self.ListaJutsus3.node.TurnoAtual)
             				end;
             
             				if  0 > self.ListaJutsus3.node.RecargaHabilidade then
             					self.ListaJutsus3.node.RecargaHabilidade = 0
             				end;
+            					--------------- GAMBI DO COMBOBOX ----------------
+            
+            				local valorOriginal = node.cmbTipoDeGrupoFH;
+            				
+            				-- 1. Aplica o valor temporário
+            				node.cmbTipoDeGrupoFH = "3";
+            				
+            				-- 2. Cria um delay usando uma função imediata
+            				local function aplicarDelay()
+            					-- 3. Restaura o valor original
+            					node.cmbTipoDeGrupoFH = valorOriginal;
+            					
+            				end
+            				
+            				-- Alternativa 1: Usando uma tabela vazia para forçar um mini-delay
+            				for i = 1, 10 do end -- Loop vazio para criar um pequeno delay
+            				
+            				aplicarDelay();
+            				
+            				-- Alternativa 2: Se precisar de mais tempo, usar um hack com rolagem de dados
+            				-- mesaDoPersonagem.chat:rolarDados("1d1", "Delay", function() aplicarDelay() end);
         end);
 
     obj._e_event3 = obj.rclListaDosItens3:addEventListener("onEndEnumeration",
@@ -1148,10 +788,32 @@ local function constructNew_frmhabilidade()
 
     obj._e_event6 = obj.button4:addEventListener("onClick",
         function (event)
-            NDB.deleteNode(self.ListaJutsus3.node);
+            local node = self.rclListaDosItens3.selectedNode; 
+            						self.ListaJutsus3.node = node;  
+            						self.ListaJutsus3.node.RecargaHabilidade = 0;
+            						RecarregaCD();
         end);
 
-    obj._e_event7 = obj.cmbTipoGrupoH:addEventListener("onClick",
+    obj._e_event7 = obj.button5:addEventListener("onClick",
+        function (event)
+            dialogs.confirmYesNo("Deseja realmente deletar esta habilidade?", 
+            							function(confirmado)
+            								if confirmado then
+            									NDB.deleteNode(self.rclListaDosItens3.selectedNode)
+            									
+            									if self.rclListaDosItens3.selectedNode == nil and sheet ~= nil then
+            										local nodes = ndb.getChildNodes(sheet.ListaDeHabilidades)               
+            
+            										if #nodes > 0 then
+            											self.rclListaDosItens3.selectedNode = nodes[1]
+            										end
+            									end
+            								end
+            							end
+            						)
+        end);
+
+    obj._e_event8 = obj.cmbTipoGrupoH:addEventListener("onClick",
         function (event)
             local node = self.rclListaDosItens3.selectedNode; 
             								self.ListaJutsus3.node = node;                       
@@ -1203,9 +865,15 @@ local function constructNew_frmhabilidade()
             
             									local function atualizarComboBoxH()
             										local comboBox = self.cmbInimigosH
+            
+            										-- Adiciona os novos itens na ordem desejada
+            										table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+            										table.insert(lista, "Dano em Área")   -- Último item
+            										table.insert(lista, "Cura em Área")   -- Último item
+            
             										comboBox.items = lista
             										comboBox.values = lista
-            										comboBox.value = lista[1] or ""
+            										comboBox.value = ""
             									end
             
             									local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
@@ -1253,9 +921,15 @@ local function constructNew_frmhabilidade()
             
             									local function atualizarComboBoxH()
             										local comboBox = self.cmbInimigosH
+            
+            										-- Adiciona os novos itens na ordem desejada
+            										table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+            										table.insert(lista, "Dano em Área")   -- Último item
+            										table.insert(lista, "Cura em Área")   -- Último item
+            
             										comboBox.items = lista
             										comboBox.values = lista
-            										comboBox.value = lista[1] or ""  -- Defina o primeiro item como selecionado por padrão
+            										comboBox.value = ""  -- Defina o primeiro item como selecionado por padrão
             									end
             
             									local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
@@ -1308,9 +982,15 @@ local function constructNew_frmhabilidade()
             
             												local function atualizarComboBoxH()
             													local comboBox = self.cmbInimigosH
+            
+            													-- Adiciona os novos itens na ordem desejada
+            													table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+            													table.insert(lista, "Dano em Área")   -- Último item
+            													table.insert(lista, "Cura em Área")   -- Último item
+            
             													comboBox.items = lista
             													comboBox.values = lista
-            													comboBox.value = lista[1] or ""
+            													comboBox.value = ""
             												end
             
             												local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
@@ -1360,9 +1040,15 @@ local function constructNew_frmhabilidade()
             
             												local function atualizarComboBoxH()
             													local comboBox = self.cmbInimigosH
+            
+            													-- Adiciona os novos itens na ordem desejada
+            													table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+            													table.insert(lista, "Dano em Área")   -- Último item
+            													table.insert(lista, "Cura em Área")   -- Último item
+            
             													comboBox.items = lista
             													comboBox.values = lista
-            													comboBox.value = lista[1] or ""  -- Defina o primeiro item como selecionado por padrão
+            													comboBox.value = ""  -- Defina o primeiro item como selecionado por padrão
             												end
             
             												local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
@@ -1371,232 +1057,257 @@ local function constructNew_frmhabilidade()
             								end;
         end);
 
-    obj._e_event8 = obj.dataLink2:addEventListener("onChange",
+    obj._e_event9 = obj.dataLink2:addEventListener("onChange",
         function (field, oldValue, newValue)
             local node = self.rclListaDosItens3.selectedNode; 
-            							self.ListaJutsus3.node = node;                       
-            							self.ListaJutsus3.visible = (node ~= nil);
+            								self.ListaJutsus3.node = node;                       
+            								self.ListaJutsus3.visible = (node ~= nil);
             
-            							if self.cmbTipoGrupoH.value == "1" then
-            								local mesas = rrpg.getRooms();
-            								local bibliotecaAtual = mesas[1].library;
-            								
-            								lista = {}
+            								if self.cmbTipoGrupoH.value == "1" then
+            									local mesas = rrpg.getRooms();
+            									local bibliotecaAtual = mesas[1].library;
+            									
+            									lista = {}
             
-            								local function obterNomesRecursivoH(bibItem)
-            									local itensFilhos = bibItem.children;
-            									local nomes = bibItem.name;
+            									local function obterNomesRecursivoH(bibItem)
+            										local itensFilhos = bibItem.children;
+            										local nomes = bibItem.name;
+            
+            										
+            										
+            										for i = 1, #itensFilhos, 1 do
+            											local bibItemFilho = itensFilhos[i];
+            											local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
+            
+            											if nomesDoFilho == "Sistema de Combaate Velen" then
+            												-- Obter ID do personagem Loan
+            												local idPersonagem = bibItemFilho;
+            
+            												-- Solicita acesso à ficha do personagem
+            												local promise = bibItemFilho:asyncOpenNDB();
+            
+            												-- Aguarda até que a ficha esteja carregada
+            												local nodeExterno = await(promise);
+            												
+            												local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)											
+            												
+            												for _, node in ipairs(nodesO) do
+            													if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
+            														table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
+            														
+            													end
+            												end
+            												
+            												table.sort(lista)
+            												
+            											end
+            										end
+            										return nomes
+            									end
             
             									
+            
+            									local function atualizarComboBoxH()
+            										local comboBox = self.cmbInimigosH
+            
+            										-- Adiciona os novos itens na ordem desejada
+            										table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+            										table.insert(lista, "Dano em Área")   -- Último item
+            										table.insert(lista, "Cura em Área")   -- Último item
+            
+            										comboBox.items = lista
+            										comboBox.values = lista
+            										comboBox.value = ""
+            									end
+            
+            									local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
+            									atualizarComboBoxH()
+            								end
+            
+            								if self.cmbTipoGrupoH.value == "2" then
+            									local mesas = rrpg.getRooms();
+            									local bibliotecaAtual = mesas[1].library;
             									
-            									for i = 1, #itensFilhos, 1 do
-            										local bibItemFilho = itensFilhos[i];
-            										local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
+            									lista = {}
             
-            										if nomesDoFilho == "Sistema de Combaate Velen" then
-            											-- Obter ID do personagem Loan
-            											local idPersonagem = bibItemFilho;
+            									local function obterNomesRecursivoH(bibItem)
+            										local itensFilhos = bibItem.children;
+            										local nomes = bibItem.name;
+            										
+            										for i = 1, #itensFilhos, 1 do
+            											local bibItemFilho = itensFilhos[i];
+            											local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
             
-            											-- Solicita acesso à ficha do personagem
-            											local promise = bibItemFilho:asyncOpenNDB();
+            											if nomesDoFilho == "Sistema de Combaate Velen" then
+            												-- Obter ID do personagem Loan
+            												local idPersonagem = bibItemFilho;
             
-            											-- Aguarda até que a ficha esteja carregada
-            											local nodeExterno = await(promise);
-            											
-            											local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)											
-            											
-            											for _, node in ipairs(nodesO) do
-            												if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
-            													table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
+            												-- Solicita acesso à ficha do personagem
+            												local promise = bibItemFilho:asyncOpenNDB();
+            
+            												-- Aguarda até que a ficha esteja carregada
+            												local nodeExterno = await(promise);
+            												
+            												local nodesJ = ndb.getChildNodes(nodeExterno.NomeJogador)
+            												
+            												for _, node in ipairs(nodesJ) do
+            													if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
+            														table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
+            													end
+            												end
+            												
+            												table.sort(lista)
+            												
+            											end
+            										end
+            										return nomes
+            									end
+            
+            									local function atualizarComboBoxH()
+            										local comboBox = self.cmbInimigosH
+            
+            										-- Adiciona os novos itens na ordem desejada
+            										table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+            										table.insert(lista, "Dano em Área")   -- Último item
+            										table.insert(lista, "Cura em Área")   -- Último item
+            
+            										comboBox.items = lista
+            										comboBox.values = lista
+            										comboBox.value = ""  -- Defina o primeiro item como selecionado por padrão
+            									end
+            
+            									local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
+            									atualizarComboBoxH()
+            								end;
+            
+            											if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
+            												if self.cmbTipoGrupoH.value == "1" then
+            												local mesas = rrpg.getRooms();
+            												local bibliotecaAtual = mesas[1].library;
+            												
+            												lista = {}
+            
+            												local function obterNomesRecursivoH(bibItem)
+            													local itensFilhos = bibItem.children;
+            													local nomes = bibItem.name;
+            
             													
-            												end
-            											end
-            											
-            											table.sort(lista)
-            											
-            										end
-            									end
-            									return nomes
-            								end
+            													
+            													for i = 1, #itensFilhos, 1 do
+            														local bibItemFilho = itensFilhos[i];
+            														local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
             
-            								
+            														if nomesDoFilho == "Sistema de Combaate Velen" then
+            															-- Obter ID do personagem Loan
+            															local idPersonagem = bibItemFilho;
             
-            								local function atualizarComboBoxH()
-            									local comboBox = self.cmbInimigosH
-            									comboBox.items = lista
-            									comboBox.values = lista
-            									comboBox.value = lista[1] or ""
-            								end
+            															-- Solicita acesso à ficha do personagem
+            															local promise = bibItemFilho:asyncOpenNDB();
             
-            								local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
-            								atualizarComboBoxH()
-            							end
-            
-            							if self.cmbTipoGrupoH.value == "2" then
-            								local mesas = rrpg.getRooms();
-            								local bibliotecaAtual = mesas[1].library;
-            								
-            								lista = {}
-            
-            								local function obterNomesRecursivoH(bibItem)
-            									local itensFilhos = bibItem.children;
-            									local nomes = bibItem.name;
-            									
-            									for i = 1, #itensFilhos, 1 do
-            										local bibItemFilho = itensFilhos[i];
-            										local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
-            
-            										if nomesDoFilho == "Sistema de Combaate Velen" then
-            											-- Obter ID do personagem Loan
-            											local idPersonagem = bibItemFilho;
-            
-            											-- Solicita acesso à ficha do personagem
-            											local promise = bibItemFilho:asyncOpenNDB();
-            
-            											-- Aguarda até que a ficha esteja carregada
-            											local nodeExterno = await(promise);
-            											
-            											local nodesJ = ndb.getChildNodes(nodeExterno.NomeJogador)
-            											
-            											for _, node in ipairs(nodesJ) do
-            												if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
-            													table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
-            												end
-            											end
-            											
-            											table.sort(lista)
-            											
-            										end
-            									end
-            									return nomes
-            								end
-            
-            								local function atualizarComboBoxH()
-            									local comboBox = self.cmbInimigosH
-            									comboBox.items = lista
-            									comboBox.values = lista
-            									comboBox.value = lista[1] or ""  -- Defina o primeiro item como selecionado por padrão
-            								end
-            
-            								local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
-            								atualizarComboBoxH()
-            							end;
-            
-            										if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
-            											if self.cmbTipoGrupoH.value == "1" then
-            											local mesas = rrpg.getRooms();
-            											local bibliotecaAtual = mesas[1].library;
-            											
-            											lista = {}
-            
-            											local function obterNomesRecursivoH(bibItem)
-            												local itensFilhos = bibItem.children;
-            												local nomes = bibItem.name;
-            
-            												
-            												
-            												for i = 1, #itensFilhos, 1 do
-            													local bibItemFilho = itensFilhos[i];
-            													local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
-            
-            													if nomesDoFilho == "Sistema de Combaate Velen" then
-            														-- Obter ID do personagem Loan
-            														local idPersonagem = bibItemFilho;
-            
-            														-- Solicita acesso à ficha do personagem
-            														local promise = bibItemFilho:asyncOpenNDB();
-            
-            														-- Aguarda até que a ficha esteja carregada
-            														local nodeExterno = await(promise);
-            														
-            														local nodesO = ndb.getChildNodes(nodeExterno.NomeJogador)								
-            														
-            														for _, node in ipairs(nodesO) do
-            															if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
-            																table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
-            															end
-            														end
-            														
-            														table.sort(lista)
-            														
-            													end
-            												end
-            												return nomes
-            											end
-            
-            											
-            
-            											local function atualizarComboBoxH()
-            												local comboBox = self.cmbInimigosH
-            												comboBox.items = lista
-            												comboBox.values = lista
-            												comboBox.value = lista[1] or ""
-            											end
-            
-            											local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
-            											atualizarComboBoxH()
-            										end
-            
-            										if self.cmbTipoGrupoH.value == "2" then
-            											local mesas = rrpg.getRooms();
-            											local bibliotecaAtual = mesas[1].library;
-            											
-            											lista = {}
-            
-            											local function obterNomesRecursivoH(bibItem)
-            												local itensFilhos = bibItem.children;
-            												local nomes = bibItem.name;
-            												
-            												for i = 1, #itensFilhos, 1 do
-            													local bibItemFilho = itensFilhos[i];
-            													local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
-            
-            													if nomesDoFilho == "Sistema de Combaate Velen" then
-            														-- Obter ID do personagem Loan
-            														local idPersonagem = bibItemFilho;
-            
-            														-- Solicita acesso à ficha do personagem
-            														local promise = bibItemFilho:asyncOpenNDB();
-            
-            														-- Aguarda até que a ficha esteja carregada
-            														local nodeExterno = await(promise);
-            														
-            														local nodesJ = ndb.getChildNodes(nodeExterno.NomeJogador)
-            														
-            														for _, node in ipairs(nodesJ) do
+            															-- Aguarda até que a ficha esteja carregada
+            															local nodeExterno = await(promise);
             															
-            															if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
-            																table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
-            																
+            															local nodesO = ndb.getChildNodes(nodeExterno.NomeJogador)								
+            															
+            															for _, node in ipairs(nodesO) do
+            																if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
+            																	table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
+            																end
             															end
+            															
+            															table.sort(lista)
+            															
             														end
-            														
-            														table.sort(lista)
-            														
             													end
+            													return nomes
             												end
-            												return nomes
+            
+            												
+            
+            												local function atualizarComboBoxH()
+            													local comboBox = self.cmbInimigosH
+            
+            													-- Adiciona os novos itens na ordem desejada
+            													table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+            													table.insert(lista, "Dano em Área")   -- Último item
+            													table.insert(lista, "Cura em Área")   -- Último item
+            
+            													comboBox.items = lista
+            													comboBox.values = lista
+            													comboBox.value = ""
+            												end
+            
+            												local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
+            												atualizarComboBoxH()
             											end
             
-            											local function atualizarComboBoxH()
-            												local comboBox = self.cmbInimigosH
-            												comboBox.items = lista
-            												comboBox.values = lista
-            												comboBox.value = lista[1] or ""  -- Defina o primeiro item como selecionado por padrão
-            											end
+            											if self.cmbTipoGrupoH.value == "2" then
+            												local mesas = rrpg.getRooms();
+            												local bibliotecaAtual = mesas[1].library;
+            												
+            												lista = {}
             
-            											local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
-            											atualizarComboBoxH()
-            										end;
-            							end;
+            												local function obterNomesRecursivoH(bibItem)
+            													local itensFilhos = bibItem.children;
+            													local nomes = bibItem.name;
+            													
+            													for i = 1, #itensFilhos, 1 do
+            														local bibItemFilho = itensFilhos[i];
+            														local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
+            
+            														if nomesDoFilho == "Sistema de Combaate Velen" then
+            															-- Obter ID do personagem Loan
+            															local idPersonagem = bibItemFilho;
+            
+            															-- Solicita acesso à ficha do personagem
+            															local promise = bibItemFilho:asyncOpenNDB();
+            
+            															-- Aguarda até que a ficha esteja carregada
+            															local nodeExterno = await(promise);
+            															
+            															local nodesJ = ndb.getChildNodes(nodeExterno.NomeJogador)
+            															
+            															for _, node in ipairs(nodesJ) do
+            																
+            																if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
+            																	table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
+            																	
+            																end
+            															end
+            															
+            															table.sort(lista)
+            															
+            														end
+            													end
+            													return nomes
+            												end
+            
+            												local function atualizarComboBoxH()
+            													local comboBox = self.cmbInimigosH
+            
+            													-- Adiciona os novos itens na ordem desejada
+            													table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+            													table.insert(lista, "Dano em Área")   -- Último item
+            													table.insert(lista, "Cura em Área")   -- Último item
+            
+            													comboBox.items = lista
+            													comboBox.values = lista
+            													comboBox.value = ""  -- Defina o primeiro item como selecionado por padrão
+            												end
+            
+            												local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
+            												atualizarComboBoxH()
+            											end;
+            								end;
         end);
 
-    obj._e_event9 = obj.button5:addEventListener("onClick",
+    obj._e_event10 = obj.button6:addEventListener("onClick",
         function (event)
-            ExecutarH2()
+            SoTesteH()
         end);
 
     function obj:_releaseEvents()
+        __o_rrpgObjs.removeEventListenerById(self._e_event10);
         __o_rrpgObjs.removeEventListenerById(self._e_event9);
         __o_rrpgObjs.removeEventListenerById(self._e_event8);
         __o_rrpgObjs.removeEventListenerById(self._e_event7);
@@ -1638,19 +1349,21 @@ local function constructNew_frmhabilidade()
         if self.TargetName ~= nil then self.TargetName:destroy(); self.TargetName = nil; end;
         if self.label4 ~= nil then self.label4:destroy(); self.label4 = nil; end;
         if self.button4 ~= nil then self.button4:destroy(); self.button4 = nil; end;
+        if self.label15 ~= nil then self.label15:destroy(); self.label15 = nil; end;
         if self.label2 ~= nil then self.label2:destroy(); self.label2 = nil; end;
         if self.button2 ~= nil then self.button2:destroy(); self.button2 = nil; end;
         if self.ListaJutsus3 ~= nil then self.ListaJutsus3:destroy(); self.ListaJutsus3 = nil; end;
-        if self.edit13 ~= nil then self.edit13:destroy(); self.edit13 = nil; end;
-        if self.rectangle1 ~= nil then self.rectangle1:destroy(); self.rectangle1 = nil; end;
         if self.label13 ~= nil then self.label13:destroy(); self.label13 = nil; end;
+        if self.rectangle1 ~= nil then self.rectangle1:destroy(); self.rectangle1 = nil; end;
+        if self.comboBox2 ~= nil then self.comboBox2:destroy(); self.comboBox2 = nil; end;
+        if self.edit13 ~= nil then self.edit13:destroy(); self.edit13 = nil; end;
         if self.NameTipoDeGrupo ~= nil then self.NameTipoDeGrupo:destroy(); self.NameTipoDeGrupo = nil; end;
         if self.edit3 ~= nil then self.edit3:destroy(); self.edit3 = nil; end;
         if self.label8 ~= nil then self.label8:destroy(); self.label8 = nil; end;
         if self.label5 ~= nil then self.label5:destroy(); self.label5 = nil; end;
-        if self.label14 ~= nil then self.label14:destroy(); self.label14 = nil; end;
-        if self.textEditor1 ~= nil then self.textEditor1:destroy(); self.textEditor1 = nil; end;
         if self.button5 ~= nil then self.button5:destroy(); self.button5 = nil; end;
+        if self.textEditor1 ~= nil then self.textEditor1:destroy(); self.textEditor1 = nil; end;
+        if self.label14 ~= nil then self.label14:destroy(); self.label14 = nil; end;
         if self.imghability ~= nil then self.imghability:destroy(); self.imghability = nil; end;
         if self.edit6 ~= nil then self.edit6:destroy(); self.edit6 = nil; end;
         if self.label3 ~= nil then self.label3:destroy(); self.label3 = nil; end;
@@ -1663,6 +1376,7 @@ local function constructNew_frmhabilidade()
         if self.label9 ~= nil then self.label9:destroy(); self.label9 = nil; end;
         if self.dataLink1 ~= nil then self.dataLink1:destroy(); self.dataLink1 = nil; end;
         if self.label6 ~= nil then self.label6:destroy(); self.label6 = nil; end;
+        if self.button6 ~= nil then self.button6:destroy(); self.button6 = nil; end;
         if self.edit7 ~= nil then self.edit7:destroy(); self.edit7 = nil; end;
         if self.edit11 ~= nil then self.edit11:destroy(); self.edit11 = nil; end;
         if self.edit1 ~= nil then self.edit1:destroy(); self.edit1 = nil; end;

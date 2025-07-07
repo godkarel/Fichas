@@ -18,7 +18,7 @@
         </dataLink>
 		------------------------- Habilidade 1 --------------------------------------------------		
 		<label left="200" top="15" width="250" height="40" fontColor="Indigo" fontStyle="bold" fontFamily="Nyala" fontSize="20" text="Pontos de Habilidade"/>
-		<edit  left="413" top="20" width="30" fontSize="15" horzTextAlign="center" fontStyle="bold" hitTest="false" canFocus="false" height="30" field="PontoHabilidade"/>	
+		<edit  left="413" top="20" width="30" fontSize="15" horzTextAlign="center" fontStyle="bold" hitTest="true" canFocus="true" height="30" field="PontoHabilidade"/>	
 		<button text="Nova Magia"  width="125" height="40" left="10" top="10">
 			<event name="onClick">
 				self.rclListaDosItens3:append();
@@ -27,60 +27,14 @@
 		</button>		
 		<recordList name="rclListaDosItens3" field="ListaDeHabilidades" templateForm="frmItemDaLista3"
 					width="450" height="550" left="70" top="60" selectable="true">                              
-			<event name="onSelect">           
+			<event name="onSelect"> 
+				if sheet then
+					FichaPrincipal = sheet
+				end;          
 				local node = self.rclListaDosItens3.selectedNode; 
 				self.ListaJutsus3.node = node;                       
 				self.ListaJutsus3.visible = (node ~= nil);
 
-				if node.DanoAtributo1 == 'PA' then
-					node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PA) or 0)								
-					node.naoEBuff = true;
-					node.verificaBuff = node.naoEBuff;
-				end;			
-				if node.DanoAtributo1 == 'PM' then
-					node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)						
-					node.naoEBuff = true;
-					node.verificaBuff = node.naoEBuff;
-				end;
-				if node.DanoAtributo1 == 'PF' then
-					node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PF) or 0)	
-					node.naoEBuff = true;
-					node.verificaBuff = node.naoEBuff;
-				end;							
-				if node.DanoAtributo1 == 'Cura' then
-					node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)	
-					node.naoEBuff = true;
-					node.verificaBuff = node.naoEBuff;
-				end;
-				if node.DanoAtributo1 == 'Cura Fixa' then
-					node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0);	
-					node.naoEBuff = true;
-					node.verificaBuff = node.naoEBuff;
-				end;
-				if node.DanoAtributo1 == 'Fixo' then
-					node.Hintensidade1 = (tonumber(node.FixoHabilidade1) or 0)	
-					node.naoEBuff = true;
-					node.verificaBuff = node.naoEBuff;
-				end;
-				if node.DanoAtributo1 == 'M/PA' then
-					node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PA / 2) or 0)	
-					node.naoEBuff = true;
-					node.verificaBuff = node.naoEBuff;
-				end;
-				if node.DanoAtributo1 == 'M/PM' then
-					node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PM / 2) or 0)	
-					node.naoEBuff = true;
-					node.verificaBuff = node.naoEBuff;
-				end;
-				if node.DanoAtributo1 == 'M/PF' then
-					node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PF / 2) or 0)		
-					node.naoEBuff = true;
-					node.verificaBuff = node.naoEBuff;
-				end;
-				if node.DanoAtributo1 == 'BUFF' then
-					node.Hintensidade1 = "Habilidade de Buff";
-				end;
-				
 				if self.ListaJutsus3.visible == true then
 					self.ListaJutsus3.node.NomeHabilidade = self.ListaJutsus3.node.NomeHabilidade or 'Nome da Habilidade';
 					self.ListaJutsus3.node.DescriHabilidade1 = self.ListaJutsus3.node.DescriHabilidade1 or 'Descrição da Habilidade';
@@ -126,7 +80,7 @@
 					end
 					return nomes
 				end
-
+				
 				if self.ListaJutsus3.node.TurnoAtual == 0 then 
 					self.ListaJutsus3.node.ContaRecarga = 0
 					self.ListaJutsus3.node.RecargaHabilidade = 0
@@ -135,14 +89,33 @@
 				local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
 
 				if self.ListaJutsus3.node.ContaRecarga ~= nil and self.ListaJutsus3.node.ContaRecarga ~= "" and self.ListaJutsus3.node.ContaRecarga > 0 then
-					self.ListaJutsus3.node.RecargaHabilidade = tonumber(self.ListaJutsus3.node.ContaRecarga) + tonumber(self.ListaJutsus3.node.CDHabilidade) + 1 -  tonumber(self.ListaJutsus3.node.TurnoAtual)
+					self.ListaJutsus3.node.RecargaHabilidade = tonumber(self.ListaJutsus3.node.ContaRecarga) + tonumber(self.ListaJutsus3.node.CDHabilidade) -  tonumber(self.ListaJutsus3.node.TurnoAtual)
 				end;
 
 				if  0 > self.ListaJutsus3.node.RecargaHabilidade then
 					self.ListaJutsus3.node.RecargaHabilidade = 0
 				end;
+					--------------- GAMBI DO COMBOBOX ----------------
 
-
+				local valorOriginal = node.cmbTipoDeGrupoFH;
+				
+				-- 1. Aplica o valor temporário
+				node.cmbTipoDeGrupoFH = "3";
+				
+				-- 2. Cria um delay usando uma função imediata
+				local function aplicarDelay()
+					-- 3. Restaura o valor original
+					node.cmbTipoDeGrupoFH = valorOriginal;
+					
+				end
+				
+				-- Alternativa 1: Usando uma tabela vazia para forçar um mini-delay
+				for i = 1, 10 do end -- Loop vazio para criar um pequeno delay
+				
+				aplicarDelay();
+				
+				-- Alternativa 2: Se precisar de mais tempo, usar um hack com rolagem de dados
+				-- mesaDoPersonagem.chat:rolarDados("1d1", "Delay", function() aplicarDelay() end);
 			</event>			
 			<event name="onEndEnumeration">
 				if self.rclListaDosItens3.selectedNode == nil and sheet ~= nil then
@@ -154,26 +127,29 @@
 				end;
 			</event>
 		</recordList>       
-		<dataScopeBox name="ListaJutsus3" visible="false" width="480" height="580" left="540" top="60" >
+		<dataScopeBox name="ListaJutsus3" visible="false" width="490" height="580" left="540" top="60" >
 			<rectangle  xradius="10" color="Transparent" yradius="10" width="460" height="560" left="1" top="1" >        
 			<image name="imghability" align="client" style="stretch" visible="false" animate="true" src="https://i.pinimg.com/originals/91/95/f4/9195f4dd1b69f90038f627c8af422429.gif"/>
 				<label left="60" top="10" width="200" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Habilidade:"/>
 				<image left="140" top="15" width="40" height="30" visible="true" field="fldImgIconSkill"/>
 				<edit  left="180" top="15" width="230" height="30" fontSize="15" fontStyle="bold" field="NomeHabilidade"/>				
 				<textEditor left="60" top="60" width="350" height="240" fontSize="15" fontStyle="bold" field="DescriHabilidade1"/>
-				<label left="60" top="350" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Dano"/>
-				<edit left="115" top="355" width="50" height="30" type="number" field="DanoHabilidade1"/>
-				<label left="310" top="350" width="60" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Fixo"/>
-				<edit left="350" top="355" width="60" height="30" type="number" field="FixoHabilidade1"/>
-				<label left="180" top="350" width="60" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Cura"/>
-				<edit left="230" top="355" width="70" height="30"  type="number"  field="CuraHabilidade1"/>                               
-				<label left="60" top="385" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Custo"/>
-				<edit left="115" top="390" width="50" height="30" type="number" field="CustoHabilidade"/>
-				<edit left="400" top="385" width="40" height="30" visible="false" type="number" field="Custo2"/>							    
-				<label left="180" top="385" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Tipo"/>								
-				<comboBox left="230" top="395" width="70" height="18" field="DanoAtributo1" items="{'PA', 'PM', 'PF', 'Cura', 'Cura Fixa', 'Fixo', 'BUFF', 'M/PA', 'M/PM', 'M/PF'}"/>
-				<label left="310" top="385" width="60" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Level"/>
-				<button left="350" top="390" width="16" height="30" text="-">
+				<label left="60" top="370" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Dano"/>
+				<edit left="115" top="375" width="50" height="30" type="number" field="DanoHabilidade1"/>
+				<label left="310" top="370" width="60" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Real"/>
+				<edit left="350" top="375" width="60" height="30" type="number" field="FixoHabilidade1"/>
+				<label left="180" top="370" width="60" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Cura"/>
+				<edit left="230" top="375" width="70" height="30"  type="number"  field="CuraHabilidade1"/>                               
+				<label left="60" top="405" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Custo"/>
+				<edit left="115" top="410" width="50" height="30" type="number" field="CustoHabilidade"/>
+				<edit left="400" top="405" width="40" height="30" visible="false" type="number" field="Custo2"/>							    
+				<label left="172" top="410" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Tipo"/>	
+				<label left="85" top="295" width="120" height="40" fontFamily="Nyala" fontColor="Red" fontSize="16" text="OPÇÃO:"/>	
+				<comboBox left="140" top="305" width="200" height="20" field="OpcaoHab" items="{'Ofensiva', 'Dano em Area', 'Cura', 'Cura em Area', 'Defensiva'}"/>							
+				<comboBox left="207" top="420" width="100" height="18" field="DanoAtributo1" items="{'PA', 'PF', 'PM', 'PA+M/PA', 'PF+M/PF', 'PM+M/PM', 'M/PA', 'M/PF', 'M/PM', 'PA+PF', 'PF+PM', 'PA+PM', 'M/PA+PF', 'M/PA+PM', 'M/PF+PM', 'M/PF+PA', 'M/PM+PF',
+	 'M/PM+PA', 'M/PA+M/PF', 'M/PF+M/PM', 'M/PA+M/PM', 'REAL PA', 'REAL PF', 'REAL PM', 'Efeito', 'Buff'}"/>
+				<label left="310" top="405" width="60" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Level"/>
+				<button left="350" top="410" width="16" height="30" text="-">
 					<event name="onClick">						
 						local node = self.ListaJutsus3.node;
 						sheet.PontoHabilidade = tonumber(sheet.PontoHabilidade) or 0;
@@ -187,8 +163,8 @@
 						end;						
 					</event>
 				</button>			
-				<edit left="366" top="390" width="27" height="30" canFocus="true" horzTextAlign="center" hitTest="true" type="number" field="LevelHabilidade"/>						
-				<button left="393" top="390" width="16" height="30" text="+">
+				<edit left="366" top="410	" width="27" height="30" canFocus="true" horzTextAlign="center" hitTest="true" type="number" field="LevelHabilidade"/>						
+				<button left="393" top="410" width="16" height="30" text="+">
 					<event name="onClick">
 						local node = self.ListaJutsus3.node;
 						sheet.PontoHabilidade = tonumber(sheet.PontoHabilidade) or 0;
@@ -207,27 +183,55 @@
 					</event>
 				</button>
 
-				<label left="60" top="420" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="CD"/>
-				<edit left="90" top="425" width="40" height="30" type="number" field="CDHabilidade"/>
+				<label left="60" top="440" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="CD"/>
+				<edit left="90" top="445" width="40" height="30" type="number" field="CDHabilidade"/>
 
-				<label left="135" top="420" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Recarga"/>
-				<edit left="210" top="425" width="40" height="30" type="number" field="RecargaHabilidade"/>
-
-				<label left="255" top="420" width="120" height="40" visible="false" fontFamily="Nyala" fontColor="Black" fontSize="20" text="CONTA"/>
-				<edit left="325" top="425" width="40" height="30" visible="false" type="number" field="ContaRecarga"/>
+				<label left="135" top="440" width="120" height="40" fontFamily="Nyala" fontColor="Black" fontSize="20" text="Recarga"/>
+				<edit left="210" top="445" width="40" height="30" type="number" field="RecargaHabilidade"/>
 				
-				<label left="220" top="480" width="120" height="40" fontFamily="Nyala" fontColor="blue" fontSize="20" text="Intensidade"/>
-				<edit left="330" top="485" width="80" height="30" enabled="false" fontColor="Red" type="number" field="Hintensidade1"/>									
-				<image left="60" top="450" width="150" height="150" src="/imagens/magia.png"/>
-				<button left="220" top="540" fontColor="red" text="Apagar!" margins="{left=4, right=4, top=2, bottom=2}" width="150" onClick="NDB.deleteNode(self.ListaJutsus3.node);" />
+				<button left="255" top="445" width="80" height="30" fontFamily="Nyala" fontColor="White" fontSize="20" text="Resetar">
+					<event name="onClick">
+						local node = self.rclListaDosItens3.selectedNode; 
+						self.ListaJutsus3.node = node;  
+						self.ListaJutsus3.node.RecargaHabilidade = 0;
+						RecarregaCD();	
+					</event>
+				</button>
+
+				<label left="255" top="440" width="120" height="40" visible="false" fontFamily="Nyala" fontColor="Black" fontSize="20" text="CONTA"/>
+				<edit left="325" top="445" width="40" height="30" visible="false" type="number" field="ContaRecarga"/>
+				
+				<label left="220" top="500" width="120" height="40" fontFamily="Nyala" fontColor="blue" fontSize="20" text="Intensidade"/>
+				<edit left="330" top="505" width="80" height="30" enabled="false" fontColor="Red" type="number" field="Hintensidade1"/>									
+				<image left="60" top="460" width="150" height="150" src="/imagens/magia.png"/>
+				<button left="220" top="550" fontColor="red" text="Apagar!" margins="{left=4, right=4, top=2, bottom=2}" width="150" >
+				<event name="onClick">
+						dialogs.confirmYesNo("Deseja realmente deletar esta habilidade?", 
+							function(confirmado)
+								if confirmado then
+									NDB.deleteNode(self.rclListaDosItens3.selectedNode)
+									
+									if self.rclListaDosItens3.selectedNode == nil and sheet ~= nil then
+										local nodes = ndb.getChildNodes(sheet.ListaDeHabilidades)               
+
+										if #nodes > 0 then
+											self.rclListaDosItens3.selectedNode = nodes[1]
+										end
+									end
+								end
+							end
+						)
+
+					</event>
+				</button>
 				<edit width="120" visible="false" field="naoEBuff"/>
-				<flowLayout name="TargetName" scale="1" left="230" top="305" width="150" height="40">
+				<flowLayout name="TargetName" scale="1" left="230" top="325	" width="150" height="40">
 				<label text="Alvo:" fontColor="red" align="right"  width="75" />
 						<comboBox items="{'Inimigo 1', 'Inimigo 2', 'Inimigo 3'}"
 								values="{'1', '2', '3'}" value="1" fontColor="#FF6347" name="cmbInimigosH" width="150" height="25" />
 				</flowLayout>
 				
-				<flowLayout name="NameTipoDeGrupo" scale="1" left="60" top="305" width="150" height="40">
+				<flowLayout name="NameTipoDeGrupo" scale="1" left="60" top="325" width="150" height="40">
 					<label text="Grupo:" fontColor="green" align="right" width="75" />
 					<comboBox items="{'Jogadores', 'Inimigos'}"
 							values="{'1', '2'}" value="1" fontColor="#00FF7F" name="cmbTipoGrupoH" field="cmbTipoDeGrupoFH" width="150" height="25" >
@@ -282,9 +286,15 @@
 
 									local function atualizarComboBoxH()
 										local comboBox = self.cmbInimigosH
+
+										-- Adiciona os novos itens na ordem desejada
+										table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+										table.insert(lista, "Dano em Área")   -- Último item
+										table.insert(lista, "Cura em Área")   -- Último item
+
 										comboBox.items = lista
 										comboBox.values = lista
-										comboBox.value = lista[1] or ""
+										comboBox.value = ""
 									end
 
 									local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
@@ -332,9 +342,15 @@
 
 									local function atualizarComboBoxH()
 										local comboBox = self.cmbInimigosH
+
+										-- Adiciona os novos itens na ordem desejada
+										table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+										table.insert(lista, "Dano em Área")   -- Último item
+										table.insert(lista, "Cura em Área")   -- Último item
+
 										comboBox.items = lista
 										comboBox.values = lista
-										comboBox.value = lista[1] or ""  -- Defina o primeiro item como selecionado por padrão
+										comboBox.value = ""  -- Defina o primeiro item como selecionado por padrão
 									end
 
 									local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
@@ -387,9 +403,15 @@
 
 												local function atualizarComboBoxH()
 													local comboBox = self.cmbInimigosH
+
+													-- Adiciona os novos itens na ordem desejada
+													table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+													table.insert(lista, "Dano em Área")   -- Último item
+													table.insert(lista, "Cura em Área")   -- Último item
+
 													comboBox.items = lista
 													comboBox.values = lista
-													comboBox.value = lista[1] or ""
+													comboBox.value = ""
 												end
 
 												local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
@@ -439,9 +461,15 @@
 
 												local function atualizarComboBoxH()
 													local comboBox = self.cmbInimigosH
+
+													-- Adiciona os novos itens na ordem desejada
+													table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+													table.insert(lista, "Dano em Área")   -- Último item
+													table.insert(lista, "Cura em Área")   -- Último item
+
 													comboBox.items = lista
 													comboBox.values = lista
-													comboBox.value = lista[1] or ""  -- Defina o primeiro item como selecionado por padrão
+													comboBox.value = ""  -- Defina o primeiro item como selecionado por padrão
 												end
 
 												local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
@@ -455,613 +483,267 @@
 				 <dataLink field="cmbTipoDeGrupoFH">
 					<event name="onChange">
 							local node = self.rclListaDosItens3.selectedNode; 
-							self.ListaJutsus3.node = node;                       
-							self.ListaJutsus3.visible = (node ~= nil);
+								self.ListaJutsus3.node = node;                       
+								self.ListaJutsus3.visible = (node ~= nil);
 
-							if self.cmbTipoGrupoH.value == "1" then
-								local mesas = rrpg.getRooms();
-								local bibliotecaAtual = mesas[1].library;
-								
-								lista = {}
+								if self.cmbTipoGrupoH.value == "1" then
+									local mesas = rrpg.getRooms();
+									local bibliotecaAtual = mesas[1].library;
+									
+									lista = {}
 
-								local function obterNomesRecursivoH(bibItem)
-									local itensFilhos = bibItem.children;
-									local nomes = bibItem.name;
+									local function obterNomesRecursivoH(bibItem)
+										local itensFilhos = bibItem.children;
+										local nomes = bibItem.name;
+
+										
+										
+										for i = 1, #itensFilhos, 1 do
+											local bibItemFilho = itensFilhos[i];
+											local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
+
+											if nomesDoFilho == "Sistema de Combaate Velen" then
+												-- Obter ID do personagem Loan
+												local idPersonagem = bibItemFilho;
+
+												-- Solicita acesso à ficha do personagem
+												local promise = bibItemFilho:asyncOpenNDB();
+
+												-- Aguarda até que a ficha esteja carregada
+												local nodeExterno = await(promise);
+												
+												local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)											
+												
+												for _, node in ipairs(nodesO) do
+													if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
+														table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
+														
+													end
+												end
+												
+												table.sort(lista)
+												
+											end
+										end
+										return nomes
+									end
 
 									
+
+									local function atualizarComboBoxH()
+										local comboBox = self.cmbInimigosH
+
+										-- Adiciona os novos itens na ordem desejada
+										table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+										table.insert(lista, "Dano em Área")   -- Último item
+										table.insert(lista, "Cura em Área")   -- Último item
+
+										comboBox.items = lista
+										comboBox.values = lista
+										comboBox.value = ""
+									end
+
+									local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
+									atualizarComboBoxH()
+								end
+
+								if self.cmbTipoGrupoH.value == "2" then
+									local mesas = rrpg.getRooms();
+									local bibliotecaAtual = mesas[1].library;
 									
-									for i = 1, #itensFilhos, 1 do
-										local bibItemFilho = itensFilhos[i];
-										local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
+									lista = {}
 
-										if nomesDoFilho == "Sistema de Combaate Velen" then
-											-- Obter ID do personagem Loan
-											local idPersonagem = bibItemFilho;
+									local function obterNomesRecursivoH(bibItem)
+										local itensFilhos = bibItem.children;
+										local nomes = bibItem.name;
+										
+										for i = 1, #itensFilhos, 1 do
+											local bibItemFilho = itensFilhos[i];
+											local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
 
-											-- Solicita acesso à ficha do personagem
-											local promise = bibItemFilho:asyncOpenNDB();
+											if nomesDoFilho == "Sistema de Combaate Velen" then
+												-- Obter ID do personagem Loan
+												local idPersonagem = bibItemFilho;
 
-											-- Aguarda até que a ficha esteja carregada
-											local nodeExterno = await(promise);
-											
-											local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)											
-											
-											for _, node in ipairs(nodesO) do
-												if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
-													table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
+												-- Solicita acesso à ficha do personagem
+												local promise = bibItemFilho:asyncOpenNDB();
+
+												-- Aguarda até que a ficha esteja carregada
+												local nodeExterno = await(promise);
+												
+												local nodesJ = ndb.getChildNodes(nodeExterno.NomeJogador)
+												
+												for _, node in ipairs(nodesJ) do
+													if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
+														table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
+													end
+												end
+												
+												table.sort(lista)
+												
+											end
+										end
+										return nomes
+									end
+
+									local function atualizarComboBoxH()
+										local comboBox = self.cmbInimigosH
+
+										-- Adiciona os novos itens na ordem desejada
+										table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+										table.insert(lista, "Dano em Área")   -- Último item
+										table.insert(lista, "Cura em Área")   -- Último item
+
+										comboBox.items = lista
+										comboBox.values = lista
+										comboBox.value = ""  -- Defina o primeiro item como selecionado por padrão
+									end
+
+									local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
+									atualizarComboBoxH()
+								end;
+
+											if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
+												if self.cmbTipoGrupoH.value == "1" then
+												local mesas = rrpg.getRooms();
+												local bibliotecaAtual = mesas[1].library;
+												
+												lista = {}
+
+												local function obterNomesRecursivoH(bibItem)
+													local itensFilhos = bibItem.children;
+													local nomes = bibItem.name;
+
 													
-												end
-											end
-											
-											table.sort(lista)
-											
-										end
-									end
-									return nomes
-								end
+													
+													for i = 1, #itensFilhos, 1 do
+														local bibItemFilho = itensFilhos[i];
+														local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
 
-								
+														if nomesDoFilho == "Sistema de Combaate Velen" then
+															-- Obter ID do personagem Loan
+															local idPersonagem = bibItemFilho;
 
-								local function atualizarComboBoxH()
-									local comboBox = self.cmbInimigosH
-									comboBox.items = lista
-									comboBox.values = lista
-									comboBox.value = lista[1] or ""
-								end
+															-- Solicita acesso à ficha do personagem
+															local promise = bibItemFilho:asyncOpenNDB();
 
-								local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
-								atualizarComboBoxH()
-							end
-
-							if self.cmbTipoGrupoH.value == "2" then
-								local mesas = rrpg.getRooms();
-								local bibliotecaAtual = mesas[1].library;
-								
-								lista = {}
-
-								local function obterNomesRecursivoH(bibItem)
-									local itensFilhos = bibItem.children;
-									local nomes = bibItem.name;
-									
-									for i = 1, #itensFilhos, 1 do
-										local bibItemFilho = itensFilhos[i];
-										local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
-
-										if nomesDoFilho == "Sistema de Combaate Velen" then
-											-- Obter ID do personagem Loan
-											local idPersonagem = bibItemFilho;
-
-											-- Solicita acesso à ficha do personagem
-											local promise = bibItemFilho:asyncOpenNDB();
-
-											-- Aguarda até que a ficha esteja carregada
-											local nodeExterno = await(promise);
-											
-											local nodesJ = ndb.getChildNodes(nodeExterno.NomeJogador)
-											
-											for _, node in ipairs(nodesJ) do
-												if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
-													table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
-												end
-											end
-											
-											table.sort(lista)
-											
-										end
-									end
-									return nomes
-								end
-
-								local function atualizarComboBoxH()
-									local comboBox = self.cmbInimigosH
-									comboBox.items = lista
-									comboBox.values = lista
-									comboBox.value = lista[1] or ""  -- Defina o primeiro item como selecionado por padrão
-								end
-
-								local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
-								atualizarComboBoxH()
-							end;
-
-										if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
-											if self.cmbTipoGrupoH.value == "1" then
-											local mesas = rrpg.getRooms();
-											local bibliotecaAtual = mesas[1].library;
-											
-											lista = {}
-
-											local function obterNomesRecursivoH(bibItem)
-												local itensFilhos = bibItem.children;
-												local nomes = bibItem.name;
-
-												
-												
-												for i = 1, #itensFilhos, 1 do
-													local bibItemFilho = itensFilhos[i];
-													local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
-
-													if nomesDoFilho == "Sistema de Combaate Velen" then
-														-- Obter ID do personagem Loan
-														local idPersonagem = bibItemFilho;
-
-														-- Solicita acesso à ficha do personagem
-														local promise = bibItemFilho:asyncOpenNDB();
-
-														-- Aguarda até que a ficha esteja carregada
-														local nodeExterno = await(promise);
-														
-														local nodesO = ndb.getChildNodes(nodeExterno.NomeJogador)								
-														
-														for _, node in ipairs(nodesO) do
-															if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
-																table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
-															end
-														end
-														
-														table.sort(lista)
-														
-													end
-												end
-												return nomes
-											end
-
-											
-
-											local function atualizarComboBoxH()
-												local comboBox = self.cmbInimigosH
-												comboBox.items = lista
-												comboBox.values = lista
-												comboBox.value = lista[1] or ""
-											end
-
-											local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
-											atualizarComboBoxH()
-										end
-
-										if self.cmbTipoGrupoH.value == "2" then
-											local mesas = rrpg.getRooms();
-											local bibliotecaAtual = mesas[1].library;
-											
-											lista = {}
-
-											local function obterNomesRecursivoH(bibItem)
-												local itensFilhos = bibItem.children;
-												local nomes = bibItem.name;
-												
-												for i = 1, #itensFilhos, 1 do
-													local bibItemFilho = itensFilhos[i];
-													local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
-
-													if nomesDoFilho == "Sistema de Combaate Velen" then
-														-- Obter ID do personagem Loan
-														local idPersonagem = bibItemFilho;
-
-														-- Solicita acesso à ficha do personagem
-														local promise = bibItemFilho:asyncOpenNDB();
-
-														-- Aguarda até que a ficha esteja carregada
-														local nodeExterno = await(promise);
-														
-														local nodesJ = ndb.getChildNodes(nodeExterno.NomeJogador)
-														
-														for _, node in ipairs(nodesJ) do
+															-- Aguarda até que a ficha esteja carregada
+															local nodeExterno = await(promise);
 															
-															if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
-																table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
-																
+															local nodesO = ndb.getChildNodes(nodeExterno.NomeJogador)								
+															
+															for _, node in ipairs(nodesO) do
+																if node.NomeDoPersonagemVez then  -- Verifica se o campo NomeDoPersonagemVez existe
+																	table.insert(lista, node.NomeDoPersonagemVez)  -- Adiciona o valor do campo NomeDoPersonagemVez à lista
+																end
 															end
+															
+															table.sort(lista)
+															
 														end
-														
-														table.sort(lista)
-														
 													end
+													return nomes
 												end
-												return nomes
+
+												
+
+												local function atualizarComboBoxH()
+													local comboBox = self.cmbInimigosH
+
+													-- Adiciona os novos itens na ordem desejada
+													table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+													table.insert(lista, "Dano em Área")   -- Último item
+													table.insert(lista, "Cura em Área")   -- Último item
+
+													comboBox.items = lista
+													comboBox.values = lista
+													comboBox.value = ""
+												end
+
+												local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
+												atualizarComboBoxH()
 											end
 
-											local function atualizarComboBoxH()
-												local comboBox = self.cmbInimigosH
-												comboBox.items = lista
-												comboBox.values = lista
-												comboBox.value = lista[1] or ""  -- Defina o primeiro item como selecionado por padrão
-											end
+											if self.cmbTipoGrupoH.value == "2" then
+												local mesas = rrpg.getRooms();
+												local bibliotecaAtual = mesas[1].library;
+												
+												lista = {}
 
-											local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
-											atualizarComboBoxH()
-										end;
-							end;
+												local function obterNomesRecursivoH(bibItem)
+													local itensFilhos = bibItem.children;
+													local nomes = bibItem.name;
+													
+													for i = 1, #itensFilhos, 1 do
+														local bibItemFilho = itensFilhos[i];
+														local nomesDoFilho = obterNomesRecursivoH(bibItemFilho) or "";
+
+														if nomesDoFilho == "Sistema de Combaate Velen" then
+															-- Obter ID do personagem Loan
+															local idPersonagem = bibItemFilho;
+
+															-- Solicita acesso à ficha do personagem
+															local promise = bibItemFilho:asyncOpenNDB();
+
+															-- Aguarda até que a ficha esteja carregada
+															local nodeExterno = await(promise);
+															
+															local nodesJ = ndb.getChildNodes(nodeExterno.NomeJogador)
+															
+															for _, node in ipairs(nodesJ) do
+																
+																if node.NomeDoOponenteVez then  -- Verifica se o campo NomeDoOponenteVez existe
+																	table.insert(lista, node.NomeDoOponenteVez)  -- Adiciona o valor do campo NomeDoOponenteVez à lista
+																	
+																end
+															end
+															
+															table.sort(lista)
+															
+														end
+													end
+													return nomes
+												end
+
+												local function atualizarComboBoxH()
+													local comboBox = self.cmbInimigosH
+
+													-- Adiciona os novos itens na ordem desejada
+													table.insert(lista, "Alvo Simulado")  -- Penúltimo item
+													table.insert(lista, "Dano em Área")   -- Último item
+													table.insert(lista, "Cura em Área")   -- Último item
+
+													comboBox.items = lista
+													comboBox.values = lista
+													comboBox.value = ""  -- Defina o primeiro item como selecionado por padrão
+												end
+
+												local nomesDeTodosOsItens = obterNomesRecursivoH(bibliotecaAtual);
+												atualizarComboBoxH()
+											end;
+								end;
 						</event>
 					</dataLink>			
-				<button left="60" top="480" fontSize="20" opacity="0.1" height="90" width="150" text="Usar" fontColor="White" onClick="ExecutarH2()"/>								
+				<button left="60" top="490" fontSize="20" opacity="0.1" height="90" width="150" text="Usar" fontColor="White" onClick="SoTesteH()"/>								
 				<script>					
-				local function ExecutarH2() 
+					function SoTesteH()
+						
+						local node = self.rclListaDosItens3.selectedNode; 
+						self.ListaJutsus3.node = node;                       
+						self.ListaJutsus3.visible = (node ~= nil);
 
-				local node = self.rclListaDosItens3.selectedNode; 
-				self.ListaJutsus3.node = node;                       
-				self.ListaJutsus3.visible = (node ~= nil);
-
-				if 0 == self.ListaJutsus3.node.RecargaHabilidade then 
-				
-					--[[ HABILIDADE DE DANO ]]--
-					-- obter a mesa do personagem
-
-					
-					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
-					local mesas = rrpg.getRooms();
-					local bibliotecaAtual = mesas[1].library;
-
-
-						if self.cmbTipoGrupoH.value == "1" then 
-							local function obterNomesRecursivoH1(bibItem)
-								local itensFilhos = bibItem.children;
-								local nomes = bibItem.name;
-								
-								for i = 1, #itensFilhos, 1 do
-									local bibItemFilho = itensFilhos[i];
-									local nomesDoFilho = obterNomesRecursivoH1(bibItemFilho) or "";
-
-									if nomesDoFilho == "Sistema de Combaate Velen" then
-										-- Obter ID do personagem Loan
-										local idPersonagem = self.cmbInimigosH.value;
-										
-										-- Solicita acesso à ficha do personagem
-										local promise = bibItemFilho:asyncOpenNDB();
-
-										-- Aguarda até que a ficha esteja carregada
-										nodeExterno = await(promise);
-										
-										local nodesO = ndb.getChildNodes(nodeExterno.NomeOponentes)
-										
-										
-										for _, node in ipairs(nodesO) do
-											if node.NomeDoOponenteVez == idPersonagem then  -- Verifica se o campo NomeDoOponenteVez existe
-												PERAlvo = node.Pers
-												RESAlvo = node.RES
-											end
-										end
-									end
-								end
-								return nomes
-							end
-
-							local nomesDeTodosOsItens = obterNomesRecursivoH1(bibliotecaAtual);
+						if self.cmbInimigosH.value == "" then
+							showMessage("CADE O ALVO ?")
+						else
+							local nodeInimigo = await(ConsegueAlvoExterno(self, node, self.cmbInimigosH.value, node.cmbTipoDeGrupoFH, node.OpcaoHab));
 							
-							local node = self.ListaJutsus3.node;
-
-							nodeExterno.TipoRecebido = nil
-							
-							local mesaDoPersonagem = rrpg.getMesaDe(sheet);					
-							sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
-							mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
-							function (rolado)					
-							if node.DanoAtributo1 ~= nil then
-								if sheet.AcertoMagico + 1 > rolado.resultado then							
-									if node.DanoAtributo1 == 'PA' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PA) or 0)								
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;			
-									if node.DanoAtributo1 == 'PM' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)						
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'PF' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PF) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;							
-									if node.DanoAtributo1 == 'Cura' then
-										node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'Cura Fixa' then
-										node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0);	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'Fixo' then
-										node.Hintensidade1 = (tonumber(node.FixoHabilidade1) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'M/PA' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PA / 2) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'M/PM' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PM / 2) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'M/PF' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PF / 2) or 0)		
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'BUFF' then
-										node.Hintensidade1 = "Habilidade de Buff";
-									end;
-									if sheet.AcertoMagico >= rolado.resultado then
-										if node.fldImgIconSkill ~= nil then 
-											mesaDoPersonagem.chat:enviarMensagem("[§I " .. node.fldImgIconSkill .. "]");
-										end;
-										mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriHabilidade1);
-										local mesa = Firecast.getMesaDe(sheet); 
-										local Custo2 = sheet.MPAtual;
-										node.Custo2 = sheet.MPAtual;
-										node.Custo2 = (tonumber(node.Custo2) or 0) - (tonumber(node.CustoHabilidade) or 0);
-										sheet.MPAtual = node.Custo2;
-										mesa.meuJogador:requestSetBarValue(2, node.Custo2);
-										sheet.MPAtual = node.Custo2;
-										self.ListaJutsus3.node.ContaRecarga = self.ListaJutsus3.node.TurnoAtual	
-										self.ListaJutsus3.node.RecargaHabilidade = tonumber(self.ListaJutsus3.node.ContaRecarga) + tonumber(self.ListaJutsus3.node.CDHabilidade) + 1 -  tonumber(self.ListaJutsus3.node.TurnoAtual)	
-										if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
-											if 1 == rolado.resultado then										
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value	
-												nodeExterno.TipoRecebido = node.DanoAtributo1	
-												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1 * 2)) * -1		
-												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando  com [§K4,0] CRITICAL [§K9,0] « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] » :dinofauro: ");
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											else										
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-												nodeExterno.TipoRecebido = node.DanoAtributo1	
-												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1)) * -1
-												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] »");
-												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-											end;	
-										else
-											if sheet.CMagico +1 > rolado.resultado then 										
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-												if node.DanoAtributo1 ~= 'BUFF' then
-													nodeExterno.DanoRecebido = math.floor((node.Hintensidade1 * 2) * (1 - (RESAlvo / 100)))
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												end;											
-												if node.DanoAtributo1 == 'Fixo' then
-													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												end;
-												
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido) .. "[§K9,0] » :dinofauro: ");
-											else
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-												if node.DanoAtributo1 ~= 'BUFF' then
-													nodeExterno.DanoRecebido = math.floor((node.Hintensidade1) * (1 - (RESAlvo / 100)))
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												end;
-												if node.DanoAtributo1 == 'Fixo' then
-													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-												end;
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido .. "[§K9,0] »");
-											end;	
-										end;										
-									else
-										mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
-										nodeExterno.DanoRecebido = 0
-										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-									end;
-								else							
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
-									nodeExterno.DanoRecebido = 0
-									nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
-									if node.DanoAtributo1 == 'BUFF' then
-										mesaDoPersonagem.chat:enviarMensagem("[§K3,15]ERA UM BUFF ESSA HABILIDADE,[§K4,0] O Player mantem a ação");	
-									else 	
-									end;
-								end;
+							if nodeInimigo ~= nil then
+								RolarHabilidadeNovo(self, node, self.cmbInimigosH.value, node.cmbTipoDeGrupoFH, nodeInimigo, node.OpcaoHab);
 							else
-								nodeExterno.DanoRecebido = 0
-								nodeExterno.TipoRecebido = nil
-								mesaDoPersonagem.chat:enviarMensagem("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE");
-							end;
-							end);
-						
-						end;
-
-						
-						---------- inimigo 2 -----------
-
-						if self.cmbTipoGrupoH.value == "2" then 
-							local function obterNomesRecursivoH2(bibItem)
-								local itensFilhos = bibItem.children;
-								local nomes = bibItem.name;
-								
-								for i = 1, #itensFilhos, 1 do
-									local bibItemFilho = itensFilhos[i];
-									local nomesDoFilho = obterNomesRecursivoH2(bibItemFilho) or "";
-
-									if nomesDoFilho == "Sistema de Combaate Velen" then
-										-- Obter ID do personagem Loan
-										local idPersonagem = self.cmbInimigosH.value;
-										
-										-- Solicita acesso à ficha do personagem
-										local promise = bibItemFilho:asyncOpenNDB();
-
-										-- Aguarda até que a ficha esteja carregada
-										nodeExterno = await(promise);
-										
-										local nodesO = ndb.getChildNodes(nodeExterno.NomeJogador)		
-										
-										
-										for _, node in ipairs(nodesO) do
-											if node.NomeDoPersonagemVez == idPersonagem then  -- Verifica se o campo NomeDoPersonagemVez existe
-												PERAlvo = node.Pers
-												RESAlvo = node.RES
-											end
-										end
-									end
-								end
-								return nomes
+								showMessage("Inimigo não encontrado.");
 							end
-
-							local nomesDeTodosOsItens = obterNomesRecursivoH2(bibliotecaAtual);
-							
-							local node = self.ListaJutsus3.node;
-							local mesaDoPersonagem = rrpg.getMesaDe(sheet);
-							if node.DanoAtributo1 == 'BUFF' then
-								if node.naoEBuff == true then
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FOI PEGO TENTANDO ROLAR UMA HABILIDADE QUE NÃO É BUFF COMO BUFF A PROXIMA VEZ ELE SERA DESCLASSIFICADO DA MESA");
-								return 
-								else															
-								end;
-							end;										
-							sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
-							mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
-							function (rolado)					
-							if node.DanoAtributo1 ~= nil then
-								if sheet.AcertoMagico + 1 > rolado.resultado then							
-									if node.DanoAtributo1 == 'PA' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PA) or 0)								
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;			
-									if node.DanoAtributo1 == 'PM' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)						
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'PF' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PF) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;							
-									if node.DanoAtributo1 == 'Cura' then
-										node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0) + (tonumber(sheet.PM) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'Cura Fixa' then
-										node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0);	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'Fixo' then
-										node.Hintensidade1 = (tonumber(node.FixoHabilidade1) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'M/PA' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PA / 2) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'M/PM' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PM / 2) or 0)	
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'M/PF' then
-										node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(sheet.PF / 2) or 0)		
-										node.naoEBuff = true;
-										node.verificaBuff = node.naoEBuff;
-									end;
-									if node.DanoAtributo1 == 'BUFF' then
-										node.Hintensidade1 = "Habilidade de Buff";
-									end;
-									if sheet.AcertoMagico >= rolado.resultado then
-										if node.fldImgIconSkill ~= nil then 
-											mesaDoPersonagem.chat:enviarMensagem("[§I " .. node.fldImgIconSkill .. "]");
-										end;
-										mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. node.DescriHabilidade1);
-										local mesa = Firecast.getMesaDe(sheet); 
-										local Custo2 = sheet.MPAtual;
-										node.Custo2 = sheet.MPAtual;
-										node.Custo2 = (tonumber(node.Custo2) or 0) - (tonumber(node.CustoHabilidade) or 0);
-										sheet.MPAtual = node.Custo2;
-										mesa.meuJogador:requestSetBarValue(2, node.Custo2);
-										self.ListaJutsus3.node.ContaRecarga = self.ListaJutsus3.node.TurnoAtual	
-										self.ListaJutsus3.node.RecargaHabilidade = tonumber(self.ListaJutsus3.node.ContaRecarga) + tonumber(self.ListaJutsus3.node.CDHabilidade) + 1 -  tonumber(self.ListaJutsus3.node.TurnoAtual)	
-										if node.DanoAtributo1 == 'Cura' or node.DanoAtributo1 == 'Cura Fixa' then
-											if 1 == rolado.resultado then										
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value		
-												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando  com [§K4,0] CRITICAL [§K9,0] « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] » :dinofauro: ");
-											else										
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. node.Hintensidade1 .. "[§K8,0] »");
-											end;	
-										else
-											if sheet.CMagico +1 > rolado.resultado then 										
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-												if node.DanoAtributo1 ~= 'BUFF' then
-													nodeExterno.DanoRecebido = math.floor((node.Hintensidade1 * 2) * (1 - (RESAlvo / 100)))
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
-												end;
-												if node.DanoAtributo1 == 'Fixo' then
-													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
-												end;
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (nodeExterno.DanoRecebido) .. "[§K9,0] » :dinofauro: ");
-											else
-												nodeExterno.AlvoRecebido = self.cmbInimigosH.value
-												nodeExterno.GrupoRecebido = self.cmbTipoGrupoH.value
-												if node.DanoAtributo1 ~= 'BUFF' then
-													nodeExterno.DanoRecebido = math.floor((node.Hintensidade1) * (1 - (RESAlvo / 100)))
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
-												end;
-												if node.DanoAtributo1 == 'Fixo' then
-													nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
-													nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
-												end;
-												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. nodeExterno.DanoRecebido .. "[§K9,0] »");
-											end;	
-										end;
-																			
-									else
-										mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
-										nodeExterno.DanoRecebido = 0
-										nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
-									end;
-								else							
-									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
-									nodeExterno.DanoRecebido = 0
-									nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
-									if node.DanoAtributo1 == 'BUFF' then
-										mesaDoPersonagem.chat:enviarMensagem("[§K3,15]ERA BUFF ESSA MERDA");	
-									else 	
-									end;
-								end;
-							else							
-								mesaDoPersonagem.chat:enviarMensagem("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE");
-								nodeExterno.DanoRecebido = 0
-							end;
-							end);
-						
 						end;
-					else
-						showMessage("Sua Habilidade ainda esta em Recarga!")
-					end;
-
-										
-				end; 																				
+					end																
 				</script> 
 			</rectangle>
 		</dataScopeBox>

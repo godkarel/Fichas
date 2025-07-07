@@ -24,13 +24,13 @@
 			if sheet.AcaoAtualIndex == nil then
 				sheet.AcaoAtualIndex = 1  -- Inicializa com a primeira ação
 				sheet.AcaoAtualControle = acoes[sheet.AcaoAtualIndex]
-				sheet.TurnoAtualControle = (sheet.TurnoAtualControle or 0) + 1
+				ProximoTurno();	
 			else
 				sheet.AcaoAtualIndex = sheet.AcaoAtualIndex + 1
 				if sheet.AcaoAtualIndex > #acoes then
 					sheet.AcaoAtualIndex = 1  -- Reinicia o ciclo das ações
 					
-					sheet.TurnoAtualControle = (sheet.TurnoAtualControle or 0) + 1
+					
 					sheet.VezAtualIndex = sheet.VezAtualIndex + 1
 					sheet.AcaoAtualControle = acoes[sheet.AcaoAtualIndex]
 					
@@ -40,6 +40,7 @@
 					else
 						sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
 					end;
+					ProximoTurno();	
 				end
 			end
 
@@ -71,12 +72,12 @@
 			if sheet.AcaoAtualIndex == nil then
 				sheet.AcaoAtualIndex = 3  -- Inicializa com a primeira ação
 				sheet.AcaoAtualControle = acoes[sheet.AcaoAtualIndex]
-				sheet.TurnoAtualControle = (sheet.TurnoAtualControle or 0) - 1
+				AnteriorTurno();
 			else
 				sheet.AcaoAtualIndex = sheet.AcaoAtualIndex - 1
 				if sheet.AcaoAtualIndex < 1 then
 					sheet.AcaoAtualIndex = 3  -- Reinicia o ciclo das ações
-					sheet.TurnoAtualControle = (sheet.TurnoAtualControle or 0) - 1
+					
 					sheet.VezAtualIndex = sheet.VezAtualIndex - 1
 					sheet.AcaoAtualControle = acoes[sheet.AcaoAtualIndex]
 					sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
@@ -85,6 +86,7 @@
 					else
 						sheet.VezAtualControle = lista2[sheet.VezAtualIndex]
 					end;
+					AnteriorTurno();
 				end
 			end
 

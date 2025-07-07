@@ -6,7 +6,7 @@
 				
 				if sheet.Level > 20 then 
 					if sheet.Elevel > 0 then
-						sheet.XPNecessario = tonumber(sheet.Elevel) * 100;
+						sheet.XPNecessario = 1050 + tonumber(sheet.ELevel) * 100 ;
 					end;
 				else
 					sheet.XPNecessario = 100 + tonumber(sheet.level) * 50;
@@ -21,10 +21,7 @@
 					sheet.LiberarRolagemUp = tonumber(sheet.LiberarRolagemUp) + 1;
 					AtualizaStatusMesaSilencioso()
 				end;			
-				
-				self.BarraXP.value = tonumber(sheet.XPAtual);
-				self.BarraXP.max = tonumber(sheet.XPNecessario);
-				
+								
 				if sheet.LiberarRolagemUp > 0 then
 					self.btnUpaLevel.visible = true;
 				else
@@ -36,4 +33,51 @@
 				end;
 			end;	
 		end;
+
+
+			function SincronizaTurnoEfeito()
+			-- Envolver a execução em um pcall para capturar erros silenciosamente
+				local status, err = pcall(function()
+					-- obter a mesa do personagem
+					local mesaDoPersonagem = Firecast.getMesaDe(sheet);
+					local mesas = rrpg.getRooms();
+					local bibliotecaAtual = mesas[1].library;
+
+					local function obterNomesRecursivo(bibItem)
+						local itensFilhos = bibItem.children;
+						local nomes = bibItem.name;
+						
+						for i = 1, #itensFilhos, 1 do
+							local bibItemFilho = itensFilhos[i];
+							local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";
+
+							if nomesDoFilho == "Sistema de Combaate Velen" then
+								-- Solicita acesso à ficha do personagem
+								local promise = bibItemFilho:asyncOpenNDB();
+
+								-- Aguarda até que a ficha esteja carregada
+								nodeExterno = await(promise);
+							end
+						end
+						return nomes
+					end
+
+					local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
+
+					if GlobalSelf ~= nil then
+						local nodePai = GlobalSelf.rclBuffs
+						local filhos = nodePai:getChildren();
+						local i;
+
+						for i = 1, #filhos, 1 do
+							filhos[i].sheet.OutroEffect = tonumber(nodeExterno.TurnoAtualControle)
+						end
+					end
+				end)
+
+				-- Se houver erro, ele é ignorado
+				if not status then
+					-- print("Erro silenciosamente ignorado")  -- Se quiser registrar, descomente
+				end
+			end
 	</script>

@@ -41,6 +41,149 @@
 		<label align="client" text="Teste de label" fontSize="15" fontStyle="bold" visible="true" fontColor="blue" field="NomeHabilidade" margins="{left=60}"/>
 	</layout>
 
+	<dataLink fields="{'DanoAtributo1', 'DanoHabilidade1', 'CuraHabilidade1', 'FixoHabilidade1'}">
+                <event name="onChange">  
+					if FichaPrincipal ~= nil then               
+                      	if sheet.DanoAtributo1 == 'PA' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(FichaPrincipal.PA) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;			
+						if sheet.DanoAtributo1 == 'PM' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(FichaPrincipal.PM) or 0)						
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;
+						if sheet.DanoAtributo1 == 'PF' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(FichaPrincipal.PF) or 0)	
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;							
+
+						if sheet.DanoAtributo1 == 'Cura' then
+							sheet.Hintensidade1 =(tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(FichaPrincipal.PM) or 0)	
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;
+						if sheet.DanoAtributo1 == 'Cura Fixa' then
+							sheet.Hintensidade1 =(tonumber(sheet.CuraHabilidade1) or 0);	
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;
+
+						if sheet.DanoAtributo1 == 'PA+M/PA' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(FichaPrincipal.PA * 1.5) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;	
+						if sheet.DanoAtributo1 == 'PF+M/PF' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(FichaPrincipal.PF * 1.5) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;	
+						if sheet.DanoAtributo1 == 'PM+M/PM' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(FichaPrincipal.PM * 1.5) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;	
+
+
+						if sheet.DanoAtributo1 == 'M/PA' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(FichaPrincipal.PA / 2) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;	
+						if sheet.DanoAtributo1 == 'M/PF' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(FichaPrincipal.PF / 2) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;	
+						if sheet.DanoAtributo1 == 'M/PM' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(FichaPrincipal.PM / 2) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;	
+
+						if sheet.DanoAtributo1 == 'PA+PF' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(FichaPrincipal.PA + FichaPrincipal.PF) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;	
+						if sheet.DanoAtributo1 == 'PF+PM' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(FichaPrincipal.PF + FichaPrincipal.PM) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;
+						if sheet.DanoAtributo1 == 'PA+PM' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber(FichaPrincipal.PA + FichaPrincipal.PM) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;
+
+						if sheet.DanoAtributo1 == 'M/PA+PF' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber((FichaPrincipal.PA /2) + FichaPrincipal.PF) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;
+						if sheet.DanoAtributo1 == 'M/PA+PM' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber((FichaPrincipal.PA /2) + FichaPrincipal.PM) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;
+						if sheet.DanoAtributo1 == 'M/PF+PM' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber((FichaPrincipal.PF /2) + FichaPrincipal.PM) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;
+						if sheet.DanoAtributo1 == 'M/PF+PA' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber((FichaPrincipal.PF /2) + FichaPrincipal.PA) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;
+						if sheet.DanoAtributo1 == 'M/PM+PF' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber((FichaPrincipal.PM /2) + FichaPrincipal.PF) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;
+						if sheet.DanoAtributo1 == 'M/PM+PA' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber((FichaPrincipal.PM /2) + FichaPrincipal.PA) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;
+
+						if sheet.DanoAtributo1 == 'M/PA+M/PF' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber((FichaPrincipal.PA /2) + FichaPrincipal.PF / 2) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;
+						if sheet.DanoAtributo1 == 'M/PF+M/PM' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber((FichaPrincipal.PF /2) + FichaPrincipal.PM / 2) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;
+						if sheet.DanoAtributo1 == 'M/PA+M/PM' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0) + (tonumber(sheet.CuraHabilidade1) or 0) + (tonumber((FichaPrincipal.PA /2) + FichaPrincipal.PM / 2) or 0)								
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;
+
+						if sheet.DanoAtributo1 == 'REAL PA' or sheet.DanoAtributo1 == 'REAL PF' or sheet.DanoAtributo1 == 'REAL PM' then
+							sheet.Hintensidade1 = (tonumber(sheet.FixoHabilidade1) or 0)	
+							sheet.naoEBuff = true;
+							sheet.verificaBuff = sheet.naoEBuff;
+						end;
+
+						if sheet.DanoAtributo1 == 'Efeito' then
+							sheet.Hintensidade1 = 0
+						end;
+
+						if sheet.DanoAtributo1 == 'Buff' then
+							sheet.Hintensidade1 = (tonumber(sheet.DanoHabilidade1) or 0)	
+						end;
+					end;
+                </event>
+        </dataLink>
+
 	<script>		 					
 		local function ExecutarHDaActionbar() 
 		
@@ -79,8 +222,7 @@
 									
 									for _, node in ipairs(nodesO) do
 										if node.NomeDoOponenteVez == idPersonagem then  -- Verifica se o campo NomeDoOponenteVez existe
-											PERAlvo = tonumber(node.Pers or 1)
-											RESAlvo = tonumber(node.RES or 1)
+
 										end
 									end
 								end
@@ -123,56 +265,7 @@
 						function (rolado)				
 						if node.DanoAtributo1 ~= nil then
 							if fieldficha.AcertoMagico + 1 > rolado.resultado then							
-								if node.DanoAtributo1 == 'PA' then
-									node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(fieldficha.PA) or 0)								
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;			
-								if node.DanoAtributo1 == 'PM' then
-									node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(fieldficha.PM) or 0)						
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;
-								if node.DanoAtributo1 == 'PF' then
-									node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(fieldficha.PF) or 0)	
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;							
-								if node.DanoAtributo1 == 'Cura' then
-									node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0) + (tonumber(fieldficha.PM) or 0)	
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;
-								if node.DanoAtributo1 == 'Cura Fixa' then
-									node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0);	
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;
-								if node.DanoAtributo1 == 'Fixo' then
-									node.Hintensidade1 = (tonumber(node.FixoHabilidade1) or 0)	
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;
-								if node.DanoAtributo1 == 'M/PA' then
-									node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(fieldficha.PA / 2) or 0)	
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;
-								if node.DanoAtributo1 == 'M/PM' then
-									node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(fieldficha.PM / 2) or 0)	
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;
-								if node.DanoAtributo1 == 'M/PF' then
-									node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(fieldficha.PF / 2) or 0)		
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;
-								if node.DanoAtributo1 == 'BUFF' then
-									node.Hintensidade1 = "Habilidade de Buff";
-								end;
 								if fieldficha.AcertoMagico >= rolado.resultado then
-									
 									if node.fldImgIconSkill ~= nil then 
 										mesaDoPersonagem.chat:enviarMensagem("[§I " .. node.fldImgIconSkill .. "]");
 									end;
@@ -209,7 +302,7 @@
 												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1 * 2) * (1 - (RESAlvo / 100)))
 												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 											end;											
-											if node.DanoAtributo1 == 'Fixo' then
+											if node.DanoAtributo1 == 'REAL PA' or node.DanoAtributo1 == 'REAL PF' or node.DanoAtributo1 == 'REAL PM' then
 												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
 												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 											end;
@@ -222,7 +315,7 @@
 												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1) * (1 - (RESAlvo / 100)))
 												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 											end;
-											if node.DanoAtributo1 == 'Fixo' then
+											if node.DanoAtributo1 == 'REAL PA' or node.DanoAtributo1 == 'REAL PF' or node.DanoAtributo1 == 'REAL PM' then
 												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
 												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)
 											end;
@@ -323,55 +416,6 @@
 										
 						if node.DanoAtributo1 ~= nil then
 							if fieldficha.AcertoMagico + 1 > rolado.resultado then	
-												
-								if node.DanoAtributo1 == 'PA' then
-									node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(fieldficha.PA) or 0)								
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;			
-								if node.DanoAtributo1 == 'PM' then
-									node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(fieldficha.PM) or 0)						
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;
-								if node.DanoAtributo1 == 'PF' then
-									node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + (tonumber(fieldficha.PF) or 0)	
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;							
-								if node.DanoAtributo1 == 'Cura' then
-									node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0) + (tonumber(fieldficha.PM) or 0)	
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;
-								if node.DanoAtributo1 == 'Cura Fixa' then
-									node.Hintensidade1 =(tonumber(node.CuraHabilidade1) or 0);	
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;
-								if node.DanoAtributo1 == 'Fixo' then
-									node.Hintensidade1 = (tonumber(node.FixoHabilidade1) or 0)	
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;
-								if node.DanoAtributo1 == 'M/PA' then
-									node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(fieldficha.PA / 2) or 0)	
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;
-								if node.DanoAtributo1 == 'M/PM' then
-									node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(fieldficha.PM / 2) or 0)	
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;
-								if node.DanoAtributo1 == 'M/PF' then
-									node.Hintensidade1 = (tonumber(node.DanoHabilidade1) or 0) + (tonumber(node.CuraHabilidade1) or 0) + math.ceil(tonumber(fieldficha.PF / 2) or 0)		
-									node.naoEBuff = true;
-									node.verificaBuff = node.naoEBuff;
-								end;
-								if node.DanoAtributo1 == 'BUFF' then
-									node.Hintensidade1 = "Habilidade de Buff";
-								end;
 								if fieldficha.AcertoMagico >= rolado.resultado then
 									if node.fldImgIconSkill ~= nil then 
 										mesaDoPersonagem.chat:enviarMensagem("[§I " .. node.fldImgIconSkill .. "]");
@@ -403,7 +447,7 @@
 												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1 * 2) * (1 - (RESAlvo / 100)))
 												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 											end;
-											if node.DanoAtributo1 == 'Fixo' then
+											if node.DanoAtributo1 == 'REAL PA' or node.DanoAtributo1 == 'REAL PF' or node.DanoAtributo1 == 'REAL PM' then
 												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1 * 2)
 												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 											end;
@@ -415,7 +459,7 @@
 												nodeExterno.DanoRecebido = math.floor((node.Hintensidade1) * (1 - (RESAlvo / 100)))
 												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 											end;
-											if node.DanoAtributo1 == 'Fixo' then
+											if node.DanoAtributo1 == 'REAL PA' or node.DanoAtributo1 == 'REAL PF' or node.DanoAtributo1 == 'REAL PM' then
 												nodeExterno.DanoRecebido = math.floor(node.Hintensidade1)
 												nodeExterno.ACAOTURNO = (tonumber(nodeExterno.ACAOTURNO) + 1)	
 											end;
@@ -564,8 +608,8 @@
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df2xhed-a305dae1-4b59-4846-8963-391209d102cf.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYyeGhlZC1hMzA1ZGFlMS00YjU5LTQ4NDYtODk2My0zOTEyMDlkMTAyY2YucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.V7_jYQEQSol1khsp21y9MXD_gk1M7pHP0WrGl6D1TsE"
 			end;
 			
-			if sheet.NomeHabilidade == "Sí" then
-				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df2xhdg-060557f2-5f2f-4139-9c36-57f56b2662c7.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYyeGhkZy0wNjA1NTdmMi01ZjJmLTQxMzktOWMzNi01N2Y1NmIyNjYyYzcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.eWXzXWd22kFrMAtsNAamBtwAA0aJCAIjYF29u3OGlXE"
+			if sheet.NomeHabilidade == "Si" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df2xhdg-060557f2-5f2f-4139-9c36-57f56b2662c7.png/v1/fill/w_32,h_32,q_80,strp/si_by_karelsama_df2xhdg-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzIiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RmMnhoZGctMDYwNTU3ZjItNWYyZi00MTM5LTljMzYtNTdmNTZiMjY2MmM3LnBuZyIsIndpZHRoIjoiPD0zMiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.xe3O2_M3pY-6Z552KnrYJz2lq598t8bc4RzfjYTWlSg"
 				self.imgIconSkill.width = "45"
 				self.imgIconSkill.height ="45"
 			end;
@@ -600,10 +644,18 @@
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df2zio2-d16dde3b-fc43-4271-9d07-0977b225eb48.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYyemlvMi1kMTZkZGUzYi1mYzQzLTQyNzEtOWQwNy0wOTc3YjIyNWViNDgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.mXprZud2JzkDbceyk4KUQZmKqyKhKqTwn8puStEJqUk"
 			end;
 			
-			if sheet.NomeHabilidade == "Reviver" then
+			if sheet.NomeHabilidade == "Reanimar" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df2zinm-4c26d6f6-aa56-49eb-aee1-5195dca63e82.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYyemlubS00YzI2ZDZmNi1hYTU2LTQ5ZWItYWVlMS01MTk1ZGNhNjNlODIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.rustAgJmsRGzZGrBdIuzsjqCsNDEwKwz2wJKjql_afU"
 				self.imgIconSkill.width = "45"
 				self.imgIconSkill.height ="45"
+			end;
+
+			if sheet.NomeHabilidade == "Estilhaços de Alma" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df2zz60-b04b91ab-5620-44f4-803b-3567b7bd8a4a.png/v1/fill/w_32,h_32,q_80,strp/estilhao_de_arma_by_karelsama_df2zz60-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzIiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RmMnp6NjAtYjA0YjkxYWItNTYyMC00NGY0LTgwM2ItMzU2N2I3YmQ4YTRhLnBuZyIsIndpZHRoIjoiPD0zMiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.lLlb21CabKcM2rdhqJLzuPZvcX0tUrIWfvuBA4yKThE"
+			end;
+
+			if sheet.NomeHabilidade == "Labareda Abissal" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3okxh-ab2e7df9-3b92-4f77-b37b-fe6f5d6cf65b.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzb2t4aC1hYjJlN2RmOS0zYjkyLTRmNzctYjM3Yi1mZTZmNWQ2Y2Y2NWIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.6zHpykrsvq0OZRBx7UOvWduNCOX3Ej_S1Ekl2jEpi2s"
 			end;
 			
 			if sheet.NomeHabilidade == "Labareda Abissal" then
@@ -927,6 +979,47 @@
 				self.imgIconSkill.width = "45"
 				self.imgIconSkill.height ="45"
 			end;
+
+			if sheet.NomeHabilidade == "Alvoredo" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkx7kw-53f86089-5fa0-4a89-9bab-6a7dd01830ae.png/v1/fill/w_64,h_64,q_80,strp/alvoredo_by_karelsama_djkx7kw-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2Rqa3g3a3ctNTNmODYwODktNWZhMC00YTg5LTliYWItNmE3ZGQwMTgzMGFlLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.01UD7CXT1mLrbVmrwytHV_BRhLjD7OiHw2jvdvsSYCo"
+			end;
+
+			if sheet.NomeHabilidade == "Transformação do Urso Corjua" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djw57fv-15392f2e-277c-41e8-be8b-b78114162c5c.png/v1/fill/w_372,h_352,q_80,strp/urso_coruja_by_karelsama_djw57fv-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzUyIiwicGF0aCI6IlwvZlwvZGIxYzM2YTAtNzhhYy00ZmI3LTk4ZWEtMWIwYWFlODZjZTJjXC9kanc1N2Z2LTE1MzkyZjJlLTI3N2MtNDFlOC1iZThiLWI3ODExNDE2MmM1Yy5wbmciLCJ3aWR0aCI6Ijw9MzcyIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.FbvyzQIk2ly8swNohXtP3YG-rLKTyRtUtKM6lEWWupY"
+			end;
+
+			if sheet.NomeHabilidade == "Transformação Besta Hibrida" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djw5c19-ceb9eab0-7e4f-46ba-b9e4-0be5aa208eb0.png/v1/fill/w_64,h_64,q_80,strp/spell_holy_blessingofstamina_by_karelsama_djw5c19-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RqdzVjMTktY2ViOWVhYjAtN2U0Zi00NmJhLWI5ZTQtMGJlNWFhMjA4ZWIwLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.yYZ5Ap6TgPJPV3Xrv-p52VW4JxWhdyWM4ZICzdayuWk"
+			end;
+
+			if sheet.NomeHabilidade == "Fonte da Vida" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkx7ql-2c2e392d-301f-405b-a08d-ee49cfc636e0.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreDdxbC0yYzJlMzkyZC0zMDFmLTQwNWItYTA4ZC1lZTQ5Y2ZjNjM2ZTAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.Cixf1p4H-1f5DngKQTRQerXfkJCI_obq4Y-UkvuB-vo"
+			end;
+
+			if sheet.NomeHabilidade == "Mastigar[ Urso ]" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk3565d-df7c63c2-df7c-4fae-9ee0-4d40c7b4da71.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGszNTY1ZC1kZjdjNjNjMi1kZjdjLTRmYWUtOWVlMC00ZDQwYzdiNGRhNzEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.q5vXKbOcEC9i0-h0V7S1KkUrWzZbjXmcHkMRDhknh3w"
+			end;
+
+			if sheet.NomeHabilidade == "Investida do Urso[ Urso ]" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk3565t-a4bb5e14-f2e4-42f9-bdfe-d563e1ca7d42.png/v1/fill/w_64,h_64,q_80,strp/carreira_druida_by_karelsama_dk3565t-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMzU2NXQtYTRiYjVlMTQtZjJlNC00MmY5LWJkZmUtZDU2M2UxY2E3ZDQyLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.TvFWnLTOg0okWkbowZP-IdEcrXzS67FZPGtqTsKotDc"
+			end;
+
+			if sheet.NomeHabilidade == "Olhar Felino[ Pantera ]" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk35654-e57687e9-3100-45d8-9297-cdc9619d1bd2.png/v1/fill/w_64,h_64,q_80,strp/olhar_felino_by_karelsama_dk35654-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMzU2NTQtZTU3Njg3ZTktMzEwMC00NWQ4LTkyOTctY2RjOTYxOWQxYmQyLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.Yhuf59IZPtYTYHLbOPJkmF43wdA-TlpMmwtxttohKeM"
+			end;
+
+			if sheet.NomeHabilidade == "Instinto Felinmo[ Pantera ]" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk3565o-624c83c4-ce74-42ee-898c-ae780180ab09.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGszNTY1by02MjRjODNjNC1jZTc0LTQyZWUtODk4Yy1hZTc4MDE4MGFiMDkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.qb1hDBkTmQryYau1HHumrKITQPrMv3hWqa6j_40hw-Y"
+			end;
+
+
+			if sheet.NomeHabilidade == "Pulso Estelar" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djw5al9-e41021e3-b841-41ad-90d5-e942a572b06e.png/v1/fill/w_64,h_64,q_80,strp/pulso_estelar_by_karelsama_djw5al9-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RqdzVhbDktZTQxMDIxZTMtYjg0MS00MWFkLTkwZDUtZTk0MmE1NzJiMDZlLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.OmGB8UmEUSgmY-aYpDGXJYLEn7y3Fdjbi3MVng9xg8w"
+			end;
+
+			if sheet.NomeHabilidade == "Garras Selvagens" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djw5b7y-5efc1a4a-1d04-46a7-b879-3e8d4cee3253.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGp3NWI3eS01ZWZjMWE0YS0xZDA0LTQ2YTctYjg3OS0zZThkNGNlZTMyNTMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.rwnDkczOyuhE6ka0hoIawNzLZnohJva_IfhvcEes60E"
+			end;
 						
 			if sheet.NomeHabilidade == "Raio" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3axq2-63cf2ba1-521b-4a87-9a89-8d3a2194c9b4.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzYXhxMi02M2NmMmJhMS01MjFiLTRhODctOWE4OS04ZDNhMjE5NGM5YjQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.cCWi5sU6oVcyCQMSdHe3SZLeToMVKI-PscXvvNaU7LI"
@@ -935,7 +1028,15 @@
 			if sheet.NomeHabilidade == "Golpe de Pedra" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3axqo-09facc99-9257-4815-8abe-290f12593505.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzYXhxby0wOWZhY2M5OS05MjU3LTQ4MTUtOGFiZS0yOTBmMTI1OTM1MDUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.Tqk_vw29nwfLF5yiU6s8L-YVBVfPBht7bPaDDcsUi6w"
 			end;
-			
+
+			if sheet.NomeHabilidade == "Golpe Fisico Eletrico" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk35ds6-9c56feef-58fb-4236-9e47-4fbcd2590a9f.png/v1/fill/w_64,h_64,q_80,strp/golpe_fisico_eletrico_by_karelsama_dk35ds6-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMzVkczYtOWM1NmZlZWYtNThmYi00MjM2LTllNDctNGZiY2QyNTkwYTlmLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.2adFAqlQf8fWsrA8TYYxqUvI15fW1cP_XWmFvCJz-vw"
+			end;
+
+			if sheet.NomeHabilidade == "Marretada de Lava" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk35ds0-0a31bc4f-4aeb-4886-99a3-e427183a9db9.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGszNWRzMC0wYTMxYmM0Zi00YWViLTQ4ODYtOTlhMy1lNDI3MTgzYTlkYjkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.U5UAhK0wrHdePiputVowTiZ7rtyOaFlN2RnaiXLePSM"
+			end;
+
 			if sheet.NomeHabilidade == "Regeneração dos Ventos" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3axpv-bf10c4b8-45e8-43ec-a35b-b3f6d319b5bd.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzYXhwdi1iZjEwYzRiOC00NWU4LTQzZWMtYTM1Yi1iM2Y2ZDMxOWI1YmQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.dPp_viedDwBQiGxJUI4yDKhP8VtZ2KXSA6F-wQ_tO_w"
 			end;
@@ -967,8 +1068,16 @@
 			if sheet.NomeHabilidade == "Ventos da Tempestade" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3axpr-0345b1a2-612f-49d0-97cf-36db87152f03.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzYXhwci0wMzQ1YjFhMi02MTJmLTQ5ZDAtOTdjZi0zNmRiODcxNTJmMDMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.VZdmhbcuWGx2BHDHKLFKwKOahokL3yDTx2yiy2kWpa8"
 			end;
+
+			if sheet.NomeHabilidade == "Chuva Vital" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxkh1-2b9a040e-7f7e-41de-b1cb-8e6da4d55508.png/v1/fill/w_64,h_64,q_80,strp/chuva_vital_by_karelsama_djkxkh1-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2Rqa3hraDEtMmI5YTA0MGUtN2Y3ZS00MWRlLWIxY2ItOGU2ZGE0ZDU1NTA4LnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.4bZqcZtxctfwouYAxa0nEttABosE7Do94JZy1NAkXvE"
+			end;
+
+			if sheet.NomeHabilidade == "Sapo" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxkib-50bc6d43-0592-4edb-8e6f-73416ddaa61b.png/v1/fill/w_64,h_64,q_80,strp/sapo_by_karelsama_djkxkib-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2Rqa3hraWItNTBiYzZkNDMtMDU5Mi00ZWRiLThlNmYtNzM0MTZkZGFhNjFiLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.AaDNgYU0GReUS64K_C3delGl9giMVz1jTi4WG1WE1Ug"
+			end;
 			
-			if sheet.NomeHabilidade == "Espíritos dos Lobos" then
+			if sheet.NomeHabilidade == "Espírito do Lobo" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3axp8-6fc266b9-8572-40e3-85c3-313cc1a59c33.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzYXhwOC02ZmMyNjZiOS04NTcyLTQwZTMtODVjMy0zMTNjYzFhNTljMzMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.SlZE56rNlLD7nanw7lx1nv7sjOxAZ7IPrKaBmCbAIGc"
 				self.imgIconSkill.width = "45"
 				self.imgIconSkill.height ="45"
@@ -976,6 +1085,12 @@
 			
 			if sheet.NomeHabilidade == "Onda de Lava" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3axqd-ab29dd32-da40-4a0c-9cef-d6ee91a3740a.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzYXhxZC1hYjI5ZGQzMi1kYTQwLTRhMGMtOWNlZi1kNmVlOTFhMzc0MGEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.W32QTNa43P6BZ6cgyUtQHKwmrJMYD6ZnTBEhPOJNRwo"
+				self.imgIconSkill.width = "45"
+				self.imgIconSkill.height ="45"
+			end;
+
+			if sheet.NomeHabilidade == "Link Espiritual" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djnmxv7-c834df50-dc95-4890-8093-cee987e86b8c.png/v1/fill/w_64,h_64,q_80,strp/spell_shaman_spiritlink_by_karelsama_djnmxv7-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2Rqbm14djctYzgzNGRmNTAtZGM5NS00ODkwLTgwOTMtY2VlOTg3ZTg2YjhjLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.TV4y6AI0y_UZCX5zjMBy9uaV1mN55navPNvyGaPck6c"
 				self.imgIconSkill.width = "45"
 				self.imgIconSkill.height ="45"
 			end;
@@ -1012,6 +1127,14 @@
 			
 			if sheet.NomeHabilidade == "Elo da Fera" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dfe8hgk-ef88f211-1b41-47b0-9111-9b8b85c2f342.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGZlOGhnay1lZjg4ZjIxMS0xYjQxLTQ3YjAtOTExMS05YjhiODVjMmYzNDIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.vVOmVatXEZI7mrIV00DgsibYffS7JpiLcjMhGclABWE"
+			end;
+
+			if sheet.NomeHabilidade == "Ward Sentinela" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkwylw-0b140027-fd31-4930-8ab4-1aee797816ad.png/v1/fit/w_150,h_150,q_70,strp/ward_espia_by_karelsama_djkwylw-150.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTEyIiwicGF0aCI6IlwvZlwvZGIxYzM2YTAtNzhhYy00ZmI3LTk4ZWEtMWIwYWFlODZjZTJjXC9kamt3eWx3LTBiMTQwMDI3LWZkMzEtNDkzMC04YWI0LTFhZWU3OTc4MTZhZC5wbmciLCJ3aWR0aCI6Ijw9NTEyIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.DK7DfPv-IbT1X6l_jE2Y1aWF5uRbCzgnuJPJWgEYBTY"
+			end;
+
+			if sheet.NomeHabilidade == "Flash Aliado" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkwz2j-998baa85-bfe5-468d-ae13-d7903670ce1e.png/v1/fill/w_64,h_64/flash_aliado_by_karelsama_djkwz2j-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2Rqa3d6MmotOTk4YmFhODUtYmZlNS00NjhkLWFlMTMtZDc5MDM2NzBjZTFlLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.AeGH-8nPzhtR5ToNmeqo5dGJRHPkij7wGZYpLv-isz4"
 			end;
 					
 			if sheet.NomeHabilidade == "Companheiro Animal" then
@@ -1051,6 +1174,14 @@
 			if sheet.NomeHabilidade == "Tiro Almejado" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3b0no-6d172e95-401d-48c5-aa79-6a87b309c984.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzYjBuby02ZDE3MmU5NS00MDFkLTQ4YzUtYWE3OS02YTg3YjMwOWM5ODQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ivuwi4ftezpLpCZKu2zf4_9n4cxxn3RYYeLql5UqrbM"
 			end;
+
+			if sheet.NomeHabilidade == "Flecha Congelante" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxjda-b3e147f6-c69b-4e0a-8495-875cb47d3eaf.png/v1/fill/w_256,h_256,q_80,strp/flecha_congelante_by_karelsama_djkxjda-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MjU2IiwicGF0aCI6IlwvZlwvZGIxYzM2YTAtNzhhYy00ZmI3LTk4ZWEtMWIwYWFlODZjZTJjXC9kamt4amRhLWIzZTE0N2Y2LWM2OWItNGUwYS04NDk1LTg3NWNiNDdkM2VhZi5wbmciLCJ3aWR0aCI6Ijw9MjU2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.y__vr4gIzUryHuJcNxxR-pUFm7VGnP_5P_8bP8v41rU"
+			end;
+
+			if sheet.NomeHabilidade == "Flecha Concentrada" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxjoc-009aeb52-0ebd-4eed-ac53-de26a0f75351.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGpvYy0wMDlhZWI1Mi0wZWJkLTRlZWQtYWM1My1kZTI2YTBmNzUzNTEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.M3Sqg9trjrgeaNkNWpIWsx6K7bHjrt5Ak3oWZqIsrBU"
+			end;
 			
 			if sheet.NomeHabilidade == "Arco Magico" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3b0o2-f55ff50f-1cae-4dc8-b6c2-adb53498a5dd.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzYjBvMi1mNTVmZjUwZi0xY2FlLTRkYzgtYjZjMi1hZGI1MzQ5OGE1ZGQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.p1Jt1H4uRUS1l_ogVzpmQ6FBggZ2lGFaKZLmyt2hWgM"
@@ -1085,6 +1216,26 @@
 			if sheet.NomeHabilidade == "Acústico de Proteção" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3b2dw-3140007e-0eac-4547-90ca-9ce5eacd12df.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzYjJkdy0zMTQwMDA3ZS0wZWFjLTQ1NDctOTBjYS05Y2U1ZWFjZDEyZGYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.fnCLtj5bUxFsYdi1IgIABebBfaaUwvfVpySQHvPYTrA"
 			end;
+
+			if sheet.NomeHabilidade == "Aproveitando a Cura" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkx6m3-8e0b7582-e1aa-477b-8e1f-22acf179bffd.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreDZtMy04ZTBiNzU4Mi1lMWFhLTQ3N2ItOGUxZi0yMmFjZjE3OWJmZmQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.G1ZqMwY3ek9qZs4vedTTLOZzdhE3dSbUQu48moyOcPc"
+			end;
+
+			if sheet.NomeHabilidade == "Carga Sonora" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkx81o-24fe98cf-f89f-4780-bf5b-2f46b4256884.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreDgxby0yNGZlOThjZi1mODlmLTQ3ODAtYmY1Yi0yZjQ2YjQyNTY4ODQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.zAhuubkiaZCQjylnK0v-5VnZSJBW4dNAhfS477WzMbY"
+			end;
+
+			if sheet.NomeHabilidade == "Lamina Sonora" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djmqsek-f6518e8a-f0eb-43b7-8c70-4b1d0b75c3f1.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGptcXNlay1mNjUxOGU4YS1mMGViLTQzYjctOGM3MC00YjFkMGI3NWMzZjEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.YCIaEz85aytiIf1ZplX7pkohDrWqmsRy6mChHd1_CuU"
+			end;
+			
+			if sheet.NomeHabilidade == "Dó Maior" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djrjnza-63046cb3-b096-4c59-a396-f5543a20dd3d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpyam56YS02MzA0NmNiMy1iMDk2LTRjNTktYTM5Ni1mNTU0M2EyMGRkM2QucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.GoCAbrYtzJrvPX7uyK2qD6ZQiwE-M_WCzqG4YfQ1o8c"
+			end;
+
+			if sheet.NomeHabilidade == "Sinfonia Curativa" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkx87r-c049a55a-61f8-469f-b284-a1e9824022bc.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreDg3ci1jMDQ5YTU1YS02MWY4LTQ2OWYtYjI4NC1hMWU5ODI0MDIyYmMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.AzZsOKFOCr6kkHl0O3Soh3rbu1FXdpohu51AfxTIXAg"
+			end;
 			
 			if sheet.NomeHabilidade == "Acordes Perfeitos" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3b2e0-584e4c5b-785c-40ef-98e8-44cab1a67d4b.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzYjJlMC01ODRlNGM1Yi03ODVjLTQwZWYtOThlOC00NGNhYjFhNjdkNGIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ozSTRuMMjpQ_mVrqcHQmCnKCqE6nrvxtb01XxIuYlbU"
@@ -1097,7 +1248,7 @@
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df6y6tz-0202b5a6-9f21-4f0c-b854-1c7cf7a11cb2.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGY2eTZ0ei0wMjAyYjVhNi05ZjIxLTRmMGMtYjg1NC0xYzdjZjdhMTFjYjIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.bKl6HWi8r9Cu8fPxjtmscCevsrd8A16g5ysRoLsbrUg"
 			end;
 			
-			if sheet.NomeHabilidade == "Dissonancia" then
+			if sheet.NomeHabilidade == "Diade" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df6y6u4-9dfdcbf8-f0eb-4e60-8173-d76de66c8a15.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGY2eTZ1NC05ZGZkY2JmOC1mMGViLTRlNjAtODE3My1kNzZkZTY2YzhhMTUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.gjjZw3Q3MjHJULJvMd-RWv2KByx-o69agkvx_8KZKs8"
 			end;
 			
@@ -1124,8 +1275,24 @@
 			if sheet.NomeHabilidade == "Orquestrar e Persistir" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dfeatsl-dabab1ed-d744-4178-99f6-d66c75cb0d1d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGZlYXRzbC1kYWJhYjFlZC1kNzQ0LTQxNzgtOTlmNi1kNjZjNzVjYjBkMWQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.-I5NFa7ahtjg0sdo6jNSG5xgctoBOyMxOX3h0lCrErY"
 			end;
+
+			if sheet.NomeHabilidade == "Flecha Sonora" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxhct-f9de268b-956a-4a78-9cd0-0f48269b7c68.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGhjdC1mOWRlMjY4Yi05NTZhLTRhNzgtOWNkMC0wZjQ4MjY5YjdjNjgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.LGo6PGmKZOPy02pky8yRQILi7OQipFO-4GV5ebiDIZk"
+			end;
+
+			if sheet.NomeHabilidade == "Notas de Precisão" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxheh-9c1cbe1c-8167-4b3f-9227-722f1fde54e1.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGhlaC05YzFjYmUxYy04MTY3LTRiM2YtOTIyNy03MjJmMWZkZTU0ZTEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.izLsiaLDIXCYfH1Nox8KvNLmYkzCWZKgzW3Z3oK8g58"
+			end;
+
+			if sheet.NomeHabilidade == "Maestro do Arsenal" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djmp0hl-3371e0d9-b547-4f14-b8eb-137c2f819507.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGptcDBobC0zMzcxZTBkOS1iNTQ3LTRmMTQtYjhlYi0xMzdjMmY4MTk1MDcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.hEazUGwIFUHvlNcGKjwj7K8mjDtTR6N0CSSIugYNrnc"
+			end;
+
+			if sheet.NomeHabilidade == "Vinculo Sonoro" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxhfp-04527b4f-7bc1-42b5-bdb4-f50a0c88842a.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGhmcC0wNDUyN2I0Zi03YmMxLTQyYjUtYmRiNC1mNTBhMGM4ODg0MmEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.MJT36yCAWyJSmvJROmBTLKWobGJlzceYBZyvfVwBtls"
+			end;
 			
-			if sheet.NomeHabilidade == "Porta da Infelicidade" then
+			if sheet.NomeHabilidade == "Porta do Beneficio Oculto" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df6y6tq-69ed91be-e731-4b9d-8736-5d2d4a98f235.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGY2eTZ0cS02OWVkOTFiZS1lNzMxLTRiOWQtODczNi01ZDJkNGE5OGYyMzUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ESOnXTpV6hF6agwAyWzlA7RVepOWWcUDdbO90rUvCxg"
 				self.imgIconSkill.width = "45"
 				self.imgIconSkill.height ="45"
@@ -1161,7 +1328,7 @@
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3cbtr-5121396a-430a-4492-ade4-247893e8b2df.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzY2J0ci01MTIxMzk2YS00MzBhLTQ0OTItYWRlNC0yNDc4OTNlOGIyZGYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.8PLIlvY-TUHrXrTIpbafTWpSs-bMLcowsFrL619DeSI"
 			end;
 			
-			if sheet.NomeHabilidade == "Toque da Morte" then
+			if sheet.NomeHabilidade == "Toque da Necrofago" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3cbtl-eb4bd6a6-3c54-4836-9776-e815da284e1a.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzY2J0bC1lYjRiZDZhNi0zYzU0LTQ4MzYtOTc3Ni1lODE1ZGEyODRlMWEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.PI-i6Nzg--E3AKuZdfKuNCRBxgBb40i6e3VIOt_nq1s"
 			end;
 			
@@ -1183,6 +1350,14 @@
 			
 			if sheet.NomeHabilidade == "Corrente Infernal" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3cbuj-7decdfdf-603d-4436-bffc-efb8a64c0ca2.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzY2J1ai03ZGVjZGZkZi02MDNkLTQ0MzYtYmZmYy1lZmI4YTY0YzBjYTIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.iQDXK8xeW7M-ndFR4Fcpw0Zx4B6pNpccaMoJU3EN8-I"
+			end;
+
+			if sheet.NomeHabilidade == "Caixão" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxhv0-81cf3be4-2bdf-44ed-99dd-c1f96d28596e.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGh2MC04MWNmM2JlNC0yYmRmLTQ0ZWQtOTlkZC1jMWY5NmQyODU5NmUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.p3NGwrfrRd4fxyUWhF1ZGoJ_ei5A_mjxkOa8MDl9mLw"
+			end;
+
+			if sheet.NomeHabilidade == "Nova Alma" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxhvq-42539c33-cadd-4cf6-a06c-a1e455e0d545.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGh2cS00MjUzOWMzMy1jYWRkLTRjZjYtYTA2Yy1hMWU0NTVlMGQ1NDUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.LQFNiKqzUoOa9pnkHPHyaASvvuwgY0GSBpC3gLulogM"
 			end;
 			
 			if sheet.NomeHabilidade == "Re Encarnar" then
@@ -1230,6 +1405,14 @@
 			if sheet.NomeHabilidade == "Revigoração Espiritual" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dfe8hjw-5d0c390e-eaa1-4e8d-b6bc-6bc037c59481.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGZlOGhqdy01ZDBjMzkwZS1lYWExLTRlOGQtYjZiYy02YmMwMzdjNTk0ODEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.0Oc2_Mp7XjgIMh-a3Ms4H5drm-cmfR1RuVQgprVvuXc"
 			end;
+
+			if sheet.NomeHabilidade == "Controle Mental" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxj02-06c49024-67b1-4e3c-8cd0-b08d4389760e.png/v1/fill/w_64,h_64,q_80,strp/controle_da_mente_by_karelsama_djkxj02-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2Rqa3hqMDItMDZjNDkwMjQtNjdiMS00ZTNjLThjZDAtYjA4ZDQzODk3NjBlLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.hIeHO46x8c9a93APKi0OiIGnaFwaS8gPepzqJsPJWFU"
+			end;
+
+			if sheet.NomeHabilidade == "Feixe de Luz" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxiga-24f0a35a-8486-4e65-a602-2dd2df224ee0.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGlnYS0yNGYwYTM1YS04NDg2LTRlNjUtYTYwMi0yZGQyZGYyMjRlZTAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.T9yn_SRWaVZflcGiVK50oTTfhMNU0zHlibEq0qKLV6c"
+			end;
 			
 			if sheet.NomeHabilidade == "Proteção Sagrada" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3ok3b-e66fecd3-4eac-4f81-a595-e298bf9c5d43.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzb2szYi1lNjZmZWNkMy00ZWFjLTRmODEtYTU5NS1lMjk4YmY5YzVkNDMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.cx5gh0ab_GXDOJRAjrMCwjgnZqI4iR5K9a_9TOeQqDQ"
@@ -1270,6 +1453,24 @@
 			if sheet.NomeHabilidade == "Pacto Sangrento" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3okrh-25a901a7-a858-4918-bc45-86b3be840b03.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzb2tyaC0yNWE5MDFhNy1hODU4LTQ5MTgtYmM0NS04NmIzYmU4NDBiMDMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.8iqwgAKi2eU7twmQn7ri3RwR8cD1iSImx9xY2CDG-ZI"
 			end;
+
+			if sheet.NomeHabilidade == "Lembranças do Oponente" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxgyr-a6f5318d-9db6-4a5d-a346-cea523f2a3fe.png/v1/fill/w_32,h_32,q_80,strp/lembranca_do_oponente_by_karelsama_djkxgyr-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzIiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2Rqa3hneXItYTZmNTMxOGQtOWRiNi00YTVkLWEzNDYtY2VhNTIzZjJhM2ZlLnBuZyIsIndpZHRoIjoiPD0zMiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.eabFCYb69umjI5QcNDEVTvszCTbfrkOiCVFNM5yXDuE"
+			end;
+
+			if sheet.NomeHabilidade == "Justiça Veloz" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2oc9l-b40c9d54-5540-481a-b60a-4e49b6836041.png/v1/fill/w_32,h_32,q_80,strp/justia_veloz_by_karelsama_dk2oc9l-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzIiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9jOWwtYjQwYzlkNTQtNTU0MC00ODFhLWI2MGEtNGU0OWI2ODM2MDQxLnBuZyIsIndpZHRoIjoiPD0zMiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.P-DX2zm525hnxCHo9LivrpNOWxrhAjVgu9VPwUyzDNw"
+			end;
+			if sheet.NomeHabilidade == "Decreto de Morte" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2oc9z-9b5bec8e-b9ab-4b0f-bc95-ef5453cb3f91.png/v1/fill/w_32,h_32,q_80,strp/decreto_de_morte_by_karelsama_dk2oc9z-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzIiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9jOXotOWI1YmVjOGUtYjlhYi00YjBmLWJjOTUtZWY1NDUzY2IzZjkxLnBuZyIsIndpZHRoIjoiPD0zMiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.19cav0yoDTB5FGrZ9GvbXAsuUynA6LHIrTAjEwyWggs"
+			end;
+			if sheet.NomeHabilidade == "Protesto" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2oc9b-76a40b79-28ad-4dc8-9fc5-34b76bfd4e0b.png/v1/fill/w_32,h_32,q_80,strp/protesto_by_karelsama_dk2oc9b-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzIiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9jOWItNzZhNDBiNzktMjhhZC00ZGM4LTlmYzUtMzRiNzZiZmQ0ZTBiLnBuZyIsIndpZHRoIjoiPD0zMiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.yDXVZ_df8HzaMGx02tlwd49xgJn5Fd-dVaN9u5Bs7VM"
+			end;
+			if sheet.NomeHabilidade == "Foice Impura" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2oc9t-97d68c11-9f55-47d9-bc75-321d6584a932.png/v1/fill/w_32,h_32,q_80,strp/foice_impura_by_karelsama_dk2oc9t-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzIiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9jOXQtOTdkNjhjMTEtOWY1NS00N2Q5LWJjNzUtMzIxZDY1ODRhOTMyLnBuZyIsIndpZHRoIjoiPD0zMiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.pmCkrxtu5FIsDGcK6TWhZiWE3S8t-qjP81pDrGzaHbw"
+			end;
+
 			
 			if sheet.NomeHabilidade == "Forma Final" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3cgsg-3e836082-dbc6-4d36-9b5b-f30621bb1a24.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzY2dzZy0zZTgzNjA4Mi1kYmM2LTRkMzYtOWI1Yi1mMzA2MjFiYjFhMjQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.0CCzrVeDaCBDb1cPlWNngaxhHc6518mf7lzWyS8a7Wg"
@@ -1303,6 +1504,10 @@
 			
 			if sheet.NomeHabilidade == "Quebrar Pernas" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3cl4n-240f9e69-9c68-4846-82e4-0aeaba4e2570.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzY2w0bi0yNDBmOWU2OS05YzY4LTQ4NDYtODJlNC0wYWVhYmE0ZTI1NzAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.INejg8-6aUuCFh6KNYU8k6nFJUHyTVionGoxZnFq5Bk"
+			end;
+
+			if sheet.NomeHabilidade == "Golpe Titânico" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkwx7k-4c9bcb95-141d-4f11-8ed9-4a5fa98795f1.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGprd3g3ay00YzliY2I5NS0xNDFkLTRmMTEtOGVkOS00YTVmYTk4Nzk1ZjEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.SR1WPVa-YMYmUT6e1TDoT3DMVXUzKHVY0OjEOkOWvdY"
 			end;
 			
 			if sheet.NomeHabilidade == "Guerra" then
@@ -1342,6 +1547,18 @@
 			if sheet.NomeHabilidade == "Aura de Fogo" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3clil-b10fa381-eb03-4bf5-bf71-cb0e2b70ff11.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzY2xpbC1iMTBmYTM4MS1lYjAzLTRiZjUtYmY3MS1jYjBlMmI3MGZmMTEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xroOBAn_iy08PoQ6EFY06RcYd64I6PXndmuro0Rzv1Y"
 			end;
+
+			if sheet.NomeHabilidade == "Reflexo Solar" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxl9h-706bb9e0-e053-4bca-b237-8cf102d3c6ee.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGw5aC03MDZiYjllMC1lMDUzLTRiY2EtYjIzNy04Y2YxMDJkM2M2ZWUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.NamGdfJIGTvoX5UQ0_LJQnk4OiOSdnxFyeFAUvJ-RY4"
+			end;
+
+			if sheet.NomeHabilidade == "Alvo de Cura" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxl7p-46c5ffd8-b0d8-47f4-8898-8344fdd0f78e.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGw3cC00NmM1ZmZkOC1iMGQ4LTQ3ZjQtODg5OC04MzQ0ZmRkMGY3OGUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ArspbKpWywdRL5IsEHrCHDDWCOq7z2cNstkDrDDMYGQ"
+			end;
+
+			if sheet.NomeHabilidade == "Reflexo Solar" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2wiok-d028397a-45d0-4a34-b412-84d1caa79ace.png/v1/fill/w_32,h_32,q_80,strp/reflexo_solar_by_karelsama_dk2wiok-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzIiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMndpb2stZDAyODM5N2EtNDVkMC00YTM0LWI0MTItODRkMWNhYTc5YWNlLnBuZyIsIndpZHRoIjoiPD0zMiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.gX0tiu4qttflum1VJwlCjl6JaSsepG46gUxoKSD9-EA"
+			end;
 			
 			if sheet.NomeHabilidade == "Ultimate Defense" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3clhl-dbdd9eea-2ece-4025-b8ac-65826fc8058b.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzY2xobC1kYmRkOWVlYS0yZWNlLTQwMjUtYjhhYy02NTgyNmZjODA1OGIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.4k9WnRjtmmMYdxT3h9HFOLSSjEfzJuT1d_GxNndctns"
@@ -1363,7 +1580,7 @@
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3co98-c6f5a15e-a3eb-46fe-bb31-dfd3ad6bef48.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzY285OC1jNmY1YTE1ZS1hM2ViLTQ2ZmUtYmIzMS1kZmQzYWQ2YmVmNDgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.uL4XqiVYpayEOprsOPmpc0v1uZBC23bgofzMqo9TZD4"
 			end;
 			
-			if sheet.NomeHabilidade == "Penetração" then
+			if sheet.NomeHabilidade == "Penetrar" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3co8u-1795e676-9700-4dc2-be99-eaacb7a0d4ee.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzY284dS0xNzk1ZTY3Ni05NzAwLTRkYzItYmU5OS1lYWFjYjdhMGQ0ZWUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.9sKxsnyWvGAHMImTulaX14MUHWDmHuCHNmg7-fNcq5c"
 			end;
 			
@@ -1373,6 +1590,10 @@
 			
 			if sheet.NomeHabilidade == "Vantagem" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3co8m-61726a8d-d519-4843-8493-b70b7c71d743.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzY284bS02MTcyNmE4ZC1kNTE5LTQ4NDMtODQ5My1iNzBiN2M3MWQ3NDMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.z2M47lVTMD8JDWWiyL6aTjOIVtAfOLi2aCCO7kjMJxg"
+			end;
+
+			if sheet.NomeHabilidade == "Chute na Garganta" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkwuni-036bbc94-1cfc-4a67-8651-2b2321059c1e.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGprd3VuaS0wMzZiYmM5NC0xY2ZjLTRhNjctODY1MS0yYjIzMjEwNTljMWUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.R60dfRU_omJXrShulbusYY9iAeylYe_9d2Y8jKY4c0A"
 			end;
 			
 			if sheet.NomeHabilidade == "Critical Poderoso" then
@@ -1410,6 +1631,10 @@
 			if sheet.NomeHabilidade == "Espreita" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3d123-1e0d1f2f-53b0-4736-9251-f85bae3d6b91.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzZDEyMy0xZTBkMWYyZi01M2IwLTQ3MzYtOTI1MS1mODViYWUzZDZiOTEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.8kuwCkcNrg7NQ9QHC0sWjXT0WtMZ9bh9pSGdeK7Kc_I"
 			end;
+
+			if sheet.NomeHabilidade == "Energia Infinita" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkwv92-410aa9c8-4e1d-46bb-b7f5-8d0ac8f870bf.png/v1/fill/w_64,h_64/energia_infinita_by_karelsama_djkwv92-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2Rqa3d2OTItNDEwYWE5YzgtNGUxZC00NmJiLWI3ZjUtOGQwYWM4Zjg3MGJmLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.FoiOqvmAkhu-TC5lHF7TpZL6gZgo_JCmOKhtxMBJ4Io"
+			end;
 			
 			if sheet.NomeHabilidade == "Assassinato" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3d12e-10f02184-ab84-450c-b6fb-4b90deb32fe6.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzZDEyZS0xMGYwMjE4NC1hYjg0LTQ1MGMtYjZmYi00YjkwZGViMzJmZTYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xkg4CCwg9uc--xEMofLJ8CGpUPhiVZOXLXd2OlGJ6_Y"
@@ -1445,7 +1670,7 @@
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3eixn-6d9769e3-a82a-4222-97df-fea106a691b3.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzZWl4bi02ZDk3NjllMy1hODJhLTQyMjItOTdkZi1mZWExMDZhNjkxYjMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.wPrsUY0aEDXeHnO2LxY9QLwjf6n9yhZaTgGS_djT4ss"
 			end;
 			
-			if sheet.NomeHabilidade == "Flash" then
+			if sheet.NomeHabilidade == "Piscar" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3eiy2-1b9265f4-8efa-41e6-a961-b68df329471d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzZWl5Mi0xYjkyNjVmNC04ZWZhLTQxZTYtYTk2MS1iNjhkZjMyOTQ3MWQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.znJtr0xuHGmmHWaQyG5zMG5vQyvTxb57sU9rjVdMJG0"
 			end;
 			
@@ -1530,7 +1755,7 @@
 			end;
 			
 			if sheet.NomeHabilidade == "Drenar Mana" then
-				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3fhv9-d1df6c35-bbe1-4432-b86b-2f03016e5b3d.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzZmh2OS1kMWRmNmMzNS1iYmUxLTQ0MzItYjg2Yi0yZjAzMDE2ZTViM2QucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.KOOi5CUfg-zIPXr_qvcWKm9zGjdnKvJmvTEuRDMqKkE"
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3cbtz-e371ec22-7ca2-4409-9e4b-42bb173e280c.png/v1/fill/w_128,h_128,q_80,strp/drenar_mana_by_karelsama_df3cbtz-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4IiwicGF0aCI6IlwvZlwvZGIxYzM2YTAtNzhhYy00ZmI3LTk4ZWEtMWIwYWFlODZjZTJjXC9kZjNjYnR6LWUzNzFlYzIyLTdjYTItNDQwOS05ZTRiLTQyYmIxNzNlMjgwYy5wbmciLCJ3aWR0aCI6Ijw9MTI4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.gMAzAan9Y4mKkuJOLYKqBVSq9y8RROFc8tv8JAkDm1w"
 			end;
 			
 			if sheet.NomeHabilidade == "Silenciar" then
@@ -1586,7 +1811,7 @@
 			end;
 			
 			if sheet.NomeHabilidade == "Troca Equivalente" then
-				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3gyzi-f4179908-92df-4d0a-9dc6-b6f7fe8ee0ab.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzZ3l6aS1mNDE3OTkwOC05MmRmLTRkMGEtOWRjNi1iNmY3ZmU4ZWUwYWIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0._BWil_uqfNaZX9BdXhjZiorSJGUBxZQyRh1VOz1LY4s"
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3cbtj-6733c0c7-9e33-49c0-8346-7acf37abf325.png/v1/fill/w_32,h_32,q_80,strp/troca_equivalente_by_karelsama_df3cbtj-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzIiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RmM2NidGotNjczM2MwYzctOWUzMy00OWMwLTgzNDYtN2FjZjM3YWJmMzI1LnBuZyIsIndpZHRoIjoiPD0zMiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.fHgrhXNhEZa5BMm5cUEXEDWkvwQy2VTmS78aCRl96U4"
 			end;
 			
 			if sheet.NomeHabilidade == "Aumentar Velocidade" then
@@ -1603,6 +1828,14 @@
 			
 			if sheet.NomeHabilidade == "Dissipar Magia" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3gz04-7c495770-6a76-4d31-aca8-4183ce365056.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzZ3owNC03YzQ5NTc3MC02YTc2LTRkMzEtYWNhOC00MTgzY2UzNjUwNTYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ZUspi0dhErHbCgg-Iter3sRd6K7VTkzE3uk9YFjRcKU"
+			end;
+
+			if sheet.NomeHabilidade == "Retirar Mana do Ambiente" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxkvf-d522b0eb-aaac-4407-a802-0b3de8ffd984.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGt2Zi1kNTIyYjBlYi1hYWFjLTQ0MDctYTgwMi0wYjNkZThmZmQ5ODQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.pi5f51e16Bv-KYfe3-rqLGtqg4-bmuv1Pf988zCtJfM"
+			end;
+
+			if sheet.NomeHabilidade == "Heroico" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxku2-aed831eb-c342-4149-81a2-2169e6120fb2.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGt1Mi1hZWQ4MzFlYi1jMzQyLTQxNDktODFhMi0yMTY5ZTYxMjBmYjIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.xm0HrjE8ent-yt3v_4k6DHkievaNCl7N_1HUnIf93Jw"
 			end;
 			
 			if sheet.NomeHabilidade == "Mestre das Summons" then
@@ -1644,6 +1877,16 @@
 			if sheet.NomeHabilidade == "Frenesi da Guerra" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3h1b3-6a90acc5-0cf1-48ce-9da4-113568c74dbd.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzaDFiMy02YTkwYWNjNS0wY2YxLTQ4Y2UtOWRhNC0xMTM1NjhjNzRkYmQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.pBxXLoaQsTNQ-l_I87LfsGET4ZOYq3o0moWWH9eAs7A"
 			end;
+
+			if sheet.NomeHabilidade == "Desafiar" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djmp0rd-5073a8de-b53b-46db-9dbe-cdf7c021434e.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGptcDByZC01MDczYThkZS1iNTNiLTQ2ZGItOWRiZS1jZGY3YzAyMTQzNGUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.NcQNskiNR36WdB7OPPOh84nm8jz5TSvqAdsazPeimAU"
+			end;
+
+			if sheet.NomeHabilidade == "Sobreviverei" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djmqcyb-00622f26-a310-4510-ab88-57ced170c0c8.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGptcWN5Yi0wMDYyMmYyNi1hMzEwLTQ1MTAtYWI4OC01N2NlZDE3MGMwYzgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.B-8EXO5zyAhbiJrJjjUDFEW2gxgU9_B0D_nyQ6hxO6Q"
+			end;
+
+
 			
 			if sheet.NomeHabilidade == "Coração Valente" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3h1bh-4bcacb44-86c2-4223-b3a8-ab3c07c9d014.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzaDFiaC00YmNhY2I0NC04NmMyLTQyMjMtYjNhOC1hYjNjMDdjOWQwMTQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.LuAgvw0XYu0vPwBimIEb6P72Uf2S_wVWaqLl_txqBpY"
@@ -1698,6 +1941,22 @@
 			if sheet.NomeHabilidade == "Neblina" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3hknp-c6341164-69b5-4089-b02c-2d346ff62874.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzaGtucC1jNjM0MTE2NC02OWI1LTQwODktYjAyYy0yZDM0NmZmNjI4NzQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.cycdhvA4FPNAIoexWHyVELRrJcjSeZIRxRBbpaNz8xs"
 			end;
+
+			if sheet.NomeHabilidade == "Inspiração dos Mares" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxi64-40f91f1c-86b4-4df0-9c3e-65a2d8e3d69c.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGk2NC00MGY5MWYxYy04NmI0LTRkZjAtOWMzZS02NWEyZDhlM2Q2OWMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.lr7-kSHOaaxqKanu18B7RtgBlq4cKq_3JT6DcJAV6vA"
+			end;
+
+			if sheet.NomeHabilidade == "Livrar-se" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djta46q-25dde1e3-61c7-4d4c-a19c-f4d3fc68f44f.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGp0YTQ2cS0yNWRkZTFlMy02MWM3LTRkNGMtYTE5Yy1mNGQzZmM2OGY0NGYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.fVXXSqcCCkvWMnLOatZwksNHFHImUhacACjsa1-b_ag"
+			end;
+
+			if sheet.NomeHabilidade == "Embebedar o Alvo" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djta7l6-80f901aa-2b13-4fad-a8c9-94404f9705e8.png/v1/fit/w_827,h_687,q_70,strp/embebedar_inimigo_by_karelsama_djta7l6-414w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9Njg3IiwicGF0aCI6IlwvZlwvZGIxYzM2YTAtNzhhYy00ZmI3LTk4ZWEtMWIwYWFlODZjZTJjXC9kanRhN2w2LTgwZjkwMWFhLTJiMTMtNGZhZC1hOGM5LTk0NDA0Zjk3MDVlOC5wbmciLCJ3aWR0aCI6Ijw9ODI3In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.2dwgWYWQ3Zf_9zUT7rebk8Czl9J2jQcKnY_QU11brvY"
+			end;
+
+			if sheet.NomeHabilidade == "Mais uma Espadada" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djta89u-8421bd52-fdec-4ef6-99dc-d2eb8f061236.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGp0YTg5dS04NDIxYmQ1Mi1mZGVjLTRlZjYtOTlkYy1kMmViOGYwNjEyMzYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.cGGD5wNuWdtnwPDuE4sVGKmlzNmBRuWubFYITDmBEoo"
+			end;
 			
 			if sheet.NomeHabilidade == "Barragem de Canhão" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3hkoq-ff02ea9a-47e2-42ef-be86-7ceda0bc01c4.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzaGtvcS1mZjAyZWE5YS00N2UyLTQyZWYtYmU4Ni03Y2VkYTBiYzAxYzQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.tazDpNygapM0cGe2gFk1iP4eIcM2tliVRCiNW2n5i1g"
@@ -1744,8 +2003,36 @@
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dfyqt9j-ec7e557f-ecfb-49fb-b4f4-cab54f1d2748.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGZ5cXQ5ai1lYzdlNTU3Zi1lY2ZiLTQ5ZmItYjRmNC1jYWI1NGYxZDI3NDgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.6HOhpZYfq_9J6SDKAPzBs2vwL-wFtayTsWSaZ2VNVvM"
 			end;
 			
+			if sheet.NomeHabilidade == "Infundir a Raiva" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2ws58-c4f4b635-bcea-4b4c-ac7f-bb3f6851df23.png/v1/fill/w_32,h_32,q_80,strp/infundir_raiva_by_karelsama_dk2ws58-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzIiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMndzNTgtYzRmNGI2MzUtYmNlYS00YjRjLWFjN2YtYmIzZjY4NTFkZjIzLnBuZyIsIndpZHRoIjoiPD0zMiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.71NZOkv-S6w9TPVrJ-RAoGGO4125k7thEj28iASo5Ic"
+			end;
+
 			if sheet.NomeHabilidade == "Marcação Tríplice" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dfz1as3-30eb7a9a-cbd3-408f-8e39-96b6a2cf1518.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGZ6MWFzMy0zMGViN2E5YS1jYmQzLTQwOGYtOGUzOS05NmI2YTJjZjE1MTgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.Z8Yqc67teZIcjul8K2DAT39p9O6Zv21sSt2B1H6IARE"
+			end;
+
+			if sheet.NomeHabilidade == "Bênção do Retorno" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkx9eq-1c36595f-b448-48e0-93a2-338bb9567331.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreDllcS0xYzM2NTk1Zi1iNDQ4LTQ4ZTAtOTNhMi0zMzhiYjk1NjczMzEucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.MwzVBUzmXFsrTMY2AkXeYPs4MDUHvzg0AJ9_Ft5jOJI"
+			end;
+
+			if sheet.NomeHabilidade == "Meditação Espiritual" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2wsdo-d6b5d425-e52f-42e6-bff4-27e248bf720f.png/v1/fill/w_164,h_180,q_80,strp/meditao_sei_la_by_karelsama_dk2wsdo-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTgwIiwicGF0aCI6IlwvZlwvZGIxYzM2YTAtNzhhYy00ZmI3LTk4ZWEtMWIwYWFlODZjZTJjXC9kazJ3c2RvLWQ2YjVkNDI1LWU1MmYtNDJlNi1iZmY0LTI3ZTI0OGJmNzIwZi5wbmciLCJ3aWR0aCI6Ijw9MTY0In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.Mro9zKAqo-yd6OIq0evXNT5JqKth4uhp-fmJVdEaLlA"
+			end;
+
+			if sheet.NomeHabilidade == "Namaste" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2wrwe-e97af6f6-cef7-4cda-9c00-628d03a8d6fb.png/v1/fill/w_32,h_32,q_80,strp/namaste_by_karelsama_dk2wrwe-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzIiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMndyd2UtZTk3YWY2ZjYtY2VmNy00Y2RhLTljMDAtNjI4ZDAzYThkNmZiLnBuZyIsIndpZHRoIjoiPD0zMiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.uD-0PUJ9s-5V3wHQCMbn3UYcR6F6M6nj8qqaU5MXruU"
+			end;
+
+			if sheet.NomeHabilidade == "Impacto Ascendente" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxe9n-01b9f4b5-0a9a-47ca-a46b-66ac0049c8e9.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGU5bi0wMWI5ZjRiNS0wYTlhLTQ3Y2EtYTQ2Yi02NmFjMDA0OWM4ZTkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.9ekgovnXsQVsjBW2B5Od33pV3eODkVsO81NMeRr2xrc"
+			end;
+
+			if sheet.NomeHabilidade == "Força é Mana" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2wqx2-9897fc0f-7e39-4c04-8ecc-7a87b376acc7.png/v1/fill/w_32,h_32,q_80,strp/fora__mana_by_karelsama_dk2wqx2-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzIiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMndxeDItOTg5N2ZjMGYtN2UzOS00YzA0LThlY2MtN2E4N2IzNzZhY2M3LnBuZyIsIndpZHRoIjoiPD0zMiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.H92u6GqVm_isM8WQ1sQ6qStxMKl5k2D1zSqz6D2Uvfo"
+			end;
+
+			if sheet.NomeHabilidade == "Mandamento da Harmonia" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxfbf-9254f6ef-1c3a-4b3e-aebf-896622b66a97.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGZiZi05MjU0ZjZlZi0xYzNhLTRiM2UtYWViZi04OTY2MjJiNjZhOTcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.S-9hySGlWiBgId3A3DLeP-selYxi5hP4tbW7xINomL8"
 			end;
 			
 			if sheet.NomeHabilidade == "Toque da Morte" then
@@ -1796,8 +2083,20 @@
 			if sheet.NomeHabilidade == "Livramento Espiritual" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3izdv-72cb2891-0e1f-467b-9e3f-20495bafd583.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzaXpkdi03MmNiMjg5MS0wZTFmLTQ2N2ItOWUzZi0yMDQ5NWJhZmQ1ODMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.Is7GIEvC_xYG7YxsSaaQwjnGYcUbJd5Fq8fbTj4F6B8"
 			end;
+
+			if sheet.NomeHabilidade == "Bloqueio de Chi" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxg19-f01c4a7e-8327-47a1-ba72-40f31f6deb98.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGcxOS1mMDFjNGE3ZS04MzI3LTQ3YTEtYmE3Mi00MGYzMWY2ZGViOTgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.BLbxJH8MPShP6eWs3SDwRm8IAeW9bCNeovjXwm9uKe0"
+			end;
+
+			if sheet.NomeHabilidade == "Braços Espirituais" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxg6l-6d182fa9-473d-4f65-8306-3310f0cb8e1c.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGc2bC02ZDE4MmZhOS00NzNkLTRmNjUtODMwNi0zMzEwZjBjYjhlMWMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.BUWDjTSFxSSOOE76-Yr9KqNNLQI6ViGy8O4ETECh-Sg"
+			end;
+
+			if sheet.NomeHabilidade == "Petalas de Lotus" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxgpy-e54858db-eb57-4f79-8df0-2182a7533769.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGdweS1lNTQ4NThkYi1lYjU3LTRmNzktOGRmMC0yMTgyYTc1MzM3NjkucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.CTwrLeW-ngbVgvleBG0zcCQxEoUDA8UTe8mOvvofXv0"
+			end;
 			
-			if sheet.NomeHabilidade == "Chi" then
+			if sheet.NomeHabilidade == "Super Força" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3ize3-91772d2b-3b2e-4a5c-a944-7c7af1e7bc34.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzaXplMy05MTc3MmQyYi0zYjJlLTRhNWMtYTk0NC03YzdhZjFlN2JjMzQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.d3e3COg47NQXKaEBNpi4_TZMvzljzj94SfkY822Dja0"
 				self.imgIconSkill.width = "45"
 				self.imgIconSkill.height ="45"
@@ -1856,6 +2155,18 @@
 			if sheet.NomeHabilidade == "Arma Runica" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dfe8xor-469edfa6-d15f-46a2-9071-406ba6a37413.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGZlOHhvci00NjllZGZhNi1kMTVmLTQ2YTItOTA3MS00MDZiYTZhMzc0MTMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.rhUXyPJ9zvBDe5NPy2bq4CvNjxQDROZJrou9MZxrXzw"
 			end;
+
+			if sheet.NomeHabilidade == "Alma Sanguinária" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkwzth-e50ed5a4-99db-42e2-a48e-1bd96b1632d9.png/v1/fill/w_64,h_64/alma_sanquinaria1_by_karelsama_djkwzth-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2Rqa3d6dGgtZTUwZWQ1YTQtOTlkYi00MmUyLWE0OGUtMWJkOTZiMTYzMmQ5LnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.7qXSY_awR576Np7kcLrPNBh-cQz8jznuLPmbcmrielk"
+			end;
+
+			if sheet.NomeHabilidade == "Pela Escoria" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkx1ns-7434f342-6b4c-4d9b-b9ca-b7936879c9ce.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreDFucy03NDM0ZjM0Mi02YjRjLTRkOWItYjljYS1iNzkzNjg3OWM5Y2UucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.v-8foYnNT8Yms-Cz_93Lf59zOZnBMiABRsgiwvZm9cI"
+			end;
+
+			if sheet.NomeHabilidade == "Profanar Alma" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkx21f-8e27b139-2cc7-49fe-a607-d62c693cae26.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreDIxZi04ZTI3YjEzOS0yY2M3LTQ5ZmUtYTYwNy1kNjJjNjkzY2FlMjYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.yGm7yIuIAGagrgjzNely-cY-kptZEPuYG1_3kFoF3VY"
+			end;
 			
 			if sheet.NomeHabilidade == "Carniçal" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3joks-ba6ec8e2-3a6a-404a-b90f-92ab960807d8.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzam9rcy1iYTZlYzhlMi0zYTZhLTQwNGEtYjkwZi05MmFiOTYwODA3ZDgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.7jdQD0rropyPhPqEudtu_WDydfb69gvzOg9FlPuvRKU"
@@ -1901,6 +2212,26 @@
 			
 			if sheet.NomeHabilidade == "Perito em Mithril" then
 				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3j320-bcf1fb0a-3c82-45f1-9d18-60a08ab63026.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzajMyMC1iY2YxZmIwYS0zYzgyLTQ1ZjEtOWQxOC02MGEwOGFiNjMwMjYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.C-GMcDOZGxW97M7AdtdARLT-oV6rCQIyeKzNZV_r9H4"
+			end;
+
+			if sheet.NomeHabilidade == "Asas de Anjo" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxm1t-ce6854be-046a-45b9-a48a-a77c2899d413.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreG0xdC1jZTY4NTRiZS0wNDZhLTQ1YjktYTQ4YS1hNzdjMjg5OWQ0MTMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.U5e1jpQ1swBxkD8wJwvBpDQLjh1yNL1cV43x15iypUg"
+			end;
+
+			if sheet.NomeHabilidade == "Critical Cura" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxlpi-3ed75f78-fb18-4435-8ef5-c087c206787c.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGxwaS0zZWQ3NWY3OC1mYjE4LTQ0MzUtOGVmNS1jMDg3YzIwNjc4N2MucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.2fetVzKYHMDMWdQbK6D24foV3yJpxBQrIrhXz4jalRs"
+			end;
+
+			if sheet.NomeHabilidade == "Fenda Divina" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxlqf-7f7ddeaf-856b-4dbb-a2fc-f6c47bb1616c.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGxxZi03ZjdkZGVhZi04NTZiLTRkYmItYTJmYy1mNmM0N2JiMTYxNmMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.spcrqrjFfoAycmv7jzWXPXFk_xW_Bob8-LpR2rdXYiE"
+			end;
+
+			if sheet.NomeHabilidade == "Luz Solar" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/djkxlr6-3a5ef1e4-7b11-42e5-ac6e-6ed96210917c.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGpreGxyNi0zYTVlZjFlNC03YjExLTQyZTUtYWM2ZS02ZWQ5NjIxMDkxN2MucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.dcT3gEzK6ZhTcjYKnRUl_foprKYyhidO881MVoQ8UM8"
+			end;
+
+			if sheet.NomeHabilidade == "Escudo Refletor" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/df3j326-9f333426-2bd2-44fc-a4b7-5dade17f362f.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGYzajMyNi05ZjMzMzQyNi0yYmQyLTQ0ZmMtYTRiNy01ZGFkZTE3ZjM2MmYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.MqMkoMTvCVr-jasepKJf4eS8n9fs9SyG4eUTqtxAWdo"
 			end;
 			
 			if sheet.NomeHabilidade == "Fênix Caída" then
@@ -1967,9 +2298,78 @@
 				self.imgIconSkill.height ="45"
 			end;
 			
+			if sheet.NomeHabilidade == "Orbes Entrópicos" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2olvf-837921b6-4f10-415b-9c37-496bc0d577ee.png/v1/fill/w_64,h_64,q_80,strp/orbes_entrpicos_by_karelsama_dk2olvf-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9sdmYtODM3OTIxYjYtNGYxMC00MTViLTljMzctNDk2YmMwZDU3N2VlLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.zjQQig6xLAVu2kXTVsVZx5jAvqafk6jwIcnS-ZYri4E"
+			end;
+
+			if sheet.NomeHabilidade == "Impacto do Caos" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2olvf-837921b6-4f10-415b-9c37-496bc0d577ee.png/v1/fill/w_64,h_64,q_80,strp/orbes_entrpicos_by_karelsama_dk2olvf-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9sdmYtODM3OTIxYjYtNGYxMC00MTViLTljMzctNDk2YmMwZDU3N2VlLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.zjQQig6xLAVu2kXTVsVZx5jAvqafk6jwIcnS-ZYri4E"
+			end;
+
+			if sheet.NomeHabilidade == "Vislumbre do Vazio" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2oiun-0826d9d6-0060-4eb0-8fb1-b6b2ae3d2d42.png/v1/fill/w_32,h_32,q_80,strp/vislumbre_do_vazio_by_karelsama_dk2oiun-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzIiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9pdW4tMDgyNmQ5ZDYtMDA2MC00ZWIwLThmYjEtYjZiMmFlM2QyZDQyLnBuZyIsIndpZHRoIjoiPD0zMiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.xn5UqRqOe4Gemv6XWG7R1xdwi9A7iP47k1AjMWhcuhw"
+			end;
+
+			if sheet.NomeHabilidade == "Explosão da Entropia" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2oiuf-08d32849-838f-435d-9e23-fe8fa309b05c.png/v1/fill/w_128,h_128,q_80,strp/exploso_entropica_by_karelsama_dk2oiuf-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4IiwicGF0aCI6IlwvZlwvZGIxYzM2YTAtNzhhYy00ZmI3LTk4ZWEtMWIwYWFlODZjZTJjXC9kazJvaXVmLTA4ZDMyODQ5LTgzOGYtNDM1ZC05ZTIzLWZlOGZhMzA5YjA1Yy5wbmciLCJ3aWR0aCI6Ijw9MTI4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.JvuZay8dj6tr7txlZxu3bOz1EaofSiqZkF_NJ-Imerw"
+			end;
+
+			if sheet.NomeHabilidade == "Canalizar o Vazio" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2onmf-4feafc06-6aa8-4c2d-bd62-bea101c4040c.png/v1/fill/w_64,h_64,q_80,strp/canalizar_vazio_by_karelsama_dk2onmf-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9ubWYtNGZlYWZjMDYtNmFhOC00YzJkLWJkNjItYmVhMTAxYzQwNDBjLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.U-GltupBgjmuWI5tyHhzIkzCo1sHoGPPZJidC1LUotw"
+			end;
+
+			if sheet.NomeHabilidade == "Distorção da Sorte" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2oiu3-cf3cba2f-9611-46cc-aee5-aed50d15c566.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiMWMzNmEwLTc4YWMtNGZiNy05OGVhLTFiMGFhZTg2Y2UyY1wvZGsyb2l1My1jZjNjYmEyZi05NjExLTQ2Y2MtYWVlNS1hZWQ1MGQxNWM1NjYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.vyJ4XEGWm4gtBvBtUgCCBCM4rrA5T0y3msnM5ic4Rcw"
+			end;
+
+			if sheet.NomeHabilidade == "Buraco Negro" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2omi8-79785065-a3e7-4fef-9454-ed77d8abc07e.png/v1/fill/w_64,h_64,q_80,strp/buraco_negro_by_karelsama_dk2omi8-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9taTgtNzk3ODUwNjUtYTNlNy00ZmVmLTk0NTQtZWQ3N2Q4YWJjMDdlLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.kFtnDfCVJtGZ_hucYa-y4XmZUUze-IgnaIMOMnnlWMc"
+			end;
+
+			if sheet.NomeHabilidade == "Cometa do Caos" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2omm3-537c93bb-fbf8-4fe7-ac65-faf41828f037.png/v1/fill/w_64,h_64,q_80,strp/cometa_do_caos_by_karelsama_dk2omm3-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9tbTMtNTM3YzkzYmItZmJmOC00ZmU3LWFjNjUtZmFmNDE4MjhmMDM3LnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.qhVIvPAfbcvJljX631gXojgDmCbGXRr7NesxooDUI5k"
+			end;
+
+			if sheet.NomeHabilidade == "Comsumir a Realidade" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2omt3-a868038b-5c37-40d0-aabc-e37185e30882.png/v1/fill/w_64,h_64,q_80,strp/comsumir_a_realidade_by_karelsama_dk2omt3-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9tdDMtYTg2ODAzOGItNWMzNy00MGQwLWFhYmMtZTM3MTg1ZTMwODgyLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.ADhEWjUHl9VrZvbObCST6TJ0S0HCB9w1I-H7bMZFc_o"
+			end;
+
+			if sheet.NomeHabilidade == "Alimentando-se do Caos" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2onju-feb5d14d-8aa9-4939-9af5-6b6e5b9a7ed6.png/v1/fill/w_64,h_64,q_80,strp/alimentando_se_do_caos_by_karelsama_dk2onju-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9uanUtZmViNWQxNGQtOGFhOS00OTM5LTlhZjUtNmI2ZTViOWE3ZWQ2LnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.E_mCuMYAD2Nds6fKPteLjqt-6RTr0YN0KjCWSjT9maQ"
+			end;
+
+			if sheet.NomeHabilidade == "Companheiro do Vazio" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2om6z-2586c65b-7734-4607-ba60-a7734acdc95c.png/v1/fill/w_64,h_64,q_80,strp/companheiro_do_vazio_by_karelsama_dk2om6z-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9tNnotMjU4NmM2NWItNzczNC00NjA3LWJhNjAtYTc3MzRhY2RjOTVjLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.NNg888Zj5M4U43dX783i4IJ6wDEvihuNiaSMVqglDkQ"
+			end;
+
+			if sheet.NomeHabilidade == "Consumo Realidade" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2omt3-a868038b-5c37-40d0-aabc-e37185e30882.png/v1/fill/w_64,h_64,q_80,strp/comsumir_a_realidade_by_karelsama_dk2omt3-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9tdDMtYTg2ODAzOGItNWMzNy00MGQwLWFhYmMtZTM3MTg1ZTMwODgyLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.ADhEWjUHl9VrZvbObCST6TJ0S0HCB9w1I-H7bMZFc_o"
+			end;
+
+			if sheet.NomeHabilidade == "Dimensão Zero" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2oiu0-3172228f-7f9c-493d-a2ba-c292e6564035.png/v1/fill/w_32,h_32,q_80,strp/dimenso_zero_by_karelsama_dk2oiu0-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzIiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9pdTAtMzE3MjIyOGYtN2Y5Yy00OTNkLWEyYmEtYzI5MmU2NTY0MDM1LnBuZyIsIndpZHRoIjoiPD0zMiJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.eoQmCA1JFOxrzBBc14KDGaeVyqwBCu9qNzIpNg3HG9g"
+			end;
+
+			if sheet.NomeHabilidade == "Espada Entrópica" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2oiua-1f810634-c131-428e-9e74-4a467f0febd1.png/v1/fill/w_128,h_128,q_80,strp/espada_entropica_by_karelsama_dk2oiua-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTI4IiwicGF0aCI6IlwvZlwvZGIxYzM2YTAtNzhhYy00ZmI3LTk4ZWEtMWIwYWFlODZjZTJjXC9kazJvaXVhLTFmODEwNjM0LWMxMzEtNDI4ZS05ZTc0LTRhNDY3ZjBmZWJkMS5wbmciLCJ3aWR0aCI6Ijw9MTI4In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.8sEN1I87hf7JWixEXS1BtqwT5Q6ztcnwRmxcg1Gr9Ck"
+			end;
+
+			if sheet.NomeHabilidade == "Retirar Espirito do Vazio" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2on9k-f49051df-fdeb-49b7-bc5d-7397c8cfb983.png/v1/fill/w_64,h_64,q_80,strp/retirar_espirito_do_vazio_by_karelsama_dk2on9k-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9uOWstZjQ5MDUxZGYtZmRlYi00OWI3LWJjNWQtNzM5N2M4Y2ZiOTgzLnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.RBNn3M5pCFLw-VKvWQVh_rtXZU5X9QL6Bxi0DndvmVA"
+			end;
+
+			if sheet.NomeHabilidade == "Rajada de Orbes Entrópicas" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2olvi-ed4863af-3874-4ff2-9fd3-c65ee1e2bb68.png/v1/fill/w_64,h_64,q_80,strp/rajada_de_orbes_entrpicas_by_karelsama_dk2olvi-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQiLCJwYXRoIjoiXC9mXC9kYjFjMzZhMC03OGFjLTRmYjctOThlYS0xYjBhYWU4NmNlMmNcL2RrMm9sdmktZWQ0ODYzYWYtMzg3NC00ZmYyLTlmZDMtYzY1ZWUxZTJiYjY4LnBuZyIsIndpZHRoIjoiPD02NCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.QFJprWS3EfWBOQjeaZuW7meqgaMaOAmsrMq9A66pzMI"
+			end;
+			
+			if sheet.NomeHabilidade == "Lamina Lendaria dos Dragões" then
+				sheet.fldImgIconSkill = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db1c36a0-78ac-4fb7-98ea-1b0aae86ce2c/dk2whte-9398e221-cff9-45c5-92a9-68b4ac3a2fe8.png/v1/fill/w_207,h_215,q_80,strp/lamina_de_lendaria_dos_drages_by_karelsama_dk2whte-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MjE1IiwicGF0aCI6IlwvZlwvZGIxYzM2YTAtNzhhYy00ZmI3LTk4ZWEtMWIwYWFlODZjZTJjXC9kazJ3aHRlLTkzOThlMjIxLWNmZjktNDVjNS05MmE5LTY4YjRhYzNhMmZlOC5wbmciLCJ3aWR0aCI6Ijw9MjA3In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.RRzd5DSTr0gBJBIc2BoP2sI3K_XO4z56oDP_E3l6JyA"
+			end;
+
 			if sheet.NomeHabilidade == "" then
 				sheet.fldImgIconSkill = ""
 			end;
+
 			
 			if sheet.NomeHabilidade == "" then
 				sheet.fldImgIconSkill = "/imagens/tt.png"

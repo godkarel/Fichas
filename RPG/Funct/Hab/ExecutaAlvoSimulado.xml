@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+	<script>
+				function ExecutaAlvoSimulado(SelfHabilidade, nodeHabilidade, SelfcmbInimigosH, cmbTipoDeGrupoFH, nodeExterno, OpcaoHab)       			
+						local mesaDoPersonagem = rrpg.getMesaDe(sheet);					
+						sheet.AcertoMagico = tonumber(sheet.AcertoMagico) or 0;						
+						mesaDoPersonagem.chat:rolarDados("1d20", "[§K3]Executar Habilidade",
+							function (rolado)					
+							if nodeHabilidade.DanoAtributo1 ~= nil then
+								if sheet.AcertoMagico + 1 > rolado.resultado then							
+									if sheet.AcertoMagico >= rolado.resultado then
+										if nodeHabilidade.fldImgIconSkill ~= nil then 
+											mesaDoPersonagem.chat:enviarMensagem("[§I " .. nodeHabilidade.fldImgIconSkill .. "]");
+										end;
+										mesaDoPersonagem.chat:enviarMensagem(".. [§K3]".. nodeHabilidade.DescriHabilidade1);
+										local mesa = Firecast.getMesaDe(sheet); 
+										local Custo2 = sheet.MPAtual;
+										nodeHabilidade.Custo2 = sheet.MPAtual;
+										nodeHabilidade.Custo2 = (tonumber(nodeHabilidade.Custo2) or 0) - (tonumber(nodeHabilidade.CustoHabilidade) or 0);
+										sheet.MPAtual = nodeHabilidade.Custo2;
+										mesa.meuJogador:requestSetBarValue(2, sheet.MPAtual);
+										nodeHabilidade.ContaRecarga = nodeHabilidade.TurnoAtual	
+										nodeHabilidade.RecargaHabilidade = tonumber(nodeHabilidade.ContaRecarga) + tonumber(nodeHabilidade.CDHabilidade) -  tonumber(nodeHabilidade.TurnoAtual)	
+										if nodeHabilidade.DanoAtributo1 == 'Cura' or nodeHabilidade.DanoAtributo1 == 'Cura Fixa' then
+											if 1 == rolado.resultado then										
+												sheet.DanoHabilidadeSimulada = math.floor((node.Hintensidade1 * 2)) * -1	
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando  com [§K4,0] CRITICAL [§K9,0] « [§K4,0]" .. sheet.DanoHabilidadeSimulada .. "[§K8,0] » :dinofauro: ");
+											else										
+												sheet.DanoHabilidadeSimulada = math.floor((node.Hintensidade1)) * -1
+												mesaDoPersonagem.chat:enviarMensagem("[§K8,0]Curando « [§K4,0]" .. sheet.DanoHabilidadeSimulada .. "[§K8,0] »");
+											end;	
+										else
+											if sheet.CMagico +1 > rolado.resultado then 										
+												if nodeHabilidade.DanoAtributo1 ~= 'BUFF' then
+													sheet.DanoHabilidadeSimulada = math.floor((nodeHabilidade.Hintensidade1 * 2))
+												end;											
+												if nodeHabilidade.DanoAtributo1 == 'Real' then
+													sheet.DanoHabilidadeSimulada = math.floor(nodeHabilidade.Hintensidade1 * 2)
+												end;
+												
+												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando com [§K4,0] CRITICAL [§K9,0] « [§K4,0] " .. (sheet.DanoHabilidadeSimulada) .. "[§K9,0] » :dinofauro: ");
+											else
+												if nodeHabilidade.DanoAtributo1 ~= 'BUFF' then
+													sheet.DanoHabilidadeSimulada = math.floor((nodeHabilidade.Hintensidade1))
+												end;
+												if nodeHabilidade.DanoAtributo1 == 'Real' then
+													sheet.DanoHabilidadeSimulada = math.floor(nodeHabilidade.Hintensidade1)
+												end;
+												mesaDoPersonagem.chat:enviarMensagem("[§K9,0]Causando « [§K4,0]" .. sheet.DanoHabilidadeSimulada .. "[§K9,0] »");
+											end;	
+										end;										
+									else
+										mesaDoPersonagem.chat:enviarMensagem("[§K4]FALHA :troll: ");
+										sheet.DanoHabilidadeSimulada = 0
+									end;
+								else							
+									mesaDoPersonagem.chat:enviarMensagem("[§K4,0]FALHOU :troll:");
+									sheet.DanoHabilidadeSimulada = 0
+									if nodeHabilidade.DanoAtributo1 == 'BUFF' then
+										mesaDoPersonagem.chat:enviarMensagem("[§K3,15]ERA UM BUFF ESSA HABILIDADE,[§K4,0] O Player mantem a ação");	
+									else 	
+									end;
+								end;
+							else
+								sheet.DanoHabilidadeSimulada = 0
+								showMessage("[§K3,0] TUA HABILIDADE NÃO TEM TIPO NÃO O FILHA DA PUTA ? ELA É DIFERENTONA ? ESCOLHE O TIPO DA HABILIDADE");
+							end;
+						end);			
+				end;               
+	</script>

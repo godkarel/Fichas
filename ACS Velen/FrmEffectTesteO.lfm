@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<popupForm	 name="FrmEffectTesteO" scale="0.9" width="650" height="350" >		
+	 
+					
+		<layout align="top" height="30" margins="{bottom=4}">
+			<button text="Criar Novo Effeito OPONENTE" visible="true" width="150" height="30" align="top">
+				<event name="onClick">
+					-- Usuário clicou no botão de criar novo item.
+					-- Vamos inserir um novo item no nosso recordList                              
+					self.rclBuffsO:append();
+				</event>
+			</button>
+		</layout>
+			<recordList name="rclBuffsO" field="listaBuffsO" templateForm="frmBuffO" top="40" width="725" height="50" layout="horizontal" selectable="true">
+                       
+			<event name="onSelect">
+				local node = self.rclBuffsO.selectedNode;  
+				self.dscBuffSlotO.node = node;                       
+				self.dscBuffSlotO.visible = (node ~= nil);
+				RclSelecionadoBuffO = sheet.listaBuffsO
+
+				if self.dscBuffSlotO.visible == true then
+					if self.dscBuffSlotO.node.NomeEfeitoO == nil and self.dscBuffSlotO.node.NomeEfeitoO == "" then
+						self.dscBuffSlotO.node.NomeEfeitoO = "EFEITO";
+					end;
+					self.dscBuffSlotO.node.PAEffect = tonumber(self.dscBuffSlotO.node.PAEffect) or 0;
+					self.dscBuffSlotO.node.PMEffect = tonumber(self.dscBuffSlotO.node.PMEffect) or 0;
+					self.dscBuffSlotO.node.PFEffect = tonumber(self.dscBuffSlotO.node.PFEffect) or 0;
+					self.dscBuffSlotO.node.DEFEffect = tonumber(self.dscBuffSlotO.node.DEFEffect) or 0;
+					self.dscBuffSlotO.node.RESEffect = tonumber(self.dscBuffSlotO.node.RESEffect) or 0;
+					self.dscBuffSlotO.node.ACEffect = tonumber(self.dscBuffSlotO.node.ACEffect) or 0;
+					self.dscBuffSlotO.node.ACMEffect = tonumber(self.dscBuffSlotO.node.ACMEffect) or 0;
+					self.dscBuffSlotO.node.CREffect = tonumber(self.dscBuffSlotO.node.CREffect) or 0;
+					self.dscBuffSlotO.node.CRMEffect = tonumber(self.dscBuffSlotO.node.CRMEffect) or 0;
+					self.dscBuffSlotO.node.DadoEffect = tonumber(self.dscBuffSlotO.node.DadoEffect) or 0;
+					self.dscBuffSlotO.node.ESQEffect = tonumber(self.dscBuffSlotO.node.ESQEffect) or 0;
+					self.dscBuffSlotO.node.PersEffect = tonumber(self.dscBuffSlotO.node.PersEffect) or 0;
+					self.dscBuffSlotO.node.VezEffect = tonumber(self.dscBuffSlotO.node.VezEffect) or 0;
+					self.dscBuffSlotO.node.DanoEffect = tonumber(self.dscBuffSlotO.node.DanoEffect) or 0;
+					
+					self.dscBuffSlotO.node.CDEffect = tonumber(self.dscBuffSlotO.node.CDEffect) or 0;
+					self.dscBuffSlotO.node.DuraEffect = tonumber(self.dscBuffSlotO.node.DuraEffect) or 9000;
+					self.dscBuffSlotO.node.ContaEffect = tonumber(self.dscBuffSlotO.node.ContaEffect) or 0;
+					self.dscBuffSlotO.node.TipoEffect = tonumber(self.dscBuffSlotO.node.TipoEffect) or 0;
+					self.dscBuffSlotO.node.HPTotalEffect = tonumber(self.dscBuffSlotO.node.HPTotalEffect) or 0;
+					self.dscBuffSlotO.node.MPTotalEffect = tonumber(self.dscBuffSlotO.node.MPTotalEffect) or 0;
+
+					self.dscBuffSlotO.node.DanoEffect = tonumber(self.dscBuffSlotO.node.DanoEffect) or 0;
+					self.dscBuffSlotO.node.CustoEffect = tonumber(self.dscBuffSlotO.node.CustoEffect) or 0;
+					self.dscBuffSlotO.node.CuraEffect = tonumber(self.dscBuffSlotO.node.CuraEffect) or 0;
+					self.dscBuffSlotO.node.RegMPEffect = tonumber(self.dscBuffSlotO.node.RegMPEffect) or 0;
+
+					if self.dscBuffSlotO.node.ExpiraEffect == nil or self.dscBuffSlotO.node.ExpiraEffect == "" then
+						self.dscBuffSlotO.node.ExpiraEffect = 9999
+					end;
+
+					
+				end;
+
+
+			</event>
+		</recordList>  
+
+
+				<dataScopeBox name="dscBuffSlotO" visible="false" top="100" width="725" height="300"
+						margins="{left=4, right=4, top=2}">
+					<!-- Faça um layout "bonito" para sua caixa de detalhes =). Utilize a propriedade "field" nas tags aqui dentro   -->      
+
+							<rectangle align="client" color="black" xradius="10" yradius="10"
+									padding="{top=3, left=3, right=3, bottom=3}">       
+
+									<layout align="top" height="30" margins="{bottom=4}">
+											<label align="left" text="Efeito" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="160" margins="{left=15, right=-10}" field="NomeEfeitoO"/>	
+											<label align="left" text="Dano" fontColor="red" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="DanoEffect"/>
+											<label align="left" text="Custo" fontColor="#00FFFF" width="65" margins="{left=15, right=-10}"/>
+											<edit  align="left" width="50" fontColor="#00FFFF" field="CustoEffect"/>
+											<label align="left" text="Cura" fontColor="yellow" width="50" margins="{left=5, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="CuraEffect"/>
+											<label align="left" text="RegMP" fontColor="#0000FF" width="65" margins="{left=15, right=-10}"/>
+											<edit  align="left" width="50" fontColor="#0000FF" field="RegMPEffect"/>
+															
+									</layout>                            
+
+									<layout align="top" height="30" margins="{bottom=4}">
+											<label align="left" text="PA" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="PAEffect"/>
+											<label align="left" text="PM" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="PMEffect"/>
+											<label align="left" text="PF" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="PFEffect"/>
+											<label align="left" text="DEF" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="DEFEffect"/>
+											<label align="left" text="RES" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="RESEffect"/>
+									</layout>                       
+
+									<layout align="top" height="30" margins="{bottom=4}">              
+											<label align="left" text="AC" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="ACEffect"/>
+											<label align="left" text="ACM" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="ACMEffect"/>
+											<label align="left" text="CR" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="CREffect"/>
+											<label align="left" text="CRM" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="CRMEffect"/>
+											<label align="left" text="Proc" fontColor="#FF1493" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" fontColor="#FF1493" margins="{left=15, right=-10}" type="number" field="DadoEffect"/>
+											
+									</layout>
+
+									<layout align="top" height="30" margins="{bottom=4}">              
+											<label align="left" text="ESQ" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="ESQEffect"/>
+											<label align="left" text="Pers" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="PersEffect"/>
+											<label align="left" text="VEZ" fontColor="green" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" fontColor="green" margins="{left=15, right=-10}" type="number" field="VezEffect"/>  
+											<label align="left" text="HP Total" fontColor="red" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="HPTotalEffect"/>
+											<label align="left" text="MP Total" fontColor="blue" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" fontColor="blue" margins="{left=15, right=-10}" type="number" field="MPTotalEffect"/>                                
+				
+									</layout>
+
+									<layout align="top" height="30" margins="{bottom=4}">              
+											<label align="left" text="CD" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="CDEffect"/>
+											<label align="left" text="Duração" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="DuraEffect"/>
+											<label align="left" text="Conta" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="ContaEffect"/> 
+											<label align="left" text="Tipo" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="TipoEffect"/> 
+											<label align="left" text="Expira" width="50" margins="{left=15, right=-10}"/>
+											<edit align="left" width="50" margins="{left=15, right=-10}" type="number" field="ExpiraEffect"/> 
+											<button align="right" fontColor="red" text="Apagar!" 
+											margins="{left=4, right=4, top=2, bottom=2}" width="150">
+											<event name="onClick">
+
+												sheet.PATotal = tonumber(sheet.PAEffectTotal or 0) + tonumber(sheet.PA or 0)
+												sheet.PMTotal = tonumber(sheet.PMEffectTotal or 0) + tonumber(sheet.PM or 0)
+												if sheet.PF ~= "NPC" then
+													sheet.PFTotal = (tonumber(sheet.PFEffectTotal or 0) + tonumber(sheet.PF or 0) or 0)
+												else 
+													sheet.PFTotal = 0
+												end;
+												sheet.DEFTotal = tonumber(sheet.DEFEffectTotal or 0) + tonumber(sheet.DEF or 0)
+												sheet.RESTotal = tonumber(sheet.RESEffectTotal or 0) + tonumber(sheet.RES or 0)
+												sheet.ACTotal = tonumber(sheet.ACEffectTotal or 0) + tonumber(sheet.AC or 0)
+												sheet.ACMTotal = tonumber(sheet.ACMEffectTotal or 0) + tonumber(sheet.ACM or 0)
+												sheet.CRTotal = tonumber(sheet.CREffectTotal or 0) + tonumber(sheet.CR or 0)
+												sheet.CRMTotal = tonumber(sheet.CRMEffectTotal or 0) + tonumber(sheet.CRM or 0)
+												sheet.DadoTotal = tonumber(sheet.DadoEffectTotal or 0) + tonumber(sheet.Dado or 0)
+												sheet.ESQTotal = tonumber(sheet.ESQEffectTotal or 0) + tonumber(sheet.ESQ or 0)
+												sheet.PersTotal = tonumber(sheet.PersEffectTotal or 0) + tonumber(sheet.Pers or 0)
+												sheet.ManaTotal = tonumber(sheet.ManaEffectTotal or 0) + tonumber(sheet.Mana or 0)
+												sheet.CDTotal = tonumber(sheet.CDEffectTotal or 0) + tonumber(sheet.CD or 0)
+												sheet.TipoTotal = tonumber(sheet.TipoEffectTotal or 0) + tonumber(sheet.Tipo or 0)
+												sheet.HPTotalTotal = tonumber(sheet.HPTotalEffectTotal or 0) + tonumber(sheet.HPTotal or 0)
+												sheet.MPTotalTotal = tonumber(sheet.MPTotalEffectTotal or 0) + tonumber(sheet.MPTotal or 0)
+												sheet.DanoEffectTotal = tonumber(sheet.DanoEffectTotal or 0) + tonumber(sheet.DanoEffect or 0)
+												sheet.CustoEffectTotal = tonumber(sheet.CustoEffectTotal or 0) + tonumber(sheet.CustoEffect or 0)
+												sheet.CuraEffectTotal = tonumber(sheet.CuraEffectTotal or 0) + tonumber(sheet.CuraEffect or 0)												
+												sheet.RegMPEffectTotal = tonumber(sheet.RegMPEffectTotal or 0) + tonumber(sheet.RegMPEffect or 0)
+												ndb.deleteNode(self.dscBuffSlotO.node);
+											</event>
+											</button>   	
+
+									</layout>
+
+									<layout align="client" margins="{top=5, left=5 , bottom=4}">
+											<textEditor align="top" field="DescriBuff" height="100"/>
+									</layout> 
+							</rectangle>
+						</dataScopeBox>     
+</popupForm>

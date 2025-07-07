@@ -130,12 +130,61 @@ local function constructNew_frmItemJogador()
     obj.button1:setWidth(80);
     obj.button1:setName("button1");
 
+    obj.dataLink1 = GUI.fromHandle(_obj_newObject("dataLink"));
+    obj.dataLink1:setParent(obj);
+    obj.dataLink1:setFields({'PAEffectTotal', 'PMEffectTotal', 'PFEffectTotal', 'DEFEffectTotal', 'RESEffectTotal', 
+                   'ACEffectTotal', 'ACMEffectTotal', 'CREffectTotal', 'CRMEffectTotal', 'DadoEffectTotal', 
+                   'ESQEffectTotal', 'PersEffectTotal', 'VezEffectTotal', 'ManaEffectTotal', 'CDEffectTotal', 
+                   'DuraEffectTotal', 'ContaEffectTotal', 'TipoEffectTotal', 'ExpiraEffectTotal', 
+                   'DanoEffectTotal', 'HPTotalEffectTotal', 'MPTotalEffectTotal'});
+    obj.dataLink1:setName("dataLink1");
+
+    obj.dataLink2 = GUI.fromHandle(_obj_newObject("dataLink"));
+    obj.dataLink2:setParent(obj);
+    obj.dataLink2:setField("Vez");
+    obj.dataLink2:setName("dataLink2");
+
     obj._e_event0 = obj.button1:addEventListener("onClick",
         function (event)
             NDB.deleteNode(sheet);
         end);
 
+    obj._e_event1 = obj.dataLink1:addEventListener("onChange",
+        function (field, oldValue, newValue)
+            sheet.PATotal = tonumber(sheet.PAEffectTotal or 0) + tonumber(sheet.PA or 0)
+            					sheet.PMTotal = tonumber(sheet.PMEffectTotal or 0) + tonumber(sheet.PM or 0)
+            					sheet.PFTotal = tonumber(sheet.PFEffectTotal or 0) + tonumber(sheet.PF or 0)
+            					sheet.DEFTotal = tonumber(sheet.DEFEffectTotal or 0) + tonumber(sheet.DEF or 0)
+            					sheet.RESTotal = tonumber(sheet.RESEffectTotal or 0) + tonumber(sheet.RES or 0)
+            					sheet.ACTotal = tonumber(sheet.ACEffectTotal or 0) + tonumber(sheet.AC or 0)
+            					sheet.ACMTotal = tonumber(sheet.ACMEffectTotal or 0) + tonumber(sheet.ACM or 0)
+            					sheet.CRTotal = tonumber(sheet.CREffectTotal or 0) + tonumber(sheet.CR or 0)
+            					sheet.CRMTotal = tonumber(sheet.CRMEffectTotal or 0) + tonumber(sheet.CRM or 0)
+            					sheet.DadoTotal = tonumber(sheet.DadoEffectTotal or 0) + tonumber(sheet.Dado or 0)
+            					sheet.ESQTotal = tonumber(sheet.ESQEffectTotal or 0) + tonumber(sheet.ESQ or 0)
+            					sheet.PersTotal = tonumber(sheet.PersEffectTotal or 0) + tonumber(sheet.Pers or 0)
+            
+            					sheet.CDTotal = tonumber(sheet.CDEffectTotal or 0) + tonumber(sheet.CD or 0)
+            					sheet.TipoTotal = tonumber(sheet.TipoEffectTotal or 0) + tonumber(sheet.Tipo or 0)
+            					sheet.HPTotalTotal = tonumber(sheet.HPTotalEffectTotal or 0) + tonumber(sheet.HPTotal or 0)
+            					sheet.MPTotalTotal = tonumber(sheet.MPTotalEffectTotal or 0) + tonumber(sheet.MPTotal or 0)
+        end);
+
+    obj._e_event2 = obj.dataLink2:addEventListener("onChange",
+        function (field, oldValue, newValue)
+            if SelfFichPrincipalASC and SelfFichPrincipalASC.rclGrupoJogadores then
+            					-- Força a reordenação do RecordList
+            					local nodes = ndb.getChildNodes(SelfFichPrincipalASC.rclGrupoJogadores.node or {})
+            					SelfFichPrincipalASC.rclGrupoJogadores:sort()
+            					-- Alternativa mais direta (pode funcionar melhor em algumas versões)
+            					SelfFichPrincipalASC.rclGrupoJogadores.node = SelfFichPrincipalASC.rclGrupoJogadores.node
+            					sheet.NomeDoPersonagemVez = sheet.Vez .. " - " ..  sheet.NomeDoPersonagem
+            				end
+        end);
+
     function obj:_releaseEvents()
+        __o_rrpgObjs.removeEventListenerById(self._e_event2);
+        __o_rrpgObjs.removeEventListenerById(self._e_event1);
         __o_rrpgObjs.removeEventListenerById(self._e_event0);
     end;
 
@@ -148,8 +197,10 @@ local function constructNew_frmItemJogador()
           self:setNodeDatabase(nil);
         end;
 
+        if self.dataLink2 ~= nil then self.dataLink2:destroy(); self.dataLink2 = nil; end;
         if self.progressBar1 ~= nil then self.progressBar1:destroy(); self.progressBar1 = nil; end;
         if self.label2 ~= nil then self.label2:destroy(); self.label2 = nil; end;
+        if self.dataLink1 ~= nil then self.dataLink1:destroy(); self.dataLink1 = nil; end;
         if self.label6 ~= nil then self.label6:destroy(); self.label6 = nil; end;
         if self.label1 ~= nil then self.label1:destroy(); self.label1 = nil; end;
         if self.label8 ~= nil then self.label8:destroy(); self.label8 = nil; end;

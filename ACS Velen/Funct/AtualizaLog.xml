@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	
+	<script>		
+		function atualizarLog()
+			-- Obtém o texto atual do log
+			local logAtual = sheet.FieldLogCombat or ""
+
+			-- Obtém a hora atual no formato HH:MM:SS
+			local horaAtual = os.date("%H:%M:%S")
+
+			-- Nova entrada formatada com a hora e duas quebras de linha
+			local novaEntrada = "[" .. horaAtual .. "] " ..
+								(sheet.VezdeQuem or "Alguém") .. " causou " .. 
+								(sheet.DanoProLog or "0") .. " no alvo " .. 
+								(sheet.AlvoRecebido or "Desconhecido") .. "\n\n"
+
+			-- Adiciona a nova entrada no INÍCIO do log
+			sheet.FieldLogCombat = novaEntrada .. logAtual
+
+		end
+
+		function atualizarLogCritical()
+			-- Obtém o texto atual do log
+			local logAtual = sheet.FieldLogCombat or ""
+
+			-- Obtém a hora atual no formato HH:MM:SS
+			local horaAtual = os.date("%H:%M:%S")
+
+			-- Nova entrada formatada com a hora e duas quebras de linha
+			local novaEntrada = "[" .. horaAtual .. "] " .. "⚡⚡CRITICAL⚡⚡ " ..
+								(sheet.VezdeQuem or "Alguém") .. " causou " .. 
+								(sheet.DanoProLog or "0") .. " no alvo " .. 
+								(sheet.AlvoRecebido or "Desconhecido") .. "\n\n"
+			-- Adiciona a nova entrada no INÍCIO do log
+			sheet.FieldLogCombat = novaEntrada .. logAtual
+
+		end
+
+		function ResetaLog()
+			Dialogs.confirmYesNo("Deseja realmente resetar o log?", function(confirmado)
+				if confirmado then
+					sheet.FieldLogCombat = nil					
+				end
+			end)
+		end
+	</script>

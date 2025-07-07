@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	
+	<script>		
+		function VerificaAlvo(Usuario, Jogador, Oponente)
+			local nodes = ndb.getChildNodes(Jogador)
+
+			function trim(s)
+				return (s:gsub("^%s*(.-)%s*$", "%1"))
+			end
+
+			function limparNome(s)
+				return s:match("%d+%s*%-%s*(.+)") or s
+			end
+
+			local usuarioLimpo = limparNome(trim(Usuario))
+
+			if #nodes > 0 then
+				for i, node in ipairs(nodes) do
+					local nomeLimpo = limparNome(trim(node.NomeDoPersonagem))
+
+					if nomeLimpo == usuarioLimpo then
+						return node
+					end
+				end
+			end
+
+			nodes = ndb.getChildNodes(Oponente)
+
+			if #nodes > 0 then
+				for i, node in ipairs(nodes) do
+					local nomeLimpo = limparNome(trim(node.NomeDoOponente))
+
+					if nomeLimpo == usuarioLimpo then
+						return node
+					end
+				end
+			end
+		end
+
+	</script>

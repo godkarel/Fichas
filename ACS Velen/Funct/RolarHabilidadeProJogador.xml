@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	
+	<script>
+    function DecideOqueRolar(UsuarioEnvio, AlvoEnviou, TipoDeEnvio, UsuarioEnvioCusto, BoxDetalheJogadores, BoxDetalheOponentes, depoisDoResultado)
+        local mesaDoPersonagem = Firecast.getRoomOf(sheet)
+        if sheet.TesteDecidido == "AtaqueBasico" then
+            UsuarioEnvio.ACEffectTotal = tonumber(UsuarioEnvio.ACEffectTotal or 0)
+            UsuarioEnvio.AC = tonumber(UsuarioEnvio.AC or 0)
+            UsuarioEnvio.CREffectTotal = tonumber(UsuarioEnvio.CREffectTotal or 0)
+            UsuarioEnvio.CR = tonumber(UsuarioEnvio.CR or 0)
+
+            local TestedeExecucao = UsuarioEnvio.ACEffectTotal + UsuarioEnvio.AC
+            local TestedeCR = UsuarioEnvio.CREffectTotal + UsuarioEnvio.CR
+            sheet.AcertouPergunta = nil -- zera antes do teste
+
+            mesaDoPersonagem.chat:rolarDados("1d20 + " .. TestedeExecucao, "Ataquinho Basiquinho",
+                function (rolado)
+                    -- controlador de critical para ataque basico --
+                    local SoDadoAtaqueBasico = tonumber(rolado.resultado - TestedeExecucao)
+                    if SoDadoAtaqueBasico >= TestedeCR then 
+                        sheet.DanoRecebido = tonumber(sheet.DanoRecebido * 2) or 0
+                        sheet.FoiCriticalLog = true;
+                    else
+                        sheet.FoiCriticalLog = false;
+                    end
+
+                    -- valida o acerto contra esquiva --
+                    if rolado.resultado > AlvoEnviou.ESQ then                         
+                        sheet.AcertouPergunta = "True"
+                        CustoDeManaJogador(UsuarioEnvio, UsuarioEnvioCusto, BoxDetalheJogadores, BoxDetalheOponentes)
+                    else
+                        sheet.AcertouPergunta = "False"
+                        mesaDoPersonagem.chat:enviarMensagem("Errou o Ataque no Alvo - " .. rolado.resultado)
+                        
+                    end
+
+                    if depoisDoResultado then
+                        depoisDoResultado()
+                    end
+                end)
+        else
+            -- Magia
+            UsuarioEnvio.ACMEffectTotal = UsuarioEnvio.ACMEffectTotal or 0
+            UsuarioEnvio.ACM = UsuarioEnvio.ACM or 0
+            UsuarioEnvio.CRMEffectTotal = tonumber(UsuarioEnvio.CRMEffectTotal or 0)
+            UsuarioEnvio.CRM = tonumber(UsuarioEnvio.CRM or 0)
+
+            local TestedeExecucaoM = UsuarioEnvio.ACMEffectTotal + UsuarioEnvio.ACM
+            local AcertoMagico = TestedeExecucaoM or 20
+            local TestedeCRM = UsuarioEnvio.CRMEffectTotal + UsuarioEnvio.CRM
+
+            sheet.AcertouPergunta = nil
+
+            mesaDoPersonagem.chat:rolarDados("1d20", "Execucao de Habilidade",
+                function (rolado)
+                    -- controlador de critical para ataque basico --
+                    if TestedeCRM >= rolado.resultado then 
+                        sheet.DanoRecebido = tonumber(sheet.DanoRecebido * 2) or 0
+                        sheet.FoiCriticalLog = true;
+                    else
+                        sheet.FoiCriticalLog = false;
+                    end
+
+                    if AcertoMagico >= rolado.resultado then                        
+                        sheet.AcertouPergunta = "True"
+                        CustoDeManaJogador(UsuarioEnvio, UsuarioEnvioCusto, BoxDetalheJogadores, BoxDetalheOponentes)
+                    else
+                        sheet.AcertouPergunta = "False"
+                        mesaDoPersonagem.chat:enviarMensagem("Falha ao conjurar - " .. rolado.resultado)
+                        
+                    end
+
+                    if depoisDoResultado then
+                        depoisDoResultado()
+                    end
+                end)
+        end
+    end
+</script>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	
+	<script>		
+		function CustoDeManaJogador(Usuario, Custo, BoxDetalheJogadores, BoxDetalheOponentes)
+			
+
+			local nodes = ndb.getChildNodes(sheet.NomeOponentes) -- Substitua pelo campo correto
+			
+			for _, node in ipairs(nodes) do
+				if node.NomeDoOponenteVez == Usuario.NomeDoOponenteVez then
+					
+					self.rclGrupoOponentes.selectedNode = node
+					break
+				end
+			end
+
+
+			local nodes = ndb.getChildNodes(sheet.NomeJogador) -- Substitua pelo campo correto
+
+			for _, node in ipairs(nodes) do
+				if node.NomeDoPersonagemVez == Usuario.NomeDoPersonagemVez then
+					
+					self.rclGrupoJogadores.selectedNode = node
+					break
+				end
+			end
+
+			if sheet.GrupoRecebido == "2" then
+				local nodes = ndb.getChildNodes(sheet.NomeOponentes)
+				for _, node in ipairs(nodes) do
+					if node.NomeDoOponenteVez == UsuarioEnvio.NomeDoOponenteVez then						
+
+						if BoxDetalheOponentes.visible == true then
+							local mesas = rrpg.getRooms()
+							local bibliotecaAtual = mesas[1].library
+							local node = self.rclGrupoOponentes.selectedNode   
+							self.rclGrupoOponentes.node = node
+
+							-- Função para remover espaços antes e depois do nome
+							local function trim(str)
+								return (str or ""):gsub("^%s*(.-)%s*$", "%1")
+							end
+
+							local function obterNomesRecursivoI(bibItem)
+								local itensFilhos = bibItem.children
+								local nomes = bibItem.name			
+
+								for i = 1, #itensFilhos do
+									local bibItemFilho = itensFilhos[i]
+									local nomesDoFilho = obterNomesRecursivoI(bibItemFilho) or ""			
+
+									if trim(nomesDoFilho):lower() == trim(node.NomeDoOponente):lower() then
+										local idPersonagem = bibItemFilho
+										local promise = bibItemFilho:asyncOpenNDB()
+										local nodeExterno = await(promise)
+
+										node.MPBarO = tonumber(math.floor((node.MPBarO or 0) - (tonumber(Custo) or 0)))
+										nodeExterno.MPAtual = tonumber(node.MPBarO or 0)
+										return nomes
+									end
+								end
+
+								return nomes
+							end
+
+							local nomesDeTodosOsItens = obterNomesRecursivoI(bibliotecaAtual)
+						end
+					end
+				end
+			end
+
+
+
+			if sheet.GrupoRecebido == "1" then
+				local nodes = ndb.getChildNodes(sheet.NomeJogador)
+				for _, node in ipairs(nodes) do
+
+					if node.NomeDoPersonagemVez == UsuarioEnvio.NomeDoPersonagemVez then
+
+						if BoxDetalheJogadores.visible == true then							
+							local node = self.rclGrupoJogadores.selectedNode
+							self.rclGrupoJogadores.node = node
+
+							local mesas = rrpg.getRooms();
+							local bibliotecaAtual = mesas[1].library;
+
+							local function trim(str)
+								return (str or ""):gsub("^%s*(.-)%s*$", "%1")
+							end
+
+							local function obterNomesRecursivoP(bibItem)
+								local itensFilhos = bibItem.children
+								local nomes = bibItem.name
+
+								for i = 1, #itensFilhos do
+									local bibItemFilho = itensFilhos[i]
+									local nomesDoFilho = obterNomesRecursivoP(bibItemFilho) or ""
+
+									if trim(nomesDoFilho):lower() == trim(node.NomeDoPersonagem):lower() then
+
+										local idPersonagem = bibItemFilho
+										local promise = bibItemFilho:asyncOpenNDB()
+										local nodeExterno = await(promise)
+										
+										node.MPBar = tonumber(math.floor((node.MPBar or 0) - (tonumber(Custo) or 0)))
+										nodeExterno.MPAtual = tonumber(node.MPBar or 0)
+										return nomes
+									end
+								end
+
+								return nomes
+							end
+
+							local nomesDeTodosOsItens = obterNomesRecursivoP(bibliotecaAtual)
+						end
+					end
+				end
+			end
+
+			local nodes = ndb.getChildNodes(sheet.NomeOponentes) -- Substitua pelo campo correto
+			
+			for _, node in ipairs(nodes) do
+				if node.NomeDoOponenteVez == Usuario.NomeDoOponenteVez then
+					
+					self.rclGrupoOponentes.selectedNode = node
+					break
+				end
+			end
+
+
+			local nodes = ndb.getChildNodes(sheet.NomeJogador) -- Substitua pelo campo correto
+
+			for _, node in ipairs(nodes) do
+				if node.NomeDoPersonagemVez == Usuario.NomeDoPersonagemVez then
+					
+					self.rclGrupoJogadores.selectedNode = node
+					break
+				end
+			end
+
+
+		end
+
+
+	</script>

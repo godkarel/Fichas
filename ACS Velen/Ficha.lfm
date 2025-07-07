@@ -4,11 +4,58 @@
 	  <event name="onNodeReady">		
 		sheet.ACAOTURNO = (tonumber(sheet.ACAOTURNO) or 0); 
 		sheet.EditarStatus = sheet.EditarStatus or false
+		sheet.AlvoRecebido = nil
+		sheet.VezdeQuem = nil
+
+		local personagem = rrpg.getPersonagemDe(sheet);                                
+		
+		if (personagem ~= nil) then
+			local mesa = personagem.mesa;
+
+			if not mesa.meuJogador.isMestre then  
+			    self.rclGrupoJogadores.opacity = 0.0
+				self.rclGrupoOponentes.opacity = 0.0
+				self.BoxDetalheJogadores.opacity = 0.0
+				self.BoxDetalheOponentes.opacity = 0.0
+				self.LogCombat.opacity = 0.0
+				self.btnResetLog.opacity = 0.0
+			end;
+
+			if (mesa.meuJogador.id) == 51345 then
+				self.rclGrupoJogadores.opacity = 1.0
+				self.rclGrupoOponentes.opacity = 1.0
+				self.BoxDetalheJogadores.opacity = 1.0
+				self.BoxDetalheOponentes.opacity = 1.0
+				self.LogCombat.opacity = 1.0
+				self.btnResetLog.opacity = 1.0
+			end
+		end; 
+
+		ASCPrincipal = sheet     
+		SelfFichPrincipalASC = self
+		sheet.UsuarioEnvio = nil
+		sheet.AcertouPergunta = nil
+
 	</event>
 	 
 	<import file="Funct/ProximaAcao.xml"/>
 	<import file="Funct/ProximaVez.xml"/>
 	<import file="Funct/ProximoTurno.xml"/>
+	<import file="Funct/AtualizaLog.xml"/>
+	<import file="Funct/VerificaDanoEmAreaGPUm.xml"/>
+	<import file="Funct/VerificaDanoEmAreaGPDois.xml"/>
+	<import file="Funct/VerificaCuraEmAreaGPUm.xml"/>
+	<import file="Funct/VerificaCuraEmAreaGPDois.xml"/>
+	<import file="Funct/ControladorDuracaoEfeito.xml"/>
+	<import file="Funct/QuemEnviou.xml"/>
+	<import file="Funct/VerificaAlvo.xml"/>
+	<import file="Funct/RolarHabilidadeProJogador.xml"/>
+	<import file="Funct/CustoDeManaJogador.xml"/>
+	<import file="Funct/SincronizaJogadorTurno.xml"/>
+	<import file="Funct/SincronizaOponenteTurno.xml"/>
+	<import file="Funct/SincronizaUmJogadorPorVez.xml"/>
+	<import file="Funct/SincronizaUmOponentePorVez.xml"/>
+	<import file="Funct/HabilidadeCura.xml"/>
 	 
 	--- recordlist do jogador ---
 	<button top="10" left="10" text="Adicionar Jogador" width="150" height="30">
@@ -21,6 +68,7 @@
 		<event name="onClick">				                          
 			-- Chama a função para criar e incrementar a lista
 			criarEIncrementarLista()
+			criarEIncrementarListaVez();
 			showMessage(sheet.PersonagensEmCombate)
 
 		</event>
@@ -44,11 +92,18 @@
 	<recordList top="40" left="10" width="600" height="300" name="rclGrupoJogadores"  field="NomeJogador" templateForm="frmItemJogador"
 				selectable="true">                              
 		<event name="onSelect">
+			if sheet ~= nil then
+				ASCPrincipal = sheet
+				SelfFichPrincipalASC = self
+				RclSelecionadoDaVez = self.rclGrupoJogadores.selectedNode
+				RclSelecionado = sheet.NomeEfeito
+				
+			end;
 			local node = self.rclGrupoJogadores.selectedNode; 
 			
 			self.BoxDetalheJogadores.node = node;
 
-			self.rclGrupoJogadores:sort();
+			
 			
 			self.BoxDetalheJogadores.visible = (node ~= nil);
 
@@ -56,7 +111,7 @@
 				local node = self.rclGrupoJogadores.selectedNode;   
 				self.rclGrupoJogadores.node = node;
 
-				if node.NomeDoPersonagemVez ~= nil or node.NomeDoPersonagemVez ~= "" then
+				if node.NomeDoPersonagemVez ~= nil and node.NomeDoPersonagemVez ~= "" then
 				
 					local mesas = rrpg.getRooms();
 					local bibliotecaAtual = mesas[1].library;
@@ -82,51 +137,51 @@
 								-- Acessa o valor da força do personagem
 
 								if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
-									node.PA = nodeExterno.PA or '0';
-									node.PM = nodeExterno.PM or '0';
-									node.PF = nodeExterno.PF or '0';
-									node.DEF = nodeExterno.DEFRED or '0';
-									node.RES = nodeExterno.RESRED or '0';
-									node.AC = nodeExterno.Acerto or '0';
-									node.ACM = nodeExterno.AcertoMagico or '0';
-									node.CR = nodeExterno.Critical or '0';
-									node.CRM = nodeExterno.CMagico or '0';
-									node.ESQ = nodeExterno.Esquiva or '0';
-									node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+									node.PA = tonumber(nodeExterno.PA) or '0';
+									node.PM = tonumber(nodeExterno.PM) or '0';
+									node.PF = tonumber(nodeExterno.PF) or '0';
+									node.DEF = tonumber(nodeExterno.DEFRED) or '0';
+									node.RES = tonumber(nodeExterno.RESRED) or '0';
+									node.AC = tonumber(nodeExterno.Acerto) or '0';
+									node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+									node.CR = tonumber(nodeExterno.Critical or '0');
+									node.CRM = tonumber(nodeExterno.CMagico or '0');
+									node.ESQ = tonumber(nodeExterno.Esquiva or '0');
+									node.Pers = tonumber(math.floor(nodeExterno.Persistencia) or '0');
 									node.Vez = node.Vez or '0';
-									node.Atletismo = nodeExterno.TAtletismo or '0';
-									node.Sabedoria = nodeExterno.TSabedoria or '0';
-									node.Percepcao = nodeExterno.TPercepcao or '0';
-									node.Acrobacia = nodeExterno.TAcrobacia or '0';
-									node.Vigor = nodeExterno.TVigor or '0';
-									node.HPBarMax = nodeExterno.HPTotal or '0';
-									node.MPBarMax = nodeExterno.MPTotal or '0';
-									node.HPBar = nodeExterno.HPAtual or '0';
-									node.MPBar = nodeExterno.MPAtual or '0';
+									node.Atletismo = tonumber(nodeExterno.TAtletismo) or '0';
+									node.Sabedoria = tonumber(nodeExterno.TSabedoria) or '0';
+									node.Percepcao = tonumber(nodeExterno.TPercepcao) or '0';
+									node.Acrobacia = tonumber(nodeExterno.TAcrobacia) or '0';
+									node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+									node.HPBarMax = tonumber(nodeExterno.HPTotal) or '0';
+									node.MPBarMax = tonumber(nodeExterno.MPTotal) or '0';
+									node.HPBar = tonumber(nodeExterno.HPAtual) or '0';
+									node.MPBar = tonumber(nodeExterno.MPAtual) or '0';
 									node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoPersonagem
 									node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
 								else
-									node.PA = nodeExterno.Dano or '0';
-									node.PM = nodeExterno.DanoMagico or '0';
+									node.PA = tonumber(nodeExterno.Dano) or '0';
+									node.PM = tonumber(nodeExterno.DanoMagico) or '0';
 									node.PF = "NPC";
-									node.DEF = nodeExterno.DefesaPorCent or '0';
-									node.RES = nodeExterno.ResistenciaPorCent or '0';
-									node.AC = nodeExterno.Acerto or '0';
-									node.ACM = nodeExterno.AcertoMagico or '0';
-									node.CR = nodeExterno.Critical or '0';
-									node.CRM = nodeExterno.CriticalMagico or '0';
-									node.ESQ = nodeExterno.Esquiva or '0';
-									node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+									node.DEF = tonumber(nodeExterno.DefesaPorCent) or '0';
+									node.RES = tonumber(nodeExterno.ResistenciaPorCent) or '0';
+									node.AC = tonumber(nodeExterno.Acerto) or '0';
+									node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+									node.CR = tonumber(nodeExterno.Critical) or '0';
+									node.CRM = tonumber(nodeExterno.CriticalMagico) or '0';
+									node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+									node.Pers = tonumber(math.floor(nodeExterno.Persistencia) or '0');
 									node.Vez = node.Vez or '0';
-									node.Atletismo = nodeExterno.Atletismo or '0';
-									node.Sabedoria = nodeExterno.Sabedoria or '0';
-									node.Percepcao = nodeExterno.Percepcao or '0';
-									node.Acrobacia = nodeExterno.Acrobacia or '0';
-									node.Vigor = nodeExterno.TVigor or '0';
-									node.HPBarMax = nodeExterno.HPTotal or '0';
-									node.MPBarMax = nodeExterno.MPTotal or '0';
-									node.HPBar = nodeExterno.HPAtual or '0';
-									node.MPBar = nodeExterno.MPAtual or '0';
+									node.Atletismo = tonumber(nodeExterno.Atletismo) or '0';
+									node.Sabedoria = tonumber(nodeExterno.Sabedoria) or '0';
+									node.Percepcao = tonumber(nodeExterno.Percepcao) or '0';
+									node.Acrobacia = tonumber(nodeExterno.Acrobacia) or '0';
+									node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+									node.HPBarMax = tonumber(nodeExterno.HPTotal) or '0';
+									node.MPBarMax = tonumber(nodeExterno.MPTotal) or '0';
+									node.HPBar = tonumber(nodeExterno.HPAtual) or '0';
+									node.MPBar = tonumber(nodeExterno.MPAtual) or '0';
 									node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
 									node.imagemDoPersonagem = nodeExterno.imgInimigo
 								end;
@@ -140,6 +195,8 @@
 				end;
 								
 			end;	
+
+			self.rclGrupoJogadores:sort();
 
 		</event>
 		
@@ -189,53 +246,89 @@
 											-- Acessa o valor da força do personagem
 
 											if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
-												node.PA = nodeExterno.PA or '0';
-												node.PM = nodeExterno.PM or '0';
-												node.PF = nodeExterno.PF or '0';
-												node.DEF = nodeExterno.DEFRED or '0';
-												node.RES = nodeExterno.RESRED or '0';
-												node.AC = nodeExterno.Acerto or '0';
-												node.ACM = nodeExterno.AcertoMagico or '0';
-												node.CR = nodeExterno.Critical or '0';
-												node.CRM = nodeExterno.CMagico or '0';
-												node.ESQ = nodeExterno.Esquiva or '0';
-												node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+												node.PA = tonumber(nodeExterno.PA) or '0';
+												node.PM = tonumber(nodeExterno.PM) or '0';
+												node.PF = tonumber(nodeExterno.PF) or '0';
+												node.DEF = tonumber(nodeExterno.DEFRED) or '0';
+												node.RES = tonumber(nodeExterno.RESRED) or '0';
+												node.AC = tonumber(nodeExterno.Acerto) or '0';
+												node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+												node.CR = tonumber(nodeExterno.Critical) or '0';
+												node.CRM = tonumber(nodeExterno.CMagico) or '0';
+												node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+												node.Pers = tonumber(math.floor(nodeExterno.Persistencia) or '0');
 												node.Vez = node.Vez or '0';
-												node.Atletismo = nodeExterno.TAtletismo or '0';
-												node.Sabedoria = nodeExterno.TSabedoria or '0';
-												node.Percepcao = nodeExterno.TPercepcao or '0';
-												node.Acrobacia = nodeExterno.TAcrobacia or '0';
-												node.Vigor = nodeExterno.TVigor or '0';
-												node.HPBarMax = nodeExterno.HPTotal or '0';
-												node.MPBarMax = nodeExterno.MPTotal or '0';
-												node.HPBar = nodeExterno.HPAtual or '0';
-												node.MPBar = nodeExterno.MPAtual or '0';
+												node.Atletismo = tonumber(nodeExterno.TAtletismo) or '0';
+												node.Sabedoria = tonumber(nodeExterno.TSabedoria) or '0';
+												node.Percepcao = tonumber(nodeExterno.TPercepcao) or '0';
+												node.Acrobacia = tonumber(nodeExterno.TAcrobacia) or '0';
+												node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+												node.HPBarMax = tonumber(nodeExterno.HPTotal) or '0';
+												node.MPBarMax = tonumber(nodeExterno.MPTotal) or '0';
+												node.HPBar = tonumber(nodeExterno.HPAtual) or '0';
+												node.MPBar = tonumber(nodeExterno.MPAtual) or '0';
 												node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoPersonagem
 												node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
+
+												node.PAEffectTotal = 0;
+												node.PMEffectTotal = 0;
+												node.PFEffectTotal = 0;
+												node.DEFEffectTotal = 0;
+												node.RESEffectTotal = 0;
+												node.ACEffectTotal = 0;
+												node.ACMEffectTotal = 0;
+												node.CREffectTotal = 0;
+												node.CRMEffectTotal = 0;
+												node.ESQEffectTotal = 0;
+												node.PersEffectTotal = 0;
+												node.HPTotalEffect = 0;
+												node.MPTotalEffect = 0;
+												node.DanoEffect = 0
+												node.CustoEffect = 0 
+												node.CuraEffect = 0  
+												node.RegMPEffect = 0 
 											else
-												node.PA = nodeExterno.Dano or '0';
-												node.PM = nodeExterno.DanoMagico or '0';
+												node.PA = tonumber(nodeExterno.Dano) or '0';
+												node.PM = tonumber(nodeExterno.DanoMagico) or '0';
 												node.PF = "NPC";
-												node.DEF = nodeExterno.DefesaPorCent or '0';
-												node.RES = nodeExterno.ResistenciaPorCent or '0';
-												node.AC = nodeExterno.Acerto or '0';
-												node.ACM = nodeExterno.AcertoMagico or '0';
-												node.CR = nodeExterno.Critical or '0';
-												node.CRM = nodeExterno.CriticalMagico or '0';
-												node.ESQ = nodeExterno.Esquiva or '0';
-												node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+												node.DEF = tonumber(nodeExterno.DefesaPorCent) or '0';
+												node.RES = tonumber(nodeExterno.ResistenciaPorCent) or '0';
+												node.AC = tonumber(nodeExterno.Acerto) or '0';
+												node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+												node.CR = tonumber(nodeExterno.Critical) or '0';
+												node.CRM = tonumber(nodeExterno.CriticalMagico) or '0';
+												node.ESQ = tonumber(nodeExterno.Esquiva or '0');
+												node.Pers = tonumber(math.floor(nodeExterno.Persistencia) or '0');
 												node.Vez = node.Vez or '0';
-												node.Atletismo = nodeExterno.Atletismo or '0';
-												node.Sabedoria = nodeExterno.Sabedoria or '0';
-												node.Percepcao = nodeExterno.Percepcao or '0';
-												node.Acrobacia = nodeExterno.Acrobacia or '0';
-												node.Vigor = nodeExterno.TVigor or '0';
-												node.HPBarMax = nodeExterno.HPTotal or '0';
-												node.MPBarMax = nodeExterno.MPTotal or '0';
-												node.HPBar = nodeExterno.HPAtual or '0';
-												node.MPBar = nodeExterno.MPAtual or '0';
+												node.Atletismo = tonumber(nodeExterno.Atletismo) or '0';
+												node.Sabedoria = tonumber(nodeExterno.Sabedoria) or '0';
+												node.Percepcao = tonumber(nodeExterno.Percepcao) or '0';
+												node.Acrobacia = tonumber(nodeExterno.Acrobacia) or '0';
+												node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+												node.HPBarMax = tonumber(nodeExterno.HPTotal) or '0';
+												node.MPBarMax = tonumber(nodeExterno.MPTotal) or '0';
+												node.HPBar = tonumber(nodeExterno.HPAtual) or '0';
+												node.MPBar = tonumber(nodeExterno.MPAtual) or '0';
 												node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
 												node.imagemDoPersonagem = nodeExterno.imgInimigo
+
+												node.PAEffectTotal = 0;
+												node.PMEffectTotal = 0;
+												node.PFEffectTotal = 0;
+												node.DEFEffectTotal = 0;
+												node.RESEffectTotal = 0;
+												node.ACEffectTotal = 0;
+												node.ACMEffectTotal = 0;
+												node.CREffectTotal = 0;
+												node.CRMEffectTotal = 0;
+												node.ESQEffectTotal = 0;
+												node.PersEffectTotal = 0;
+												node.HPTotalEffect = 0;
+												node.MPTotalEffect = 0;
+												node.DanoEffect = 0
+												node.CustoEffect = 0 
+												node.CuraEffect = 0  
+												node.RegMPEffect = 0 
 											end;
 										end
 									end
@@ -375,38 +468,38 @@
 
 											-- Acessa o valor da força do personagem
 
-											nodeExterno.HPTotal = tonumber(node.HPBarMax);
-											nodeExterno.MPTotal = tonumber(node.MPBarMax);
+											if node.HPBarResolve ~= 0 and node.HPBarResolve ~= nil and node.HPBarResolve ~= "" then 
+												local hpBarInput = tostring(node.HPBarResolve) -- Converte o valor para string, caso não seja
+												if hpBarInput:match("^%+%d+$") then
+													-- Se começar com "+", soma ao valor existente
+													local valor = tonumber(hpBarInput:sub(2)) -- Remove o "+" e converte para número
+													nodeExterno.HPAtual = (tonumber(node.HPBar) or 0) + valor
+												elseif hpBarInput:match("^%-%d+$") then
+													-- Se começar com "-", subtrai do valor existente
+													local valor = tonumber(hpBarInput:sub(2)) -- Remove o "-" e converte para número
+													nodeExterno.HPAtual = (tonumber(node.HPBar) or 0) - valor
+												else
+													-- Se não tiver "+" ou "-", aplica o valor diretamente
+													nodeExterno.HPAtual = tonumber(hpBarInput)
+												end
+											end;
 
-											local hpBarInput = tostring(node.HPBarResolve) -- Converte o valor para string, caso não seja
-											if hpBarInput:match("^%+%d+$") then
-												-- Se começar com "+", soma ao valor existente
-												local valor = tonumber(hpBarInput:sub(2)) -- Remove o "+" e converte para número
-												nodeExterno.HPAtual = (tonumber(node.HPBar) or 0) + valor
-											elseif hpBarInput:match("^%-%d+$") then
-												-- Se começar com "-", subtrai do valor existente
-												local valor = tonumber(hpBarInput:sub(2)) -- Remove o "-" e converte para número
-												nodeExterno.HPAtual = (tonumber(node.HPBar) or 0) - valor
-											else
-												-- Se não tiver "+" ou "-", aplica o valor diretamente
-												nodeExterno.HPAtual = tonumber(hpBarInput)
-											end
-
-											-- Ajuste para MPAtual
-											local mpBarInput = tostring(node.MPBarResolve) -- Converte o valor para string, caso não seja
-											if mpBarInput:match("^%+%d+$") then
-												-- Se começar com "+", soma ao valor existente
-												local valor = tonumber(mpBarInput:sub(2)) -- Remove o "+" e converte para número
-												nodeExterno.MPAtual = (tonumber(node.MPBar) or 0) + valor
-											elseif mpBarInput:match("^%-%d+$") then
-												-- Se começar com "-", subtrai do valor existente
-												local valor = tonumber(mpBarInput:sub(2)) -- Remove o "-" e converte para número
-												nodeExterno.MPAtual = (tonumber(node.MPBar) or 0) - valor
-											else
-												-- Se não tiver "+" ou "-", aplica o valor diretamente
-												nodeExterno.MPAtual = tonumber(mpBarInput)
-											end
-
+											if node.MPBarResolve ~= 0 and node.MPBarResolve ~= nil and node.MPBarResolve ~= "" then
+												-- Ajuste para MPAtual
+												local mpBarInput = tostring(node.MPBarResolve) -- Converte o valor para string, caso não seja
+												if mpBarInput:match("^%+%d+$") then
+													-- Se começar com "+", soma ao valor existente
+													local valor = tonumber(mpBarInput:sub(2)) -- Remove o "+" e converte para número
+													nodeExterno.MPAtual = (tonumber(node.MPBar) or 0) + valor
+												elseif mpBarInput:match("^%-%d+$") then
+													-- Se começar com "-", subtrai do valor existente
+													local valor = tonumber(mpBarInput:sub(2)) -- Remove o "-" e converte para número
+													nodeExterno.MPAtual = (tonumber(node.MPBar) or 0) - valor
+												else
+													-- Se não tiver "+" ou "-", aplica o valor diretamente
+													nodeExterno.MPAtual = tonumber(mpBarInput)
+												end
+											end;
 										end
 									end
 								return nomes								
@@ -445,51 +538,51 @@
 											-- Acessa o valor da força do personagem
 
 											if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
-												node.PA = nodeExterno.PA or '0';
-												node.PM = nodeExterno.PM or '0';
-												node.PF = nodeExterno.PF or '0';
-												node.DEF = nodeExterno.DEFRED or '0';
-												node.RES = nodeExterno.RESRED or '0';
-												node.AC = nodeExterno.Acerto or '0';
-												node.ACM = nodeExterno.AcertoMagico or '0';
-												node.CR = nodeExterno.Critical or '0';
-												node.CRM = nodeExterno.CMagico or '0';
-												node.ESQ = nodeExterno.Esquiva or '0';
-												node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+												node.PA = tonumber(nodeExterno.PA) or '0';
+												node.PM = tonumber(nodeExterno.PM) or '0';
+												node.PF = tonumber(nodeExterno.PF) or '0';
+												node.DEF = tonumber(nodeExterno.DEFRED) or '0';
+												node.RES = tonumber(nodeExterno.RESRED) or '0';
+												node.AC = tonumber(nodeExterno.Acerto) or '0';
+												node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+												node.CR = tonumber(nodeExterno.Critical) or '0';
+												node.CRM = tonumber(nodeExterno.CMagico) or '0';
+												node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+												node.Pers = tonumber(math.floor(nodeExterno.Persistencia) or '0');
 												node.Vez = node.Vez or '0';
-												node.Atletismo = nodeExterno.TAtletismo or '0';
-												node.Sabedoria = nodeExterno.TSabedoria or '0';
-												node.Percepcao = nodeExterno.TPercepcao or '0';
-												node.Acrobacia = nodeExterno.TAcrobacia or '0';
-												node.Vigor = nodeExterno.TVigor or '0';
-												node.HPBarMax = nodeExterno.HPTotal or '0';
-												node.MPBarMax = nodeExterno.MPTotal or '0';
-												node.HPBar = nodeExterno.HPAtual or '0';
-												node.MPBar = nodeExterno.MPAtual or '0';
+												node.Atletismo = tonumber(nodeExterno.TAtletismo) or '0';
+												node.Sabedoria = tonumber(nodeExterno.TSabedoria) or '0';
+												node.Percepcao = tonumber(nodeExterno.TPercepcao) or '0';
+												node.Acrobacia = tonumber(nodeExterno.TAcrobacia) or '0';
+												node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+												node.HPBarMax = tonumber(nodeExterno.HPTotal) or '0';
+												node.MPBarMax = tonumber(nodeExterno.MPTotal) or '0';
+												node.HPBar = tonumber(nodeExterno.HPAtual) or '0';
+												node.MPBar = tonumber(nodeExterno.MPAtual) or '0';
 												node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoPersonagem
 												node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
 											else
-												node.PA = nodeExterno.Dano or '0';
-												node.PM = nodeExterno.DanoMagico or '0';
+												node.PA = tonumber(nodeExterno.Dano) or '0';
+												node.PM = tonumber(nodeExterno.DanoMagico) or '0';
 												node.PF = "NPC";
-												node.DEF = nodeExterno.DefesaPorCent or '0';
-												node.RES = nodeExterno.ResistenciaPorCent or '0';
-												node.AC = nodeExterno.Acerto or '0';
-												node.ACM = nodeExterno.AcertoMagico or '0';
-												node.CR = nodeExterno.Critical or '0';
-												node.CRM = nodeExterno.CriticalMagico or '0';
-												node.ESQ = nodeExterno.Esquiva or '0';
-												node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+												node.DEF = tonumber(nodeExterno.DefesaPorCent) or '0';
+												node.RES = tonumber(nodeExterno.ResistenciaPorCent) or '0';
+												node.AC = tonumber(nodeExterno.Acerto) or '0';
+												node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+												node.CR = tonumber(nodeExterno.Critical) or '0';
+												node.CRM = tonumber(nodeExterno.CriticalMagico) or '0';
+												node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+												node.Pers = tonumber(math.floor(nodeExterno.Persistencia) or '0');
 												node.Vez = node.Vez or '0';
-												node.Atletismo = nodeExterno.Atletismo or '0';
-												node.Sabedoria = nodeExterno.Sabedoria or '0';
-												node.Percepcao = nodeExterno.Percepcao or '0';
-												node.Acrobacia = nodeExterno.Acrobacia or '0';
-												node.Vigor = nodeExterno.TVigor or '0';
-												node.HPBarMax = nodeExterno.HPTotal or '0';
-												node.MPBarMax = nodeExterno.MPTotal or '0';
-												node.HPBar = nodeExterno.HPAtual or '0';
-												node.MPBar = nodeExterno.MPAtual or '0';
+												node.Atletismo = tonumber(nodeExterno.Atletismo) or '0';
+												node.Sabedoria = tonumber(nodeExterno.Sabedoria) or '0';
+												node.Percepcao = tonumber(nodeExterno.Percepcao) or '0';
+												node.Acrobacia = tonumber(nodeExterno.Acrobacia) or '0';
+												node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+												node.HPBarMax = tonumber(nodeExterno.HPTotal) or '0';
+												node.MPBarMax = tonumber(nodeExterno.MPTotal) or '0';
+												node.HPBar = tonumber(nodeExterno.HPAtual) or '0';
+												node.MPBar = tonumber(nodeExterno.MPAtual) or '0';
 												node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
 												node.imagemDoPersonagem = nodeExterno.imgInimigo
 											end;
@@ -509,109 +602,21 @@
 					<image align="top" width="64" height="64" src="./imagens/buff.png" margins="{top=5}">
 					<button name="btnEffect" opacity="0.0" align="client">
 						<event name="onClick">
-							self.popEffect:show();
+							local novoForm = GUI.newForm("FrmEffectTeste");
+							novoForm:setNodeObject(self.rclGrupoJogadores.selectedNode);
+							novoForm:show();
                 		</event>
 					</button>
 					</image>
-					<popup name="popEffect" width="600" height="300" backOpacity="0.5">
-						<layout align="top" height="30" margins="{bottom=4}">
-							<button text="Criar Novo Item" width="150" align="left">
-								<event name="onClick">
-									-- Usuário clicou no botão de criar novo item.
-									-- Vamos inserir um novo item no nosso recordList                              
-									self.rclBuffs:append();
-								</event>
-							</button>
-						</layout>  
-						 <recordList name="rclBuffs" field="campoDosItens" templateForm="frmEffect" align="top" selectable="true" layout="horizontal" height="40">                       
-							<event name="onSelect">
-								local node = self.rclBuffs.selectedNode;  
-								self.dscBuffSlot.node = node;                       
-								self.dscBuffSlot.visible = (node ~= nil);
-							</event>
-						</recordList>  
-
-						<dataScopeBox name="dscBuffSlot" visible="false" align="client"
-									margins="{left=4, right=4, top=2}">
-								<!-- Faça um layout "bonito" para sua caixa de detalhes =). Utilize a propriedade "field" nas tags aqui dentro   -->      
-
-								<rectangle align="client" color="black" xradius="10" yradius="10"
-										padding="{top=3, left=3, right=3, bottom=3}">                                   
-
-										<layout align="top" height="30" margins="{bottom=4}">
-												<label align="left" text="PA" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="PAEffect"/>
-												<label align="left" text="PM" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="PMEffect"/>
-												<label align="left" text="PF" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="PFEffect"/>
-												<label align="left" text="DEF" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="DEFEffect"/>
-												<label align="left" text="RES" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="RESEffect"/>
-																			
-
-											<!-- Botão de apagar o item -->
-											<button align="right" fontColor="red" visible="false" text="Apagar!" 
-													margins="{left=4, right=4, top=2, bottom=2}" width="150"
-													onClick="ndb.deleteNode(self.dscBuffSlot.node);" />
-
-										</layout>                       
-
-										<layout align="top" height="30" margins="{bottom=4}">              
-												<label align="left" text="AC" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="ACEffect"/>
-												<label align="left" text="ACM" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="ACMEffect"/>
-												<label align="left" text="CR" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="CREffect"/>
-												<label align="left" text="CRM" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="CRMEffect"/>
-												<label align="left" text="Proc" fontColor="#FF1493" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" fontColor="#FF1493" margins="{left=15, right=-10}" field="DadoEffect"/>
-                                               
-										</layout>
-
-										<layout align="top" height="30" margins="{bottom=4}">              
-												<label align="left" text="ESQ" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="ESQEffect"/>
-												<label align="left" text="Pers" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="PersEffect"/>
-												<label align="left" text="VEZ" fontColor="green" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" fontColor="green" margins="{left=15, right=-10}" field="VezEffect"/>  
-												<label align="left" text="Dano" fontColor="red" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="DanoEffect"/>
-												<label align="left" text="Mana" fontColor="blue" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" fontColor="blue" margins="{left=15, right=-10}" field="ManaEffect"/>                                
-                   
-										</layout>
-
-										<layout align="top" height="30" margins="{bottom=4}">              
-												<label align="left" text="CD" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="CDEffect"/>
-												<label align="left" text="Duração" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="DuraEffect"/>
-												<label align="left" text="Conta" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="ContaEffect"/> 
-												<label align="left" text="Tipo" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="TipoEffect"/> 
-												<label align="left" text="Outro" width="50" margins="{left=15, right=-10}"/>
-												<edit align="left" width="50" margins="{left=15, right=-10}" field="OutroEffect"/> 
-                           
-                   
-										</layout>
-										<layout align="client" margins="{top=5, left=5 , bottom=4}">
-												<textEditor align="top" field="DescriBuff" height="100"/>
-										</layout> 
-								</rectangle>
-						</dataScopeBox>        
-						       
-					</popup>  
+					
 
 					
 				</layout>
+
+				
 				
 				<layout align="left" width="50" margins="{right=1}" >
+					<label align="top" text="Status" width="50" margins="{left=10}"/>
 					<label align="top" text="PA:" width="50" margins="{left=10}"/>
 					<label align="top" text="PM:" width="50" margins="{left=10}"/>
 					<label align="top" text="PF:" width="50" margins="{left=10}"/>
@@ -629,7 +634,8 @@
 					<label align="top" text="Vez:" fontColor="green" width="50" margins="{left=10}"/>
 				</layout>
 				
-				<layout align="left" width="50" margins="{right=1}" >						
+				<layout align="left" width="50" margins="{right=1}" >
+					<label align="top" text="Valor" width="50" margins="{left=10}"/>						
 					<label align="top" field="PA" width="50" margins="{left=10}"/>
 					<label align="top" field="PM" width="50" margins="{left=10}"/>
 					<label align="top" field="PF" width="50" margins="{left=10}"/>
@@ -647,29 +653,65 @@
 					<edit align="top" field="Vez" fontColor="green" width="50" margins="{left=10}"/>						
 				</layout>
 				
-				<layout align="left" width="75" margins="{right=1}" >						
-					<label align="top" text="Atletismo:" autoSize="true" margins="{left=10}"/>
-					<label align="top" text="Sabedoria:" autoSize="true" margins="{left=10}"/>
-					<label align="top" text="Percepcao:" autoSize="true" margins="{left=10}"/>
-					<label align="top" text="Acrobacia:" autoSize="true" margins="{left=10}"/>
-					<label align="top" text="Vigor:" autoSize="true" margins="{left=10}"/>
-					<label align="top" text="---" width="50" margins="{left=10}"/>						
+				<layout align="left" width="50" margins="{right=1}" >	
+					<label align="top" text="Efeitos" width="50" margins="{left=10}"/>					
+					<label align="top" field="PAEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="PMEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="PFEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="DEFEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="RESEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>
+					<label align="top" field="ACEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="ACMEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="CREffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="CRMEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>
+					<label align="top" field="ESQEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="PersEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>					
 				</layout>
-				
-				<layout align="left" width="50" margins="{right=1}" >						
-					<label align="top" field="Atletismo" width="50" margins="{left=10}"/>
-					<label align="top" field="Sabedoria" width="50" margins="{left=10}"/>
-					<label align="top" field="Percepcao" width="50" margins="{left=10}"/>
-					<label align="top" field="Acrobacia" width="50" margins="{left=10}"/>
-					<label align="top" field="Vigor" width="50" margins="{left=10}"/>
-					<label align="top" text="---" width="50" margins="{left=10}"/>		
-				</layout>       
 
-				        
+				<layout align="left" width="50" margins="{right=1}" >		
+					<label align="top" text="Total" width="50" margins="{left=10}"/>				
+					<label align="top" field="PATotal" width="50" margins="{left=10}"/>
+					<label align="top" field="PMTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="PFTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="DEFTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="RESTotal" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>
+					<label align="top" field="ACTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="ACMTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="CRTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="CRMTotal" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>
+					<label align="top" field="ESQTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="PersTotal" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>					
+				</layout>
+
+				<layout align="left" width="75" margins="{right=1}" >		
+					<label align="top" text="Vitais" width="75" margins="{left=10}"/>
+					<label align="top" text="HPTotal" width="75" margins="{left=10}"/>				
+					<label align="top" text="MPTotal" width="75" margins="{left=10}"/>			
+				</layout>
+
+				<layout align="left" width="50" margins="{right=1}" >		
+					<label align="top" text="Valor" width="50" margins="{left=10}"/>
+					<label align="top" field="HPEffectTotals" width="50" margins="{left=10}"/>				
+					<label align="top" field="MPEffectTotals" width="50" margins="{left=10}"/>			
+				</layout>
+
+				<layout align="left" width="50" margins="{right=1}" >		
+					<label align="top" text="Total" width="50" margins="{left=10}"/>
+					<label align="top" field="HPTotalTotal" width="50" margins="{left=10}"/>				
+					<label align="top" field="MPTotalTotal" width="50" margins="{left=10}"/>			
+				</layout>
+           
 			</rectangle>
 	</dataScopeBox>
 	
-	--- controlador -----
+	
+				
 	
 	<label text="Controle de Turnos" left="620" width="150" top="10" fontSize="15"/>
 
@@ -876,11 +918,19 @@
 	<recordList top="40" left="830" width="600" height="300" name="rclGrupoOponentes"  field="NomeOponentes" templateForm="frmItemOponente"
 				selectable="true">                             
 		<event name="onSelect">
+			if sheet ~= nil then
+				ASCPrincipal = sheet
+				SelfFichPrincipalASC = self
+				RclSelecionadoDaVezO = self.rclGrupoOponentes.selectedNode
+				RclSelecionadoO = sheet.NomeEfeitoO
+				
+			end;
+
 			local node = self.rclGrupoOponentes.selectedNode; 
 				
 			self.BoxDetalheOponentes.node = node; 
 
-			self.rclGrupoOponentes:sort();
+			
 			
 			self.BoxDetalheOponentes.visible = (node ~= nil);
 
@@ -890,7 +940,7 @@
 					local node = self.rclGrupoOponentes.selectedNode;   
 					self.rclGrupoOponentes.node = node;
 					
-					if node.NomeDoOponenteVez ~= nil or node.NomeDoOponenteVez ~= "" then
+					if node.NomeDoOponenteVez ~= nil and node.NomeDoOponenteVez ~= "" then
 
 						local mesas = rrpg.getRooms();
 						local bibliotecaAtual = mesas[1].library;
@@ -916,51 +966,51 @@
 									-- Acessa o valor da força do personagem
 									
 									if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
-										node.PA = nodeExterno.PA or '0';
-										node.PM = nodeExterno.PM or '0';
-										node.PF = nodeExterno.PF or '0';
-										node.DEF = nodeExterno.DEFRED or '0';
-										node.RES = nodeExterno.RESRED or '0';
-										node.AC = nodeExterno.Acerto or '0';
-										node.ACM = nodeExterno.AcertoMagico or '0';
-										node.CR = nodeExterno.Critical or '0';
-										node.CRM = nodeExterno.CMagico or '0';
-										node.ESQ = nodeExterno.Esquiva or '0';
-										node.Pers = (nodeExterno.Persistencia) or '0';
+										node.PA = tonumber(nodeExterno.PA) or '0';
+										node.PM = tonumber(nodeExterno.PM) or '0';
+										node.PF = tonumber(nodeExterno.PF) or '0';
+										node.DEF = tonumber(nodeExterno.DEFRED) or '0';
+										node.RES = tonumber(nodeExterno.RESRED) or '0';
+										node.AC = tonumber(nodeExterno.Acerto) or '0';
+										node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+										node.CR = tonumber(nodeExterno.Critical) or '0';
+										node.CRM = tonumber(nodeExterno.CMagico) or '0';
+										node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+										node.Pers = tonumber(nodeExterno.Persistencia) or '0';
 										node.Vez = node.Vez or '0';
-										node.Atletismo = nodeExterno.TAtletismo or '0';
-										node.Sabedoria = nodeExterno.TSabedoria or '0';
-										node.Percepcao = nodeExterno.TPercepcao or '0';
-										node.Acrobacia = nodeExterno.TAcrobacia or '0';
-										node.Vigor = nodeExterno.TVigor or '0';
-										node.HPBarMaxO = nodeExterno.HPTotal or '0';
-										node.MPBarMaxO = nodeExterno.MPTotal or '0';
-										node.HPBarO = nodeExterno.HPAtual or '0';
-										node.MPBarO = nodeExterno.MPAtual or '0';
+										node.Atletismo = tonumber(nodeExterno.TAtletismo) or '0';
+										node.Sabedoria = tonumber(nodeExterno.TSabedoria) or '0';
+										node.Percepcao = tonumber(nodeExterno.TPercepcao) or '0';
+										node.Acrobacia = tonumber(nodeExterno.TAcrobacia) or '0';
+										node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+										node.HPBarMaxO = tonumber(nodeExterno.HPTotal) or '0';
+										node.MPBarMaxO = tonumber(nodeExterno.MPTotal) or '0';
+										node.HPBarO = tonumber(nodeExterno.HPAtual) or '0';
+										node.MPBarO = tonumber(nodeExterno.MPAtual) or '0';
 										node.NomeDoOponenteVez = node.Vez .. " - " ..  node.NomeDoOponente
 										node.imagemInimigo = nodeExterno.imagemDoPersonagem
 									else
-										node.PA = nodeExterno.Dano or '0';
-										node.PM = nodeExterno.DanoMagico or '0';
+										node.PA = tonumber(nodeExterno.Dano) or '0';
+										node.PM = tonumber(nodeExterno.DanoMagico) or '0';
 										node.PF = "NPC";
-										node.DEF = nodeExterno.DefesaPorCent or '0';
-										node.RES = nodeExterno.ResistenciaPorCent or '0';
-										node.AC = nodeExterno.Acerto or '0';
-										node.ACM = nodeExterno.AcertoMagico or '0';
-										node.CR = nodeExterno.Critical or '0';
-										node.CRM = nodeExterno.CriticalMagico or '0';
-										node.ESQ = nodeExterno.Esquiva or '0';
-										node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+										node.DEF = tonumber(nodeExterno.DefesaPorCent) or '0';
+										node.RES = tonumber(nodeExterno.ResistenciaPorCent) or '0';
+										node.AC = tonumber(nodeExterno.Acerto) or '0';
+										node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+										node.CR = tonumber(nodeExterno.Critical) or '0';
+										node.CRM = tonumber(nodeExterno.CriticalMagico) or '0';
+										node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+										node.Pers = tonumber(math.floor(nodeExterno.Persistencia) or '0');
 										node.Vez = node.Vez or '0';
-										node.Atletismo = nodeExterno.Atletismo or '0';
-										node.Sabedoria = nodeExterno.Sabedoria or '0';
-										node.Percepcao = nodeExterno.Percepcao or '0';
-										node.Acrobacia = nodeExterno.Acrobacia or '0';
-										node.Vigor = nodeExterno.TVigor or '0';
-										node.HPBarMaxO = nodeExterno.HPTotal or '0';
-										node.MPBarMaxO = nodeExterno.MPTotal or '0';
-										node.HPBarO = nodeExterno.HPAtual or '0';
-										node.MPBarO = nodeExterno.MPAtual or '0';
+										node.Atletismo = tonumber(nodeExterno.Atletismo) or '0';
+										node.Sabedoria = tonumber(nodeExterno.Sabedoria) or '0';
+										node.Percepcao = tonumber(nodeExterno.Percepcao) or '0';
+										node.Acrobacia = tonumber(nodeExterno.Acrobacia) or '0';
+										node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+										node.HPBarMaxO = tonumber(nodeExterno.HPTotal) or '0';
+										node.MPBarMaxO = tonumber(nodeExterno.MPTotal) or '0';
+										node.HPBarO = tonumber(nodeExterno.HPAtual) or '0';
+										node.MPBarO = tonumber(nodeExterno.MPAtual) or '0';
 										node.NomeDoOponenteVez = node.Vez .. " - " ..  nodeExterno.Nome
 										node.imagemInimigo = nodeExterno.imgInimigo
 									end;
@@ -972,6 +1022,7 @@
 					end;
 				end;
 				
+				self.rclGrupoOponentes:sort();
 		</event>
 		<event name="onCompare">
 			return utils.compareStringPtBr(nodeA.Vez, nodeB.Vez);
@@ -1016,53 +1067,89 @@
 										-- Acessa o valor da força do personagem
 										
 										if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
-											node.PA = nodeExterno.PA or '0';
-											node.PM = nodeExterno.PM or '0';
-											node.PF = nodeExterno.PF or '0';
-											node.DEF = nodeExterno.DEFRED or '0';
-											node.RES = nodeExterno.RESRED or '0';
-											node.AC = nodeExterno.Acerto or '0';
-											node.ACM = nodeExterno.AcertoMagico or '0';
-											node.CR = nodeExterno.Critical or '0';
-											node.CRM = nodeExterno.CMagico or '0';
-											node.ESQ = nodeExterno.Esquiva or '0';
-											node.Pers = (nodeExterno.Persistencia) or '0';
+											node.PA = tonumber(nodeExterno.PA) or '0';
+											node.PM = tonumber(nodeExterno.PM) or '0';
+											node.PF = tonumber(nodeExterno.PF) or '0';
+											node.DEF = tonumber(nodeExterno.DEFRED) or '0';
+											node.RES = tonumber(nodeExterno.RESRED) or '0';
+											node.AC = tonumber(nodeExterno.Acerto) or '0';
+											node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+											node.CR = tonumber(nodeExterno.Critical) or '0';
+											node.CRM = tonumber(nodeExterno.CMagico) or '0';
+											node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+											node.Pers = tonumber(nodeExterno.Persistencia) or '0';
 											node.Vez = node.Vez or '0';
-											node.Atletismo = nodeExterno.TAtletismo or '0';
-											node.Sabedoria = nodeExterno.TSabedoria or '0';
-											node.Percepcao = nodeExterno.TPercepcao or '0';
-											node.Acrobacia = nodeExterno.TAcrobacia or '0';
-											node.Vigor = nodeExterno.TVigor or '0';
-											node.HPBarMaxO = nodeExterno.HPTotal or '0';
-											node.MPBarMaxO = nodeExterno.MPTotal or '0';
-											node.HPBarO = nodeExterno.HPAtual or '0';
-											node.MPBarO = nodeExterno.MPAtual or '0';
+											node.Atletismo = tonumber(nodeExterno.TAtletismo) or '0';
+											node.Sabedoria = tonumber(nodeExterno.TSabedoria) or '0';
+											node.Percepcao = tonumber(nodeExterno.TPercepcao) or '0';
+											node.Acrobacia = tonumber(nodeExterno.TAcrobacia) or '0';
+											node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+											node.HPBarMaxO = tonumber(nodeExterno.HPTotal) or '0';
+											node.MPBarMaxO = tonumber(nodeExterno.MPTotal) or '0';
+											node.HPBarO = tonumber(nodeExterno.HPAtual) or '0';
+											node.MPBarO = tonumber(nodeExterno.MPAtual) or '0';
 											node.NomeDoOponenteVez = node.Vez .. " - " ..  node.NomeDoOponente
 											node.imagemInimigo = nodeExterno.imagemDoPersonagem
+
+											node.PAEffectTotal = 0;
+											node.PMEffectTotal = 0;
+											node.PFEffectTotal = 0;
+											node.DEFEffectTotal = 0;
+											node.RESEffectTotal = 0;
+											node.ACEffectTotal = 0;
+											node.ACMEffectTotal = 0;
+											node.CREffectTotal = 0;
+											node.CRMEffectTotal = 0;
+											node.ESQEffectTotal = 0;
+											node.PersEffectTotal = 0;
+											node.HPEffectTotals = 0;
+											node.MPEffectTotals = 0;
+											node.DanoEffect = 0
+											node.CustoEffect = 0 
+											node.CuraEffect = 0  
+											node.RegMPEffect = 0 
 										else
-											node.PA = nodeExterno.Dano or '0';
-											node.PM = nodeExterno.DanoMagico or '0';
+											node.PA = tonumber(nodeExterno.Dano) or '0';
+											node.PM = tonumber(nodeExterno.DanoMagico) or '0';
 											node.PF = "NPC";
-											node.DEF = nodeExterno.DefesaPorCent or '0';
-											node.RES = nodeExterno.ResistenciaPorCent or '0';
-											node.AC = nodeExterno.Acerto or '0';
-											node.ACM = nodeExterno.AcertoMagico or '0';
-											node.CR = nodeExterno.Critical or '0';
-											node.CRM = nodeExterno.CriticalMagico or '0';
-											node.ESQ = nodeExterno.Esquiva or '0';
-											node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+											node.DEF = tonumber(nodeExterno.DefesaPorCent) or '0';
+											node.RES = tonumber(nodeExterno.ResistenciaPorCent) or '0';
+											node.AC = tonumber(nodeExterno.Acerto) or '0';
+											node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+											node.CR = tonumber(nodeExterno.Critical) or '0';
+											node.CRM = tonumber(nodeExterno.CriticalMagico) or '0';
+											node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+											node.Pers = tonumber(math.floor(nodeExterno.Persistencia) or '0');
 											node.Vez = node.Vez or '0';
-											node.Atletismo = nodeExterno.Atletismo or '0';
-											node.Sabedoria = nodeExterno.Sabedoria or '0';
-											node.Percepcao = nodeExterno.Percepcao or '0';
-											node.Acrobacia = nodeExterno.Acrobacia or '0';
-											node.Vigor = nodeExterno.TVigor or '0';
-											node.HPBarMaxO = nodeExterno.HPTotal or '0';
-											node.MPBarMaxO = nodeExterno.MPTotal or '0';
-											node.HPBarO = nodeExterno.HPAtual or '0';
-											node.MPBarO = nodeExterno.MPAtual or '0';
+											node.Atletismo = tonumber(nodeExterno.Atletismo) or '0';
+											node.Sabedoria = tonumber(nodeExterno.Sabedoria) or '0';
+											node.Percepcao = tonumber(nodeExterno.Percepcao) or '0';
+											node.Acrobacia = tonumber(nodeExterno.Acrobacia) or '0';
+											node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+											node.HPBarMaxO = tonumber(nodeExterno.HPTotal) or '0';
+											node.MPBarMaxO = tonumber(nodeExterno.MPTotal) or '0';
+											node.HPBarO = tonumber(nodeExterno.HPAtual) or '0';
+											node.MPBarO = tonumber(nodeExterno.MPAtual) or '0';
 											node.NomeDoOponenteVez = node.Vez .. " - " ..  nodeExterno.Nome
 											node.imagemInimigo = nodeExterno.imgInimigo
+
+											node.PAEffectTotal = 0;
+											node.PMEffectTotal = 0;
+											node.PFEffectTotal = 0;
+											node.DEFEffectTotal = 0;
+											node.RESEffectTotal = 0;
+											node.ACEffectTotal = 0;
+											node.ACMEffectTotal = 0;
+											node.CREffectTotal = 0;
+											node.CRMEffectTotal = 0;
+											node.ESQEffectTotal = 0;
+											node.PersEffectTotal = 0;
+											node.HPEffectTotals = 0;
+											node.MPEffectTotals = 0;
+											node.DanoEffect = 0
+											node.CustoEffect = 0 
+											node.CuraEffect = 0  
+											node.RegMPEffect = 0 
 										end;
 									end
 								end
@@ -1208,11 +1295,8 @@
 											local nodeExterno = await(promise);
 
 											-- Acessa o valor da força do personagem
-
-											nodeExterno.HPTotal = tonumber(node.HPBarMaxO);
-											nodeExterno.MPTotal = tonumber(node.MPBarMaxO);
 											
-											if node.HPBarResolveO ~= 0 then 
+											if node.HPBarResolveO ~= 0 and node.HPBarResolveO ~= nil and node.HPBarResolveO ~= "" then 
 												local hpBarInput = tostring(node.HPBarResolveO) -- Converte o valor para string, caso não seja
 												if hpBarInput:match("^%+%d+$") then
 													-- Se começar com "+", soma ao valor existente
@@ -1226,11 +1310,9 @@
 													-- Se não tiver "+" ou "-", aplica o valor diretamente
 													nodeExterno.HPAtual = tonumber(hpBarInput)
 												end
-
-											node.HPBarResolveO = 0
 											end;
 
-											if node.MPBarResolveO ~= 0 then 
+											if node.MPBarResolveO ~= 0 and node.MPBarResolveO ~= nil and node.MPBarResolveO ~= "" then 
 												-- Ajuste para MPAtual
 												local mpBarInput = tostring(node.MPBarResolveO) -- Converte o valor para string, caso não seja
 												if mpBarInput:match("^%+%d+$") then
@@ -1245,8 +1327,6 @@
 													-- Se não tiver "+" ou "-", aplica o valor diretamente
 													nodeExterno.MPAtual = tonumber(mpBarInput)
 												end
-
-												node.MPBarResolveO = 0
 											end;
 
 										end
@@ -1287,51 +1367,51 @@
 											-- Acessa o valor da força do personagem
 
 											if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
-												node.PA = nodeExterno.PA or '0';
-												node.PM = nodeExterno.PM or '0';
-												node.PF = nodeExterno.PF or '0';
-												node.DEF = nodeExterno.DEFRED or '0';
-												node.RES = nodeExterno.RESRED or '0';
-												node.AC = nodeExterno.Acerto or '0';
-												node.ACM = nodeExterno.AcertoMagico or '0';
-												node.CR = nodeExterno.Critical or '0';
-												node.CRM = nodeExterno.CMagico or '0';
-												node.ESQ = nodeExterno.Esquiva or '0';
-												node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+												node.PA = tonumber(nodeExterno.PA) or '0';
+												node.PM = tonumber(nodeExterno.PM) or '0';
+												node.PF = tonumber(nodeExterno.PF) or '0';
+												node.DEF = tonumber(nodeExterno.DEFRED) or '0';
+												node.RES = tonumber(nodeExterno.RESRED) or '0';
+												node.AC = tonumber(nodeExterno.Acerto) or '0';
+												node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+												node.CR = tonumber(nodeExterno.Critical) or '0';
+												node.CRM = tonumber(nodeExterno.CMagico) or '0';
+												node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+												node.Pers = tonumber(math.floor(nodeExterno.Persistencia) or '0');
 												node.Vez = node.Vez or '0';
-												node.Atletismo = nodeExterno.TAtletismo or '0';
-												node.Sabedoria = nodeExterno.TSabedoria or '0';
-												node.Percepcao = nodeExterno.TPercepcao or '0';
-												node.Acrobacia = nodeExterno.TAcrobacia or '0';
-												node.Vigor = nodeExterno.TVigor or '0';
-												node.HPBarMaxO = nodeExterno.HPTotal or '0';
-												node.MPBarMaxO = nodeExterno.MPTotal or '0';
-												node.HPBarO = nodeExterno.HPAtual or '0';
-												node.MPBarO = nodeExterno.MPAtual or '0';
+												node.Atletismo = tonumber(nodeExterno.TAtletismo) or '0';
+												node.Sabedoria = tonumber(nodeExterno.TSabedoria) or '0';
+												node.Percepcao = tonumber(nodeExterno.TPercepcao) or '0';
+												node.Acrobacia = tonumber(nodeExterno.TAcrobacia) or '0';
+												node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+												node.HPBarMaxO = tonumber(nodeExterno.HPTotal) or '0';
+												node.MPBarMaxO = tonumber(nodeExterno.MPTotal) or '0';
+												node.HPBarO = tonumber(nodeExterno.HPAtual) or '0';
+												node.MPBarO = tonumber(nodeExterno.MPAtual) or '0';
 												node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoOponente
 												node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
 											else
-												node.PA = nodeExterno.Dano or '0';
-												node.PM = nodeExterno.DanoMagico or '0';
+												node.PA = tonumber(nodeExterno.Dano) or '0';
+												node.PM = tonumber(nodeExterno.DanoMagico) or '0';
 												node.PF = "NPC";
-												node.DEF = nodeExterno.DefesaPorCent or '0';
-												node.RES = nodeExterno.ResistenciaPorCent or '0';
-												node.AC = nodeExterno.Acerto or '0';
-												node.ACM = nodeExterno.AcertoMagico or '0';
-												node.CR = nodeExterno.Critical or '0';
-												node.CRM = nodeExterno.CriticalMagico or '0';
-												node.ESQ = nodeExterno.Esquiva or '0';
-												node.Pers = math.floor(nodeExterno.Persistencia) or '0';
+												node.DEF = tonumber(nodeExterno.DefesaPorCent) or '0';
+												node.RES = tonumber(nodeExterno.ResistenciaPorCent) or '0';
+												node.AC = tonumber(nodeExterno.Acerto) or '0';
+												node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+												node.CR = tonumber(nodeExterno.Critical) or '0';
+												node.CRM = tonumber(nodeExterno.CriticalMagico) or '0';
+												node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+												node.Pers = tonumber(math.floor(nodeExterno.Persistencia) or '0');
 												node.Vez = node.Vez or '0';
-												node.Atletismo = nodeExterno.Atletismo or '0';
-												node.Sabedoria = nodeExterno.Sabedoria or '0';
-												node.Percepcao = nodeExterno.Percepcao or '0';
-												node.Acrobacia = nodeExterno.Acrobacia or '0';
-												node.Vigor = nodeExterno.TVigor or '0';
-												node.HPBarMaxO = nodeExterno.HPTotal or '0';
-												node.MPBarMaxO = nodeExterno.MPTotal or '0';
-												node.HPBarO = nodeExterno.HPAtual or '0';
-												node.MPBarO = nodeExterno.MPAtual or '0';
+												node.Atletismo = tonumber(nodeExterno.Atletismo) or '0';
+												node.Sabedoria = tonumber(nodeExterno.Sabedoria) or '0';
+												node.Percepcao = tonumber(nodeExterno.Percepcao) or '0';
+												node.Acrobacia = tonumber(nodeExterno.Acrobacia) or '0';
+												node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+												node.HPBarMaxO = tonumber(nodeExterno.HPTotal) or '0';
+												node.MPBarMaxO = tonumber(nodeExterno.MPTotal) or '0';
+												node.HPBarO = tonumber(nodeExterno.HPAtual) or '0';
+												node.MPBarO = tonumber(nodeExterno.MPAtual) or '0';
 												node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
 												node.imagemDoPersonagem = nodeExterno.imgInimigo
 											end;
@@ -1348,293 +1428,644 @@
 							end
 						</event>	
 					</button>	
+					<image align="top" width="64" height="64" src="./imagens/buff.png" margins="{top=5}">
+					<button name="btnEffectO" opacity="0.0" align="client">
+						<event name="onClick">
+							local novoForm = GUI.newForm("FrmEffectTesteO");
+							novoForm:setNodeObject(self.rclGrupoOponentes.selectedNode);
+							novoForm:show();
+                		</event>
+					</button>
+					</image>
+				
+			</layout>
+			<layout align="left" width="50" margins="{right=1}" >
+					<label align="top" text="Status" width="50" margins="{left=10}"/>
+					<label align="top" text="PA:" width="50" margins="{left=10}"/>
+					<label align="top" text="PM:" width="50" margins="{left=10}"/>
+					<label align="top" text="PF:" width="50" margins="{left=10}"/>
+					<label align="top" text="DEF:" width="50" margins="{left=10}"/>
+					<label align="top" text="RES:" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>
+					<label align="top" text="AC:" width="50" margins="{left=10}"/>
+					<label align="top" text="ACM:" width="50" margins="{left=10}"/>
+					<label align="top" text="CR:" width="50" margins="{left=10}"/>
+					<label align="top" text="CRM:" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>
+					<label align="top" text="ESQ:" width="50" margins="{left=10}"/>
+					<label align="top" text="Pers:" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>
+					<label align="top" text="Vez:" fontColor="green" width="50" margins="{left=10}"/>
+				</layout>
+				
+				<layout align="left" width="50" margins="{right=1}" >
+					<label align="top" text="Valor" width="50" margins="{left=10}"/>						
+					<label align="top" field="PA" width="50" margins="{left=10}"/>
+					<label align="top" field="PM" width="50" margins="{left=10}"/>
+					<label align="top" field="PF" width="50" margins="{left=10}"/>
+					<label align="top" field="DEF" width="50" margins="{left=10}"/>
+					<label align="top" field="RES" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>
+					<label align="top" field="AC" width="50" margins="{left=10}"/>
+					<label align="top" field="ACM" width="50" margins="{left=10}"/>
+					<label align="top" field="CR" width="50" margins="{left=10}"/>
+					<label align="top" field="CRM" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>
+					<label align="top" field="ESQ" width="50" margins="{left=10}"/>
+					<label align="top" field="Pers" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>
+					<edit align="top" field="Vez" fontColor="green" width="50" margins="{left=10}"/>	
+					
+					
+					
+				</layout>
+				
+				<layout align="left" width="50" margins="{right=1}" >	
+					<label align="top" text="Efeitos" width="50" margins="{left=10}"/>					
+					<label align="top" field="PAEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="PMEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="PFEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="DEFEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="RESEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>
+					<label align="top" field="ACEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="ACMEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="CREffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="CRMEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>
+					<label align="top" field="ESQEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="PersEffectTotal" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>					
+				</layout>
 
-			</layout>
-			
-			<layout align="left" width="50" margins="{right=1}" >
-				<label align="top" text="PA:" width="50" margins="{left=10}"/>
-				<label align="top" text="PM:" width="50" margins="{left=10}"/>
-				<label align="top" text="PF:" width="50" margins="{left=10}"/>
-				<label align="top" text="DEF:" width="50" margins="{left=10}"/>
-				<label align="top" text="RES:" width="50" margins="{left=10}"/>
-				<label align="top" text="---" width="50" margins="{left=10}"/>
-				<label align="top" text="AC:" width="50" margins="{left=10}"/>
-				<label align="top" text="ACM:" width="50" margins="{left=10}"/>
-				<label align="top" text="CR:" width="50" margins="{left=10}"/>
-				<label align="top" text="CRM:" width="50" margins="{left=10}"/>
-				<label align="top" text="---" width="50" margins="{left=10}"/>
-				<label align="top" text="ESQ:" width="50" margins="{left=10}"/>
-				<label align="top" text="Pers:" width="50" margins="{left=10}"/>
-				<label align="top" text="---" width="50" margins="{left=10}"/>
-				<label align="top" text="Vez:" fontColor="green" width="50" margins="{left=10}"/>
-			</layout>
-			
-			<layout align="left" width="50" margins="{right=1}" >
-				<label align="top" field="PA" width="50" margins="{left=10}"/>
-				<label align="top" field="PM" width="50" margins="{left=10}"/>
-				<label align="top" field="PF" width="50" margins="{left=10}"/>
-				<label align="top" field="DEF" width="50" margins="{left=10}"/>
-				<label align="top" field="RES" width="50" margins="{left=10}"/>
-				<label align="top" text="---" width="50" margins="{left=10}"/>
-				<label align="top" field="AC" width="50" margins="{left=10}"/>
-				<label align="top" field="ACM" width="50" margins="{left=10}"/>
-				<label align="top" field="CR" width="50" margins="{left=10}"/>
-				<label align="top" field="CRM" width="50" margins="{left=10}"/>
-				<label align="top" text="---" width="50" margins="{left=10}"/>
-				<label align="top" field="ESQ" width="50" margins="{left=10}"/>
-				<label align="top" field="Pers" width="50" margins="{left=10}"/>
-				<label align="top" text="---" width="50" margins="{left=10}"/>
-				<edit align="top" field="Vez" fontColor="green" width="50" margins="{left=10}"/>
-			</layout>
-			
-			<layout align="left" width="75" margins="{right=1}" >
-				<label align="top" text="Atletismo:" autoSize="true" margins="{left=10}"/>
-				<label align="top" text="Sabedoria:" autoSize="true" margins="{left=10}"/>
-				<label align="top" text="Percepcao:" autoSize="true" margins="{left=10}"/>
-				<label align="top" text="Acrobacia:" autoSize="true" margins="{left=10}"/>
-				<label align="top" text="Vigor:" autoSize="true" margins="{left=10}"/>
-				<label align="top" text="---" width="50" margins="{left=10}"/>
-			</layout>
-			
-			<layout align="left" width="50" margins="{right=1}" >
-				<label align="top" field="Atletismo" width="50" margins="{left=10}"/>
-				<label align="top" field="Sabedoria" width="50" margins="{left=10}"/>
-				<label align="top" field="Percepcao" width="50" margins="{left=10}"/>
-				<label align="top" field="Acrobacia" width="50" margins="{left=10}"/>
-				<label align="top" field="Vigor" width="50" margins="{left=10}"/>
-				<label align="top" text="---" width="50" margins="{left=10}"/>						
-			</layout>			 
+				<layout align="left" width="50" margins="{right=1}" >		
+					<label align="top" text="Total" width="50" margins="{left=10}"/>				
+					<label align="top" field="PATotal" width="50" margins="{left=10}"/>
+					<label align="top" field="PMTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="PFTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="DEFTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="RESTotal" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>
+					<label align="top" field="ACTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="ACMTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="CRTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="CRMTotal" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>
+					<label align="top" field="ESQTotal" width="50" margins="{left=10}"/>
+					<label align="top" field="PersTotal" width="50" margins="{left=10}"/>
+					<label align="top" text="---" width="50" margins="{left=10}"/>					
+				</layout>
+
+				<layout align="left" width="75" margins="{right=1}" >		
+					<label align="top" text="Vitais" width="75" margins="{left=10}"/>
+					<label align="top" text="HPTotal" width="75" margins="{left=10}"/>				
+					<label align="top" text="MPTotal" width="75" margins="{left=10}"/>			
+				</layout>
+
+				<layout align="left" width="50" margins="{right=1}" >		
+					<label align="top" text="Valor" width="50" margins="{left=10}"/>
+					<label align="top" field="HPEffectTotals" width="50" margins="{left=10}"/>				
+					<label align="top" field="MPEffectTotals" width="50" margins="{left=10}"/>			
+				</layout>
+
+				<layout align="left" width="50" margins="{right=1}" >		
+					<label align="top" text="Total" width="50" margins="{left=10}"/>
+					<label align="top" field="HPTotalTotal" width="50" margins="{left=10}"/>				
+					<label align="top" field="MPTotalTotal" width="50" margins="{left=10}"/>			
+				</layout>
+			----LZADA----		 
 		</rectangle>
 	</dataScopeBox>
+
+	<textEditor name="LogCombat" left="615" top="350" width="210" height="350" field="FieldLogCombat"/>
+	<button name="btnResetLog" left="615" width="210" top="710" text="Reset Log" onClick="ResetaLog()"/>
 	
 	<dataLink fields="{'ACAOTURNO'}">
-		<event name="onChange">            
+		<event name="onChange">
 
-			if sheet.AlvoRecebido ~= nil and sheet.AlvoRecebido ~= "" then
-				-- Acessa o RecordList do grupo de jogadores
-				local nodes = ndb.getChildNodes(sheet.NomeJogador) -- Substitua pelo campo correto
+								local personagem = rrpg.getPersonagemDe(sheet); 
 
-				for _, node in ipairs(nodes) do
-					-- Verifica se o NomeDoPersonagem coincide com o AlvoRecebido
-					if node.NomeDoPersonagemVez == sheet.AlvoRecebido then
-						-- Seleciona automaticamente o item no RecordList
-						self.rclGrupoJogadores.selectedNode = node
-						break -- Encerra o loop ao encontrar o item correspondente
-					end
-				end
-			end
+								          
+											
+								if (personagem ~= nil) then
+									local mesa = personagem.mesa;
+									if (mesa.meuJogador.id) == 51345 then
 
-			if sheet.AlvoRecebido ~= nil and sheet.AlvoRecebido ~= "" then
-				-- Acessa o RecordList do grupo de jogadores
-				local nodes = ndb.getChildNodes(sheet.NomeOponentes) -- Substitua pelo campo correto
-
-				for _, node in ipairs(nodes) do
-					-- Verifica se o NomeDoPersonagem coincide com o AlvoRecebido
-					if node.NomeDoPersonagemVez == sheet.AlvoRecebido then
-						-- Seleciona automaticamente o item no RecordList
-						self.rclGrupoOponentes.selectedNode = node
-						break -- Encerra o loop ao encontrar o item correspondente
-					end
-				end
-			end
-
-		    if sheet.GrupoRecebido == "1" then
-				local nodes = ndb.getChildNodes(sheet.NomeOponentes)
-					
-				for _, node in ipairs(nodes) do
-					if node.NomeDoOponenteVez == sheet.AlvoRecebido then						
-						
-						--AQUI--
-						if	self.BoxDetalheOponentes.visible == true then
-							local node = self.rclGrupoOponentes.selectedNode;   
-							self.rclGrupoOponentes.node = node;
-							
-							local mesas = rrpg.getRooms();
-							local bibliotecaAtual = mesas[1].library;
-
-							local function obterNomesRecursivo(bibItem)
-								local itensFilhos = bibItem.children;
-								local nomes = bibItem.name;								
-
-								for i = 1, #itensFilhos, 1 do
-									local bibItemFilho = itensFilhos[i];
-									local nomesDoFilho = obterNomesRecursivo(bibItemFilho) or "";									
-
-									if nomesDoFilho == node.NomeDoOponente then
-										-- Obter ID do personagem Loan
-										local idPersonagem = bibItemFilho;
-
-										-- Solicita acesso à ficha do personagem
-										local promise = bibItemFilho:asyncOpenNDB();
 										
-										
-
-										-- Aguarda até que a ficha esteja carregada
-										local nodeExterno = await(promise);
-
-										-- Sincronizando
-
-										if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
-											node.PA = nodeExterno.PA or '0';
-											node.PM = nodeExterno.PM or '0';
-											node.PF = nodeExterno.PF or '0';
-											node.DEF = nodeExterno.DEFRED or '0';
-											node.RES = nodeExterno.RESRED or '0';
-											node.AC = nodeExterno.Acerto or '0';
-											node.ACM = nodeExterno.AcertoMagico or '0';
-											node.CR = nodeExterno.Critical or '0';
-											node.CRM = nodeExterno.CMagico or '0';
-											node.ESQ = nodeExterno.Esquiva or '0';
-											node.Pers = math.floor(nodeExterno.Persistencia) or '0';
-											node.Vez = node.Vez or '0';
-											node.Atletismo = nodeExterno.TAtletismo or '0';
-											node.Sabedoria = nodeExterno.TSabedoria or '0';
-											node.Percepcao = nodeExterno.TPercepcao or '0';
-											node.Acrobacia = nodeExterno.TAcrobacia or '0';
-											node.Vigor = nodeExterno.TVigor or '0';
-											node.HPBarMax = nodeExterno.HPTotal or '0';
-											node.MPBarMax = nodeExterno.MPTotal or '0';
-											node.HPBar = nodeExterno.HPAtual or '0';
-											node.MPBar = nodeExterno.MPAtual or '0';
-											node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoOponente
-											node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
-										else
-											node.PA = nodeExterno.Dano or '0';
-											node.PM = nodeExterno.DanoMagico or '0';
-											node.PF = "NPC";
-											node.DEF = nodeExterno.DefesaPorCent or '0';
-											node.RES = nodeExterno.ResistenciaPorCent or '0';
-											node.AC = nodeExterno.Acerto or '0';
-											node.ACM = nodeExterno.AcertoMagico or '0';
-											node.CR = nodeExterno.Critical or '0';
-											node.CRM = nodeExterno.CriticalMagico or '0';
-											node.ESQ = nodeExterno.Esquiva or '0';
-											node.Pers = math.floor(nodeExterno.Persistencia) or '0';
-											node.Vez = node.Vez or '0';
-											node.Atletismo = nodeExterno.Atletismo or '0';
-											node.Sabedoria = nodeExterno.Sabedoria or '0';
-											node.Percepcao = nodeExterno.Percepcao or '0';
-											node.Acrobacia = nodeExterno.Acrobacia or '0';
-											node.Vigor = nodeExterno.TVigor or '0';
-											node.HPBarMax = nodeExterno.HPTotal or '0';
-											node.MPBarMax = nodeExterno.MPTotal or '0';
-											node.HPBar = nodeExterno.HPAtual or '0';
-											node.MPBar = nodeExterno.MPAtual or '0';
-											node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
-											node.imagemDoPersonagem = nodeExterno.imgInimigo
+										if sheet.UsuarioEnvio ~= nil and sheet.EscolheTipoAtaque ~= "Cura" and sheet.EscolheTipoAtaque ~= "Cura Fixa" then
+											UsuarioEnvio = AchaQuemEnviou(sheet.UsuarioEnvio, sheet.NomeJogador, sheet.NomeOponentes)
 										end;
 
-										node.HPBarO = (node.HPBarO - await(sheet.DanoRecebido))
-										nodeExterno.HPAtual = node.HPBarO or '0';
-
-									end
-								end
-							return nomes
-							end
-							local nomesDeTodosOsItens = obterNomesRecursivo(bibliotecaAtual);
-						end;
-						
-					end
-				end
-			end;
-			
-			if sheet.GrupoRecebido == "2" then
-				local nodes = ndb.getChildNodes(sheet.NomeJogador)
-					
-				for _, node in ipairs(nodes) do
-					if node.NomeDoPersonagemVez == sheet.AlvoRecebido then
-						if	self.BoxDetalheJogadores.visible == true then
-							local node = self.rclGrupoJogadores.selectedNode;   
-							self.rclGrupoJogadores.node = node;
-							
-							local mesas = rrpg.getRooms();
-							local bibliotecaAtual = mesas[1].library;
-
-							local function obterNomesRecursivoO(bibItem)
-								local itensFilhos = bibItem.children;
-								local nomes = bibItem.name;
-
-								for i = 1, #itensFilhos, 1 do
-									local bibItemFilho = itensFilhos[i];
-									local nomesDoFilho = obterNomesRecursivoO(bibItemFilho) or "";
-
-									if nomesDoFilho == node.NomeDoPersonagem then
-										-- Obter ID do personagem Loan
-										local idPersonagem = bibItemFilho;
-
-										-- Solicita acesso à ficha do personagem
-										local promise = bibItemFilho:asyncOpenNDB();
-
-										-- Aguarda até que a ficha esteja carregada
-										local nodeExterno = await(promise);
-
-										-- Sincronizando
-
-										if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
-											node.PA = nodeExterno.PA or '0';
-											node.PM = nodeExterno.PM or '0';
-											node.PF = nodeExterno.PF or '0';
-											node.DEF = nodeExterno.DEFRED or '0';
-											node.RES = nodeExterno.RESRED or '0';
-											node.AC = nodeExterno.Acerto or '0';
-											node.ACM = nodeExterno.AcertoMagico or '0';
-											node.CR = nodeExterno.Critical or '0';
-											node.CRM = nodeExterno.CMagico or '0';
-											node.ESQ = nodeExterno.Esquiva or '0';
-											node.Pers = math.floor(nodeExterno.Persistencia) or '0';
-											node.Vez = node.Vez or '0';
-											node.Atletismo = nodeExterno.TAtletismo or '0';
-											node.Sabedoria = nodeExterno.TSabedoria or '0';
-											node.Percepcao = nodeExterno.TPercepcao or '0';
-											node.Acrobacia = nodeExterno.TAcrobacia or '0';
-											node.Vigor = nodeExterno.TVigor or '0';
-											node.HPBarMax = nodeExterno.HPTotal or '0';
-											node.MPBarMax = nodeExterno.MPTotal or '0';
-											node.HPBar = nodeExterno.HPAtual or '0';
-											node.MPBar = nodeExterno.MPAtual or '0';
-											node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoPersonagem
-											node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
-										else
-											node.PA = nodeExterno.Dano or '0';
-											node.PM = nodeExterno.DanoMagico or '0';
-											node.PF = "NPC";
-											node.DEF = nodeExterno.DefesaPorCent or '0';
-											node.RES = nodeExterno.ResistenciaPorCent or '0';
-											node.AC = nodeExterno.Acerto or '0';
-											node.ACM = nodeExterno.AcertoMagico or '0';
-											node.CR = nodeExterno.Critical or '0';
-											node.CRM = nodeExterno.CriticalMagico or '0';
-											node.ESQ = nodeExterno.Esquiva or '0';
-											node.Pers = math.floor(nodeExterno.Persistencia) or '0';
-											node.Vez = node.Vez or '0';
-											node.Atletismo = nodeExterno.Atletismo or '0';
-											node.Sabedoria = nodeExterno.Sabedoria or '0';
-											node.Percepcao = nodeExterno.Percepcao or '0';
-											node.Acrobacia = nodeExterno.Acrobacia or '0';
-											node.Vigor = nodeExterno.TVigor or '0';
-											node.HPBarMax = nodeExterno.HPTotal or '0';
-											node.MPBarMax = nodeExterno.MPTotal or '0';
-											node.HPBar = nodeExterno.HPAtual or '0';
-											node.MPBar = nodeExterno.MPAtual or '0';
-											node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
-											node.imagemDoPersonagem = nodeExterno.imgInimigo
+										if sheet.AlvoRecebido ~= nil and sheet.EscolheTipoAtaque ~= "Cura" and sheet.EscolheTipoAtaque ~= "Cura Fixa" then
+											AlvoEnviou = VerificaAlvo(sheet.AlvoRecebido, sheet.NomeJogador, sheet.NomeOponentes)
 										end;
+																			
+												
+										local mesaDoPersonagem = Firecast.getRoomOf(sheet); 
 
+										if sheet.TipoRecebido == "Cura" or sheet.TipoRecebido == "Cura Fixa" then
+											HabilidadeCura(nil)
+										end;          
+
+											if sheet.AlvoRecebido ~= nil and sheet.AlvoRecebido ~= "" then
+												-- Acessa o RecordList do grupo de jogadores
+												local nodes = ndb.getChildNodes(sheet.NomeJogador) -- Substitua pelo campo correto
+
+												for _, node in ipairs(nodes) do
+													if node.NomeDoPersonagemVez == sheet.AlvoRecebido then
+														-- Seleciona automaticamente o item no RecordList
+														self.rclGrupoJogadores.selectedNode = node
+														break -- Encerra o loop ao encontrar o item correspondente
+													end
+												end
+											end
+
+											if sheet.AlvoRecebido ~= nil and sheet.AlvoRecebido ~= "" then
+												-- Acessa o RecordList do grupo de jogadores
+												local nodes = ndb.getChildNodes(sheet.NomeOponentes) -- Substitua pelo campo correto
+
+												for _, node in ipairs(nodes) do
+													if node.NomeDoOponenteVez == sheet.AlvoRecebido then
+														-- Seleciona automaticamente o item no RecordList
+														self.rclGrupoOponentes.selectedNode = node
+														break -- Encerra o loop ao encontrar o item correspondente
+													end
+												end
+											end
+
+											
+
+											if sheet.GrupoRecebido == "1" then
+												local nodes = ndb.getChildNodes(sheet.NomeOponentes)
+													
+												for _, node in ipairs(nodes) do
+													if node.NomeDoOponenteVez == sheet.AlvoRecebido then						
+														
+														--AQUI--
+														if	self.BoxDetalheOponentes.visible == true then
+															local node = self.rclGrupoOponentes.selectedNode;   
+															self.rclGrupoOponentes.node = node;
+															
+															local mesas = rrpg.getRooms();
+															local bibliotecaAtual = mesas[1].library;
+
+															local function obterNomesRecursivoI(bibItem)
+																local itensFilhos = bibItem.children;
+																local nomes = bibItem.name;								
+
+																for i = 1, #itensFilhos, 1 do
+																	local bibItemFilho = itensFilhos[i];
+																	local nomesDoFilho = obterNomesRecursivoI(bibItemFilho) or "";									
+
+																	if nomesDoFilho == node.NomeDoOponente then
+																		-- Obter ID do personagem Loan
+																		local idPersonagem = bibItemFilho;
+																		
+
+																		-- Solicita acesso à ficha do personagem
+																		local promise = bibItemFilho:asyncOpenNDB();
+																		
+																		-- Aguarda até que a ficha esteja carregada
+																		local nodeExterno = await(promise);
+
+																		-- Sincronizando
+
+																		if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
+																			node.PA = tonumber(nodeExterno.PA) or '0';
+																			node.PM = tonumber(nodeExterno.PM) or '0';
+																			node.PF = tonumber(nodeExterno.PF) or '0';
+																			node.DEF = tonumber(nodeExterno.DEFRED) or '0';
+																			node.RES = tonumber(nodeExterno.RESRED) or '0';
+																			node.AC = tonumber(nodeExterno.Acerto) or '0';
+																			node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+																			node.CR = tonumber(nodeExterno.Critical) or '0';
+																			node.CRM = tonumber(nodeExterno.CMagico) or '0';
+																			node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+																			node.Pers = math.floor(tonumber(nodeExterno.Persistencia)) or '0';
+																			node.Vez = node.Vez or '0';
+																			node.Atletismo = tonumber(nodeExterno.TAtletismo) or '0';
+																			node.Sabedoria = tonumber(nodeExterno.TSabedoria) or '0';
+																			node.Percepcao = tonumber(nodeExterno.TPercepcao) or '0';
+																			node.Acrobacia = tonumber(nodeExterno.TAcrobacia) or '0';
+																			node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+																			node.HPBarMaxO = tonumber(nodeExterno.HPTotal) or '0';
+																			node.MPBarMaxO = math.floor(tonumber(nodeExterno.MPTotal)) or '0';
+																			node.HPBarO = tonumber(nodeExterno.HPAtual) or '0';
+																			node.MPBarO = math.floor(tonumber(nodeExterno.MPAtual)) or '0';
+																			node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoOponente
+																			node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
+																		else
+																			node.PA = tonumber(nodeExterno.Dano) or '0';
+																			node.PM = tonumber(nodeExterno.DanoMagico) or '0';
+																			node.PF = "NPC";
+																			node.DEF = tonumber(nodeExterno.DefesaPorCent) or '0';
+																			node.RES = tonumber(nodeExterno.ResistenciaPorCent) or '0';
+																			node.AC = tonumber(nodeExterno.Acerto) or '0';
+																			node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+																			node.CR = tonumber(nodeExterno.Critical) or '0';
+																			node.CRM = tonumber(nodeExterno.CriticalMagico) or '0';
+																			node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+																			node.Pers = math.floor(tonumber(nodeExterno.Persistencia)) or '0';
+																			node.Vez = node.Vez or '0';
+																			node.Atletismo = tonumber(nodeExterno.Atletismo) or '0';
+																			node.Sabedoria = tonumber(nodeExterno.Sabedoria) or '0';
+																			node.Percepcao = tonumber(nodeExterno.Percepcao) or '0';
+																			node.Acrobacia = tonumber(nodeExterno.Acrobacia) or '0';
+																			node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+																			node.HPBarMaxO = tonumber(nodeExterno.HPTotal) or '0';
+																			node.MPBarMaxO = math.floor(tonumber(nodeExterno.MPTotal)) or '0';
+																			node.HPBarO = tonumber(nodeExterno.HPAtual) or '0';
+																			node.MPBarO = math.floor(tonumber(nodeExterno.MPAtual)) or '0';
+																			node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
+																			node.imagemDoPersonagem = nodeExterno.imgInimigo
+																		end;
+		
+																		if sheet.EscolheTipoAtaque == 'PA' or sheet.EscolheTipoAtaque == 'DF' or sheet.EscolheTipoAtaque == 'PA+PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + UsuarioEnvio.PAEffectTotal) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'M/PA' or sheet.EscolheTipoAtaque == 'M/DF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PAEffectTotal / 2)) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'PA+M/PA' or sheet.EscolheTipoAtaque == 'DF' or sheet.EscolheTipoAtaque == 'PA+PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + UsuarioEnvio.PAEffectTotal) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'DF+M/DF' or sheet.EscolheTipoAtaque == 'DF' or sheet.EscolheTipoAtaque == 'PA+PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + UsuarioEnvio.PAEffectTotal) or 0)
+																		end;
+
+																		if sheet.EscolheTipoAtaque == 'PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + UsuarioEnvio.PFEffectTotal) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'M/PF' or sheet.EscolheTipoAtaque == 'M/DF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PFEffectTotal / 2)) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'PF+M/PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + UsuarioEnvio.PFEffectTotal) or 0)
+																		end;
+
+																		if sheet.EscolheTipoAtaque == 'PM' or sheet.EscolheTipoAtaque == 'DM' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PMEffectTotal or 0)) or 0)
+																		end;	
+																		if sheet.EscolheTipoAtaque == 'PM+M/PM' or sheet.EscolheTipoAtaque == 'DM' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PMEffectTotal or 0)) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'DM+M/DM' or sheet.EscolheTipoAtaque == 'DM' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PMEffectTotal or 0)) or 0)
+																		end;	
+
+																		if sheet.EscolheTipoAtaque == 'PA+PM' or sheet.EscolheTipoAtaque == 'DF+DM' or sheet.EscolheTipoAtaque == 'PF+PM' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PMEffectTotal or 0) + (UsuarioEnvio.PFEffectTotal or 0) ) or 0)
+																		end;
+																		
+
+																		if sheet.EscolheTipoAtaque == 'M/PA+PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PAEffectTotal / 2) + (UsuarioEnvio.PFEffectTotal)) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'M/PF+PA' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PFEffectTotal / 2) + (UsuarioEnvio.PAEffectTotal)) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'M/PF+M/PA' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PFEffectTotal / 2) + (UsuarioEnvio.PAEffectTotal / 2)) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'M/PM' or sheet.EscolheTipoAtaque == 'M/DM' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + UsuarioEnvio.PMEffectTotal / 2) or 0)
+																		end;								
+
+																		
+																		if sheet.EscolheTipoAtaque == 'M/PM+PA' or sheet.EscolheTipoAtaque == 'M/DM+DF' or sheet.EscolheTipoAtaque == 'M/PM+PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + ((UsuarioEnvio.PMEffectTotal / 2) or 0) + (UsuarioEnvio.PAEffectTotal or 0)) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'M/DF+DM' or sheet.EscolheTipoAtaque == 'M/PA+PM' or sheet.EscolheTipoAtaque == 'M/PF+PM' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + ((UsuarioEnvio.PAEffectTotal / 2) or 0) + (UsuarioEnvio.PMEffectTotal or 0)) or 0)
+																		end;
+
+
+																		if sheet.EscolheTipoAtaque == 'M/PA+M/PM' or sheet.EscolheTipoAtaque == 'M/PF+M/PM' or sheet.EscolheTipoAtaque == 'M/DF+M/DM' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + ((UsuarioEnvio.PAEffectTotal / 2) or 0) + (UsuarioEnvio.PMEffectTotal /2) or 0) or 0)
+																		end;
+
+																		if sheet.EscolheTipoAtaque == 'REAL PA' or sheet.EscolheTipoAtaque == 'REAL PF' or sheet.EscolheTipoAtaque == 'REAL PM' or sheet.EscolheTipoAtaque == 'REAL DM' or sheet.EscolheTipoAtaque == 'REAL DF' or sheet.EscolheTipoAtaque == 'Real' then
+																			sheet.RedutivelAtual = 0
+																		end;
+
+																		if sheet.EscolheTipoAtaque == 'Buff' or sheet.EscolheTipoAtaque == 'Defensiva' then
+																			sheet.RedutivelAtual = 0
+																		end;	
+
+																		if sheet.EscolheTipoAtaque == 'Efeito' then
+																			sheet.RedutivelAtual = 0
+																		end;		
+
+																		if sheet.EscolheTipoAtaque == 'M/PA+M/PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PAEffectTotal / 2) + (UsuarioEnvio.PFEffectTotal / 2)) or 0)
+																		end;					
+																		
+																		if sheet.UsuarioEnvio ~= nil then
+																			DecideOqueRolar(
+																			UsuarioEnvio, 
+																			AlvoEnviou, 
+																			sheet.TipoRecebido, 
+																			sheet.UsuarioEnviouCusto,
+																			self.BoxDetalheJogadores, 
+																			self.BoxDetalheOponentes,
+																			function()
+																				-- Este código só executa DEPOIS que DecideOqueRolar terminar
+																				if sheet.AcertouPergunta == "True" then
+																					mesaDoPersonagem.chat:enviarMensagem("[§K1]---ACERTOU O ALVO---")
+																					local danoFinal = (sheet.DanoRecebido or 0) * (1 - (tonumber(sheet.RedutivelAtual or 0) / 100))
+																					sheet.DanoProLog = danoFinal
+																					node.HPBarO = tonumber(math.floor(node.HPBarO - danoFinal))
+																					nodeExterno.HPAtual = tonumber(node.HPBarO) or '0'
+																					if sheet.FoiCriticalLog == true then																			
+																						atualizarLogCritical()
+																						mesaDoPersonagem.chat:enviarMensagem(string.rep("-", 50) .. "\n[§K1][§K4]⚡⚡ CRITICAL ⚡⚡ --- ACERTOU O ALVO ---\n" .. string.rep("-", 50))
+																					else
+																						atualizarLog()
+																					end;
+																				elseif sheet.AcertouPergunta == "False" then
+																					mesaDoPersonagem.chat:enviarMensagem("[§K2]--ERROU O ALVO--")
+																				else 
+																				end
+																			end
+																			)
+																		end
+
+
+																	end
+																end
+															return nomes
+															end
+															
+															local nomesDeTodosOsItens = obterNomesRecursivoI(bibliotecaAtual);
+														end;
+														
+													end
+												end
+											end;
+
+											if sheet.GrupoRecebido == "2" then
+												local nodes = ndb.getChildNodes(sheet.NomeJogador)
+													
+												for _, node in ipairs(nodes) do
+													if node.NomeDoPersonagemVez == sheet.AlvoRecebido then
+														if	self.BoxDetalheJogadores.visible == true then
+															local node = self.rclGrupoJogadores.selectedNode;   
+															self.rclGrupoJogadores.node = node;
+															
+															local mesas = rrpg.getRooms();
+															local bibliotecaAtual = mesas[1].library;
+
+															local function obterNomesRecursivoP(bibItem)
+																local itensFilhos = bibItem.children;
+																local nomes = bibItem.name;
+
+																for i = 1, #itensFilhos, 1 do
+																	local bibItemFilho = itensFilhos[i];
+																	local nomesDoFilho = obterNomesRecursivoP(bibItemFilho) or "";
+
+																	if nomesDoFilho == node.NomeDoPersonagem then
+																		-- Obter ID do personagem Loan
+																		local idPersonagem = bibItemFilho;
+
+																		-- Solicita acesso à ficha do personagem
+																		local promise = bibItemFilho:asyncOpenNDB();
+
+																		-- Aguarda até que a ficha esteja carregada
+																		local nodeExterno = await(promise);
+
+																		-- Sincronizando
+
+																		if nodeExterno.PA ~= nil or nodeExterno.PA == ""  then
+																			node.PA = tonumber(nodeExterno.PA) or '0';
+																			node.PM = tonumber(nodeExterno.PM) or '0';
+																			node.PF = tonumber(nodeExterno.PF) or '0';
+																			node.DEF = tonumber(nodeExterno.DEFRED) or '0';
+																			node.RES = tonumber(nodeExterno.RESRED) or '0';
+																			node.AC = tonumber(nodeExterno.Acerto) or '0';
+																			node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+																			node.CR = tonumber(nodeExterno.Critical) or '0';
+																			node.CRM = tonumber(nodeExterno.CMagico) or '0';
+																			node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+																			node.Pers = tonumber(math.floor(nodeExterno.Persistencia) or '0');
+																			node.Vez = node.Vez or '0';
+																			node.Atletismo = tonumber(nodeExterno.TAtletismo) or '0';
+																			node.Sabedoria = tonumber(nodeExterno.TSabedoria) or '0';
+																			node.Percepcao = tonumber(nodeExterno.TPercepcao) or '0';
+																			node.Acrobacia = tonumber(nodeExterno.TAcrobacia) or '0';
+																			node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+																			node.HPBarMax = tonumber(nodeExterno.HPTotal) or '0';
+																			node.MPBarMax = tonumber(math.floor(tonumber(nodeExterno.MPTotal)) or '0');
+																			node.HPBar = tonumber(nodeExterno.HPAtual) or '0';
+																			node.MPBar = tonumber(nodeExterno.MPAtual) or '0';
+																			node.NomeDoPersonagemVez = node.Vez .. " - " ..  node.NomeDoPersonagem
+																			node.imagemDoPersonagem = nodeExterno.imagemDoPersonagem
+																		else
+																			node.PA = tonumber(nodeExterno.Dano) or '0';
+																			node.PM = tonumber(nodeExterno.DanoMagico) or '0';
+																			node.PF = "NPC";
+																			node.DEF = tonumber(nodeExterno.DefesaPorCent) or '0';
+																			node.RES = tonumber(nodeExterno.ResistenciaPorCent) or '0';
+																			node.AC = tonumber(nodeExterno.Acerto) or '0';
+																			node.ACM = tonumber(nodeExterno.AcertoMagico) or '0';
+																			node.CR = tonumber(nodeExterno.Critical) or '0';
+																			node.CRM = tonumber(nodeExterno.CriticalMagico) or '0';
+																			node.ESQ = tonumber(nodeExterno.Esquiva) or '0';
+																			node.Pers = tonumber(math.floor(nodeExterno.Persistencia) or '0');
+																			node.Vez = node.Vez or '0';
+																			node.Atletismo = tonumber(nodeExterno.Atletismo) or '0';
+																			node.Sabedoria = tonumber(nodeExterno.Sabedoria) or '0';
+																			node.Percepcao = tonumber(nodeExterno.Percepcao) or '0';
+																			node.Acrobacia = tonumber(nodeExterno.Acrobacia) or '0';
+																			node.Vigor = tonumber(nodeExterno.TVigor) or '0';
+																			node.HPBarMax = tonumber(nodeExterno.HPTotal) or '0';
+																			node.MPBarMax = tonumber(math.floor(tonumber(nodeExterno.MPTotal)) or '0');
+																			node.HPBar = tonumber(nodeExterno.HPAtual) or '0';
+																			node.MPBar = tonumber(nodeExterno.MPAtual) or '0';
+																			node.NomeDoPersonagemVez = node.Vez .. " - " ..  nodeExterno.Nome
+																			node.imagemDoPersonagem = nodeExterno.imgInimigo
+																		end;
+
+																		if sheet.EscolheTipoAtaque == 'PA' or sheet.EscolheTipoAtaque == 'DF' or sheet.EscolheTipoAtaque == 'PA+PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + UsuarioEnvio.PAEffectTotal) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'M/PA' or sheet.EscolheTipoAtaque == 'M/DF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PAEffectTotal / 2)) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'PA+M/PA' or sheet.EscolheTipoAtaque == 'DF' or sheet.EscolheTipoAtaque == 'PA+PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + UsuarioEnvio.PAEffectTotal) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'DF+M/DF' or sheet.EscolheTipoAtaque == 'DF' or sheet.EscolheTipoAtaque == 'PA+PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + UsuarioEnvio.PAEffectTotal) or 0)
+																		end;
+
+																		if sheet.EscolheTipoAtaque == 'PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + UsuarioEnvio.PFEffectTotal) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'M/PF' or sheet.EscolheTipoAtaque == 'M/DF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PFEffectTotal / 2)) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'PF+M/PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + UsuarioEnvio.PFEffectTotal) or 0)
+																		end;
+
+																		if sheet.EscolheTipoAtaque == 'PM' or sheet.EscolheTipoAtaque == 'DM' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PMEffectTotal or 0)) or 0)
+																		end;	
+																		if sheet.EscolheTipoAtaque == 'PM+M/PM' or sheet.EscolheTipoAtaque == 'DM' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PMEffectTotal or 0)) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'DM+M/DM' or sheet.EscolheTipoAtaque == 'DM' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PMEffectTotal or 0)) or 0)
+																		end;	
+																																		
+																		if sheet.EscolheTipoAtaque == 'PA+PM' or sheet.EscolheTipoAtaque == 'DF+DM' or sheet.EscolheTipoAtaque == 'PF+PM' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PMEffectTotal or 0) + (UsuarioEnvio.PFEffectTotal or 0) ) or 0)
+																		end;
+
+																		if sheet.EscolheTipoAtaque == 'M/PA+PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PAEffectTotal / 2) + (UsuarioEnvio.PFEffectTotal)) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'M/PF+PA' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PFEffectTotal / 2) + (UsuarioEnvio.PAEffectTotal)) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'M/PF+M/PA' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PFEffectTotal / 2) + (UsuarioEnvio.PAEffectTotal / 2)) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'M/PM' or sheet.EscolheTipoAtaque == 'M/DM' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + UsuarioEnvio.PMEffectTotal / 2) or 0)
+																		end;								
+
+																		
+																		if sheet.EscolheTipoAtaque == 'M/PM+PA' or sheet.EscolheTipoAtaque == 'M/DM+DF' or sheet.EscolheTipoAtaque == 'M/PM+PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + ((UsuarioEnvio.PMEffectTotal / 2) or 0) + (UsuarioEnvio.PAEffectTotal or 0)) or 0)
+																		end;
+																		if sheet.EscolheTipoAtaque == 'M/DF+DM' or sheet.EscolheTipoAtaque == 'M/PA+PM' or sheet.EscolheTipoAtaque == 'M/PF+PM' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + ((UsuarioEnvio.PAEffectTotal / 2) or 0) + (UsuarioEnvio.PMEffectTotal or 0)) or 0)
+																		end;
+
+
+																		if sheet.EscolheTipoAtaque == 'M/PA+M/PM' or sheet.EscolheTipoAtaque == 'M/PF+M/PM' or sheet.EscolheTipoAtaque == 'M/DF+M/DM' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.RES + node.RESEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + ((UsuarioEnvio.PAEffectTotal / 2) or 0) + (UsuarioEnvio.PMEffectTotal /2) or 0) or 0)
+																		end;
+
+																		if sheet.EscolheTipoAtaque == 'REAL PA' or sheet.EscolheTipoAtaque == 'REAL PF' or sheet.EscolheTipoAtaque == 'REAL PM' or sheet.EscolheTipoAtaque == 'REAL DM' or sheet.EscolheTipoAtaque == 'REAL DF' or sheet.EscolheTipoAtaque == 'Real' then
+																			sheet.RedutivelAtual = 0
+																		end;
+
+																		if sheet.EscolheTipoAtaque == 'Buff' or sheet.EscolheTipoAtaque == 'Defensiva' then
+																			sheet.RedutivelAtual = 0
+																		end;
+
+																		if sheet.EscolheTipoAtaque == 'Efeito' then
+																			sheet.RedutivelAtual = 0
+																		end;			
+
+																		if sheet.EscolheTipoAtaque == 'M/PA+M/PF' then
+																			sheet.RedutivelAtual = tonumber(math.floor(node.DEF + node.DEFEffectTotal))
+																			sheet.DanoRecebido = tonumber(math.floor(sheet.DanoRecebido + (UsuarioEnvio.PAEffectTotal / 2) + (UsuarioEnvio.PFEffectTotal / 2)) or 0)
+																		end;
+					
+																		
+																	
+																		if sheet.UsuarioEnvio ~= nil then
+																			DecideOqueRolar(
+																			UsuarioEnvio, 
+																			AlvoEnviou, 
+																			sheet.TipoRecebido, 
+																			sheet.UsuarioEnviouCusto,
+																			self.BoxDetalheJogadores, 
+																			self.BoxDetalheOponentes,
+																			function()
+
+																				-- Este código só executa DEPOIS que DecideOqueRolar terminar
+																				if sheet.AcertouPergunta == "True" then
+																					mesaDoPersonagem.chat:enviarMensagem("[§K1]---ACERTOU O ALVO---")
+																					local danoFinal = (sheet.DanoRecebido or 0) * (1 - (tonumber(sheet.RedutivelAtual or 0) / 100))
+																					sheet.DanoProLog = danoFinal
+																					node.HPBar = tonumber(math.floor(node.HPBar - danoFinal))
+																					nodeExterno.HPAtual = tonumber(node.HPBar) or '0'																					
+																					if sheet.FoiCriticalLog == true then
+																						atualizarLogCritical()
+																						mesaDoPersonagem.chat:enviarMensagem(string.rep("-", 50) .. "\n[§K1][§K4]⚡⚡ CRITICAL ⚡⚡ --- ACERTOU O ALVO ---\n" .. string.rep("-", 50))
+																					else																						
+																						atualizarLog()
+																					end;
+																				elseif sheet.AcertouPergunta == "False" then
+																					mesaDoPersonagem.chat:enviarMensagem("[§K2]--ERROU O ALVO--")
+																				else 
+																					showMessage('erro, reutilizar habilidade')
+																				end
+																			end
+																			)
+																		end
+																	end
+																end
+															return nomes
+															end
+															local nomesDeTodosOsItens = obterNomesRecursivoP(bibliotecaAtual);
+														end;
+														
+													end
+												end
+											end
 										
-										node.HPBar = (node.HPBar - await(sheet.DanoRecebido))
-										nodeExterno.HPAtual = node.HPBar or '0';
+									
 										
+
 									end
-								end
-							return nomes
-							end
-							local nomesDeTodosOsItens = obterNomesRecursivoO(bibliotecaAtual);
-						end;
-						
-					end
-				end
+									sheet.UsuarioEnvio = nil
+									sheet.TesteDecidido = nil
+									sheet.AcertouPergunta = nil
+								end;  
+		</event>
+	</dataLink>
+
+	<dataLink fields="{'RecargaNome', 'QuemRecarregou'}">
+		<event name="onChange">
+			if sheet.QuemRecarregou ~= nil then
+				sheet.QuemRecarregou = nil  -- Reseta o campo para evitar múltiplas mensagens
 			end
 		</event>
 	</dataLink>
+
+
+	
 
 </form>

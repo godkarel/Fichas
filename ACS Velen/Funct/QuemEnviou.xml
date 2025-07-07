@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>		
+	
+	<script>		
+		function AchaQuemEnviou(Usuario, Jogador, Oponente)
+			local nodes = ndb.getChildNodes(Jogador) -- Obtém os nós da recordList
+			function trim(s)
+				return (s:gsub("^%s*(.-)%s*$", "%1"))
+			end
+			
+			if #nodes > 0 then  -- Verifica se há elementos na lista
+				for i, node in ipairs(nodes) do
+					if trim(node.NomeDoPersonagem) == trim(Usuario) then
+						return node
+					end;
+				end
+			else
+				
+			end
+
+			local nodes = ndb.getChildNodes(Oponente) -- Obtém os nós da recordList
+			
+			if #nodes > 0 then  -- Verifica se há elementos na lista
+				for i, node in ipairs(nodes) do
+					if trim(node.NomeDoOponente) == trim(Usuario) then
+						return node
+					end;
+				end
+			else
+				
+			end
+
+			
+
+		end
+
+
+	</script>
